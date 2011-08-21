@@ -342,9 +342,40 @@ InDB.add_row = function( database, key, index, on_success, on_error, on_abort ) 
 
 }
 
-/* returns an IDBKeyRange */
-InDB.get_key_range = function( type, begin_key, end_key ) {
+/* Key range helpers */
+InDB.key_range_only = function( value ) {
+	return InDB.get_key_range( value, null, null, null, null );
+}
+InDB.key_range_left = function( left_bound ) {
+	return InDB.get_key_range( null, left_bound, null, false, null );
+}
+InDB.key_range_left_open = function( left_bound ) {
+	return InDB.get_key_range( null, left_bound, null, true, null );
+}
+InDB.key_range_right = function( right_bound ) {
+	return InDB.get_key_range( null, null, right_bound, null, false );
+}
+InDB.key_range_right_open = function( right_bound ) {
+	return InDB.get_key_range( null, null, right_bound, null, true );
+}
 
+/* returns an IDBKeyRange given a range type
+ * returns false if type is not valid;
+ * valid types: bound, leftBound, only, rightBound */
+/* uses duck typing to determine key type */
+/* more info: https://developer.mozilla.org/en/indexeddb/idbkeyrange*/
+InDB.get_key_range = function( value, left_bound, right_bound, includes_left_bound, includes_right_bound ) {
+	if( !!left_bound && !!right_bound && !!includes_left_bound && !!includes_right_bound ) {	
+		return IDBKeyRange.bound( left_bound, right_bound, includes_left_bound, includes_right_bound );	
+	} else if ( !!left_bound && !!includes_left_bound ) {
+		return IDBKeyRange.leftBound( left_bound, includes_left_bound );
+	} else if ( !!right_bound && !!includes_right_bound ) {
+		return IDBKeyRange.rightBound( right_bound, includes_right_bound );
+	} else if( !!value ) {
+		return IDBKeyRange.only( value );
+	}  else {
+		return false;
+	}
 }
 
 InDB.get_rows = function( database, index, key_range, map, on_success, on_error, on_abort ) {
