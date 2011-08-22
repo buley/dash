@@ -94,7 +94,7 @@ InDB.browserSupported = function() {
  *
  **/
 InDB.assert = function( statement, error_message, warn_level ) {
-	error_message = ( !!error ) ? error : "False assertion";
+	error_message = ( !!error_message ) ? error_message : "False assertion";
 	result = false;
 	switch( warn_level ) {
 		case 'log':
@@ -106,6 +106,7 @@ InDB.assert = function( statement, error_message, warn_level ) {
 		default: 
 			if( statement ) { 
 				result = true;
+			} else {
 				throw new Error( error_message );
 			}
 			break;
