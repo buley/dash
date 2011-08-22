@@ -1,14 +1,71 @@
 <html>
 	<head>
 		<title>InDB.js > examples > add_items.html</title>
-		<script src="../indb.dev.js" type="text/javascript">
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
+		<script src="../indb.dev.js" type="text/javascript"></script>
 	</head>
 	<body>
 	<div id="results"></div>	
 
 	<script type="text/javascript">
-		var warnLevel = "log"; //also valid: error, alert
-		assert( "hello"==="world", "inDB.js is loaded", "log" );
+		var warnLevel = "log"; //also valid: alert (defaults to error object)
+		InDB.assert( "hello"==="world", "inDB.js is loaded", warnLevel );
+		
+		/* Setup */
+		var browser_check = InDB.checkBrowser();
+		InDB.assert( -1 !== browser_check, "incompatible browser" );
+		if( 0 === browser_check ) {
+			InDB.fixBrowser();
+		}
+
+		/* Constants */
+		var database_name = "test_store_1";
+		var database_desc = "Something about this objectStore";
+		var database_key = "id";
+		var database_key_inc = true;
+
+		/* Load Database */
+                InDB.database.load( database_name, database_desc, function( event ) {
+                        console.log( "success" );
+                }, function( event ) {
+                        console.log( "error" );
+                }, function( event ) {
+                        console.log( "abort" );
+                } );
+		
+		/* Create Object Store */
+		jQuery( document ).bind( 'InDB_database_created', function() {
+			InDB.assert( InDB.db !== "Object", "Database not loaded" );
+			console.log( "ready to create object store" );
+			InDB.stores.create( database_name, database_key, database_key_inc, function( event ) {
+				console.log("object store created");
+				console.log( event );
+			} );
+		} );
+		jQuery( document ).bind( 'InDB_stores_loaded', function() {
+			console.log("object stores loaded");
+			var data = {
+				"name": "Scrooge McDuck",
+				"hobby": "Swimming in gold."
+			}
+			InDB.row.add( database_name, database_key, data, function( event ) {
+				console.log( "data has been added to object store");
+				console.log( event );
+			} );
+		} );
+
+
+
+		/* Create store  */
+		//InDB.store.create( );	
+
+		/* Add objects to store */
+		var data = {};
+		//InDB.rows.add( data );
+
+		/* Get objects from store */
+		//InDB.rows.get();
+
 	</script>
 	</body>
 </html>
