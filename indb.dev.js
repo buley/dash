@@ -94,18 +94,22 @@ InDB.browserSupported = function() {
  **/
 InDB.assert = function( statement, error_message, warn_level ) {
 	error_message = ( !!error ) ? error : "False assertion";
+	result = false;
 	switch( warn_level ) {
 		case 'log':
-			( statement ) ? return true : console.log( error_message );
+			( statement ) ? result = true : console.log( error_message );
 			break;
 		case 'alert': 
-			( statement ) ? return true : alert( error_message );
+			( statement ) ? result = true : alert( error_message );
 			break;
 		default: 
-			( statement ) ? return true : throw error_message;
+			if( statement ) { 
+				result = true;
+				throw new Error( error_message );
+			}
 			break;
 	}
-	return false;
+	return result;
 }
 
 
