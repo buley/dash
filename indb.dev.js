@@ -13,11 +13,11 @@
  *   Indb.database - namepspace for database methods (IDBDatabase)
  *   Indb.store - namespace for objectStore methods
  *   Indb.index - namespace for index methods (IDBIndex)
- *   Indb.transaction - namespace for key range methods 
+ *   Indb.transaction - namespace for key range methods (IDBTransaction)
  *   Indb.range - namespace for key range methods (IDBKeyRange)
  *   Indb.row - namespace for row methods
  *   Indb.cursor - namespace for rows methods (IDBCursor)
- *   Indb.event - namespace for event and error methods (IDBEvent, IDBSuccessEvent, IDBErrorEvent, IDBDatabaseError and IDBDatabaseException)
+ *   Indb.events - namespace for event and error methods (IDBEvent, IDBSuccessEvent, IDBErrorEvent, IDBDatabaseError and IDBDatabaseException)
  **/
 
 /* Begin Namespaces */
@@ -30,7 +30,8 @@ InDB.index = {};
 InDB.range = {};
 InDB.row = {};
 InDB.cursor = {};
-InDB.event = {};
+InDB.events = {};
+InDB.transaction = {};
 /* End Namespaces */
 
 
