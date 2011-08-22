@@ -29,8 +29,8 @@ InDB.store = {};
 InDB.index = {};
 InDB.range = {};
 InDB.row = {};
-InDb.cursor = {};
-InDb.event = {};
+InDB.cursor = {};
+InDB.event = {};
 /* End Namespaces */
 
 
@@ -103,7 +103,10 @@ InDB.assert = function( statement, error_message, warn_level ) {
 			( statement ) ? result = true : alert( error_message );
 			break;
 		default: 
-			( statement ) ? result = true : throw error_message;
+			if( statement ) { 
+				result = true;
+				throw new Error( error_message );
+			}
 			break;
 	}
 	return result;
@@ -463,7 +466,7 @@ InDB.range.get = function( value, left_bound, right_bound, includes_left_bound, 
 	}
 }
 
-InDb.cursor.get = function( database, index, key_range, map, on_success, on_error, on_abort ) {
+InDB.cursor.get = function( database, index, key_range, map, on_success, on_error, on_abort ) {
 
 	jQuery(document).trigger( 'InDB_get_rows', { "database": database, "key": key, "index": index, "map": map, "on_complete": on_success, "on_error": on_error, "on_abort": on_abort } );
 
