@@ -1,71 +1,118 @@
 <html>
 	<head>
 		<title>InDB.js > examples > add_items.html</title>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script> 
-		<script src="../indb.dev.js" type="text/javascript"></script>
+		<script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script> 
+		<script src='../indb.dev.js' type='text/javascript'></script>
 	</head>
 	<body>
-	<div id="results"></div>	
+		<div id='results'></div>	
 
-	<script type="text/javascript">
-		var warnLevel = "log"; //also valid: alert (defaults to error object)
-		InDB.assert( "hello"==="world", "inDB.js is loaded", warnLevel );
-		
-		/* Setup */
-		var browser_check = InDB.checkBrowser();
-		InDB.assert( -1 !== browser_check, "incompatible browser" );
-		if( 0 === browser_check ) {
-			InDB.fixBrowser();
-		}
-
-		/* Constants */
-		var database_name = "test_store_1";
-		var database_desc = "Something about this objectStore";
-		var database_key = "id";
-		var database_key_inc = true;
-
-		/* Load Database */
-                InDB.database.load( database_name, database_desc, function( event ) {
-                        console.log( "success" );
-                }, function( event ) {
-                        console.log( "error" );
-                }, function( event ) {
-                        console.log( "abort" );
-                } );
-		
-		/* Create Object Store */
-		jQuery( document ).bind( 'InDB_database_created', function() {
-			InDB.assert( InDB.db !== "Object", "Database not loaded" );
-			console.log( "ready to create object store" );
-			InDB.stores.create( database_name, database_key, database_key_inc, function( event ) {
-				console.log("object store created");
-				console.log( event );
-			} );
-		} );
-		jQuery( document ).bind( 'InDB_stores_loaded', function() {
-			console.log("object stores loaded");
-			var data = {
-				"name": "Scrooge McDuck",
-				"hobby": "Swimming in gold."
+		<script type='text/javascript'>
+			var warnLevel = 'log'; //also valid: alert (defaults to error object)
+			InDB.assert( 'hello'==='world', 'inDB.js is loaded', warnLevel );
+			
+			/* Setup */
+			var browser_check = InDB.checkBrowser();
+			InDB.assert( -1 !== browser_check, 'incompatible browser' );
+			if( 0 === browser_check ) {
+				InDB.fixBrowser();
 			}
-			InDB.row.add( database_name, database_key, data, function( event ) {
-				console.log( "data has been added to object store");
-				console.log( event );
+
+			/* Constants */
+			var database_name = 'InDB_examples';
+			var database_desc = 'An IndexedDB to store InDB examples';
+
+			var stores = {
+				'ducks': { 
+					'key': 'id'
+					, 'incrementing_key': true
+				}
+				, 'names': { 'key': 'name' } /* 'incrementing_key' defaults to false */
+			};
+	
+			var on_success = function( event ) {
+				console.log( 'success', event );
+			}		
+			var on_error = function( event ) {
+				console.log( 'error', event );
+			}		
+			var on_abort = function( event ) {
+				console.log( 'abort', event );
+			}		
+			var on_complete = function( event ) {
+				console.log( 'complete', event );
+			}		
+	
+
+			/* Load database or create and load if necessary */
+			InDB.database.load( database_name, database_desc, on_success, on_error, on_abort );
+
+			/* Listen for the event that shows the database is ready to work with */
+			InDB.event.bind( 'InDB_database_loaded_success', function( event, context ) {
+				console.log( 'The IndexedDB database was loaded', event, context );
 			} );
-		} );
+		
+			/* Create object stores after the database is created */
+			InDB.event.bind( 'InDB_database_created_success', function( event, context ) {
+				// Assert that the database is already loaded
+				if( InDB.assert( InDB.db !== 'Object', 'Database not loaded' ) ) {
+					console.log( 'Database created', event, context );
+				}
+				console.log( 'Adding object store' );
+				InDB.stores.create( stores, function( event ) {
+					console.log( 'Object store created', event );
+				}, function( event ) {
+					console.log( 'Object store creation error', event );
+				} );
+			} );
+
+			InDB.event.bind( 'InDB_object_store_created_success', function( event, context ) {
+				console.log( 'Object store created', event, context );
+			} );
+
+			/* InDB_store_already_exists is a specific type of InDB_store_created_error */
+			InDB.event.bind( 'InDB_store_already_exists', function( event, context ) {
+				console.log( 'Object store already exists', event, context );
+			} );
+
+			InDB.event.bind( 'InDB_stores_loaded_success', function( event, context ) {
+				console.log( 'Object stores loaded', event, context );
+				//Is this the droid we're looking for?
+				if( !InDB.isEmpty( context.name ) ) {
+					var data = [
+						{
+							'name': 'Scrooge McDuck',
+							'hobby': 'Swimming in gold.'
+						}
+						, { 
+							'name': 'Drake Mallard',
+							'hobby': 'Darkwinged activities.'
+						}
+					];
+					console.log( "Adding data to object store", context.name, data );
+					var item_added_callback = function( event ) { 
+						console.log( 'Added to object store', event );
+					}
+
+					for( var i = 0; i < 10; i++ ) {
+						var item = data[ i ];
+						InDB.row.add( "hobbies", item.name, item_added_callback );
+						InDB.row.add( "ducks", item, item_added_callback );
+					}
+				}
+			} );
+
+			/* Example listeners */
+
+			InDB.event.bind( 'InDB_row_added_success', function( event, context ) {
+				console.log( 'An item was added to an object store', event, context );
+			} );
+
+			InDB.event.bind( 'InDB_row_added_error', function( event, context ) {
+				console.log( 'There was an error adding something to an object store', event, context );
+			} );
 
 
-
-		/* Create store  */
-		//InDB.store.create( );	
-
-		/* Add objects to store */
-		var data = {};
-		//InDB.rows.add( data );
-
-		/* Get objects from store */
-		//InDB.rows.get();
-
-	</script>
+		</script>
 	</body>
 </html>

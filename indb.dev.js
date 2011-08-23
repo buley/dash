@@ -9,27 +9,32 @@
  * Namespaces:
  *   Indb - application namespace
  *   Indb.db - namespace for the open IndexedDB instance (IDBFactory)
- *   Indb.dbs = namespace for object stores (IDBObjectStore)
+ *   Indb.dbs = namespace for open databases (reserved)
  *   Indb.database - namepspace for database methods (IDBDatabase)
- *   Indb.store - namespace for objectStore methods
+ *   Indb.store - namespace for operations against multiple object stores (IBObjectStore)
+ *   Indb.stores - namespace for single object stores (IDBObjectStore)
  *   Indb.index - namespace for index methods (IDBIndex)
  *   Indb.transaction - namespace for key range methods (IDBTransaction)
  *   Indb.range - namespace for key range methods (IDBKeyRange)
  *   Indb.row - namespace for row methods
  *   Indb.cursor - namespace for rows methods (IDBCursor)
- *   Indb.events - namespace for event and error methods (IDBEvent, IDBSuccessEvent, IDBErrorEvent, IDBDatabaseError and IDBDatabaseException)
+ *   Indb.event - namespace for event and error methods (IDBEvent, IDBSuccessEvent, IDBErrorEvent, IDBDatabaseError and IDBDatabaseException)
+ *   Indb.events - namespace for event callbacks
  **/
 
 /* Begin Namespaces */
 InDB = {};
 InDB.factory = {};
 InDB.db = {};
+InDB.dbs = {};
 InDB.database = {};
+InDB.store = {};
 InDB.stores = {};
 InDB.index = {};
 InDB.range = {};
 InDB.row = {};
 InDB.cursor = {};
+InDB.event = {};
 InDB.events = {};
 InDB.transaction = {};
 /* End Namespaces */
@@ -46,7 +51,8 @@ InDB.transaction = {};
 
 /**
  * Defaults:
- *   InDB.database.version (int) - database version
+ *   InDB.database.version (int) - database version to start with
+ *   InDB.debug (bool) - whether or not to console.log stuff
  *   InDB.events.on_success (function) - generic success callback
  *   InDB.events.onComplete (function) - generic complete callback
  *   InDB.events.onError (function)- generic error callback
@@ -55,6 +61,7 @@ InDB.transaction = {};
 
 /* Begin Defaults */
 InDB.database.version = 1;
+InDB.debug = false;
 InDB.events.onComplete = function( e ) { console.log( "IndexedDB request completed" ); console.log( e ); }
 InDB.events.onSuccess = function( e ) { console.log( "IndexedDB request successful" ); console.log( e ); }
 InDB.events.onError = function( e ) { console.log( "IndexedDB request errored" ); console.log( e ); }
@@ -62,10 +69,37 @@ InDB.events.onAbort = function( e ) { console.log( "IndexedDB request aborted" )
 /* End Defaults */
 
 /* Begin Onload */
-
+//jQuery document.load callback TK
 /* End Onload */
 
+
+/**
+ * Actions:
+ *  InDB_database_loaded - The database is loaded into the InDB.db namespace; no guarantee that object stores exist if a fresh install
+ *  InDB_database_created - Database is created for the first time
+ *  InDB_stores_loaded_{success|error|abort} - Database is loaded and all collections have been created
+ *  InDB_store_created_{success|error|abort} - Response to an attempt at creating an object store
+ *  InDB_database_already_loaded - a specific type of InDB_database_loaded_error
+ *  InDB_store_already_exists - a specific type of InDB_store_created_error
+ **/
+ /* End Actions */
+
 /* Begin Functions */
+
+/* Begin Event Methods */
+
+/* binds a callback method to new events */
+InDB.event.bind = function( event_name, callback_method ) {
+	//TODO: assert argument types and validity
+	jQuery( InDB ).bind( event_name, callback_method );
+}
+
+/* triggers a new event */
+InDB.event.trigger = function( event_name, context ) {
+	//TODO: assert argument types and validity
+	jQuery( InDB ).trigger( event_name, context );
+}
+
 
 /* Begin InDB Methods */
 /**
@@ -73,8 +107,18 @@ InDB.events.onAbort = function( e ) { console.log( "IndexedDB request aborted" )
  *  Checks to see if IndexedDB is supported
  *  returns 1 if fully supported, 0 if supported w/fixes, and -1 if unsupported
  **/
-
+/* Bug (sort of): The InDB.db namespace means that it works with only one 
+ * IndexedDB database at a time. */
+/* This function is indempodent (you can run it multiple times and it won't do anything */
 InDB.database.load = function( name, description, on_success, on_error, on_abort ) {
+
+	if( "IDBDatabase" === typeof InDB.db && name === InDB.db.name ) {
+		on_error( new Error( "Database already loaded" ) );
+		InDB.event.trigger( 'InDB_database_already_loaded', context );
+		return;
+	}
+	var context = { "name": name, "description": description, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
+	InDB.event.trigger( 'InDB_database_loading', context );
 
 	/* Assertions */	
 	if( !InDB.assert( !InDB.isEmpty( name ), "database name cannot be empty" ) ) { 
@@ -106,29 +150,39 @@ InDB.database.load = function( name, description, on_success, on_error, on_abort
 	}
 	/* End Debug */
 
+
 	if( typeof InDB.db === "IDBDatabase" ) {
-		//database already loaded
-		jQuery( document ).trigger( 'InDB_database_loaded' );
+
+		InDB.event.trigger( 'InDB_database_loaded_success', context );
+		InDB.event.trigger( 'InDB_stores_loaded_success', context );
 	} else {
 		var open_request = window.indexedDB.open( name, description );
 		open_request.onsuccess = function( event ) {
 			InDB.db = event.target.result;
 			on_success( event );
-			jQuery( document ).trigger( 'InDB_database_loaded' );
+			if( isNaN( InDB.db.version ) ) {
+				InDB.event.trigger( 'InDB_database_loaded_success', context );
+				InDB.event.trigger( 'InDB_database_created_success', context );
+				/* Database is unversioned, so create object stores */
+				InDB.event.trigger( 'InDB_stores_loaded_success', context );
+			} else {
+				InDB.event.trigger( 'InDB_database_loaded_success', context );
+				InDB.event.trigger( 'InDB_stores_loaded_success', context );
+			}
 		}
 		open_request.onerror = function( event ) {
 			on_error( event );
-			jQuery( document ).trigger( 'InDB_database_loaded_error' );
+			InDB.event.trigger( 'InDB_database_loaded_error' );
 		}
 		open_request.onabort = function( event ) {
-			jQuery( document ).trigger( 'InDB_database_loaded_error' );
 			on_abort( event );
+			InDB.event.trigger( 'InDB_database_loaded_error' )
 		}
 	}
 }
 
 InDB.checkBrowser = function() {
-	jQuery( document ).trigger( 'doing_browserSupported' );		
+	InDB.event.trigger( 'InDB_checking_browser' );		
 	var result = -1;
 	// the support check
 	if( !!window.webkitIndexedDB || !!window.mozIndexedDB ) {
@@ -137,9 +191,8 @@ InDB.checkBrowser = function() {
 		result = 1;
 	}
 	//TODO: Allow filter
-	//TODO: Check if anything is listening; else don't filter
-	//result = jQuery( document ).trigger( 'Indb_did_browserSupported', { "result": result } );
-	jQuery( document ).trigger( 'InDB_did_browserSupported', { "result": result } );
+	//result = InDB.event.trigger( 'Indb_did_browserSupported', { "result": result } );
+	InDB.event.trigger( 'InDB_checked_browser', { "result": result } );
 	return result;
 }
 
@@ -175,13 +228,33 @@ InDB.assert = function( statement, error_message, warn_level ) {
 /* InDB.isEmpty ( mixed var ) -> bool
  * Checks whether a variable has a value */
 InDB.isEmpty = function( mixed_var ) {
-	return ( "undefined" !== typeof "mixed_var" && null !== mixed_var && "" !== mixed_var ) ? false : true;
+	return ( "undefined" !== typeof mixed_var && null !== mixed_var && "" !== mixed_var ) ? false : true;
+}
+
+InDB.isString = function( mixed_var ) {
+	return InDB.isType( "string", mixed_var );
+}
+
+InDB.isFunction = function( mixed_var ) {
+	return InDB.isType( "function", mixed_var );
+}
+
+InDB.isNumber = function( mixed_var ) {
+	return InDB.isType( "number", mixed_var );
+}
+
+InDB.isBoolean = function( mixed_var ) {
+	return InDB.isType( "boolean", mixed_var );
+}
+
+InDB.isType = function( type, mixed_var ) {
+	return ( type !== typeof mixed_var ) ? false : true;
 }
 
 /* InDB.fixBrowser( ) -> null 
  * Sets up expermental interfaces if necessary. For use when a browser has not yet implemented the native (window.IndexedDB) dom interface, which is detectable if InDB.browser_supported returns -1. */
 InDB.fixBrowser = function() {
-	jQuery( document ).trigger( 'doing_fixBrowser' );		
+	InDB.event.trigger( 'doing_fixBrowser' );		
 	if (typeof window.webkitIndexedDB !== "undefined") {
 		window.IDBCursor = window.webkitIDBCursor;
 		window.IDBDatabase = window.webkitIDBDatabase;
@@ -204,21 +277,69 @@ InDB.fixBrowser = function() {
 
 /* End InDB Methods */
 
-/* auto_incrementing_key defaults to false if a key is specified;
+/* Begin Object Store Methods */
+
+InDB.store.exists = function( name ) {
+	for( i=0; i<InDB.db.objectStoreNames.length; i++ ) {
+		if ( name === InDB.db.objectStoreNames[i] ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+InDB.stores.create = function( stores, on_success, on_error, on_abort ) {
+	//TODO: Assertions
+	for( store in stores ) {
+		var options = stores[ store ];
+		if( InDB.isString( options ) ) {
+			/* options object is really a string
+                         * recast options var from a string to a
+                         * real deal options object */
+			options = InDB.store.options( options );
+		}
+		if( !InDB.isEmpty( options ) ) {
+			var key = options.key;
+			var autoinc_key = options.incrementing_key;
+			var empty_key = InDB.isEmpty( key );
+			InDB.assert( ( empty_key || InDB.isString(  key ) ), 'Key needs to be a string' );  
+			InDB.assert( ( !autoinc_key || InDB.isBoolean( autoinc_key ) ), 'Autoinc_key (whether the key uses a generator) needs to be a boolean' );  
+			if( "undefined" === typeof autoinc_key || InDB.isBoolean( autoinc_key ) ) { 
+				autoinc_key = false; 
+			}
+			InDB.store.create( store, key, autoinc_key, on_success, on_error, on_abort );
+		}
+	}
+
+};
+
+InDB.store.options = function( key, autoinc_key ) {
+	//TODO: Assertions key is valid string; autoinc_key is bool (isBoolean?)
+	return { 
+		'keyPath': ( !!key ) ? key : null
+		, autoIncrement: ( !!key && autoinc_key ) ? true : false
+	};
+}
+
+/* return true if request is successfully requested (no bearing on result)
+/* autoinc_key defaults to false if a key is specified;
    key gets set to "key" and autoincrements when key is not specified */
-InDB.stores.create = function( name, key, auto_incrementing_key, on_success, on_error, on_abort ) {
+InDB.store.create = function( name, key, autoinc_key, on_success, on_error, on_abort ) {
 
 	/* Assertions */	
-	if( !InDB.assert( !InDB.isEmpty( name ), "object store name cannot be empty" ) ) { 
-		return;
+	if( !InDB.assert( !InDB.isEmpty( name ), "object store name should not be empty" ) ) { 
+		return false;
+	}
+	if( !InDB.assert( !InDB.store.exists( name ) , "object store should not already exist" ) ) { 
+		return false;
 	}
 
 	var keyPath = {};
 	if( !key ) {
 		keyPath = { "keyPath": "key" };
-		auto_incrementing_key = true;
-	} else if ( !auto_incrementing_key ) {
-		auto_incrementing_key = false;
+		autoinc_key = true;
+	} else if ( !autoinc_key ) {
+		autoinc_key = false;
 	} else {
 		keyPath = { "keyPath": key };	
 	}
@@ -231,32 +352,34 @@ InDB.stores.create = function( name, key, auto_incrementing_key, on_success, on_
 	if( "undefined" === typeof on_abort ) {
 		on_abort = InDB.events.onAbort;
 	}
+	
 	/* database changes must happen w/in a setVersion transaction */
-        var setVersionRequest = InDB.db.setVersion( parseInt( InDB.version, 10 ) );
+	var setVersionRequest = InDB.db.setVersion( parseInt( InDB.db.version, 10 ) + 1 );
 	setVersionRequest.onsuccess = function( event ) {
-		var transaction = InDB.db.createObjectStore( name, keyPath, auto_incrementing_key );
-		transaction.onsuccess = function( event ) {
+		try {
+			InDB.db.createObjectStore( name, keyPath, autoinc_key );
+			// not reachable when createObjectStore throws an error
 			on_success( event );
-			jQuery( document ).trigger( "database_created_success", { "name": name, "keyPath": keyPath, "auto_incrementing_key": auto_incrementing_key } );
+			InDB.event.trigger( "InDB_store_created_success", { "name": name, "keyPath": keyPath, "autoinc_key": auto_incrementing_key } );
+		} catch( error ) {
+			// createdObject store threw an error
+			on_error( error );
+			InDB.event.trigger( "InDB_store_created_error", { "name": name, "keyPath": keyPath, "autoinc_key": auto_incrementing_key } );
+			//if already created, then the store already exists
+			if( IDBDatabaseException.CONSTRAINT_ERR === error.code ) {
+				InDB.event.trigger( "InDB_store_already_exists", { "name": name, "keyPath": keyPath, "autoinc_key": auto_incrementing_key } );
+			}
 		}
-		transaction.onerror = function( event ) {
-			on_error( event );
-			jQuery( document ).trigger( "database_created_error", { "name": name, "keyPath": keyPath, "auto_incrementing_key": auto_incrementing_key } );
-		}
-		transaction.onabort = function( event ) {
-			on_abort( event );
-			jQuery( document ).trigger( "database_created_abort", { "name": name, "keyPath": keyPath, "auto_incrementing_key": auto_incrementing_key } );
-		}
-
 	};
 	setVersionRequest.onerror = function( event ) {
 		on_error( event );
-		jQuery( document ).trigger( "database_created_error", { "name": name, "keyPath": keyPath, "auto_incrementing_key": auto_incrementing_key } );
+		InDB.event.trigger( "InDB_store_created_error", { "name": name, "keyPath": keyPath, "autoinc_key": auto_incrementing_key } );
 	}
 	setVersionRequest.onabort = function( event ) {
 		on_abort( event );
-		jQuery( document ).trigger( "database_created_abort", { "name": name, "keyPath": keyPath, "auto_incrementing_key": auto_incrementing_key } );
+		InDB.event.trigger( "InDB_store_created_abort", { "name": name, "keyPath": keyPath, "autoinc_key": autoautoinc_key } );
 	}
+	return true;
 }
 
 /* unique defaults to false if not present */
@@ -291,22 +414,22 @@ InDB.index.create = function( store, property, name, unique, on_complete, on_suc
 
 	var databaseTransaction = InDB.store.transaction( store );
 	/* Database changes need to happen from w/in a setVersionRequest */
-        var setVersionRequest = InDB.db.setVersion( parseInt( InDB.version, 10 ) );
+        var setVersionRequest = InDB.db.setVersion( parseInt( InDB.db.version, 10 ) + 1 );
 	setVersionRequest.onsuccess = function ( event ) {
 		databaseTransaction.createIndex( name, property, {
 			"unique": unique
 		});
 		databaseTransaction.onsuccess = function( event ) {
 			on_success( event );
-			jQuery( document ).trigger( 'index_created_success', { "database": database, "property": property, "name": name, "unique": unique } );
+			InDB.event.trigger( 'index_created_success', { "database": database, "property": property, "name": name, "unique": unique } );
 		};
 		databaseTransaction.onerror = function( event ) {
 			on_error( event );
-			jQuery( document ).trigger( 'index_created_error', { "database": database, "property": property, "name": name, "unique": unique } );
+			InDB.event.trigger( 'index_created_error', { "database": database, "property": property, "name": name, "unique": unique } );
 		};
 		databaseTransaction.onabort = function( event ) {
 			on_abort( event );
-			jQuery( document ).trigger( 'index_created_abort', { "database": database, "property": property, "name": name, "unique": unique } );
+			InDB.event.trigger( 'index_created_abort', { "database": database, "property": property, "name": name, "unique": unique } );
 		};		
 	};
 	setVersionRequest.onerror = function( event ) {
@@ -319,7 +442,7 @@ InDB.index.create = function( store, property, name, unique, on_complete, on_suc
 }
 
 InDB.database.open = function( name, description, on_success, on_error, on_abort ) {
-	jQuery(document).trigger( 'InDB_open_database', { "name": name, "description": description, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );
+	InDB.event.trigger( 'InDB_open_database', { "name": name, "description": description, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );
 	if( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
@@ -331,15 +454,15 @@ InDB.database.open = function( name, description, on_success, on_error, on_abort
 	}
 	var open_database_request = window.indexedDB.open( name, description );
 	database_open_request.onsuccess = function( event ) {
-		jQuery(document).trigger( 'InDB_open_database_success', { "name": name, "description": description, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'InDB_open_database_success', { "name": name, "description": description, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );
 		on_success( event );
 	};
 	database_open_request.onerror = function( event ) {
-		jQuery(document).trigger( 'InDB_open_database_error', { "name": name, "description": description, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'InDB_open_database_error', { "name": name, "description": description, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );
 		on_error( event );
 	}
 	database_open_request.onabort = function( event ) {
-		jQuery(document).trigger( 'InDB_open_database_abort', { "name": name, "description": description, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'InDB_open_database_abort', { "name": name, "description": description, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );
 		on_abort( event );
 	}
 }
@@ -357,7 +480,7 @@ InDB.transaction.write = function() {
 
 /* Transaction factory */
 InDB.transaction.create = function( database_name, type, on_complete, on_error, on_abort ) {
-	jQuery(document).trigger( 'InDB_create_transaction', { "name": name, "type": type, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );		
+	InDB.event.trigger( 'InDB_create_transaction', { "name": name, "type": type, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );		
 	if( "undefined" === typeof type ) {
 		type = IDBTransaction.READ_WRITE;
 	}
@@ -374,18 +497,21 @@ InDB.transaction.create = function( database_name, type, on_complete, on_error, 
 		on_abort = InDB.events.onAbort;
 	}
 	try {
-		var transaction = Buleys.db.transaction( [ database_name ], type, timeout );
+		if( !!InDB.debug ) {
+			console.log( "InDB.db.transaction", database_name, type, timeout );
+		}
+		var transaction = InDB.db.transaction( [ database_name ], type, timeout );
 		transaction.oncomplete = function( event ) {
 			on_complete( event );
-			jQuery( document ).trigger( 'transaction_complete', { "database": database_name, "type": type, "timeout": timeout } );
+			InDB.event.trigger( 'transaction_complete', { "database": database_name, "type": type, "timeout": timeout } );
 		};
 		transaction.onerror = function( event ) {
 			on_error( event );
-			jQuery( document ).trigger( 'transaction_error', { "database": database_name, "type": type, "timeout": timeout } );
+			InDB.event.trigger( 'transaction_error', { "database": database_name, "type": type, "timeout": timeout } );
 		};
 		transaction.onabort = function( event ) {
 			on_abort( event );
-			jQuery( document ).trigger( 'transaction_abort', { "database": database_name, "type": type, "timeout": timeout } );
+			InDB.event.trigger( 'transaction_abort', { "database": database_name, "type": type, "timeout": timeout } );
 		};
 		return transaction.objectStore( database_name );
 	} catch ( event ) {
@@ -410,7 +536,7 @@ InDB.value = function( event ) {
 }
 
 InDB.row.get = function( database, key, index, on_success, on_error, on_abort ) {
-	jQuery(document).trigger( 'InDB_get_record', { "database": database, "key": key, "index": index, "on_complete": on_success, "on_error": on_error, "on_abort": on_abort } );
+	InDB.event.trigger( 'InDB_get_record', { "database": database, "key": key, "index": index, "on_complete": on_success, "on_error": on_error, "on_abort": on_abort } );
 	if( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
@@ -432,23 +558,23 @@ InDB.row.get = function( database, key, index, on_success, on_error, on_abort ) 
 			
 	get_request.onsuccess = function( event ) {	
 		on_success( event );
-		jQuery( document ).trigger( 'get_success', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'get_success', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 	get_request.onerror = function( event ) {	
 		on_error( event );
-		jQuery( document ).trigger( 'get_error', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'get_error', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 	get_request.onabort = function( event ) {	
 		on_abort( event );
-		jQuery( document ).trigger( 'get_abort', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'get_abort', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 }
 
 
 InDB.row.remove = function( database, key, index, on_success, on_error, on_abort ) {
-	jQuery(document).trigger( 'set_record', { "database": database, "key": key, "index": index, "on_complete": on_success, "on_error": on_error, "on_abort": on_abort } );
+	InDB.event.trigger( 'set_record', { "database": database, "key": key, "index": index, "on_complete": on_success, "on_error": on_error, "on_abort": on_abort } );
 	if( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
@@ -464,22 +590,27 @@ InDB.row.remove = function( database, key, index, on_success, on_error, on_abort
 	
 	get_request.onsuccess = function( event ) {	
 		on_success( event );
-		jQuery( document ).trigger( 'set_success', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'set_success', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 	get_request.onerror = function( event ) {	
 		on_error( event );
-		jQuery( document ).trigger( 'set_error', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'set_error', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 	get_request.onabort = function( event ) {	
 		on_abort( event );
-		jQuery( document ).trigger( 'set_abort', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'set_abort', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 }
 
-InDB.row.add = function( database, key, index, on_success, on_error, on_abort ) {
-	jQuery(document).trigger( 'set_record', { "database": database, "key": key, "index": index, "on_complete": on_success, "on_error": on_error, "on_abort": on_abort } );
+/* Adds a data object to an object store */
+InDB.row.add = function( store, data, on_success, on_error, on_abort ) {
+
+	//TODO: Assertions
+
+	InDB.event.trigger( 'InDB_row_adding', { "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+
 	if( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
@@ -490,21 +621,26 @@ InDB.row.add = function( database, key, index, on_success, on_error, on_abort ) 
 		on_abort = InDB.events.onAbort;
 	}
 
-	var transaction = InDB.store.transaction( database, InDB.transaction.write() );
-	var set_request = transaction.add( key );
+	var transaction = InDB.transaction.create( store, InDB.transaction.write() );
+
+	if( !!InDB.debug ) {
+		console.log( 'transaction', transaction );
+	}
+
+	//use this[ 'format' ] for function invocation to avoid a Closure compiler error
+	var set_request = transaction[ 'add' ]( data );
 	
 	get_request.onsuccess = function( event ) {	
 		on_success( event );
-		jQuery( document ).trigger( 'set_success', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'InDB_row_added_success', { "event": event, "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 	get_request.onerror = function( event ) {	
 		on_error( event );
-		jQuery( document ).trigger( 'set_error', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'InDB_row_added_error', { "event": event, "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
-
 	get_request.onabort = function( event ) {	
 		on_abort( event );
-		jQuery( document ).trigger( 'set_abort', { "event": event, "database": database_name, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'InDB_row_added_abort', { "event": event, "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 }
@@ -547,7 +683,7 @@ InDB.range.get = function( value, left_bound, right_bound, includes_left_bound, 
 
 InDB.cursor.get = function( database, index, key_range, on_success, on_error, on_abort ) {
 
-	jQuery(document).trigger( 'InDB_get_rows', { "database": database, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+	InDB.event.trigger( 'InDB_get_rows', { "database": database, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 
 	if( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
@@ -580,16 +716,16 @@ InDB.cursor.get = function( database, index, key_range, on_success, on_error, on
 			//rows exhausted
 			return;
 		}
-		jQuery(document).trigger( 'InDB_get_rows_success', { 'event': event, "database": database, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'InDB_get_rows_success', { 'event': event, "database": database, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 	get_rows_request.onerror = function( event ) {	
 		on_error( event );
-		jQuery(document).trigger( 'InDB_get_rows_error', { 'event': event, "database": database, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'InDB_get_rows_error', { 'event': event, "database": database, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 	get_rows_request.onabort = function( event ) {	
 		on_abort( event );
-		jQuery(document).trigger( 'InDB_get_rows_abort', { 'event': event, "database": database, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.event.trigger( 'InDB_get_rows_abort', { 'event': event, "database": database, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 }
