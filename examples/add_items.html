@@ -15,8 +15,9 @@
 
 		<script type='text/javascript'>
 			var warnLevel = 'log'; //also valid: alert (defaults to error object)
-			InDB.assert( 'hello'==='world', 'inDB.js is loaded', warnLevel );
-			
+			InDB.debug = true;
+
+
 			/* Setup */
 			var browser_check = InDB.checkBrowser();
 			InDB.assert( -1 !== browser_check, 'incompatible browser' );
@@ -25,12 +26,12 @@
 			}
 
 			/* Constants */
-			var database_name = 'InDB_examples_7';
+			var database_name = 'InDB_examples_8';
 			var database_desc = 'An IndexedDB to store InDB examples';
 
 			var stores = {
 				'todos': { 
-					'key': 'id'
+					'key': 'timeStamp'
 				}
 			};
 	
@@ -108,6 +109,7 @@
 
 					var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
 					var string_length = 4;
+					var randomnum = ( new Date().getTime() + Math.floor( Math.random(0,1000000) ) );
 					var data = [];
 					for( var k=0; k < 5; k++ ) {
 						var randomstring = '';
@@ -115,11 +117,14 @@
 							var rnum = Math.floor(Math.random() * chars.length);
 							randomstring += chars.substring(rnum,rnum+1);
 						}
+
 						data.push( {
 							'text': randomstring
-							, 'timeStamp': new Date().getTime()
+							, 'timeStamp': randomnum 
 						} );
+						randomnum = randomnum + 1;
                                         }
+					console.log( data );
 
 					var item_added_callback = function( event ) { 
 						if( !!InDB.debug ) {
@@ -144,7 +149,7 @@
 				if( !!InDB.debug ) {
 					console.log( 'Getting items', event, context );
 				}
-				InDB.cursor.get( "todos", null, InDB.range.left_open( "a" ), function(e){console.log("got",e);} );
+				InDB.cursor.get( "todos", null, InDB.range.left_open( 0 ), function(e){console.log("InDB.cusor.get result",e.target.result);} );
 			} );
 
 	

@@ -127,6 +127,12 @@ InDB.trigger = function ( event_name, context ) {
 /* This function is indempodent (you can run it multiple times and it won't do anything */
 InDB.database.load = function ( name, description, on_success, on_error, on_abort ) {
 
+	/* Begin Debug */
+	if( !!InDB.debug ) {
+		console.log( "InDB.database.load", name, description, on_success, on_error, on_abort );
+	}
+	/* End Debug */
+
 	if( "IDBDatabase" === typeof InDB.db && name === InDB.db.name ) {
 		on_error( new Error( "Database already loaded" ) );
 		InDB.trigger( 'InDB_database_already_loaded', context );
@@ -143,12 +149,6 @@ InDB.database.load = function ( name, description, on_success, on_error, on_abor
 		return;
 	}
 
-	/* Begin Debug */
-	if( !!InDB.debug ) {
-		console.log( "InDB.database.load", name, description, on_success, on_error, on_abort );
-	}
-	/* End Debug */
-
 	if( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
@@ -159,12 +159,6 @@ InDB.database.load = function ( name, description, on_success, on_error, on_abor
 		on_abort = InDB.events.onAbort;
 	}
 
-	/* Begin Debug */
-	if( !!InDB.debug ) {
-		console.log( "InDB.database.load", name, description, on_success, on_error, on_abort );
-	}
-	/* End Debug */
-	
 	if( "undefined" !== typeof InDB.db && name === InDB.db.name ) {
 		InDB.trigger( 'InDB_database_loaded_success', context );
 		InDB.trigger( 'InDB_stores_loaded_success', context );
@@ -304,8 +298,6 @@ InDB.store.exists = function ( name ) {
 InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 	//TODO: Assertions
 	for( store in stores ) {
-		console.log( store );
-		console.log( stores );
 		var options = stores[ store ];
 		if( InDB.isString( options ) ) {
 			/* options object is really a string
@@ -319,7 +311,6 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 			var empty_key = InDB.isEmpty( key );
 			InDB.assert( ( empty_key || InDB.isString(  key ) ), 'Key needs to be a string' );  
 			InDB.assert( ( !autoinc_key || InDB.isBoolean( autoinc_key ) ), 'Autoinc_key (whether the key uses a generator) needs to be a boolean' );  
-			console.log("blahblahblah");
 			if( "undefined" === typeof autoinc_key || InDB.isBoolean( autoinc_key ) ) { 
 				autoinc_key = false; 
 			}
@@ -733,7 +724,9 @@ InDB.range.right_open = function ( right_bound ) {
 /* uses duck typing to determine key type */
 /* more info: https://developer.mozilla.org/en/indexeddb/idbkeyrange*/
 InDB.range.get = function ( value, left_bound, right_bound, includes_left_bound, includes_right_bound ) {
-	console.log('range.get');
+	if( !!InDB.debug ) {
+		console.log( 'InDB.range.get', value, left_bound, right_bound, includes_left_bound, includes_right_bound );
+	}
 	if( !!left_bound && !!right_bound && !!includes_left_bound && !!includes_right_bound ) {	
 		return IDBKeyRange.bound( left_bound, right_bound, includes_left_bound, includes_right_bound );	
 	} else if ( !!left_bound && !!includes_left_bound ) {
@@ -751,7 +744,11 @@ InDB.range.get = function ( value, left_bound, right_bound, includes_left_bound,
 
 InDB.cursor.get = function ( database, index, key_range, on_success, on_error, on_abort ) {
 
-	InDB.trigger( 'InDB_get_rows', { "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+	if( !!InDB.debug ) {
+		console.log( 'InDB.cursor.get', database, index, key_range, on_success, on_error, on_abort );
+	}
+
+	InDB.trigger( 'InDB_range_gets', { "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 
 	if( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
@@ -762,38 +759,48 @@ InDB.cursor.get = function ( database, index, key_range, on_success, on_error, o
 	if( "undefined" === typeof on_abort ) {
 		on_abort = InDB.events.onAbort;
 	}
-	var transaction = InDB.store.transaction( database, InDB.transaction.read() );
-	console.log(transaction);
-	var get_rows_request = {};
-	if( "undefined" !== typeof index || null === index ) {
+	var transaction = InDB.transaction.create( database, InDB.transaction.read_write() );
+	if( !!InDB.debug ) {
+		console.log( 'InDB.cursor.get transaction', transaction, index, typeof index );
+	}
+	var get_rows_request;
+	if( "undefined" !== typeof index && !InDB.isEmpty( index ) ) {
+		if( !!InDB.debug ) {
+			console.log( 'transaction_index.openCursor', index, key_range );
+		}
 		var transaction_index = transaction.index( index );
 		get_rows_request = transaction_index.openCursor( key_range );
 	} else {
+		if( !!InDB.debug ) {
+			console.log( 'transaction.openCursor', key_range );
+		}
 		get_rows_request = transaction.openCursor( key_range );
 	}
 
 	get_rows_request.onsuccess = function ( event ) {	
 		on_success( event ); 
-		var result = event.target.result;
-		var item = result.value; 
-		map( item );
-		try {
+		InDB.trigger( 'InDB_range_get_success', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+//		try {
 			//load the next row
-			result[ 'continue' ]();
-		} catch ( error ) {
+			var result = event.target.result;
+			if( "undefined" !== typeof result.value ) {
+				result[ 'continue' ]();
+			}
+//		} catch ( error ) {
+//			InDB.trigger( 'InDB_range_gets_success', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 			//rows exhausted
-			return;
-		}
-		InDB.trigger( 'InDB_get_rows_success', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+//			return;
+//		}
+
 	}
 	get_rows_request.onerror = function ( event ) {	
 		on_error( event );
-		InDB.trigger( 'InDB_get_rows_error', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.trigger( 'InDB_range_gets_error', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 	get_rows_request.onabort = function ( event ) {	
 		on_abort( event );
-		InDB.trigger( 'InDB_get_rows_abort', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.trigger( 'InDB_range_gets_abort', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 }
