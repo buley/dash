@@ -533,7 +533,8 @@ InDB.transaction.create = function ( database_name, type, on_complete, on_error,
 	};
 }
 
-InDB.result = function ( event ) {
+InDB.row.result = function ( event ) {
+
 	if( "undefined" !== typeof event.result ) {
 		return event.result;
 	} else {
@@ -541,9 +542,23 @@ InDB.result = function ( event ) {
 	}
 }
 
-InDB.value = function ( event ) {
-	if( "undefined" !== typeof event.result && "undefined" !== typeof event.result.value ) {
-		return event.result.value;
+InDB.cursor.result = function ( event ) {
+	if( !!InDB.debug ) {
+		console.log( 'InDB.cursor.result', event );
+	}
+	if( "undefined" !== typeof event.target && "undefined" !== typeof event.target.result ) {
+		return event.target.result;
+	} else {
+		return null;
+	}
+}
+
+InDB.cursor.value = function ( event ) {
+	if( !!InDB.debug ) {
+		console.log( 'InDB.cursor.value', event );
+	}
+	if( "undefined" !== typeof event.target && "undefined" !== typeof event.target.result ) {
+		return event.target.result.value;
 	} else {
 		return null;
 	}
@@ -661,7 +676,7 @@ InDB.row.add = function ( store, data, key, on_success, on_error, on_abort ) {
 		key = null;
 	}
 
-	InDB.trigger( 'InDB_row_adding', { "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+	InDB.trigger( 'InDB_row_add', { "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 
 	if( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
@@ -683,15 +698,15 @@ InDB.row.add = function ( store, data, key, on_success, on_error, on_abort ) {
 		var set_request = transaction[ 'add' ]( data );
 		set_request.onsuccess = function ( event ) {	
 			on_success( event );
-			InDB.trigger( 'InDB_row_added_success', { "event": event, "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+			InDB.trigger( 'InDB_row_add_success', { "event": event, "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 		}
 		set_request.onerror = function ( event ) {
 			on_error( event );
-			InDB.trigger( 'InDB_row_added_error', { "event": event, "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+			InDB.trigger( 'InDB_row_add_error', { "event": event, "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 		}
 		set_request.onabort = function ( event ) {
 			on_abort( event );
-			InDB.trigger( 'InDB_row_added_abort', { "event": event, "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+			InDB.trigger( 'InDB_row_add_abort', { "event": event, "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 		}
 	} catch( error ) {
 		if( !!InDB.debug ) {
@@ -730,11 +745,9 @@ InDB.range.get = function ( value, left_bound, right_bound, includes_left_bound,
 	if( !!left_bound && !!right_bound && !!includes_left_bound && !!includes_right_bound ) {	
 		return IDBKeyRange.bound( left_bound, right_bound, includes_left_bound, includes_right_bound );	
 	} else if ( !!left_bound && !!includes_left_bound ) {
-		return IDBKeyRange.bound( left_bound, null, includes_left_bound, null );	
-		//return IDBKeyRange.leftBound( left_bound, includes_left_bound );
+		return IDBKeyRange.lowerBound( left_bound, includes_left_bound );
 	} else if ( !!right_bound && !!includes_right_bound ) {
-		return IDBKeyRange.bound( null, right_bound, null, includes_right_bound );	
-		//return IDBKeyRange.rightBound( right_bound, includes_right_bound );
+		return IDBKeyRange.upperBound( right_bound, includes_right_bound );
 	} else if( !!value ) {
 		return IDBKeyRange.only( value );
 	}  else {
@@ -748,7 +761,69 @@ InDB.cursor.get = function ( database, index, key_range, on_success, on_error, o
 		console.log( 'InDB.cursor.get', database, index, key_range, on_success, on_error, on_abort );
 	}
 
-	InDB.trigger( 'InDB_range_gets', { "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+	InDB.trigger( 'InDB_cursor_get', { "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+
+	if( "undefined" === typeof on_success ) {
+		on_success = InDB.events.onSuccess;
+	}
+	if( "undefined" === typeof on_error ) {
+		on_error = InDB.events.onError;
+	}
+	if( "undefined" === typeof on_abort ) {
+		on_abort = InDB.events.onAbort;
+	}
+	var transaction = InDB.transaction.create( database, InDB.transaction.read_write() );
+	if( !!InDB.debug ) {
+		console.log( 'InDB.cursor.get transaction', transaction, index, typeof index );
+	}
+	var get_rows_request;
+	if( "undefined" !== typeof index && !InDB.isEmpty( index ) ) {
+		if( !!InDB.debug ) {
+			console.log( 'transaction_index.openCursor', index, key_range );
+		}
+		var transaction_index = transaction.index( index );
+		get_rows_request = transaction_index.openCursor( key_range );
+	} else {
+		if( !!InDB.debug ) {
+			console.log( 'transaction.openCursor', key_range );
+		}
+		get_rows_request = transaction.openCursor( key_range );
+	}
+
+	get_rows_request.onsuccess = function ( event ) {	
+		if( !!InDB.debug ) {
+			console.log( 'sending to on_success', event );
+		}
+		on_success( event ); 
+		InDB.trigger( 'InDB_cursor_row_get_success', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		var result = event.target.result;
+		if( "undefined" !== typeof result && "undefined" !== typeof result.value ) {
+			if( !!InDB.debug ) {
+				console.log( 'cursor.get result', InDB.cursor.result( event ) );
+				console.log( 'cursor.value value', InDB.cursor.value( event ) );
+			}
+			result[ 'continue' ]();
+		}
+	}
+	get_rows_request.onerror = function ( event ) {	
+		on_error( event );
+		InDB.trigger( 'InDB_cursor_row_get_error', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+	}
+
+	get_rows_request.onabort = function ( event ) {	
+		on_abort( event );
+		InDB.trigger( 'InDB_cursor_row_get_abort', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+	}
+
+}
+
+InDB.cursor.update = function ( database, index, key_range, update_value, on_success, on_error, on_abort ) {
+
+	if( !!InDB.debug ) {
+		console.log( 'InDB.cursor.update', database, index, key_range, on_success, on_error, on_abort );
+	}
+
+	InDB.trigger( 'InDB_cursor_update', { "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 
 	if( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
@@ -779,30 +854,83 @@ InDB.cursor.get = function ( database, index, key_range, on_success, on_error, o
 
 	get_rows_request.onsuccess = function ( event ) {	
 		on_success( event ); 
-		InDB.trigger( 'InDB_range_get_success', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
-//		try {
-			//load the next row
-			var result = event.target.result;
-			if( "undefined" !== typeof result.value ) {
-				result[ 'continue' ]();
-			}
-//		} catch ( error ) {
-//			InDB.trigger( 'InDB_range_gets_success', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
-			//rows exhausted
-//			return;
-//		}
-
+		InDB.trigger( 'InDB_cursor_row_update_success', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		var result = event.target.result;
+		if( "undefined" !== typeof result && "undefined" !== typeof result.value ) {
+			console.log( 'cursor.update result', result );
+			result[ 'update' ]( update_value );
+			result[ 'continue' ]();
+		}
 	}
 	get_rows_request.onerror = function ( event ) {	
 		on_error( event );
-		InDB.trigger( 'InDB_range_gets_error', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.trigger( 'InDB_cursor_row_update_error', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 	get_rows_request.onabort = function ( event ) {	
 		on_abort( event );
-		InDB.trigger( 'InDB_range_gets_abort', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		InDB.trigger( 'InDB_cursor_row_update_abort', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
 	}
 
 }
+
+
+InDB.cursor.delete = function ( database, index, key_range, on_success, on_error, on_abort ) {
+
+	if( !!InDB.debug ) {
+		console.log( 'InDB.cursor.get', database, index, key_range, on_success, on_error, on_abort );
+	}
+
+	InDB.trigger( 'InDB_cursor_delete', { "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+
+	if( "undefined" === typeof on_success ) {
+		on_success = InDB.events.onSuccess;
+	}
+	if( "undefined" === typeof on_error ) {
+		on_error = InDB.events.onError;
+	}
+	if( "undefined" === typeof on_abort ) {
+		on_abort = InDB.events.onAbort;
+	}
+	var transaction = InDB.transaction.create( database, InDB.transaction.read_write() );
+	if( !!InDB.debug ) {
+		console.log( 'InDB.cursor.get transaction', transaction, index, typeof index );
+	}
+	var get_rows_request;
+	if( "undefined" !== typeof index && !InDB.isEmpty( index ) ) {
+		if( !!InDB.debug ) {
+			console.log( 'transaction_index.openCursor', index, key_range );
+		}
+		var transaction_index = transaction.index( index );
+		get_rows_request = transaction_index.openCursor( key_range );
+	} else {
+		if( !!InDB.debug ) {
+			console.log( 'transaction.openCursor', key_range );
+		}
+		get_rows_request = transaction.openCursor( key_range );
+	}
+
+	get_rows_request.onsuccess = function ( event ) {	
+		on_success( event ); 
+		InDB.trigger( 'InDB_cursor_row_delete_success', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+		var result = event.target.result;
+		if( "undefined" !== typeof result && "undefined" !== typeof result.value ) {
+			console.log( 'cursor.delete result', result );
+			result[ 'delete' ]();
+			result[ 'continue' ]();
+		}
+	}
+	get_rows_request.onerror = function ( event ) {	
+		on_error( event );
+		InDB.trigger( 'InDB_cursor_row_delete_error', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+	}
+
+	get_rows_request.onabort = function ( event ) {	
+		on_abort( event );
+		InDB.trigger( 'InDB_cursor_row_delete_abort', { 'event': event, "database": database, "key_range": key_range, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+	}
+
+}
+
 
 /* End Functions */

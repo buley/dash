@@ -6,11 +6,49 @@
 	</head>
 	<body>
 		<div id='results'>
-			<ul id="counts">
-				<li id="requests">Requested: <span class='count'>0</span></li>
-				<li id="successes">Sucesses: <span class='count'>0</span></li>
-				<li id="errors">Errors: <span class='count'>0</span></li>
-			</ul>	
+			<h2>Types</h2>
+			<h3>Singles</h3>
+			<ul id="singles">
+				<li id="row_adds">Adds: <span class='count'>0</span></li>
+				<li id="row_gets">Gets: <span class='count'>0</span></li>
+				<li id="row_deletes">Deletes: <span class='count'>0</span></li>
+				<li id="row_updates">Updates: <span class='count'>0</span></li>
+			</ul>
+			<h3>Ranges</h3>
+			<ul id="ranges">
+				<li id="cursor_gets">Gets: <span class='count'>0</span></li>
+				<li id="cursor_deletes">Deletes: <span class='count'>0</span></li>
+				<li id="cursor_updates">Updates: <span class='count'>0</span></li>
+			</ul>
+			<h2>Requests</h2>
+			<h3>Adds</h3>
+			<ul id="adds">
+				<li id="add_requests">Requested: <span class='count'>0</span></li>
+				<li id="add_successes">Sucesses: <span class='count'>0</span></li>
+				<li id="add_errors">Errors: <span class='count'>0</span></li>
+				<li id="add_aborts">Aborts: <span class='count'>0</span></li>
+			</ul>
+			<h3>Gets</h3>
+			<ul id="gets">
+				<li id="get_successes">Successes: <span class='count'>0</span></li>
+				<li id="get_aborts">Aborts: <span class='count'>0</span></li>
+				<li id="get_errors">Errors: <span class='count'>0</span></li>
+			</ul>
+			<h3>Updates</h3>
+			<ul id="updates">
+				<li id="update_successes">Successes: <span class='count'>0</span></li>
+				<li id="update_aborts">Aborts: <span class='count'>0</span></li>
+				<li id="update_errors">Errors: <span class='count'>0</span></li>
+			</ul>
+			<h3>Deletes</h3>
+			<ul id="deletes">
+				<li id="delete_successes">Successes: <span class='count'>0</span></li>
+				<li id="delete_aborts">Aborts: <span class='count'>0</span></li>
+				<li id="delete_errors">Errors: <span class='count'>0</span></li>
+			</ul>
+			<h2>Results</h2>
+			<ul id='list'>
+			</ul>
 		</div>	
 
 		<script type='text/javascript'>
@@ -26,12 +64,12 @@
 			}
 
 			/* Constants */
-			var database_name = 'InDB_examples_8';
+			var database_name = 'InDB_examples_10';
 			var database_desc = 'An IndexedDB to store InDB examples';
 
 			var stores = {
 				'todos': { 
-					'key': 'timeStamp'
+					'key': 'id'
 				}
 			};
 	
@@ -74,9 +112,13 @@
 						console.log( 'Database created', event, context );
 					}
 				}
-				console.log( 'Adding object stores' );
+				if( !!InDB.debug ) {
+					console.log( 'Adding object stores' );
+				}
 				InDB.stores.create( stores, function( event ) {
+				if( !!InDB.debug ) {
 					console.log( 'Object store created', event );
+				}
 				}, function( event ) {
 
 					if( !!InDB.debug ) {
@@ -85,94 +127,419 @@
 				} );
 			} );
 
-			InDB.bind( 'InDB_object_store_created_success', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( 'Object store created', event, context );
-				}
-			} );
-
-			/* InDB_store_already_exists is a specific type of InDB_store_created_error */
-			InDB.bind( 'InDB_store_already_exists', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( 'Object store already exists', event, context );
-				}
-			} );
-
-			InDB.bind( 'InDB_stores_loaded_success', function( event, context ) {
+			InDB.bind( 'Example_add_rows', function( event, context ) {
 
 				if( !!InDB.debug ) {
-					console.log( 'Object stores loaded', event, context );
+					console.log( 'Example_add_rows', event, context );
 				}
 
-				//Is this the droid we're looking for?
-				if( !InDB.isEmpty( event ) ) {
+				if( !InDB.isEmpty( context.count ) ) {
+					context.count = 10;
+				}
 
-					var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-					var string_length = 4;
-					var randomnum = ( new Date().getTime() + Math.floor( Math.random(0,1000000) ) );
-					var data = [];
-					for( var k=0; k < 5; k++ ) {
-						var randomstring = '';
-						for (var i=0; i<string_length; i++) {
-							var rnum = Math.floor(Math.random() * chars.length);
-							randomstring += chars.substring(rnum,rnum+1);
-						}
+				var data = [];
 
-						data.push( {
-							'text': randomstring
-							, 'timeStamp': randomnum 
-						} );
-						randomnum = randomnum + 1;
-                                        }
-					console.log( data );
+				context.keyLength = ( !InDB.isEmpty( context.keyLength ) ) ? context.keyLength : 4;
+				context.count = ( !InDB.isEmpty( context.count ) ) ? context.count : 10;
 
-					var item_added_callback = function( event ) { 
-						if( !!InDB.debug ) {
-							console.log( 'Added to object store', event );
-						}
+				var randomnum = ( new Date().getTime() + Math.floor( Math.random(0,1000000) ) );
+				var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
 
+				for( var k=0; k < context.count; k++ ) {
+					var randomstring = '';
+					for (var i=0; i<context.keyLength; i++) {
+						var rnum = Math.floor(Math.random() * chars.length);
+						randomstring += chars.substring(rnum,rnum+1);
 					}
 
-					for( var i = 0; i < data.length; i++ ) {
-						var item = data[ i ];
-						if( !!InDB.debug ) {
-							console.log( "Adding data to object store", context.name, item );
-						}
-						for( store in stores ) {
-							InDB.row.add( store, item, item_added_callback );
-						}
+					data.push( {
+						'id': randomstring
+						, 'timeStamp': randomnum 
+					} );
+					randomnum = randomnum + 1;
+				}
+
+				var item_added_callback = function( event ) { 
+					if( !!InDB.debug ) {
+						console.log( 'Added to object store', data, event );
+					}
+
+				}
+
+				for( var i = 0; i < data.length; i++ ) {
+					var item = data[ i ];
+					if( !!InDB.debug ) {
+						console.log( "Adding data to object store", context.name, item );
+					}
+					for( store in stores ) {
+						InDB.row.add( store, item, item_added_callback );
 					}
 				}
 			} );
 
-			InDB.bind( 'InDB_example_get_items', function( event, context ) {
+			InDB.bind( 'Example_get_rows', function( row_result, context ) {
 				if( !!InDB.debug ) {
-					console.log( 'Getting items', event, context );
+					console.log( 'Getting items', row_result, context );
+					console.log( 'Getting rows with key', InDB.range.left_open( "0" ) );
 				}
-				InDB.cursor.get( "todos", null, InDB.range.left_open( 0 ), function(e){console.log("InDB.cusor.get result",e.target.result);} );
+
+				InDB.cursor.get( "todos", null, InDB.range.left_open( "0" ), function( cursor_result ){
+					var value = InDB.cursor.value( cursor_result );
+					if( !!InDB.debug ) {
+						console.log( 'InDB.cursor.get cursor_result', cursor_result );
+						if( "undefined" !== typeof cursor_result.target.result ) {
+							console.log( 'InDB.cursor.get cursor_result result', cursor_result.target.result );
+							console.log( 'InDB.cursor.get cursor_result value', cursor_result.target.result.value );
+						}
+
+					}
+					if( !!value ) { 
+						if( !!InDB.debug ) {
+							console.log( "InDB.cursor.get result value", value );
+						}
+						var fragment = document.createDocumentFragment();
+						var row = document.createElement('li');
+						row.textContent = value.id;
+						row.id = value.id;
+						row.setAttribute( 'timestamp', value.timeStamp );
+						fragment.appendChild( row );
+						if( !!InDB.debug ) {
+							console.log( 'fragment', fragment );
+						}
+						document.getElementById( 'list' ).appendChild( fragment );
+					}
+				} );
 			} );
 
 	
-			/* UI listeners */
+			InDB.bind( 'Example_update_rows', function( row_result, context ) {
+				if( !!InDB.debug ) {
+					console.log( 'Updating items', row_result, context );
+					console.log( 'Updating rows with key', InDB.range.left_open( "0" ) );
+				}
 
-			InDB.bind( 'InDB_row_adding', function( event, context ) {
-				console.log( 'An item is being added to an object store', event, context );
-				var node = jQuery( '#requests > .count ');
+				InDB.cursor.update( "todos", null, InDB.range.left_open( "0" ), function( cursor_result ){
+					var value = InDB.cursor.value( cursor_result );
+					if( !!InDB.debug ) {
+						console.log( 'InDB.cursor.update cursor_result', cursor_result );
+						if( "undefined" !== typeof cursor_result.target.result ) {
+							console.log( 'InDB.cursor.update cursor_result result', cursor_result.target.result );
+							console.log( 'InDB.cursor.update cursor_result value', cursor_result.target.result.value );
+						}
+
+					}
+					if( !!value ) { 
+						if( !!InDB.debug ) {
+							console.log( "InDB.cursor.update result value", value );
+						}
+						var fragment = document.createDocumentFragment();
+						var row = document.createElement('li');
+						row.textContent = value.id;
+						row.id = value.id;
+						row.setAttribute( 'timestamp', value.timeStamp );
+						fragment.appendChild( row );
+						if( !!InDB.debug ) {
+							console.log( 'fragment', fragment );
+						}
+						document.getElementById( 'list' ).appendChild( fragment );
+					}
+				} );
+			} );
+
+			InDB.bind( 'Example_delete_rows', function( row_result, context ) {
+				if( !!InDB.debug ) {
+					console.log( 'Deleting items', row_result, context );
+					console.log( 'Deleting rows with key', InDB.range.left_open( "0" ) );
+				}
+
+				InDB.cursor.delete( "todos", null, InDB.range.left_open( "0" ), function( cursor_result ){
+					var value = InDB.cursor.value( cursor_result );
+					if( !!InDB.debug ) {
+						console.log( 'InDB.cursor.delete cursor_result', cursor_result );
+						if( "undefined" !== typeof cursor_result.target.result ) {
+							console.log( 'InDB.cursor.delete cursor_result result', cursor_result.target.result );
+							console.log( 'InDB.cursor.delete cursor_result value', cursor_result.target.result.value );
+						}
+
+					}
+					if( !!value ) { 
+						if( !!InDB.debug ) {
+							console.log( "InDB.cursor.delete result value", value );
+						}
+						var fragment = document.createDocumentFragment();
+						var row = document.createElement('li');
+						row.textContent = value.id;
+						row.id = value.id;
+						row.setAttribute( 'timestamp', value.timeStamp );
+						fragment.appendChild( row );
+						if( !!InDB.debug ) {
+							console.log( 'fragment', fragment );
+						}
+						document.getElementById( 'list' ).appendChild( fragment );
+					}
+				} );
+			} );
+
+	
+	
+			/* Event counters */
+
+			/* Adds */
+
+			InDB.bind( 'InDB_row_add', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( 'InDB_row_add', event, context );
+				}
+				var node = jQuery( '#row_adds > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+				node = jQuery( '#add_requests > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
-			InDB.bind( 'InDB_row_added_success', function( event, context ) {
-				console.log( 'An item was added to an object store', event, context );
-				var node = jQuery( '#successes > .count ');
+
+			InDB.bind( 'InDB_row_add_success', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( 'InDB_row_add_success', event, context );
+				}
+				var node = jQuery( '#add_successes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
-			InDB.bind( 'InDB_row_added_error', function( event, context ) {
-				console.log( 'There was an error adding something to an object store', event, context );
-				var node = jQuery( '#error > .count');
-				node.html( parseInt( node.html(), 10 ) + 1 );
-		} );
 
+			InDB.bind( 'InDB_row_add_abort', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#add_aborts > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_add_error', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#add_errors > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			/* Gets */
+
+			InDB.bind( 'InDB_row_get', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#row_gets > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_cursor_get', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#cursor_gets > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_cursor_row_get_success', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#get_successes > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_get_success', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#get_successes > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_get_abort', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#get_aborts > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_cursor_row_get_abort', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#get_aborts > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_get_error', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#get_errors > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_cursor_row_get_error', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#get_errors > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			/* Updates */
+
+			InDB.bind( 'InDB_row_update', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#row_updates > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+			InDB.bind( 'InDB_cursor_row_update', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#cursor_updates > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_update_success', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#update_successes > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+			InDB.bind( 'InDB_cursor_row_update_success', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#update_successes > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_update_abort', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#update_aborts > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_cursor_row_update_abort', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#update_aborts > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_update_error', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#update_errors > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_cursor_row_update_error', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#update_errors > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+
+			/* Deletes */
+
+			InDB.bind( 'InDB_row_delete', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#row_deletes > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+			InDB.bind( 'InDB_cursor_delete', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#cursor_deletes > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_delete_success', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#delete_successes > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+			InDB.bind( 'InDB_cursor_row_delete_success', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#delete_successes > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_delete_abort', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}		
+				var node = jQuery( '#delete_aborts > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_cursor_row_delete_abort', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}		
+				var node = jQuery( '#delete_aborts > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+
+			InDB.bind( 'InDB_row_delete_error', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#delete_errors > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
+
+			InDB.bind( 'InDB_cursor_row_delete_error', function( event, context ) {
+				if( !!InDB.debug ) {
+					console.log( '', event, context );
+				}
+				var node = jQuery( '#delete_errors > .count ');
+				node.html( parseInt( node.html(), 10 ) + 1 );
+			} );
 
 		</script>
 	</body>
