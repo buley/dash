@@ -52,11 +52,25 @@
 		</div>	
 
 		<script type='text/javascript'>
+
+			/*
+				InDB.trigger( 'Example_load_database', { 'name': database_name, 'description': database_desc } );
+
+				InDB.trigger( 'Example_add_rows', { 'store':'todos', 'count': 20, 'keyLength': 10 } );
+
+				InDB.trigger( 'Example_get_rows', { 'store':'todos' } );
+
+				InDB.trigger( 'Example_update_rows', { 'store': 'todos', 'data': { 'datatata': 'dadadada' }, 'replace': false } );
+			
+				InDB.trigger( 'Example_delete_rows', { 'store':'todos' } );
+			*/
+
 			var warnLevel = 'log'; //also valid: alert (defaults to error object)
 			InDB.debug = true;
 
 
 			/* Setup */
+
 			var browser_check = InDB.checkBrowser();
 			InDB.assert( -1 !== browser_check, 'incompatible browser' );
 			if ( 0 === browser_check ) {
@@ -64,9 +78,15 @@
 			}
 
 			/* Constants */
+
 			var database_name = 'InDB_examples_10';
 			var database_desc = 'An IndexedDB to store InDB examples';
 
+			/* On load */
+		
+			jQuery( document ).ready( function() { 	
+				InDB.trigger( 'Example_load_database', { 'name': database_name, 'description': database_desc } );
+			} );
 			var stores = {
 				'todos': { 
 					'key': 'id'
@@ -100,7 +120,7 @@
 			Example.addResult = function ( value ) {
 				if ( !!value ) { 
 					if ( !!InDB.debug ) {
-						console.log ( "InDB.cursor.update result value", value );
+						console.log ( "Example.addResult( value )", value );
 					}
 					var fragment = document.createDocumentFragment();
 					var row = document.createElement('li');
@@ -139,7 +159,8 @@
 				/* Defaults */
 	
 				if ( "undefined" === typeof on_success ) {
-					on_success = function ( result ) {
+					on_success = function ( context ) {
+						var result = context.event
 						var value = InDB.cursor.value( result );
 						if ( !!InDB.debug ) {
 							console.log ( 'InDB.row.get result', result );
@@ -199,7 +220,8 @@
 				/* Defaults */
 	
 				if ( "undefined" === typeof on_success ) {
-					on_success = function ( result ) {
+					on_success = function ( context ) {
+						var result = context.event;
 						var value = InDB.cursor.value( result );
 						if ( !!InDB.debug ) {
 							console.log ( 'InDB.cursor.delete result', result );
@@ -253,7 +275,8 @@
 				}
 	
 				if ( "undefined" === typeof on_success ) {
-					on_success = function ( result ) {
+					on_success = function ( context ) {
+						var result = context.event;
 						var value = InDB.cursor.value( result );
 						if ( !!InDB.debug ) {
 							console.log ( 'InDB.cursor.delete result', result );
@@ -309,7 +332,8 @@
 				/* Defaults */
 	
 				if ( "undefined" === typeof on_success ) {
-					on_success = function ( result ) {
+					on_success = function ( context ) {
+						var result = context.event;
 						var value = InDB.cursor.value( result );
 						if ( !!InDB.debug ) {
 							console.log ( 'InDB.cursor.delete result', result );
@@ -370,10 +394,11 @@
 				index = ( !InDB.isEmpty( index ) ) ? index : null;
 				
 				if ( "undefined" === typeof on_success ) {
-					on_success = function ( result ) {
+					on_success = function ( context ) {
+						var result = context.event;
 						var value = InDB.cursor.value( result );
 						if ( !!InDB.debug ) {
-							console.log ( 'InDB.cursor.delete result', result );
+							console.log ( 'InDB.cursor.delete result', result  );
 							if ( "undefined" !== typeof result.target.result ) {
 								console.log ( 'InDB.cursor.delete result result', result.target.result );
 								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
@@ -404,6 +429,8 @@
 
 			InDB.bind( 'Example_do_cursor_update', function ( result, context ) { 
 
+				/* Setup */
+
 				var store = context.store; // Required
 				var index = context.index; // Optional; Defaults to null
 				var keyRange = context.keyRange; // Required; must be a valid IDBKeyRange
@@ -414,6 +441,7 @@
 				var on_abort = context.on_abort;
 
 				/* Assertions */
+
 				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
 					return;
 				}
@@ -427,14 +455,17 @@
 				}
 				
 				/* Defaults */
+
 				replace = ( InDB.isBoolean( replace ) ) ? replace : false;
 				index = ( !InDB.isEmpty( index ) ) ? index : null;
 
 				if ( "undefined" === typeof on_success ) {
-					on_success = function ( result ) {
+	
+					on_success = function ( context ) {
+						var result = context.event;
 						var value = InDB.cursor.value( result );
 						if ( !!InDB.debug ) {
-							console.log ( 'InDB.cursor.delete result', result );
+							console.log ( 'InDB.cursor.delete result', result  );
 							if ( "undefined" !== typeof result.target.result ) {
 								console.log ( 'InDB.cursor.delete result result', result.target.result );
 								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
@@ -494,11 +525,13 @@
 				index = ( !InDB.isEmpty( index ) ) ? index : null;
 
 				if ( "undefined" === typeof on_success ) {
-					on_success = function ( result ) {
+
+					on_success = function ( context ) {
+						var result = context.event;
 						var value = InDB.cursor.value( result );
 						if ( !!InDB.debug ) {
-							console.log ( 'InDB.cursor.delete result', result );
-							if ( "undefined" !== typeof result.target.result ) {
+							console.log ( 'InDB.cursor.delete result', result  );
+							if ( "undefined" !== typeof context.event.target.result ) {
 								console.log ( 'InDB.cursor.delete result result', result.target.result );
 								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
 							}
@@ -515,8 +548,6 @@
 					'store': store,
 					'index': index,
 					'keyRange': keyRange,
-					'data': data,
-					'replace': replace,
 					'on_success': on_success,
 					'on_error': on_error,
 					'on_abort': on_abort
@@ -653,24 +684,22 @@
 					if ( !!InDB.debug ) {
 						console.log ( "Example_do_add", store, item );
 					}
-					
-					// Add item to each store
-					//for( store in stores ) {
 
-						/* Callback */
+					/* Callback */
 
-						callback = function ( event ) { 
-							if ( !!InDB.debug ) {
-								console.log ( 'Added item to object store', item, event );
-							}
-							Example.addResult( item );
+					callback = function ( context ) { 
+						var result = context.event;
+						var value = InDB.row.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'Example_add_rows value', context, value );
 						}
+						Example.addResult( context.data );	
+					};
 
-						/* Request */
+					/* Request */
 
-						InDB.trigger( 'Example_do_add', { 'store': store, 'data': item, 'on_success': callback } );
+					InDB.trigger( 'Example_do_add', { 'store': store, 'data': item, 'on_success': callback } );
 
-					//}
 				}
 			} );
 
@@ -701,6 +730,35 @@
 				/* Request */
 
 				InDB.trigger( 'Example_do_cursor_get', { 'store': store, 'keyRange': keyRange } );
+			
+			} );
+
+			InDB.bind( 'Example_delete_rows', function ( row_result, context ) {
+
+				/* Debug */
+
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_delete_rows', row_result, context );
+				}
+	
+				/* Setup */
+
+				var store = context.store; // Required
+				var keyRange = context.keyRange; // Optional; Default
+			
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide a store name' ) ) {
+					return;
+				}
+
+				/* Defaults */
+
+				keyRange = ( InDB.isEmpty( keyRange ) ) ?  InDB.range.left_open( "0" ) : keyRange;
+				
+				/* Request */
+
+				InDB.trigger( 'Example_do_cursor_delete', { 'store': store, 'keyRange': keyRange } );
 			
 			} );
 
@@ -742,7 +800,8 @@
 				keyRange = ( InDB.isEmpty( keyRange ) ) ?  InDB.range.left_open( "0" ) : keyRange;
 
 				if ( 'undefined' === typeof on_success ) {
-					on_success =function ( result ){
+					on_success = function ( context ){
+						var result = context.event;
 						var value = InDB.cursor.value( result );
 						if ( !!InDB.debug ) {
 							console.log ( 'InDB.cursor.update result', result );
