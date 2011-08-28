@@ -59,7 +59,7 @@
 			/* Setup */
 			var browser_check = InDB.checkBrowser();
 			InDB.assert( -1 !== browser_check, 'incompatible browser' );
-			if( 0 === browser_check ) {
+			if ( 0 === browser_check ) {
 				InDB.fixBrowser();
 			}
 
@@ -73,222 +73,710 @@
 				}
 			};
 	
-			var on_success = function( event ) {
-				if( !!InDB.debug ) {
-					console.log( 'success', event );
+			var on_success = function ( event ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'success', event );
 				}
 			}
-			var on_error = function( event ) {
-				if( !!InDB.debug ) {
-					console.log( 'error', event );
+			var on_error = function ( event ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'error', event );
 				}
 			}		
-			var on_abort = function( event ) {
-				if( !!InDB.debug ) {
-					console.log( 'abort', event );
+			var on_abort = function ( event ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'abort', event );
 				}
 			}		
-			var on_complete = function( event ) {
-				if( !!InDB.debug ) {
-					console.log( 'complete', event );
+			var on_complete = function ( event ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'complete', event );
 				}
 			}		
+
+
+			var Example = {};
+			/* returns bool */
+			Example.addResult = function ( value ) {
+				if ( !!value ) { 
+					if ( !!InDB.debug ) {
+						console.log ( "InDB.cursor.update result value", value );
+					}
+					var fragment = document.createDocumentFragment();
+					var row = document.createElement('li');
+					row.textContent = value.id;
+					row.id = value.id;
+					row.setAttribute( 'timestamp', value.timeStamp );
+					fragment.appendChild( row );
+					if ( !!InDB.debug ) {
+						console.log ( 'fragment', fragment );
+					}
+					document.getElementById( 'list' ).appendChild( fragment );
+					return true;
+				}
+				return false;
+			};
+
+
+			InDB.bind( 'Example_do_get', function ( result, context ) { 
+			
+				var store = context.store; // Required
+				var key = context.key; // Required
+				var on_success = context.on_success;
+				var on_error = context.on_error;
+				var on_abort = context.on_abort;
+
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key to delete' ) ) {
+					return;
+				}
+			
+				/* Defaults */
+	
+				if ( "undefined" === typeof on_success ) {
+					on_success = function ( result ) {
+						var value = InDB.cursor.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'InDB.row.get result', result );
+							if ( "undefined" !== typeof result.target.result ) {
+								console.log ( 'InDB.row.get result result', result.target.result );
+								console.log ( 'InDB.row.get result value', result.target.result.value );
+							}
+
+						}
+						Example.addResult( value );
+                                	};
+				}
+
+				/* Context */
+
+				var context = {
+					'store': store,
+					'key': key,
+					'on_success': on_success,
+					'on_error': on_error,
+					'on_abort': on_abort
+				};
+			
+				/* Request */
+
+				InDB.trigger( 'InDB_do_row_get', context );
+				
+			} );
+
+
+			InDB.bind( 'Example_do_add', function ( result, context ) { 
+
+				/* Debug */
+
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_do_add', result, context );
+				}
+
+				/* Setup */
+
+				var store = context.store; // Required
+				var data = context.data; // Required
+				var on_success = context.on_success; // Optional; Default
+				var on_error = context.on_error; // Optional; No default
+				var on_abort = context.on_abort; // Optiona; No default
+
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object to store' ) ) {
+					return;
+				}
+
+				/* Defaults */
+	
+				if ( "undefined" === typeof on_success ) {
+					on_success = function ( result ) {
+						var value = InDB.cursor.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'InDB.cursor.delete result', result );
+							if ( "undefined" !== typeof result.target.result ) {
+								console.log ( 'InDB.cursor.delete result result', result.target.result );
+								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
+							}
+						}
+						Example.addResult( value );
+                                	}
+				}
+
+				/* Context */
+
+				var context = {
+					'store': store,
+					'data': data,
+					'on_success': on_success,
+					'on_error': on_error,
+					'on_abort': on_abort
+				};
+	
+				/* Request */
+
+				InDB.trigger( 'InDB_do_row_add', context );
+
+			} );
+			
+
+			// context.store, context.key, context.data, context.on_success, context.on_error, context.on_abort
+			InDB.bind( 'Example_do_put', function ( result, context ) { 
+
+				var store = context.store; // Required
+				var key = context.key; // Required
+				var data = context.data; // Required
+				var on_success = context.on_success; // Optional; Default
+				var on_error = context.on_error; // Optional; No default
+				var on_abort = context.on_abort; // Optional; No default
+
+				/* Assertions */
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key to delete' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object to store' ) ) {
+					return;
+				}
+	
+				if ( "undefined" === typeof on_success ) {
+					on_success = function ( result ) {
+						var value = InDB.cursor.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'InDB.cursor.delete result', result );
+							if ( "undefined" !== typeof result.target.result ) {
+								console.log ( 'InDB.cursor.delete result result', result.target.result );
+								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
+							}
+						}
+						Example.addResult( value );
+                                	}
+				}
+
+				var context = {
+					'store': store,
+					'key': key,
+					'data': data,
+					'on_success': on_success,
+					'on_error': on_error,
+					'on_abort': on_abort 
+				};
+
+				InDB.trigger( 'InDB_do_row_put', context );
+
+			} );
+
+			// context.store, context.key, context.on_success, context.on_error, context.on_abort
+			InDB.bind( 'Example_do_delete', function ( result, context ) { 
+
+				/* Debug */
+				
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_do_delete', result, context );
+				}
+
+				/* Setup */
+			
+				var store = context.store; // Required
+				var key = context.key; // Required
+				var on_success = context.on_success; // Optional; Default
+				var on_error = context.on_error; // Optional; No default
+				var on_abort = context.on_abort; // Optional; No default
+
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key to delete' ) ) {
+					return;
+				}
+			
+				/* Defaults */
+	
+				if ( "undefined" === typeof on_success ) {
+					on_success = function ( result ) {
+						var value = InDB.cursor.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'InDB.cursor.delete result', result );
+							if ( "undefined" !== typeof result.target.result ) {
+								console.log ( 'InDB.cursor.delete result result', result.target.result );
+								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
+							}
+
+						}
+						Example.addResult( value );
+                                	}
+				}
+
+				/* Context */
+
+				var context = {
+					'store': store,
+					'key': key,
+					'on_success': on_success,
+					'on_error': on_error,
+					'on_abort': on_abort
+				};
+
+				/* Request */
+
+				InDB.trigger( 'InDB_do_row_delete', context );
+				
+			} );
+
+			InDB.bind( 'Example_do_cursor_get', function ( result, context ) { 
+
+				/* Debug */
+
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_do_cursor_get', result, context );
+				}
+
+				/* Setup */
+
+				var store = context.store; // Required
+				var index = context.index; // Optional; Defaults to null
+				var keyRange = context.keyRange; // Required; Must be of type IDBKeyRange
+				var on_success = context.on_success; // Optional; Default
+				var on_error = context.on_error; // Optional; No default
+				var on_abort = context.on_abort; // Optiona; No default
+
+				/* Assertions */
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
+				}
+			
+				if ( !InDB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
+					return;
+				}
+				
+				/* Defaults */
+
+				index = ( !InDB.isEmpty( index ) ) ? index : null;
+				
+				if ( "undefined" === typeof on_success ) {
+					on_success = function ( result ) {
+						var value = InDB.cursor.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'InDB.cursor.delete result', result );
+							if ( "undefined" !== typeof result.target.result ) {
+								console.log ( 'InDB.cursor.delete result result', result.target.result );
+								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
+							}
+
+						}
+						Example.addResult( value );
+                                	}
+
+				}
+
+				/* Context */
+
+				var context = {
+					'store': store,
+					'index': index,
+					'keyRange': keyRange,
+					'on_success': on_success,
+					'on_error': on_error,
+					'on_abort': on_abort
+ 				};
+
+
+				InDB.trigger( 'InDB_do_cursor_get', context );
+
+			} );
+
+
+			InDB.bind( 'Example_do_cursor_update', function ( result, context ) { 
+
+				var store = context.store; // Required
+				var index = context.index; // Optional; Defaults to null
+				var keyRange = context.keyRange; // Required; must be a valid IDBKeyRange
+				var data = context.data; // Required
+				var replace = context.data; // Optional Defaults to false
+				var on_success = context.on_success;
+				var on_error = context.on_error;
+				var on_abort = context.on_abort;
+
+				/* Assertions */
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object' ) ) {
+					return;
+				}
+			
+				if ( !InDB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
+					return;
+				}
+				
+				/* Defaults */
+				replace = ( InDB.isBoolean( replace ) ) ? replace : false;
+				index = ( !InDB.isEmpty( index ) ) ? index : null;
+
+				if ( "undefined" === typeof on_success ) {
+					on_success = function ( result ) {
+						var value = InDB.cursor.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'InDB.cursor.delete result', result );
+							if ( "undefined" !== typeof result.target.result ) {
+								console.log ( 'InDB.cursor.delete result result', result.target.result );
+								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
+							}
+
+						}
+						Example.addResult( value );
+                                	}
+
+				}
+	
+				var context = {
+					'store': store,
+					'index': index,
+					'keyRange': keyRange,
+					'data': data,
+					'replace': replace,
+					'on_success': on_success,
+					'on_error': on_error,
+					'on_abort': on_abort
+				};
+
+				InDB.trigger( 'InDB_do_cursor_update', context );
+				
+			} );
+
+
+			InDB.bind( 'Example_do_cursor_delete', function ( result, context ) { 
+
+				/* Debug */
+		
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_do_cursor_delete', result, context );
+				}
+
+				/* Setup */
+
+				var store = context.store; // Required
+				var index = context.index; // Optional; Defaults to null
+				var keyRange = context.keyRange; // Required; must be a valid IDBKeyRange
+				var on_success = context.on_success;
+				var on_error = context.on_error;
+				var on_abort = context.on_abort;
+
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
+					return;
+				}
+				
+				/* Defaults */
+				
+				index = ( !InDB.isEmpty( index ) ) ? index : null;
+
+				if ( "undefined" === typeof on_success ) {
+					on_success = function ( result ) {
+						var value = InDB.cursor.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'InDB.cursor.delete result', result );
+							if ( "undefined" !== typeof result.target.result ) {
+								console.log ( 'InDB.cursor.delete result result', result.target.result );
+								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
+							}
+
+						}
+						Example.addResult( value );
+                                	}
+
+				}
+
+				/* Context */
+
+				var context = {
+					'store': store,
+					'index': index,
+					'keyRange': keyRange,
+					'data': data,
+					'replace': replace,
+					'on_success': on_success,
+					'on_error': on_error,
+					'on_abort': on_abort
+				};
+
+				/* Request */
+
+				InDB.trigger( 'InDB_do_cursor_delete', context );
+				
+			} );
+
+
+			/* Auto-loaded database */
+			InDB.bind( 'InDB_database_load_success', function ( event, context ) {
+				InDB.trigger( 'Example_loaded_database', { 'name': database_name, 'description': database_desc } );
+			} );
 	
 			/* Load database or create and load if necessary */
-			InDB.database.load( database_name, database_desc, on_success, on_error, on_abort );
-
-			/* Listen for the event that shows the database is ready to work with */
-			InDB.bind( 'InDB_database_loaded_success', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( 'The IndexedDB database was loaded', event, context );
+			InDB.bind( 'Example_load_database', function ( event, context ) {
+	
+				/* Debug */
+			
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_load_database', event, context );
 				}
-			} );
+
+				/* Setup */
+
+				var name = context.name; // Required
+				var description = context.description; // Required
+				var on_success = context.on_success;
+				var on_error = context.on_error;
+				var on_abort = context.on_abort;
 		
-			/* Create object stores after the database is created */
-			InDB.bind( 'InDB_database_created_success', function( event, context ) {
-				// Assert that the database is already loaded
-				if( InDB.assert( InDB.db !== 'Object', 'Database not loaded' ) ) {
-					if( !!InDB.debug ) {
-						console.log( 'Database created', event, context );
-					}
-				}
-				if( !!InDB.debug ) {
-					console.log( 'Adding object stores' );
-				}
-				InDB.stores.create( stores, function( event ) {
-				if( !!InDB.debug ) {
-					console.log( 'Object store created', event );
-				}
-				}, function( event ) {
+				/* Assertions */
 
-					if( !!InDB.debug ) {
-						console.log( 'Object store creation error', event );
-					}
-				} );
+				if ( !InDB.assert( !InDB.isEmpty( name ), 'Must provide a database name' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( description ), 'Must provide a database description' ) ) {
+					return;
+				}
+
+				/* Request */
+
+				InDB.database.load( name, description, on_success, on_error, on_abort );
+
 			} );
 
-			InDB.bind( 'Example_add_rows', function( event, context ) {
+			/* Create object stores after the database is created */
+			InDB.bind( 'Example_create_stores', function ( event, context ) {
 
-				if( !!InDB.debug ) {
-					console.log( 'Example_add_rows', event, context );
+				/* Debug */
+
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_create_stores', event, context );
+				}
+			
+				/* Assertions */
+
+				// Assert that the database is already loaded
+				if ( !InDB.assert( InDB.db !== 'Object', 'Database not loaded' ) ) {
+					if ( !!InDB.debug ) {
+						console.log ( 'Database created', event, context );
+					}
 				}
 
-				if( !InDB.isEmpty( context.count ) ) {
-					context.count = 10;
+				/* Request */
+
+				InDB.stores.create( stores, on_sucess, on_error, on_abort );
+
+			} );
+
+			// Custom
+			InDB.bind( 'Example_add_rows', function ( event, context ) {
+
+				/* Debug */
+
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_add_rows', event, context );
 				}
 
-				var data = [];
+				/* Setup */
+
+				var store = context.store; // Required
+				var count = context.count; // Optional; Defaults to 10
+				var keyLength = context.keyLength; // Optional; Defaults to 4
+
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
+				}
+
+				/* Defaults */
 
 				context.keyLength = ( !InDB.isEmpty( context.keyLength ) ) ? context.keyLength : 4;
 				context.count = ( !InDB.isEmpty( context.count ) ) ? context.count : 10;
 
+				/* Data */
+
+				var data = [];
+
 				var randomnum = ( new Date().getTime() + Math.floor( Math.random(0,1000000) ) );
 				var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
 
-				for( var k=0; k < context.count; k++ ) {
+				for( var k=0; k < count; k++ ) {
+
 					var randomstring = '';
-					for (var i=0; i<context.keyLength; i++) {
-						var rnum = Math.floor(Math.random() * chars.length);
-						randomstring += chars.substring(rnum,rnum+1);
+					
+					// Build a random string given the keyLength
+					for ( var i = 0; i < keyLength; i++ ) {
+						var rnum = Math.floor( Math.random() * chars.length );
+						randomstring += chars.substring( rnum, rnum + 1) ;
 					}
 
+					// Push new item onto data stack
 					data.push( {
 						'id': randomstring
 						, 'timeStamp': randomnum 
 					} );
+
 					randomnum = randomnum + 1;
-				}
-
-				var item_added_callback = function( event ) { 
-					if( !!InDB.debug ) {
-						console.log( 'Added to object store', data, event );
-					}
 
 				}
 
+				// Add data to stores
 				for( var i = 0; i < data.length; i++ ) {
+
 					var item = data[ i ];
-					if( !!InDB.debug ) {
-						console.log( "Adding data to object store", context.name, item );
+					var callback;
+
+					if ( !!InDB.debug ) {
+						console.log ( "Example_do_add", store, item );
 					}
-					for( store in stores ) {
-						InDB.row.add( store, item, item_added_callback );
-					}
+					
+					// Add item to each store
+					//for( store in stores ) {
+
+						/* Callback */
+
+						callback = function ( event ) { 
+							if ( !!InDB.debug ) {
+								console.log ( 'Added item to object store', item, event );
+							}
+							Example.addResult( item );
+						}
+
+						/* Request */
+
+						InDB.trigger( 'Example_do_add', { 'store': store, 'data': item, 'on_success': callback } );
+
+					//}
 				}
 			} );
 
-			InDB.bind( 'Example_get_rows', function( row_result, context ) {
-				if( !!InDB.debug ) {
-					console.log( 'Getting items', row_result, context );
-					console.log( 'Getting rows with key', InDB.range.left_open( "0" ) );
+
+			InDB.bind( 'Example_get_rows', function ( row_result, context ) {
+
+				/* Debug */
+
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_get_rows', row_result, context );
+				}
+	
+				/* Setup */
+
+				var store = context.store; // Required
+				var keyRange = context.keyRange; // Optional; Default
+			
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide a store name' ) ) {
+					return;
 				}
 
-				InDB.cursor.get( "todos", null, InDB.range.left_open( "0" ), function( cursor_result ){
-					var value = InDB.cursor.value( cursor_result );
-					if( !!InDB.debug ) {
-						console.log( 'InDB.cursor.get cursor_result', cursor_result );
-						if( "undefined" !== typeof cursor_result.target.result ) {
-							console.log( 'InDB.cursor.get cursor_result result', cursor_result.target.result );
-							console.log( 'InDB.cursor.get cursor_result value', cursor_result.target.result.value );
-						}
+				/* Defaults */
 
-					}
-					if( !!value ) { 
-						if( !!InDB.debug ) {
-							console.log( "InDB.cursor.get result value", value );
-						}
-						var fragment = document.createDocumentFragment();
-						var row = document.createElement('li');
-						row.textContent = value.id;
-						row.id = value.id;
-						row.setAttribute( 'timestamp', value.timeStamp );
-						fragment.appendChild( row );
-						if( !!InDB.debug ) {
-							console.log( 'fragment', fragment );
-						}
-						document.getElementById( 'list' ).appendChild( fragment );
-					}
-				} );
+				keyRange = ( InDB.isEmpty( keyRange ) ) ?  InDB.range.left_open( "0" ) : keyRange;
+				
+				/* Request */
+
+				InDB.trigger( 'Example_do_cursor_get', { 'store': store, 'keyRange': keyRange } );
+			
 			} );
 
 	
-			InDB.bind( 'Example_update_rows', function( row_result, context ) {
-				if( !!InDB.debug ) {
-					console.log( 'Updating items', row_result, context );
-					console.log( 'Updating rows with key', InDB.range.left_open( "0" ) );
+			//context.database, context.index, context.keyRange (e.g. InDB.range.left_open( "0" ) ), context.data, context.replace, context.on_success
+			InDB.bind( 'Example_update_rows', function ( event, context ) {
+
+				/* Debug */
+
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_update_rows', event, context );
 				}
 
-				InDB.cursor.update( "todos", null, InDB.range.left_open( "0" ), function( cursor_result ){
-					var value = InDB.cursor.value( cursor_result );
-					if( !!InDB.debug ) {
-						console.log( 'InDB.cursor.update cursor_result', cursor_result );
-						if( "undefined" !== typeof cursor_result.target.result ) {
-							console.log( 'InDB.cursor.update cursor_result result', cursor_result.target.result );
-							console.log( 'InDB.cursor.update cursor_result value', cursor_result.target.result.value );
-						}
+				/* Setup */
 
-					}
-					if( !!value ) { 
-						if( !!InDB.debug ) {
-							console.log( "InDB.cursor.update result value", value );
-						}
-						var fragment = document.createDocumentFragment();
-						var row = document.createElement('li');
-						row.textContent = value.id;
-						row.id = value.id;
-						row.setAttribute( 'timestamp', value.timeStamp );
-						fragment.appendChild( row );
-						if( !!InDB.debug ) {
-							console.log( 'fragment', fragment );
-						}
-						document.getElementById( 'list' ).appendChild( fragment );
-					}
-				} );
-			} );
+				var store = context.store; // Required
+				var index = context.index; // Optional; Defaults to null
+				var keyRange = context.keyRange; // Optional; Defaults
+				var data = context.data; // Required
+				var replace = context.replace; // Optional; Defaults to false
+				var on_success = context.on_success; // Optional; Defaulta
+				var on_error = context.on_error; // Optional
+				var on_abort = context.on_abort; // Optional
 
-			InDB.bind( 'Example_delete_rows', function( row_result, context ) {
-				if( !!InDB.debug ) {
-					console.log( 'Deleting items', row_result, context );
-					console.log( 'Deleting rows with key', InDB.range.left_open( "0" ) );
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
 				}
 
-				InDB.cursor.delete( "todos", null, InDB.range.left_open( "0" ), function( cursor_result ){
-					var value = InDB.cursor.value( cursor_result );
-					if( !!InDB.debug ) {
-						console.log( 'InDB.cursor.delete cursor_result', cursor_result );
-						if( "undefined" !== typeof cursor_result.target.result ) {
-							console.log( 'InDB.cursor.delete cursor_result result', cursor_result.target.result );
-							console.log( 'InDB.cursor.delete cursor_result value', cursor_result.target.result.value );
-						}
+				//if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object' ) ) {
+				//	return;
+				//}
 
-					}
-					if( !!value ) { 
-						if( !!InDB.debug ) {
-							console.log( "InDB.cursor.delete result value", value );
+				/* Defaults */
+
+				replace = ( InDB.isBoolean( replace ) ) ? replace : false;
+				index = ( !InDB.isEmpty( index ) ) ? index : null;
+				keyRange = ( InDB.isEmpty( keyRange ) ) ?  InDB.range.left_open( "0" ) : keyRange;
+
+				if ( 'undefined' === typeof on_success ) {
+					on_success =function ( result ){
+						var value = InDB.cursor.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'InDB.cursor.update result', result );
+							if ( "undefined" !== typeof result.target.result ) {
+								console.log ( 'InDB.cursor.update result result', result.target.result );
+								console.log ( 'InDB.cursor.update result value', result.target.result.value );
+							}
+
 						}
-						var fragment = document.createDocumentFragment();
-						var row = document.createElement('li');
-						row.textContent = value.id;
-						row.id = value.id;
-						row.setAttribute( 'timestamp', value.timeStamp );
-						fragment.appendChild( row );
-						if( !!InDB.debug ) {
-							console.log( 'fragment', fragment );
-						}
-						document.getElementById( 'list' ).appendChild( fragment );
-					}
-				} );
+						Example.addResult( value );	
+					};
+				}
+
+				/* Context */
+
+				var context = { 'store': store, 'index': index, 'keyRange': keyRange, 'data': data, 'replace': replace, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort  };
+
+				/* Request */
+				
+				InDB.trigger( 'Example_do_cursor_update', context );
+
 			} );
 
-	
-	
-			/* Event counters */
 
+
+			/**
+			 * Event counters
+			 **/
+			
 			/* Adds */
 
-			InDB.bind( 'InDB_row_add', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( 'InDB_row_add', event, context );
+			InDB.bind( 'InDB_row_add', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_add', event, context );
 				}
 				var node = jQuery( '#row_adds > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
@@ -296,28 +784,27 @@
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
-
-			InDB.bind( 'InDB_row_add_success', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( 'InDB_row_add_success', event, context );
+			InDB.bind( 'InDB_row_add_success', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_add_success', event, context );
 				}
 				var node = jQuery( '#add_successes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_add_abort', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_add_abort', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_add_abort', event, context );
 				}
 				var node = jQuery( '#add_aborts > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_add_error', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_add_error', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_add_error', event, context );
 				}
 				var node = jQuery( '#add_errors > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
@@ -326,72 +813,72 @@
 
 			/* Gets */
 
-			InDB.bind( 'InDB_row_get', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_get', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_get', event, context );
 				}
 				var node = jQuery( '#row_gets > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_cursor_get', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_get', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_cursor_get', event, context );
 				}
 				var node = jQuery( '#cursor_gets > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_cursor_row_get_success', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_row_get_success', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_cursor_row_get_success', event, context );
 				}
 				var node = jQuery( '#get_successes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_get_success', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_get_success', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_get_success', event, context );
 				}
 				var node = jQuery( '#get_successes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_get_abort', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_get_abort', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_get_abort', event, context );
 				}
 				var node = jQuery( '#get_aborts > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_cursor_row_get_abort', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_row_get_abort', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_cursor_row_get_abort', event, context );
 				}
 				var node = jQuery( '#get_aborts > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_get_error', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_get_error', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_get_error', event, context );
 				}
 				var node = jQuery( '#get_errors > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_cursor_row_get_error', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_row_get_error', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_cursor_row_get_error', event, context );
 				}
 				var node = jQuery( '#get_errors > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
@@ -400,70 +887,70 @@
 
 			/* Updates */
 
-			InDB.bind( 'InDB_row_update', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_update', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( '', event, context );
 				}
 				var node = jQuery( '#row_updates > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
-			InDB.bind( 'InDB_cursor_row_update', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_update', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( '', event, context );
 				}
 				var node = jQuery( '#cursor_updates > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_update_success', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_update_success', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( '', event, context );
 				}
 				var node = jQuery( '#update_successes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
-			InDB.bind( 'InDB_cursor_row_update_success', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_row_update_success', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( '', event, context );
 				}
 				var node = jQuery( '#update_successes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_update_abort', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_update_abort', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( '', event, context );
 				}
 				var node = jQuery( '#update_aborts > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_cursor_row_update_abort', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_row_update_abort', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( '', event, context );
 				}
 				var node = jQuery( '#update_aborts > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_update_error', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_update_error', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( '', event, context );
 				}
 				var node = jQuery( '#update_errors > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_cursor_row_update_error', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_row_update_error', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( '', event, context );
 				}
 				var node = jQuery( '#update_errors > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
@@ -473,69 +960,69 @@
 
 			/* Deletes */
 
-			InDB.bind( 'InDB_row_delete', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_delete', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_delete', event, context );
 				}
 				var node = jQuery( '#row_deletes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
-			InDB.bind( 'InDB_cursor_delete', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_delete', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_cursor_delete', event, context );
 				}
 				var node = jQuery( '#cursor_deletes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_delete_success', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_delete_success', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_delete_success', event, context );
 				}
 				var node = jQuery( '#delete_successes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
-			InDB.bind( 'InDB_cursor_row_delete_success', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_row_delete_success', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_cursor_row_delete_success', event, context );
 				}
 				var node = jQuery( '#delete_successes > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_delete_abort', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_delete_abort', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_delete_abort', event, context );
 				}		
 				var node = jQuery( '#delete_aborts > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_cursor_row_delete_abort', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_row_delete_abort', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_cursor_row_delete_abort', event, context );
 				}		
 				var node = jQuery( '#delete_aborts > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
 
-			InDB.bind( 'InDB_row_delete_error', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_row_delete_error', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_row_delete_error', event, context );
 				}
 				var node = jQuery( '#delete_errors > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
 			} );
 
-			InDB.bind( 'InDB_cursor_row_delete_error', function( event, context ) {
-				if( !!InDB.debug ) {
-					console.log( '', event, context );
+			InDB.bind( 'InDB_cursor_row_delete_error', function ( event, context ) {
+				if ( !!InDB.debug ) {
+					console.log ( 'InDB_cursor_row_delete_error', event, context );
 				}
 				var node = jQuery( '#delete_errors > .count ');
 				node.html( parseInt( node.html(), 10 ) + 1 );
