@@ -54,15 +54,35 @@
 		<script type='text/javascript'>
 
 			/*
-				InDB.trigger( 'Example_load_database', { 'name': database_name, 'description': database_desc } );
+InDB.trigger( 'Example_load_database', { 'name': database_name, 'description': database_desc } );
 
-				InDB.trigger( 'Example_add_rows', { 'store':'todos', 'count': 20, 'keyLength': 10 } );
+InDB.trigger( 'Example_create_stores', { stores: { 'items': { 'id': '123' } } } );
 
-				InDB.trigger( 'Example_get_rows', { 'store':'todos' } );
+InDB.trigger( 'InDB_do_index_create', { 'store':'todos','key':'id', 'name':'txn_id','on_success':function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
 
-				InDB.trigger( 'Example_update_rows', { 'store': 'todos', 'data': { 'datatata': 'dadadada' }, 'replace': false } );
-			
-				InDB.trigger( 'Example_delete_rows', { 'store':'todos' } );
+InDB.trigger( 'InDB_do_index_delete', { 'store':'todos', 'name': 'txn_id', 'on_success': function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
+
+
+InDB.trigger( 'Example_add_rows', { 'store':'todos', 'count': 10, 'keyLength': 10, 'on_success': function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
+
+
+InDB.trigger( 'Example_update_rows', { 'store': 'todos', 'data': { 'datatata': 'dadadada' }, 'replace': false } );
+
+
+InDB.trigger( 'Example_get_rows', { 'store':'todos',  'on_success': function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
+
+
+InDB.trigger( 'Example_delete_rows', { 'store':'todos' } );
+
+InDB.trigger( 'Example_get_row', { 'store':'todos', 'key': '03HzEMz90w', 'on_success': function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
+
+InDB.trigger( 'Example_do_update', { 'store':'todos', 'data': { 'datatata': 'soobydoobydoo' }, 'key': '03HzEMz95w', 'on_success': function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
+
+InDB.trigger( 'Example_do_put', { 'store':'todos', 'data': { 'id':'03HzEMz95w','timeStamp':'123123123','attribute': 'value' }, 'key': "03HzEMz95w", 'on_success': function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
+
+InDB.trigger( 'Example_do_delete', { 'store':'todos', 'key': "03HzEMz95w", 'on_success': function(context){ console.log( InDB.row.value( context.event ) ); } } );
+
+
 			*/
 
 			var warnLevel = 'log'; //also valid: alert (defaults to error object)
@@ -79,7 +99,7 @@
 
 			/* Constants */
 
-			var database_name = 'InDB_examples_10';
+			var database_name = 'InDB_examples_19';
 			var database_desc = 'An IndexedDB to store InDB examples';
 
 			/* On load */
@@ -142,6 +162,7 @@
 			
 				var store = context.store; // Required
 				var key = context.key; // Required
+				var index = context.index; // Optional
 				var on_success = context.on_success;
 				var on_error = context.on_error;
 				var on_abort = context.on_abort;
@@ -174,11 +195,14 @@
                                 	};
 				}
 
+				index = ( !!index ) ? index : null;
+
 				/* Context */
 
 				var context = {
 					'store': store,
 					'key': key,
+					'index': index,
 					'on_success': on_success,
 					'on_error': on_error,
 					'on_abort': on_abort
@@ -250,6 +274,73 @@
 
 			} );
 			
+
+			InDB.bind( 'Example_do_put', function ( result, context ) { 
+
+				/* Debug */
+
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_do_put', result, context );
+				}
+
+				/* Setup */
+
+				var store = context.store; // Required
+				var key = context.store; // Required
+				var data = context.data; // Required
+				var on_success = context.on_success; // Optional; Default
+				var on_error = context.on_error; // Optional; No default
+				var on_abort = context.on_abort; // Optiona; No default
+
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide an object key' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object to store' ) ) {
+					return;
+				}
+
+				/* Defaults */
+	
+				if ( "undefined" === typeof on_success ) {
+					on_success = function ( context ) {
+						var result = context.event;
+						var value = InDB.cursor.value( result );
+						if ( !!InDB.debug ) {
+							console.log ( 'InDB.cursor.delete result', result );
+							if ( "undefined" !== typeof result.target.result ) {
+								console.log ( 'InDB.cursor.delete result result', result.target.result );
+								console.log ( 'InDB.cursor.delete result value', result.target.result.value );
+							}
+						}
+						Example.addResult( value );
+                                	}
+				}
+
+				/* Context */
+
+				var context = {
+					'store': store,
+					'key': key,
+					'data': data,
+					'on_success': on_success,
+					'on_error': on_error,
+					'on_abort': on_abort
+				};
+	
+				/* Request */
+
+				InDB.trigger( 'InDB_do_row_put', context );
+
+			} );
+			
+
 
 			// context.store, context.key, context.data, context.on_success, context.on_error, context.on_abort
 			InDB.bind( 'Example_do_put', function ( result, context ) { 
@@ -385,7 +476,7 @@
 					return;
 				}
 			
-				if ( !InDB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
+				if ( !InDB.assert( 'undefined' !== typeof keyRange, 'Must provide a keyRange' ) ) {
 					return;
 				}
 				
@@ -606,6 +697,13 @@
 				if ( !!InDB.debug ) {
 					console.log ( 'Example_create_stores', event, context );
 				}
+
+				/* Setup */
+
+				var stores = context.stores;
+				var on_success = context.on_success;
+				var on_error = context.on_error;
+				var on_abort = context.on_abort;
 			
 				/* Assertions */
 
@@ -618,7 +716,7 @@
 
 				/* Request */
 
-				InDB.stores.create( stores, on_sucess, on_error, on_abort );
+				InDB.stores.create( stores, on_success, on_error, on_abort );
 
 			} );
 
@@ -704,6 +802,44 @@
 			} );
 
 
+			InDB.bind( 'Example_get_row', function ( row_result, context ) {
+
+				/* Debug */
+
+				if ( !!InDB.debug ) {
+					console.log ( 'Example_get_rows', row_result, context );
+				}
+	
+				/* Setup */
+
+				var store = context.store; // Required
+				var key = context.key; // Required
+				var index = context.index; // Optional				
+				var on_success = context.on_success; // Optional
+				var on_error = context.on_error; // Optional
+				var on_abort = context.on_abort; // Optional
+
+				/* Assertions */
+
+				if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide a store name' ) ) {
+					return;
+				}
+
+				if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key' ) ) {
+					return;
+				}
+
+				/* Defaults */
+
+				index = ( InDB.isEmpty( index ) ) ? index : null;
+				
+				/* Request */
+
+				InDB.trigger( 'Example_do_get', { 'store': store, 'key': key, 'index': index, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort } );
+			
+			} );
+
+
 			InDB.bind( 'Example_get_rows', function ( row_result, context ) {
 
 				/* Debug */
@@ -729,7 +865,7 @@
 				
 				/* Request */
 
-				InDB.trigger( 'Example_do_cursor_get', { 'store': store, 'keyRange': keyRange } );
+				InDB.trigger( 'Example_do_cursor_get', { 'store': store, 'keyRange': keyRange, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort } );
 			
 			} );
 
