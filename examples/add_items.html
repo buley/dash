@@ -58,6 +58,12 @@ InDB.trigger( 'Example_load_database', { 'name': database_name, 'description': d
 
 InDB.trigger( 'Example_create_stores', { stores: { 'items': { 'id': '123' } } } );
 
+InDB.stores.create( { 'stor13': {'id':false } } );
+InDB.stores.create( { 'stor12': { 'key':'id','incrementing_key':false } } );
+
+InDB.trigger( 'InDB_do_stores_create', { 'stores': { 'stor16': { 'key':'id','incrementing_key':false },'stor17': {'id':false } } } );
+
+
 InDB.trigger( 'InDB_do_index_create', { 'store':'todos','key':'id', 'name':'txn_id','on_success':function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
 
 InDB.trigger( 'InDB_do_index_delete', { 'store':'todos', 'name': 'txn_id', 'on_success': function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
@@ -82,6 +88,7 @@ InDB.trigger( 'Example_do_put', { 'store':'todos', 'data': { 'id':'03HzEMz95w','
 
 InDB.trigger( 'Example_do_delete', { 'store':'todos', 'key': "03HzEMz95w", 'on_success': function(context){ console.log( InDB.row.value( context.event ) ); } } );
 
+InDB.trigger( 'InDB_do_store_clear', { 'store':'todos' } );
 
 			*/
 
@@ -99,7 +106,7 @@ InDB.trigger( 'Example_do_delete', { 'store':'todos', 'key': "03HzEMz95w", 'on_s
 
 			/* Constants */
 
-			var database_name = 'InDB_examples_19';
+			var database_name = 'InDB_examples_21';
 			var database_desc = 'An IndexedDB to store InDB examples';
 
 			/* On load */

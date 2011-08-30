@@ -30,6 +30,7 @@ InDB.database = {};
 InDB.store = {};
 InDB.stores = {};
 InDB.index = {};
+InDB.indexes = {};
 InDB.range = {};
 InDB.row = {};
 InDB.cursor = {};
@@ -306,6 +307,18 @@ InDB.fixBrowser = function () {
 
 /* End InDB Methods */
 
+InDB.index.exists = function ( store, index ) {
+	var store = InDB.transaction.create( store );
+	var indexes = store.indexNames;
+	for( i=0; i< indexes.length; i++ ) {
+		if ( name === indexes[i] ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
 /* Begin Object Store Methods */
 
 InDB.store.exists = function ( name ) {
@@ -317,31 +330,99 @@ InDB.store.exists = function ( name ) {
 	return false;
 }
 
+
+
+/* Create object stores after the database is created */
+InDB.bind( 'InDB_do_stores_create', function ( event, context ) {
+
+	/* Debug */
+
+	if ( !!InDB.debug ) {
+		console.log ( 'InDB_do_create_stores', event, context );
+	}
+
+	/* Setup */
+
+	var stores = context.stores;
+	var on_success = context.on_success;
+	var on_error = context.on_error;
+	var on_abort = context.on_abort;
+
+	/* Assertions */
+
+	// Assert that the database is already loaded
+	if ( !InDB.assert( InDB.db !== 'Object', 'Database not loaded' ) ) {
+		if ( !!InDB.debug ) {
+			console.log ( 'Database created', event, context );
+		}
+	}
+
+	/* Request */
+	console.log('calling stores create', InDB.stores.create, stores, on_success, on_error, on_abort );
+	InDB.stores.create( stores, on_success, on_error, on_abort );
+
+} );
+
+
 InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
+
+	var context = { 'stores': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
 	//TODO: Assertions
 	for( store in stores ) {
+
+		console.log('store',store);
+		console.log('options',stores[store]);
 		var options = stores[ store ];
+
 		if ( InDB.isString( options ) ) {
 			/* options object is really a string
                          * recast options var from a string to a
                          * real deal options object */
 			options = InDB.store.options( options );
 		}
-		if ( !InDB.isEmpty( options ) && !InDB.store.exists( store ) ) {
-			var key = options.key;
-			var autoinc_key = options.incrementing_key;
-			var empty_key = InDB.isEmpty( key );
-			InDB.assert( ( empty_key || InDB.isString(  key ) ), 'Key needs to be a string' );  
-			InDB.assert( ( !autoinc_key || InDB.isBoolean( autoinc_key ) ), 'Autoinc_key (whether the key uses a generator) needs to be a boolean' );  
+		if ( !InDB.store.exists( store ) ) {
+			/* Setup */
+			//TODO: #Cleanup; if/else logic here is a little muddy (why the empty_key var?)
+			var key, autoinc_key, empty_key;
+			if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
+				console.log('f1');
+				key = options.key;
+				autoinc_key = options.incrementing_key;
+				empty_key = InDB.isEmpty( key );
+			} else {
+				console.log('f2');
+				for( attrib in options ) {
+					// Don't want prototype attributes
+					if( options.hasOwnProperty( attrib ) ) {
+						key = attrib;
+						autoinc_key = options[ attrib ];
+						console.log( 'setting key autoinc_key',key,autoinc_key);
+					}
+				}
+			}
+
 			if ( "undefined" === typeof autoinc_key || InDB.isBoolean( autoinc_key ) ) { 
 				autoinc_key = false; 
 			}
-			console.log( store, key, autoinc_key, on_success, on_error, on_abort );
+			/* Assertions */
+
+			InDB.assert( ( empty_key || InDB.isString( key ) ), 'Key needs to be a string' );  
+			console.log('autoinc',autoinc_key);
+			InDB.assert( ( InDB.isBoolean( autoinc_key ) ), 'Autoinc_key (whether the key uses a generator) needs to be a boolean' ); 
+			/* Debug */
+
+			if( !!InDB.debug ) {
+				console.log( 'InDB.stores.create calling InDB.store.create', store, key, autoinc_key, on_success, on_error, on_abort );
+			}
+
+			/* Request */
+			console.log('calling all store creates');
 			InDB.store.create( store, key, autoinc_key, on_success, on_error, on_abort );
+
 		}
 	}
-
 };
+
 
 InDB.store.options = function ( key, autoinc_key ) {
 	//TODO: Assertions key is valid string; autoinc_key is bool (isBoolean?)
@@ -356,19 +437,31 @@ InDB.store.options = function ( key, autoinc_key ) {
 /* autoinc_key defaults to false if a key is specified;
    key gets set to "key" and autoincrements when key is not specified */
 InDB.store.create = function ( name, key, autoinc_key, on_success, on_error, on_abort ) {
+	
+	/* Debug */
 
-
-	console.log ("InDB.store.create", name, key, autoinc_key, on_success, on_error, on_abort );
+	if( !!InDB.debug ) {
+		console.log ( "InDB.store.create", name, key, autoinc_key, on_success, on_error, on_abort );
+	}
 
 	/* Assertions */	
+
 	if ( !InDB.assert( !InDB.isEmpty( name ), "object store name should not be empty" ) ) { 
 		return false;
 	}
+
 	if ( !InDB.assert( !InDB.store.exists( name ) , "object store should not already exist" ) ) { 
 		return false;
 	}
 
+	// TODO: #Question: Is this true?
+	if ( !InDB.assert( !InDB.isEmpty( key ), "object store needs a key" ) ) { 
+		return false;
+	}
+
+
 	var keyPath = {};
+
 	if ( !key ) {
 		autoinc_key = false;
 	} else {
@@ -390,8 +483,14 @@ InDB.store.create = function ( name, key, autoinc_key, on_success, on_error, on_
 	}
 	
 	var context =  { "name": name, "keyPath": keyPath, "autoinc_key": autoinc_key };
+	
+	/* Debug */
+	
+	if( !!InDB.debug ) {
+		console.log( 'InDB.store.create context', context );
+	}
 
-	/* database changes must happen w/in a setVersion transaction */
+	// Database changes must happen w/in a setVersion transaction
 	var setVersionRequest = InDB.db.setVersion( parseInt( InDB.db.version, 10 ) + 1 );
 	setVersionRequest.onsuccess = function ( event ) {
 		try {
@@ -424,6 +523,93 @@ InDB.store.create = function ( name, key, autoinc_key, on_success, on_error, on_
 	}
 	return true;
 }
+
+
+InDB.bind( 'InDB_do_indexes_create', function ( event, context ) {
+
+	/* Debug */
+
+	if ( !!InDB.debug ) {
+		console.log ( 'InDB_do_create_indexes', event, context );
+	}
+
+	/* Setup */
+
+	var indexes = context.indexes;
+	var on_success = context.on_success;
+	var on_error = context.on_error;
+	var on_abort = context.on_abort;
+
+	/* Assertions */
+
+	// Assert that the database is already loaded
+	if ( !InDB.assert( InDB.db !== 'Object', 'Database not loaded' ) ) {
+		return;
+	}
+
+	/* Request */
+	console.log('calling indexes create', indexes, on_success, on_error, on_abort );
+	console.log( InDB.indexes );
+	InDB.indexes.create( indexes, on_success, on_error, on_abort );
+
+} );
+
+InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
+	var context = { 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
+	//TODO: Assertions
+	for( store in stores ) {
+		//TODO: Cache vars to prevent wasted nested lookups
+		for( index in stores[store] ) {
+			if( stores[store].hasOwnProperty( index ) ) {
+
+				var options = stores[store][index];
+				var key, unique, empty_key;
+				var name = index;
+
+				if ( !InDB.index.exists( store, index ) ) {
+					//TODO: Cleanup
+					if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
+						key = options.key;
+						unique = options.unique;
+					} else {
+						for( attrib in options ) {
+							// Don't want prototype attributes
+							if( options.hasOwnProperty( attrib ) ) {
+								key = attrib;
+								unique = options[ attrib ];
+								console.log( 'setting key',key);
+								console.log( 'setting key unique',unique);
+							}
+						}
+					}
+				}
+			}
+
+			if ( "undefined" === typeof unique || !InDB.isBoolean( unique ) ) { 
+				unique = false; 
+			}
+
+			/* Assertions */
+			
+			InDB.assert( !InDB.isEmpty( key ), 'Must provide an index key' );  
+			InDB.assert( ( InDB.isBoolean( unique ) ), 'Unique key value must be a boolean' );
+
+			/* Debug */
+
+			if( !!InDB.debug ) {
+				console.log( 'InDB.indexes.create calling InDB.index.create', store, key, name, unique, on_success, on_error, on_abort );
+			}
+
+			/* Request */
+			
+			InDB.index.create( store, key, name, unique, on_complete, on_success, on_abort );
+
+		
+			
+		}
+	}
+};
+
 
 //context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort
 InDB.bind( 'InDB_do_index_create', function( row_result, context ) {
@@ -1309,6 +1495,290 @@ InDB.row.add = function ( store, data, on_success, on_error, on_abort ) {
 
 	}
 }
+
+
+//context.store, context.on_success, context.on_error, context.on_abort
+InDB.bind( 'InDB_do_store_clear', function( row_result, context ) {
+
+	/* Debug */
+
+	if ( !!InDB.debug ) {
+		console.log ( 'InDB_do_store_clear', row_result, context );
+	}
+
+        /* Assertions */
+        
+        if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
+                return; 
+        }       
+
+	/* Invocation */
+
+	InDB.store.clear( context.store, context.on_success, context.on_error, context.on_abort );
+} );
+
+
+/* Clears an object store of any objects */
+InDB.store.clear = function ( store, on_success, on_error, on_abort ) {
+
+	/* Debug */
+	
+	console.log ( 'InDB.store.clear', store, on_success, on_error, on_abort );	
+
+        /* Assertions */
+        
+        if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+                return; 
+        }       
+
+	/* Defaults */
+
+	if ( "undefined" === typeof on_success ) {
+		on_success = InDB.events.onSuccess;
+	}
+
+	if ( "undefined" === typeof on_error ) {
+		on_error = InDB.events.onError;
+	}
+
+	if ( "undefined" === typeof on_abort ) {
+		on_abort = InDB.events.onAbort;
+	}
+
+	/* Context */
+
+	var context = { "store": store, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
+	
+	/* Action */
+
+	InDB.trigger( 'InDB_store_clear', context );
+
+	/* Transaction */
+
+	var transaction = InDB.transaction.create( store, InDB.transaction.read_write() );
+
+	/* Debug */
+
+	if ( !!InDB.debug ) {
+		console.log ( 'InDB.store.clear transaction', transaction );
+	}
+
+	/* Request */
+
+	//use this[ 'format' ] for function invocation to avoid a Closure compiler error
+	var request = transaction[ 'clear' ];
+
+	/* Request Responses */
+
+	request.onsuccess = function ( event ) {	
+		console.log('clearED');
+		/* Context */
+
+		context[ 'event' ] = event;
+
+		/* Callback */
+
+		on_success( event );
+
+		/* Action */
+
+		InDB.trigger( 'InDB_store_clear_success', context );
+
+	}
+
+	request.onerror = function ( event ) {
+		console.log('erroclear');
+		/* Context */
+
+		context[ 'event' ] = event;
+
+		/* Callback */
+
+		on_error( event );
+
+		/* Action */
+
+		InDB.trigger( 'InDB_row_put_error', context );
+
+	}
+
+	request.onabort = function ( event ) {
+		console.log('abortclear');
+		/* Context */
+
+		context[ 'event' ] = event;
+
+		/* Callback */
+
+		on_abort( event );
+		
+		/* Action */
+
+		InDB.trigger( 'InDB_row_put_abort', context );
+
+	}
+}
+
+
+//context.store, context.data, context.on_success, context.on_error, context.on_abort
+InDB.bind( 'InDB_do_row_put', function( row_result, context ) {
+
+	/* Debug */
+
+	if ( !!InDB.debug ) {
+		console.log ( 'InDB_do_row_put', row_result, context );
+	}
+
+        /* Assertions */
+        
+        if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
+                return; 
+        }       
+
+        if ( !InDB.assert( !InDB.isEmpty( context.key ), 'Must provide a key to delete' ) ) {
+                return; 
+        }       
+
+        if ( !InDB.assert( !InDB.isEmpty( context.data ), 'Must provide an object to store' ) ) {
+                return; 
+        }       
+
+	/* Invocation */
+
+	InDB.row.put( context.store, context.key, context.data, context.on_success, context.on_error, context.on_abort );
+} );
+
+
+/* Puts a data object to an object store */
+InDB.row.put = function ( store, key, data, on_success, on_error, on_abort ) {
+
+	/* Debug */
+	
+	console.log ( 'InDB.row.put', store, key, data, on_success, on_error, on_abort );	
+
+        /* Assertions */
+        
+        if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+                return; 
+        }       
+
+        if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key to delete' ) ) {
+                return; 
+        }       
+
+        if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object to store' ) ) {
+                return; 
+        }       
+
+	/* Defaults */
+
+	if ( "undefined" === typeof on_success ) {
+		on_success = InDB.events.onSuccess;
+	}
+
+	if ( "undefined" === typeof on_error ) {
+		on_error = InDB.events.onError;
+	}
+
+	if ( "undefined" === typeof on_abort ) {
+		on_abort = InDB.events.onAbort;
+	}
+
+	/* Context */
+
+	var context = { "store": store, "key": key, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
+	
+	/* Action */
+
+	InDB.trigger( 'InDB_row_put', context );
+
+	/* Transaction */
+
+	var transaction = InDB.transaction.create( store, InDB.transaction.read_write() );
+
+	/* Debug */
+
+	if ( !!InDB.debug ) {
+		console.log ( 'InDB_row_put transaction', transaction );
+	}
+
+	//use this[ 'format' ] for function invocation to avoid a Closure compiler error
+	try {
+
+		/* Request */
+
+		var request = transaction[ 'put' ]( data );
+
+		/* Request Responses */
+
+		request.onsuccess = function ( event ) {	
+
+			/* Context */
+
+			context[ 'event' ] = event;
+	
+			/* Callback */
+
+			on_success( event );
+
+			/* Action */
+
+			InDB.trigger( 'InDB_row_put_success', { "event": event, "store": store, "key": key, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+
+		}
+
+		request.onerror = function ( event ) {
+
+			/* Context */
+
+			context[ 'event' ] = event;
+	
+			/* Callback */
+
+			on_error( event );
+
+			/* Action */
+
+			InDB.trigger( 'InDB_row_put_error', { "event": event, "store": store, "key": key, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+
+		}
+
+		request.onabort = function ( event ) {
+
+			/* Context */
+
+			context[ 'event' ] = event;
+	
+			/* Callback */
+
+			on_abort( event );
+			
+			/* Action */
+
+			InDB.trigger( 'InDB_row_put_abort', { "event": event, "store": store, "key": key, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort } );
+
+		}
+
+	} catch( error ) {
+
+		/* Debug */
+
+		if ( !!InDB.debug ) {
+			console.log ( error );
+			console.log ( 'errorType', InDB.database.errorType( error.code ) );
+		}
+
+		/* Context */
+
+		context[ 'error' ] = error;
+
+		on_error( context );
+	
+	}
+}
+
+
+
 
 //context.store, context.data, context.on_success, context.on_error, context.on_abort
 InDB.bind( 'InDB_do_row_put', function( row_result, context ) {
