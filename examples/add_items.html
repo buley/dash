@@ -64,6 +64,9 @@ InDB.stores.create( { 'stor12': { 'key':'id','incrementing_key':false } } );
 InDB.trigger( 'InDB_do_stores_create', { 'stores': { 'stor16': { 'key':'id','incrementing_key':false },'stor17': {'id':false } } } );
 
 
+InDB.indexes.create( { 'stor18': { 'stor18_idx': { 'key':'timeStamp','unique':true } },'stor19': { 'stor19_idx_1': { 'key':'timeStamp','unique':true }, 'story_19_idx2': { 'timeStamp':false } } } );
+
+
 InDB.trigger( 'InDB_do_index_create', { 'store':'todos','key':'id', 'name':'txn_id','on_success':function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
 
 InDB.trigger( 'InDB_do_index_delete', { 'store':'todos', 'name': 'txn_id', 'on_success': function(context){ Example.addResult( InDB.row.value( context.event ) ); } } );
@@ -659,7 +662,7 @@ InDB.trigger( 'InDB_do_store_clear', { 'store':'todos' } );
 
 
 			/* Auto-loaded database */
-			InDB.bind( 'InDB_database_load_success', function ( event, context ) {
+			InDB.bind( 'InDB_database_loaded', function ( event, context ) {
 				InDB.trigger( 'Example_loaded_database', { 'name': database_name, 'description': database_desc } );
 			} );
 	
