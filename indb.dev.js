@@ -615,7 +615,7 @@ InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_er
 
 	setVersionRequest.onblocked = function ( event ) {
 		context[ 'event' ] = event;
-		on_block( context );
+		on_blocked( context );
 		InDB.trigger( "InDB_store_created_error", context );
 	};
 
