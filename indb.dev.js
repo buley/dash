@@ -2285,7 +2285,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, on_succes
 			update_data = InDB.cursor.value( event );
 			update_data = ( !!update_data ) ? update_data : {};
 			for( attr in data ) {
-				if( data.hasOwnProperty( attr ) {
+				if( data.hasOwnProperty( attr ) ) {
 					update_data[ attr ] = data[ attr ];
 				}
 			}
