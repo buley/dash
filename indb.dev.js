@@ -86,7 +86,7 @@ InDB.events.onAbort = function ( e ) {
 
 InDB.events.onBlocked = function ( e ) {
 	if ( !!InDB.debug ) {
-		console.log ( "IndexedDB request blocked", e );
+		console.log ( "IndexedDB request blocked", e.event.target.result );
 	}
 };
 
@@ -354,11 +354,16 @@ InDB.fixBrowser = function () {
 /* End InDB Methods */
 
 InDB.index.exists = function ( store, index ) {
+	if( !!InDB.debug ) {
+		console.log( 'InDB.index.exists', store, index );
+	}
 	var store = InDB.transaction.create( store );
 	var indexes = store.indexNames;
-	for( i=0; i< indexes.length; i++ ) {
-		if ( name === indexes[i] ) {
-			return true;
+	if( 'undefined' !== typeof indexes && null !== indexes && index.length > 0 ) {
+		for( var i=0; i< indexes.length; i++ ) {
+			if ( name === indexes[i] ) {
+				return true;
+			}
 		}
 	}
 	return false;
@@ -553,7 +558,6 @@ InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_er
 		return false;
 	}
 
-	console.log('r1');
 	var keyPath = {};
 
 	if ( !key ) {
@@ -592,7 +596,7 @@ InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_er
 	version = ( isNaN( version ) ) ? 1 : version + 1;
 	
 	var setVersionRequest = InDB.db.setVersion( version );
-
+	console.log(setVersionRequest);
 	setVersionRequest.onsuccess = function ( event ) {
 		try {
 			//missing autoinc_key as third arg
@@ -664,6 +668,9 @@ InDB.bind( 'InDB_do_indexes_create', function ( event, context ) {
 
 InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
 	var context = { 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
+	if( !!InDB.debug ) {
+		console.log( 'InDB.indexes.create', context );
+	}
 	//TODO: Assertions
 	for( store in stores ) {
 		//TODO: Cache vars to prevent wasted nested lookups
@@ -694,6 +701,7 @@ InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
 			}
 
 			if ( "undefined" === typeof unique || !InDB.isBoolean( unique ) ) { 
+
 				unique = false; 
 			}
 
@@ -711,8 +719,6 @@ InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
 			/* Request */
 			
 			InDB.index.create( store, key, name, unique, on_success, on_error, on_abort );
-
-		
 			
 		}
 	}
@@ -2278,11 +2284,13 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, on_succes
 		} else {
 			update_data = InDB.cursor.value( event );
 			update_data = ( !!update_data ) ? update_data : {};
+			for( attr in data ) {
+				if( data.hasOwnProperty( attr ) {
+					update_data[ attr ] = data[ attr ];
+				}
+			}
 		}
-		for( attr in data ) {
-			update_data[ attr ] = data[ attr ];
-		}
-		
+
 		/* Debug */
 
 		if ( !!InDB.debug ) {
