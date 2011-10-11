@@ -37,6 +37,7 @@ InDB.cursor = {};
 InDB.event = {};
 InDB.events = {};
 InDB.transaction = {};
+InDB.utilities = {};
 /* End Namespaces */
 
 
@@ -537,7 +538,7 @@ InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_er
 	
 	/* Debug */
 	
-	console.log('InDB.store.create!@', name, key, autoinc_key, unique, on_success, on_error, on_abort );
+	console.log('InDB.store.create!', name, key, autoinc_key, unique, on_success, on_error, on_abort );
 
 	if( !!InDB.debug ) {
 		console.log ( "InDB.store.create", name, key, autoinc_key, on_success, on_error, on_abort );
@@ -2525,6 +2526,24 @@ InDB.cursor.delete = function ( store, index, keyRange, on_success, on_error, on
 
 	}
 
+}
+
+/* Utilities */
+
+InDB.utilities.random = function( length, type ) {
+        var set;
+        if( 'numbers' !== type ) {
+                set += 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+        }
+        if( 'letters' !== type ) {
+                set += '0123456789';
+        }
+        var random = '';
+        for ( var i=0; i < length; i++ ) {
+                var random_pos = Math.floor( Math.random() * set.length );
+                random += random.substring( random_pos, random_pos + 1 );
+        }
+        return random;
 }
 
 /* End Functions */
