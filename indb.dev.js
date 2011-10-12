@@ -321,7 +321,7 @@ InDB.isNumber = function ( mixed_var ) {
 }
 
 InDB.isBoolean = function ( mixed_var ) {
-	return InDB.isType( "boolean", mixed_var );
+	return InDB.isType( "boolean", mixed_var ) || 'true' == mixed_var || 'false' == mixed_var;
 }
 
 InDB.isType = function ( type, mixed_var ) {
