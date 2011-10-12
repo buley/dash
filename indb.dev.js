@@ -325,7 +325,6 @@ InDB.isBoolean = function ( mixed_var ) {
 }
 
 InDB.isType = function ( type, mixed_var ) {
-	console.log( 'DELETEME isType', mixed_var, type, typeof mixed_var );
 	return ( type !== typeof mixed_var ) ? false : true;
 }
 
@@ -470,7 +469,6 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 			/* Assertions */
 
 			InDB.assert( ( empty_key || InDB.isString( key ) ), 'Key needs to be a string' );
-			console.log( 'DELETEME', autoinc_key, InDB.isBoolean( autoinc_key ) );  
 			InDB.assert( ( InDB.isBoolean( autoinc_key ) ), 'Autoinc_key (whether the key uses a generator) needs to be a boolean' ); 
 
 			/* Debug */
