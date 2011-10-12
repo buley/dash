@@ -325,6 +325,7 @@ InDB.isBoolean = function ( mixed_var ) {
 }
 
 InDB.isType = function ( type, mixed_var ) {
+	console.log( 'DELETEME isType', mixed_var, type, typeof mixed_var );
 	return ( type !== typeof mixed_var ) ? false : true;
 }
 
