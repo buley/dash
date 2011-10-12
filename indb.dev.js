@@ -1109,7 +1109,7 @@ InDB.row.value = function ( event ) {
 	if ( !!InDB.debug ) {
 		console.log ( 'InDB.row.value', event );
 	}
-	if ( "undefined" !== typeof event && "undefined" !== typeof event.target && "undefined" !== typeof event.target.result ) {
+	if ( "undefined" !== typeof event && "undefined" !== typeof event.target && "undefined" !== typeof event.target.result && null !== event.target.result ) {
 		return event.target.result;
 	} else {
 		return null;
