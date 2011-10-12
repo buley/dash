@@ -446,8 +446,8 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 			if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
 				key = options.key;
 				unique = options.unique;
-				console.log( 'checking incrementing options', options.incrementing_key, options );
 				autoinc_key = options.incrementing_key;
+				console.log( 'checking incrementing options', options.incrementing_key, autoinc_key );
 				empty_key = InDB.isEmpty( key );
 			} else {
 				console.log('not able to cehck inc options');
@@ -463,11 +463,11 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 
 			/* Defaults */
 
-			if ( "undefined" === typeof unique || InDB.isBoolean( unique ) ) { 
+			if ( "undefined" === typeof unique || !InDB.isBoolean( unique ) ) { 
 				unique = false; 
 			}
 
-			if ( "undefined" === typeof autoinc_key || InDB.isBoolean( autoinc_key ) ) { 
+			if ( "undefined" === typeof autoinc_key || !InDB.isBoolean( autoinc_key ) ) { 
 				autoinc_key = false; 
 			}
 
