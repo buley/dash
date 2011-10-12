@@ -585,7 +585,7 @@ InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_er
 	}
 	
 	var context =  { "name": name, "keyPath": keyPath, "autoinc_key": autoinc_key };
-	
+
 	/* Debug */
 	
 	if( !!InDB.debug ) {
@@ -600,13 +600,27 @@ InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_er
 	console.log(setVersionRequest);
 	setVersionRequest.onsuccess = function ( event ) {
 		try {
-			//missing autoinc_key as third arg
-			InDB.db.createObjectStore( name, keyPath );
-			// not reachable when createObjectStore throws an error
+
+			/* Database options */
+
+			var options = {};
+			if( 'undefined' !== typeof keyPath && null !== keyPath ) {
+				options[ 'keyPath' ] = autoinc_key;
+			} 
+			if( 'undefined' !== typeof autoinc_key && null !== autoinc_key ) {
+				options[ 'autoIncrement' ] = autoinc_key;
+			}
+			
+			InDB.db.createObjectStore( name, options );
+
 			context[ 'event' ] = event;
+
 			on_success( context );
+
 			InDB.trigger( "InDB_store_created_success", context );
+
 		} catch( error ) {
+
 			// createdObject store threw an error 
 			context[ 'error' ] = error;
 			on_error( context );
