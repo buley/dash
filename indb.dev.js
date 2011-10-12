@@ -1960,7 +1960,7 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 
 } );
 
-
+/* TODO: Direction? */
 InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_abort ) {
 
 	/* Debug */
