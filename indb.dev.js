@@ -1922,6 +1922,7 @@ InDB.row.put = function ( store, data, key, on_success, on_error, on_abort ) {
 }
 
 
+/* TODO: On complete */
 InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 	
 	/* Debug */
