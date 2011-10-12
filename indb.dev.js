@@ -307,6 +307,10 @@ InDB.isEmpty = function ( mixed_var ) {
 	return ( "undefined" !== typeof mixed_var && null !== mixed_var && "" !== mixed_var && !!mixed_var ) ? false : true;
 }
 
+InDB.isObject = function ( mixed_var ) {
+	return InDB.isType( "object", mixed_var );
+}
+
 InDB.isString = function ( mixed_var ) {
 	return InDB.isType( "string", mixed_var );
 }
@@ -428,7 +432,7 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 		console.log('options',stores[store]);
 		var options = stores[ store ];
 
-		if ( InDB.isString( options ) ) {
+		if ( InDB.isObject( options ) ) {
 			/* options object is really a string
                          * recast options var from a string to a
                          * real deal options object */
@@ -436,7 +440,7 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 		}
 		if ( !InDB.store.exists( store ) ) {
 			/* Setup */
-			console.log('Store doesn\'t yet exist', store );
+			console.log('Store doesn\'t yet exist', store,  );
 			//TODO: Cleanup; if/else logic here is a little muddy (why the empty_key var?)
 			var key, autoinc_key, empty_key, unique;
 			if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
