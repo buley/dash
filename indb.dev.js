@@ -428,8 +428,6 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 	//TODO: Assertions
 	for( store in stores ) {
 
-		console.log('store',store);
-		console.log('options',stores[store]);
 		var options = stores[ store ];
 
 		if ( InDB.isString( options ) ) {
@@ -440,17 +438,17 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 		}
 		if ( !InDB.store.exists( store ) ) {
 			/* Setup */
-			console.log('Store doesn\'t yet exist', store, options  );
+			if( !!InDB.debug ) {
+				console.log('Store doesn\'t yet exist', store, options  );
+			}
 			//TODO: Cleanup; if/else logic here is a little muddy (why the empty_key var?)
 			var key, autoinc_key, empty_key, unique;
 			if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
 				key = options.key;
 				unique = options.unique;
 				autoinc_key = options.incrementing_key;
-				console.log( 'checking incrementing options', options.incrementing_key, autoinc_key );
 				empty_key = InDB.isEmpty( key );
 			} else {
-				console.log('not able to cehck inc options');
 				for( attrib in options ) {
 					// Don't want prototype attributes
 					if( options.hasOwnProperty( attrib ) ) {
