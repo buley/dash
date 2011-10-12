@@ -2550,11 +2550,11 @@ InDB.cursor.delete = function ( store, index, keyRange, on_success, on_error, on
 /* Utilities */
 
 InDB.utilities.random = function( length, type ) {
-        var set;
+        var set = new String();
         if( 'numbers' !== type ) {
                 set += 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
         }
-        if( 'string' !== type || 'letters' !== type ) {
+        if( 'string' !== type && 'letters' !== type ) {
                 set += '0123456789';
         }
         var random = '';
