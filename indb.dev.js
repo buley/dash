@@ -604,13 +604,14 @@ InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_er
 			/* Database options */
 
 			var options = {};
+			console.log('blahb lah keyPath', keyPath );
 			if( 'undefined' !== typeof keyPath && null !== keyPath ) {
 				options[ 'keyPath' ] = keyPath;
 			} 
 			if( 'undefined' !== typeof autoinc_key && null !== autoinc_key ) {
 				options[ 'autoIncrement' ] = autoinc_key;
 			}
-			
+			console.log('options~', options );	
 			InDB.db.createObjectStore( name, options );
 
 			context[ 'event' ] = event;
