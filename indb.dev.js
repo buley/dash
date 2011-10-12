@@ -1143,6 +1143,8 @@ InDB.database.errorType = function ( code ) {
 		return "Deadlock";
 	} else if ( 2 === code ) {
 		return "Not allowed";
+	} else if ( 5 === code ) {
+		return "Bad data format";
 	} else if ( 6 === code ) {
 		return "Not allowed";
 	} else if ( 3 === code ) {
