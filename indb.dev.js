@@ -440,7 +440,7 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 		}
 		if ( !InDB.store.exists( store ) ) {
 			/* Setup */
-			console.log('Store doesn\'t yet exist', store,  );
+			console.log('Store doesn\'t yet exist', store, options  );
 			//TODO: Cleanup; if/else logic here is a little muddy (why the empty_key var?)
 			var key, autoinc_key, empty_key, unique;
 			if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
