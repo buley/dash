@@ -295,6 +295,11 @@ InDB.assert = function ( statement, error_message, warn_level ) {
 }
 
 
+
+InDB.exists = function( mixed_var ) {
+	return ( InDB.isEmpty( mixed_var ) ) ? false : true;
+};
+
 /* InDB.isEmpty ( mixed var ) -> bool
  * Checks whether a variable has a value */
 InDB.isEmpty = function ( mixed_var ) {
@@ -304,7 +309,7 @@ InDB.isEmpty = function ( mixed_var ) {
 		console.log ( '"" !== mixed_var', "" !== mixed_var );
 		console.log ( '!!mixed_var', !!mixed_var );
 	}
-	return ( "undefined" !== typeof mixed_var && null !== mixed_var && "" !== mixed_var && !!mixed_var ) ? false : true;
+	return ( "undefined" !== typeof mixed_var && null !== mixed_var && "" !== mixed_var ) ? false : true;
 }
 
 InDB.isObject = function ( mixed_var ) {
@@ -1199,13 +1204,13 @@ InDB.range.get = function ( value, left_bound, right_bound, includes_left_bound,
 	if ( !!InDB.debug ) {
 		console.log ( 'InDB.range.get', value, left_bound, right_bound, includes_left_bound, includes_right_bound );
 	}
-	if ( !!left_bound && !!right_bound && !!includes_left_bound && !!includes_right_bound ) {	
+	if ( InDB.exists( left_bound ) && InDB.exists( right_bound ) && InDB.exists( includes_left_bound ) && InDB.exists( includes_right_bound ) ) {	
 		return IDBKeyRange.bound( left_bound, right_bound, includes_left_bound, includes_right_bound );	
-	} else if ( !!left_bound && !!includes_left_bound ) {
+	} else if ( InDB.exists( left_bound ) && InDB.exists( includes_left_bound ) ) {
 		return IDBKeyRange.lowerBound( left_bound, includes_left_bound );
-	} else if ( !!right_bound && !!includes_right_bound ) {
+	} else if ( InDB.exists( right_bound ) && InDB.exists( includes_right_bound ) ) {
 		return IDBKeyRange.upperBound( right_bound, includes_right_bound );
-	} else if ( false === value || !!value ) {
+	} else if ( InDB.exists( value ) ) {
 		return IDBKeyRange.only( value );
 	}  else {
 		return false;
