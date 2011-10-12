@@ -564,7 +564,7 @@ InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_er
 	if ( !key ) {
 		autoinc_key = false;
 	} else {
-		keyPath = { "keyPath": key };	
+		keyPath = key;	
 	}
 
 	if ( !autoinc_key ) {
