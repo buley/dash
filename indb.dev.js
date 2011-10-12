@@ -605,7 +605,7 @@ InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_er
 
 			var options = {};
 			if( 'undefined' !== typeof keyPath && null !== keyPath ) {
-				options[ 'keyPath' ] = autoinc_key;
+				options[ 'keyPath' ] = keyPath;
 			} 
 			if( 'undefined' !== typeof autoinc_key && null !== autoinc_key ) {
 				options[ 'autoIncrement' ] = autoinc_key;
@@ -2551,7 +2551,7 @@ InDB.utilities.random = function( length, type ) {
         if( 'numbers' !== type ) {
                 set += 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
         }
-        if( 'letters' !== type ) {
+        if( 'string' !== type || 'letters' !== type ) {
                 set += '0123456789';
         }
         var random = '';
