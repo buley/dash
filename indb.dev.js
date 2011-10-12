@@ -432,7 +432,7 @@ InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 		console.log('options',stores[store]);
 		var options = stores[ store ];
 
-		if ( InDB.isObject( options ) ) {
+		if ( InDB.isString( options ) ) {
 			/* options object is really a string
                          * recast options var from a string to a
                          * real deal options object */
