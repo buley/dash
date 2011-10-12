@@ -2000,7 +2000,7 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 
 	/* Debug */
 	
-	if( !!Buleys.debug ) {
+	if( !!InDB.debug ) {
 		console.log( 'indb.js > InDB.cursor.get() > Doing InDB_cursor_get', context );
 	}	
 	
@@ -2139,7 +2139,7 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 		context[ 'error' ] = error;
 		on_error( context );
 
-		if( !!Buleys.debug ) {
+		if( !!InDB.debug ) {
 			console.log('Error in cursor get row', error );
 		}
 
