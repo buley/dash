@@ -2783,7 +2783,7 @@ InDB.utilities.random = function( length, type ) {
         var random = '';
         for ( var i=0; i < length; i++ ) {
                 var random_pos = Math.floor( Math.random() * set.length );
-                random += random.substring( random_pos, random_pos + 1 );
+                random += set.substring( random_pos, random_pos + 1 );
         }
         return random;
 }
