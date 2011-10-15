@@ -1698,10 +1698,8 @@ InDB.bind( 'InDB_do_row_update', function( row_result, context ) {
 	/* Debug */
 
 	if ( !!InDB.debug ) {
-		console.log ( 'InDB_do_row_update', row_result, context );
+		console.log ( 'InDB_do_row_update', row_result, JSON.stringify( context ) );
 	}
-
-
 	/* Assertions */
 
 	if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
