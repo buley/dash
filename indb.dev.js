@@ -771,7 +771,7 @@ InDB.bind( 'InDB_do_index_create', function( row_result, context ) {
 	}
 
 
-	/* Inovation */
+	/* Invocation */
 
 	InDB.index.create( context.store, context.key, context.name, context.unique, context.on_success, context.on_error, context.on_abort );
 } );
@@ -870,7 +870,7 @@ InDB.bind( 'InDB_do_index_delete', function( row_result, context ) {
 		return;
 	}
 
-	/* Inovation */
+	/* Invocation */
 
 	InDB.index.delete( context.store, context.name, context.on_success, context.on_error, context.on_abort );
 
@@ -1236,7 +1236,7 @@ InDB.bind( 'InDB_do_row_get', function( row_result, context ) {
 		return;
 	}
 
-	/* Inovation */
+	/* Invocation */
 
 	InDB.row.get( context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort );
 } );
@@ -1274,7 +1274,7 @@ InDB.row.get = function ( store, key, index, on_success, on_error, on_abort ) {
 		on_abort = InDB.events.onAbort;
 	}
 
-	index = ( InDB.isEmpty( index ) ) ? index : null;
+	index = ( !InDB.isEmpty( index ) ) ? index : null;
 
 	/* Context */
 
@@ -1508,7 +1508,7 @@ InDB.bind( 'InDB_do_row_add', function( row_result, context ) {
 		return;
 	}
 
-	/* Inovation */
+	/* Invocation */
 
 	InDB.row.add( context.store, context.data, context.on_success, context.on_error, context.on_abort );
 } );
@@ -1638,6 +1638,113 @@ InDB.row.add = function ( store, data, on_success, on_error, on_abort ) {
 
 	}
 }
+
+
+//context.store, context.key, context.index, context.data, context.on_success, context.on_error, context.on_abort
+InDB.bind( 'InDB_do_row_update', function( row_result, context ) {
+	
+	/* Debug */
+
+	if ( !!InDB.debug ) {
+		console.log ( 'InDB_do_row_update', row_result, context );
+	}
+
+	/* Assertions */
+
+	if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
+		return;
+	}
+		
+	if ( !InDB.assert( !InDB.isEmpty( context.key ), 'Must provide a range to get' ) ) {
+		return;
+	}
+
+	if ( !InDB.assert( !InDB.isEmpty( context.data ), 'Must provide data to update' ) ) {
+		return;
+	}
+		
+	/* Invocation */
+
+	InDB.row.update( context.store, context.key, context.index, context.data, context.replace, context.on_success, context.on_error, context.on_abort );
+} );
+
+
+InDB.row.update = function ( store, key, index, data, replace, on_success, on_error, on_abort ) {
+
+	/* Debug */
+
+	if ( !!InDB.debug ) {
+		console.log ( 'InDB.row.update', store, key, index, on_success, on_error, on_abort );
+	}
+
+	/* Assertions */
+
+	if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		return;
+	}
+		
+	if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a range to get' ) ) {
+		return;
+	}
+
+	if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide data to update' ) ) {
+		return;
+	}
+
+	/* Defaults */
+
+	if ( "undefined" === typeof on_success ) {
+		on_success = InDB.events.onSuccess;
+	}
+
+	if ( "undefined" === typeof on_error ) {
+		on_error = InDB.events.onError;
+	}
+
+	if ( "undefined" === typeof on_abort ) {
+		on_abort = InDB.events.onAbort;
+	}
+
+	index = ( !InDB.isEmpty( index ) ) ? index : null;
+	
+	replace = ( InDB.isBool( replace ) ) ? replace : false;
+
+	/* Context */
+
+	var context =  { "store": store, "key": key, "index": index, "data": data, "replace": replace, "on_complete": on_success, "on_error": on_error, "on_abort": on_abort };
+
+	/* Action */
+
+	InDB.trigger( 'InDB_row_update', context );
+
+	var callback = function( callback_context ) {
+
+		var result = InDB.row.value( callback_context.event );
+
+		if( 'function' == typeof data ) {
+			data = data( result );
+		}
+
+		if( false == replace ) {	
+			var temp_data = data;
+			for( attr in result ) {
+				temp_data[ attr ] = result[ attr ];
+			}
+			data = temp_data;
+		}
+
+		if( !!InDB.debug ) {
+			console.log( 'InDB.row.update updating', result, data );
+		}
+
+		InDB.row.put( context.store, data, context.on_success, context.on_error, context.on_abort );
+
+	};
+
+	InDB.row.get( context.store, context.key, context.index, callback, context.on_error, context.on_abort );
+
+}
+
 
 
 //context.store, context.on_success, context.on_error, context.on_abort
