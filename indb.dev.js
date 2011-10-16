@@ -2360,6 +2360,8 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 
 			InDB.trigger( 'InDB_cursor_row_get_success', context );
 
+			total++;
+
 			/* Result */
 			
 			var result = event.target.result;
@@ -2367,7 +2369,6 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 			if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
 				// Move cursor to next key
 				if( 'undefined' == typeof limit || null == limit || total <= limit ) {
-					total++;
 					result[ 'continue' ]();
 				}
 			}
