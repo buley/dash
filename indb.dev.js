@@ -1092,7 +1092,7 @@ InDB.cursor.direction.previous = function( no_dupes ) {
 }
 
 InDB.cursor.isDirection = function( direction ) {
-	direction = ( 'undefined' !== typeof direction && InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous( true ) ) ? true : false;
+	return direction = ( 'undefined' !== typeof direction && InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous( true ) ) ? true : false;
 };
 
 
