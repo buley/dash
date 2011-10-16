@@ -2219,7 +2219,7 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 
 	/* Defaults */
 
-	index = (  ) ? context.index : null;
+	direction = ( InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.prev( true ) ) ? direction : InDB.cursor.direction.next();
 	index = ( !InDB.isEmpty( context.index ) ) ? context.index : null;
 
 	/* Invocation */
