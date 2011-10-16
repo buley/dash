@@ -1810,10 +1810,6 @@ InDB.row.update = function ( store, key, index, data, replace, expecting, on_suc
 
 					}
 
-					if( !InDB.assert( result[ attr ] == expecting[ attr ], 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] ) ) {
-						return;
-					}
-
 				}
 				if( 'undefined' !== typeof value ) {
 					temp_data[ attr ] = value;
@@ -2579,10 +2575,6 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting
 
 						on_error( context );
 
-					}
-				       	
-					if( !InDB.assert( result[ attr ] == expecting[ attr ], 'Found ' + result[ attr ] + ', expecting ' + expecting[ attr ] ) ) {
-						return;
 					}
 
 				}
