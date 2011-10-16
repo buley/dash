@@ -1785,21 +1785,16 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 		if( 'function' == typeof data ) {
 			data = data( result );
 		}
-		console.log('doing replace?', replace, data );
 		if( false == replace ) {	
 			var temp_data = data;
-			console.log('yes doing replace: ' + JSON.stringify( temp_data ) );
 			for( attr in result ) {
-				console.log('aaaaaatr',attr, result[attr]);
 				if( 'undefined' !== typeof data[ attr ] ) {
 					temp_data[ attr ] = data[ attr ];
 				} else {
 					temp_data[ attr ] = result[ attr ];
 				}
 			}
-			console.log('pretransfer', JSON.stringify( temp_data ), JSON.stringify( data ) );
 			data = temp_data;
-			console.log('transfer', JSON.stringify( temp_data ), JSON.stringify( data ) );
 		}
 
 		if( !!InDB.debug ) {
@@ -2522,18 +2517,25 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, on_succes
 		InDB.trigger( 'InDB_cursor_row_update_success', context );
 
 		/* Update */
-		var update_data = {};
-		if ( true === replace ) { 
-			update_data = data;
-		} else {
-			update_data = InDB.cursor.value( event );
-			update_data = ( !!update_data ) ? update_data : {};
-			for( attr in data ) {
-				if( data.hasOwnProperty( attr ) ) {
-					update_data[ attr ] = data[ attr ];
+
+		var result = InDB.row.value( context.event );
+
+		if( 'function' == typeof data ) {
+			data = data( result );
+		}
+
+		if( false == replace ) {	
+			var temp_data = data;
+			for( attr in result ) {
+				if( 'undefined' !== typeof data[ attr ] ) {
+					temp_data[ attr ] = data[ attr ];
+				} else {
+					temp_data[ attr ] = result[ attr ];
 				}
 			}
+			data = temp_data;
 		}
+
 
 		/* Debug */
 
@@ -2541,13 +2543,10 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, on_succes
 			console.log ( 'InDB.cursor.update context.data update_data', update_data );
 		}
 
-		/* Result */
 
-		var result = event.target.result;
-		
 		if ( "undefined" !== typeof result && "undefined" !== typeof result.value ) {
 			// Update current cursor item
-			result[ 'update' ]( update_data );
+			result[ 'update' ]( data );
 			// Move cursor to next key
 			result[ 'continue' ]();
 		}
