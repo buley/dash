@@ -2388,6 +2388,7 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 	var keyRange = context.keyRange; // Required
 	var data = context.data; // Required
 	var replace = context.replace; // Optional; Defaults to false
+	var expecting = context.expecting; // Optional; Defaults to null
 
 	/* Assertions */
 
@@ -2406,16 +2407,19 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 	/* Defaults */
 
 	replace = ( InDB.isBoolean( replace ) ) ? replace : false;
+
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
+
+	expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
 
 	/* Invocation */
 
-	InDB.cursor.update( store, index, keyRange, data, replace, context.on_success, context.on_error, context.on_abort, context.on_complete );
+	InDB.cursor.update( store, index, keyRange, data, replace, expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 } );
 
 
-InDB.cursor.update = function ( store, index, keyRange, data, replace, on_success, on_error, on_abort, on_complete ) {
+InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting, on_success, on_error, on_abort, on_complete ) {
 
 	/* Debug */
 
@@ -2442,6 +2446,8 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, on_succes
 	replace = ( InDB.isBoolean( replace ) ) ? replace : false;
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
+	
+	expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
 
 	if ( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
@@ -2462,7 +2468,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, on_succes
 
 	/* Context */
 
-	var context = { "store": store, "keyRange": keyRange, "index": index, "data": data, "replace": replace, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+	var context = { "store": store, "keyRange": keyRange, "index": index, "data": data, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 	/* Action */
 
@@ -2546,9 +2552,21 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, on_succes
 			var temp_data = data;
 			for( attr in result ) {
 				var value = data[ attr ];
+		
 				if( 'function' == typeof value ) {
 					value = value( result[ attr ] );
 				}
+		
+				if( !InDB.assert( result[ attr ] == value, 'Found ' + result[ 'attr'] + ', expecting ' + expecting[ attr ]' ) {
+					if( !!InDB.debug ) {
+						console.log( 'InDB.row.update > value was not expected.', result[ 'attr' ], expected[ attr ] );
+					}
+					var err = new Error( 'Found ' + result[ 'attr'] + ', expecting ' + expecting[ attr ]' );
+					context.event = err;
+					on_error( { 'event': error, 'context': context } );
+					return;
+				}
+
 				if( 'undefined' !== typeof value ) {
 					temp_data[ attr ] = value;
 				} else {
