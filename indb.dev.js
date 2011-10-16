@@ -2224,7 +2224,7 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 
 	/* Defaults */
 
-	direction = ( InDB.isDirection( direction ) ? direction : InDB.cursor.direction.next();
+	direction = ( InDB.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
 	index = ( !InDB.isEmpty( context.index ) ) ? context.index : null;
 
 	/* Invocation */
@@ -2255,7 +2255,7 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
 	
-	direction = ( InDB.isDirection( direction ) ? direction : InDB.cursor.direction.next();
+	direction = ( InDB.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
 	
 	if ( "undefined" == typeof on_success ) {
 		on_success = InDB.events.onSuccess;
