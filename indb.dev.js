@@ -1339,6 +1339,9 @@ InDB.row.get = function ( store, key, index, on_success, on_error, on_abort, on_
 
 	if ( "undefined" !== typeof index && null !== index ) {
 		var transaction_index = transaction.index( index );
+		if( !!InDB.debug ) {
+			console.log( 'InDB.row.get (using index)', transaction, transaction_index, index, key );
+		}
 		request = transaction_index.get( key );
 	} else {
 		request = transaction.get( key );
@@ -1417,17 +1420,17 @@ InDB.bind( 'InDB_do_row_delete', function( row_result, context ) {
 
 	/* Invocation */
 
-	InDB.row.delete( context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort, context.on_complete );
+	InDB.row.delete( context.store, context.key, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 } );
 
 
-InDB.row.delete = function ( store, key, index, on_success, on_error, on_abort, on_complete ) {
+InDB.row.delete = function ( store, key, on_success, on_error, on_abort, on_complete ) {
 
 	/* Debug */
 
 	if ( !!InDB.debug ) {
-		console.log ( 'InDB.row.delete', store, key, index, on_success, on_error, on_abort );
+		console.log ( 'InDB.row.delete', store, key, on_success, on_error, on_abort );
 	}
 
 	/* Assertions */
@@ -1442,7 +1445,7 @@ InDB.row.delete = function ( store, key, index, on_success, on_error, on_abort, 
 
 	/* Context */
 
-	var context = { "store": store, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+	var context = { "store": store, "key": key, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 	/* Action */
 
@@ -1466,43 +1469,6 @@ InDB.row.delete = function ( store, key, index, on_success, on_error, on_abort, 
 	/* Transaction */
 
 	var transaction = InDB.transaction.create( store, InDB.transaction.write() );
-	
-	/* Optional Index */
-
-	var request;
-	if ( !InDB.isEmpty( index ) ) {
-
-		// Using index
-		var transaction_index = transaction.index( index );
-
-
-		/* Debug */
-
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.delete (index)', transaction, index, transaction_index, key );
-		}
-
-
-		/* Request */
-		
-		request = transaction_index[ 'delete' ]( key );
-
-
-	} else {
-
-		/* Debug */
-
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.delete (no index)', transaction, key );
-		}
-
-		// No index
-
-		/* Request */
-
-		request = transaction[ "delete" ]( key );
-
-	}
 
 	/* Transaction Callback */
 	
@@ -1516,7 +1482,7 @@ InDB.row.delete = function ( store, key, index, on_success, on_error, on_abort, 
 
 	/* Request */
 
-
+	var request = transaction[ "delete" ]( key );
 
 	/* Request Responses */
 	
