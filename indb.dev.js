@@ -2620,7 +2620,8 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 
 		/* Update */
 
-		var result = InDB.row.value( context.event );
+		var result = context.event.target.result;
+		var val = InDB.row.value( context.event );
 
 		if( 'function' == typeof data ) {
 			data = data( result );
@@ -2667,7 +2668,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		}
 
 
-		if ( "undefined" !== typeof result && null !== result && "undefined" !== typeof result.value ) {
+		if ( "undefined" !== typeof result && null !== result && "undefined" !== typeof value ) {
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
 				result[ 'update' ]( data );
 				result[ 'continue' ]();
