@@ -1788,8 +1788,12 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 		if( false == replace ) {	
 			var temp_data = data;
 			for( attr in result ) {
-				if( 'undefined' !== typeof data[ attr ] ) {
-					temp_data[ attr ] = data[ attr ];
+				var value = data[ attr ];
+				if( 'function' == typeof value ) {
+					value = value( result[ attr ] );
+				}
+				if( 'undefined' !== typeof value ) {
+					temp_data[ attr ] = value;
 				} else {
 					temp_data[ attr ] = result[ attr ];
 				}
@@ -2527,8 +2531,12 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, on_succes
 		if( false == replace ) {	
 			var temp_data = data;
 			for( attr in result ) {
-				if( 'undefined' !== typeof data[ attr ] ) {
-					temp_data[ attr ] = data[ attr ];
+				var value = data[ attr ];
+				if( 'function' == typeof value ) {
+					value = value( result[ attr ] );
+				}
+				if( 'undefined' !== typeof value ) {
+					temp_data[ attr ] = value;
 				} else {
 					temp_data[ attr ] = result[ attr ];
 				}
