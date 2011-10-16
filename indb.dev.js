@@ -1092,9 +1092,7 @@ InDB.cursor.direction.previous = function( no_dupes ) {
 }
 
 InDB.cursor.isDirection = function( direction ) {
-	console.log("IS DIRECTION?",direction);
 	direction = ( 'undefined' !== typeof direction && InDB.isNumber( direction ) && direction >= InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous( true ) ) ? true : false;
-	console.log("IS DIRECTION",direction);
 	return direction;
 };
 
@@ -2207,6 +2205,7 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 		console.log ( 'InDB_do_cursor_get', row_result, context );
 	}
 
+
 	/* Setup */
 
 	var store = context.store; // Required
@@ -2214,6 +2213,7 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 	var keyRange = context.keyRange; // Required
 	var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
 	var limit = context.limit; //Optional
+
 
 	/* Assertions */
 
@@ -2225,10 +2225,15 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 		return;
 	}
 
+
 	/* Defaults */
 
 	direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+
 	index = ( !InDB.isEmpty( context.index ) ) ? context.index : null;
+
+	limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+
 
 	/* Invocation */
 	
@@ -2259,6 +2264,8 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
 	
 	direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+	
+	limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
 	
 	if ( "undefined" == typeof on_success ) {
 		on_success = InDB.events.onSuccess;
@@ -2446,6 +2453,8 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 
 	/* Setup */
 
+	var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
+	var limit = context.limit; // Optional; defaults to InDB.cursor.direction.next()
 	var store = context.store; // Required
 	var index = context.index; // Optional; Defaults to null
 	var keyRange = context.keyRange; // Required
@@ -2475,6 +2484,10 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 
 	expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
 
+	direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+
+	limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+
 	/* Invocation */
 
 	InDB.cursor.update( store, index, keyRange, data, replace, expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
@@ -2482,12 +2495,12 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 } );
 
 
-InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting, on_success, on_error, on_abort, on_complete ) {
+InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, replace, expecting, on_success, on_error, on_abort, on_complete ) {
 
 	/* Debug */
 
 	if ( !!InDB.debug ) {
-		console.log ( 'InDB.cursor.update', store, index, keyRange, data, on_success, on_error, on_abort, on_complete );
+		console.log ( 'InDB.cursor.update', store, index, keyRange, data, direction, limit, replace, on_success, on_error, on_abort, on_complete );
 	}
 
 	/* Assertions */
@@ -2512,6 +2525,10 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting
 	
 	expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
 
+	direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+
+	limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+
 	if ( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
@@ -2531,7 +2548,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting
 
 	/* Context */
 
-	var context = { "store": store, "keyRange": keyRange, "index": index, "data": data, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+	var context = { "store": store, "keyRange": keyRange, "index": index, "data": data, 'direction': direction, 'limit': limit, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 	/* Action */
 
@@ -2566,14 +2583,14 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting
 	
 		/* Request */
 
-		request = transaction_index.openCursor( keyRange );
+		request = transaction_index.openCursor( keyRange, direction );
 
 	} else {
 
 		/* Debug */
 
 		if ( !!InDB.debug ) {
-			console.log ( 'transaction.openCursor', keyRange );
+			console.log ( 'transaction.openCursor', keyRange, direction );
 
 		}
 
@@ -2581,7 +2598,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting
 
 		/* Request */
 
-		request = transaction.openCursor( keyRange );
+		request = transaction.openCursor( keyRange, direction );
 
 	}
 
@@ -2652,9 +2669,13 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting
 
 		if ( "undefined" !== typeof result && "undefined" !== typeof result.value ) {
 			// Update current cursor item
-			result[ 'update' ]( data );
-			// Move cursor to next key
-			result[ 'continue' ]();
+			if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
+				// Move cursor to next key
+				if( 'undefined' == typeof limit || null == limit || total < limit ) {
+					result[ 'update' ]( data );
+					result[ 'continue' ]();
+				}
+			}
 		}
 	}
 
@@ -2707,6 +2728,8 @@ InDB.bind( 'InDB_do_cursor_delete', function( row_result, context ) {
 	var store = context.store; // Required
 	var keyRange = context.keyRange; // Required
 	var index = context.index; // Required
+	var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
+	var limit = context.limit;
 
 	/* Assertions */
 
@@ -2721,14 +2744,18 @@ InDB.bind( 'InDB_do_cursor_delete', function( row_result, context ) {
 	/* Defaults */
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
+	
+	limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+
+	direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
 
 	/* Invocation */
 
-	InDB.cursor.delete( store, index, keyRange, context.on_success, context.on_error, context.on_abort, context.on_complete );
+	InDB.cursor.delete( store, index, keyRange, direction, limit, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 } );
 
-InDB.cursor.delete = function ( store, index, keyRange, on_success, on_error, on_abort, on_complete ) {
+InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete ) {
 
 	/* Debug */
 
@@ -2750,6 +2777,10 @@ InDB.cursor.delete = function ( store, index, keyRange, on_success, on_error, on
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
 
+	direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+
+	limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+
 	if ( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
@@ -2769,7 +2800,7 @@ InDB.cursor.delete = function ( store, index, keyRange, on_success, on_error, on
 
 	/* Context */
 
-	var context = { "store": store, "keyRange": keyRange, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+	var context = { "store": store, "keyRange": keyRange, "index": index, 'direction': direction, 'limit': limit, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 	/* Action */
 	
@@ -2797,27 +2828,27 @@ InDB.cursor.delete = function ( store, index, keyRange, on_success, on_error, on
 		/* Debug */
 
 		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.get transaction_index.openCursor', index, keyRange );
+			console.log ( 'InDB.cursor.get transaction_index.openCursor', index, keyRange, direction );
 		}
 
 		// Using index
 		var transaction_index = transaction.index( index );
 
 		/* Request */
-		request = transaction_index.openCursor( keyRange );
+		request = transaction_index.openCursor( keyRange, direction );
 
 	} else {
 
 		/* Debug */
 
 		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.get transaction.openCursor', keyRange );
+			console.log ( 'InDB.cursor.get transaction.openCursor', keyRange, direction );
 		}
 		
 		// No index
 
 		/* Request */
-		request = transaction.openCursor( keyRange );
+		request = transaction.openCursor( keyRange, direction );
 
 	}
 
@@ -2842,10 +2873,14 @@ InDB.cursor.delete = function ( store, index, keyRange, on_success, on_error, on
 		var result = event.target.result;
 
 		if ( "undefined" !== typeof result && "undefined" !== typeof result.value ) {
-			// Delete current cursor item
-			result[ 'delete' ]();
-			// Move cursor to next item
-			result[ 'continue' ]();
+			// Update current cursor item
+			if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
+				// Move cursor to next key
+				if( 'undefined' == typeof limit || null == limit || total < limit ) {
+					result[ 'delete' ]();
+					result[ 'continue' ]();
+				}
+			}
 		}
 	}
 	request.onerror = function ( event ) {	
