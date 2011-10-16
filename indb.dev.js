@@ -1797,7 +1797,6 @@ InDB.row.update = function ( store, key, index, data, replace, expecting, on_suc
 					value = value( result[ attr ] );
 				}
 				if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] ) {
-					console.log("BLAH", result[ attr ], value, result[ attr ] == value );
 					if( result[ attr ] !== expecting[ attr ] ) {
 
 						if( !!InDB.debug ) {
