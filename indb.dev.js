@@ -1417,17 +1417,17 @@ InDB.bind( 'InDB_do_row_delete', function( row_result, context ) {
 
 	/* Invocation */
 
-	InDB.row.delete( context.store, context.key, context.on_success, context.on_error, context.on_abort, context.on_complete );
+	InDB.row.delete( context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 } );
 
 
-InDB.row.delete = function ( store, key, on_success, on_error, on_abort, on_complete ) {
+InDB.row.delete = function ( store, key, index, on_success, on_error, on_abort, on_complete ) {
 
 	/* Debug */
 
 	if ( !!InDB.debug ) {
-		console.log ( 'InDB.row.delete', store, key, on_success, on_error, on_abort );
+		console.log ( 'InDB.row.delete', store, key, index, on_success, on_error, on_abort );
 	}
 
 	/* Assertions */
@@ -1442,7 +1442,7 @@ InDB.row.delete = function ( store, key, on_success, on_error, on_abort, on_comp
 
 	/* Context */
 
-	var context = { "store": store, "key": key, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+	var context = { "store": store, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 	/* Action */
 
@@ -1466,6 +1466,40 @@ InDB.row.delete = function ( store, key, on_success, on_error, on_abort, on_comp
 	/* Transaction */
 
 	var transaction = InDB.transaction.create( store, InDB.transaction.write() );
+	
+	/* Optional Index */
+
+	var request;
+	if ( !InDB.isEmpty( index ) ) {
+
+		/* Debug */
+
+		if ( !!InDB.debug ) {
+			console.log ( 'InDB.row.delete (index)', transaction, index, key );
+		}
+
+		// Using index
+		var transaction_index = transaction.index( index );
+
+		/* Request */
+
+		request = transaction_index[ 'delete' ]( key );
+
+	} else {
+
+		/* Debug */
+
+		if ( !!InDB.debug ) {
+			console.log ( 'InDB.row.delete (no index)', transaction, key );
+		}
+
+		// No index
+
+		/* Request */
+
+		request = transaction[ "delete" ]( key );
+
+	}
 
 	/* Transaction Callback */
 	
@@ -1479,7 +1513,7 @@ InDB.row.delete = function ( store, key, on_success, on_error, on_abort, on_comp
 
 	/* Request */
 
-	var request = transaction[ "delete" ]( key );
+
 
 	/* Request Responses */
 	
