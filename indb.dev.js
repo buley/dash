@@ -1078,6 +1078,7 @@ InDB.transaction.write = function () {
 /* Direction types */
 
 InDB.cursor = InDB.cursor || {};
+InDB.cursor.direction = InDB.cursor.direction || {};
 
 InDB.cursor.direction.next = function( no_dupes ) {
 	no_dupes = ( !!no_dupes ) ? no_dupes : false;
