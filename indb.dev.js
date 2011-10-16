@@ -1079,11 +1079,11 @@ InDB.transaction.write = function () {
 
 InDB.cursor = InDB.cursor || {};
 
-InDB.cursor.direction.next( no_dupes ) {
+InDB.cursor.direction.next = function( no_dupes ) {
 	no_dupes = ( !!no_dupes ) ? no_dupes : false;
 	return ( !!no_dupes ) ? IDBCursor.NEXT_NO_DUPLICATE : IDBCursor.NEXT; 
 }
-InDB.cursor.direction.previous( no_dupes ) {
+InDB.cursor.direction.previous = function( no_dupes ) {
 	no_dupes = ( !!no_dupes ) ? no_dupes : false;
 	return ( !!no_dupes ) ? IDBCursor.PREV_NO_DUPLICATE : IDBCursor.NEXT;
 }
