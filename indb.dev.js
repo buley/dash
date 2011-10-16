@@ -1334,11 +1334,8 @@ InDB.row.get = function ( store, key, index, on_success, on_error, on_abort, on_
 
 	/* Transaction */
 	
-	var transaction = InDB.transaction.create( store, InDB.transaction.read() );
+	var transaction = InDB.transaction.create( store, InDB.transaction.read(), on_complete );
 
-	/* Transaction Callback */
-	
-	transaction.oncomplete = on_complete;
 
 	/* Debug */
 	
@@ -1490,11 +1487,8 @@ InDB.row.delete = function ( store, key, on_success, on_error, on_abort, on_comp
 	
 	/* Transaction */
 
-	var transaction = InDB.transaction.create( store, InDB.transaction.write() );
+	var transaction = InDB.transaction.create( store, InDB.transaction.write(), on_complete );
 
-	/* Transaction Callback */
-	
-	transaction.oncomplete = on_complete;
 	
 	/* Debug */
 	
@@ -1639,12 +1633,7 @@ InDB.row.add = function ( store, data, on_success, on_error, on_abort, on_comple
 
 	/* Transaction */
 
-	var transaction = InDB.transaction.create( store, InDB.transaction.read_write() );
-
-
-	/* Transaction Callback */
-	
-	transaction.oncomplete = on_complete;	
+	var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
 
 
 	/* Debug */
@@ -1944,12 +1933,7 @@ InDB.store.clear = function ( store, on_success, on_error, on_abort ) {
 
 	/* Transaction */
 
-	var transaction = InDB.transaction.create( store, InDB.transaction.read_write() );
-
-
-	/* Transaction Callback */
-
-	transaction.oncomplete = on_complete;
+	var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
 
 
 	/* Debug */
@@ -2094,12 +2078,8 @@ InDB.row.put = function ( store, data, key, on_success, on_error, on_abort, on_c
 
 	/* Transaction */
 
-	var transaction = InDB.transaction.create( store, InDB.transaction.read_write() );
+	var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
 
-
-	/* Transaction Callback */
-	
-	transaction.oncomplete = on_complete;
 
 	/* Debug */
 
@@ -2244,11 +2224,11 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 	/* Defaults */
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
-console.log("B",on_success);
+	
 	if ( "undefined" == typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
-console.log("D",on_success);
+	
 	if ( "undefined" == typeof on_error ) {
 		on_error = InDB.events.onError;
 	}
@@ -2279,11 +2259,8 @@ console.log("D",on_success);
 
 		/* Transaction */
 
-		var transaction = InDB.transaction.create ( store, InDB.transaction.read_write() );
+		var transaction = InDB.transaction.create ( store, InDB.transaction.read_write(), on_complete );
 
-		/* Callbacks */
-		
-		transaction.oncomplete = on_complete;
 
 		/* Debug */
 
@@ -2523,9 +2500,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting
 	
 	/* Transaction */
 
-	var transaction = InDB.transaction.create( store, InDB.transaction.read_write() );
-
-	transaction.oncomplete = on_complete;
+	var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
 
 	/* Debug */
 
@@ -2763,9 +2738,8 @@ InDB.cursor.delete = function ( store, index, keyRange, on_success, on_error, on
 
 	/* Transaction */
 
-	var transaction = InDB.transaction.create( store, InDB.transaction.read_write() );
+	var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
 
-	transaction.oncomplete = on_complete;
 
 	/* Debug */
 
