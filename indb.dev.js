@@ -1243,6 +1243,7 @@ InDB.range.get = function ( value, left_bound, right_bound, includes_left_bound,
 	} else if ( InDB.exists( right_bound ) && InDB.exists( includes_right_bound ) ) {
 		return IDBKeyRange.upperBound( right_bound, includes_right_bound );
 	} else if ( InDB.exists( value ) ) {
+		console.log( "RANGE value", value );
 		return IDBKeyRange.only( value );
 	}  else {
 		return false;
