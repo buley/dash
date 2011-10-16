@@ -2668,13 +2668,9 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 
 
 		if ( "undefined" !== typeof result && null !== result && "undefined" !== typeof result.value ) {
-			// Update current cursor item
-			if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
-				// Move cursor to next key
-				if( 'undefined' == typeof limit || null == limit || total < limit ) {
-					result[ 'update' ]( data );
-					result[ 'continue' ]();
-				}
+			if( 'undefined' == typeof limit || null == limit || total < limit ) {
+				result[ 'update' ]( data );
+				result[ 'continue' ]();
 			}
 		}
 	}
