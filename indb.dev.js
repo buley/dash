@@ -1068,7 +1068,29 @@ InDB.transaction.read_write = function () {
 } 
 InDB.transaction.write = function () {
 	return IDBTransaction.READ_WRITE;
-} 
+}
+
+/**
+ * Directions
+ *
+ **/
+
+/* Direction types */
+
+InDB.cursor = InDB.cursor || {};
+
+InDB.cursor.direction.next( no_dupes ) {
+	no_dupes = ( !!no_dupes ) ? no_dupes : false;
+	return ( !!no_dupes ) ? IDBCursor.NEXT_NO_DUPLICATE : IDBCursor.NEXT; 
+}
+InDB.cursor.direction.previous( no_dupes ) {
+	no_dupes = ( !!no_dupes ) ? no_dupes : false;
+	return ( !!no_dupes ) ? IDBCursor.PREV_NO_DUPLICATE : IDBCursor.NEXT;
+}
+
+
+
+
 
 /* Transaction factory */
 InDB.transaction.create = function ( database, type, on_complete, on_error, on_abort ) {
@@ -2182,6 +2204,8 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 	var store = context.store; // Required
 	var index = context.index; // Optional
 	var keyRange = context.keyRange; // Required
+	var direction = context.direction; // Optional; defaults to 1
+	var limit = context.limit; //Optional
 
 	/* Assertions */
 
@@ -2195,20 +2219,21 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 
 	/* Defaults */
 
+	index = (  ) ? context.index : null;
 	index = ( !InDB.isEmpty( context.index ) ) ? context.index : null;
 
 	/* Invocation */
 	
-	InDB.cursor.get( store, index, keyRange, context.on_success, context.on_error, context.on_abort, context.on_complete );
+	InDB.cursor.get( store, index, keyRange, direction, limit, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 } );
 
 /* TODO: Direction? */
-InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_abort, on_complete ) {
+InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete ) {
 
 	/* Debug */
 	if ( !!InDB.debug ) {	
-		console.log ( 'InDB.cursor.get', store, index, keyRange, on_success, on_error, on_abort, on_complete );
+		console.log ( 'InDB.cursor.get', store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete );
 	}
 
 	/* Assertions */
@@ -2243,7 +2268,7 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 
 	/* Context */
 
-	var context =  { "store": store, "index": index, "keyRange": keyRange, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+	var context =  { "store": store, "index": index, "keyRange": keyRange, 'direction': direction, 'limit': limit, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 	/* Debug */
 	
@@ -2284,7 +2309,8 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 
 			// Using index
 			var transaction_index = transaction.index( index );
-
+			//xxx
+			//
 
 			/* Request */
 
