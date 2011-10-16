@@ -2854,6 +2854,8 @@ InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_suc
 
 	/* Request Responses */
 
+	var total = 0;
+
 	request.onsuccess = function ( event ) {	
 
 		/* Context */
@@ -2871,7 +2873,7 @@ InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_suc
 		/* Result */
 
 		var result = event.target.result;
-
+	
 		if ( "undefined" !== typeof result && "undefined" !== typeof result.value ) {
 			// Update current cursor item
 			if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
