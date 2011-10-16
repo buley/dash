@@ -1806,7 +1806,7 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 			console.log( 'InDB.row.update before/after', result, data );
 		}
 
-		InDB.row.put( context.store, data, null, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		InDB.row.put( store, data, null, on_success, on_error, on_abort, on_complete );
 
 	};
 
