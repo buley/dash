@@ -2250,6 +2250,8 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
 	
+	direction = ( InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.prev( true ) ) ? direction : InDB.cursor.direction.next();
+	
 	if ( "undefined" == typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
@@ -2309,13 +2311,10 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 
 			// Using index
 			var transaction_index = transaction.index( index );
-			//xxx
-			//
 
 			/* Request */
 
-			request = transaction_index.openCursor( keyRange );
-
+			request = transaction_index.openCursor( keyRange, direction );
 
 		} else {
 
@@ -2334,6 +2333,8 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 		}
 
 		/* Request Responses */
+
+		var total = 0;
 
 		request.onsuccess = function ( event ) {	
 
@@ -2362,7 +2363,10 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 
 			if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
 				// Move cursor to next key
-				result[ 'continue' ]();
+				if( 'undefined' == typeof limit || null == limit || total <= limit ) {
+					total++;
+					result[ 'continue' ]();
+				}
 			}
 		}
 
