@@ -1098,10 +1098,10 @@ InDB.transaction.create = function ( database, type, on_complete, on_error, on_a
 
 
 InDB.row.result = function ( event ) {
-	if( 'undefined' !== typeof event.event ) {
+	if( 'undefined' !== typeof event && 'undefined' !== typeof event.event ) {
 		event = event.event;
 	}
-	if ( "undefined" !== typeof event.result ) {
+	if ( 'undefined' !== typeof event && "undefined" !== typeof event.result ) {
 		return event.result;
 	} else {
 		return null;
@@ -1110,17 +1110,21 @@ InDB.row.result = function ( event ) {
 
 
 InDB.row.value = function ( event ) {
+
 	if ( !!InDB.debug ) {
 		console.log ( 'InDB.row.value', event );
 	}
-	if( 'undefined' !== typeof event.event ) {
+
+	if( 'undefined' !== typeof event && 'undefined' !== typeof event.event ) {
 		event = event.event;
 	}
+
 	if ( "undefined" !== typeof event && null !== event && "undefined" !== typeof event.target && "undefined" !== typeof event.target.result && null !== event.target.result ) {
 		return event.target.result;
 	} else {
 		return null;
 	}
+
 }
 
 
@@ -1128,10 +1132,10 @@ InDB.cursor.result = function ( event ) {
 	if ( !!InDB.debug ) {
 		console.log ( 'InDB.cursor.result', event );
 	}
-	if( 'undefined' !== typeof event.event ) {
+	if( 'undefined' !== typeof event && 'undefined' !== typeof event.event ) {
 		event = event.event;
 	}
-	if ( "undefined" !== typeof event.target && "undefined" !== typeof event.target.result ) {
+	if ( 'undefined' !== typeof event && "undefined" !== typeof event.target && "undefined" !== typeof event.target.result ) {
 		return event.target.result;
 	} else {
 		return null;
