@@ -1727,7 +1727,6 @@ InDB.bind( 'InDB_do_row_update', function( row_result, context ) {
 	if ( !InDB.assert( !InDB.isEmpty( context.data ), 'Must provide data to update' ) ) {
 		return;
 	}
-		
 
 	/* Invocation */
 
@@ -1797,11 +1796,9 @@ InDB.row.update = function ( store, key, index, data, replace, expecting, on_suc
 	var callback = function( callback_context ) {
 
 		var result = InDB.row.value( callback_context.event );
-		console.log("UPDATE with this data",data);
 		if( 'function' == typeof data ) {
 			data = data( result );
 		}
-		console.log("UPDATE2 with this data",data);
 		if( false == replace ) {
 			var temp_data = data;
 			for( attr in result ) {
