@@ -275,21 +275,21 @@ InDB.checkBrowser = function () {
  **/
 InDB.assert = function ( statement, error_message, warn_level ) {
 
-	error_message = ( !!error_message ) ? error_message : "False assertion";
+	error_message = ( !!error_message ) ? error_message : "Unknown error.";
 	result = false;
 	switch( warn_level ) {
 		case 'log':
-			( statement ) ? result = true : console.log ( error_message );
+			( statement ) ? result = true : console.log ( 'Assertion failed: ' + error_message, argument[ 0 ] );
 			break;
 		case 'alert': 
-			( statement ) ? result = true : alert( error_message );
+			( statement ) ? result = true : alert( 'Assertion failed: ' + error_message, argument[ 0 ] );
 			break;
 		default: 
 			if ( statement ) { 
 				result = true;
 			} else {
 				console.log( error_message );
-				throw new Error( error_message );
+				throw new Error( 'Assertion failed': error_message, argument[ 0 ] );
 			}
 			break;
 	}
