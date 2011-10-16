@@ -1802,10 +1802,10 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 		}
 
 		if( !!InDB.debug ) {
-			console.log( 'InDB.row.update updating', result, data );
+			console.log( 'InDB.row.update before/after', result, data );
 		}
 
-		InDB.row.put( context.store, data, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		InDB.row.put( context.store, data, null, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	};
 
