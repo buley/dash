@@ -1082,11 +1082,13 @@ InDB.cursor.direction = InDB.cursor.direction || {};
 
 InDB.cursor.direction.next = function( no_dupes ) {
 	no_dupes = ( !!no_dupes ) ? no_dupes : false;
-	return var result = ( !!no_dupes ) ? IDBCursor.NEXT_NO_DUPLICATE : IDBCursor.NEXT; 
+	var result = ( !!no_dupes ) ? IDBCursor.NEXT_NO_DUPLICATE : IDBCursor.NEXT; 
+	retur result;
 };
 InDB.cursor.direction.previous()ious = function( no_dupes ) {
 	no_dupes = ( !!no_dupes ) ? no_dupes : false;
-	return var result = ( !!no_dupes ) ? IDBCursor.PREV_NO_DUPLICATE : IDBCursor.NEXT;
+	var result = ( !!no_dupes ) ? IDBCursor.PREV_NO_DUPLICATE : IDBCursor.NEXT;
+	return result;
 }
 
 
