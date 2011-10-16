@@ -1803,9 +1803,8 @@ InDB.row.update = function ( store, key, index, data, replace, expecting, on_suc
 					}
 
 					var err = new Error( 'Found ' + result[ 'attr'] + ', expecting ' + expecting[ attr ] );
-					context.event = err;
 					
-					on_error( { 'event': error, 'context': context } );
+					on_error( { 'event': err, 'context': context } );
 				       	
 					if( !InDB.assert( result[ attr ] == value, 'Found ' + result[ 'attr'] + ', expecting ' + expecting[ attr ] ) ) {
 						return;
@@ -2570,9 +2569,8 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting
 					}
 
 					var err = new Error( 'Found ' + result[ 'attr'] + ', expecting ' + expecting[ attr ] );
-					context.event = err;
 					
-					on_error( { 'event': error, 'context': context } );
+					on_error( { 'event': err, 'context': context } );
 				       	
 					if( !InDB.assert( result[ attr ] == value, 'Found ' + result[ 'attr'] + ', expecting ' + expecting[ attr ] ) ) {
 						return;
