@@ -2253,7 +2253,7 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
 	
-	direction = ( InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous()( true ) ) ? direction : InDB.cursor.direction.next();
+	direction = ( InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous( true ) ) ? direction : InDB.cursor.direction.next();
 	
 	if ( "undefined" == typeof on_success ) {
 		on_success = InDB.events.onSuccess;
