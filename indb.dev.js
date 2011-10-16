@@ -1719,11 +1719,13 @@ InDB.bind( 'InDB_do_row_update', function( row_result, context ) {
 
 	/* Invocation */
 
-	InDB.row.update( context.store, context.key, context.index, context.data, context.replace, context.on_success, context.on_error, context.on_abort, context.on_complete );
+	InDB.row.update( context.store, context.key, context.index, context.data, context.replace, context.expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
+
+
 } );
 
 
-InDB.row.update = function ( store, key, index, data, replace, on_success, on_error, on_abort, on_complete ) {
+InDB.row.update = function ( store, key, index, data, replace, expecting, on_success, on_error, on_abort, on_complete ) {
 
 
 	/* Debug */
@@ -1768,11 +1770,13 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
 	
+	expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
+	
 	replace = ( InDB.isBoolean( replace ) ) ? replace : false;
 
 	/* Context */
 
-	var context =  { "store": store, "key": key, "index": index, "data": data, "replace": replace, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+	var context =  { "store": store, "key": key, "index": index, "data": data, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 	/* Action */
 
@@ -1785,12 +1789,21 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 		if( 'function' == typeof data ) {
 			data = data( result );
 		}
-		if( false == replace ) {	
+		if( false == replace ) {
 			var temp_data = data;
 			for( attr in result ) {
 				var value = data[ attr ];
 				if( 'function' == typeof value ) {
 					value = value( result[ attr ] );
+				}
+				if( !InDB.assert( result[ attr ] == value, 'Found ' + result[ 'attr'] + ', expecting ' + expecting[ attr ]' ) {
+					if( !!InDB.debug ) {
+						console.log( 'InDB.row.update > value was not expected.', result[ 'attr' ], expected[ attr ] );
+					}
+					var err = new Error( 'Found ' + result[ 'attr'] + ', expecting ' + expecting[ attr ]' );
+					context.event = err;
+					on_error( { 'event': error, 'context': context } );
+					return;
 				}
 				if( 'undefined' !== typeof value ) {
 					temp_data[ attr ] = value;
