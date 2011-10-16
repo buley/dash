@@ -1798,15 +1798,19 @@ InDB.row.update = function ( store, key, index, data, replace, expecting, on_suc
 				}
 				if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] ) {
 
-					if( !!InDB.debug ) {
-						console.log( 'InDB.row.update > value was not expected.', result[ attr ], expecting[ attr ] );
+					if( result[ attr ] == value ) {
+
+						if( !!InDB.debug ) {
+							console.log( 'InDB.row.update > value was not expected.', result[ attr ], expecting[ attr ] );
+						}
+
+						var err = new Error( 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] );
+						context[ 'event' ] = err;
+
+						on_error( context );
+
 					}
 
-					var err = new Error( 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] );
-					context.event = err;
-					
-					on_error( context );
-				       	
 					if( !InDB.assert( result[ attr ] == value, 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] ) ) {
 						return;
 					}
