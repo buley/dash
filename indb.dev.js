@@ -1797,10 +1797,11 @@ InDB.row.update = function ( store, key, index, data, replace, expecting, on_suc
 	var callback = function( callback_context ) {
 
 		var result = InDB.row.value( callback_context.event );
-
+		console.log("UPDATE with this data",data);
 		if( 'function' == typeof data ) {
 			data = data( result );
 		}
+		console.log("UPDATE2 with this data",data);
 		if( false == replace ) {
 			var temp_data = data;
 			for( attr in result ) {
