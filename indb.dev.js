@@ -1348,19 +1348,25 @@ InDB.row.get = function ( store, key, index, on_success, on_error, on_abort, on_
 
 	/* Request */
 
-	var request = {};
 
-	/* Optional Index */
 
+	var request;
 	if ( "undefined" !== typeof index && null !== index ) {
 		var transaction_index = transaction.index( index );
 		if( !!InDB.debug ) {
 			console.log( 'InDB.row.get (using index)', transaction, transaction_index, index, key );
 		}
-		//request = transaction_index.get( key );
-		request = transaction.get( key );
+		/* Optional Index */
+
+		request = transaction_index.get( key );
+		//request = transaction.get( key );
+
 	} else {
+
+		/* Optional Index */
+
 		request = transaction.get( key );
+
 	}
 	
 	/* Request Responses */
