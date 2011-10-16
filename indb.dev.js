@@ -1472,18 +1472,21 @@ InDB.row.delete = function ( store, key, index, on_success, on_error, on_abort, 
 	var request;
 	if ( !InDB.isEmpty( index ) ) {
 
+		// Using index
+		var transaction_index = transaction.index( index );
+
+
 		/* Debug */
 
 		if ( !!InDB.debug ) {
 			console.log ( 'InDB.row.delete (index)', transaction, index, key );
 		}
 
-		// Using index
-		var transaction_index = transaction.index( index );
 
 		/* Request */
-
+		
 		request = transaction_index[ 'delete' ]( key );
+
 
 	} else {
 
