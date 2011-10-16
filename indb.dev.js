@@ -1790,11 +1790,11 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 			var temp_data = data;
 			console.log('yes doing replace: ' + JSON.stringify( temp_data ) );
 			for( attr in result ) {
-				console.log('aaaaaatr',attr, result);
+				console.log('aaaaaatr',attr, result[attr]);
 				temp_data[ attr ] = result[ attr ];
 			}
 			data = temp_data;
-			console.log('transfer', JSON.stringify( data ) );
+			console.log('transfer', JSON.stringify( temp_data ), JSON.stringify( data ) );
 		}
 
 		if( !!InDB.debug ) {
