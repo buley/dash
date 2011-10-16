@@ -2445,6 +2445,7 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 //context.store, context.index, context.keyRange (e.g. InDB.range.left_open( "0" ) ), context.on_success, context.on_error, context.on_abort
 InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 	
+console.log('7');
 	/* Debug */
 
 	if ( !!InDB.debug ) {
@@ -2453,6 +2454,7 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 
 	/* Setup */
 
+console.log('8');
 	var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
 	var limit = context.limit; // Optional; defaults to InDB.cursor.direction.next()
 	var store = context.store; // Required
@@ -2462,6 +2464,7 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 	var replace = context.replace; // Optional; Defaults to false
 	var expecting = context.expecting; // Optional; Defaults to null
 
+console.log('9');
 	/* Assertions */
 
 	if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
@@ -2476,6 +2479,7 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 		return;
 	}
 
+console.log('10');
 	/* Defaults */
 
 	replace = ( InDB.isBoolean( replace ) ) ? replace : false;
@@ -2488,6 +2492,7 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 
 	limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
 
+console.log('11');
 	/* Invocation */
 
 	InDB.cursor.update( store, index, keyRange, data, replace, expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
@@ -2865,6 +2870,8 @@ InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_suc
 		/* Callback */
 
 		on_success( context );
+
+		total++;
 
 		/* Action */
 
