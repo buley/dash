@@ -1295,7 +1295,7 @@ InDB.row.get = function ( store, key, index, on_success, on_error, on_abort ) {
 
 	/* Context */
 
-	var context =  { "store": store, "key": key, "index": index, "on_complete": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+	var context =  { "store": store, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 	/* Action */
 
@@ -1772,7 +1772,7 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 
 	/* Context */
 
-	var context =  { "store": store, "key": key, "index": index, "data": data, "replace": replace, "on_complete": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+	var context =  { "store": store, "key": key, "index": index, "data": data, "replace": replace, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 	/* Action */
 
