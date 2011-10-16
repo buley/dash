@@ -2244,11 +2244,11 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 	/* Defaults */
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
-
+console.log("B",on_success);
 	if ( "undefined" == typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
-
+console.log("D",on_success);
 	if ( "undefined" == typeof on_error ) {
 		on_error = InDB.events.onError;
 	}
