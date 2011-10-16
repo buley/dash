@@ -1700,6 +1700,8 @@ InDB.bind( 'InDB_do_row_update', function( row_result, context ) {
 	if ( !!InDB.debug ) {
 		console.log ( 'InDB_do_row_update', row_result, JSON.stringify( context ) );
 	}
+
+
 	/* Assertions */
 
 	if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
@@ -1783,7 +1785,7 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 		if( 'function' == typeof data ) {
 			data = data( result );
 		}
-
+		console.log('doing replace?', replace, data );
 		if( false == replace ) {	
 			var temp_data = data;
 			for( attr in result ) {
