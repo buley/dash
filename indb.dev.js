@@ -1802,6 +1802,7 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 		}
 
 		if( !!InDB.debug ) {
+			console.log( 'InDB.row.update context', context );
 			console.log( 'InDB.row.update before/after', result, data );
 		}
 
@@ -1984,12 +1985,12 @@ InDB.bind( 'InDB_do_row_put', function( row_result, context ) {
 
 
 /* Puts a data object to an object store */
-InDB.row.put = function ( store, data, key, on_success, on_error, on_abort ) {
+InDB.row.put = function ( store, data, key, on_success, on_error, on_abort, on_complete ) {
 
 	/* Debug */
 	
 	if ( !!InDB.debug ) {
-		console.log ( 'InDB.row.put', store, data, key, on_success, on_error, on_abort );	
+		console.log ( 'InDB.row.put', store, data, key, on_success, on_error, on_abort, on_complete );	
 	}
 
         /* Assertions */
