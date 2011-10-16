@@ -1357,7 +1357,8 @@ InDB.row.get = function ( store, key, index, on_success, on_error, on_abort, on_
 		if( !!InDB.debug ) {
 			console.log( 'InDB.row.get (using index)', transaction, transaction_index, index, key );
 		}
-		request = transaction_index.get( key );
+		//request = transaction_index.get( key );
+		request = transaction.get( key );
 	} else {
 		request = transaction.get( key );
 	}
