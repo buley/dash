@@ -1479,7 +1479,7 @@ InDB.row.delete = function ( store, key, index, on_success, on_error, on_abort, 
 		/* Debug */
 
 		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.delete (index)', transaction, index, key );
+			console.log ( 'InDB.row.delete (index)', transaction, index, transaction_index, key );
 		}
 
 
