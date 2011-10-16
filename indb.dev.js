@@ -2556,7 +2556,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, replace, expecting
 				if( 'function' == typeof value ) {
 					value = value( result[ attr ] );
 				}
-		
+				console.log('tx');	
 				if( !InDB.assert( result[ attr ] == value, 'Found ' + result[ 'attr'] + ', expecting ' + expecting[ attr ]' ) ) {
 					if( !!InDB.debug ) {
 						console.log( 'InDB.row.update > value was not expected.', result[ 'attr' ], expected[ attr ] );
