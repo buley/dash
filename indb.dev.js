@@ -1083,7 +1083,7 @@ InDB.cursor.direction = InDB.cursor.direction || {};
 InDB.cursor.direction.next = function( no_dupes ) {
 	no_dupes = ( !!no_dupes ) ? no_dupes : false;
 	var result = ( !!no_dupes ) ? IDBCursor.NEXT_NO_DUPLICATE : IDBCursor.NEXT; 
-	retur result;
+	return result;
 };
 InDB.cursor.direction.previous()ious = function( no_dupes ) {
 	no_dupes = ( !!no_dupes ) ? no_dupes : false;
