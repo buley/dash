@@ -2222,7 +2222,7 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 
 	/* Defaults */
 
-	direction = ( InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous()( true ) ) ? direction : InDB.cursor.direction.next();
+	direction = ( 'undefined' !== typeof direction && InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous()( true ) ) ? direction : InDB.cursor.direction.next();
 	index = ( !InDB.isEmpty( context.index ) ) ? context.index : null;
 
 	/* Invocation */
