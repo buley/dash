@@ -2245,19 +2245,19 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
 
-	if ( "undefined" === typeof on_success ) {
+	if ( "undefined" == typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
 
-	if ( "undefined" === typeof on_error ) {
+	if ( "undefined" == typeof on_error ) {
 		on_error = InDB.events.onError;
 	}
 
-	if ( "undefined" === typeof on_abort ) {
+	if ( "undefined" == typeof on_abort ) {
 		on_abort = InDB.events.onAbort;
 	}
 
-	if ( "undefined" === typeof on_complete ) {
+	if ( "undefined" == typeof on_complete ) {
 		on_complete = InDB.events.onComplete;
 	}
 
@@ -2282,7 +2282,7 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 		var transaction = InDB.transaction.create ( store, InDB.transaction.read_write() );
 
 		/* Callbacks */
-		console.log('adding ONCOMPLETE handler', transaction, on_complete );	
+		
 		transaction.oncomplete = on_complete;
 
 		/* Debug */
