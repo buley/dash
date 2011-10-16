@@ -2282,7 +2282,7 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 		var transaction = InDB.transaction.create ( store, InDB.transaction.read_write() );
 
 		/* Callbacks */
-		console.log('adding ONCOMPLETE handler', on_complete );	
+		console.log('adding ONCOMPLETE handler', transaction, on_complete );	
 		transaction.oncomplete = on_complete;
 
 		/* Debug */
@@ -2308,7 +2308,6 @@ InDB.cursor.get = function ( store, index, keyRange, on_success, on_error, on_ab
 			// Using index
 			var transaction_index = transaction.index( index );
 
-			transaction_index.oncomplete = on_complete;
 
 			/* Request */
 
