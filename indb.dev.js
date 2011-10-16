@@ -698,7 +698,7 @@ InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
 	}
 	//TODO: Assertions
 	for( store in stores ) {
-		//TODO: Cache vars to prevent wasted nested lookups
+		//TODO: Cache vars to previous()ent wasted nested lookups
 		for( index in stores[store] ) {
 			if( stores[store].hasOwnProperty( index ) ) {
 
@@ -1084,7 +1084,7 @@ InDB.cursor.direction.next = function( no_dupes ) {
 	no_dupes = ( !!no_dupes ) ? no_dupes : false;
 	return ( !!no_dupes ) ? IDBCursor.NEXT_NO_DUPLICATE : IDBCursor.NEXT; 
 }
-InDB.cursor.direction.previous = function( no_dupes ) {
+InDB.cursor.direction.previous()ious = function( no_dupes ) {
 	no_dupes = ( !!no_dupes ) ? no_dupes : false;
 	return ( !!no_dupes ) ? IDBCursor.PREV_NO_DUPLICATE : IDBCursor.NEXT;
 }
@@ -2220,7 +2220,7 @@ InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 
 	/* Defaults */
 
-	direction = ( InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.prev( true ) ) ? direction : InDB.cursor.direction.next();
+	direction = ( InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous()( true ) ) ? direction : InDB.cursor.direction.next();
 	index = ( !InDB.isEmpty( context.index ) ) ? context.index : null;
 
 	/* Invocation */
@@ -2251,7 +2251,7 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 
 	index = ( !InDB.isEmpty( index ) ) ? index : null;
 	
-	direction = ( InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.prev( true ) ) ? direction : InDB.cursor.direction.next();
+	direction = ( InDB.isNumber( direction ) && direction > InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous()( true ) ) ? direction : InDB.cursor.direction.next();
 	
 	if ( "undefined" == typeof on_success ) {
 		on_success = InDB.events.onSuccess;
