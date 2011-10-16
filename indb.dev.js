@@ -289,7 +289,7 @@ InDB.assert = function ( statement, error_message, warn_level ) {
 				result = true;
 			} else {
 				console.log( error_message );
-				throw new Error( 'Assertion failed': error_message, argument[ 0 ] );
+				throw new Error( 'Assertion failed: ' + error_message, argument[ 0 ] );
 			}
 			break;
 	}
