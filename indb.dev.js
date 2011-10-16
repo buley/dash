@@ -1793,6 +1793,7 @@ InDB.row.update = function ( store, key, index, data, replace, on_success, on_er
 				console.log('aaaaaatr',attr, result[attr]);
 				temp_data[ attr ] = data[ attr ];
 			}
+			console.log('pretransfer', JSON.stringify( temp_data ), JSON.stringify( data ) );
 			data = temp_data;
 			console.log('transfer', JSON.stringify( temp_data ), JSON.stringify( data ) );
 		}
