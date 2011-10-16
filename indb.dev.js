@@ -2331,7 +2331,7 @@ InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_succes
 
 			/* Request */
 
-			request = transaction.openCursor( keyRange );
+			request = transaction.openCursor( keyRange, direction );
 
 		}
 
