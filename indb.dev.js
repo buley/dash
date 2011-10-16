@@ -1240,27 +1240,39 @@ InDB.bind( 'InDB_do_row_get', function( row_result, context ) {
 		console.log ( 'InDB_do_row_get', row_result, context );
 	}
 
+	/* Setup */
+
+	var store = context.store;
+
+	var key = context.key;
+
+	var index = context.index;
+
+	/* Defaults */
+
+	index = ( 'undefined' !== index ) ? index : null;
+
 	/* Assertions */
-	if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
+	if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
 		return;
 	}
 		
-	if ( !InDB.assert( !InDB.isEmpty( context.key ), 'Must provide a range to get' ) ) {
+	if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key to get' ) ) {
 		return;
 	}
 
 	/* Invocation */
 
-	InDB.row.get( context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort, context.on_complete );
+	InDB.row.get( store, key, index, context.on_success, context.on_error, context.on_abort, context.on_complete );
 } );
 
 
-InDB.row.get = function ( store, key, index, on_success, on_error, on_abort ) {
+InDB.row.get = function ( store, key, index, on_success, on_error, on_abort, on_complete ) {
 
 	/* Debug */
 
 	if ( !!InDB.debug ) {
-		console.log ( 'InDB.row.get', store, key, index, on_success, on_error, on_abort );
+		console.log ( 'InDB.row.get', store, key, index, on_success, on_error, on_abort, on_complete );
 	}
 
 	/* Assertions */
@@ -1269,7 +1281,7 @@ InDB.row.get = function ( store, key, index, on_success, on_error, on_abort ) {
 		return;
 	}
 		
-	if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a range to get' ) ) {
+	if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key to get' ) ) {
 		return;
 	}
 
