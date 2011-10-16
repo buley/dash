@@ -2663,7 +2663,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		/* Debug */
 
 		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.update context.data update_data', update_data );
+			console.log ( 'InDB.cursor.update context.data data', data );
 		}
 
 
