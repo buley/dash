@@ -703,7 +703,7 @@ InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
 			if( stores[store].hasOwnProperty( index ) ) {
 
 				var options = stores[store][index];
-				var key, unique, empty_key;
+				var key, unique, empty_key, multirow;
 				var name = index;
 
 				if ( !InDB.index.exists( store, index ) ) {
@@ -716,8 +716,15 @@ InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
 							// Don't want prototype attributes
 							if( options.hasOwnProperty( attrib ) ) {
 								key = attrib;
-								unique = options[ attrib ];
+								var opts = options[attrib];
+								if( 'undefined' !== typeof opts && 'undefined' !== typeof opts[ 'unique' ] || 'undefined' !== typeof options[ 'multirow' ] ) {
+									unique = opts.unique;
+									multirow = opts.multirow;
+								} else {
+									unique = options[ attrib ];
+								}
 								console.log( 'setting key',key);
+								console.log( 'setting key multirow',multirow);
 								console.log( 'setting key unique',unique);
 							}
 						}
@@ -738,19 +745,19 @@ InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
 			/* Debug */
 
 			if( !!InDB.debug ) {
-				console.log( 'InDB.indexes.create calling InDB.index.create', store, key, name, unique, on_success, on_error, on_abort );
+				console.log( 'InDB.indexes.create calling InDB.index.create', store, key, name, unique, multirow, on_success, on_error, on_abort );
 			}
 
 			/* Request */
 			
-			InDB.index.create( store, key, name, unique, on_success, on_error, on_abort );
+			InDB.index.create( store, key, name, unique, multirow, on_success, on_error, on_abort );
 			
 		}
 	}
 };
 
 
-//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort
+//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort, context.unique, context.multirow
 InDB.bind( 'InDB_do_index_create', function( row_result, context ) {
 
 	/* Debug */
@@ -775,17 +782,17 @@ InDB.bind( 'InDB_do_index_create', function( row_result, context ) {
 
 	/* Invocation */
 
-	InDB.index.create( context.store, context.key, context.name, context.unique, context.on_success, context.on_error, context.on_abort );
+	InDB.index.create( context.store, context.key, context.name, context.unique, context.multirow, context.on_success, context.on_error, context.on_abort );
 } );
 
 
 /* unique defaults to false if not present */
-InDB.index.create = function ( store, key, name, unique, on_success, on_error, on_abort ) {
+InDB.index.create = function ( store, key, name, unique, multirow, on_success, on_error, on_abort ) {
 	
 	/* Debug */
 
 	if( !!InDB.debug ) {
-		console.log( 'InDB.index.create', store, key, name, unique, on_success, on_error, on_abort );
+		console.log( 'InDB.index.create', store, key, name, unique, multirow, on_success, on_error, on_abort );
 	}
 
 	/* Assertions */
@@ -807,19 +814,27 @@ InDB.index.create = function ( store, key, name, unique, on_success, on_error, o
 	if ( "undefined" === typeof unique ) {
 		unique = false;	
 	}
+
+	if ( "undefined" === typeof multirow ) {
+		multirow = false;	
+	}
+
+
 	if ( "undefined" === typeof on_success ) {
 		on_success = InDB.events.onSuccess;
 	}
+
 	if ( "undefined" === typeof on_error ) {
 		on_error = InDB.events.onError;
 	}
+
 	if ( "undefined" === typeof on_abort ) {
 		on_abort = InDB.events.onAbort;
 	}
 
 	/* Context */
 
-	var context = { "store": store, "key": key, "name": name, "unique": unique, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
+	var context = { "store": store, "key": key, "name": name, "unique": unique, "multirow": multirow, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
 
 	/* Request */
 
@@ -834,7 +849,7 @@ InDB.index.create = function ( store, key, name, unique, on_success, on_error, o
 		var databaseTransaction = result.objectStore( store );
 		try {
 			console.log('attempting to create using db tx', databaseTransaction);
-			databaseTransaction.createIndex( name, key, { 'unique': unique } );
+			databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
 			on_success( event );
 		} catch ( error ) {
 			console.log( error );
