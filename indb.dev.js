@@ -1919,9 +1919,10 @@ InDB.bind( 'InDB_do_store_clear', function( row_result, context ) {
 InDB.store.clear = function ( store, on_success, on_error, on_abort ) {
 
 	/* Debug */
-	
-	console.log ( 'InDB.store.clear', store, on_success, on_error, on_abort );	
 
+	if( !!InDB.debug ) {	
+		console.log ( 'InDB.store.clear', store, on_success, on_error, on_abort );	
+	}
 
         /* Assertions */
         
