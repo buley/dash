@@ -2633,6 +2633,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 				var value = data[ attr ];
 		
 				if( 'function' == typeof value ) {
+					console.log("VALLLLL FX",value,typeof value);
 					value = value( result[ attr ] );
 				}
 				if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] ) {
