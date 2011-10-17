@@ -2623,10 +2623,11 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		var result = res.value;
 
 		if( 'function' == typeof data ) {
-			console.log("DYNAPMIC DATA",JSON.stringify(result));
 			var result_value = result;
 			data = Neural.synapses.shorthand_encode( data( Neural.synapses.shorthand_decode( result_value ) ) );
-			console.log('DATA',JSON.stringify(data));
+			if( !!Neural.debug ) {
+				console.log('Neural.synapses.cursor.update', JSON.stringify( data ) );
+			}
 		}
 
 		if( false == replace ) {	
@@ -2673,9 +2674,9 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		if ( "undefined" !== typeof res && null !== res && "undefined" !== typeof data ) {
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
 				var passing = {};
-				padding = data;
+				passing = data;
 				console.log( res );
-				console.log( 'using!' + res[ 'update' ] );
+				console.log( 'using!' + res[ 'update' ] + ' xxx ' + JSON.encode( padding ) ) );
 				res[ 'update' ]( passing );
 				res[ 'continue' ]();
 			}
