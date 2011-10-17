@@ -2677,8 +2677,8 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 				res[ 'update' ]( instance_data );
 
 			}
+			res[ 'continue' ]();
 		}
-		context.event.target[ 'continue' ]();
 	}
 
 	request.onerror = function ( event ) {	
