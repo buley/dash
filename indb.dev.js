@@ -2496,7 +2496,7 @@ InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 
 
 InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, replace, expecting, on_success, on_error, on_abort, on_complete ) {
-console.log('DATA',data);
+
 	/* Debug */
 	if ( !!InDB.debug ) {
 		console.log ( 'InDB.cursor.update', store, index, keyRange, data, direction, limit, replace, on_success, on_error, on_abort, on_complete );
@@ -2623,9 +2623,10 @@ console.log('DATA',data);
 		var result = InDB.row.value( context.event );
 
 		if( 'function' == typeof data ) {
-			console.log("DYNAPMIC DATA",result.value);
+			console.log("DYNAPMIC DATA",JSON.stringify(result.value));
 			var result_value = result.value;
 			data = data( result_value );
+			console.log('DATA',JSON.stringify(data));
 		}
 
 		if( false == replace ) {	
