@@ -2580,7 +2580,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		var transaction_index = transaction.index( index );
 	
 		/* Request */
-
+	console.log('x',keyRange,direction);
 		request = transaction_index.openCursor( keyRange, direction );
 
 	} else {
@@ -2595,6 +2595,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		// No index
 
 		/* Request */
+console.log('y',keyRange,direction);
 
 		request = transaction.openCursor( keyRange, direction );
 
