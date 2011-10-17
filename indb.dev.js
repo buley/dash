@@ -2629,7 +2629,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 				console.log('Neural.synapses.cursor.update', JSON.stringify( data ) );
 			}
 		}
-
+	console.log("GOSSIP",data);
 		if( false == replace && null !== result && 'undefined' !== result ) {	
 			var temp_data = data;
 			for( attr in result ) {
