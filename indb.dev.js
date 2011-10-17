@@ -2620,8 +2620,8 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 
 		/* Update */
 
-		var result = context.event.target.result;
-		var val = InDB.row.value( context.event );
+		var res = context.event.target.result;
+		var result = InDB.row.value( context.event );
 
 		if( 'function' == typeof data ) {
 			data = data( result );
@@ -2633,7 +2633,6 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 				var value = data[ attr ];
 		
 				if( 'function' == typeof value ) {
-					console.log("VALLLLL FX",value,typeof value);
 					value = value( result[ attr ] );
 				}
 				if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] ) {
@@ -2669,10 +2668,10 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		}
 
 
-		if ( "undefined" !== typeof result && null !== result && "undefined" !== typeof value ) {
+		if ( "undefined" !== typeof res && null !== res && "undefined" !== typeof data ) {
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
-				result[ 'update' ]( data );
-				result[ 'continue' ]();
+				res[ 'update' ]( data );
+				res[ 'continue' ]();
 			}
 		}
 	}
