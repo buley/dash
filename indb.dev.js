@@ -1672,7 +1672,6 @@ InDB.row.add = function ( store, data, on_success, on_error, on_abort, on_comple
 	//use this[ 'format' ] for function invocation to avoid a Closure compiler error
 	try {
 		var request = transaction[ 'add' ]( data );
-		console.log("REQUEST",request);
 		request.onsuccess = function ( event ) {	
 
 			/* Context */
