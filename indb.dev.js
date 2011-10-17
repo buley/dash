@@ -2621,7 +2621,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 
 		var res = InDB.row.value( context.event );
 		var result = ( null !== res ) ? res.value : null;
-
+		var instance_data = {};
 		if( 'function' == typeof data ) {
 			var result_value = result;
 			data = Neural.synapses.shorthand_encode( data( Neural.synapses.shorthand_decode( result_value ) ) );
@@ -2629,7 +2629,8 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 				console.log('Neural.synapses.cursor.update', JSON.stringify( data ) );
 			}
 		}
-	console.log("GOSSIP",JSON.stringify(data));
+		instance_data = data;
+	console.log("GOSSIP",JSON.stringify(instance_data));
 		if( false == replace && null !== result && 'undefined' !== result ) {	
 			var temp_data = data;
 			for( attr in result ) {
