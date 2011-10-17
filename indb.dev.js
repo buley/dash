@@ -2874,9 +2874,10 @@ InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_suc
 
 		/* Result */
 
-		var result = event.target.result;
-		console.log("TRAINS",result);
-		if ( "undefined" !== typeof result && null !== result && "undefined" !== typeof result.value ) {
+		var cursor = event.target.result;
+		var cursor_result = InDB.cursor.value( cursor );
+		console.log("TRAINS",cursor,cursor_result);
+		if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof cursor_result ) {
 			// Update current cursor item
 			if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
 				// Move cursor to next key
