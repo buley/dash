@@ -2878,14 +2878,10 @@ InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_suc
 		var cursor_result = InDB.cursor.value( cursor );
 		console.log("TRAINS",cursor_result,limit,total);
 		if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof cursor_result ) {
-			// Update current cursor item
-			if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
-				// Move cursor to next key
-				console.log('JAMAICA',limit,total);
-				if( 'undefined' == typeof limit || null == limit || total < limit ) {
-					result[ 'delete' ]();
-					result[ 'continue' ]();
-				}
+			console.log('JAMAICA',limit,total);
+			if( 'undefined' == typeof limit || null == limit || total < limit ) {
+				result[ 'delete' ]();
+				result[ 'continue' ]();
 			}
 		}
 	}
