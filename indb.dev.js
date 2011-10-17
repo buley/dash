@@ -2670,8 +2670,9 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 			console.log ( 'InDB.cursor.update context.data data', instance_data );
 		}
 
-
-		if ( "undefined" !== typeof res && null !== res && "undefined" !== typeof data ) {
+		console.log('l1',"undefined" !== typeof res && null !== res );
+		console.log('l2',  'undefined' == typeof limit || null == limit || total < limit );
+		if ( "undefined" !== typeof res && null !== res ) {
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
 				res[ 'update' ]( instance_data );
 				res[ 'continue' ]();
