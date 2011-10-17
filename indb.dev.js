@@ -2676,7 +2676,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 				var passing = {};
 				passing = data;
 				console.log( res );
-				console.log( 'using!' + res[ 'update' ] + ' xxx ' + JSON.encode( padding ) ) );
+				console.log( 'using!' + res[ 'update' ] + ' xxx ' + JSON.encode( padding ) );
 				res[ 'update' ]( passing );
 				res[ 'continue' ]();
 			}
