@@ -1190,10 +1190,10 @@ InDB.cursor.value = function ( event ) {
 	if ( !!InDB.debug ) {
 		console.log ( 'InDB.cursor.value', event );
 	}
-	if( 'undefined' !== typeof event.event ) {
+	if( 'undefined' !== event && 'undefined' !== typeof event.event ) {
 		event = event.event;
 	}
-	if ( "undefined" !== typeof event.target && "undefined" !== typeof event.target.result && null !== event.target.result ) {
+	if ( 'undefined' !== event && "undefined" !== typeof event.target && "undefined" !== typeof event.target.result && null !== event.target.result ) {
 		return event.target.result.value;
 	} else {
 		return null;
