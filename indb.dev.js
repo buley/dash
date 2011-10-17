@@ -2619,12 +2619,10 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		/* Update */
 
 		var cursor = InDB.row.value( context.event );
-		console.log("CURS?",cursor);
 		var result = InDB.cursor.value( context.event );
 		var instance_data = {};
 		if( 'function' == typeof data ) {
 			var result_value = result;
-			console.log("CURSOR VAL",InDB.cursor.value( context.event ));
 			instance_data = data( result_value );
 			if( !!Neural.debug ) {
 				console.log('Neural.synapses.cursor.update', JSON.stringify( instance_data ) );
@@ -2669,9 +2667,6 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		if ( !!InDB.debug ) {
 			console.log ( 'InDB.cursor.update context.data data', instance_data );
 		}
-		console.log('lll',cursor,context);
-		console.log('l1',"undefined" !== typeof cursor && null !== cursor );
-		console.log('l2',  'undefined' == typeof limit || null == limit || total < limit );
 		if ( "undefined" !== typeof cursor && null !== cursor ) {
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
 				cursor[ 'update' ]( instance_data );
