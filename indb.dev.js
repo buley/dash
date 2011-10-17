@@ -2875,15 +2875,10 @@ InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_suc
 
 		var cursor = event.target.result;
 		var cursor_result = InDB.cursor.value( cursor );
-		console.log("TRAINS",cursor_result,limit,total);
 		if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof cursor_result ) {
-			console.log('JAMAICA',limit,total,cursor);
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
-				console.log('DELETE', cursor.delete );
 				cursor[ 'continue' ]();
 				cursor[ 'delete' ]();
-				console.log('deleted already, now continuing');
-
 			}
 		}
 	}
