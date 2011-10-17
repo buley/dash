@@ -2624,7 +2624,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		var result = InDB.row.value( context.event );
 
 		if( 'function' == typeof data ) {
-			console.log("DYNAPMIC DATA",data,result);
+			console.log("DYNAPMIC DATA",result.value);
 			data = data( result.value );
 		}
 
