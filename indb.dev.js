@@ -2632,7 +2632,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		if( false == replace && null !== result && 'undefined' !== result ) {	
 			var temp_data = instance_data;
 			for( attr in result ) {
-				var value = data[ attr ];
+				var value = instance_data[ attr ];
 		
 				if( 'function' == typeof value ) {
 					value = value( result[ attr ] );
