@@ -2674,7 +2674,8 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
 				var passing = {};
 				padding = data;
-				console.log( res, 'using!' + res[ 'update' ] );
+				console.log( res );
+				console.log( 'using!' + res[ 'update' ] );
 				res[ 'update' ]( passing );
 				res[ 'continue' ]();
 			}
