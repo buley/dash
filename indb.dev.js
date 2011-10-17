@@ -2669,6 +2669,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		}
 		if ( "undefined" !== typeof cursor && null !== cursor ) {
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
+				console.log("DOING UPDAET FOR",instance_data);
 				cursor[ 'update' ]( instance_data );
 
 			}
