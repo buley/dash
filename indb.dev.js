@@ -2556,6 +2556,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 
 	var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
 
+
 	/* Debug */
 
 	if ( !!InDB.debug ) {
@@ -2628,7 +2629,6 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 				console.log('Neural.synapses.cursor.update', JSON.stringify( instance_data ) );
 			}
 		}
-		console.log('instnce',JSON.stringify( instance_data ) );
 		if( false == replace && null !== result && 'undefined' !== result ) {	
 			var temp_data = instance_data;
 			for( attr in result ) {
@@ -2670,7 +2670,6 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		}
 		if ( "undefined" !== typeof cursor && null !== cursor ) {
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
-				console.log("DOING UPDAET FOR",instance_data);
 				cursor[ 'update' ]( instance_data );
 
 			}
