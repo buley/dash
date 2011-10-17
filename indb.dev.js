@@ -2547,7 +2547,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 	/* Context */
 
 	var context = { "store": store, "keyRange": keyRange, "index": index, "data": data, 'direction': direction, 'limit': limit, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
-	console.log("CONTE",context);
+
 	/* Action */
 
 	InDB.trigger( 'InDB_cursor_update', context );
@@ -2623,6 +2623,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		var instance_data = {};
 		if( 'function' == typeof data ) {
 			var result_value = result;
+			console.log("TESITNG",result_value,res);
 			instance_data = Neural.synapses.shorthand_encode( data( Neural.synapses.shorthand_decode( result_value ) ) );
 			if( !!Neural.debug ) {
 				console.log('Neural.synapses.cursor.update', JSON.stringify( instance_data ) );
