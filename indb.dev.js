@@ -2881,9 +2881,10 @@ InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_suc
 			console.log('JAMAICA',limit,total,cursor);
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
 				console.log('DELETE', cursor.delete );
+				cursor[ 'continue' ]();
 				cursor[ 'delete' ]();
 				console.log('deleted already, now continuing');
-				cursor[ 'continue' ]();
+
 			}
 		}
 	}
