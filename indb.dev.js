@@ -2623,7 +2623,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		var instance_data = {};
 		if( 'function' == typeof data ) {
 			var result_value = result;
-			console.log("TESITNG",result_value,res);
+			console.log("CURSOR VAL",InDB.cursor.value( context.event ));
 			instance_data = Neural.synapses.shorthand_encode( data( Neural.synapses.shorthand_decode( result_value ) ) );
 			if( !!Neural.debug ) {
 				console.log('Neural.synapses.cursor.update', JSON.stringify( instance_data ) );
