@@ -1602,6 +1602,7 @@ InDB.bind( 'InDB_do_row_add', function( row_result, context ) {
 	/* Invocation */
 
 	InDB.row.add( context.store, context.data, context.on_success, context.on_error, context.on_abort, context.on_complete );
+
 } );
 
 
@@ -1613,7 +1614,7 @@ InDB.row.add = function ( store, data, on_success, on_error, on_abort, on_comple
 	if ( !!InDB.debug ) {
 		console.log ( 'InDB.row.add', store, data, on_success, on_error, on_abort );
 	}
-
+	console.log('sucbjecty change',on_success);
 
         /* Assertions */
 
