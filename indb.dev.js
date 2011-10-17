@@ -2617,8 +2617,9 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		InDB.trigger( 'InDB_cursor_row_update_success', context );
 
 		/* Update */
-		console.log("CURS?",event);
+
 		var cursor = InDB.row.value( context.event );
+		console.log("CURS?",cursor);
 		var result = InDB.cursor.value( context.event );
 		var instance_data = {};
 		if( 'function' == typeof data ) {
