@@ -2620,7 +2620,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		/* Update */
 
 		var res = InDB.row.value( context.event );
-		var result = res.value;
+		var result = ( !!res ) ? res.value : null;
 
 		if( 'function' == typeof data ) {
 			var result_value = result;
@@ -2630,7 +2630,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 			}
 		}
 
-		if( false == replace ) {	
+		if( false == replace && null !== result && 'undefined' !== result ) {	
 			var temp_data = data;
 			for( attr in result ) {
 				var value = data[ attr ];
