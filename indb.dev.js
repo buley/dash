@@ -2623,7 +2623,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		var result = res.value;
 
 		if( 'function' == typeof data ) {
-			console.log("DYNAPMIC DATA",JSON.stringify(result.value));
+			console.log("DYNAPMIC DATA",JSON.stringify(result));
 			var result_value = result;
 			data = Neural.synapses.shorthand_encode( data( Neural.synapses.shorthand_decode( result_value ) ) );
 			console.log('DATA',JSON.stringify(data));
