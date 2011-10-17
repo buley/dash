@@ -2673,11 +2673,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 
 		if ( "undefined" !== typeof res && null !== res && "undefined" !== typeof data ) {
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
-				var passing = {};
-				passing = data;
-				console.log( res );
-				console.log( 'using!' + res[ 'update' ] + ' xxx ' + JSON.stringify( passing ) );
-				res[ 'update' ]( passing );
+				res[ 'update' ]( data );
 				res[ 'continue' ]();
 			}
 		}
