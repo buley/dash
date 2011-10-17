@@ -2631,7 +2631,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		}
 	console.log("GOSSIP",JSON.stringify(instance_data));
 		if( false == replace && null !== result && 'undefined' !== result ) {	
-			var temp_data = data;
+			var temp_data = instance_data;
 			for( attr in result ) {
 				var value = data[ attr ];
 		
@@ -2660,20 +2660,20 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 					temp_data[ attr ] = result[ attr ];
 				}
 			}
-			data = temp_data;
+			instance_data = temp_data;
 		}
 
 
 		/* Debug */
 
 		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.update context.data data', data );
+			console.log ( 'InDB.cursor.update context.data data', instance_data );
 		}
 
 
 		if ( "undefined" !== typeof res && null !== res && "undefined" !== typeof data ) {
 			if( 'undefined' == typeof limit || null == limit || total < limit ) {
-				res[ 'update' ]( data );
+				res[ 'update' ]( instance_data );
 				res[ 'continue' ]();
 			}
 		}
