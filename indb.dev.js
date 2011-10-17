@@ -1663,8 +1663,6 @@ InDB.row.add = function ( store, data, on_success, on_error, on_abort, on_comple
 
 	var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
 
-	console.log("CAALLLLLL", transaction, data );
-
 	/* Debug */
 
 	if ( !!InDB.debug ) {
@@ -1737,7 +1735,7 @@ InDB.row.add = function ( store, data, on_success, on_error, on_abort, on_comple
 			console.log ( 'errorType', InDB.database.errorType( event.code ) );
 		}	
 		
-
+		console.log("ERRRRR");
 		/* Context */
 
 		context[ 'event' ] = event;
