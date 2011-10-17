@@ -2619,8 +2619,8 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 
 		/* Update */
 
-		var res = context.event.target.result;
-		var result = InDB.row.value( context.event );
+		var res = InDB.row.value( context.event );
+		var result = res.value;
 
 		if( 'function' == typeof data ) {
 			console.log("DYNAPMIC DATA",JSON.stringify(result.value));
