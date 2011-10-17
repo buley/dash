@@ -2599,7 +2599,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		request = transaction.openCursor( keyRange, direction );
 
 	}
-	console.log("REQ",request,transaction);
+	
 	/* Request Responses */
 
 	request.onsuccess = function ( event ) {	
@@ -2617,7 +2617,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		InDB.trigger( 'InDB_cursor_row_update_success', context );
 
 		/* Update */
-		console.log("CURS?",context.event.target);
+		console.log("CURS?",event);
 		var cursor = InDB.row.value( context.event );
 		var result = InDB.cursor.value( context.event );
 		var instance_data = {};
