@@ -2599,7 +2599,7 @@ InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, 
 		request = transaction.openCursor( keyRange, direction );
 
 	}
-
+	console.log("REQ",request);
 	/* Request Responses */
 
 	request.onsuccess = function ( event ) {	
