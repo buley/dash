@@ -3089,9 +3089,9 @@ var IDB = (function(){
 		};
 
 		DB.trigger( 'IndexedDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error } ) ;
-
+*/
 		return this;
-*/	};
+	};
 
 	/* Database */
 
