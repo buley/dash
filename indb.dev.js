@@ -628,7 +628,6 @@ var IDB = (function(){
 				if( !!InDB.debug ) {
 					console.log( 'InDB.stores.create calling InDB.store.create', store, key, autoinc_key, on_success, on_error, on_abort );
 				}
-				console.log("XXX");
 				/* Request */
 					
 				InDB.store.create( store, key, autoinc_key, unique, on_success, on_error, on_abort );
@@ -865,9 +864,6 @@ var IDB = (function(){
 									} else {
 										unique = options[ attrib ];
 									}
-									console.log( 'setting key',key);
-									console.log( 'setting key multirow',multirow);
-									console.log( 'setting key unique',unique);
 								}
 							}
 						}
