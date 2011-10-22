@@ -3542,7 +3542,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item = DB.prototype.shorthand_reverse( InDB.cursor.value( context.event ) );
+			var item = InDB.shorthand.reverse( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
 			console.log('blah',item);
 			if( 'function' == typeof request.on_success ) {
 				if( !!DB.debug ) console.log( 'success', item );
@@ -3647,7 +3647,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item = DB.prototype.shorthand_reverse( InDB.cursor.value( context.event ) );
+			var item = InDB.shorthand.reverse( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( item );
 			}
