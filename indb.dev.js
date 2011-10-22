@@ -15,20 +15,20 @@ var IDB = (function(){
 
 	/**
 	 * Namespaces:
-	 *   Indb - application namespace
-	 *   Indb.db - namespace for the open IndexedDB instance (IDBFactory)
-	 *   Indb.dbs = namespace for open databases (reserved)
-	 *   Indb.database - namepspace for database methods (IDBDatabase)
-	 *   Indb.store - namespace for operations against multiple object stores (IBObjectStore)
-	 *   Indb.stores - namespace for single object stores (IDBObjectStore)
-	 *   Indb.index - namespace for index methods (IDBIndex)
-	 *   Indb.transaction - namespace for key range methods (IDBTransaction)
-	 *   Indb.range - namespace for key range methods (IDBKeyRange)
-	 *   Indb.row - namespace for row methods
-	 *   Indb.shorthand - namespace for shorthand methods
-	 *   Indb.cursor - namespace for rows methods (IDBCursor)
-	 *   Indb.event - namespace for event and error methods (IDBEvent, IDBSuccessEvent, IDBErrorEvent, IDBDatabaseError and IDBDatabaseException)
-	 *   Indb.events - namespace for event callbacks
+	 *   DB - application namespace
+	 *   DB.db - namespace for the open IndexedDB instance (IDBFactory)
+	 *   DB.dbs = namespace for open databases (reserved)
+	 *   DB.database - namepspace for database methods (IDBDatabase)
+	 *   DB.store - namespace for operations against multiple object stores (IBObjectStore)
+	 *   DB.stores - namespace for single object stores (IDBObjectStore)
+	 *   DB.index - namespace for index methods (IDBIndex)
+	 *   DB.transaction - namespace for key range methods (IDBTransaction)
+	 *   DB.range - namespace for key range methods (IDBKeyRange)
+	 *   DB.row - namespace for row methods
+	 *   DB.shorthand - namespace for shorthand methods
+	 *   DB.cursor - namespace for rows methods (IDBCursor)
+	 *   DB.event - namespace for event and error methods (IDBEvent, IDBSuccessEvent, IDBErrorEvent, IDBDatabaseError and IDBDatabaseException)
+	 *   DB.events - namespace for event callbacks
 	 **/
 
 	/* Begin Namespaces */
@@ -384,7 +384,7 @@ var IDB = (function(){
 			result = 1;
 		}
 		//TODO: Allow filter
-		//result = DB.trigger( 'Indb_did_browserSupported', { "result": result } );
+		//result = DB.trigger( 'DB_did_browserSupported', { "result": result } );
 		DB.trigger( 'InDB_checked_browser', { "result": result } );
 		return result;
 	}
@@ -3063,7 +3063,7 @@ var IDB = (function(){
 	/* Constructor */
 
 	var InDB = function( request ) {
-
+		console.log("OK");
 		// Fix browser if necessary 
 		var browser_check = DB.checkBrowser(); 
 		DB.assert( -1 !== browser_check, 'incompatible browser' ); 
