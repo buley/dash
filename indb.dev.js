@@ -154,14 +154,15 @@ var IDB = (function(){
 	};
 
 	InDB.shorthand.get = function ( request ) {
-		console.log('InDB.shorthand.get 1');
+
 		var shorthand_map = InDB.shorthand.map.get( request.store );
-		console.log('InDB.shorthand.get 2');
+
 		if( 'undefined' !== typeof DB.prototype.shorthand_map[ request.key ] ) {
 			return shorthand_map[ request.key ];
 		} else {
-			return key;
+			return request.key;
 		}
+
 	};
 
 
@@ -3109,7 +3110,6 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var indexes = request.indexes;
-		console.log('SUMTIN',indexes,indexes.primary);
 		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
 		delete request.indexes.primary;
 
