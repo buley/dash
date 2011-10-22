@@ -268,6 +268,14 @@ var IDB = (function(){
 	/* triggers a new event */
 	InDB.trigger = function ( event_name, context ) {
 		//TODO: assert argument types and validity
+/*
+		if( 'undefined' !== typeof jQuery ) {
+			InDB.trigger = function( e, c ) {
+				jQuery( InDB ).trigger( event_name, context );
+			};
+		} else {
+
+		}*/
 		jQuery( InDB ).trigger( event_name, context );
 	}
 
@@ -3521,7 +3529,7 @@ var IDB = (function(){
 			console.log( 'DB.prototype.cursor.get', request );
 		}
 
-		jQuery(document).trigger('cursor_get_namespace',request);
+		InDB.trigger('cursor_get_namespace',request);
 
 
 		/* Defaults */
@@ -3599,7 +3607,7 @@ var IDB = (function(){
 
 		/* Action */
 
-		jQuery(document).trigger('cursor_delete_namespace', { "index": index, "key": key, 'direction': direction, 'limit': limit, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger('cursor_delete_namespace', { "index": index, "key": key, 'direction': direction, 'limit': limit, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 
 		/* Defaults */
@@ -3676,7 +3684,7 @@ var IDB = (function(){
 
 		/* Action */
 
-		jQuery(document).trigger( 'cursor_update_namespace', { 'data': new_data, "index": index, "key": key, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "replace": replace, 'direction': direction, 'limit': limit, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger( 'cursor_update_namespace', { 'data': new_data, "index": index, "key": key, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "replace": replace, 'direction': direction, 'limit': limit, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		/* Defaults */
 
