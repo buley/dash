@@ -3167,7 +3167,7 @@ var IDB = (function(){
 		data[ DB.prototype.shorthand( request.attribute ) ] = request.strength;
 
 		var update_request = {};
-		foreach( attr in request ) {
+		for( attr in request ) {
 			update_request[ attr ] = request[ attr ];
 		}
 
@@ -3207,7 +3207,7 @@ var IDB = (function(){
 		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var get_request = {};
-		foreach( attr in request ) {
+		for( attr in request ) {
 			get_request[ attr ] = request[ attr ];
 		}
 
@@ -3236,7 +3236,7 @@ var IDB = (function(){
 		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var db_request = {};
-		foreach( attr in request ) {
+		for( attr in request ) {
 			db_request[ attr ] = request[ attr ];
 		}
 
@@ -3268,7 +3268,7 @@ var IDB = (function(){
 		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var db_request = {};
-		foreach( attr in request ) {
+		for( attr in request ) {
 			db_request[ attr ] = request[ attr ];
 		}
 
