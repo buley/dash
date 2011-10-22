@@ -2763,8 +2763,8 @@ var IDB = (function(){
 			if( 'function' == typeof data ) {
 				var result_value = result;
 				instance_data = data( result_value );
-				if( !!Neural.debug ) {
-					console.log('Neural.synapses.cursor.update', JSON.stringify( instance_data ) );
+				if( !!InDB.debug ) {
+					console.log('InDB.synapses.cursor.update', JSON.stringify( instance_data ) );
 				}
 			}
 			if( false == replace && null !== result && 'undefined' !== result ) {	
