@@ -3419,7 +3419,7 @@ var IDB = (function(){
 
 		var data = request.data;
 		if( 'function' !== typeof data ) {
-			data = DB.prototype.shorthand_encode( data );
+			data = InDB.shorthand.encode( { 'store': request.store, 'data': data } );
 		}
 
 		var store = request.store;
