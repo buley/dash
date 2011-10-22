@@ -167,7 +167,7 @@ var IDB = (function(){
 
 		/* Work */
 
-		if( 'undefined' !== typeof shorthand_map && 'undefined' !== typeof shorthand_map[ request.key ] ) {
+		if( null !== shorthand_map && 'undefined' !== typeof shorthand_map && 'undefined' !== typeof shorthand_map[ request.key ] ) {
 			return shorthand_map[ request.key ];
 		} else {
 			return request.key;
