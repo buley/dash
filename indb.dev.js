@@ -3144,12 +3144,12 @@ var InDB = (function(){
 	InDB.prototype.setAttr = function( request ) {
 
 		if( !InDB.debug ) {
-			console.log( InDB.prototype.setAttr', request );
+			console.log( 'InDB.prototype.setAttr', request );
 		}
 
 		var on_success =  function( context ) {
 			if( !InDB.debug ) {
-				console.log( InDB.prototype.setAttr success', context );
+				console.log( 'InDB.prototype.setAttr success', context );
 			}
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( context );
@@ -3158,7 +3158,7 @@ var InDB = (function(){
 
 		var on_error =  function( context ) {
 			if( !InDB.debug ) {
-				console.log( InDB.prototype.setAttr error', context );
+				console.log( 'InDB.prototype.setAttr error', context );
 			}
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
@@ -3193,7 +3193,7 @@ var InDB = (function(){
 		
 		var on_success =  function( value ) {
 			if( !InDB.debug ) {
-				console.log( InDB.prototype.setAttr success', context );
+				console.log( 'InDB.prototype.setAttr success', context );
 			}
 			if( 'function' == typeof request.on_success ) {
 				var result = ( 'undefined' !== typeof result ) ? value[ request.attribute ] : null;
@@ -3203,7 +3203,7 @@ var InDB = (function(){
 
 		var on_error =  function( context ) {
 			if( !InDB.debug ) {
-				console.log( InDB.prototype.getAttr error', context );
+				console.log( 'InDB.prototype.getAttr error', context );
 			}
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
@@ -3232,11 +3232,11 @@ var InDB = (function(){
 	InDB.prototype.cursor.setAttr = function( request ) {
 		
 		var on_success =  function( context ) {
-			console.log( InDB.prototype.cursor.setAttr success', context );
+			console.log( 'InDB.prototype.cursor.setAttr success', context );
 		};
 
 		var on_error =  function( context ) {
-			console.log( InDB.prototype.cursor.setAttr', context );
+			console.log( 'InDB.prototype.cursor.setAttr', context );
 		};
 
 		var store = request.store;
@@ -3261,13 +3261,13 @@ var InDB = (function(){
 	InDB.prototype.cursor.getAttr = function( request ) {
 		
 		var on_success =  function( context ) {
-			console.log( InDB.prototype.setAttr success', context );
+			console.log( 'InDB.prototype.setAttr success', context );
 			var value = DB.cursor.value( context.event );
 			request.on_success( value[ request.attribute ] );
 		};
 
 		var on_error =  function( context ) {
-			console.log( InDB.prototype.setAttr error', context );
+			console.log( 'InDB.prototype.setAttr error', context );
 			request.on_error( context );
 		};
 
@@ -3295,7 +3295,7 @@ var InDB = (function(){
 	InDB.prototype.get = function ( request )  {
 
 		if( !InDB.debug ) {
-			console.log( InDB.prototype.get', request );
+			console.log( 'InDB.prototype.get', request );
 		}
 
 		var on_success = function( context ) {
@@ -3324,7 +3324,7 @@ var InDB = (function(){
 	InDB.prototype.delete = function ( request ) {
 
 		if( !InDB.debug ) {
-			console.log( InDB.prototype.delete', request );
+			console.log( 'InDB.prototype.delete', request );
 		}
 
 		var on_success = function( context ) {
@@ -3353,7 +3353,7 @@ var InDB = (function(){
 	InDB.prototype.put = function ( request )  {
 
 		if( !InDB.debug ) {
-			console.log( InDB.prototype.put', request );
+			console.log( 'InDB.prototype.put', request );
 		}
 
 		var on_success = function( context ) {
@@ -3387,7 +3387,7 @@ var InDB = (function(){
 	InDB.prototype.add = function ( request )  {
 		
 		if( !InDB.debug ) {
-			console.log( InDB.prototype.add', request );
+			console.log( 'InDB.prototype.add', request );
 		}
 
 		var on_success = function( context ) {
@@ -3421,7 +3421,7 @@ var InDB = (function(){
 	InDB.prototype.update = function ( request ) {
 
 		if( !InDB.debug ) {
-			console.log( InDB.prototype.update', request );
+			console.log( 'InDB.prototype.update', request );
 		}
 
 		var on_success = function( context ) {
@@ -3480,7 +3480,7 @@ var InDB = (function(){
 		var right_inclusive = request.right_inclusive;
 
 		if( !InDB.debug ) {
-			console.log( InDB.prototype.cursor.get', request );
+			console.log( 'InDB.prototype.cursor.get', request );
 		}
 
 		jQuery(document).trigger('cursor_get_namespace',request);
