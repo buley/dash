@@ -3062,8 +3062,8 @@ var IDB = (function(){
 	/* Constructor */
 
 	var IndexedDB = function( request ) {
-		console.log("OK", arguments.callee);
-
+		console.log("OK", DB );
+/*
 		// Fix browser if necessary 
 		var browser_check = DB.checkBrowser(); 
 		DB.assert( -1 !== browser_check, 'incompatible browser' ); 
@@ -3074,7 +3074,7 @@ var IDB = (function(){
 		if( 'undefined' !== typeof request.store ) {
 			current_store = request.store;
 		}
-/*
+
 		var on_success = function( database ) {
 			request.target = database;
 			if( 'function' == typeof request.on_success ) {
