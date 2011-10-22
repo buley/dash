@@ -583,8 +583,9 @@ var IDB = (function(){
 				 * real deal options object */
 				options = InDB.store.options( options );
 			}
-				console.log("XXX");
+
 			if ( !InDB.store.exists( store ) ) {
+				console.log("XXX");
 				/* Setup */
 				if( !!InDB.debug ) {
 					console.log('Store doesn\'t yet exist', store, options  );
