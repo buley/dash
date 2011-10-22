@@ -3065,7 +3065,7 @@ var IDB = (function(){
 	var DB = function( request ) {
 
 		if( 'undefined' !== typeof request.store ) {
-			current_store = reqest.store;
+			current_store = request.store;
 		}
 
 		var on_success = function( database ) {
