@@ -154,7 +154,9 @@ var IDB = (function(){
 	};
 
 	InDB.shorthand.get = function ( request ) {
+		console.log('InDB.shorthand.get 1');
 		var shorthand_map = InDB.shorthand.map.get( request.store );
+		console.log('InDB.shorthand.get 2');
 		if( 'undefined' !== typeof DB.prototype.shorthand_map[ request.key ] ) {
 			return shorthand_map[ request.key ];
 		} else {
