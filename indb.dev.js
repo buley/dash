@@ -3108,7 +3108,7 @@ var IDB = (function(){
 		var namespace_idxs = {};
 		namespace_idxs[ store ] = {};
 
-		foreach( index in indexes ) {
+		for( index in indexes ) {
 			namespace_idxs[ store ][ index ] = {};
 			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = indexes[ index ];
 		}
