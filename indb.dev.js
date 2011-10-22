@@ -3063,7 +3063,7 @@ var IDB = (function(){
 
 	var IndexedDB = function( request ) {
 		console.log("OK", arguments.callee);
-		return;
+
 		// Fix browser if necessary 
 		var browser_check = DB.checkBrowser(); 
 		DB.assert( -1 !== browser_check, 'incompatible browser' ); 
@@ -3088,6 +3088,7 @@ var IDB = (function(){
 			}
 		};
 
+		return;
 		DB.trigger( 'IndexedDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error } ) ;
 
 		return this;
