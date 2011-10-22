@@ -3097,7 +3097,7 @@ var IDB = (function(){
 		}
 
 		var store = request.store;
-		store = ( !InDB.isEmpty( store ) ? store : current_store;
+		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var indexes = request.indexes;
 	
@@ -3159,7 +3159,7 @@ var IDB = (function(){
 		};
 		
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		/* Request */
 
@@ -3204,7 +3204,7 @@ var IDB = (function(){
 		};
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var get_request = {};
 		foreach( attr in request ) {
@@ -3233,7 +3233,7 @@ var IDB = (function(){
 		};
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var db_request = {};
 		foreach( attr in request ) {
@@ -3265,7 +3265,7 @@ var IDB = (function(){
 		};
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var db_request = {};
 		foreach( attr in request ) {
@@ -3305,7 +3305,7 @@ var IDB = (function(){
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		InDB.trigger( 'InDB_do_row_get', { 'store': request.store, 'key': request.key, 'index': request.index, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
@@ -3334,7 +3334,7 @@ var IDB = (function(){
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		InDB.trigger( 'InDB_do_row_delete', { 'store': request.store, 'key': request.key, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
@@ -3368,7 +3368,7 @@ var IDB = (function(){
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		InDB.trigger( 'InDB_do_row_put', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
@@ -3402,7 +3402,7 @@ var IDB = (function(){
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		InDB.trigger( 'InDB_do_row_add', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
@@ -3446,7 +3446,7 @@ var IDB = (function(){
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		InDB.trigger( 'InDB_do_row_update', { 'store': request.store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
@@ -3512,7 +3512,7 @@ var IDB = (function(){
 		};
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		/* Request */
 
@@ -3568,7 +3568,7 @@ var IDB = (function(){
 		key = ( 'undefined' !== typeof begin && 'undefined' !== typeof end ) ? key : null;
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		/* Setup */
 
@@ -3641,7 +3641,7 @@ var IDB = (function(){
 		key = ( 'undefined' !== typeof begin && 'undefined' !== typeof end ) ? key : null;
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		/* Setup */
 
@@ -3674,7 +3674,7 @@ var IDB = (function(){
 		/* Defaults */
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		InDB.trigger( 'InDB_do_store_clear', { 'store': request.store, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
 	
@@ -3701,7 +3701,7 @@ var IDB = (function(){
 		/* Defaults */
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		InDB.shorthand.map.set( { 'store': store, 'data': shorthand_map, 'on_success': request.on_success, 'on_error': request.on_error } );
 
@@ -3714,7 +3714,7 @@ var IDB = (function(){
 		/* Defaults */
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ? store : current_store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var shorthand_map = InDB.shorthand.map.get( { 'store': request.store } );
 		if ( 'undefined' === shorthand_map ) {
