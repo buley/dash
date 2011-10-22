@@ -3107,9 +3107,8 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var indexes = request.indexes;
-	console.log('1');
+		console.log('SUMTIN',indexes,indexes.primary);
 		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
-	console.log('2');
 		delete request.indexes.primary;
 
 		var namespace_idxs = {};
