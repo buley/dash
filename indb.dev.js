@@ -568,7 +568,9 @@ var IDB = (function(){
 
 		var context = { 'stores': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
 
-		console.log('InDB.stores.create', context );
+		if( !!InDB.debug ) {
+			console.log('InDB.stores.create', context );
+		}
 
 		//TODO: Assertions
 		for( store in stores ) {
@@ -624,7 +626,7 @@ var IDB = (function(){
 				if( !!InDB.debug ) {
 					console.log( 'InDB.stores.create calling InDB.store.create', store, key, autoinc_key, on_success, on_error, on_abort );
 				}
-
+				console.log("XXX");
 				/* Request */
 					
 				InDB.store.create( store, key, autoinc_key, unique, on_success, on_error, on_abort );
