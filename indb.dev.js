@@ -3462,16 +3462,16 @@ var IDB = (function(){
 		var data = request.data;
 		var new_data;
 		if( 'function' !== typeof data ) {
-			new_data = DB.prototype.shorthand_encode( data );
+			new_data = DB.prototype.shorthand_encode( { 'store': request.store, 'data': data } );
 		} else {
 			new_data = function( arg ) {
-				return DB.prototype.shorthand_encode( data( DB.prototype.shorthand_decode( arg ) ) );
+				return DB.prototype.shorthand_encode( { 'store': request.store, 'data': data( DB.prototype.shorthand_decode( arg ) ) } );
 			};
 		}
 
 		var expected = request.expected;
 		if( 'function' !== typeof expected ) {
-			expected = DB.prototype.shorthand_encode( expected );
+			expected = InDB.shorthand.encode( { 'store': request.store, 'data': expected } );
 		}
 
 		var store = request.store;
