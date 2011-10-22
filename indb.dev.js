@@ -3322,7 +3322,7 @@ var IDB = (function(){
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = DB.prototype.shorthand_decode( InDB.row.value( context ) );
+				var value = InDB.shorthand.decode( { 'store': request.store, 'data': InDB.row.value( context )  } );
 				request.on_success( value );
 			}
 		}
