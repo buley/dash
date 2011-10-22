@@ -15,20 +15,20 @@ var IDB = (function(){
 
 	/**
 	 * Namespaces:
-	 *   Indb - application namespace
-	 *   Indb.db - namespace for the open IndexedDB instance (IDBFactory)
-	 *   Indb.dbs = namespace for open databases (reserved)
-	 *   Indb.database - namepspace for database methods (IDBDatabase)
-	 *   Indb.store - namespace for operations against multiple object stores (IBObjectStore)
-	 *   Indb.stores - namespace for single object stores (IDBObjectStore)
-	 *   Indb.index - namespace for index methods (IDBIndex)
-	 *   Indb.transaction - namespace for key range methods (IDBTransaction)
-	 *   Indb.range - namespace for key range methods (IDBKeyRange)
-	 *   Indb.row - namespace for row methods
-	 *   Indb.shorthand - namespace for shorthand methods
-	 *   Indb.cursor - namespace for rows methods (IDBCursor)
-	 *   Indb.event - namespace for event and error methods (IDBEvent, IDBSuccessEvent, IDBErrorEvent, IDBDatabaseError and IDBDatabaseException)
-	 *   Indb.events - namespace for event callbacks
+	 *   InDB - application namespace
+	 *   InDB.db - namespace for the open IndexedDB instance (IDBFactory)
+	 *   InDB.dbs = namespace for open databases (reserved)
+	 *   InDB.database - namepspace for database methods (IDBDatabase)
+	 *   InDB.store - namespace for operations against multiple object stores (IBObjectStore)
+	 *   InDB.stores - namespace for single object stores (IDBObjectStore)
+	 *   InDB.index - namespace for index methods (IDBIndex)
+	 *   InDB.transaction - namespace for key range methods (IDBTransaction)
+	 *   InDB.range - namespace for key range methods (IDBKeyRange)
+	 *   InDB.row - namespace for row methods
+	 *   InDB.shorthand - namespace for shorthand methods
+	 *   InDB.cursor - namespace for rows methods (IDBCursor)
+	 *   InDB.event - namespace for event and error methods (IDBEvent, IDBSuccessEvent, IDBErrorEvent, IDBDatabaseError and IDBDatabaseException)
+	 *   InDB.events - namespace for event callbacks
 	 **/
 
 	/* Begin Namespaces */
@@ -384,7 +384,7 @@ var IDB = (function(){
 			result = 1;
 		}
 		//TODO: Allow filter
-		//result = InDB.trigger( 'Indb_did_browserSupported', { "result": result } );
+		//result = InDB.trigger( 'InDB_did_browserSupported', { "result": result } );
 		InDB.trigger( 'InDB_checked_browser', { "result": result } );
 		return result;
 	}
@@ -3107,8 +3107,8 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var indexes = request.indexes;
-	
-		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': request.indexes.primary.key } ), 'incrementing_key': request.indexes.primary.incrementing, 'unique': request.indexes.primary.unique }
+		console.log("INSTALL",indexes);	
+		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
 
 		delete request.indexes.primary;
 
