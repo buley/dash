@@ -8,17 +8,10 @@
 		<div id="result"></div>
 		<script type="text/javascript">
 
-			var Test = {};
-			var Test.synapses = new IDB( 'synapses' );
-			var Test.neurons = new IDB( 'neurons' );
-
+			var InDB;
 			var test = test || {};
-			test.synapses = test.synapses || {};
-			test.cursor = test.synapses.cursor || {};
-			test.neurons = test.neurons || {};
-			test.neurons.cursor = test.neurons.cursor || {};
-			test.data = test.synapses.data || {};
-			test.neurons.data = test.neurons.data || {};
+			test.cursor = test.cursor || {};
+			test.data = test.data || {};
 
 			var test_id = 77;
 			var inc_amount = 1;
@@ -28,15 +21,15 @@
 				for( var i = 0; i < count; i++ ) {
 					var node1 = Math.floor( Math.random()*100 );	
 					var node2 = Math.floor( Math.random()*100 );	
-					Test.add( { 'data': { 'type': 'connection', 'from': node1, 'to': node2, 'strength': Math.random() }, 'on_success': function( result_value ) {
-						if( !!Test.debug ) {
+					InDB.add( { 'store': 'tests', 'data': { 'type': 'connection', 'from': node1, 'to': node2, 'strength': Math.random() }, 'on_success': function( result_value ) {
+						if( !!InDB.debug ) {
 							console.log( 'Added synapse', result_value );
 						}
 						if( 'undefined' !== typeof on_success ) {
 							on_success( result_value );
 						}
 					}, 'on_error': function( context ) {
-						if( !!Test.debug ) {
+						if( !!InDB.debug ) {
 							console.log( 'Failed to add synapses', context ); 
 						}
 						if( 'undefined' !== typeof on_error ) {
@@ -53,9 +46,10 @@
 						test_callback( value );
 					}
 				};
-				Test.getAttr( {
+				InDB.getAttr( {
 					'key': test_id
 					, 'index': 'id'
+					, 'store': 'tests'
 					, 'on_success': function( value ) {	
 						if( 'undefined' !== value ) {
 							console.log( 'test.getAttr(): passed' );
@@ -79,15 +73,16 @@
 						test_callback( value );
 					}
 				};
-				Test.getAttr( {
+				InDB.getAttr( {
 					'key': test_id
 					, 'index': 'id'
+					, 'store': 'tests'
 					, 'on_success': function( context ) {	
 						var value = InDB.row.value( context.event );	
 						var expected =  {};
-						var key = Test.shorthand( 'strength' );
+						var key = InDB.shorthand( 'strength' );
 					       	expected[ key ] = value[ key ];
-						Test.setAttr( {
+						InDB.setAttr( {
 							'key': test_id
 							, 'index': 'id'
 							, 'expecting': expected
@@ -96,7 +91,7 @@
 								replacement = ( !!replacement && replacement > .001 ) ? replacement : 1;
 								return replacement;
 							}, 'on_success': function( context ) {
-								Test.getAttr( {
+								InDB.getAttr( {
 									'key': test_id
 									, 'index': 'id'
 									, 'on_success': function( value ) {
@@ -128,8 +123,9 @@
 						test_callback( get_context );
 					}
 				};
-				Test.get( {
+				InDB.get( {
 					'key': test_id
+					, 'store': 'tests'
 					//, 'index': 'id'
 					, 'on_success': function( value ) {	
 						console.log( 'test.get(): passed' );
@@ -150,19 +146,21 @@
 						test_callback( value );
 					}
 				};
-				Test.get( {
+				InDB.get( {
 					'key': test_id
 					//, 'index': 'id'
+					, 'store': 'tests'
 					, 'on_success': function( new_value ) {
 						new_value[ 'from' ] = ( isNaN( new_value[ 'from' ] ) ) ? 1 : new_value[ 'from' ];
 						new_value[ 'from' ] = parseInt( new_value[ 'from' ], 10 ) + inc_amount;
 						new_value[ 'to' ] = ( isNaN( new_value[ 'to' ] ) ) ? 1 : new_value[ 'to' ];
 						new_value[ 'to' ] = parseInt( new_value[ 'to' ], 10 ) + inc_amount;
-						Test.put( {
+						InDB.put( {
 							'key': test_id
 							, 'data': new_value
+							, 'store': 'tests'
 							, 'on_success': function( result_id ) {
-								Test.get( {
+								InDB.get( {
 									'key': result_id
 									//, 'index': 'id'
 									, 'on_success': function( return_value ) {
@@ -198,11 +196,13 @@
 					, 'type': 'connection'
 					, 'strength': Math.random()
 				};
-				Test.add( {
+				InDB.add( {
 					'data': new_value
+					, 'store': 'tests'
 					, 'on_success': function( add_value ) {
-						Test.get( {
-							'key': add_value
+						InDB.get( {
+							'store': 'tests'
+							, 'key': add_value
 							//, 'index': 'id'
 							, 'on_success': function( return_value ) {
 								if( 'undefined' !== typeof return_value && null !== return_value && add_value == return_value.id ) {
@@ -230,14 +230,16 @@
 						test_callback( value );
 					}
 				};
-				Test.get( {
+				InDB.get( {
 					'key': test_id
+					, 'store': 'tests'
 					//, 'index': 'id'
 					, 'on_success': function( value ) {	
 						var expected =  {};
 						expected[ 'to' ] = value[ 'to' ];
-						Test.update( {
+						InDB.update( {
 							'key': test_id
+							, 'store': 'tests'
 							//, 'index': 'id'
 							, 'expecting': expected
 							, 'data': function( current ) {
@@ -245,8 +247,9 @@
 								val[ 'to' ] = parseInt( current[ 'to' ], 10 ) + inc_amount;
 								return val;
 							}, 'on_success': function( context ) {
-								Test.get( {
+									InDB.get( {
 									'key': test_id
+									, 'store': 'tests'
 									//, 'index': 'id'
 									, 'on_success': function( returned_value ) {
 										if( 'undefined' !== typeof returned_value && null !== returned_value && ( returned_value[ 'to' ] - inc_amount )  == expected[ 'to' ] ) {
@@ -282,18 +285,22 @@
 					, 'type': 'connection'
 					, 'strength': Math.random()
 				};
-				Test.add( {
+				InDB.add( {
 					'data': new_value
+					, 'store': 'tests'
 					, 'on_success': function( add_value ) {
-						Test.get( {
+						InDB.get( {
 							'key': add_value
+							, 'store': 'tests'
 							//, 'index': 'id'
 							, 'on_success': function( get_value_1 ) {
-								Test.delete( {
+								InDB.delete( {
 									'key': add_value
+									, 'store': 'tests'
 									, 'on_success': function( delete_value ) {
-										Test.get( {
+										InDB.get( {
 											'key': add_value
+											, 'store': 'tests'
 											//, 'index': 'id'
 											, 'on_error': on_error
 											, 'on_success': function( context ) {
@@ -324,8 +331,9 @@
 					}
 				};
 				var item_count = 0;
-				Test.clear( {
-					'on_success': function( value ) {	
+				InDB.clear( {
+					'store': 'tests'
+					, 'on_success': function( value ) {	
 						console.log( 'test.cursor.clear(): passed' );
 						if( 'function' == typeof test_callback ) {
 							test_callback( value );
@@ -347,8 +355,9 @@
 					}
 				};
 				var item_count = 0;
-				Test.cursor.get( {
+				InDB.cursor.get( {
 					'begin': 0
+					, 'store': 'tests'
 					, 'left_inclusive': true
 					//, 'index': 'id'
 					, 'limit': 20
@@ -376,8 +385,9 @@
 				};
 				var item_count = 0;
 				var limit = 20;
-				Test.cursor.get( {
+				InDB.cursor.get( {
 					'begin': 0
+					, 'store': 'tests'
 					, 'left_inclusive': true
 					//, 'index': 'id'
 					//, 'limit': limit
@@ -387,8 +397,9 @@
 					}, 'on_complete': function( value ) {	
 						console.log("TOTAL", item_count );
 						var delete_count = 0;
-						Test.cursor.delete( {
+						InDB.cursor.delete( {
 							'begin': 0
+							, 'store': 'tests'
 							, 'left_inclusive': true
 							//, 'index': 'id'
 							//, 'limit': limit
@@ -397,8 +408,9 @@
 								delete_count++;
 							}, 'on_complete': function( value ) {	
 							var final_count = 0;
-								Test.cursor.get( {
+								InDB.cursor.get( {
 									'begin': 0
+									, 'store': 'tests'
 									, 'left_inclusive': true
 									//, 'index': 'id'
 									//, 'limit': limit
@@ -435,8 +447,9 @@
 				var item_count = 0;
 				var limit = 20;
 				var update_map = {};
-				Test.cursor.update( {
+				InDB.cursor.update( {
 					'begin': 0
+					, 'store': 'tests'
 					, 'left_inclusive': true
 					//, 'index': 'id' //xxx
 					, 'data': function( current_value ) {
@@ -471,23 +484,61 @@
 			$(document).ready(function() {
 	
 				var request = {};
-				request.database_name = "Test-001";
-				request.database_description = "Basic MLP neural network."
+				request.database = "InDB-005";
+				request.description = "Database for InDB tests."
 
 				var on_loaded = function( context ) {
 					jQuery( document ).trigger( 'test_database_loaded', context );
+					test_install();
 				}
 
-				var Test = new IDB{ 'name': Test.database_name, 'description': Test.database_description, 'on_success': on_loaded } ) ;
+				InDB = new IDB( { 'database': request.database, 'description': request.description, 'on_success': on_loaded } ) ;
+	
+				InDB.shorthand.set( { 'store': 'tests', 'data': test_shorthand_map } );
 	
 			});
-	
+
+			var test_install = function() {
+
+				var indexes = {
+					'primary': {
+						'key': 'id'
+						, 'incrementing': true
+						, 'unique': true
+					}, 'id': true,
+					'type': true,
+					'to': true,
+					'from': true,
+					'strength': true
+				};
+
+				console.log( 'test_install()', indexes );
+
+				InDB.install( { 'store': 'tests', 'indexes': indexes, 'on_success': function( context ) {
+					console.log( 'InDB store installed', context );
+				} } );
+
+			}
+
+			var test_shorthand_map = {
+				'id': 'i',
+				'to': 't',
+				'from': 'f',
+				'strength': 's',
+				'type': 'y',
+				'votes': 'v',
+				'payload': 'p'
+			};
 
 			jQuery( document ).bind( 'test_database_loaded', function( context ) {
-				console.log( "Test InDB is loaded", context );
+				console.log( "InDB InDB is loaded", context );
+				tests_callback();
+			} );
+
+			function tests_callback() {
 
 				var done = function( context ) {
-					console.log( "Tests complete." );
+					console.log( "InDBs complete." );
 				};
 
 				var get_test = function( context ) {
@@ -521,17 +572,20 @@
 
 				var node1 = Math.floor( Math.random()*100 );	
 				var node2 = Math.floor( Math.random()*100 );	
-				Test.add( { 'data': { 'type': 'connection', 'from': node1, 'to': node2, 'strength': Math.random() }, 'on_success': function( result_value ) {
+
+				InDB.add( { 'store': 'tests', 'data': { 'type': 'connection', 'id': 77, 'from': node1, 'to': node2, 'strength': Math.random() }, 'on_success': function( result_value ) {
 					test_id = result_value;
+					console.log( "SUCCESSFULLY added", test_id );
 					get_test();
 				}, 'on_error': function( context ) {
-					console.log( 'FAILED to add synapses', context );       
+					console.log( 'FAILED to add test data', context );
 				} } );
 
 				//test.getAttr();
 				//test.setAttr();
 
-			} );
+			};
+
 		</script>
 		<script type="text/javascript" src="http://github.com/editor/InDB/raw/master/indb.dev.js"></script>
 	</body>
