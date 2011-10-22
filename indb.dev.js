@@ -4,7 +4,7 @@
  * Twitter -> @taylorbuley
  **/
 
-var InDB = (function(){
+var IDB = (function(){
 
 	/* Private vars */
 
