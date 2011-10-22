@@ -3078,17 +3078,16 @@ var IDB = (function(){
 		var on_success = function( database ) {
 			request.target = database;
 			if( 'function' == typeof request.on_success ) {
-				request.on_success( database );
+				//request.on_success( database );
 			}
 		};
 
 		var on_error = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				request.on_error( context );
+				//request.on_error( context );
 			}
 		};
 
-		return;
 		DB.trigger( 'IndexedDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error } ) ;
 
 		return this;
