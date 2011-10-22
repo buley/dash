@@ -1,5 +1,5 @@
 /**
- * InDB by Taylor Buley
+ * IndexedDB by Taylor Buley
  * Github -> http://github.com/editor/indb 
  * Twitter -> @taylorbuley
  **/
@@ -155,7 +155,7 @@ var IDB = (function(){
 
 	DB.shorthand.get = function ( request ) {
 		var shorthand_map = DB.shorthand.map.get( request.store );
-		if( 'undefined' !== typeofInDB.prototype.shorthand_map[ key ] ) {
+		if( 'undefined' !== typeofIndexedDB.prototype.shorthand_map[ key ] ) {
 			return shorthand_map[ request.key ];
 		} else {
 			return key;
@@ -232,12 +232,12 @@ var IDB = (function(){
 
 	/**
 	 * Actions:
-	 *  InDB_database_loaded - The database is loaded into the DB.db namespace; no guarantee that object stores exist if a fresh install
-	 *  InDB_database_created - Database is created for the first time
-	 *  InDB_stores_load_{success|error|abort} - Database is loaded and all collections have been created
-	 *  InDB_store_created_{success|error|abort} - Response to an attempt at creating an object store
-	 *  InDB_database_already_loaded - a specific type of InDB_database_load_error
-	 *  InDB_store_already_exists - a specific type of InDB_store_created_error
+	 *  IndexedDB_database_loaded - The database is loaded into the DB.db namespace; no guarantee that object stores exist if a fresh install
+	 *  IndexedDB_database_created - Database is created for the first time
+	 *  IndexedDB_stores_load_{success|error|abort} - Database is loaded and all collections have been created
+	 *  IndexedDB_store_created_{success|error|abort} - Response to an attempt at creating an object store
+	 *  IndexedDB_database_already_loaded - a specific type of IndexedDB_database_load_error
+	 *  IndexedDB_store_already_exists - a specific type of IndexedDB_store_created_error
 	 **/
 	 /* End Actions */
 
@@ -248,17 +248,17 @@ var IDB = (function(){
 	/* binds a callback method to new events */
 	DB.bind = function ( event_name, callback_method ) {
 		//TODO: assert argument types and validity
-		jQuery( InDB ).bind( event_name, callback_method );
+		jQuery( IndexedDB ).bind( event_name, callback_method );
 	}
 
 	/* triggers a new event */
 	DB.trigger = function ( event_name, context ) {
 		//TODO: assert argument types and validity
-		jQuery( InDB ).trigger( event_name, context );
+		jQuery( IndexedDB ).trigger( event_name, context );
 	}
 
 
-	/* Begin InDB Methods */
+	/* Begin IndexedDB Methods */
 	/**
 	 * DB.browserSupported( )  > support level (int): [ -1, 0, 1 ]
 	 *  Checks to see if IndexedDB is supported
@@ -266,12 +266,12 @@ var IDB = (function(){
 	 **/
 
 	/* Create object stores after the database is created */
-	DB.bind( 'InDB_do_database_load', function ( event, context ) {
+	DB.bind( 'IndexedDB_do_database_load', function ( event, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_database_load', event, context );
+			console.log ( 'IndexedDB_do_database_load', event, context );
 		}
 
 		/* Setup */
@@ -312,7 +312,7 @@ var IDB = (function(){
 		
 		if ( "IDBDatabase" === typeof DB.db && name === DB.db.name ) {
 			on_error( new Error( "Database already loaded" ) );
-			DB.trigger( 'InDB_database_already_loaded', context );
+			DB.trigger( 'IndexedDB_database_already_loaded', context );
 			return;
 		}
 			
@@ -339,43 +339,43 @@ var IDB = (function(){
 		}
 		
 		/* Action */
-		DB.trigger( 'InDB_database_loading', context );
+		DB.trigger( 'IndexedDB_database_loading', context );
 		
 		/* Request Responses */
 
 		if ( "undefined" !== typeof DB.db && name === DB.db.name ) {
-			DB.trigger( 'InDB_database_load_success', context );
-			DB.trigger( 'InDB_stores_load_success', context );
+			DB.trigger( 'IndexedDB_database_load_success', context );
+			DB.trigger( 'IndexedDB_stores_load_success', context );
 		} else {
-			var open_request = window.indexeInDB.open( name, description );
+			var open_request = window.indexeIndexedDB.open( name, description );
 			open_request.onsuccess = function ( event ) {
 				var result = event.target.result;
 				on_success( result );
 				if ( isNaN( DB.db.version ) ) {
-					DB.trigger( 'InDB_database_load_success', result );
-					DB.trigger( 'InDB_database_created_success', result );
+					DB.trigger( 'IndexedDB_database_load_success', result );
+					DB.trigger( 'IndexedDB_database_created_success', result );
 					/* Database is unversioned, so create object stores */
-					DB.trigger( 'InDB_stores_load_success', result );
+					DB.trigger( 'IndexedDB_stores_load_success', result );
 				} else {
-					DB.trigger( 'InDB_database_load_success', result );
-					DB.trigger( 'InDB_stores_load_success', result );
+					DB.trigger( 'IndexedDB_database_load_success', result );
+					DB.trigger( 'IndexedDB_stores_load_success', result );
 				}
 			}
 			open_request.onerror = function ( event ) {
 				context[ 'event' ] = event;
 				on_error( context );
-				DB.trigger( 'InDB_database_load_error' );
+				DB.trigger( 'IndexedDB_database_load_error' );
 			}
 			open_request.onabort = function ( event ) {
 				context[ 'event' ] = event;
 				on_abort( context );
-				DB.trigger( 'InDB_database_load_error' )
+				DB.trigger( 'IndexedDB_database_load_error' )
 			}
 		}
 	}
 
 	DB.checkBrowser = function () {
-		DB.trigger( 'InDB_checking_browser' );		
+		DB.trigger( 'IndexedDB_checking_browser' );		
 		var result = -1;
 		// the support check
 		if ( !!window.webkitIndexedDB || !!window.mozIndexedDB ) {
@@ -385,7 +385,7 @@ var IDB = (function(){
 		}
 		//TODO: Allow filter
 		//result = DB.trigger( 'DB_did_browserSupported', { "result": result } );
-		DB.trigger( 'InDB_checked_browser', { "result": result } );
+		DB.trigger( 'IndexedDB_checked_browser', { "result": result } );
 		return result;
 	}
 
@@ -484,7 +484,7 @@ var IDB = (function(){
 		}
 	}
 
-	/* End InDB Methods */
+	/* End IndexedDB Methods */
 
 	DB.index.exists = function ( store, index ) {
 		if( !!DB.debug ) {
@@ -520,12 +520,12 @@ var IDB = (function(){
 
 
 	/* Create object stores after the database is created */
-	DB.bind( 'InDB_do_stores_create', function ( event, context ) {
+	DB.bind( 'IndexedDB_do_stores_create', function ( event, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_create_stores', event, context );
+			console.log ( 'IndexedDB_do_create_stores', event, context );
 		}
 
 		/* Setup */
@@ -628,12 +628,12 @@ var IDB = (function(){
 	}
 
 	/* Create object stores after the database is created */
-	DB.bind( 'InDB_do_store_create', function ( event, context ) {
+	DB.bind( 'IndexedDB_do_store_create', function ( event, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_create_store', event, context );
+			console.log ( 'IndexedDB_do_create_store', event, context );
 		}
 
 		/* Setup */
@@ -749,17 +749,17 @@ var IDB = (function(){
 
 				on_success( context );
 
-				DB.trigger( "InDB_store_created_success", context );
+				DB.trigger( "IndexedDB_store_created_success", context );
 
 			} catch( error ) {
 
 				// createdObject store threw an error 
 				context[ 'error' ] = error;
 				on_error( context );
-				DB.trigger( "InDB_store_created_error", context );
+				DB.trigger( "IndexedDB_store_created_error", context );
 				//if already created, then the store already exists
 				if ( IDBDatabaseException.CONSTRAINT_ERR === error.code ) {
-					DB.trigger( "InDB_store_already_exists", context );
+					DB.trigger( "IndexedDB_store_already_exists", context );
 				}
 			}
 		};
@@ -767,30 +767,30 @@ var IDB = (function(){
 		setVersionRequest.onblocked = function ( event ) {
 			context[ 'event' ] = event;
 			on_blocked( context );
-			DB.trigger( "InDB_store_created_error", context );
+			DB.trigger( "IndexedDB_store_created_error", context );
 		};
 
 		setVersionRequest.onerror = function ( event ) {
 			context[ 'event' ] = event;
 			on_error( context );
-			DB.trigger( "InDB_store_created_error", context );
+			DB.trigger( "IndexedDB_store_created_error", context );
 		};
 
 		setVersionRequest.onabort = function ( event ) {
 			context[ 'event' ] = event;
 			on_abort( context );
-			DB.trigger( "InDB_store_created_abort", context );
+			DB.trigger( "IndexedDB_store_created_abort", context );
 		};
 
 	}
 
 
-	DB.bind( 'InDB_do_indexes_create', function ( event, context ) {
+	DB.bind( 'IndexedDB_do_indexes_create', function ( event, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_create_indexes', event, context );
+			console.log ( 'IndexedDB_do_create_indexes', event, context );
 		}
 
 		/* Setup */
@@ -880,12 +880,12 @@ var IDB = (function(){
 
 
 	//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort, context.unique, context.multirow
-	DB.bind( 'InDB_do_index_create', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_index_create', function( row_result, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_index_create', row_result, context );
+			console.log ( 'IndexedDB_do_index_create', row_result, context );
 		}
 
 		/* Assertions */
@@ -991,12 +991,12 @@ var IDB = (function(){
 	}
 
 	//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort
-	DB.bind( 'InDB_do_index_delete', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_index_delete', function( row_result, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_index_delete', row_result, context );
+			console.log ( 'IndexedDB_do_index_delete', row_result, context );
 		}
 
 		/* Assertions */
@@ -1118,11 +1118,11 @@ var IDB = (function(){
 
 		/* Action */
 
-		DB.trigger( 'InDB_open_database', context );
+		DB.trigger( 'IndexedDB_open_database', context );
 
 		/* Request */
 
-		var open_database_request = window.indexeInDB.open( name, description );
+		var open_database_request = window.indexeIndexedDB.open( name, description );
 
 		/* Request Responses */
 
@@ -1138,7 +1138,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_open_database_success', context );
+			DB.trigger( 'IndexedDB_open_database_success', context );
 
 		};
 
@@ -1154,7 +1154,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_open_database_error', context );
+			DB.trigger( 'IndexedDB_open_database_error', context );
 
 		}
 
@@ -1170,7 +1170,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_open_database_abort', context );
+			DB.trigger( 'IndexedDB_open_database_abort', context );
 
 		}
 
@@ -1222,7 +1222,7 @@ var IDB = (function(){
 
 	/* Transaction factory */
 	DB.transaction.create = function ( database, type, on_complete, on_error, on_abort ) {
-		DB.trigger( 'InDB_create_transaction', { "name": name, "type": type, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );		
+		DB.trigger( 'IndexedDB_create_transaction', { "name": name, "type": type, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );		
 		if ( "undefined" === typeof type ) {
 			type = IDBTransaction.READ_WRITE;
 		}
@@ -1401,12 +1401,12 @@ var IDB = (function(){
 
 
 	//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort
-	DB.bind( 'InDB_do_row_get', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_row_get', function( row_result, context ) {
 		
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_row_get', row_result, context );
+			console.log ( 'IndexedDB_do_row_get', row_result, context );
 		}
 
 		/* Setup */
@@ -1480,7 +1480,7 @@ var IDB = (function(){
 
 		/* Action */
 
-		DB.trigger( 'InDB_row_get', context );
+		DB.trigger( 'IndexedDB_row_get', context );
 
 		/* Transaction */
 		
@@ -1530,7 +1530,7 @@ var IDB = (function(){
 		
 			/* Action */
 			
-			DB.trigger( 'InDB_row_get_success', context );
+			DB.trigger( 'IndexedDB_row_get_success', context );
 
 		}
 
@@ -1546,7 +1546,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_row_get_error', context );
+			DB.trigger( 'IndexedDB_row_get_error', context );
 
 		}
 		
@@ -1562,19 +1562,19 @@ var IDB = (function(){
 		
 			/* Action */
 		
-			DB.trigger( 'InDB_row_get_abort', context );
+			DB.trigger( 'IndexedDB_row_get_abort', context );
 
 		}
 	}
 
 
 	//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort
-	DB.bind( 'InDB_do_row_delete', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_row_delete', function( row_result, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_row_delete', row_result, context );
+			console.log ( 'IndexedDB_do_row_delete', row_result, context );
 		}
 
 		/* Assertions */
@@ -1618,7 +1618,7 @@ var IDB = (function(){
 
 		/* Action */
 
-		DB.trigger( 'InDB_row_delete', context );
+		DB.trigger( 'IndexedDB_row_delete', context );
 
 		/* Defaults */
 
@@ -1703,12 +1703,12 @@ var IDB = (function(){
 	}
 
 	//context.store, context.data, context.on_success, context.on_error, context.on_abort
-	DB.bind( 'InDB_do_row_add', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_row_add', function( row_result, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_row_add', row_result, context );
+			console.log ( 'IndexedDB_do_row_add', row_result, context );
 		}
 
 		/* Assertions */
@@ -1774,10 +1774,10 @@ var IDB = (function(){
 
 		/* Action */
 
-		DB.trigger( 'InDB_row_add', context );
+		DB.trigger( 'IndexedDB_row_add', context );
 
 		if ( !!DB.debug ) {
-			console.log( 'InDB_row_add', context );
+			console.log( 'IndexedDB_row_add', context );
 		}
 
 
@@ -1808,7 +1808,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				DB.trigger( 'InDB_row_add_success', context );
+				DB.trigger( 'IndexedDB_row_add_success', context );
 
 			}
 
@@ -1826,7 +1826,7 @@ var IDB = (function(){
 		
 				/* Action */
 
-				DB.trigger( 'InDB_row_add_error', context );
+				DB.trigger( 'IndexedDB_row_add_error', context );
 
 			}
 
@@ -1844,7 +1844,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				DB.trigger( 'InDB_row_add_abort', context );
+				DB.trigger( 'IndexedDB_row_add_abort', context );
 
 			}
 
@@ -1864,19 +1864,19 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_row_add_error', context );
+			DB.trigger( 'IndexedDB_row_add_error', context );
 
 		}
 	}
 
 
 	//context.store, context.key, context.index, context.data, context.on_success, context.on_error, context.on_abort
-	DB.bind( 'InDB_do_row_update', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_row_update', function( row_result, context ) {
 		
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_row_update', row_result, JSON.stringify( context ) );
+			console.log ( 'IndexedDB_do_row_update', row_result, JSON.stringify( context ) );
 		}
 
 
@@ -1957,7 +1957,7 @@ var IDB = (function(){
 
 		/* Action */
 
-		DB.trigger( 'InDB_row_update', context );
+		DB.trigger( 'IndexedDB_row_update', context );
 
 		var callback = function( callback_context ) {
 
@@ -2012,12 +2012,12 @@ var IDB = (function(){
 
 
 	//context.store, context.on_success, context.on_error, context.on_abort
-	DB.bind( 'InDB_do_store_clear', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_store_clear', function( row_result, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_store_clear', row_result, context );
+			console.log ( 'IndexedDB_do_store_clear', row_result, context );
 		}
 
 
@@ -2077,7 +2077,7 @@ var IDB = (function(){
 		
 		/* Action */
 
-		DB.trigger( 'InDB_store_clear', context );
+		DB.trigger( 'IndexedDB_store_clear', context );
 
 
 		/* Transaction */
@@ -2111,7 +2111,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_store_clear_success', context );
+			DB.trigger( 'IndexedDB_store_clear_success', context );
 
 		}
 
@@ -2127,7 +2127,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_row_put_error', context );
+			DB.trigger( 'IndexedDB_row_put_error', context );
 
 		}
 
@@ -2143,19 +2143,19 @@ var IDB = (function(){
 			
 			/* Action */
 
-			DB.trigger( 'InDB_row_put_abort', context );
+			DB.trigger( 'IndexedDB_row_put_abort', context );
 
 		}
 	}
 
 
 	//context.store, context.data, context.on_success, context.on_error, context.on_abort
-	DB.bind( 'InDB_do_row_put', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_row_put', function( row_result, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_row_put', row_result, context );
+			console.log ( 'IndexedDB_do_row_put', row_result, context );
 		}
 
 		/* Assertions */
@@ -2222,7 +2222,7 @@ var IDB = (function(){
 		
 		/* Action */
 
-		DB.trigger( 'InDB_row_put', context );
+		DB.trigger( 'IndexedDB_row_put', context );
 
 
 		/* Transaction */
@@ -2233,7 +2233,7 @@ var IDB = (function(){
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_row_put transaction', transaction );
+			console.log ( 'IndexedDB_row_put transaction', transaction );
 		}
 
 		//use this[ 'format' ] for function invocation to avoid a Closure compiler error
@@ -2263,7 +2263,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				DB.trigger( 'InDB_row_put_success', context );
+				DB.trigger( 'IndexedDB_row_put_success', context );
 
 			}
 
@@ -2279,7 +2279,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				DB.trigger( 'InDB_row_put_error', context );
+				DB.trigger( 'IndexedDB_row_put_error', context );
 
 			}
 
@@ -2295,7 +2295,7 @@ var IDB = (function(){
 				
 				/* Action */
 
-				DB.trigger( 'InDB_row_put_abort', context );
+				DB.trigger( 'IndexedDB_row_put_abort', context );
 
 			}
 
@@ -2318,12 +2318,12 @@ var IDB = (function(){
 
 
 	/* TODO: On complete */
-	DB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_cursor_get', function( row_result, context ) {
 		
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_cursor_get', row_result, context );
+			console.log ( 'IndexedDB_do_cursor_get', row_result, context );
 		}
 
 
@@ -2411,12 +2411,12 @@ var IDB = (function(){
 		/* Debug */
 		
 		if( !!DB.debug ) {
-			console.log( 'indb.js > DB.cursor.get() > Doing InDB_cursor_get', context );
+			console.log( 'indb.js > DB.cursor.get() > Doing IndexedDB_cursor_get', context );
 		}	
 		
 		/* Action */
 
-		DB.trigger( 'InDB_cursor_get', context );
+		DB.trigger( 'IndexedDB_cursor_get', context );
 		
 		try {
 
@@ -2491,7 +2491,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				DB.trigger( 'InDB_cursor_row_get_success', context );
+				DB.trigger( 'IndexedDB_cursor_row_get_success', context );
 
 				total++;
 
@@ -2520,12 +2520,12 @@ var IDB = (function(){
 				/* Debug */
 
 				if ( !!DB.debug ) {
-					console.log ( 'Doing InDB_cursor_row_get_error', context );
+					console.log ( 'Doing IndexedDB_cursor_row_get_error', context );
 				}
 
 				/* Action */
 
-				DB.trigger( 'InDB_cursor_row_get_error', context );
+				DB.trigger( 'IndexedDB_cursor_row_get_error', context );
 
 			}
 
@@ -2542,12 +2542,12 @@ var IDB = (function(){
 				/* Debug */
 
 				if ( !!DB.debug ) {
-					console.log ( 'Doing InDB_cursor_row_get_abort', context );
+					console.log ( 'Doing IndexedDB_cursor_row_get_abort', context );
 				}
 
 				/* Action */
 
-				DB.trigger( 'InDB_cursor_row_get_abort', context );
+				DB.trigger( 'IndexedDB_cursor_row_get_abort', context );
 
 			}
 
@@ -2564,12 +2564,12 @@ var IDB = (function(){
 	}
 
 	//context.store, context.index, context.keyRange (e.g. DB.range.left_open( "0" ) ), context.on_success, context.on_error, context.on_abort
-	DB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_cursor_update', function( row_result, context ) {
 		
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_cursor_update', row_result, context );
+			console.log ( 'IndexedDB_do_cursor_update', row_result, context );
 		}
 
 		/* Setup */
@@ -2672,7 +2672,7 @@ var IDB = (function(){
 
 		/* Action */
 
-		DB.trigger( 'InDB_cursor_update', context );
+		DB.trigger( 'IndexedDB_cursor_update', context );
 		
 		/* Transaction */
 
@@ -2737,7 +2737,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_cursor_row_update_success', context );
+			DB.trigger( 'IndexedDB_cursor_row_update_success', context );
 
 			/* Update */
 
@@ -2811,7 +2811,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_cursor_row_update_error', context );
+			DB.trigger( 'IndexedDB_cursor_row_update_error', context );
 
 		}
 
@@ -2827,7 +2827,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_cursor_row_update_abort', context );
+			DB.trigger( 'IndexedDB_cursor_row_update_abort', context );
 
 		}
 
@@ -2835,12 +2835,12 @@ var IDB = (function(){
 
 
 	//context.database, context.index, context.keyRange (e.g. DB.range.left_open( "0" ) ), context.on_success, context.on_error, context.on_abort
-	DB.bind( 'InDB_do_cursor_delete', function( row_result, context ) {
+	DB.bind( 'IndexedDB_do_cursor_delete', function( row_result, context ) {
 
 		/* Debug */
 
 		if ( !!DB.debug ) {
-			console.log ( 'InDB_do_cursor_delete', row_result, context );
+			console.log ( 'IndexedDB_do_cursor_delete', row_result, context );
 		}
 
 		/* Setup */
@@ -2924,7 +2924,7 @@ var IDB = (function(){
 
 		/* Action */
 		
-		DB.trigger( 'InDB_cursor_delete', context );
+		DB.trigger( 'IndexedDB_cursor_delete', context );
 
 		/* Transaction */
 
@@ -2990,7 +2990,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			DB.trigger( 'InDB_cursor_row_delete_success', context );
+			DB.trigger( 'IndexedDB_cursor_row_delete_success', context );
 
 			/* Result */
 
@@ -3015,7 +3015,7 @@ var IDB = (function(){
 			
 			/* Action */
 
-			DB.trigger( 'InDB_cursor_row_delete_error', context );
+			DB.trigger( 'IndexedDB_cursor_row_delete_error', context );
 
 		}
 
@@ -3031,7 +3031,7 @@ var IDB = (function(){
 			
 			/* Action */
 
-			DB.trigger( 'InDB_cursor_row_delete_abort', context );
+			DB.trigger( 'IndexedDB_cursor_row_delete_abort', context );
 
 		}
 
@@ -3062,8 +3062,7 @@ var IDB = (function(){
 
 	/* Constructor */
 
-	var InDB = function( request ) {
-		console.log("OK", arguments);break;
+	var IndexedDB = function( request ) {
 		// Fix browser if necessary 
 		var browser_check = DB.checkBrowser(); 
 		DB.assert( -1 !== browser_check, 'incompatible browser' ); 
@@ -3088,14 +3087,14 @@ var IDB = (function(){
 			}
 		};
 
-		DB.trigger( 'InDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error } ) ;
+		DB.trigger( 'IndexedDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error } ) ;
 
 		return this;
 	};
 
 	/* Database */
 
-	InDB.prototype.install = function ( request ) {
+	IndexedDB.prototype.install = function ( request ) {
 
 		var namespace = {};
 	
@@ -3120,8 +3119,8 @@ var IDB = (function(){
 			namespace_idxs[ store ][ index ][ DB.shorthand.get( { 'store': store, 'key': index } ) ] = indexes[ index ];
 		}
 
-		DB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
-			DB.trigger( 'InDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_complete': function( context2 ) {
+		DB.trigger( 'IndexedDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
+			DB.trigger( 'IndexedDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_complete': function( context2 ) {
 				console.log( 'Store loaded', context2 );
 			} } );
 		} } );
@@ -3138,18 +3137,18 @@ var IDB = (function(){
 	Each takes an object w/attributes { options: obj, on_success: fn, on_error: fn }
 	*/
 
-	InDB.prototype.cursor =InDB.prototype.cursor || {};
+	IndexedDB.prototype.cursor =IndexedDB.prototype.cursor || {};
 
 	/* Synapses Set */
-	InDB.prototype.setAttr = function( request ) {
+	IndexedDB.prototype.setAttr = function( request ) {
 
-		if( !InDB.debug ) {
-			console.log( 'InDB.prototype.setAttr', request );
+		if( !IndexedDB.debug ) {
+			console.log( 'IndexedDB.prototype.setAttr', request );
 		}
 
 		var on_success =  function( context ) {
-			if( !InDB.debug ) {
-				console.log( 'InDB.prototype.setAttr success', context );
+			if( !IndexedDB.debug ) {
+				console.log( 'IndexedDB.prototype.setAttr success', context );
 			}
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( context );
@@ -3157,8 +3156,8 @@ var IDB = (function(){
 		};
 
 		var on_error =  function( context ) {
-			if( !InDB.debug ) {
-				console.log( 'InDB.prototype.setAttr error', context );
+			if( !IndexedDB.debug ) {
+				console.log( 'IndexedDB.prototype.setAttr error', context );
 			}
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
@@ -3171,7 +3170,7 @@ var IDB = (function(){
 		/* Request */
 
 		var data = {};
-		data[InDB.prototype.shorthand( request.attribute ) ] = request.strength;
+		data[IndexedDB.prototype.shorthand( request.attribute ) ] = request.strength;
 
 		var update_request = {};
 		for( attr in request ) {
@@ -3181,7 +3180,7 @@ var IDB = (function(){
 		update_request.on_success = on_success;
 		update_request.on_error = on_error;
 
-	InDB.prototype.update( update_request );
+	IndexedDB.prototype.update( update_request );
 
 		return this;
 
@@ -3189,11 +3188,11 @@ var IDB = (function(){
 
 	/* Synapses Get */
 	// ( 'key': string, 'index': string (requred), 'strength': int, 'on_success': fn, 'on_error': fn }
-	InDB.prototype.getAttr = function( request ) {
+	IndexedDB.prototype.getAttr = function( request ) {
 		
 		var on_success =  function( value ) {
-			if( !InDB.debug ) {
-				console.log( 'InDB.prototype.setAttr success', context );
+			if( !IndexedDB.debug ) {
+				console.log( 'IndexedDB.prototype.setAttr success', context );
 			}
 			if( 'function' == typeof request.on_success ) {
 				var result = ( 'undefined' !== typeof result ) ? value[ request.attribute ] : null;
@@ -3202,8 +3201,8 @@ var IDB = (function(){
 		};
 
 		var on_error =  function( context ) {
-			if( !InDB.debug ) {
-				console.log( 'InDB.prototype.getAttr error', context );
+			if( !IndexedDB.debug ) {
+				console.log( 'IndexedDB.prototype.getAttr error', context );
 			}
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
@@ -3221,7 +3220,7 @@ var IDB = (function(){
 		get_request.on_success = on_success;
 		get_request.on_error = on_error;
 
-	InDB.prototype.get( get_request );
+	IndexedDB.prototype.get( get_request );
 
 		return this;
 
@@ -3229,14 +3228,14 @@ var IDB = (function(){
 
 	/* Synapses Cursor set */
 	// ( 'key': string, 'index': string (requred), 'strength': int, 'on_success': fn, 'on_error': fn }
-	InDB.prototype.cursor.setAttr = function( request ) {
+	IndexedDB.prototype.cursor.setAttr = function( request ) {
 		
 		var on_success =  function( context ) {
-			console.log( 'InDB.prototype.cursor.setAttr success', context );
+			console.log( 'IndexedDB.prototype.cursor.setAttr success', context );
 		};
 
 		var on_error =  function( context ) {
-			console.log( 'InDB.prototype.cursor.setAttr', context );
+			console.log( 'IndexedDB.prototype.cursor.setAttr', context );
 		};
 
 		var store = request.store;
@@ -3250,24 +3249,24 @@ var IDB = (function(){
 		db_request.on_success = on_success;
 		db_request.on_error = on_error;
 
-		db_request.data[InDB.prototype.shorthand( request.attribute ) ] = request.strength;
+		db_request.data[IndexedDB.prototype.shorthand( request.attribute ) ] = request.strength;
 		
-	InDB.prototype.cursor.update( db_request );
+	IndexedDB.prototype.cursor.update( db_request );
 		
 		return this;
 	};
 
 	/* Synapses Cursor get */
-	InDB.prototype.cursor.getAttr = function( request ) {
+	IndexedDB.prototype.cursor.getAttr = function( request ) {
 		
 		var on_success =  function( context ) {
-			console.log( 'InDB.prototype.setAttr success', context );
+			console.log( 'IndexedDB.prototype.setAttr success', context );
 			var value = DB.cursor.value( context.event );
 			request.on_success( value[ request.attribute ] );
 		};
 
 		var on_error =  function( context ) {
-			console.log( 'InDB.prototype.setAttr error', context );
+			console.log( 'IndexedDB.prototype.setAttr error', context );
 			request.on_error( context );
 		};
 
@@ -3282,7 +3281,7 @@ var IDB = (function(){
 		db_request.on_success = on_success;
 		db_request.on_error = on_error;
 
-	InDB.prototype.get( db_request );
+	IndexedDB.prototype.get( db_request );
 		return this;
 	};
 
@@ -3292,15 +3291,15 @@ var IDB = (function(){
 	/* Single */
 
 	/* Get */
-	InDB.prototype.get = function ( request )  {
+	IndexedDB.prototype.get = function ( request )  {
 
-		if( !InDB.debug ) {
-			console.log( 'InDB.prototype.get', request );
+		if( !IndexedDB.debug ) {
+			console.log( 'IndexedDB.prototype.get', request );
 		}
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value =InDB.prototype.shorthand_decode( DB.row.value( context ) );
+				var value =IndexedDB.prototype.shorthand_decode( DB.row.value( context ) );
 				request.on_success( value );
 			}
 		}
@@ -3314,17 +3313,17 @@ var IDB = (function(){
 		var store = request.store;
 		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		DB.trigger( 'InDB_do_row_get', { 'store': request.store, 'key': request.key, 'index': request.index, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'IndexedDB_do_row_get', { 'store': request.store, 'key': request.key, 'index': request.index, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Remove */
-	InDB.prototype.delete = function ( request ) {
+	IndexedDB.prototype.delete = function ( request ) {
 
-		if( !InDB.debug ) {
-			console.log( 'InDB.prototype.delete', request );
+		if( !IndexedDB.debug ) {
+			console.log( 'IndexedDB.prototype.delete', request );
 		}
 
 		var on_success = function( context ) {
@@ -3343,17 +3342,17 @@ var IDB = (function(){
 		var store = request.store;
 		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		DB.trigger( 'InDB_do_row_delete', { 'store': request.store, 'key': request.key, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'IndexedDB_do_row_delete', { 'store': request.store, 'key': request.key, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Put */
-	InDB.prototype.put = function ( request )  {
+	IndexedDB.prototype.put = function ( request )  {
 
-		if( !InDB.debug ) {
-			console.log( 'InDB.prototype.put', request );
+		if( !IndexedDB.debug ) {
+			console.log( 'IndexedDB.prototype.put', request );
 		}
 
 		var on_success = function( context ) {
@@ -3371,23 +3370,23 @@ var IDB = (function(){
 
 		var data = request.data;
 		if( 'function' !== typeof data ) {
-			data =InDB.prototype.shorthand_encode( data );
+			data =IndexedDB.prototype.shorthand_encode( data );
 		}
 
 		var store = request.store;
 		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		DB.trigger( 'InDB_do_row_put', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'IndexedDB_do_row_put', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Add */
-	InDB.prototype.add = function ( request )  {
+	IndexedDB.prototype.add = function ( request )  {
 		
-		if( !InDB.debug ) {
-			console.log( 'InDB.prototype.add', request );
+		if( !IndexedDB.debug ) {
+			console.log( 'IndexedDB.prototype.add', request );
 		}
 
 		var on_success = function( context ) {
@@ -3405,23 +3404,23 @@ var IDB = (function(){
 
 		var data = request.data;
 		if( 'function' !== typeof data ) {
-			data =InDB.prototype.shorthand_encode( data );
+			data =IndexedDB.prototype.shorthand_encode( data );
 		}
 
 		var store = request.store;
 		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		DB.trigger( 'InDB_do_row_add', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'IndexedDB_do_row_add', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Update */
-	InDB.prototype.update = function ( request ) {
+	IndexedDB.prototype.update = function ( request ) {
 
-		if( !InDB.debug ) {
-			console.log( 'InDB.prototype.update', request );
+		if( !IndexedDB.debug ) {
+			console.log( 'IndexedDB.prototype.update', request );
 		}
 
 		var on_success = function( context ) {
@@ -3440,22 +3439,22 @@ var IDB = (function(){
 		var data = request.data;
 		var new_data;
 		if( 'function' !== typeof data ) {
-			new_data =InDB.prototype.shorthand_encode( data );
+			new_data =IndexedDB.prototype.shorthand_encode( data );
 		} else {
 			new_data = function( arg ) {
-				returnInDB.prototype.shorthand_encode( data(InDB.prototype.shorthand_decode( arg ) ) );
+				returnIndexedDB.prototype.shorthand_encode( data(IndexedDB.prototype.shorthand_decode( arg ) ) );
 			};
 		}
 
 		var expected = request.expected;
 		if( 'function' !== typeof expected ) {
-			expected =InDB.prototype.shorthand_encode( expected );
+			expected =IndexedDB.prototype.shorthand_encode( expected );
 		}
 
 		var store = request.store;
 		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		DB.trigger( 'InDB_do_row_update', { 'store': request.store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'IndexedDB_do_row_update', { 'store': request.store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
@@ -3463,10 +3462,10 @@ var IDB = (function(){
 
 	/* Multi */
 
-	InDB.prototype.cursor =InDB.prototype.cursor || {};
+	IndexedDB.prototype.cursor =IndexedDB.prototype.cursor || {};
 
 	/* Cursor Get */
-	InDB.prototype.cursor.get = function( request ) {
+	IndexedDB.prototype.cursor.get = function( request ) {
 
 		/* Action */
 
@@ -3479,8 +3478,8 @@ var IDB = (function(){
 		var left_inclusive = request.left_inclusive;
 		var right_inclusive = request.right_inclusive;
 
-		if( !InDB.debug ) {
-			console.log( 'InDB.prototype.cursor.get', request );
+		if( !IndexedDB.debug ) {
+			console.log( 'IndexedDB.prototype.cursor.get', request );
 		}
 
 		jQuery(document).trigger('cursor_get_namespace',request);
@@ -3504,10 +3503,10 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item =InDB.prototype.shorthand_reverse( DB.cursor.value( context.event ) );
+			var item =IndexedDB.prototype.shorthand_reverse( DB.cursor.value( context.event ) );
 			console.log('blah',item);
 			if( 'function' == typeof request.on_success ) {
-				if( !InDB.debug ) console.log( 'success', item );
+				if( !IndexedDB.debug ) console.log( 'success', item );
 				request.on_success( item );
 			}
 		};
@@ -3523,14 +3522,14 @@ var IDB = (function(){
 
 		/* Request */
 
-		DB.trigger( 'InDB_do_cursor_get', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'IndexedDB_do_cursor_get', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Cursor Delete */
-	InDB.prototype.cursor.delete = function( request ) {
+	IndexedDB.prototype.cursor.delete = function( request ) {
 
 		/* Setup */
 
@@ -3583,14 +3582,14 @@ var IDB = (function(){
 
 		/* Request */
 
-		DB.trigger( 'InDB_do_cursor_delete', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'IndexedDB_do_cursor_delete', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	};
 
 	/* Cursor Update */
-	InDB.prototype.cursor.update = function( request ) {
+	IndexedDB.prototype.cursor.update = function( request ) {
 
 		/* Setup */
 
@@ -3609,7 +3608,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item =InDB.prototype.shorthand_reverse( DB.cursor.value( context.event ) );
+			var item =IndexedDB.prototype.shorthand_reverse( DB.cursor.value( context.event ) );
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( item );
 			}
@@ -3625,10 +3624,10 @@ var IDB = (function(){
 		/* Shorthand Encoding */
 		var new_data;
 		if( 'function' !== typeof data ) {
-			new_data =InDB.prototype.shorthand_encode( data );
+			new_data =IndexedDB.prototype.shorthand_encode( data );
 		} else {
 			new_data = function( arg ) {
-				returnInDB.prototype.shorthand_encode( data(InDB.prototype.shorthand_decode( arg ) ) );
+				returnIndexedDB.prototype.shorthand_encode( data(IndexedDB.prototype.shorthand_decode( arg ) ) );
 			};
 		}
 
@@ -3656,13 +3655,13 @@ var IDB = (function(){
 
 		/* Request */
 		
-		DB.trigger( 'InDB_do_cursor_update', { 'store': request.store, 'data': new_data, 'keyRange': keyRange, 'index': index, 'replace': replace, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'IndexedDB_do_cursor_update', { 'store': request.store, 'data': new_data, 'keyRange': keyRange, 'index': index, 'replace': replace, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 	
 		return this;
 
 	}
 
-	InDB.prototype.clear = function( request ) {
+	IndexedDB.prototype.clear = function( request ) {
 
 		/* Callbacks */
 
@@ -3683,15 +3682,15 @@ var IDB = (function(){
 		var store = request.store;
 		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		DB.trigger( 'InDB_do_store_clear', { 'store': request.store, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
+		DB.trigger( 'IndexedDB_do_store_clear', { 'store': request.store, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
 	
 		return this;
 
 	};
 
-	InDB.prototype.shorthand =InDB.prototype.shorthand || {};
+	IndexedDB.prototype.shorthand =IndexedDB.prototype.shorthand || {};
 
-	InDB.prototype.shorthand.set = function( request ) {
+	IndexedDB.prototype.shorthand.set = function( request ) {
 
 		var store = request.store;
 		var data = request.data;
@@ -3716,7 +3715,7 @@ var IDB = (function(){
 
 	};
 
-	InDB.prototype.shorthand.get = function( request ) {
+	IndexedDB.prototype.shorthand.get = function( request ) {
 
 		/* Defaults */
 
@@ -3741,6 +3740,6 @@ var IDB = (function(){
 		return this;	
 	};
 
-	return InDB;
+	return IndexedDB;
 
 } )(); // End immediately executing anonymous function
