@@ -3690,7 +3690,7 @@ var IDB = (function(){
 		var data = request.data;
 		var on_error = request.on_error;
 		var shorthand_map = InDB.shorthand.map.get( { 'store': store } );
-		if( 'undefined' !== typeof.request.replace && false === request.replace ) {
+		if( 'undefined' !== typeof request.replace && false === request.replace ) {
 			for( item in data ) {
 				shorthand_map[ item ] = data[ item ];
 			}
