@@ -156,8 +156,10 @@ var IDB = (function(){
 	InDB.shorthand.get = function ( request ) {
 
 		var shorthand_map = InDB.shorthand.map.get( request.store );
-		console.log("InDB.shorthand.get",shorthand_map);
-		if( 'undefined' !== typeof DB.prototype.shorthand_map[ request.key ] ) {
+		if( !!InDB.debug ) {
+			console.log("InDB.shorthand.get map", shorthand_map);
+		}
+		if( 'undefined' !== typeof shorthand_map[ request.key ] ) {
 			return shorthand_map[ request.key ];
 		} else {
 			return request.key;
