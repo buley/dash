@@ -3115,12 +3115,12 @@ var IDB = (function(){
 	DB.prototype.cursor.direction = DB.prototype.cursor.direction || {};
 	DB.prototype.cursor.direction.next = function( request ) {
 		var no_dupes = false;
-		no_dupes = ( true == request.duplicates ) ? false : true;
+		no_dupes = ( 'undefined' !== duplicates && false == request.duplicates ) ? true : false;
 		return InDB.cursor.direction.next( no_dupes );
 	};
 	DB.prototype.cursor.direction.previous = function( request ) {
 		var no_dupes = false;
-		no_dupes = ( true == request.duplicates ) ? false : true;
+		no_dupes = ( 'undefined' !== duplicates && false == request.duplicates ) ? true : false;
 		return InDB.cursor.direction.previous( no_dupes );
 	};
 
