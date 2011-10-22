@@ -150,7 +150,7 @@ var IDB = (function(){
 	InDB.shorthand.map.get = function( store ) {
 		if( 'undefined' == shorthand_maps ) return null;
 		var result = shorthand_maps[ store ]; 
-		return ( 'undefined' == typeof result ) ? null : return result;
+		return ( 'undefined' == typeof result ) ? null : result;
 	};
 
 	InDB.shorthand.get = function ( request ) {
