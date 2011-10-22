@@ -3071,7 +3071,7 @@ var IDB = (function(){
 			InDB.fixBrowser(); 
 		}
 
-		if( 'undefined' !== typeof request.store ) {
+		if( 'undefined' !== typeof oequest.store ) {
 			current_store = request.store;
 		}
 
