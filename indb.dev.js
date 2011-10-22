@@ -3128,7 +3128,7 @@ var IDB = (function(){
 			return this;
 		}
 
-		indexes.primary.unique = ( true == indexes.primary.unique ) ? 'true' : 'false' );
+		indexes.primary.unique = ( true == indexes.primary.unique ) ? 'true' : 'false';
 
 		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
 		delete request.indexes.primary;
