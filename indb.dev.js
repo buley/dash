@@ -363,6 +363,7 @@ var IDB = (function(){
 			var open_request = window.indexedDB.open( name, description );
 			open_request.onsuccess = function ( event ) {
 				var result = event.target.result;
+				InDB.db = result;
 				on_success( result );
 				if ( isNaN( InDB.db.version ) ) {
 					InDB.trigger( 'InDB_database_load_success', result );
@@ -585,7 +586,6 @@ var IDB = (function(){
 			}
 
 			if ( !InDB.store.exists( store ) ) {
-				console.log("XXX");
 				/* Setup */
 				if( !!InDB.debug ) {
 					console.log('Store doesn\'t yet exist', store, options  );
