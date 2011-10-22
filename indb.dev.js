@@ -3107,7 +3107,7 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var indexes = request.indexes;
-		console.log("INSTALL",indexes);	
+
 		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
 
 		delete request.indexes.primary;
@@ -3116,6 +3116,7 @@ var IDB = (function(){
 		namespace_idxs[ store ] = {};
 
 		for( index in indexes ) {
+			console.log("INSTALL",index);	
 			namespace_idxs[ store ][ index ] = {};
 			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = indexes[ index ];
 		}
