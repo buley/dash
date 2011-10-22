@@ -3111,6 +3111,7 @@ var IDB = (function(){
 
 		var indexes = request.indexes;
 		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
+		console.log("NAMESPACE",namespace);
 		delete request.indexes.primary;
 
 		var namespace_idxs = {};
