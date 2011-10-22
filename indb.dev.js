@@ -10,6 +10,7 @@ var IDB = (function(){
 
 	var shorthand_maps = {};
 	var default_database = '';
+	var current_store = null;
 
 	/* PRIVATE API */
 
