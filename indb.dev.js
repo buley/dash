@@ -3097,7 +3097,7 @@ var IDB = (function(){
 		}
 
 		var store = request.store;
-		store = ( !InDB.isEmpty( store ) ? store : current_store;cx
+		store = ( !InDB.isEmpty( store ) ? store : current_store;
 
 		var indexes = request.indexes;
 	
