@@ -195,7 +195,7 @@ var IDB = (function(){
 
 
 //recursive
-	InDB.shorthand.decode = function( object ) {
+	InDB.shorthand.decode = function( request ) {
 		var encoded = {};
 		var total = 0;
 		var object = request.data;
@@ -205,10 +205,10 @@ var IDB = (function(){
 				//base case: string value
 				var value = object[ itemobj ];
 				if( 'object' === typeof value ) {
-					encoded[ InDB.shorthand.reverse( itemobj ) ] = InDB.shorthand.decode( { 'database': request.database, 'data': value } );
+					encoded[ InDB.shorthand.reverse( { 'store': request.store, 'data': itemobj } ) ] = InDB.shorthand.decode( { 'database': request.database, 'data': value } );
 					delete value;
 				} else { 
-					encoded[ InDB.shorthand.reverse( itemobj ) ] = value;
+					encoded[ InDB.shorthand.reverse( { 'store': request.store, 'data': itemobj } ) ] = value;
 					delete value;
 				}
 			}
