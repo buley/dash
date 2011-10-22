@@ -425,7 +425,7 @@ var IDB = (function(){
 				if ( statement ) { 
 					result = true;
 				} else {
-					console.log( error_message, arguments.callee );
+					console.log( error_message );
 					throw new Error( 'Assertion failed: ' + error_message, arguments[ 0 ] );
 				}
 				break;
@@ -3124,6 +3124,12 @@ var IDB = (function(){
 
 		var indexes = request.indexes;
 
+		if( !InDB.assert( 'undefined' !== typeof indexes.primary && 'undefined' !== typeof indexes.primary.key, 'Must set a primary key' ) ) {
+			return this;
+		}
+
+		indexes.primary.unique = ( true == indexes.primary.unique ) ? 'true' : 'false' );
+
 		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
 		delete request.indexes.primary;
 
@@ -3132,7 +3138,7 @@ var IDB = (function(){
 
 		for( index in indexes ) {
 			namespace_idxs[ store ][ index ] = {};
-			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = indexes[ index ];
+			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = ( true == indexes[ index ] ) ? 'true' : 'false';
 		}
 
 		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
