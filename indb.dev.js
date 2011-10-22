@@ -3064,6 +3064,13 @@ var IDB = (function(){
 
 	var DB = function( request ) {
 
+		// Fix browser if necessary 
+		var browser_check = InDB.checkBrowser(); 
+		InDB.assert( -1 !== browser_check, 'incompatible browser' ); 
+		if ( 0 === browser_check ) { 
+			InDB.fixBrowser(); 
+		}
+
 		if( 'undefined' !== typeof request.store ) {
 			current_store = request.store;
 		}
