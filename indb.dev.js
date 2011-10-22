@@ -4,7 +4,7 @@
  * Twitter -> @taylorbuley
  **/
 
-var IDB = (function(){
+var InDB = (function(){
 
 	/* Private vars */
 
@@ -32,23 +32,23 @@ var IDB = (function(){
 	 **/
 
 	/* Begin Namespaces */
-	var InDB = {};
-	InDB.factory = {};
-	InDB.db = {};
-	InDB.dbs = {};
-	InDB.database = {};
-	InDB.store = {};
-	InDB.shorthand = {};
-	InDB.stores = {};
-	InDB.index = {};
-	InDB.indexes = {};
-	InDB.range = {};
-	InDB.row = {};
-	InDB.cursor = {};
-	InDB.event = {};
-	InDB.events = {};
-	InDB.transaction = {};
-	InDB.utilities = {};
+	var DB = {};
+	DB.factory = {};
+	DB.db = {};
+	DB.dbs = {};
+	DB.database = {};
+	DB.store = {};
+	DB.shorthand = {};
+	DB.stores = {};
+	DB.index = {};
+	DB.indexes = {};
+	DB.range = {};
+	DB.row = {};
+	DB.cursor = {};
+	DB.event = {};
+	DB.events = {};
+	DB.transaction = {};
+	DB.utilities = {};
 	/* End Namespaces */
 
 
@@ -63,46 +63,46 @@ var IDB = (function(){
 
 	/**
 	 * Defaults:
-	 *   InDB.database.version (int) - database version to start with
-	 *   InDB.debug (bool) - whether or not to console.log stuff
-	 *   InDB.events.on_success (function) - generic success callback
-	 *   InDB.events.onComplete (function) - generic complete callback
-	 *   InDB.events.onError (function)- generic error callback
-	 *   InDB.events.onAbort (function) - generic abort callback
+	 *   DB.database.version (int) - database version to start with
+	 *   DB.debug (bool) - whether or not to console.log stuff
+	 *   DB.events.on_success (function) - generic success callback
+	 *   DB.events.onComplete (function) - generic complete callback
+	 *   DB.events.onError (function)- generic error callback
+	 *   DB.events.onAbort (function) - generic abort callback
 	 */
 
 	/* Begin Defaults */
 
-	InDB.database.version = 1;
+	DB.database.version = 1;
 
-	InDB.debug = false;
+	DB.debug = false;
 
-	InDB.events.onComplete = function ( e ) {
-		if ( !!InDB.debug ) {
+	DB.events.onComplete = function ( e ) {
+		if ( !!DB.debug ) {
 			console.log ( "IndexedDB request completed", e );
 		}
 	};
 
-	InDB.events.onSuccess = function ( e ) {
-		if ( !!InDB.debug ) {
+	DB.events.onSuccess = function ( e ) {
+		if ( !!DB.debug ) {
 			console.log ( "IndexedDB request successful", e );
 		}
 	};
 
-	InDB.events.onError = function ( e ) {
-		if ( !!InDB.debug ) {
+	DB.events.onError = function ( e ) {
+		if ( !!DB.debug ) {
 			console.log ( "IndexedDB request errored", e );
 		}
 	};
 
-	InDB.events.onAbort = function ( e ) {
-		if ( !!InDB.debug ) {
+	DB.events.onAbort = function ( e ) {
+		if ( !!DB.debug ) {
 			console.log ( "IndexedDB request aborted", e );
 		}
 	};
 
-	InDB.events.onBlocked = function ( e ) {
-		if ( !!InDB.debug ) {
+	DB.events.onBlocked = function ( e ) {
+		if ( !!DB.debug ) {
 			console.log ( "IndexedDB request blocked", e.event.target.result );
 		}
 	};
@@ -118,10 +118,10 @@ var IDB = (function(){
 	//global that stores the maps for various dbs
 	var shorthand_maps = {};
 
-	InDB.shorthand.map = InDB.shorthand.map || {};
+	DB.shorthand.map = DB.shorthand.map || {};
 
 	// Private object setter
-	InDB.shorthand.map.set = function( request ) {
+	DB.shorthand.map.set = function( request ) {
 		var on_error = request.on_error;
 		var on_success = request.on_success;
 		if( 'undefined' === shorthand_maps ) {
@@ -147,15 +147,15 @@ var IDB = (function(){
 	};
 
 	// Private object getter
-	InDB.shorthand.map.get = function( store ) {
+	DB.shorthand.map.get = function( store ) {
 		if( 'undefined' == shorthand_maps ) return null;
 		var result = shorthand_maps[ store ]; 
 		return ( 'undefined' == typeof result ) ? null : result;
 	};
 
-	InDB.shorthand.get = function ( request ) {
-		var shorthand_map = InDB.shorthand.map.get( request.store );
-		if( 'undefined' !== typeof DB.prototype.shorthand_map[ key ] ) {
+	DB.shorthand.get = function ( request ) {
+		var shorthand_map = DB.shorthand.map.get( request.store );
+		if( 'undefined' !== typeofInDB.prototype.shorthand_map[ key ] ) {
 			return shorthand_map[ request.key ];
 		} else {
 			return key;
@@ -163,13 +163,13 @@ var IDB = (function(){
 	};
 
 
-	InDB.shorthand.reverse = function ( request ) {
+	DB.shorthand.reverse = function ( request ) {
 		var k = request.key;
 		var reversed = {};
-		var shorthand_map = InDB.shorthand.map.get( request.databaes );
+		var shorthand_map = DB.shorthand.map.get( request.databaes );
 		for( var item in shorthand_map ) {
 			if( shorthand_map.hasOwnProperty( item ) ) {
-				reversed[ InDB.shorthand.get( item ) ] = item;
+				reversed[ DB.shorthand.get( item ) ] = item;
 			}
 		}
 		if( 'undefined' !== typeof reversed[ k ] ) {
@@ -181,7 +181,7 @@ var IDB = (function(){
 
 
 //recursive
-	InDB.shorthand.decode = function( object ) {
+	DB.shorthand.decode = function( object ) {
 		var encoded = {};
 		var total = 0;
 		var object = request.data;
@@ -191,10 +191,10 @@ var IDB = (function(){
 				//base case: string value
 				var value = object[ itemobj ];
 				if( 'object' === typeof value ) {
-					encoded[ InDB.shorthand.reverse( itemobj ) ] = InDB.shorthand.decode( { 'database': request.database, 'data': value } );
+					encoded[ DB.shorthand.reverse( itemobj ) ] = DB.shorthand.decode( { 'database': request.database, 'data': value } );
 					delete value;
 				} else { 
-					encoded[ InDB.shorthand.reverse( itemobj ) ] = value;
+					encoded[ DB.shorthand.reverse( itemobj ) ] = value;
 					delete value;
 				}
 			}
@@ -209,7 +209,7 @@ var IDB = (function(){
 
 
 	//recursive
-	InDB.shorthand.encode = function( request ) {
+	DB.shorthand.encode = function( request ) {
 		var encoded = {};
 		var object = request.data;
 		for( var item in object ) {
@@ -218,9 +218,9 @@ var IDB = (function(){
 				//base case: string value
 
 				if( 'object' === typeof object[ item ] ) {
-					encoded[ InDB.shorthand.get( item ) ] = InDB.shorthand.encode( { 'database': request.database, 'data': object[ item ] } );	
+					encoded[ DB.shorthand.get( item ) ] = DB.shorthand.encode( { 'database': request.database, 'data': object[ item ] } );	
 				} else { 
-					encoded[ InDB.shorthand.get( item ) ] = object[ item ];
+					encoded[ DB.shorthand.get( item ) ] = object[ item ];
 				}
 			}
 		}
@@ -232,7 +232,7 @@ var IDB = (function(){
 
 	/**
 	 * Actions:
-	 *  InDB_database_loaded - The database is loaded into the InDB.db namespace; no guarantee that object stores exist if a fresh install
+	 *  InDB_database_loaded - The database is loaded into the DB.db namespace; no guarantee that object stores exist if a fresh install
 	 *  InDB_database_created - Database is created for the first time
 	 *  InDB_stores_load_{success|error|abort} - Database is loaded and all collections have been created
 	 *  InDB_store_created_{success|error|abort} - Response to an attempt at creating an object store
@@ -246,13 +246,13 @@ var IDB = (function(){
 	/* Begin Event Methods */
 
 	/* binds a callback method to new events */
-	InDB.bind = function ( event_name, callback_method ) {
+	DB.bind = function ( event_name, callback_method ) {
 		//TODO: assert argument types and validity
 		jQuery( InDB ).bind( event_name, callback_method );
 	}
 
 	/* triggers a new event */
-	InDB.trigger = function ( event_name, context ) {
+	DB.trigger = function ( event_name, context ) {
 		//TODO: assert argument types and validity
 		jQuery( InDB ).trigger( event_name, context );
 	}
@@ -260,17 +260,17 @@ var IDB = (function(){
 
 	/* Begin InDB Methods */
 	/**
-	 * InDB.browserSupported( )  > support level (int): [ -1, 0, 1 ]
+	 * DB.browserSupported( )  > support level (int): [ -1, 0, 1 ]
 	 *  Checks to see if IndexedDB is supported
 	 *  returns 1 if fully supported, 0 if supported w/fixes, and -1 if unsupported
 	 **/
 
 	/* Create object stores after the database is created */
-	InDB.bind( 'InDB_do_database_load', function ( event, context ) {
+	DB.bind( 'InDB_do_database_load', function ( event, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_database_load', event, context );
 		}
 
@@ -285,23 +285,23 @@ var IDB = (function(){
 		/* Assertions */
 
 		// Assert that the database has a name
-		if ( !InDB.assert( !InDB.isEmpty( name ), 'Database must have a name' ) ) {
+		if ( !DB.assert( !DB.isEmpty( name ), 'Database must have a name' ) ) {
 			return;
 		}
 
 		/* Request */
 
-		InDB.database.load( name, description, on_success, on_error, on_abort );
+		DB.database.load( name, description, on_success, on_error, on_abort );
 
 	} );
 
 
 	/* This function is indempodent (you can run it multiple times and it won't do anything */
-	InDB.database.load = function ( name, description, on_success, on_error, on_abort ) {
+	DB.database.load = function ( name, description, on_success, on_error, on_abort ) {
 
 		/* Begin Debug */
-		if ( !!InDB.debug ) {
-			console.log ( "InDB.database.load", name, description, on_success, on_error, on_abort );
+		if ( !!DB.debug ) {
+			console.log ( "DB.database.load", name, description, on_success, on_error, on_abort );
 		}
 		/* End Debug */
 
@@ -310,72 +310,72 @@ var IDB = (function(){
 
 		/* Assertions */	
 		
-		if ( "IDBDatabase" === typeof InDB.db && name === InDB.db.name ) {
+		if ( "IDBDatabase" === typeof DB.db && name === DB.db.name ) {
 			on_error( new Error( "Database already loaded" ) );
-			InDB.trigger( 'InDB_database_already_loaded', context );
+			DB.trigger( 'InDB_database_already_loaded', context );
 			return;
 		}
 			
-		if ( !InDB.assert( !InDB.isEmpty( name ), "database name cannot be empty" ) ) { 
+		if ( !DB.assert( !DB.isEmpty( name ), "database name cannot be empty" ) ) { 
 			return;
 		}
 		
-		if ( !InDB.assert( !InDB.isEmpty( description ), "database description cannot be empty" ) ) { 
+		if ( !DB.assert( !DB.isEmpty( description ), "database description cannot be empty" ) ) { 
 			return;
 		}
 
 		/* Defaults */
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 		
 		/* Action */
-		InDB.trigger( 'InDB_database_loading', context );
+		DB.trigger( 'InDB_database_loading', context );
 		
 		/* Request Responses */
 
-		if ( "undefined" !== typeof InDB.db && name === InDB.db.name ) {
-			InDB.trigger( 'InDB_database_load_success', context );
-			InDB.trigger( 'InDB_stores_load_success', context );
+		if ( "undefined" !== typeof DB.db && name === DB.db.name ) {
+			DB.trigger( 'InDB_database_load_success', context );
+			DB.trigger( 'InDB_stores_load_success', context );
 		} else {
-			var open_request = window.indexedDB.open( name, description );
+			var open_request = window.indexeInDB.open( name, description );
 			open_request.onsuccess = function ( event ) {
 				var result = event.target.result;
 				on_success( result );
-				if ( isNaN( InDB.db.version ) ) {
-					InDB.trigger( 'InDB_database_load_success', result );
-					InDB.trigger( 'InDB_database_created_success', result );
+				if ( isNaN( DB.db.version ) ) {
+					DB.trigger( 'InDB_database_load_success', result );
+					DB.trigger( 'InDB_database_created_success', result );
 					/* Database is unversioned, so create object stores */
-					InDB.trigger( 'InDB_stores_load_success', result );
+					DB.trigger( 'InDB_stores_load_success', result );
 				} else {
-					InDB.trigger( 'InDB_database_load_success', result );
-					InDB.trigger( 'InDB_stores_load_success', result );
+					DB.trigger( 'InDB_database_load_success', result );
+					DB.trigger( 'InDB_stores_load_success', result );
 				}
 			}
 			open_request.onerror = function ( event ) {
 				context[ 'event' ] = event;
 				on_error( context );
-				InDB.trigger( 'InDB_database_load_error' );
+				DB.trigger( 'InDB_database_load_error' );
 			}
 			open_request.onabort = function ( event ) {
 				context[ 'event' ] = event;
 				on_abort( context );
-				InDB.trigger( 'InDB_database_load_error' )
+				DB.trigger( 'InDB_database_load_error' )
 			}
 		}
 	}
 
-	InDB.checkBrowser = function () {
-		InDB.trigger( 'InDB_checking_browser' );		
+	DB.checkBrowser = function () {
+		DB.trigger( 'InDB_checking_browser' );		
 		var result = -1;
 		// the support check
 		if ( !!window.webkitIndexedDB || !!window.mozIndexedDB ) {
@@ -384,18 +384,18 @@ var IDB = (function(){
 			result = 1;
 		}
 		//TODO: Allow filter
-		//result = InDB.trigger( 'Indb_did_browserSupported', { "result": result } );
-		InDB.trigger( 'InDB_checked_browser', { "result": result } );
+		//result = DB.trigger( 'Indb_did_browserSupported', { "result": result } );
+		DB.trigger( 'InDB_checked_browser', { "result": result } );
 		return result;
 	}
 
 	/**
-	 * InDB.assert( statement, string, string ) - handy little tool for unit tests
+	 * DB.assert( statement, string, string ) - handy little tool for unit tests
 	 * statement (mixed): whatever you want to evaluate
 	 * warn_level (string): log, alert or *error (*default) 
 	 *
 	 **/
-	InDB.assert = function ( statement, error_message, warn_level ) {
+	DB.assert = function ( statement, error_message, warn_level ) {
 
 		error_message = ( !!error_message ) ? error_message : "Unknown error.";
 		result = false;
@@ -420,14 +420,14 @@ var IDB = (function(){
 
 
 
-	InDB.exists = function( mixed_var ) {
-		return ( InDB.isEmpty( mixed_var ) ) ? false : true;
+	DB.exists = function( mixed_var ) {
+		return ( DB.isEmpty( mixed_var ) ) ? false : true;
 	};
 
-	/* InDB.isEmpty ( mixed var ) -> bool
+	/* DB.isEmpty ( mixed var ) -> bool
 	 * Checks whether a variable has a value */
-	InDB.isEmpty = function ( mixed_var ) {
-		if ( !!InDB.debug && "verbose" === InDB.debug ) {
+	DB.isEmpty = function ( mixed_var ) {
+		if ( !!DB.debug && "verbose" === DB.debug ) {
 			console.log ( '"undefined" !== typeof mixed_var', "undefined" !== typeof mixed_var );
 			console.log ( 'null !== mixed_var', null !== mixed_var );
 			console.log ( '"" !== mixed_var', "" !== mixed_var );
@@ -436,34 +436,34 @@ var IDB = (function(){
 		return ( "undefined" !== typeof mixed_var && null !== mixed_var && "" !== mixed_var ) ? false : true;
 	}
 
-	InDB.isObject = function ( mixed_var ) {
-		return InDB.isType( "object", mixed_var );
+	DB.isObject = function ( mixed_var ) {
+		return DB.isType( "object", mixed_var );
 	}
 
-	InDB.isString = function ( mixed_var ) {
-		return InDB.isType( "string", mixed_var );
+	DB.isString = function ( mixed_var ) {
+		return DB.isType( "string", mixed_var );
 	}
 
-	InDB.isFunction = function ( mixed_var ) {
-		return InDB.isType( "function", mixed_var );
+	DB.isFunction = function ( mixed_var ) {
+		return DB.isType( "function", mixed_var );
 	}
 
-	InDB.isNumber = function ( mixed_var ) {
-		return InDB.isType( "number", mixed_var );
+	DB.isNumber = function ( mixed_var ) {
+		return DB.isType( "number", mixed_var );
 	}
 
-	InDB.isBoolean = function ( mixed_var ) {
-		return InDB.isType( "boolean", mixed_var ) || 'true' == mixed_var || 'false' == mixed_var;
+	DB.isBoolean = function ( mixed_var ) {
+		return DB.isType( "boolean", mixed_var ) || 'true' == mixed_var || 'false' == mixed_var;
 	}
 
-	InDB.isType = function ( type, mixed_var ) {
+	DB.isType = function ( type, mixed_var ) {
 		return ( type !== typeof mixed_var ) ? false : true;
 	}
 
-	/* InDB.fixBrowser( ) -> null 
-	 * Sets up expermental interfaces if necessary. For use when a browser has not yet implemented the native (window.IndexedDB) dom interface, which is detectable if InDB.browser_supported returns -1. */
-	InDB.fixBrowser = function () {
-		InDB.trigger( 'doing_fixBrowser' );		
+	/* DB.fixBrowser( ) -> null 
+	 * Sets up expermental interfaces if necessary. For use when a browser has not yet implemented the native (window.IndexedDB) dom interface, which is detectable if DB.browser_supported returns -1. */
+	DB.fixBrowser = function () {
+		DB.trigger( 'doing_fixBrowser' );		
 		if (typeof window.webkitIndexedDB !== "undefined") {
 			window.IDBCursor = window.webkitIDBCursor;
 			window.IDBDatabase = window.webkitIDBDatabase;
@@ -486,11 +486,11 @@ var IDB = (function(){
 
 	/* End InDB Methods */
 
-	InDB.index.exists = function ( store, index ) {
-		if( !!InDB.debug ) {
-			console.log( 'InDB.index.exists', store, index );
+	DB.index.exists = function ( store, index ) {
+		if( !!DB.debug ) {
+			console.log( 'DB.index.exists', store, index );
 		}
-		var store = InDB.transaction.create( store );
+		var store = DB.transaction.create( store );
 		var indexes = store.indexNames;
 		if( 'undefined' !== typeof indexes && null !== indexes && index.length > 0 ) {
 			for( var i=0; i< indexes.length; i++ ) {
@@ -505,12 +505,12 @@ var IDB = (function(){
 
 	/* Begin Object Store Methods */
 
-	InDB.store.exists = function ( name ) {
-	/*	if( "function" === typeof InDB.db.objectStores.contains ) {
-			return InDB.db.objectStores[ 'contains' ]( name ); //TODO: #Question: Not in IndexedDB spec?
+	DB.store.exists = function ( name ) {
+	/*	if( "function" === typeof DB.db.objectStores.contains ) {
+			return DB.db.objectStores[ 'contains' ]( name ); //TODO: #Question: Not in IndexedDB spec?
 		} */
-		for( i=0; i<InDB.db.objectStoreNames.length; i++ ) {
-			if ( name === InDB.db.objectStoreNames[i] ) {
+		for( i=0; i<DB.db.objectStoreNames.length; i++ ) {
+			if ( name === DB.db.objectStoreNames[i] ) {
 				return true;
 			}
 		}
@@ -520,11 +520,11 @@ var IDB = (function(){
 
 
 	/* Create object stores after the database is created */
-	InDB.bind( 'InDB_do_stores_create', function ( event, context ) {
+	DB.bind( 'InDB_do_stores_create', function ( event, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_create_stores', event, context );
 		}
 
@@ -538,20 +538,20 @@ var IDB = (function(){
 		/* Assertions */
 
 		// Assert that the database is already loaded
-		if ( !InDB.assert( InDB.db !== 'Object', 'Database not loaded' ) ) {
-			if ( !!InDB.debug ) {
+		if ( !DB.assert( DB.db !== 'Object', 'Database not loaded' ) ) {
+			if ( !!DB.debug ) {
 				console.log ( 'Database created', event, context );
 			}
 		}
 
 		/* Request */
 
-		InDB.stores.create( stores, on_success, on_error, on_abort );
+		DB.stores.create( stores, on_success, on_error, on_abort );
 
 	} );
 
 
-	InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
+	DB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 
 		var context = { 'stores': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
 		//TODO: Assertions
@@ -559,24 +559,24 @@ var IDB = (function(){
 
 			var options = stores[ store ];
 
-			if ( InDB.isString( options ) ) {
+			if ( DB.isString( options ) ) {
 				/* options object is really a string
 				 * recast options var from a string to a
 				 * real deal options object */
-				options = InDB.store.options( options );
+				options = DB.store.options( options );
 			}
-			if ( !InDB.store.exists( store ) ) {
+			if ( !DB.store.exists( store ) ) {
 				/* Setup */
-				if( !!InDB.debug ) {
+				if( !!DB.debug ) {
 					console.log('Store doesn\'t yet exist', store, options  );
 				}
 				//TODO: Cleanup; if/else logic here is a little muddy (why the empty_key var?)
 				var key, autoinc_key, empty_key, unique;
-				if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
+				if( "undefined" !== typeof options && !DB.isEmpty( options.key ) ) {
 					key = options.key;
 					unique = options.unique;
 					autoinc_key = options.incrementing_key;
-					empty_key = InDB.isEmpty( key );
+					empty_key = DB.isEmpty( key );
 				} else {
 					for( attrib in options ) {
 						// Don't want prototype attributes
@@ -590,35 +590,35 @@ var IDB = (function(){
 
 				/* Defaults */
 
-				if ( "undefined" === typeof unique || !InDB.isBoolean( unique ) ) { 
+				if ( "undefined" === typeof unique || !DB.isBoolean( unique ) ) { 
 					unique = false; 
 				}
 
-				if ( "undefined" === typeof autoinc_key || !InDB.isBoolean( autoinc_key ) ) { 
+				if ( "undefined" === typeof autoinc_key || !DB.isBoolean( autoinc_key ) ) { 
 					autoinc_key = false; 
 				}
 
 				/* Assertions */
 
-				InDB.assert( ( empty_key || InDB.isString( key ) ), 'Key needs to be a string' );
-				InDB.assert( ( InDB.isBoolean( autoinc_key ) ), 'Autoinc_key (whether the key uses a generator) needs to be a boolean' ); 
+				DB.assert( ( empty_key || DB.isString( key ) ), 'Key needs to be a string' );
+				DB.assert( ( DB.isBoolean( autoinc_key ) ), 'Autoinc_key (whether the key uses a generator) needs to be a boolean' ); 
 
 				/* Debug */
 
-				if( !!InDB.debug ) {
-					console.log( 'InDB.stores.create calling InDB.store.create', store, key, autoinc_key, on_success, on_error, on_abort );
+				if( !!DB.debug ) {
+					console.log( 'DB.stores.create calling DB.store.create', store, key, autoinc_key, on_success, on_error, on_abort );
 				}
 
 				/* Request */
 					
-				InDB.store.create( store, key, autoinc_key, unique, on_success, on_error, on_abort );
+				DB.store.create( store, key, autoinc_key, unique, on_success, on_error, on_abort );
 
 			}
 		}
 	};
 
 
-	InDB.store.options = function ( key, autoinc_key ) {
+	DB.store.options = function ( key, autoinc_key ) {
 		//TODO: Assertions key is valid string; autoinc_key is bool (isBoolean?)
 		var obj = { 
 			'keyPath': ( !!key ) ? key : null
@@ -628,11 +628,11 @@ var IDB = (function(){
 	}
 
 	/* Create object stores after the database is created */
-	InDB.bind( 'InDB_do_store_create', function ( event, context ) {
+	DB.bind( 'InDB_do_store_create', function ( event, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_create_store', event, context );
 		}
 
@@ -651,15 +651,15 @@ var IDB = (function(){
 		/* Assertions */
 
 		// Assert that the database is already loaded
-		if ( !InDB.assert( InDB.db !== 'Object', 'Database not loaded' ) ) {
-			if ( !!InDB.debug ) {
+		if ( !DB.assert( DB.db !== 'Object', 'Database not loaded' ) ) {
+			if ( !!DB.debug ) {
 				console.log ( 'Database created', event, context );
 			}
 		}
 
 		/* Request */
 		
-		InDB.store.create( name, key, autoinc_key, unique, on_success, on_error, on_abort, on_blocked );
+		DB.store.create( name, key, autoinc_key, unique, on_success, on_error, on_abort, on_blocked );
 
 	} );
 
@@ -667,28 +667,28 @@ var IDB = (function(){
 	/* return true if request is successfully requested (no bearing on result)
 	/* autoinc_key defaults to false if a key is specified;
 	   key gets set to "key" and autoincrements when key is not specified */
-	InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_error, on_abort, on_blocked ) {
+	DB.store.create = function ( name, key, autoinc_key, unique, on_success, on_error, on_abort, on_blocked ) {
 		
 		/* Debug */
 		
-		console.log('InDB.store.create', name, key, autoinc_key, unique, on_success, on_error, on_abort );
+		console.log('DB.store.create', name, key, autoinc_key, unique, on_success, on_error, on_abort );
 
-		if( !!InDB.debug ) {
-			console.log ( "InDB.store.create", name, key, autoinc_key, on_success, on_error, on_abort );
+		if( !!DB.debug ) {
+			console.log ( "DB.store.create", name, key, autoinc_key, on_success, on_error, on_abort );
 		}
 
 		/* Assertions */	
 
-		if ( !InDB.assert( !InDB.isEmpty( name ), "object store name should not be empty" ) ) { 
+		if ( !DB.assert( !DB.isEmpty( name ), "object store name should not be empty" ) ) { 
 			return false;
 		}
 
-		if ( !InDB.assert( !InDB.store.exists( name ) , "object store should not already exist" ) ) { 
+		if ( !DB.assert( !DB.store.exists( name ) , "object store should not already exist" ) ) { 
 			return false;
 		}
 
 		// TODO: #Question: Is this true?
-		if ( !InDB.assert( !InDB.isEmpty( key ), "object store needs a key" ) ) { 
+		if ( !DB.assert( !DB.isEmpty( key ), "object store needs a key" ) ) { 
 			return false;
 		}
 
@@ -703,31 +703,31 @@ var IDB = (function(){
 		}
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 		if ( "undefined" === typeof on_blocked ) {
-			on_blocked = InDB.events.onBlocked;
+			on_blocked = DB.events.onBlocked;
 		}
 		
 		var context =  { "name": name, "keyPath": keyPath, "autoinc_key": autoinc_key };
 
 		/* Debug */
 		
-		if( !!InDB.debug ) {
-			console.log( 'InDB.store.create context', context );
+		if( !!DB.debug ) {
+			console.log( 'DB.store.create context', context );
 		}
 
 		// Database changes must happen w/in a setVersion transaction
-		var version = parseInt( InDB.db.version, 10 );
+		var version = parseInt( DB.db.version, 10 );
 		version = ( isNaN( version ) ) ? 1 : version + 1;
 		
-		var setVersionRequest = InDB.db.setVersion( version );
+		var setVersionRequest = DB.db.setVersion( version );
 		console.log(setVersionRequest);
 		setVersionRequest.onsuccess = function ( event ) {
 			try {
@@ -743,23 +743,23 @@ var IDB = (function(){
 					options[ 'autoIncrement' ] = autoinc_key;
 				}
 				console.log('options~', options );	
-				InDB.db.createObjectStore( name, options );
+				DB.db.createObjectStore( name, options );
 
 				context[ 'event' ] = event;
 
 				on_success( context );
 
-				InDB.trigger( "InDB_store_created_success", context );
+				DB.trigger( "InDB_store_created_success", context );
 
 			} catch( error ) {
 
 				// createdObject store threw an error 
 				context[ 'error' ] = error;
 				on_error( context );
-				InDB.trigger( "InDB_store_created_error", context );
+				DB.trigger( "InDB_store_created_error", context );
 				//if already created, then the store already exists
 				if ( IDBDatabaseException.CONSTRAINT_ERR === error.code ) {
-					InDB.trigger( "InDB_store_already_exists", context );
+					DB.trigger( "InDB_store_already_exists", context );
 				}
 			}
 		};
@@ -767,29 +767,29 @@ var IDB = (function(){
 		setVersionRequest.onblocked = function ( event ) {
 			context[ 'event' ] = event;
 			on_blocked( context );
-			InDB.trigger( "InDB_store_created_error", context );
+			DB.trigger( "InDB_store_created_error", context );
 		};
 
 		setVersionRequest.onerror = function ( event ) {
 			context[ 'event' ] = event;
 			on_error( context );
-			InDB.trigger( "InDB_store_created_error", context );
+			DB.trigger( "InDB_store_created_error", context );
 		};
 
 		setVersionRequest.onabort = function ( event ) {
 			context[ 'event' ] = event;
 			on_abort( context );
-			InDB.trigger( "InDB_store_created_abort", context );
+			DB.trigger( "InDB_store_created_abort", context );
 		};
 
 	}
 
 
-	InDB.bind( 'InDB_do_indexes_create', function ( event, context ) {
+	DB.bind( 'InDB_do_indexes_create', function ( event, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_create_indexes', event, context );
 		}
 
@@ -803,20 +803,20 @@ var IDB = (function(){
 		/* Assertions */
 
 		// Assert that the database is already loaded
-		if ( !InDB.assert( InDB.db !== 'Object', 'Database not loaded' ) ) {
+		if ( !DB.assert( DB.db !== 'Object', 'Database not loaded' ) ) {
 			return;
 		}
 
 		/* Request */
 		
-		InDB.indexes.create( indexes, on_success, on_error, on_abort );
+		DB.indexes.create( indexes, on_success, on_error, on_abort );
 
 	} );
 
-	InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
+	DB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
 		var context = { 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
-		if( !!InDB.debug ) {
-			console.log( 'InDB.indexes.create', context );
+		if( !!DB.debug ) {
+			console.log( 'DB.indexes.create', context );
 		}
 		//TODO: Assertions
 		for( store in stores ) {
@@ -828,9 +828,9 @@ var IDB = (function(){
 					var key, unique, empty_key, multirow;
 					var name = index;
 
-					if ( !InDB.index.exists( store, index ) ) {
+					if ( !DB.index.exists( store, index ) ) {
 						//TODO: Cleanup
-						if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
+						if( "undefined" !== typeof options && !DB.isEmpty( options.key ) ) {
 							key = options.key;
 							unique = options.unique;
 						} else {
@@ -854,25 +854,25 @@ var IDB = (function(){
 					}
 				}
 
-				if ( "undefined" === typeof unique || !InDB.isBoolean( unique ) ) { 
+				if ( "undefined" === typeof unique || !DB.isBoolean( unique ) ) { 
 
 					unique = false; 
 				}
 
 				/* Assertions */
 				
-				InDB.assert( !InDB.isEmpty( key ), 'Must provide an index key' );  
-				InDB.assert( ( InDB.isBoolean( unique ) ), 'Unique key value must be a boolean' );
+				DB.assert( !DB.isEmpty( key ), 'Must provide an index key' );  
+				DB.assert( ( DB.isBoolean( unique ) ), 'Unique key value must be a boolean' );
 
 				/* Debug */
 
-				if( !!InDB.debug ) {
-					console.log( 'InDB.indexes.create calling InDB.index.create', store, key, name, unique, multirow, on_success, on_error, on_abort );
+				if( !!DB.debug ) {
+					console.log( 'DB.indexes.create calling DB.index.create', store, key, name, unique, multirow, on_success, on_error, on_abort );
 				}
 
 				/* Request */
 				
-				InDB.index.create( store, key, name, unique, multirow, on_success, on_error, on_abort );
+				DB.index.create( store, key, name, unique, multirow, on_success, on_error, on_abort );
 				
 			}
 		}
@@ -880,54 +880,54 @@ var IDB = (function(){
 
 
 	//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort, context.unique, context.multirow
-	InDB.bind( 'InDB_do_index_create', function( row_result, context ) {
+	DB.bind( 'InDB_do_index_create', function( row_result, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_index_create', row_result, context );
 		}
 
 		/* Assertions */
-		if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide a store for index' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.store ), 'Must provide a store for index' ) ) {
 			return;
 		}
 				
-		if ( !InDB.assert( !InDB.isEmpty( context.key ), 'Must provide a key for index' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.key ), 'Must provide a key for index' ) ) {
 			return;
 		}
 		
-		if ( !InDB.assert( !InDB.isEmpty( context.name ), 'Must provide a name for index' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.name ), 'Must provide a name for index' ) ) {
 			return;
 		}
 
 
 		/* Invocation */
 
-		InDB.index.create( context.store, context.key, context.name, context.unique, context.multirow, context.on_success, context.on_error, context.on_abort );
+		DB.index.create( context.store, context.key, context.name, context.unique, context.multirow, context.on_success, context.on_error, context.on_abort );
 	} );
 
 
 	/* unique defaults to false if not present */
-	InDB.index.create = function ( store, key, name, unique, multirow, on_success, on_error, on_abort ) {
+	DB.index.create = function ( store, key, name, unique, multirow, on_success, on_error, on_abort ) {
 		
 		/* Debug */
 
-		if( !!InDB.debug ) {
-			console.log( 'InDB.index.create', store, key, name, unique, multirow, on_success, on_error, on_abort );
+		if( !!DB.debug ) {
+			console.log( 'DB.index.create', store, key, name, unique, multirow, on_success, on_error, on_abort );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide a store for index' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide a store for index' ) ) {
 			return;
 		}
 				
-		if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key for index' ) ) {
+		if ( !DB.assert( !DB.isEmpty( key ), 'Must provide a key for index' ) ) {
 			return;
 		}
 		
-		if ( !InDB.assert( !InDB.isEmpty( name ), 'Must provide a name for index' ) ) {
+		if ( !DB.assert( !DB.isEmpty( name ), 'Must provide a name for index' ) ) {
 			return;
 		}
 
@@ -943,15 +943,15 @@ var IDB = (function(){
 
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		/* Context */
@@ -961,8 +961,8 @@ var IDB = (function(){
 		/* Request */
 
 		// Database changes need to happen from w/in a setVersionRequest
-		var version = ( parseInt( InDB.db.version, 10 ) ) ? parseInt( InDB.db.version, 10 ) : 0;
-		var setVersionRequest = InDB.db.setVersion( version );
+		var version = ( parseInt( DB.db.version, 10 ) ) ? parseInt( DB.db.version, 10 ) : 0;
+		var setVersionRequest = DB.db.setVersion( version );
 		console.log('index setVersion setup', setVersionRequest, version);
 		/* Request Responses */
 
@@ -991,60 +991,60 @@ var IDB = (function(){
 	}
 
 	//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort
-	InDB.bind( 'InDB_do_index_delete', function( row_result, context ) {
+	DB.bind( 'InDB_do_index_delete', function( row_result, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_index_delete', row_result, context );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide a store for index' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.store ), 'Must provide a store for index' ) ) {
 			return;
 		}
 				
-		if ( !InDB.assert( !InDB.isEmpty( context.name ), 'Must provide a name for index' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.name ), 'Must provide a name for index' ) ) {
 			return;
 		}
 
 		/* Invocation */
 
-		InDB.index.delete( context.store, context.name, context.on_success, context.on_error, context.on_abort );
+		DB.index.delete( context.store, context.name, context.on_success, context.on_error, context.on_abort );
 
 	} );
 
 
 	/* unique defaults to false if not present */
-	InDB.index.delete = function ( store, name, on_success, on_success, on_abort ) {
+	DB.index.delete = function ( store, name, on_success, on_success, on_abort ) {
 		
 		/* Debug */
 
-		if( !!InDB.debug ) {
-			console.log( 'InDB.index.delete', store, name, on_success, on_error, on_abort );
+		if( !!DB.debug ) {
+			console.log( 'DB.index.delete', store, name, on_success, on_error, on_abort );
 		}
 
 		/* Assertions */	
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), "object store name cannot be empty" ) ) { 
+		if ( !DB.assert( !DB.isEmpty( store ), "object store name cannot be empty" ) ) { 
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( name ), "index name cannot be empty" ) ) { 
+		if ( !DB.assert( !DB.isEmpty( name ), "index name cannot be empty" ) ) { 
 			return;
 		}
 
 		/* Defaults */	
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		/* Context */
@@ -1054,8 +1054,8 @@ var IDB = (function(){
 		/* Request */
 
 		// Database changes need to happen from w/in a setVersionRequest
-		var version = ( parseInt( InDB.db.version, 10 ) ) ? parseInt( InDB.db.version, 10 ) : 0;
-		var setVersionRequest = InDB.db.setVersion( version );
+		var version = ( parseInt( DB.db.version, 10 ) ) ? parseInt( DB.db.version, 10 ) : 0;
+		var setVersionRequest = DB.db.setVersion( version );
 
 		/* Request Responses */
 
@@ -1069,19 +1069,19 @@ var IDB = (function(){
 			databaseTransaction.onsuccess = function ( event ) {
 				context[ 'event' ] = event;
 				on_success( context );
-				InDB.trigger( 'index_created_success', context );
+				DB.trigger( 'index_created_success', context );
 			};
 
 			databaseTransaction.onerror = function ( event ) {
 				context[ 'event' ] = event;
 				on_error( context );
-				InDB.trigger( 'index_created_error', context );
+				DB.trigger( 'index_created_error', context );
 			};
 
 			databaseTransaction.onabort = function ( event ) {
 				context[ 'event' ] = event;
 				on_abort( context );
-				InDB.trigger( 'index_created_abort', context );
+				DB.trigger( 'index_created_abort', context );
 			};		
 
 		};
@@ -1098,18 +1098,18 @@ var IDB = (function(){
 
 	}
 
-	InDB.database.open = function ( name, description, on_success, on_error, on_abort ) {
+	DB.database.open = function ( name, description, on_success, on_error, on_abort ) {
 
 		/* Defaults */
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		/* Context */
@@ -1118,11 +1118,11 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger( 'InDB_open_database', context );
+		DB.trigger( 'InDB_open_database', context );
 
 		/* Request */
 
-		var open_database_request = window.indexedDB.open( name, description );
+		var open_database_request = window.indexeInDB.open( name, description );
 
 		/* Request Responses */
 
@@ -1138,7 +1138,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_open_database_success', context );
+			DB.trigger( 'InDB_open_database_success', context );
 
 		};
 
@@ -1154,7 +1154,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_open_database_error', context );
+			DB.trigger( 'InDB_open_database_error', context );
 
 		}
 
@@ -1170,7 +1170,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_open_database_abort', context );
+			DB.trigger( 'InDB_open_database_abort', context );
 
 		}
 
@@ -1182,13 +1182,13 @@ var IDB = (function(){
 	 **/
 
 	/* Transaction types */
-	InDB.transaction.read = function () {
+	DB.transaction.read = function () {
 		return IDBTransaction.READ_ONLY;
 	} 
-	InDB.transaction.read_write = function () {
+	DB.transaction.read_write = function () {
 		return IDBTransaction.READ_WRITE;
 	} 
-	InDB.transaction.write = function () {
+	DB.transaction.write = function () {
 		return IDBTransaction.READ_WRITE;
 	}
 
@@ -1199,30 +1199,30 @@ var IDB = (function(){
 
 	/* Direction types */
 
-	InDB.cursor = InDB.cursor || {};
-	InDB.cursor.direction = InDB.cursor.direction || {};
+	DB.cursor = DB.cursor || {};
+	DB.cursor.direction = DB.cursor.direction || {};
 
-	InDB.cursor.direction.next = function( no_dupes ) {
+	DB.cursor.direction.next = function( no_dupes ) {
 		no_dupes = ( !!no_dupes ) ? no_dupes : false;
 		var result = ( !!no_dupes ) ? IDBCursor.NEXT_NO_DUPLICATE : IDBCursor.NEXT; 
 		return result;
 	};
-	InDB.cursor.direction.previous = function( no_dupes ) {
+	DB.cursor.direction.previous = function( no_dupes ) {
 		no_dupes = ( !!no_dupes ) ? no_dupes : false;
 		var result = ( !!no_dupes ) ? IDBCursor.PREV_NO_DUPLICATE : IDBCursor.PREV;
 		return result;
 	}
 
-	InDB.cursor.isDirection = function( direction ) {
-		direction = ( 'undefined' !== typeof direction && InDB.isNumber( direction ) && direction >= InDB.cursor.direction.next() && direction <= InDB.cursor.direction.previous( true ) ) ? true : false;
+	DB.cursor.isDirection = function( direction ) {
+		direction = ( 'undefined' !== typeof direction && DB.isNumber( direction ) && direction >= DB.cursor.direction.next() && direction <= DB.cursor.direction.previous( true ) ) ? true : false;
 		return direction;
 	};
 
 
 
 	/* Transaction factory */
-	InDB.transaction.create = function ( database, type, on_complete, on_error, on_abort ) {
-		InDB.trigger( 'InDB_create_transaction', { "name": name, "type": type, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );		
+	DB.transaction.create = function ( database, type, on_complete, on_error, on_abort ) {
+		DB.trigger( 'InDB_create_transaction', { "name": name, "type": type, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );		
 		if ( "undefined" === typeof type ) {
 			type = IDBTransaction.READ_WRITE;
 		}
@@ -1230,30 +1230,30 @@ var IDB = (function(){
 			timeout = 1000;
 		}
 		if ( "undefined" === typeof on_complete ) {
-			on_complete = InDB.events.onComplete;
+			on_complete = DB.events.onComplete;
 		}
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 		try {
-			if ( !!InDB.debug ) {
-				console.log ( "InDB.db.transaction.create", database, type, timeout );
+			if ( !!DB.debug ) {
+				console.log ( "DB.db.transaction.create", database, type, timeout );
 			}
-			var transaction = InDB.db.transaction( [ database ], type, timeout );
+			var transaction = DB.db.transaction( [ database ], type, timeout );
 			transaction.oncomplete = function ( event ) {
 				on_complete( event );
-				InDB.trigger( 'transaction_complete', { "database": database, "type": type, "timeout": timeout } );
+				DB.trigger( 'transaction_complete', { "database": database, "type": type, "timeout": timeout } );
 			};
 			transaction.onerror = function ( event ) {
 				on_error( event );
-				InDB.trigger( 'transaction_error', { "database": database, "type": type, "timeout": timeout } );
+				DB.trigger( 'transaction_error', { "database": database, "type": type, "timeout": timeout } );
 			};
 			transaction.onabort = function ( event ) {
 				on_abort( event );
-				InDB.trigger( 'transaction_abort', { "database": database, "type": type, "timeout": timeout } );
+				DB.trigger( 'transaction_abort', { "database": database, "type": type, "timeout": timeout } );
 			};
 			return transaction.objectStore( database );
 		} catch ( event ) {
@@ -1262,7 +1262,7 @@ var IDB = (function(){
 	}
 
 
-	InDB.row.result = function ( event ) {
+	DB.row.result = function ( event ) {
 		if( 'undefined' !== typeof event && 'undefined' !== typeof event.event ) {
 			event = event.event;
 		}
@@ -1274,10 +1274,10 @@ var IDB = (function(){
 	}
 
 
-	InDB.row.value = function ( event ) {
+	DB.row.value = function ( event ) {
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.value', event );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.row.value', event );
 		}
 
 		if( 'undefined' !== typeof event && 'undefined' !== typeof event.event ) {
@@ -1293,9 +1293,9 @@ var IDB = (function(){
 	}
 
 
-	InDB.cursor.result = function ( event ) {
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.result', event );
+	DB.cursor.result = function ( event ) {
+		if ( !!DB.debug ) {
+			console.log ( 'DB.cursor.result', event );
 		}
 		if( 'undefined' !== typeof event && 'undefined' !== typeof event.event ) {
 			event = event.event;
@@ -1308,9 +1308,9 @@ var IDB = (function(){
 	}
 
 
-	InDB.cursor.value = function ( event ) {
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.value', event );
+	DB.cursor.value = function ( event ) {
+		if ( !!DB.debug ) {
+			console.log ( 'DB.cursor.value', event );
 		}
 		if( 'undefined' !== event && null !== event && 'undefined' !== typeof event.event ) {
 			event = event.event;
@@ -1323,7 +1323,7 @@ var IDB = (function(){
 	}
 
 
-	InDB.database.errorType = function ( code ) {
+	DB.database.errorType = function ( code ) {
 
 		if ( 8 === code ) {
 			return "Request aborted";
@@ -1361,20 +1361,20 @@ var IDB = (function(){
 	/* Key Ranges */
 
 	/* Key range helpers */
-	InDB.range.only = function ( value ) {
-		return InDB.range.get( value, null, null, null, null );
+	DB.range.only = function ( value ) {
+		return DB.range.get( value, null, null, null, null );
 	}
-	InDB.range.left = function ( left_bound ) {
-		return InDB.range.get( null, left_bound, null, false, null );
+	DB.range.left = function ( left_bound ) {
+		return DB.range.get( null, left_bound, null, false, null );
 	}
-	InDB.range.left_open = function ( left_bound ) {
-		return InDB.range.get( null, left_bound, null, true, null );
+	DB.range.left_open = function ( left_bound ) {
+		return DB.range.get( null, left_bound, null, true, null );
 	}
-	InDB.range.right = function ( right_bound ) {
-		return InDB.range.get( null, null, right_bound, null, false );
+	DB.range.right = function ( right_bound ) {
+		return DB.range.get( null, null, right_bound, null, false );
 	}
-	InDB.range.right_open = function ( right_bound ) {
-		return InDB.range.get( null, null, right_bound, null, true );
+	DB.range.right_open = function ( right_bound ) {
+		return DB.range.get( null, null, right_bound, null, true );
 	}
 
 	/* returns an IDBKeyRange given a range type
@@ -1382,17 +1382,17 @@ var IDB = (function(){
 	 * valid types: bound, leftBound, only, rightBound */
 	/* uses duck typing to determine key type */
 	/* more info: https://developer.mozilla.org/en/indexeddb/idbkeyrange*/
-	InDB.range.get = function ( value, left_bound, right_bound, includes_left_bound, includes_right_bound ) {
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.range.get', value, left_bound, right_bound, includes_left_bound, includes_right_bound );
+	DB.range.get = function ( value, left_bound, right_bound, includes_left_bound, includes_right_bound ) {
+		if ( !!DB.debug ) {
+			console.log ( 'DB.range.get', value, left_bound, right_bound, includes_left_bound, includes_right_bound );
 		}
-		if ( InDB.exists( left_bound ) && InDB.exists( right_bound ) && InDB.exists( includes_left_bound ) && InDB.exists( includes_right_bound ) ) {	
+		if ( DB.exists( left_bound ) && DB.exists( right_bound ) && DB.exists( includes_left_bound ) && DB.exists( includes_right_bound ) ) {	
 			return IDBKeyRange.bound( left_bound, right_bound, includes_left_bound, includes_right_bound );	
-		} else if ( InDB.exists( left_bound ) && InDB.exists( includes_left_bound ) ) {
+		} else if ( DB.exists( left_bound ) && DB.exists( includes_left_bound ) ) {
 			return IDBKeyRange.lowerBound( left_bound, includes_left_bound );
-		} else if ( InDB.exists( right_bound ) && InDB.exists( includes_right_bound ) ) {
+		} else if ( DB.exists( right_bound ) && DB.exists( includes_right_bound ) ) {
 			return IDBKeyRange.upperBound( right_bound, includes_right_bound );
-		} else if ( InDB.exists( value ) ) {
+		} else if ( DB.exists( value ) ) {
 			return IDBKeyRange.only( value );
 		}  else {
 			return false;
@@ -1401,11 +1401,11 @@ var IDB = (function(){
 
 
 	//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort
-	InDB.bind( 'InDB_do_row_get', function( row_result, context ) {
+	DB.bind( 'InDB_do_row_get', function( row_result, context ) {
 		
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_row_get', row_result, context );
 		}
 
@@ -1422,57 +1422,57 @@ var IDB = (function(){
 		index = ( 'undefined' !== index ) ? index : null;
 
 		/* Assertions */
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 			
-		if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key to get' ) ) {
+		if ( !DB.assert( !DB.isEmpty( key ), 'Must provide a key to get' ) ) {
 			return;
 		}
 
 		/* Invocation */
 
-		InDB.row.get( store, key, index, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		DB.row.get( store, key, index, context.on_success, context.on_error, context.on_abort, context.on_complete );
 	} );
 
 
-	InDB.row.get = function ( store, key, index, on_success, on_error, on_abort, on_complete ) {
+	DB.row.get = function ( store, key, index, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.get', store, key, index, on_success, on_error, on_abort, on_complete );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.row.get', store, key, index, on_success, on_error, on_abort, on_complete );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 			
-		if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key to get' ) ) {
+		if ( !DB.assert( !DB.isEmpty( key ), 'Must provide a key to get' ) ) {
 			return;
 		}
 
 		/* Defaults */
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		if ( "undefined" === typeof on_complete ) {
-			on_complete = InDB.events.onComplete;
+			on_complete = DB.events.onComplete;
 		}
 
-		index = ( !InDB.isEmpty( index ) ) ? index : null;
+		index = ( !DB.isEmpty( index ) ) ? index : null;
 
 		/* Context */
 
@@ -1480,17 +1480,17 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger( 'InDB_row_get', context );
+		DB.trigger( 'InDB_row_get', context );
 
 		/* Transaction */
 		
-		var transaction = InDB.transaction.create( store, InDB.transaction.read(), on_complete );
+		var transaction = DB.transaction.create( store, DB.transaction.read(), on_complete );
 
 
 		/* Debug */
 		
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.get transaction', transaction );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.row.get transaction', transaction );
 		}
 
 		/* Request */
@@ -1500,8 +1500,8 @@ var IDB = (function(){
 		var request;
 		if ( "undefined" !== typeof index && null !== index ) {
 			var transaction_index = transaction.index( index );
-			if( !!InDB.debug ) {
-				console.log( 'InDB.row.get (using index)', transaction, transaction_index, index, key );
+			if( !!DB.debug ) {
+				console.log( 'DB.row.get (using index)', transaction, transaction_index, index, key );
 			}
 			/* Optional Index */
 
@@ -1530,7 +1530,7 @@ var IDB = (function(){
 		
 			/* Action */
 			
-			InDB.trigger( 'InDB_row_get_success', context );
+			DB.trigger( 'InDB_row_get_success', context );
 
 		}
 
@@ -1546,7 +1546,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_row_get_error', context );
+			DB.trigger( 'InDB_row_get_error', context );
 
 		}
 		
@@ -1562,53 +1562,53 @@ var IDB = (function(){
 		
 			/* Action */
 		
-			InDB.trigger( 'InDB_row_get_abort', context );
+			DB.trigger( 'InDB_row_get_abort', context );
 
 		}
 	}
 
 
 	//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort
-	InDB.bind( 'InDB_do_row_delete', function( row_result, context ) {
+	DB.bind( 'InDB_do_row_delete', function( row_result, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_row_delete', row_result, context );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( context.key ), 'Must provide a key to delete' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.key ), 'Must provide a key to delete' ) ) {
 			return;
 		}	
 
 		/* Invocation */
 
-		InDB.row.delete( context.store, context.key, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		DB.row.delete( context.store, context.key, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	} );
 
 
-	InDB.row.delete = function ( store, key, on_success, on_error, on_abort, on_complete ) {
+	DB.row.delete = function ( store, key, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.delete', store, key, on_success, on_error, on_abort );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.row.delete', store, key, on_success, on_error, on_abort );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a key to delete' ) ) {
+		if ( !DB.assert( !DB.isEmpty( key ), 'Must provide a key to delete' ) ) {
 			return;
 		}
 
@@ -1618,32 +1618,32 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger( 'InDB_row_delete', context );
+		DB.trigger( 'InDB_row_delete', context );
 
 		/* Defaults */
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 		if ( "undefined" === typeof on_complete ) {
-			on_complete = InDB.events.onComplete;
+			on_complete = DB.events.onComplete;
 		}
 		
 		/* Transaction */
 
-		var transaction = InDB.transaction.create( store, InDB.transaction.write(), on_complete );
+		var transaction = DB.transaction.create( store, DB.transaction.write(), on_complete );
 
 		
 		/* Debug */
 		
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.delete transaction', transaction );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.row.delete transaction', transaction );
 		}
 
 		/* Request */
@@ -1664,7 +1664,7 @@ var IDB = (function(){
 		
 			/* Action */
 
-			InDB.trigger( 'set_success', context );
+			DB.trigger( 'set_success', context );
 
 		}
 
@@ -1680,7 +1680,7 @@ var IDB = (function(){
 		
 			/* Action */
 
-			InDB.trigger( 'set_error', context );
+			DB.trigger( 'set_error', context );
 
 		}
 
@@ -1696,54 +1696,54 @@ var IDB = (function(){
 		
 			/* Action */
 
-			InDB.trigger( 'set_abort', context );
+			DB.trigger( 'set_abort', context );
 
 		}
 
 	}
 
 	//context.store, context.data, context.on_success, context.on_error, context.on_abort
-	InDB.bind( 'InDB_do_row_add', function( row_result, context ) {
+	DB.bind( 'InDB_do_row_add', function( row_result, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_row_add', row_result, context );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( context.data ), 'Must provide an object to store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.data ), 'Must provide an object to store' ) ) {
 			return;
 		}
 
 		/* Invocation */
 
-		InDB.row.add( context.store, context.data, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		DB.row.add( context.store, context.data, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	} );
 
 
 	/* Adds a data object to an object store */
-	InDB.row.add = function ( store, data, on_success, on_error, on_abort, on_complete ) {
+	DB.row.add = function ( store, data, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.add', store, data, on_success, on_error, on_abort );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.row.add', store, data, on_success, on_error, on_abort );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object to store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( data ), 'Must provide an object to store' ) ) {
 			return;
 		}
 
@@ -1751,19 +1751,19 @@ var IDB = (function(){
 		/* Defaults */
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_complete = InDB.events.onComplete;
+			on_complete = DB.events.onComplete;
 		}
 
 
@@ -1774,21 +1774,21 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger( 'InDB_row_add', context );
+		DB.trigger( 'InDB_row_add', context );
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log( 'InDB_row_add', context );
 		}
 
 
 		/* Transaction */
 
-		var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
+		var transaction = DB.transaction.create( store, DB.transaction.read_write(), on_complete );
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.add transaction', data, transaction );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.row.add transaction', data, transaction );
 		}
 
 		//use this[ 'format' ] for function invocation to avoid a Closure compiler error
@@ -1808,7 +1808,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				InDB.trigger( 'InDB_row_add_success', context );
+				DB.trigger( 'InDB_row_add_success', context );
 
 			}
 
@@ -1826,7 +1826,7 @@ var IDB = (function(){
 		
 				/* Action */
 
-				InDB.trigger( 'InDB_row_add_error', context );
+				DB.trigger( 'InDB_row_add_error', context );
 
 			}
 
@@ -1844,7 +1844,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				InDB.trigger( 'InDB_row_add_abort', context );
+				DB.trigger( 'InDB_row_add_abort', context );
 
 			}
 
@@ -1852,9 +1852,9 @@ var IDB = (function(){
 
 			/* Debug */
 
-			if ( !!InDB.debug ) {
+			if ( !!DB.debug ) {
 				console.log ( event );
-				console.log ( 'errorType', InDB.database.errorType( event.code ) );
+				console.log ( 'errorType', DB.database.errorType( event.code ) );
 			}	
 			
 			/* Context */
@@ -1864,65 +1864,65 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_row_add_error', context );
+			DB.trigger( 'InDB_row_add_error', context );
 
 		}
 	}
 
 
 	//context.store, context.key, context.index, context.data, context.on_success, context.on_error, context.on_abort
-	InDB.bind( 'InDB_do_row_update', function( row_result, context ) {
+	DB.bind( 'InDB_do_row_update', function( row_result, context ) {
 		
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_row_update', row_result, JSON.stringify( context ) );
 		}
 
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.store ), 'Must provide an object store' ) ) {
 			return;
 		}
 			
-		if ( !InDB.assert( !InDB.isEmpty( context.key ), 'Must provide a range to get' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.key ), 'Must provide a range to get' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( context.data ), 'Must provide data to update' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.data ), 'Must provide data to update' ) ) {
 			return;
 		}
 
 		/* Invocation */
 
-		InDB.row.update( context.store, context.key, context.index, context.data, context.replace, context.expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		DB.row.update( context.store, context.key, context.index, context.data, context.replace, context.expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 
 	} );
 
 
-	InDB.row.update = function ( store, key, index, data, replace, expecting, on_success, on_error, on_abort, on_complete ) {
+	DB.row.update = function ( store, key, index, data, replace, expecting, on_success, on_error, on_abort, on_complete ) {
 
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.update', store, key, index, on_success, on_error, on_abort, on_complete );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.row.update', store, key, index, on_success, on_error, on_abort, on_complete );
 		}
 
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 			
-		if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a range to get' ) ) {
+		if ( !DB.assert( !DB.isEmpty( key ), 'Must provide a range to get' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide data to update' ) ) {
+		if ( !DB.assert( !DB.isEmpty( data ), 'Must provide data to update' ) ) {
 			return;
 		}
 
@@ -1930,26 +1930,26 @@ var IDB = (function(){
 		/* Defaults */
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		if ( "undefined" === typeof on_complete ) {
-			on_complete = InDB.events.onComplete;
+			on_complete = DB.events.onComplete;
 		}
 
-		index = ( !InDB.isEmpty( index ) ) ? index : null;
+		index = ( !DB.isEmpty( index ) ) ? index : null;
 		
-		expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
+		expecting = ( !DB.isEmpty( expecting ) ) ? expecting : null;
 		
-		replace = ( InDB.isBoolean( replace ) ) ? replace : false;
+		replace = ( DB.isBoolean( replace ) ) ? replace : false;
 
 		/* Context */
 
@@ -1957,11 +1957,11 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger( 'InDB_row_update', context );
+		DB.trigger( 'InDB_row_update', context );
 
 		var callback = function( callback_context ) {
 
-			var result = InDB.row.value( callback_context.event );
+			var result = DB.row.value( callback_context.event );
 			if( 'function' == typeof data ) {
 				data = data( result );
 			}
@@ -1975,8 +1975,8 @@ var IDB = (function(){
 					if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] ) {
 						if( result[ attr ] !== expecting[ attr ] ) {
 
-							if( !!InDB.debug ) {
-								console.log( 'InDB.row.update > value was not expected.', result[ attr ], expecting[ attr ] );
+							if( !!DB.debug ) {
+								console.log( 'DB.row.update > value was not expected.', result[ attr ], expecting[ attr ] );
 							}
 
 							var err = new Error( 'Found ' + result[ attr ] + ', expecting ' + expecting[ attr ] );
@@ -1996,57 +1996,57 @@ var IDB = (function(){
 				data = temp_data;
 			}
 
-			if( !!InDB.debug ) {
-				console.log( 'InDB.row.update context', context );
-				console.log( 'InDB.row.update before/after', result, data );
+			if( !!DB.debug ) {
+				console.log( 'DB.row.update context', context );
+				console.log( 'DB.row.update before/after', result, data );
 			}
 
-			InDB.row.put( store, data, null, on_success, on_error, on_abort, on_complete );
+			DB.row.put( store, data, null, on_success, on_error, on_abort, on_complete );
 
 		};
 
-		InDB.row.get( context.store, context.key, context.index, callback, context.on_error, context.on_abort );
+		DB.row.get( context.store, context.key, context.index, callback, context.on_error, context.on_abort );
 
 	}
 
 
 
 	//context.store, context.on_success, context.on_error, context.on_abort
-	InDB.bind( 'InDB_do_store_clear', function( row_result, context ) {
+	DB.bind( 'InDB_do_store_clear', function( row_result, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_store_clear', row_result, context );
 		}
 
 
 		/* Assertions */
 		
-		if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.store ), 'Must provide an object store' ) ) {
 			return; 
 		}       
 
 
 		/* Invocation */
 
-		InDB.store.clear( context.store, context.on_success, context.on_error, context.on_abort );
+		DB.store.clear( context.store, context.on_success, context.on_error, context.on_abort );
 
 	} );
 
 
 	/* Clears an object store of any objects */
-	InDB.store.clear = function ( store, on_success, on_error, on_abort ) {
+	DB.store.clear = function ( store, on_success, on_error, on_abort ) {
 
 		/* Debug */
 
-		if( !!InDB.debug ) {	
-			console.log ( 'InDB.store.clear', store, on_success, on_error, on_abort );	
+		if( !!DB.debug ) {	
+			console.log ( 'DB.store.clear', store, on_success, on_error, on_abort );	
 		}
 
 		/* Assertions */
 		
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return; 
 		}       
 
@@ -2054,19 +2054,19 @@ var IDB = (function(){
 		/* Defaults */
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		if ( "undefined" === typeof on_complete ) {
-			on_complete = InDB.events.onComplete;
+			on_complete = DB.events.onComplete;
 		}
 
 
@@ -2077,18 +2077,18 @@ var IDB = (function(){
 		
 		/* Action */
 
-		InDB.trigger( 'InDB_store_clear', context );
+		DB.trigger( 'InDB_store_clear', context );
 
 
 		/* Transaction */
 
-		var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
+		var transaction = DB.transaction.create( store, DB.transaction.read_write(), on_complete );
 
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.store.clear transaction', transaction );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.store.clear transaction', transaction );
 		}
 
 
@@ -2111,7 +2111,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_store_clear_success', context );
+			DB.trigger( 'InDB_store_clear_success', context );
 
 		}
 
@@ -2127,7 +2127,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_row_put_error', context );
+			DB.trigger( 'InDB_row_put_error', context );
 
 		}
 
@@ -2143,73 +2143,73 @@ var IDB = (function(){
 			
 			/* Action */
 
-			InDB.trigger( 'InDB_row_put_abort', context );
+			DB.trigger( 'InDB_row_put_abort', context );
 
 		}
 	}
 
 
 	//context.store, context.data, context.on_success, context.on_error, context.on_abort
-	InDB.bind( 'InDB_do_row_put', function( row_result, context ) {
+	DB.bind( 'InDB_do_row_put', function( row_result, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_row_put', row_result, context );
 		}
 
 		/* Assertions */
 		
-		if ( !InDB.assert( !InDB.isEmpty( context.store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.store ), 'Must provide an object store' ) ) {
 			return; 
 		}       
 
-		if ( !InDB.assert( !InDB.isEmpty( context.data ), 'Must provide an object to store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( context.data ), 'Must provide an object to store' ) ) {
 			return; 
 		}       
 
 		/* Invocation */
 
-		InDB.row.put( context.store, context.data, context.key, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		DB.row.put( context.store, context.data, context.key, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	} );
 
 
 	/* Puts a data object to an object store */
-	InDB.row.put = function ( store, data, key, on_success, on_error, on_abort, on_complete ) {
+	DB.row.put = function ( store, data, key, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
 		
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.put', store, data, key, on_success, on_error, on_abort, on_complete );	
+		if ( !!DB.debug ) {
+			console.log ( 'DB.row.put', store, data, key, on_success, on_error, on_abort, on_complete );	
 		}
 
 		/* Assertions */
 		
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return; 
 		}       
 
-		if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object to store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( data ), 'Must provide an object to store' ) ) {
 			return; 
 		}       
 
 		/* Defaults */
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		if ( "undefined" === typeof on_complete ) {
-			on_complete = InDB.events.onComplete;
+			on_complete = DB.events.onComplete;
 		}
 
 		key = ( !!key ) ? key : null;
@@ -2222,17 +2222,17 @@ var IDB = (function(){
 		
 		/* Action */
 
-		InDB.trigger( 'InDB_row_put', context );
+		DB.trigger( 'InDB_row_put', context );
 
 
 		/* Transaction */
 
-		var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
+		var transaction = DB.transaction.create( store, DB.transaction.read_write(), on_complete );
 
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_row_put transaction', transaction );
 		}
 
@@ -2263,7 +2263,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				InDB.trigger( 'InDB_row_put_success', context );
+				DB.trigger( 'InDB_row_put_success', context );
 
 			}
 
@@ -2279,7 +2279,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				InDB.trigger( 'InDB_row_put_error', context );
+				DB.trigger( 'InDB_row_put_error', context );
 
 			}
 
@@ -2295,7 +2295,7 @@ var IDB = (function(){
 				
 				/* Action */
 
-				InDB.trigger( 'InDB_row_put_abort', context );
+				DB.trigger( 'InDB_row_put_abort', context );
 
 			}
 
@@ -2303,8 +2303,8 @@ var IDB = (function(){
 
 			/* Debug */
 
-			if ( !!InDB.debug ) {
-				console.log ( 'errorType', InDB.database.errorType( error.code ) );
+			if ( !!DB.debug ) {
+				console.log ( 'errorType', DB.database.errorType( error.code ) );
 			}
 
 			/* Context */
@@ -2318,11 +2318,11 @@ var IDB = (function(){
 
 
 	/* TODO: On complete */
-	InDB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
+	DB.bind( 'InDB_do_cursor_get', function( row_result, context ) {
 		
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_cursor_get', row_result, context );
 		}
 
@@ -2332,76 +2332,76 @@ var IDB = (function(){
 		var store = context.store; // Required
 		var index = context.index; // Optional
 		var keyRange = context.keyRange; // Required
-		var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
+		var direction = context.direction; // Optional; defaults to DB.cursor.direction.next()
 		var limit = context.limit; //Optional
 
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( keyRange ), 'Must provide keyRange' ) ) {
+		if ( !DB.assert( !DB.isEmpty( keyRange ), 'Must provide keyRange' ) ) {
 			return;
 		}
 
 
 		/* Defaults */
 
-		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		direction = ( DB.cursor.isDirection( direction ) ) ? direction : DB.cursor.direction.next();
 
-		index = ( !InDB.isEmpty( context.index ) ) ? context.index : null;
+		index = ( !DB.isEmpty( context.index ) ) ? context.index : null;
 
-		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+		limit = ( !DB.isEmpty( limit ) ) ? limit : null;
 
 
 		/* Invocation */
 		
-		InDB.cursor.get( store, index, keyRange, direction, limit, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		DB.cursor.get( store, index, keyRange, direction, limit, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	} );
 
 	/* TODO: Direction? */
-	InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete ) {
+	DB.cursor.get = function ( store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
-		if ( !!InDB.debug ) {	
-			console.log ( 'InDB.cursor.get', store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete );
+		if ( !!DB.debug ) {	
+			console.log ( 'DB.cursor.get', store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
+		if ( !DB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
 			return;
 		}
 
 		/* Defaults */
 
-		index = ( !InDB.isEmpty( index ) ) ? index : null;
+		index = ( !DB.isEmpty( index ) ) ? index : null;
 		
-		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		direction = ( DB.cursor.isDirection( direction ) ) ? direction : DB.cursor.direction.next();
 		
-		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+		limit = ( !DB.isEmpty( limit ) ) ? limit : null;
 		
 		if ( "undefined" == typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 		
 		if ( "undefined" == typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" == typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		if ( "undefined" == typeof on_complete ) {
-			on_complete = InDB.events.onComplete;
+			on_complete = DB.events.onComplete;
 		}
 
 		/* Context */
@@ -2410,25 +2410,25 @@ var IDB = (function(){
 
 		/* Debug */
 		
-		if( !!InDB.debug ) {
-			console.log( 'indb.js > InDB.cursor.get() > Doing InDB_cursor_get', context );
+		if( !!DB.debug ) {
+			console.log( 'indb.js > DB.cursor.get() > Doing InDB_cursor_get', context );
 		}	
 		
 		/* Action */
 
-		InDB.trigger( 'InDB_cursor_get', context );
+		DB.trigger( 'InDB_cursor_get', context );
 		
 		try {
 
 			/* Transaction */
 
-			var transaction = InDB.transaction.create ( store, InDB.transaction.read_write(), on_complete );
+			var transaction = DB.transaction.create ( store, DB.transaction.read_write(), on_complete );
 
 
 			/* Debug */
 
-			if ( !!InDB.debug ) {
-				console.log ( 'InDB.cursor.get transaction', transaction, index, typeof index );
+			if ( !!DB.debug ) {
+				console.log ( 'DB.cursor.get transaction', transaction, index, typeof index );
 			}
 
 			/* Request */
@@ -2437,11 +2437,11 @@ var IDB = (function(){
 			
 			/* Optional Index */
 
-			if ( !InDB.isEmpty( index ) ) {
+			if ( !DB.isEmpty( index ) ) {
 
 				/* Debug */
 
-				if ( !!InDB.debug ) {
+				if ( !!DB.debug ) {
 					console.log ( 'transaction_index.openCursor (index)', transaction, index, keyRange );
 				}
 
@@ -2456,7 +2456,7 @@ var IDB = (function(){
 
 				/* Debug */
 
-				if ( !!InDB.debug ) {
+				if ( !!DB.debug ) {
 					console.log ( 'transaction.openCursor (no index)', transaction, keyRange );
 				}
 
@@ -2476,9 +2476,9 @@ var IDB = (function(){
 
 				/* Debug */
 
-				if ( !!InDB.debug ) {
-					console.log ( 'cursor.get result', InDB.cursor.result( event ) );
-					console.log ( 'cursor.value value', InDB.cursor.value( event ) );
+				if ( !!DB.debug ) {
+					console.log ( 'cursor.get result', DB.cursor.result( event ) );
+					console.log ( 'cursor.value value', DB.cursor.value( event ) );
 				}
 
 				/* Context */
@@ -2491,7 +2491,7 @@ var IDB = (function(){
 
 				/* Action */
 
-				InDB.trigger( 'InDB_cursor_row_get_success', context );
+				DB.trigger( 'InDB_cursor_row_get_success', context );
 
 				total++;
 
@@ -2499,7 +2499,7 @@ var IDB = (function(){
 				
 				var result = event.target.result;
 
-				if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
+				if ( !DB.isEmpty( result ) && "undefined" !== typeof result.value ) {
 					// Move cursor to next key
 					if( 'undefined' == typeof limit || null == limit || total < limit ) {
 						result[ 'continue' ]();
@@ -2519,13 +2519,13 @@ var IDB = (function(){
 
 				/* Debug */
 
-				if ( !!InDB.debug ) {
+				if ( !!DB.debug ) {
 					console.log ( 'Doing InDB_cursor_row_get_error', context );
 				}
 
 				/* Action */
 
-				InDB.trigger( 'InDB_cursor_row_get_error', context );
+				DB.trigger( 'InDB_cursor_row_get_error', context );
 
 			}
 
@@ -2541,13 +2541,13 @@ var IDB = (function(){
 				
 				/* Debug */
 
-				if ( !!InDB.debug ) {
+				if ( !!DB.debug ) {
 					console.log ( 'Doing InDB_cursor_row_get_abort', context );
 				}
 
 				/* Action */
 
-				InDB.trigger( 'InDB_cursor_row_get_abort', context );
+				DB.trigger( 'InDB_cursor_row_get_abort', context );
 
 			}
 
@@ -2556,26 +2556,26 @@ var IDB = (function(){
 			context[ 'error' ] = error;
 			on_error( context );
 
-			if( !!InDB.debug ) {
+			if( !!DB.debug ) {
 				console.log('Error in cursor get row', error );
 			}
 
 		}
 	}
 
-	//context.store, context.index, context.keyRange (e.g. InDB.range.left_open( "0" ) ), context.on_success, context.on_error, context.on_abort
-	InDB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
+	//context.store, context.index, context.keyRange (e.g. DB.range.left_open( "0" ) ), context.on_success, context.on_error, context.on_abort
+	DB.bind( 'InDB_do_cursor_update', function( row_result, context ) {
 		
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_cursor_update', row_result, context );
 		}
 
 		/* Setup */
 
-		var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
-		var limit = context.limit; // Optional; defaults to InDB.cursor.direction.next()
+		var direction = context.direction; // Optional; defaults to DB.cursor.direction.next()
+		var limit = context.limit; // Optional; defaults to DB.cursor.direction.next()
 		var store = context.store; // Required
 		var index = context.index; // Optional; Defaults to null
 		var keyRange = context.keyRange; // Required
@@ -2585,84 +2585,84 @@ var IDB = (function(){
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object' ) ) {
+		if ( !DB.assert( !DB.isEmpty( data ), 'Must provide an object' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( keyRange ), 'Must provide keyRange' ) ) {
+		if ( !DB.assert( !DB.isEmpty( keyRange ), 'Must provide keyRange' ) ) {
 			return;
 		}
 
 		/* Defaults */
 
-		replace = ( InDB.isBoolean( replace ) ) ? replace : false;
+		replace = ( DB.isBoolean( replace ) ) ? replace : false;
 
-		index = ( !InDB.isEmpty( index ) ) ? index : null;
+		index = ( !DB.isEmpty( index ) ) ? index : null;
 
-		expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
+		expecting = ( !DB.isEmpty( expecting ) ) ? expecting : null;
 
-		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		direction = ( DB.cursor.isDirection( direction ) ) ? direction : DB.cursor.direction.next();
 
-		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+		limit = ( !DB.isEmpty( limit ) ) ? limit : null;
 
 		/* Invocation */
 
-		InDB.cursor.update( store, index, keyRange, data, replace, expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		DB.cursor.update( store, index, keyRange, data, replace, expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	} );
 
 
-	InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, replace, expecting, on_success, on_error, on_abort, on_complete ) {
+	DB.cursor.update = function ( store, index, keyRange, data, direction, limit, replace, expecting, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.update', store, index, keyRange, data, direction, limit, replace, on_success, on_error, on_abort, on_complete );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.cursor.update', store, index, keyRange, data, direction, limit, replace, on_success, on_error, on_abort, on_complete );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide an object' ) ) {
+		if ( !DB.assert( !DB.isEmpty( data ), 'Must provide an object' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
+		if ( !DB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
 			return;
 		}
 
 		/* Defaults */
 
-		replace = ( InDB.isBoolean( replace ) ) ? replace : false;
+		replace = ( DB.isBoolean( replace ) ) ? replace : false;
 
-		index = ( !InDB.isEmpty( index ) ) ? index : null;
+		index = ( !DB.isEmpty( index ) ) ? index : null;
 		
-		expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
+		expecting = ( !DB.isEmpty( expecting ) ) ? expecting : null;
 
-		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		direction = ( DB.cursor.isDirection( direction ) ) ? direction : DB.cursor.direction.next();
 
-		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+		limit = ( !DB.isEmpty( limit ) ) ? limit : null;
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		if ( "undefined" === typeof on_complete ) {
-			on_abort = InDB.events.onComplete;
+			on_abort = DB.events.onComplete;
 		}
 
 
@@ -2672,17 +2672,17 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger( 'InDB_cursor_update', context );
+		DB.trigger( 'InDB_cursor_update', context );
 		
 		/* Transaction */
 
-		var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
+		var transaction = DB.transaction.create( store, DB.transaction.read_write(), on_complete );
 
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.update transaction', transaction, index, typeof index );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.cursor.update transaction', transaction, index, typeof index );
 		}
 
 		/* Request */
@@ -2691,11 +2691,11 @@ var IDB = (function(){
 
 		/* Optional Index */
 
-		if ( "undefined" !== typeof index && !InDB.isEmpty( index ) ) {
+		if ( "undefined" !== typeof index && !DB.isEmpty( index ) ) {
 
 			/* Debug */
 
-			if ( !!InDB.debug ) {
+			if ( !!DB.debug ) {
 				console.log ( 'transaction_index.openCursor', index, keyRange );
 			}
 			
@@ -2710,7 +2710,7 @@ var IDB = (function(){
 
 			/* Debug */
 
-			if ( !!InDB.debug ) {
+			if ( !!DB.debug ) {
 				console.log ( 'transaction.openCursor', keyRange, direction );
 
 			}
@@ -2737,12 +2737,12 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_cursor_row_update_success', context );
+			DB.trigger( 'InDB_cursor_row_update_success', context );
 
 			/* Update */
 
-			var cursor = InDB.row.value( context.event );
-			var result = InDB.cursor.value( context.event );
+			var cursor = DB.row.value( context.event );
+			var result = DB.cursor.value( context.event );
 			var instance_data = {};
 			if( 'function' == typeof data ) {
 				var result_value = result;
@@ -2763,8 +2763,8 @@ var IDB = (function(){
 
 						if( result[ attr ] !== expecting[ attr ] ) {
 
-							if( !!InDB.debug ) {
-								console.log( 'InDB.row.update > value was not expected.', result[ attr ], expecting[ attr ] );
+							if( !!DB.debug ) {
+								console.log( 'DB.row.update > value was not expected.', result[ attr ], expecting[ attr ] );
 							}
 
 							var err = new Error( 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] );
@@ -2787,8 +2787,8 @@ var IDB = (function(){
 
 			/* Debug */
 
-			if ( !!InDB.debug ) {
-				console.log ( 'InDB.cursor.update context.data data', instance_data );
+			if ( !!DB.debug ) {
+				console.log ( 'DB.cursor.update context.data data', instance_data );
 			}
 			if ( "undefined" !== typeof cursor && null !== cursor ) {
 				if( 'undefined' == typeof limit || null == limit || total < limit ) {
@@ -2811,7 +2811,7 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_cursor_row_update_error', context );
+			DB.trigger( 'InDB_cursor_row_update_error', context );
 
 		}
 
@@ -2827,19 +2827,19 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_cursor_row_update_abort', context );
+			DB.trigger( 'InDB_cursor_row_update_abort', context );
 
 		}
 
 	}
 
 
-	//context.database, context.index, context.keyRange (e.g. InDB.range.left_open( "0" ) ), context.on_success, context.on_error, context.on_abort
-	InDB.bind( 'InDB_do_cursor_delete', function( row_result, context ) {
+	//context.database, context.index, context.keyRange (e.g. DB.range.left_open( "0" ) ), context.on_success, context.on_error, context.on_abort
+	DB.bind( 'InDB_do_cursor_delete', function( row_result, context ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
+		if ( !!DB.debug ) {
 			console.log ( 'InDB_do_cursor_delete', row_result, context );
 		}
 
@@ -2848,73 +2848,73 @@ var IDB = (function(){
 		var store = context.store; // Required
 		var keyRange = context.keyRange; // Required
 		var index = context.index; // Required
-		var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
+		var direction = context.direction; // Optional; defaults to DB.cursor.direction.next()
 		var limit = context.limit;
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( !InDB.isEmpty( keyRange ), 'Must provide keyRange' ) ) {
+		if ( !DB.assert( !DB.isEmpty( keyRange ), 'Must provide keyRange' ) ) {
 			return;
 		}
 
 		/* Defaults */
 
-		index = ( !InDB.isEmpty( index ) ) ? index : null;
+		index = ( !DB.isEmpty( index ) ) ? index : null;
 		
-		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+		limit = ( !DB.isEmpty( limit ) ) ? limit : null;
 
-		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		direction = ( DB.cursor.isDirection( direction ) ) ? direction : DB.cursor.direction.next();
 
 		/* Invocation */
 
-		InDB.cursor.delete( store, index, keyRange, direction, limit, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		DB.cursor.delete( store, index, keyRange, direction, limit, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	} );
 
-	InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete ) {
+	DB.cursor.delete = function ( store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.get', store, index, keyRange, on_success, on_error, on_abort, on_complete );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.cursor.get', store, index, keyRange, on_success, on_error, on_abort, on_complete );
 		}
 
 		/* Assertions */
 
-		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+		if ( !DB.assert( !DB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
 
-		if ( !InDB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
+		if ( !DB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
 			return;
 		}
 
 		/* Defaults */
 
-		index = ( !InDB.isEmpty( index ) ) ? index : null;
+		index = ( !DB.isEmpty( index ) ) ? index : null;
 
-		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		direction = ( DB.cursor.isDirection( direction ) ) ? direction : DB.cursor.direction.next();
 
-		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+		limit = ( !DB.isEmpty( limit ) ) ? limit : null;
 
 		if ( "undefined" === typeof on_success ) {
-			on_success = InDB.events.onSuccess;
+			on_success = DB.events.onSuccess;
 		}
 
 		if ( "undefined" === typeof on_error ) {
-			on_error = InDB.events.onError;
+			on_error = DB.events.onError;
 		}
 
 		if ( "undefined" === typeof on_abort ) {
-			on_abort = InDB.events.onAbort;
+			on_abort = DB.events.onAbort;
 		}
 
 		if ( "undefined" === typeof on_complete ) {
-			on_complete = InDB.events.onComplete;
+			on_complete = DB.events.onComplete;
 		}
 
 
@@ -2924,17 +2924,17 @@ var IDB = (function(){
 
 		/* Action */
 		
-		InDB.trigger( 'InDB_cursor_delete', context );
+		DB.trigger( 'InDB_cursor_delete', context );
 
 		/* Transaction */
 
-		var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
+		var transaction = DB.transaction.create( store, DB.transaction.read_write(), on_complete );
 
 
 		/* Debug */
 
-		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.get transaction', transaction, index, typeof index );
+		if ( !!DB.debug ) {
+			console.log ( 'DB.cursor.get transaction', transaction, index, typeof index );
 		}
 
 		/* Request */
@@ -2943,12 +2943,12 @@ var IDB = (function(){
 		
 		/* Optional Index */
 
-		if ( "undefined" !== typeof index && !InDB.isEmpty( index ) ) {
+		if ( "undefined" !== typeof index && !DB.isEmpty( index ) ) {
 
 			/* Debug */
 
-			if ( !!InDB.debug ) {
-				console.log ( 'InDB.cursor.get transaction_index.openCursor', index, keyRange, direction );
+			if ( !!DB.debug ) {
+				console.log ( 'DB.cursor.get transaction_index.openCursor', index, keyRange, direction );
 			}
 
 			// Using index
@@ -2961,8 +2961,8 @@ var IDB = (function(){
 
 			/* Debug */
 
-			if ( !!InDB.debug ) {
-				console.log ( 'InDB.cursor.get transaction.openCursor', keyRange, direction );
+			if ( !!DB.debug ) {
+				console.log ( 'DB.cursor.get transaction.openCursor', keyRange, direction );
 			}
 			
 			// No index
@@ -2990,12 +2990,12 @@ var IDB = (function(){
 
 			/* Action */
 
-			InDB.trigger( 'InDB_cursor_row_delete_success', context );
+			DB.trigger( 'InDB_cursor_row_delete_success', context );
 
 			/* Result */
 
 			var cursor = event.target.result;
-			var cursor_result = InDB.cursor.value( cursor );
+			var cursor_result = DB.cursor.value( cursor );
 			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof cursor_result ) {
 				if( 'undefined' == typeof limit || null == limit || total < limit ) {
 					cursor[ 'continue' ]();
@@ -3015,7 +3015,7 @@ var IDB = (function(){
 			
 			/* Action */
 
-			InDB.trigger( 'InDB_cursor_row_delete_error', context );
+			DB.trigger( 'InDB_cursor_row_delete_error', context );
 
 		}
 
@@ -3031,7 +3031,7 @@ var IDB = (function(){
 			
 			/* Action */
 
-			InDB.trigger( 'InDB_cursor_row_delete_abort', context );
+			DB.trigger( 'InDB_cursor_row_delete_abort', context );
 
 		}
 
@@ -3039,7 +3039,7 @@ var IDB = (function(){
 
 	/* Utilities */
 
-	InDB.utilities.random = function( length, type ) {
+	DB.utilities.random = function( length, type ) {
 		var set = new String();
 		if( 'numbers' !== type ) {
 			set += 'ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
@@ -3065,10 +3065,10 @@ var IDB = (function(){
 	var DB = function( request ) {
 
 		// Fix browser if necessary 
-		var browser_check = InDB.checkBrowser(); 
-		InDB.assert( -1 !== browser_check, 'incompatible browser' ); 
+		var browser_check = DB.checkBrowser(); 
+		DB.assert( -1 !== browser_check, 'incompatible browser' ); 
 		if ( 0 === browser_check ) { 
-			InDB.fixBrowser(); 
+			DB.fixBrowser(); 
 		}
 
 		if( 'undefined' !== typeof request.store ) {
@@ -3088,27 +3088,27 @@ var IDB = (function(){
 			}
 		};
 
-		InDB.trigger( 'InDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error } ) ;
+		DB.trigger( 'InDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error } ) ;
 
 		return this;
 	};
 
 	/* Database */
 
-	DB.prototype.install = function ( request ) {
+	InDB.prototype.install = function ( request ) {
 
 		var namespace = {};
 	
-		if( !InDB.assert( 'undefined' !== typeof request, 'Request cannot be empty' ) ) {
+		if( !DB.assert( 'undefined' !== typeof request, 'Request cannot be empty' ) ) {
 			return this;
 		}
 
 		var store = request.store;
-		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
 		var indexes = request.indexes;
 	
-		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': request.indexes.primary.key } ), 'incrementing_key': request.indexes.primary.incrementing, 'unique': request.indexes.primary.unique }
+		namespace[ store ] = { 'key': DB.shorthand.get( { 'store': store, 'key': request.indexes.primary.key } ), 'incrementing_key': request.indexes.primary.incrementing, 'unique': request.indexes.primary.unique }
 
 		delete request.indexes.primary;
 
@@ -3117,11 +3117,11 @@ var IDB = (function(){
 
 		for( index in indexes ) {
 			namespace_idxs[ store ][ index ] = {};
-			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = indexes[ index ];
+			namespace_idxs[ store ][ index ][ DB.shorthand.get( { 'store': store, 'key': index } ) ] = indexes[ index ];
 		}
 
-		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
-			InDB.trigger( 'InDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_complete': function( context2 ) {
+		DB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
+			DB.trigger( 'InDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_complete': function( context2 ) {
 				console.log( 'Store loaded', context2 );
 			} } );
 		} } );
@@ -3138,18 +3138,18 @@ var IDB = (function(){
 	Each takes an object w/attributes { options: obj, on_success: fn, on_error: fn }
 	*/
 
-	DB.prototype.cursor = DB.prototype.cursor || {};
+	InDB.prototype.cursor =InDB.prototype.cursor || {};
 
 	/* Synapses Set */
-	DB.prototype.setAttr = function( request ) {
+	InDB.prototype.setAttr = function( request ) {
 
-		if( !!DB.debug ) {
-			console.log( 'DB.prototype.setAttr', request );
+		if( !InDB.debug ) {
+			console.log( InDB.prototype.setAttr', request );
 		}
 
 		var on_success =  function( context ) {
-			if( !!DB.debug ) {
-				console.log( 'DB.prototype.setAttr success', context );
+			if( !InDB.debug ) {
+				console.log( InDB.prototype.setAttr success', context );
 			}
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( context );
@@ -3157,8 +3157,8 @@ var IDB = (function(){
 		};
 
 		var on_error =  function( context ) {
-			if( !!DB.debug ) {
-				console.log( 'DB.prototype.setAttr error', context );
+			if( !InDB.debug ) {
+				console.log( InDB.prototype.setAttr error', context );
 			}
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
@@ -3166,12 +3166,12 @@ var IDB = (function(){
 		};
 		
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
 		/* Request */
 
 		var data = {};
-		data[ DB.prototype.shorthand( request.attribute ) ] = request.strength;
+		data[InDB.prototype.shorthand( request.attribute ) ] = request.strength;
 
 		var update_request = {};
 		for( attr in request ) {
@@ -3181,7 +3181,7 @@ var IDB = (function(){
 		update_request.on_success = on_success;
 		update_request.on_error = on_error;
 
-		DB.prototype.update( update_request );
+	InDB.prototype.update( update_request );
 
 		return this;
 
@@ -3189,11 +3189,11 @@ var IDB = (function(){
 
 	/* Synapses Get */
 	// ( 'key': string, 'index': string (requred), 'strength': int, 'on_success': fn, 'on_error': fn }
-	DB.prototype.getAttr = function( request ) {
+	InDB.prototype.getAttr = function( request ) {
 		
 		var on_success =  function( value ) {
-			if( !!DB.debug ) {
-				console.log( 'DB.prototype.setAttr success', context );
+			if( !InDB.debug ) {
+				console.log( InDB.prototype.setAttr success', context );
 			}
 			if( 'function' == typeof request.on_success ) {
 				var result = ( 'undefined' !== typeof result ) ? value[ request.attribute ] : null;
@@ -3202,8 +3202,8 @@ var IDB = (function(){
 		};
 
 		var on_error =  function( context ) {
-			if( !!DB.debug ) {
-				console.log( 'DB.prototype.getAttr error', context );
+			if( !InDB.debug ) {
+				console.log( InDB.prototype.getAttr error', context );
 			}
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
@@ -3211,7 +3211,7 @@ var IDB = (function(){
 		};
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
 		var get_request = {};
 		for( attr in request ) {
@@ -3221,7 +3221,7 @@ var IDB = (function(){
 		get_request.on_success = on_success;
 		get_request.on_error = on_error;
 
-		DB.prototype.get( get_request );
+	InDB.prototype.get( get_request );
 
 		return this;
 
@@ -3229,18 +3229,18 @@ var IDB = (function(){
 
 	/* Synapses Cursor set */
 	// ( 'key': string, 'index': string (requred), 'strength': int, 'on_success': fn, 'on_error': fn }
-	DB.prototype.cursor.setAttr = function( request ) {
+	InDB.prototype.cursor.setAttr = function( request ) {
 		
 		var on_success =  function( context ) {
-			console.log( 'DB.prototype.cursor.setAttr success', context );
+			console.log( InDB.prototype.cursor.setAttr success', context );
 		};
 
 		var on_error =  function( context ) {
-			console.log( 'DB.prototype.cursor.setAttr', context );
+			console.log( InDB.prototype.cursor.setAttr', context );
 		};
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
 		var db_request = {};
 		for( attr in request ) {
@@ -3250,29 +3250,29 @@ var IDB = (function(){
 		db_request.on_success = on_success;
 		db_request.on_error = on_error;
 
-		db_request.data[ DB.prototype.shorthand( request.attribute ) ] = request.strength;
+		db_request.data[InDB.prototype.shorthand( request.attribute ) ] = request.strength;
 		
-		DB.prototype.cursor.update( db_request );
+	InDB.prototype.cursor.update( db_request );
 		
 		return this;
 	};
 
 	/* Synapses Cursor get */
-	DB.prototype.cursor.getAttr = function( request ) {
+	InDB.prototype.cursor.getAttr = function( request ) {
 		
 		var on_success =  function( context ) {
-			console.log( 'DB.prototype.setAttr success', context );
-			var value = InDB.cursor.value( context.event );
+			console.log( InDB.prototype.setAttr success', context );
+			var value = DB.cursor.value( context.event );
 			request.on_success( value[ request.attribute ] );
 		};
 
 		var on_error =  function( context ) {
-			console.log( 'DB.prototype.setAttr error', context );
+			console.log( InDB.prototype.setAttr error', context );
 			request.on_error( context );
 		};
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
 		var db_request = {};
 		for( attr in request ) {
@@ -3282,7 +3282,7 @@ var IDB = (function(){
 		db_request.on_success = on_success;
 		db_request.on_error = on_error;
 
-		DB.prototype.get( db_request );
+	InDB.prototype.get( db_request );
 		return this;
 	};
 
@@ -3292,15 +3292,15 @@ var IDB = (function(){
 	/* Single */
 
 	/* Get */
-	DB.prototype.get = function ( request )  {
+	InDB.prototype.get = function ( request )  {
 
-		if( !!DB.debug ) {
-			console.log( 'DB.prototype.get', request );
+		if( !InDB.debug ) {
+			console.log( InDB.prototype.get', request );
 		}
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = DB.prototype.shorthand_decode( InDB.row.value( context ) );
+				var value =InDB.prototype.shorthand_decode( DB.row.value( context ) );
 				request.on_success( value );
 			}
 		}
@@ -3312,24 +3312,24 @@ var IDB = (function(){
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		InDB.trigger( 'InDB_do_row_get', { 'store': request.store, 'key': request.key, 'index': request.index, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'InDB_do_row_get', { 'store': request.store, 'key': request.key, 'index': request.index, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Remove */
-	DB.prototype.delete = function ( request ) {
+	InDB.prototype.delete = function ( request ) {
 
-		if( !!DB.debug ) {
-			console.log( 'DB.prototype.delete', request );
+		if( !InDB.debug ) {
+			console.log( InDB.prototype.delete', request );
 		}
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = InDB.row.value( context );
+				var value = DB.row.value( context );
 				request.on_success( value );
 			}
 		}
@@ -3341,24 +3341,24 @@ var IDB = (function(){
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		InDB.trigger( 'InDB_do_row_delete', { 'store': request.store, 'key': request.key, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'InDB_do_row_delete', { 'store': request.store, 'key': request.key, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Put */
-	DB.prototype.put = function ( request )  {
+	InDB.prototype.put = function ( request )  {
 
-		if( !!DB.debug ) {
-			console.log( 'DB.prototype.put', request );
+		if( !InDB.debug ) {
+			console.log( InDB.prototype.put', request );
 		}
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = InDB.row.value( context );
+				var value = DB.row.value( context );
 				request.on_success( value );
 			}
 		}
@@ -3371,28 +3371,28 @@ var IDB = (function(){
 
 		var data = request.data;
 		if( 'function' !== typeof data ) {
-			data = DB.prototype.shorthand_encode( data );
+			data =InDB.prototype.shorthand_encode( data );
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		InDB.trigger( 'InDB_do_row_put', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'InDB_do_row_put', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Add */
-	DB.prototype.add = function ( request )  {
+	InDB.prototype.add = function ( request )  {
 		
-		if( !!DB.debug ) {
-			console.log( 'DB.prototype.add', request );
+		if( !InDB.debug ) {
+			console.log( InDB.prototype.add', request );
 		}
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = InDB.row.value( context );
+				var value = DB.row.value( context );
 				request.on_success( value );
 			}
 		};
@@ -3405,28 +3405,28 @@ var IDB = (function(){
 
 		var data = request.data;
 		if( 'function' !== typeof data ) {
-			data = DB.prototype.shorthand_encode( data );
+			data =InDB.prototype.shorthand_encode( data );
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		InDB.trigger( 'InDB_do_row_add', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'InDB_do_row_add', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Update */
-	DB.prototype.update = function ( request ) {
+	InDB.prototype.update = function ( request ) {
 
-		if( !!DB.debug ) {
-			console.log( 'DB.prototype.update', request );
+		if( !InDB.debug ) {
+			console.log( InDB.prototype.update', request );
 		}
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = InDB.row.value( context );
+				var value = DB.row.value( context );
 				request.on_success( value );
 			}
 		}
@@ -3440,22 +3440,22 @@ var IDB = (function(){
 		var data = request.data;
 		var new_data;
 		if( 'function' !== typeof data ) {
-			new_data = DB.prototype.shorthand_encode( data );
+			new_data =InDB.prototype.shorthand_encode( data );
 		} else {
 			new_data = function( arg ) {
-				return DB.prototype.shorthand_encode( data( DB.prototype.shorthand_decode( arg ) ) );
+				returnInDB.prototype.shorthand_encode( data(InDB.prototype.shorthand_decode( arg ) ) );
 			};
 		}
 
 		var expected = request.expected;
 		if( 'function' !== typeof expected ) {
-			expected = DB.prototype.shorthand_encode( expected );
+			expected =InDB.prototype.shorthand_encode( expected );
 		}
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		InDB.trigger( 'InDB_do_row_update', { 'store': request.store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'InDB_do_row_update', { 'store': request.store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
@@ -3463,10 +3463,10 @@ var IDB = (function(){
 
 	/* Multi */
 
-	DB.prototype.cursor = DB.prototype.cursor || {};
+	InDB.prototype.cursor =InDB.prototype.cursor || {};
 
 	/* Cursor Get */
-	DB.prototype.cursor.get = function( request ) {
+	InDB.prototype.cursor.get = function( request ) {
 
 		/* Action */
 
@@ -3479,15 +3479,15 @@ var IDB = (function(){
 		var left_inclusive = request.left_inclusive;
 		var right_inclusive = request.right_inclusive;
 
-		if( !!DB.debug ) {
-			console.log( 'DB.prototype.cursor.get', request );
+		if( !InDB.debug ) {
+			console.log( InDB.prototype.cursor.get', request );
 		}
 
 		jQuery(document).trigger('cursor_get_namespace',request);
 
 
 		/* Defaults */
-		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		direction = ( DB.cursor.isDirection( direction ) ) ? direction : DB.cursor.direction.next();
 		limit = ( 'undefined' !== typeof limit ) ? limit : null;
 		begin = ( 'undefined' !== typeof begin ) ? begin : null;
 		end = ( 'undefined' !== typeof end ) ? end : null;
@@ -3498,16 +3498,16 @@ var IDB = (function(){
 
 		/* Setup */
 
-		var keyRange = InDB.range.get( key, begin, end, left_inclusive, right_inclusive );
+		var keyRange = DB.range.get( key, begin, end, left_inclusive, right_inclusive );
 
 
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item = DB.prototype.shorthand_reverse( InDB.cursor.value( context.event ) );
+			var item =InDB.prototype.shorthand_reverse( DB.cursor.value( context.event ) );
 			console.log('blah',item);
 			if( 'function' == typeof request.on_success ) {
-				if( !!DB.debug ) console.log( 'success', item );
+				if( !InDB.debug ) console.log( 'success', item );
 				request.on_success( item );
 			}
 		};
@@ -3519,18 +3519,18 @@ var IDB = (function(){
 		};
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
 		/* Request */
 
-		InDB.trigger( 'InDB_do_cursor_get', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'InDB_do_cursor_get', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	}
 
 	/* Cursor Delete */
-	DB.prototype.cursor.delete = function( request ) {
+	InDB.prototype.cursor.delete = function( request ) {
 
 		/* Setup */
 
@@ -3546,7 +3546,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var result = InDB.cursor.value( context.event );
+			var result = DB.cursor.value( context.event );
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( result );
 			}
@@ -3570,27 +3570,27 @@ var IDB = (function(){
 		end = ( 'undefined' !== typeof end ) ? end : null;
 		left_inclusive = ( 'undefined' !== typeof left_inclusive ) ? left_inclusive : null;
 		right_inclusive = ( 'undefined' !== typeof right_inclusive ) ? right_inclusive : null;
-		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		direction = ( DB.cursor.isDirection( direction ) ) ? direction : DB.cursor.direction.next();
 		limit = ( 'undefined' !== typeof limit ) ? limit : null;
 		key = ( 'undefined' !== typeof begin && 'undefined' !== typeof end ) ? key : null;
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
 		/* Setup */
 
-		var keyRange = InDB.range.get( key, begin, end, left_inclusive, right_inclusive );
+		var keyRange = DB.range.get( key, begin, end, left_inclusive, right_inclusive );
 
 		/* Request */
 
-		InDB.trigger( 'InDB_do_cursor_delete', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'InDB_do_cursor_delete', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
 	};
 
 	/* Cursor Update */
-	DB.prototype.cursor.update = function( request ) {
+	InDB.prototype.cursor.update = function( request ) {
 
 		/* Setup */
 
@@ -3609,7 +3609,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item = DB.prototype.shorthand_reverse( InDB.cursor.value( context.event ) );
+			var item =InDB.prototype.shorthand_reverse( DB.cursor.value( context.event ) );
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( item );
 			}
@@ -3625,10 +3625,10 @@ var IDB = (function(){
 		/* Shorthand Encoding */
 		var new_data;
 		if( 'function' !== typeof data ) {
-			new_data = DB.prototype.shorthand_encode( data );
+			new_data =InDB.prototype.shorthand_encode( data );
 		} else {
 			new_data = function( arg ) {
-				return DB.prototype.shorthand_encode( data( DB.prototype.shorthand_decode( arg ) ) );
+				returnInDB.prototype.shorthand_encode( data(InDB.prototype.shorthand_decode( arg ) ) );
 			};
 		}
 
@@ -3639,7 +3639,7 @@ var IDB = (function(){
 		/* Defaults */
 
 		replace = ( true == replace ) ? true : false;
-		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		direction = ( DB.cursor.isDirection( direction ) ) ? direction : DB.cursor.direction.next();
 		limit = ( 'undefined' !== typeof limit ) ? limit : null;
 		begin = ( 'undefined' !== typeof begin ) ? begin : null;
 		end = ( 'undefined' !== typeof end ) ? end : null;
@@ -3648,21 +3648,21 @@ var IDB = (function(){
 		key = ( 'undefined' !== typeof begin && 'undefined' !== typeof end ) ? key : null;
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
 		/* Setup */
 
-		var keyRange = InDB.range.get( key, begin, end, left_inclusive, right_inclusive );
+		var keyRange = DB.range.get( key, begin, end, left_inclusive, right_inclusive );
 
 		/* Request */
 		
-		InDB.trigger( 'InDB_do_cursor_update', { 'store': request.store, 'data': new_data, 'keyRange': keyRange, 'index': index, 'replace': replace, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		DB.trigger( 'InDB_do_cursor_update', { 'store': request.store, 'data': new_data, 'keyRange': keyRange, 'index': index, 'replace': replace, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 	
 		return this;
 
 	}
 
-	DB.prototype.clear = function( request ) {
+	InDB.prototype.clear = function( request ) {
 
 		/* Callbacks */
 
@@ -3681,22 +3681,22 @@ var IDB = (function(){
 		/* Defaults */
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		InDB.trigger( 'InDB_do_store_clear', { 'store': request.store, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
+		DB.trigger( 'InDB_do_store_clear', { 'store': request.store, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
 	
 		return this;
 
 	};
 
-	DB.prototype.shorthand = DB.prototype.shorthand || {};
+	InDB.prototype.shorthand =InDB.prototype.shorthand || {};
 
-	DB.prototype.shorthand.set = function( request ) {
+	InDB.prototype.shorthand.set = function( request ) {
 
 		var store = request.store;
 		var data = request.data;
 		var on_error = request.on_error;
-		var shorthand_map = InDB.shorthand.map.get( { 'store': store } );
+		var shorthand_map = DB.shorthand.map.get( { 'store': store } );
 		if( 'undefined' !== typeof request.replace && false === request.replace ) {
 			for( item in data ) {
 				shorthand_map[ item ] = data[ item ];
@@ -3708,22 +3708,22 @@ var IDB = (function(){
 		/* Defaults */
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		InDB.shorthand.map.set( { 'store': store, 'data': shorthand_map, 'on_success': request.on_success, 'on_error': request.on_error } );
+		DB.shorthand.map.set( { 'store': store, 'data': shorthand_map, 'on_success': request.on_success, 'on_error': request.on_error } );
 
 		return this;
 
 	};
 
-	DB.prototype.shorthand.get = function( request ) {
+	InDB.prototype.shorthand.get = function( request ) {
 
 		/* Defaults */
 
 		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+		request.store = ( !DB.isEmpty( store ) ) ? store : current_store;
 
-		var shorthand_map = InDB.shorthand.map.get( { 'store': request.store } );
+		var shorthand_map = DB.shorthand.map.get( { 'store': request.store } );
 		if ( 'undefined' === shorthand_map ) {
 			var on_success = request.on_success;
 			if( 'function' === typeof on_success ) {
@@ -3741,6 +3741,6 @@ var IDB = (function(){
 		return this;	
 	};
 
-	return DB;
+	return InDB;
 
 } )(); // End immediately executing anonymous function
