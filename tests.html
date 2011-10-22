@@ -1,0 +1,539 @@
+<html>
+	<head>
+		<title>IDB.js</title>
+		<!--<link rel="stylesheet" href="/css/style.css">-->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	</head>
+	<body>
+		<div id="result"></div>
+		<script type="text/javascript">
+
+			var Test = {};
+			var Test.synapses = new IDB( 'synapses' );
+			var Test.neurons = new IDB( 'neurons' );
+
+			var test = test || {};
+			test.synapses = test.synapses || {};
+			test.cursor = test.synapses.cursor || {};
+			test.neurons = test.neurons || {};
+			test.neurons.cursor = test.neurons.cursor || {};
+			test.data = test.synapses.data || {};
+			test.neurons.data = test.neurons.data || {};
+
+			var test_id = 77;
+			var inc_amount = 1;
+
+			test.data.add = function ( count, on_success, on_error ) {
+				var map = [];
+				for( var i = 0; i < count; i++ ) {
+					var node1 = Math.floor( Math.random()*100 );	
+					var node2 = Math.floor( Math.random()*100 );	
+					Test.add( { 'data': { 'type': 'connection', 'from': node1, 'to': node2, 'strength': Math.random() }, 'on_success': function( result_value ) {
+						if( !!Test.debug ) {
+							console.log( 'Added synapse', result_value );
+						}
+						if( 'undefined' !== typeof on_success ) {
+							on_success( result_value );
+						}
+					}, 'on_error': function( context ) {
+						if( !!Test.debug ) {
+							console.log( 'Failed to add synapses', context ); 
+						}
+						if( 'undefined' !== typeof on_error ) {
+							on_error( context );
+						}
+					} } );
+				}
+			}
+
+			test.getAttr = function( test_callback ) {
+				var on_error = function( test_callback ) {
+					console.log( 'test.getAttr(): failed' );
+					if( 'function' !== typeof test_callback ) {
+						test_callback( value );
+					}
+				};
+				Test.getAttr( {
+					'key': test_id
+					, 'index': 'id'
+					, 'on_success': function( value ) {	
+						if( 'undefined' !== value ) {
+							console.log( 'test.getAttr(): passed' );
+						} else {
+							console.log( 'test.getAttr(): failed' );
+						}
+						if( 'function' !== typeof test_callback ) {
+							test_callback( value );
+						}
+					}, 'on_error': on_error
+				} );
+				
+
+			};
+
+			test.setAttr = function( test_callback ) {
+
+				var on_error = function( value ) {
+					console.log( 'test.setAttr(): failed' );
+					if( 'function' !== typeof test_callback ) {
+						test_callback( value );
+					}
+				};
+				Test.getAttr( {
+					'key': test_id
+					, 'index': 'id'
+					, 'on_success': function( context ) {	
+						var value = InDB.row.value( context.event );	
+						var expected =  {};
+						var key = Test.shorthand( 'strength' );
+					       	expected[ key ] = value[ key ];
+						Test.setAttr( {
+							'key': test_id
+							, 'index': 'id'
+							, 'expecting': expected
+							, 'strength': function( current ) {
+								var replacement = current / 2;
+								replacement = ( !!replacement && replacement > .001 ) ? replacement : 1;
+								return replacement;
+							}, 'on_success': function( context ) {
+								Test.getAttr( {
+									'key': test_id
+									, 'index': 'id'
+									, 'on_success': function( value ) {
+										if( 'undefined' !== typeof value ) {
+											console.log( 'test.setAttr(): passed' );
+										} else {
+											console.log( 'test.setAttr(): failed' );
+										}
+										if( 'function' !== typeof test_callback ) {
+											test_callback( value );
+										}
+									}, 'on_error': on_error 
+								} );
+							}, 'on_error': on_error
+						} );
+
+					}, 'on_error': on_error
+				} );
+				
+
+			};
+
+	
+			test.get = function( test_callback ) {
+
+				var on_error = function( get_context ) {
+					console.log( 'test.get(): failed' );
+					if( 'function' == typeof test_callback ) {
+						test_callback( get_context );
+					}
+				};
+				Test.get( {
+					'key': test_id
+					//, 'index': 'id'
+					, 'on_success': function( value ) {	
+						console.log( 'test.get(): passed' );
+						if( 'function' == typeof test_callback ) {
+							test_callback( value );
+						}
+					}, 'on_error': on_error
+				} );
+				
+
+			};
+
+			test.put = function( test_callback ) {
+
+				var on_error = function( value ) {
+					console.log( 'test.put(): failed' );
+					if( 'function' == typeof test_callback ) {
+						test_callback( value );
+					}
+				};
+				Test.get( {
+					'key': test_id
+					//, 'index': 'id'
+					, 'on_success': function( new_value ) {
+						new_value[ 'from' ] = ( isNaN( new_value[ 'from' ] ) ) ? 1 : new_value[ 'from' ];
+						new_value[ 'from' ] = parseInt( new_value[ 'from' ], 10 ) + inc_amount;
+						new_value[ 'to' ] = ( isNaN( new_value[ 'to' ] ) ) ? 1 : new_value[ 'to' ];
+						new_value[ 'to' ] = parseInt( new_value[ 'to' ], 10 ) + inc_amount;
+						Test.put( {
+							'key': test_id
+							, 'data': new_value
+							, 'on_success': function( result_id ) {
+								Test.get( {
+									'key': result_id
+									//, 'index': 'id'
+									, 'on_success': function( return_value ) {
+										if( 'undefined' !== typeof return_value[ 'from' ] && new_value[ 'from' ] == return_value[ 'from' ] && 'undefined' !== typeof return_value[ 'to' ] && new_value[ 'to' ] == return_value[ 'to' ] ) {	
+											console.log( 'test.put(): passed' );
+										} else {
+											console.log( 'test.put(): failed', new_value, return_value );
+										}
+										if( 'function' == typeof test_callback ) {
+											test_callback( return_value );
+										}							
+									}, 'on_error': on_error 
+								} );
+							}, 'on_error': on_error
+						} );
+
+					}, 'on_error': on_error
+				} );	
+
+			};
+
+			test.add = function( test_callback ) {
+
+				var on_error = function( value ) {
+					console.log( 'test.add(): failed' );
+					if( 'function' == typeof test_callback ) {
+						test_callback( value );
+					}
+				};
+				var new_value = {
+					'to': 1
+					, 'from': 1
+					, 'type': 'connection'
+					, 'strength': Math.random()
+				};
+				Test.add( {
+					'data': new_value
+					, 'on_success': function( add_value ) {
+						Test.get( {
+							'key': add_value
+							//, 'index': 'id'
+							, 'on_success': function( return_value ) {
+								if( 'undefined' !== typeof return_value && null !== return_value && add_value == return_value.id ) {
+									test_id = return_value;
+									console.log( 'test.add(): passed' );
+								} else {
+									console.log( 'test.add(): failed' );
+								}
+								if( 'function' == typeof test_callback ) {
+									test_callback( return_value );
+								}							
+							}, 'on_error': on_error 
+						} );
+					}, 'on_error': on_error
+				} );
+
+			};
+
+
+			test.update = function( test_callback ) {
+
+				var on_error = function( value ) {
+					console.log( 'test.update(): failed' );
+					if( 'function' == typeof test_callback ) {
+						test_callback( value );
+					}
+				};
+				Test.get( {
+					'key': test_id
+					//, 'index': 'id'
+					, 'on_success': function( value ) {	
+						var expected =  {};
+						expected[ 'to' ] = value[ 'to' ];
+						Test.update( {
+							'key': test_id
+							//, 'index': 'id'
+							, 'expecting': expected
+							, 'data': function( current ) {
+								var val = {};
+								val[ 'to' ] = parseInt( current[ 'to' ], 10 ) + inc_amount;
+								return val;
+							}, 'on_success': function( context ) {
+								Test.get( {
+									'key': test_id
+									//, 'index': 'id'
+									, 'on_success': function( returned_value ) {
+										if( 'undefined' !== typeof returned_value && null !== returned_value && ( returned_value[ 'to' ] - inc_amount )  == expected[ 'to' ] ) {
+											console.log( 'test.update(): passed' );
+										} else {
+											console.log( 'test.update(): failed' );
+										}
+										if( 'function' == typeof test_callback ) {
+											test_callback( returned_value );
+										}
+									}, 'on_error': on_error 
+								} );
+							}, 'on_error': on_error
+						} );
+
+					}, 'on_error': on_error
+				} );
+				
+
+			};
+
+			test.delete = function( test_callback ) {
+
+				var on_error = function( value ) {
+					console.log( 'test.delete(): failed' );
+					if( 'function' == typeof test_callback ) {
+						test_callback( value );
+					}
+				};
+				var new_value = {
+					'to': 1
+					, 'from': 1
+					, 'type': 'connection'
+					, 'strength': Math.random()
+				};
+				Test.add( {
+					'data': new_value
+					, 'on_success': function( add_value ) {
+						Test.get( {
+							'key': add_value
+							//, 'index': 'id'
+							, 'on_success': function( get_value_1 ) {
+								Test.delete( {
+									'key': add_value
+									, 'on_success': function( delete_value ) {
+										Test.get( {
+											'key': add_value
+											//, 'index': 'id'
+											, 'on_error': on_error
+											, 'on_success': function( context ) {
+												var get_value_2 = InDB.row.value( context );
+												if( 'undefined' !== typeof get_value_2 && null == get_value_2 ) {
+													console.log( 'test.delete(): passed' );
+												} else {
+													console.log( 'test.delete(): failed' );
+												}
+												if( 'function' == typeof test_callback ) {
+													test_callback( get_value_2 );
+												}
+											} 
+										} );
+									}, 'on_error': on_error } );
+							}, 'on_error': on_error } );
+					}, 'on_error': on_error } );
+			};
+
+			/* Clear */
+
+			test.clear = function( test_callback ) {
+
+				var on_error = function( get_context ) {
+					console.log( 'test.clear(): failed' );
+					if( 'function' == typeof test_callback ) {
+						test_callback( get_context );
+					}
+				};
+				var item_count = 0;
+				Test.clear( {
+					'on_success': function( value ) {	
+						console.log( 'test.cursor.clear(): passed' );
+						if( 'function' == typeof test_callback ) {
+							test_callback( value );
+						}
+					}, 'on_error': on_error
+				} );
+				
+
+			};
+
+			/* Cursor */
+
+			test.cursor.get = function( test_callback ) {
+
+				var on_error = function( get_context ) {
+					console.log( 'test.get(): failed' );
+					if( 'function' == typeof test_callback ) {
+						test_callback( get_context );
+					}
+				};
+				var item_count = 0;
+				Test.cursor.get( {
+					'begin': 0
+					, 'left_inclusive': true
+					//, 'index': 'id'
+					, 'limit': 20
+					, 'direction': InDB.cursor.direction.previous()
+					, 'on_success': function( value ) {	
+						item_count++;
+					}, 'on_complete': function( value ) {	
+						console.log( 'test.cursor.get(): passed' );
+						if( 'function' == typeof test_callback ) {
+							test_callback( value );
+						}
+					}, 'on_error': on_error
+				} );
+				
+
+			};
+
+			test.cursor.delete = function( test_callback ) {
+				test.data.add( 5 );
+				var on_error = function( get_context ) {
+					console.log( 'test.delete(): failed' );
+					if( 'function' == typeof test_callback ) {
+						test_callback( get_context );
+					}
+				};
+				var item_count = 0;
+				var limit = 20;
+				Test.cursor.get( {
+					'begin': 0
+					, 'left_inclusive': true
+					//, 'index': 'id'
+					//, 'limit': limit
+					, 'direction': InDB.cursor.direction.previous()
+					, 'on_success': function( value ) {	
+						item_count++;
+					}, 'on_complete': function( value ) {	
+						console.log("TOTAL", item_count );
+						var delete_count = 0;
+						Test.cursor.delete( {
+							'begin': 0
+							, 'left_inclusive': true
+							//, 'index': 'id'
+							//, 'limit': limit
+							, 'direction': InDB.cursor.direction.next()
+							, 'on_success': function( value ) {	
+								delete_count++;
+							}, 'on_complete': function( value ) {	
+							var final_count = 0;
+								Test.cursor.get( {
+									'begin': 0
+									, 'left_inclusive': true
+									//, 'index': 'id'
+									//, 'limit': limit
+									, 'direction': InDB.cursor.direction.previous()
+									, 'on_success': function( value ) {
+										if( 'undefined' !== typeof value && null !== value ) {	
+											final_count++;
+										}
+									}, 'on_complete': function( value ) {	
+										if( 0 == final_count ) {
+											console.log( 'test.cursor.delete(): passed' );
+										} else {
+											console.log( 'test.cursor.delete(): failed' );
+										}
+										if( 'function' == typeof test_callback ) {
+											test_callback( value );
+										}
+									}
+								} );
+							}, 'on_error': on_error
+						} );
+					}, 'on_error': on_error
+				} );
+			};
+
+			test.cursor.update = function( test_callback ) {
+				test.data.add( 5 );
+				var on_error = function( get_context ) {
+					console.log( 'test.update(): failed' );
+					if( 'function' == typeof test_callback ) {
+						test_callback( get_context );
+					}
+				};
+				var item_count = 0;
+				var limit = 20;
+				var update_map = {};
+				Test.cursor.update( {
+					'begin': 0
+					, 'left_inclusive': true
+					//, 'index': 'id' //xxx
+					, 'data': function( current_value ) {
+						if( 'undefined' !== typeof current_value && null !== current_value && 'undefined' !== typeof current_value.strength ) {
+							//var new_strength = ( 'undefined' !== typeof current_value.strength ) ? current_value.strength / 2 : 1;
+							var new_strength = "123456";
+							update_map[ current_value.id ] = new_strength;
+							console.log("UPDATED FROM/TO",current_value.strength,new_strength);
+							current_value.strength = new_strength;
+						}
+
+						return current_value;
+					}//, 'limit': limit
+					, 'direction': InDB.cursor.direction.next()
+					, 'on_success': function( value ) {	
+						item_count++;
+						console.log('updated');
+					}, 'on_complete': function( value ) {	
+						console.log("UPPITY",value);
+						if( limit > 0 && item_count <= limit ) {
+							console.log( 'test.cursor.update(): passed', update_map );
+						} else {
+							console.log( 'test.cursor.update(): failed. Counted ' + item_count + ' successes, expected ' + limit );
+						}
+						if( 'function' == typeof test_callback ) {
+							test_callback( value );
+						}
+					}, 'on_error': on_error
+				} );
+			};
+
+			$(document).ready(function() {
+	
+				var request = {};
+				request.database_name = "Test-001";
+				request.database_description = "Basic MLP neural network."
+
+				var on_loaded = function( context ) {
+					jQuery( document ).trigger( 'test_database_loaded', context );
+				}
+
+				var Test = new IDB{ 'name': Test.database_name, 'description': Test.database_description, 'on_success': on_loaded } ) ;
+	
+			});
+	
+
+			jQuery( document ).bind( 'test_database_loaded', function( context ) {
+				console.log( "Test InDB is loaded", context );
+
+				var done = function( context ) {
+					console.log( "Tests complete." );
+				};
+
+				var get_test = function( context ) {
+					test.get( put_test );
+				};
+				var put_test = function( context ) {
+					test.put( update_test );
+				};
+				var update_test = function( context ) {
+					test.update( add_test );
+				};
+				var add_test = function( context ) {
+					test.add( delete_test );
+				};
+				var delete_test = function( context ) {
+					test.delete( cursor_delete_test );
+				};
+				var cursor_get_test = function( context ) {
+					test.cursor.get( cursor_update_test );
+				};
+				var cursor_delete_test = function( context ) {
+					test.cursor.delete( cursor_get_test );
+				};
+				var cursor_update_test = function( context ) {
+					test.cursor.update( clear_test );
+				};
+				
+				var clear_test = function( context ) {
+					test.clear( cursor_get_test );
+				};
+
+				var node1 = Math.floor( Math.random()*100 );	
+				var node2 = Math.floor( Math.random()*100 );	
+				Test.add( { 'data': { 'type': 'connection', 'from': node1, 'to': node2, 'strength': Math.random() }, 'on_success': function( result_value ) {
+					test_id = result_value;
+					get_test();
+				}, 'on_error': function( context ) {
+					console.log( 'FAILED to add synapses', context );       
+				} } );
+
+				//test.getAttr();
+				//test.setAttr();
+
+			} );
+		</script>
+		<script type="text/javascript" src="http://github.com/editor/InDB/raw/master/indb.dev.js"></script>
+	</body>
+</html>
+
