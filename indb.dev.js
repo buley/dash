@@ -3736,4 +3736,4 @@ var IDB = (function(){
 
 	return DB;
 
-}(); // End immediately executing anonymous function
+} )(); // End immediately executing anonymous function
