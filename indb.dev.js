@@ -567,6 +567,9 @@ var IDB = (function(){
 	InDB.stores.create = function ( stores, on_success, on_error, on_abort ) {
 
 		var context = { 'stores': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
+
+		console.log('InDB.stores.create', context );
+
 		//TODO: Assertions
 		for( store in stores ) {
 
@@ -3132,7 +3135,6 @@ var IDB = (function(){
 			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = indexes[ index ];
 		}
 
-		console.log('IDXS',namespace_idxs);
 		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
 			InDB.trigger( 'InDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_complete': function( context2 ) {
 				console.log( 'Store loaded', context2 );
