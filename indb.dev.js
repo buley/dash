@@ -155,10 +155,18 @@ var IDB = (function(){
 
 	InDB.shorthand.get = function ( request ) {
 
+		/* Setup */
+
 		var shorthand_map = InDB.shorthand.map.get( request.store );
+
+		/* Debug */
+
 		if( !!InDB.debug ) {
 			console.log("InDB.shorthand.get map", shorthand_map);
 		}
+
+		/* Work */
+
 		if( 'undefined' !== typeof shorthand_map[ request.key ] ) {
 			return shorthand_map[ request.key ];
 		} else {
@@ -3112,20 +3120,19 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var indexes = request.indexes;
-		console.log('INDEXES',indexes);
+
 		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
-		console.log("NAMESPACE",namespace);
 		delete request.indexes.primary;
 
 		var namespace_idxs = {};
 		namespace_idxs[ store ] = {};
 
 		for( index in indexes ) {
-			console.log("INSTALL",index);	
 			namespace_idxs[ store ][ index ] = {};
 			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = indexes[ index ];
 		}
 
+		console.log('IDXS',namespace_idxs);
 		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
 			InDB.trigger( 'InDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_complete': function( context2 ) {
 				console.log( 'Store loaded', context2 );
