@@ -3074,7 +3074,7 @@ var IDB = (function(){
 		if( 'undefined' !== typeof request.store ) {
 			current_store = request.store;
 		}
-
+*/
 		var on_success = function( database ) {
 			request.target = database;
 			if( 'function' == typeof request.on_success ) {
@@ -3091,7 +3091,7 @@ var IDB = (function(){
 		DB.trigger( 'IndexedDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error } ) ;
 
 		return this;
-*/	};
+	};
 
 	/* Database */
 
