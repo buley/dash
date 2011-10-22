@@ -3062,7 +3062,7 @@ var InDB = (function(){
 
 	/* Constructor */
 
-	var DB = function( request ) {
+	var InDB = function( request ) {
 
 		// Fix browser if necessary 
 		var browser_check = DB.checkBrowser(); 
