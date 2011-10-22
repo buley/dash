@@ -3063,7 +3063,7 @@ var IDB = (function(){
 	/* Constructor */
 
 	var InDB = function( request ) {
-		console.log("OK");
+		console.log("OK", arguments);
 		// Fix browser if necessary 
 		var browser_check = DB.checkBrowser(); 
 		DB.assert( -1 !== browser_check, 'incompatible browser' ); 
