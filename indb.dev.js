@@ -298,7 +298,6 @@ var IDB = (function(){
 
 	/* This function is indempodent (you can run it multiple times and it won't do anything */
 	DB.database.load = function ( name, description, on_success, on_error, on_abort ) {
-		console.log("DB.database.load");
 		/* Begin Debug */
 		if ( !!DB.debug ) {
 			console.log ( "DB.database.load", name, description, on_success, on_error, on_abort );
@@ -3064,6 +3063,7 @@ var IDB = (function(){
 
 	var IndexedDB = function( request ) {
 		console.log("OK", arguments.callee);
+		return;
 		// Fix browser if necessary 
 		var browser_check = DB.checkBrowser(); 
 		DB.assert( -1 !== browser_check, 'incompatible browser' ); 
