@@ -3063,6 +3063,7 @@ var IDB = (function(){
 	/* Constructor */
 
 	var IndexedDB = function( request ) {
+		console.log("OK", arguments);
 		// Fix browser if necessary 
 		var browser_check = DB.checkBrowser(); 
 		DB.assert( -1 !== browser_check, 'incompatible browser' ); 
