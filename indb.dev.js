@@ -3459,13 +3459,16 @@ var IDB = (function(){
 			}
 		}
 
+		var store = request.store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+
 		var data = request.data;
 		var new_data;
 		if( 'function' !== typeof data ) {
 			new_data = InDB.shorthand.encode( { 'store': request.store, 'data': data } );
 		} else {
 			new_data = function( arg ) {
-				return InDB.shorthand.encode( { 'store': request.store, 'data': data( DB.prototype.shorthand_decode( arg ) ) } );
+				return InDB.shorthand.encode( { 'store': request.store, 'data': data( InDB.shorthand.decode( { 'store': request.store, 'data': arg } ) ) } );
 			};
 		}
 
@@ -3473,9 +3476,6 @@ var IDB = (function(){
 		if( 'function' !== typeof expected ) {
 			expected = InDB.shorthand.encode( { 'store': request.store, 'data': expected } );
 		}
-
-		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		InDB.trigger( 'InDB_do_row_update', { 'store': request.store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
@@ -3643,14 +3643,18 @@ var IDB = (function(){
 			}
 		};
 
+		var store = request.store;
+		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		/* Shorthand Encoding */
+
+		var data = request.data;
 		var new_data;
 		if( 'function' !== typeof data ) {
-			new_data = DB.prototype.shorthand_encode( data );
+			new_data = InDB.shorthand.encode( { 'store': request.store, 'data': data } );
 		} else {
 			new_data = function( arg ) {
-				return DB.prototype.shorthand_encode( data( DB.prototype.shorthand_decode( arg ) ) );
+				return InDB.shorthand.encode( { 'store': request.store, 'data': data( InDB.shorthand.decode( { 'store': request.store, 'data': arg } ) ) } );
 			};
 		}
 
@@ -3668,9 +3672,6 @@ var IDB = (function(){
 		left_inclusive = ( 'undefined' !== typeof left_inclusive ) ? left_inclusive : null;
 		right_inclusive = ( 'undefined' !== typeof right_inclusive ) ? right_inclusive : null;
 		key = ( 'undefined' !== typeof begin && 'undefined' !== typeof end ) ? key : null;
-
-		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		/* Setup */
 
