@@ -979,14 +979,13 @@ var IDB = (function(){
 		// Database changes need to happen from w/in a setVersionRequest
 		var version = ( parseInt( InDB.db.version, 10 ) ) ? parseInt( InDB.db.version, 10 ) : 0;
 		var setVersionRequest = InDB.db.setVersion( version );
-		console.log('index setVersion setup', setVersionRequest, version);
+
 		/* Request Responses */
 
 		setVersionRequest.onsuccess = function ( event ) {
 			var result = event.target.result;
 			var databaseTransaction = result.objectStore( store );
 			try {
-				console.log('attempting to create using db tx', databaseTransaction);
 				databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
 				on_success( event );
 			} catch ( error ) {
