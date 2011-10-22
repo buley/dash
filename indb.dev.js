@@ -426,7 +426,7 @@ var IDB = (function(){
 					result = true;
 				} else {
 					console.log( error_message );
-					throw new Error( 'Assertion failed: ' + error_message, arguments[ 0 ] );
+					throw new Error( 'Assertion failed: ' + error_message, arguments[ 0 ], arguments.callee );
 				}
 				break;
 		}
