@@ -3159,8 +3159,10 @@ var IDB = (function(){
 			} } );
 
 		}, 'on_error': function() {
-
-		} );
+			if( 'function' == typeof request.on_error ) {
+				request.on_error( context );
+			}
+		} } );
 
 		return this;
 
