@@ -3218,7 +3218,7 @@ var IDB = (function(){
 
 		var indexes = request.indexes;
 
-		if( !InDB.assert( 'undefined' !== typeof indexes.primary && 'undefined' !== typeof indexes.primary.key, 'Must set a primary key' ) ) {
+		if( !InDB.assert( 'undefined' !== typeof indexes && 'undefined' !== typeof indexes.primary && 'undefined' !== typeof indexes.primary.key, 'Must set a primary key' ) ) {
 			return this;
 		}
 
