@@ -232,9 +232,9 @@ var IDB = (function(){
 				//base case: string value
 
 				if( 'object' === typeof object[ item ] ) {
-					encoded[ InDB.shorthand.get( item ) ] = InDB.shorthand.encode( { 'database': request.database, 'data': object[ item ] } );	
+					encoded[ InDB.shorthand.get( { 'store': request.store, 'key': item } ) ] = InDB.shorthand.encode( { 'store': request.store, 'data': object[ item ] } );	
 				} else { 
-					encoded[ InDB.shorthand.get( item ) ] = object[ item ];
+					encoded[ InDB.shorthand.get( { 'store': request.store, 'key': item } ) ] = object[ item ];
 				}
 			}
 		}
