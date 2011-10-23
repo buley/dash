@@ -534,6 +534,8 @@ var IDB = (function(){
 
 	/* Begin Object Store Methods */
 
+	InDB.store = InDB.store || {};
+
 	InDB.store.list = function() {
 		return InDB.db.objectStoreNames;
 	}
