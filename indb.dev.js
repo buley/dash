@@ -3221,12 +3221,17 @@ var IDB = (function(){
 	}
 
 	DB.prototype.index = DB.prototype.index || {};
+	DB.prototype.indexes = DB.prototype.indexes || {};
 
 	DB.prototype.index.exists = function( request ) {
 		return InDB.index.exists( request.store, request.exists );
 	};
 
 	DB.prototype.index.show = function( request ) {
+		return InDB.index.show( request.store, request.index );
+	};
+
+	DB.prototype.indexes.show = function( request ) {
 		return InDB.index.show( request.store );
 	};
 
