@@ -774,7 +774,9 @@ var IDB = (function(){
 		version = ( isNaN( version ) ) ? 1 : version + 1;
 		
 		var setVersionRequest = InDB.db.setVersion( version );
-		console.log(setVersionRequest);
+		if( !!InDB.debug ) {
+			console.log( 'InDB.store.create setVersionRequest', setVersionRequest );
+		}
 		setVersionRequest.onsuccess = function ( event ) {
 			try {
 
@@ -788,7 +790,10 @@ var IDB = (function(){
 				if( 'undefined' !== typeof autoinc_key && null !== autoinc_key ) {
 					options[ 'autoIncrement' ] = autoinc_key;
 				}
-				console.log('options~', options );	
+				
+				if( !!InDB.debug ) {
+					console.log('InDB.store.create options', options );
+				}	
 				InDB.db.createObjectStore( name, options );
 
 				context[ 'event' ] = event;
