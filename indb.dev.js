@@ -20,9 +20,10 @@ var IDB = (function(){
 	 *   InDB.db - namespace for the open IndexedDB instance (IDBFactory)
 	 *   InDB.dbs = namespace for open databases (reserved)
 	 *   InDB.database - namepspace for database methods (IDBDatabase)
-	 *   InDB.store - namespace for operations against multiple object stores (IBObjectStore)
-	 *   InDB.stores - namespace for single object stores (IDBObjectStore)
+	 *   InDB.stores - namespace for operations against multiple object stores (IBObjectStore)
+	 *   InDB.store - namespace for single object stores (IDBObjectStore)
 	 *   InDB.index - namespace for index methods (IDBIndex)
+	 *   InDB.indexes - namespace for methods that act against multiple indexes (IDBIndex)
 	 *   InDB.transaction - namespace for key range methods (IDBTransaction)
 	 *   InDB.range - namespace for key range methods (IDBKeyRange)
 	 *   InDB.row - namespace for row methods
@@ -527,8 +528,8 @@ var IDB = (function(){
 		if( !!InDB.debug ) {
 			console.log( 'InDB.index.list', store );
 		}
-		var store = InDB.transaction.create( store );
-		return store.indexNames;
+		var tx = InDB.transaction.create( store );
+		return tx.indexNames;
 	}
 
 
@@ -544,8 +545,9 @@ var IDB = (function(){
 	/*	if( "function" === typeof InDB.db.objectStores.contains ) {
 			return InDB.db.objectStores[ 'contains' ]( name ); //TODO: #Question: Not in IndexedDB spec?
 		} */
-		for( i=0; i<InDB.db.objectStoreNames.length; i++ ) {
-			if ( name === InDB.db.objectStoreNames[i] ) {
+		var stores = InDB.db.objectStoreNames;
+		for( i=0; i < stores.length; i++ ) {
+			if ( name === stores[ i ] ) {
 				return true;
 			}
 		}
@@ -3157,6 +3159,9 @@ var IDB = (function(){
 	DB.prototype.store = DB.prototype.store || {};
 
 	DB.prototype.store.exists = function( request ) {
+		if( 'undefined' !== request ) {
+			return null;
+		}
 		return InDB.store.exists( request.store );
 	};
 
