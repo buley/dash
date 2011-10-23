@@ -561,13 +561,17 @@ var IDB = (function(){
 		if( !!InDB.debug ) {
 			console.log( 'InDB.index.show transaction', tx );
 		}
-		if( 'undefined' !== typeof idx ) {
+		if( 'undefined' !== typeof tx ) {
 			var idx = tx.index( index );
-			return {
-				'name': idx.name
-				, 'key': idx.keyPath	
-				, 'unique': idx.unique
-			};
+			if( 'undefined' !== typeof idx ) {
+				return {
+					'name': idx.name
+					, 'key': idx.keyPath	
+					, 'unique': idx.unique
+				};
+			} else {
+				return null;
+			}
 		} else {
 			return null;
 		}
