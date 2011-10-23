@@ -523,8 +523,20 @@ var IDB = (function(){
 		return false;
 	}
 
+	InDB.index.list = function ( store ) {
+		if( !!InDB.debug ) {
+			console.log( 'InDB.index.list', store, );
+		}
+		var store = InDB.transaction.create( store );
+		return store.indexNames;
+	}
+
 
 	/* Begin Object Store Methods */
+
+	InDB.store.list = function() {
+		return InDB.db.objectStoreNames;
+	}
 
 	InDB.store.exists = function ( name ) {
 	/*	if( "function" === typeof InDB.db.objectStores.contains ) {
@@ -2770,7 +2782,7 @@ var IDB = (function(){
 				var result_value = result;
 				instance_data = data( result_value );
 				if( !!InDB.debug ) {
-					console.log('InDB.synapses.cursor.update', JSON.stringify( instance_data ) );
+					console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
 				}
 			}
 			if( false == replace && null !== result && 'undefined' !== result ) {	
@@ -2786,7 +2798,7 @@ var IDB = (function(){
 						if( result[ attr ] !== expecting[ attr ] ) {
 
 							if( !!InDB.debug ) {
-								console.log( 'InDB.row.update > value was not expected.', result[ attr ], expecting[ attr ] );
+								console.log( 'InDB.cursor.update > value was not expected.', result[ attr ], expecting[ attr ] );
 							}
 
 							var err = new Error( 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] );
@@ -3137,8 +3149,17 @@ var IDB = (function(){
 		return InDB.index.exists( request.store, request.exists );
 	};
 
+	DB.prototype.index.list = function( request ) {
+		return InDB.index.list( request.store );
+	};
+
+
 	DB.prototype.store.exists = function( request ) {
 		return InDB.store.exists( request.store );
+	};
+
+	DB.prototype.store.list = function( request ) {
+		return InDB.store.list();
 	};
 
 
