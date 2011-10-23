@@ -552,8 +552,8 @@ var IDB = (function(){
 		if( !!InDB.debug ) {
 			console.log( 'InDB.index.show transaction', tx );
 		}
-		var idx = tx.index( index );
-		return idx;
+		//var idx = tx.index( index );
+		return tx;
 	}
 
 
@@ -3232,7 +3232,7 @@ var IDB = (function(){
 	};
 
 	DB.prototype.indexes.show = function( request ) {
-		return InDB.index.show( request.store );
+		return InDB.indexes.show( request.store );
 	};
 
 	DB.prototype.store = DB.prototype.store || {};
