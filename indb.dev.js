@@ -3146,7 +3146,7 @@ var IDB = (function(){
 
 	DB.prototype.install = function ( request ) {
 
-		DB.prototype.store.create( { 'store': request.store, 'on_success': function() {
+		DB.prototype.store.create( { 'store': request.store, 'indexes': request.indexes, 'on_success': function() {
 
 			DB.prototype.index.create( { 'store': request.store, 'indexes': request.indexes, 'on_success': function() {
 				if( 'function' == typeof request.on_success ) {
