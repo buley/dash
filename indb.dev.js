@@ -555,6 +555,10 @@ var IDB = (function(){
 	};
 
 
+	InDB.database = InDB.database || {};
+	InDB.database.list = function( request ) { 
+		return InDB.db;
+	}
 
 	/* Create object stores after the database is created */
 	InDB.bind( 'InDB_do_stores_create', function ( event, context ) {
