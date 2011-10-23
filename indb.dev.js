@@ -242,8 +242,6 @@ var IDB = (function(){
 	}
 
 
-
-
 	/**
 	 * Actions:
 	 *  InDB_database_loaded - The database is loaded into the InDB.db namespace; no guarantee that object stores exist if a fresh install
@@ -3132,10 +3130,80 @@ var IDB = (function(){
 		return InDB.cursor.direction.previous( no_dupes );
 	};
 
+	DB.prototype.index = DB.prototype.index || {};
+	DB.prototype.store = DB.prototype.store || {};
+
+	DB.prototype.index.exists = function( request ) {
+		return InDB.index.exists( request.store, request.exists );
+	};
+
+	DB.prototype.store.exists = function( request ) {
+		return InDB.store.exists( request.store );
+	};
+
 
 	/* Database */
 
 	DB.prototype.install = function ( request ) {
+
+		DB.prototype.store.create( { 'store': request.store, 'on_success': function() {
+
+			DB.prototype.index.create( { 'store': request.store, 'indexes': request.indexes, 'on_success': function() {
+				if( 'function' == typeof request.on_success ) {
+					request.on_success( context );
+				}			
+			}, 'on_error': function( context ) {
+				if( 'function' == typeof request.on_error ) {
+					request.on_error( context );
+				}
+			} );
+
+		}, 'on_error': function() {
+
+		} );
+
+		return this;
+
+	}
+
+
+	DB.prototype.index.create = function ( request ) {
+
+		var namespace = {};
+	
+		if( !InDB.assert( 'undefined' !== typeof request, 'Request cannot be empty' ) ) {
+			return this;
+		}
+
+		var store = request.store;
+		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+
+		var indexes = request.indexes;
+
+		var namespace_idxs = {};
+		namespace_idxs[ store ] = {};
+
+		for( index in indexes ) {
+			namespace_idxs[ store ][ index ] = {};
+			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = ( true == indexes[ index ] ) ? 'true' : 'false';
+		}
+
+		InDB.trigger( 'InDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_success': function( value ) {
+			if( 'function' == request.on_success ) {
+				request.on_success( value );
+			}
+		}, 'on_error': function( context ) {	
+			if( 'function' == request.on_error ) {
+				request.on_error( context );
+			}
+		} } );
+
+		return this;
+
+	}
+
+	DB.prototype.store = DB.prototype.store || {};
+	DB.prototype.store.create = function ( request ) {
 
 		var namespace = {};
 	
@@ -3158,23 +3226,20 @@ var IDB = (function(){
 		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
 		delete request.indexes.primary;
 
-		var namespace_idxs = {};
-		namespace_idxs[ store ] = {};
-
-		for( index in indexes ) {
-			namespace_idxs[ store ][ index ] = {};
-			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = ( true == indexes[ index ] ) ? 'true' : 'false';
-		}
-
 		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
-			InDB.trigger( 'InDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_complete': function( context2 ) {
-				console.log( 'Store loaded', context2 );
-			} } );
+			if( 'function' == request.on_success ) {
+				request.on_success( value );
+			}
+		}, 'on_error': function( context ) {	
+			if( 'function' == request.on_error ) {
+				request.on_error( context );
+			}
 		} } );
 
 		return this;
 
 	}
+
 
 	/* Methods */
 
