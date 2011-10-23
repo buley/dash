@@ -538,7 +538,11 @@ var IDB = (function(){
 		if( !!InDB.debug ) {
 			console.log( 'InDB.index.show transaction', tx );
 		}
-		return tx.indexNames;
+		if( 'undefined' !== typeof tx ) {
+			return tx.indexNames;
+		} else {
+			return null;
+		}
 	}
 
 	InDB.index.show = function ( store, index ) {
@@ -552,9 +556,16 @@ var IDB = (function(){
 		if( !!InDB.debug ) {
 			console.log( 'InDB.index.show transaction', tx );
 		}
-		console.log(tx.index);
-		var idx = tx.index( index );
-		return idx;
+		if( 'undefined' !== typeof idx ) {
+			var idx = tx.index( index );
+			return {
+				'name': idx.name
+				, 'key': idx.keyPath	
+				, 'unique': idx.unique
+			};
+		} else {
+			return null;
+		}
 	}
 
 
@@ -580,11 +591,15 @@ var IDB = (function(){
 		if( !!InDB.debug ) {
 			console.log( 'InDB.index.show transaction', tx );
 		}
-		return {
-			'name': tx.name
-			, 'indexes': tx.indexNames
-			, 'primary_key': tx.keyPath 	
-		};
+		if( 'undefined' !== typeof tx ) {
+			return {
+				'name': tx.name
+				, 'indexes': tx.indexNames
+				, 'key': tx.keyPath 	
+			};
+		} else {
+			return null;
+		}
 	}
 
 
