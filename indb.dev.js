@@ -539,7 +539,7 @@ var IDB = (function(){
 
 	InDB.store.list = function() {
 		return InDB.db.objectStoreNames;
-	}
+	};
 
 	InDB.store.exists = function ( name ) {
 	/*	if( "function" === typeof InDB.db.objectStores.contains ) {
@@ -552,7 +552,7 @@ var IDB = (function(){
 			}
 		}
 		return false;
-	}
+	};
 
 
 
@@ -3155,7 +3155,7 @@ var IDB = (function(){
 	DB.prototype.index.list = function( request ) {
 		return InDB.index.list( request.store );
 	};
-
+/*
 	DB.prototype.store = DB.prototype.store || {};
 
 	DB.prototype.store.exists = function( request ) {
@@ -3168,7 +3168,7 @@ var IDB = (function(){
 	DB.prototype.store.list = function( request ) {
 		return InDB.store.list();
 	};
-
+*/
 
 	/* Database */
 
