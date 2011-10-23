@@ -546,14 +546,15 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		if( !!InDB.debug ) {
-			console.log( 'InDB.index.show', store );
+			console.log( 'InDB.index.show', store, index );
 		}
 		var tx = InDB.transaction.create( store );
 		if( !!InDB.debug ) {
 			console.log( 'InDB.index.show transaction', tx );
 		}
-		//var idx = tx.index( index );
-		return tx;
+		console.log(tx.index);
+		var idx = tx.index( index );
+		return idx;
 	}
 
 
