@@ -3204,10 +3204,10 @@ var IDB = (function(){
 
 		DB.prototype.store.create( { 'store': request.store, 'indexes': request.indexes, 'on_success': function() {
 
-			DB.prototype.index.create( { 'store': request.store, 'indexes': request.indexes, 'on_success': function() {
+			DB.prototype.index.create( { 'store': request.store, 'indexes': request.indexes, 'on_success': function( result ) {
 				console.log( 'DB.install() success' );
 				if( 'function' === typeof request.on_success ) {
-					request.on_success( context );
+					request.on_success( result );
 				}			
 			}, 'on_error': function( context ) {
 				console.log( 'DB.install() error' );
