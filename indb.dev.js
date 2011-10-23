@@ -341,9 +341,9 @@ var IDB = (function(){
 			return;
 		}
 		
-		if ( !InDB.assert( !InDB.isEmpty( description ), "database description cannot be empty" ) ) { 
+		/*if ( !InDB.assert( !InDB.isEmpty( description ), "database description cannot be empty" ) ) { 
 			return;
-		}
+		}*/
 
 		/* Defaults */
 
@@ -3108,10 +3108,12 @@ var IDB = (function(){
 		if ( 0 === browser_check ) { 
 			InDB.fixBrowser(); 
 		}
-		console.log( "REQ",request);
-		console.log('undefined' === typeof request);
-		console.log('undefined' === typeof request.database);
+		
 		InDB.assert( ( 'undefined' !== typeof request && 'undefined' !== typeof request.database ), 'Must define a database' );
+
+		if( 'undefined' === typeof request.description ) {
+			request.description = null;
+		}
 
 		if( 'undefined' !== typeof request.store ) {
 			current_store = request.store;
@@ -3149,6 +3151,19 @@ var IDB = (function(){
 		no_dupes = ( 'undefined' !== typeof request && false == request.duplicates ) ? true : false;
 		return InDB.cursor.direction.previous( no_dupes );
 	};
+
+
+	DB.prototype.database = DB.prototype.database || {};
+
+	DB.prototype.database.list = function( request ) {
+		if ( 'undefined' === typeof request ) {
+			request = {};
+			request.database = null;
+		} else if( 'undefined' == typeof request.database ) {
+			request.database = null;
+		}
+		return InDB.database.list( request.database );
+	}
 
 	DB.prototype.index = DB.prototype.index || {};
 
