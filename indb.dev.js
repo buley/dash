@@ -3111,7 +3111,7 @@ var IDB = (function(){
 		console.log( "REQ",request);
 		console.log('undefined' === typeof request);
 		console.log('undefined' === typeof request.database);
-		InDB.assert( 'undefined' !== typeof request && 'undefined' !== typeof request.database, 'Must define a database' );
+		InDB.assert( ( 'undefined' !== typeof request && 'undefined' !== typeof request.database ), 'Must define a database' );
 
 		if( 'undefined' !== typeof request.store ) {
 			current_store = request.store;
