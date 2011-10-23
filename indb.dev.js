@@ -3206,19 +3206,19 @@ var IDB = (function(){
 
 			DB.prototype.index.create( { 'store': request.store, 'indexes': request.indexes, 'on_success': function() {
 				console.log( 'DB.install() success' );
-				if( 'function' == typeof request.on_success ) {
+				if( 'function' === typeof request.on_success ) {
 					request.on_success( context );
 				}			
 			}, 'on_error': function( context ) {
 				console.log( 'DB.install() error' );
-				if( 'function' == typeof request.on_error ) {
+				if( 'function' === typeof request.on_error ) {
 					request.on_error( context );
 				}
 			} } );
 
 		}, 'on_error': function() {
 			console.log( 'DB.install() error' );
-			if( 'function' == typeof request.on_error ) {
+			if( 'function' === typeof request.on_error ) {
 				request.on_error( context );
 			}
 		} } );
@@ -3250,11 +3250,11 @@ var IDB = (function(){
 		}
 
 		InDB.trigger( 'InDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_success': function( value ) {
-			if( 'function' == request.on_success ) {
+			if( 'function' === typeof request.on_success ) {
 				request.on_success( value );
 			}
 		}, 'on_error': function( context ) {	
-			if( 'function' == request.on_error ) {
+			if( 'function' === typeof request.on_error ) {
 				request.on_error( context );
 			}
 		} } );
@@ -3287,14 +3287,18 @@ var IDB = (function(){
 		namespace[ store ] = { 'key': InDB.shorthand.get( { 'store': store, 'key': indexes.primary.key } ), 'incrementing_key': indexes.primary.incrementing, 'unique': indexes.primary.unique }
 		delete request.indexes.primary;
 
-		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
-			console.log( 'DB.prototype.store.create success' );
-			if( 'function' == request.on_success ) {
-				request.on_success( value );
+		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( result ) {
+			if( !!InDB.debug ) {
+				console.log( 'DB.prototype.store.create success' );
+			}
+			if( 'function' === typeof request.on_success ) {
+				request.on_success( result );
 			}
 		}, 'on_error': function( context ) {
-			console.log( 'DB.prototype.store.create error' );
-			if( 'function' == request.on_error ) {
+			if( !!InDB.debug ) {
+				console.log( 'DB.prototype.store.create error' );
+			}
+			if( 'function' === typeof request.on_error ) {
 				request.on_error( context );
 			}
 		} } );
