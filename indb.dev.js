@@ -3205,16 +3205,19 @@ var IDB = (function(){
 		DB.prototype.store.create( { 'store': request.store, 'indexes': request.indexes, 'on_success': function() {
 
 			DB.prototype.index.create( { 'store': request.store, 'indexes': request.indexes, 'on_success': function() {
+				console.log( 'DB.install() success' );
 				if( 'function' == typeof request.on_success ) {
 					request.on_success( context );
 				}			
 			}, 'on_error': function( context ) {
+				console.log( 'DB.install() error' );
 				if( 'function' == typeof request.on_error ) {
 					request.on_error( context );
 				}
 			} } );
 
 		}, 'on_error': function() {
+			console.log( 'DB.install() error' );
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
