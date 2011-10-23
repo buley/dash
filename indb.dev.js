@@ -3145,7 +3145,6 @@ var IDB = (function(){
 	};
 
 	DB.prototype.index = DB.prototype.index || {};
-	DB.prototype.store = DB.prototype.store || {};
 
 	DB.prototype.index.exists = function( request ) {
 		return InDB.index.exists( request.store, request.exists );
@@ -3155,6 +3154,7 @@ var IDB = (function(){
 		return InDB.index.list( request.store );
 	};
 
+	DB.prototype.store = DB.prototype.store || {};
 
 	DB.prototype.store.exists = function( request ) {
 		return InDB.store.exists( request.store );
