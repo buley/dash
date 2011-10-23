@@ -306,13 +306,7 @@
 											, 'store': 'tests'
 											//, 'index': 'id'
 											, 'on_error': on_error
-											, 'on_success': function( context ) {
-												var get_value_2;
-												if( 'undefined' !== typeof context ) {
-													get_value_2 = InDB.row.value( context );
-												} else {
-													get_value_2 = null;
-												}
+											, 'on_success': function( get_value_2 ) {
 												if( 'undefined' !== typeof get_value_2 || null == get_value_2 ) {
 													console.log( 'test.delete(): passed' );
 												} else {
@@ -492,7 +486,7 @@
 			$(document).ready(function() {
 	
 				var request = {};
-				request.database = "InDB-005";
+				request.database = "InDB-007";
 				request.description = "Database for InDB tests."
 
 				var on_loaded = function( context ) {
@@ -581,7 +575,7 @@
 				var node1 = Math.floor( Math.random()*100 );	
 				var node2 = Math.floor( Math.random()*100 );	
 
-				InDB.add( { 'store': 'tests', 'data': { 'type': 'connection', 'id': 77, 'from': node1, 'to': node2, 'strength': Math.random() }, 'on_success': function( result_value ) {
+				InDB.add( { 'store': 'tests', 'data': { 'type': 'connection', 'from': node1, 'to': node2, 'strength': Math.random() }, 'on_success': function( result_value ) {
 					test_id = result_value;
 					console.log( "SUCCESSFULLY added", test_id );
 					get_test();
