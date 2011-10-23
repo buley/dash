@@ -525,10 +525,16 @@ var IDB = (function(){
 	}
 
 	InDB.index.list = function ( store ) {
+
+		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
+
 		if( !!InDB.debug ) {
 			console.log( 'InDB.index.list', store );
 		}
 		var tx = InDB.transaction.create( store );
+		if( !!InDB.debug ) {
+			console.log( 'InDB.index.list transaction', tx );
+		}
 		return tx.indexNames;
 	}
 
