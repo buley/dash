@@ -3217,7 +3217,7 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var indexes = request.indexes;
-
+		console.log("HELLO DARLING",indexes);
 		if( !InDB.assert( 'undefined' !== typeof indexes && 'undefined' !== typeof indexes.primary && 'undefined' !== typeof indexes.primary.key, 'Must set a primary key' ) ) {
 			return this;
 		}
