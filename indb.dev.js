@@ -3108,7 +3108,7 @@ var IDB = (function(){
 		if ( 0 === browser_check ) { 
 			InDB.fixBrowser(); 
 		}
-
+		console.log( "REQ",request);
 		InDB.assert( 'undefined' === typeof request || 'undefined' === typeof request.database, 'Must define a database' );
 
 		if( 'undefined' !== typeof request.store ) {
