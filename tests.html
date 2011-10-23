@@ -84,6 +84,7 @@
 					       	expected[ key ] = value[ key ];
 						InDB.setAttr( {
 							'key': test_id
+							, 'store': 'tests'
 							, 'index': 'id'
 							, 'expecting': expected
 							, 'strength': function( current ) {
@@ -93,6 +94,7 @@
 							}, 'on_success': function( context ) {
 								InDB.getAttr( {
 									'key': test_id
+									, 'store': 'tests'
 									, 'index': 'id'
 									, 'on_success': function( value ) {
 										if( 'undefined' !== typeof value ) {
@@ -162,6 +164,7 @@
 							, 'on_success': function( result_id ) {
 								InDB.get( {
 									'key': result_id
+									, 'store': 'tests'
 									//, 'index': 'id'
 									, 'on_success': function( return_value ) {
 										if( 'undefined' !== typeof return_value[ 'from' ] && new_value[ 'from' ] == return_value[ 'from' ] && 'undefined' !== typeof return_value[ 'to' ] && new_value[ 'to' ] == return_value[ 'to' ] ) {	
