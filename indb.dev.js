@@ -3288,10 +3288,12 @@ var IDB = (function(){
 		delete request.indexes.primary;
 
 		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( context ) {
+			console.log( 'DB.prototype.store.create success' );
 			if( 'function' == request.on_success ) {
 				request.on_success( value );
 			}
-		}, 'on_error': function( context ) {	
+		}, 'on_error': function( context ) {
+			console.log( 'DB.prototype.store.create error' );
 			if( 'function' == request.on_error ) {
 				request.on_error( context );
 			}
