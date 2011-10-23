@@ -525,7 +525,7 @@ var IDB = (function(){
 
 	InDB.index.list = function ( store ) {
 		if( !!InDB.debug ) {
-			console.log( 'InDB.index.list', store, );
+			console.log( 'InDB.index.list', store );
 		}
 		var store = InDB.transaction.create( store );
 		return store.indexNames;
