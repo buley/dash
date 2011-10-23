@@ -552,7 +552,8 @@ var IDB = (function(){
 		if( !!InDB.debug ) {
 			console.log( 'InDB.index.show transaction', tx );
 		}
-		return tx;
+		var idx = tx.index( index );
+		return idx;
 	}
 
 
