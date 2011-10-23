@@ -539,7 +539,12 @@ var IDB = (function(){
 			console.log( 'InDB.index.show transaction', tx );
 		}
 		if( 'undefined' !== typeof tx ) {
-			return tx.indexNames;
+			var indexes = [];
+			var indexNames = tx.indexNames;
+			for( var x = 0; x < indexNames.length; x++ ) {
+				indexes.push( indexNames[ x ] );
+			}
+			return indexes;
 		} else {
 			return null;
 		}
