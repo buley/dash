@@ -3109,6 +3109,8 @@ var IDB = (function(){
 			InDB.fixBrowser(); 
 		}
 
+		InDB.assert( 'undefined' === typeof request || 'undefined' === typeof request.database, 'Must define a database' );
+
 		if( 'undefined' !== typeof request.store ) {
 			current_store = request.store;
 		}
@@ -3155,7 +3157,7 @@ var IDB = (function(){
 	DB.prototype.index.list = function( request ) {
 		return InDB.index.list( request.store );
 	};
-/*
+
 	DB.prototype.store = DB.prototype.store || {};
 
 	DB.prototype.store.exists = function( request ) {
@@ -3168,7 +3170,7 @@ var IDB = (function(){
 	DB.prototype.store.list = function( request ) {
 		return InDB.store.list();
 	};
-*/
+
 
 	/* Database */
 
