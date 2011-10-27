@@ -3861,10 +3861,7 @@ var IDB = (function(){
 				var value = InDB.shorthand.decode( { 'store': request.store, 'data': value } );
 				if( !!DB.debug ) console.log( 'DB.prototype.cursor.get success', item );
 				request.on_success( value );
-			} else if( null === value && 'function' == typeof request.on_complete ) {
-				request.on_complete();
-
-			}
+			} 
 		};
 
 		var on_error = function ( context ) {
