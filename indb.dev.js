@@ -787,7 +787,7 @@ var IDB = (function(){
 		/* Debug */
 		
 		if( !!InDB.debug ) {
-			console.log ( "InDB.store.create", name, key, autoinc_key, unique, on_success, on_error, on_abort );
+			console.log ( "InDB.store.create", name, key, autoinc_key, on_success, on_error, on_abort );
 		}
 
 		/* Assertions */	
