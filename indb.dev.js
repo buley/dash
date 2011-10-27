@@ -181,7 +181,7 @@ var IDB = (function(){
 	InDB.shorthand.reverse = function ( request ) {
 		var k = request.key;
 		var reversed = {};
-		var shorthand_map = InDB.shorthand.map.get( request.databaes );
+		var shorthand_map = InDB.shorthand.map.get( request.database );
 		for( var item in shorthand_map ) {
 			if( shorthand_map.hasOwnProperty( item ) ) {
 				reversed[ InDB.shorthand.get( item ) ] = item;
