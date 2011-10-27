@@ -71,7 +71,7 @@ var InDBApp = (function() {
 				console.log( 'App.prototype.add success', value );
 			}
 			/* Callback */
-			if( 'function' == typeof on_success ) {
+			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
 			}
 		};
@@ -82,7 +82,7 @@ var InDBApp = (function() {
 				console.log( 'App.prototype.add error', context );
 			}
 			/* Callback */
-			if( 'function' == typeof on_error ) {
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
@@ -138,7 +138,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get complete' );
 			}
 			/* Callback */
-			if( 'function' == typeof on_complete ) {
+			if( 'function' == typeof request.on_complete ) {
 				request.on_complete();
 			}
 		};
@@ -149,7 +149,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
-			if( 'function' == typeof on_success ) {
+			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
 			}
 		};
@@ -160,7 +160,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
-			if( 'function' == typeof on_error ) {
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
@@ -226,7 +226,7 @@ var InDBApp = (function() {
 				console.log( 'App.prototype.cursor.filterGet complete' );
 			}
 			/* Callback */
-			if( 'function' == typeof on_complete ) {
+			if( 'function' == typeof request.on_complete ) {
 				request.on_complete();
 			}
 		};
@@ -237,7 +237,7 @@ var InDBApp = (function() {
 				console.log( 'App.prototype.cursor.filterGet success', value );
 			}
 			/* Callback */
-			if( 'function' == typeof on_success ) {
+			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
 			}
 		};
@@ -248,7 +248,7 @@ var InDBApp = (function() {
 				console.log( 'App.prototype.cursor.filterGet error', context );
 			}
 			/* Callback */
-			if( 'function' == typeof on_error ) {
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
@@ -302,7 +302,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
-			if( 'function' == typeof on_success ) {
+			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
 			}
 		};
@@ -313,7 +313,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
-			if( 'function' == typeof on_error ) {
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
@@ -362,7 +362,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
-			if( 'function' == typeof on_success ) {
+			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
 			}
 		};
@@ -373,7 +373,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
-			if( 'function' == typeof on_error ) {
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
@@ -431,7 +431,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get complete' );
 			}
 			/* Callback */
-			if( 'function' == typeof on_complete ) {
+			if( 'function' == typeof request.on_complete ) {
 				request.on_complete();
 			}
 		};
@@ -442,7 +442,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
-			if( 'function' == typeof on_success ) {
+			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
 			}
 		};
@@ -453,7 +453,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
-			if( 'function' == typeof on_error ) {
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
@@ -505,7 +505,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
-			if( 'function' == typeof on_success ) {
+			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
 			}
 		};
@@ -516,7 +516,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
-			if( 'function' == typeof on_error ) {
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
@@ -576,7 +576,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get complete' );
 			}
 			/* Callback */
-			if( 'function' == typeof on_complete ) {
+			if( 'function' == typeof request.on_complete ) {
 				request.on_complete();
 			}
 		};
@@ -587,7 +587,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
-			if( 'function' == typeof on_success ) {
+			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
 			}
 		};
@@ -598,7 +598,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
-			if( 'function' == typeof on_error ) {
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
@@ -655,7 +655,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
-			if( 'function' == typeof on_success ) {
+			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
 			}
 		};
@@ -666,7 +666,7 @@ var InDBApp = (function() {
 				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
-			if( 'function' == typeof on_error ) {
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
