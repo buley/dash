@@ -3575,7 +3575,7 @@ var IDB = (function(){
 				if( attrs.hasOwnProperty( attr ) ) {
 					count++;
 					for( attrib in value ) {
-						if( value.hasOwnPropery( value ) {
+						if( value.hasOwnPropery( value ) ) {
 							if( 'undefined' !== typeof attrs[ attr ] && attrs[ attr ] !== value[ attrib ] ) {
 								match = false;
 							}
