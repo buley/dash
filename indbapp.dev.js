@@ -40,12 +40,12 @@ var InDBApp = (function() {
 		var store = request.store;
 		var data = request.data;
 
-		if( 'undefined' !== typeof data ) {
+		if( 'undefined' === typeof data ) {
 			throw new Error( 'App.prototype.add: Data cannot be empty' );
 			return;
 		}
 
-		if( 'undefined' == typeof store || null === store ) {
+		if( 'undefined' === typeof store || null === store ) {
 			throw new Error( 'App.prototype.add: Store cannot be empty' );
 			return null;
 		}
