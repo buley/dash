@@ -38,6 +38,13 @@ var InDBApp = (function() {
 		/* Setup */
 
 		var store = request.store;
+		var data = request.data;
+
+		if( 'undefined' !== typeof data ) {
+			throw new Error( 'App.prototype.add: Data cannot be empty' );
+			return;
+		}
+
 		if( 'undefined' == typeof store || null === store ) {
 			throw new Error( 'App.prototype.add: Store cannot be empty' );
 			return null;
@@ -675,6 +682,5 @@ var InDBApp = (function() {
 
 	/* End App Singleton */
 
-	return App;
 
 } )(); // End immediately executing anonymous function
