@@ -187,9 +187,6 @@ var IDB = (function(){
 				reversed[ InDB.shorthand.get( { 'store': request.store, 'key': item } ) ] = item;
 			}
 		}
-		if( InDB.debug ) {
-			console.log( 'InDB.shorthand.reverse', k, reversed, reversed[ k ] );
-		}
 		if( 'undefined' !== typeof reversed[ k ] ) {
 			return reversed[ k ];
 		} else {
