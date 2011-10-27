@@ -3853,10 +3853,10 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item = InDB.shorthand.reverse( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
+			var value = InDB.shorthand.reverse( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
 			if( 'function' == typeof request.on_success ) {
-				if( !!DB.debug ) console.log( 'success', item );
-				request.on_success( item );
+				if( !!DB.debug ) console.log( 'DB.prototype.cursor.get success', item );
+				request.on_success( value );
 			}
 		};
 
