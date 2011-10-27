@@ -184,6 +184,7 @@ var IDB = (function(){
 		var shorthand_map = InDB.shorthand.map.get( request.store );
 		for( var item in shorthand_map ) {
 			if( shorthand_map.hasOwnProperty( item ) ) {
+				console.log('removeme',item,shorthand_map,  InDB.shorthand.get( item ) );
 				reversed[ InDB.shorthand.get( item ) ] = item;
 			}
 		}
