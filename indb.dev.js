@@ -181,7 +181,6 @@ var IDB = (function(){
 				reversed[ InDB.shorthand.get( { 'store': request.store, 'key': item } ) ] = item;
 			}
 		}
-		console.log('Ireverse',reversed, k, reversed[k] );
 		if( 'undefined' !== typeof reversed[ k ] ) {
 			return reversed[ k ];
 		} else {
@@ -3854,7 +3853,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var value = InDB.shorthand.reverse( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
+			var value = InDB.shorthand.decode( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
 			console.log("BEFORE AND AFTER", InDB.cursor.value( context.event ), value );
 			if( 'function' == typeof request.on_success ) {
 				if( !!DB.debug ) console.log( 'DB.prototype.cursor.get success', item );
