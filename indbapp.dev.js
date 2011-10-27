@@ -29,7 +29,7 @@ InDBApp.prototype.shorthand.get = function( request ) {
 	return this.InDB.shorthand.get( request );
 };
 
-/* */
+/* Add */
 InDBApp.prototype.add = function( request ) {
 
 	/* Setup */
@@ -73,9 +73,8 @@ InDBApp.prototype.add = function( request ) {
 
 	/* Request */
 
-	this.InDB.get( {
-		'index': index
-		, 'key': key
+	this.InDB.add( {
+		'data': data
 		, 'on_success': on_success
 		, 'on_error': on_error
 		, 'store': store
