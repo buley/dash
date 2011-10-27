@@ -2,7 +2,7 @@
 
 var InDBApp = function( request ) {
 	
-
+	var InDB;
 	var current_database = 'InDBApp';
 	var current_description = '';
 
@@ -16,17 +16,17 @@ var InDBApp = function( request ) {
 		}
 	}
 
-	this.InDB = new IDB( { 'database': current_database, 'description': current_description } );
+	InDB = new IDB( { 'database': current_database, 'description': current_description } );
 	
 };
 
 /* Not chainable */
 InDBApp.prototype.shorthand = InDBApp.prototype.shorthand || {};
 InDBApp.prototype.shorthand.set = function( request ) {
-	return this.InDB.shorthand.set( request );
+	return InDB.shorthand.set( request );
 };
 InDBApp.prototype.shorthand.get = function( request ) {
-	return this.InDB.shorthand.get( request );
+	return InDB.shorthand.get( request );
 };
 
 /* Add */
@@ -73,7 +73,7 @@ InDBApp.prototype.add = function( request ) {
 
 	/* Request */
 
-	this.InDB.add( {
+	InDB.add( {
 		'data': data
 		, 'on_success': on_success
 		, 'on_error': on_error
@@ -102,7 +102,7 @@ InDBApp.prototype.cursor.get = function( request ) {
 	var limit = request.limit;
 	limit = ( 'undefined' !== typeof limit ) ? limit : 20;
 	var direction = request.limit;
-	direction = ( 'undefined' !== typeof direction ) ? direction : this.InDB.cursor.direction.previous();
+	direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.previous();
 	var key = request.key;
 	key = ( 'undefined' !== typeof key ) ? key : null;
 	var left = request.left;
@@ -151,7 +151,7 @@ InDBApp.prototype.cursor.get = function( request ) {
 
 	/* Request */
 
-	this.InDB.cursor.get( {
+	InDB.cursor.get( {
 		'direction': direction
 		, 'key': key
 		, 'index': index
@@ -190,7 +190,7 @@ InDBApp.prototype.cursor.filterGet = function( request ) {
 	var limit = request.limit;
 	limit = ( 'undefined' !== typeof limit ) ? limit : 20;
 	var direction = request.limit;
-	direction = ( 'undefined' !== typeof direction ) ? direction : this.InDB.cursor.direction.previous();
+	direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.previous();
 	var key = request.key;
 	key = ( 'undefined' !== typeof key ) ? key : null;
 	var left = request.left;
@@ -239,7 +239,7 @@ InDBApp.prototype.cursor.filterGet = function( request ) {
 
 	/* Request */
 
-	this.InDB.cursor.filterGet( {
+	InDB.cursor.filterGet( {
 		'attributes': attributes
 		, 'direction': direction
 		, 'key': key
@@ -304,7 +304,7 @@ InDBApp.prototype.get = function( request ) {
 
 	/* Request */
 
-	this.InDB.get( {
+	InDB.get( {
 		'index': index
 		, 'key': key
 		, 'on_success': on_success
@@ -364,7 +364,7 @@ InDBApp.prototype.filterGet = function( request ) {
 
 	/* Request */
 
-	this.InDB.filterGet( {
+	InDB.filterGet( {
 		'attributes': attributes
 		, 'expecting': expecting
 		, 'index': index
@@ -395,7 +395,7 @@ InDBApp.prototype.cursor.update = function( request ) {
 	var limit = request.limit;
 	limit = ( 'undefined' !== typeof limit ) ? limit : 20;
 	var direction = request.limit;
-	direction = ( 'undefined' !== typeof direction ) ? direction : this.InDB.cursor.direction.previous();
+	direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.previous();
 	var key = request.key;
 	key = ( 'undefined' !== typeof key ) ? key : null;
 	var left = request.left;
@@ -444,7 +444,7 @@ InDBApp.prototype.cursor.update = function( request ) {
 
 	/* Request */
 
-	this.InDB.cursor.update( {
+	InDB.cursor.update( {
 		'left': begin
 		, 'direction': direction
 		, 'key': key
@@ -507,7 +507,7 @@ InDBApp.prototype.update = function( key, on_success, on_error ) {
 
 	/* Request */
 
-	this.InDB.update( {
+	InDB.update( {
 		'index': index
 		, 'key': key
 		, 'on_success': on_success
@@ -540,7 +540,7 @@ InDBApp.prototype.cursor.filterUpdate = function( request ) {
 	var limit = request.limit;
 	limit = ( 'undefined' !== typeof limit ) ? limit : 20;
 	var direction = request.limit;
-	direction = ( 'undefined' !== typeof direction ) ? direction : this.InDB.cursor.direction.previous();
+	direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.previous();
 	var key = request.key;
 	key = ( 'undefined' !== typeof key ) ? key : null;
 	var left = request.left;
@@ -589,7 +589,7 @@ InDBApp.prototype.cursor.filterUpdate = function( request ) {
 
 	/* Request */
 
-	this.InDB.cursor.filterUpdate( {
+	InDB.cursor.filterUpdate( {
 		'attributes': attributes
 		, 'direction': direction
 		, 'expecting': expecting
@@ -657,7 +657,7 @@ InDBApp.prototype.filterUpdate = function( key, on_success, on_error ) {
 
 	/* Request */
 
-	this.InDB.filterUpdate( {
+	InDB.filterUpdate( {
 		'index': index
 		, 'key': key
 		, 'attributes': attributes
