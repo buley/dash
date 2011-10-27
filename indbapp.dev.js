@@ -675,4 +675,4 @@ var InDBApp = (function(){
 
 	/* End App Singleton */
 
-} )();
+})(); // End immediately executing anonymous function
