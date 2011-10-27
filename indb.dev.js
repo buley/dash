@@ -3452,7 +3452,7 @@ var IDB = (function(){
 			var attrs = request.expecting;
 			var count = 0;
 			var attributes = request.attributes || request.attribute;
-			attributes = ( 'string' == typeof attributes ) ? [ attributes ] ? attributes;
+			attributes = ( 'string' == typeof attributes ) ? [ attributes ] : attributes;
 			if( attributes.length && attributes.length > 0 ) {
 				var new_value = {};
 				for( var x = 0; x < attributes.length; x++ ) {
