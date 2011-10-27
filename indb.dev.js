@@ -809,6 +809,8 @@ var IDB = (function(){
 			return false;
 		}
 
+		/* Defaults */
+
 		var keyPath = {};
 
 		if ( 'undefined' !== typeof key ) {
@@ -818,6 +820,9 @@ var IDB = (function(){
 		if ( 'undefined' == typeof autoinc_key ) {
 			autoinc_key = false;
 		}
+
+		if( 'true' == autoinc_key ) autoinc_key = true;
+		else if( 'false' == autoinc_key ) autoinc_key = false;
 
 		if ( "undefined" === typeof on_success ) {
 			on_success = InDB.events.onSuccess;
