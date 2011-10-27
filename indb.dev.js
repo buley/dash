@@ -856,9 +856,15 @@ var IDB = (function(){
 				var options = {};
 				
 				if( 'undefined' !== typeof keyPath && null !== keyPath ) {
+					if( !!InDB.debug ) {
+						console.log( 'InDB.store.create keyPath', keyPath );
+					}
 					options[ 'keyPath' ] = keyPath;
 				} 
 				if( 'undefined' !== typeof autoinc_key && null !== autoinc_key ) {
+					if( !!InDB.debug ) {
+						console.log( 'InDB.store.create autoIncrement', autoinc_key );
+					}
 					options[ 'autoIncrement' ] = autoinc_key;
 				}
 				
@@ -1088,11 +1094,16 @@ var IDB = (function(){
 		setVersionRequest.onsuccess = function ( event ) {
 			var result = event.target.result;
 			var databaseTransaction = result.objectStore( store );
+			context[ 'event' ] = event;
 			try {
 				databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
-				on_success( event );
+				if( !!InDB.debug ) {
+					console.log( 'InDB.index.create transaction', databaseTransaction );
+				}
+				on_success( context );
 			} catch ( error ) {
 				console.log( error );
+				on_error( error );
 			}
 		};
 
