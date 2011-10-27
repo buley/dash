@@ -833,7 +833,7 @@ var IDB = (function(){
 			on_blocked = InDB.events.onBlocked;
 		}
 		
-		var context =  { "name": name, "keyPath": keyPath, "autoinc_key": autoinc_key, 'unique': unique };
+		var context =  { "name": name, "keyPath": keyPath, "autoinc_key": autoinc_key };
 
 		/* Debug */
 		
