@@ -61,7 +61,7 @@ var InDBApp = (function() {
 
 		var on_success = function( value ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
+			if( !!InDB.prototype.debug ) {
 				console.log( 'App.prototype.add success', value );
 			}
 			/* Callback */
@@ -72,7 +72,7 @@ var InDBApp = (function() {
 
 		var on_error = function( context ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
+			if( !!InDB.prototype.debug ) {
 				console.log( 'App.prototype.add error', context );
 			}
 			/* Callback */
@@ -128,8 +128,8 @@ var InDBApp = (function() {
 
 		var on_complete = function() {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get complete' );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get complete' );
 			}
 			/* Callback */
 			if( 'function' == typeof on_complete ) {
@@ -139,8 +139,8 @@ var InDBApp = (function() {
 
 		var on_success = function( value ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get success', value );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
 			if( 'function' == typeof on_success ) {
@@ -150,8 +150,8 @@ var InDBApp = (function() {
 
 		var on_error = function( context ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get error', context );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
 			if( 'function' == typeof on_error ) {
@@ -216,7 +216,7 @@ var InDBApp = (function() {
 
 		var on_complete = function() {
 			/* Debug */
-			if( !!N.prototype.debug ) {
+			if( !!InDB.prototype.debug ) {
 				console.log( 'App.prototype.cursor.filterGet complete' );
 			}
 			/* Callback */
@@ -227,7 +227,7 @@ var InDBApp = (function() {
 
 		var on_success = function( value ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
+			if( !!InDB.prototype.debug ) {
 				console.log( 'App.prototype.cursor.filterGet success', value );
 			}
 			/* Callback */
@@ -238,7 +238,7 @@ var InDBApp = (function() {
 
 		var on_error = function( context ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
+			if( !!InDB.prototype.debug ) {
 				console.log( 'App.prototype.cursor.filterGet error', context );
 			}
 			/* Callback */
@@ -292,8 +292,8 @@ var InDBApp = (function() {
 
 		var on_success = function( value ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get success', value );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
 			if( 'function' == typeof on_success ) {
@@ -303,8 +303,8 @@ var InDBApp = (function() {
 
 		var on_error = function( context ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get error', context );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
 			if( 'function' == typeof on_error ) {
@@ -352,8 +352,8 @@ var InDBApp = (function() {
 
 		var on_success = function( value ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get success', value );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
 			if( 'function' == typeof on_success ) {
@@ -363,8 +363,8 @@ var InDBApp = (function() {
 
 		var on_error = function( context ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get error', context );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
 			if( 'function' == typeof on_error ) {
@@ -421,8 +421,8 @@ var InDBApp = (function() {
 
 		var on_complete = function() {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get complete' );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get complete' );
 			}
 			/* Callback */
 			if( 'function' == typeof on_complete ) {
@@ -432,8 +432,8 @@ var InDBApp = (function() {
 
 		var on_success = function( value ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get success', value );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
 			if( 'function' == typeof on_success ) {
@@ -443,8 +443,8 @@ var InDBApp = (function() {
 
 		var on_error = function( context ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get error', context );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
 			if( 'function' == typeof on_error ) {
@@ -495,8 +495,8 @@ var InDBApp = (function() {
 
 		var on_success = function( value ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get success', value );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
 			if( 'function' == typeof on_success ) {
@@ -506,8 +506,8 @@ var InDBApp = (function() {
 
 		var on_error = function( context ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get error', context );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
 			if( 'function' == typeof on_error ) {
@@ -566,8 +566,8 @@ var InDBApp = (function() {
 
 		var on_complete = function() {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get complete' );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get complete' );
 			}
 			/* Callback */
 			if( 'function' == typeof on_complete ) {
@@ -577,8 +577,8 @@ var InDBApp = (function() {
 
 		var on_success = function( value ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get success', value );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
 			if( 'function' == typeof on_success ) {
@@ -588,8 +588,8 @@ var InDBApp = (function() {
 
 		var on_error = function( context ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get error', context );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
 			if( 'function' == typeof on_error ) {
@@ -645,8 +645,8 @@ var InDBApp = (function() {
 
 		var on_success = function( value ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get success', value );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get success', value );
 			}
 			/* Callback */
 			if( 'function' == typeof on_success ) {
@@ -656,8 +656,8 @@ var InDBApp = (function() {
 
 		var on_error = function( context ) {
 			/* Debug */
-			if( !!N.prototype.debug ) {
-				console.log( 'N.prototype.synapses.get error', context );
+			if( !!InDB.prototype.debug ) {
+				console.log( 'InDB.prototype.synapses.get error', context );
 			}
 			/* Callback */
 			if( 'function' == typeof on_error ) {
