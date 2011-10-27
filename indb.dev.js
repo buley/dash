@@ -3334,7 +3334,8 @@ var IDB = (function(){
 
 		for( index in indexes ) {
 			namespace_idxs[ store ][ index ] = {};
-			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = ( true == indexes[ index ] ) ? 'true' : 'false';
+			var uniqueness = ( true === indexes[ index ] ) ? true : false;
+			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { 'store': store, 'key': index } ) ] = uniqueness;
 		}
 
 		InDB.trigger( 'InDB_do_indexes_create', { 'indexes': namespace_idxs, 'on_success': function( value ) {
