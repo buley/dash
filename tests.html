@@ -39,22 +39,22 @@
 				}
 			}
 
-			test.getAttr = function( test_callback ) {
+			test.filterGet = function( test_callback ) {
 				var on_error = function( test_callback ) {
-					console.log( 'test.getAttr(): failed' );
+					console.log( 'test.filterGet(): failed' );
 					if( 'function' !== typeof test_callback ) {
 						test_callback( value );
 					}
 				};
-				InDB.getAttr( {
+				InDB.filterGet( {
 					'key': test_id
 					, 'index': 'id'
 					, 'store': 'tests'
 					, 'on_success': function( value ) {	
 						if( 'undefined' !== value ) {
-							console.log( 'test.getAttr(): passed' );
+							console.log( 'test.filterGet(): passed' );
 						} else {
-							console.log( 'test.getAttr(): failed' );
+							console.log( 'test.filterGet(): failed' );
 						}
 						if( 'function' !== typeof test_callback ) {
 							test_callback( value );
@@ -65,15 +65,15 @@
 
 			};
 
-			test.setAttr = function( test_callback ) {
+			test.filterUpdate = function( test_callback ) {
 
 				var on_error = function( value ) {
-					console.log( 'test.setAttr(): failed' );
+					console.log( 'test.filterUpdate(): failed' );
 					if( 'function' !== typeof test_callback ) {
 						test_callback( value );
 					}
 				};
-				InDB.getAttr( {
+				InDB.filterGet( {
 					'key': test_id
 					, 'index': 'id'
 					, 'store': 'tests'
@@ -82,7 +82,7 @@
 						var expected =  {};
 						var key = InDB.shorthand( 'strength' );
 					       	expected[ key ] = value[ key ];
-						InDB.setAttr( {
+						InDB.filterUpdate( {
 							'key': test_id
 							, 'store': 'tests'
 							, 'index': 'id'
@@ -92,15 +92,15 @@
 								replacement = ( !!replacement && replacement > .001 ) ? replacement : 1;
 								return replacement;
 							}, 'on_success': function( context ) {
-								InDB.getAttr( {
+								InDB.filterGet( {
 									'key': test_id
 									, 'store': 'tests'
 									, 'index': 'id'
 									, 'on_success': function( value ) {
 										if( 'undefined' !== typeof value ) {
-											console.log( 'test.setAttr(): passed' );
+											console.log( 'test.filterUpdate(): passed' );
 										} else {
-											console.log( 'test.setAttr(): failed' );
+											console.log( 'test.filterUpdate(): failed' );
 										}
 										if( 'function' !== typeof test_callback ) {
 											test_callback( value );
@@ -583,8 +583,8 @@
 					console.log( 'FAILED to add test data', context );
 				} } );
 
-				//test.getAttr();
-				//test.setAttr();
+				//test.filterGet();
+				//test.filterUpdate();
 
 			};
 

@@ -3394,16 +3394,16 @@ var IDB = (function(){
 
 	DB.prototype.cursor = DB.prototype.cursor || {};
 
-	/* Synapses Set */
-	DB.prototype.setAttr = function( request ) {
+	/* Set */
+	DB.prototype.filterUpdate = function( request ) {
 
 		if( !!DB.debug ) {
-			console.log( 'DB.prototype.setAttr', request );
+			console.log( 'DB.prototype.filterUpdate', request );
 		}
 
 		var on_success =  function( context ) {
 			if( !!DB.debug ) {
-				console.log( 'DB.prototype.setAttr success', context );
+				console.log( 'DB.prototype.filterUpdate success', context );
 			}
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( context );
@@ -3412,7 +3412,7 @@ var IDB = (function(){
 
 		var on_error =  function( context ) {
 			if( !!DB.debug ) {
-				console.log( 'DB.prototype.setAttr error', context );
+				console.log( 'DB.prototype.filterUpdate error', context );
 			}
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
@@ -3441,23 +3441,50 @@ var IDB = (function(){
 
 	};
 
-	/* Synapses Get */
 	// ( 'key': string, 'index': string (requred), 'strength': int, 'on_success': fn, 'on_error': fn }
-	DB.prototype.getAttr = function( request ) {
+	DB.prototype.filterGet = function( request ) {
 		
-		var on_success =  function( value ) {
+		var on_success =  function( context ) {
 			if( !!DB.debug ) {
-				console.log( 'DB.prototype.setAttr success', context );
+				console.log( 'DB.prototype.filterUpdate success', context );
 			}
-			if( 'function' == typeof request.on_success ) {
+			var value = InDB.cursor.value( context.event );
+			var attrs = request.expecting;
+			var count = 0;
+			var attributes = request.attributes || request.attribute;
+			attributes = ( 'string' == typeof attributes ) ? [ attributes ] ? attributes;
+			if( attributes.length && attributes.length > 0 ) {
+				var new_value = {};
+				for( var x = 0; x < attributes.length; x++ ) {
+					new_value[ attributes[ x ] ] = value[ attributes[ x ] ];
+				}
+				value = new_value;
+			}
+			var match = true;
+			for( attr in attrs ) {
+				if( attrs.hasOwnProperty( attr ) ) {
+					count++;
+					for( attrib in value ) {
+						if( value.hasOwnPropery( value ) {
+							if( 'undefined' !== typeof attrs[ attr ] && attrs[ attr ] !== value[ attrib ] ) {
+								match = false;
+							}
+						}
+							
+					}	
+				}	
+			}
+			if( true === match && 'function' == typeof request.on_success ) {
 				var result = ( 'undefined' !== typeof result ) ? value[ request.attribute ] : null;
 				request.on_success( result );
+			} else if( 'function' == typeof request.on_error ) {
+				request.on_error( context );
 			}
 		};
 
 		var on_error =  function( context ) {
 			if( !!DB.debug ) {
-				console.log( 'DB.prototype.getAttr error', context );
+				console.log( 'DB.prototype.filterGet error', context );
 			}
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
@@ -3475,22 +3502,35 @@ var IDB = (function(){
 		get_request.on_success = on_success;
 		get_request.on_error = on_error;
 
-		DB.prototype.get( get_request );
+		InDB.row.get( get_request );
 
 		return this;
 
 	};
 
-	/* Synapses Cursor set */
+	/* Cursor set */
 	// ( 'key': string, 'index': string (requred), 'strength': int, 'on_success': fn, 'on_error': fn }
-	DB.prototype.cursor.setAttr = function( request ) {
+	DB.prototype.cursor.filterUpdate = function( request ) {
 		
-		var on_success =  function( context ) {
-			console.log( 'DB.prototype.cursor.setAttr success', context );
+		var on_success =  function( value ) {
+			console.log( 'DB.prototype.cursor.filterUpdate success', value );
+			if( 'function' === typeof request.on_success ) {
+				request.on_success( value );
+			}
 		};
 
 		var on_error =  function( context ) {
-			console.log( 'DB.prototype.cursor.setAttr', context );
+			console.log( 'DB.prototype.cursor.filterUpdate error', context );
+			if( 'function' === typeof request.on_complete ) {
+				request.on_error( context );
+			}
+		};
+
+		var on_complete =  function() {
+			console.log( 'DB.prototype.cursor.filterUpdate complete', context );
+			if( 'function' === typeof request.on_complete ) {
+				request.on_complete();
+			}
 		};
 
 		var store = request.store;
@@ -3503,6 +3543,7 @@ var IDB = (function(){
 
 		db_request.on_success = on_success;
 		db_request.on_error = on_error;
+		db_request.on_complete = on_complete;
 
 		db_request.data[ DB.prototype.shorthand( request.attribute ) ] = request.strength;
 		
@@ -3511,18 +3552,53 @@ var IDB = (function(){
 		return this;
 	};
 
-	/* Synapses Cursor get */
-	DB.prototype.cursor.getAttr = function( request ) {
+	/* Convenience function
+	 * Cursor get w/conditional expectation object */
+	DB.prototype.cursor.filterGet = function( request ) {
 		
 		var on_success =  function( context ) {
-			console.log( 'DB.prototype.setAttr success', context );
+			console.log( 'DB.prototype.filterGet success', context );
 			var value = InDB.cursor.value( context.event );
-			request.on_success( value[ request.attribute ] );
+			var attrs = request.expecting;
+			var count = 0;
+			var attributes = request.attributes || request.attribute;
+			attributes = ( 'string' == typeof attributes ) ? [ attributes ] ? attributes;
+			if( attributes.length && attributes.length > 0 ) {
+				var new_value = {};
+				for( var x = 0; x < attributes.length; x++ ) {
+					new_value[ attributes[ x ] ] = value[ attributes[ x ] ];
+				}
+				value = new_value;
+			}
+			var match = true;
+			for( attr in attrs ) {
+				if( attrs.hasOwnProperty( attr ) ) {
+					count++;
+					for( attrib in value ) {
+						if( value.hasOwnPropery( value ) {
+							if( 'undefined' !== typeof attrs[ attr ] && attrs[ attr ] !== value[ attrib ] ) {
+								match = false;
+							}
+						}
+							
+					}	
+				}	
+			}
+			if( true === match ) {
+				request.on_success( value );
+			}
+
 		};
 
 		var on_error =  function( context ) {
-			console.log( 'DB.prototype.setAttr error', context );
+			console.log( 'DB.prototype.filterGet error', context );
 			request.on_error( context );
+		};
+
+		var on_complete = function () {
+			if( 'function' == typeof request.on_complete ) {
+				request.on_complete();
+			}
 		};
 
 		var store = request.store;
@@ -3535,12 +3611,11 @@ var IDB = (function(){
 
 		db_request.on_success = on_success;
 		db_request.on_error = on_error;
+		db_request.on_complete = on_complete;
 
 		DB.prototype.get( db_request );
 		return this;
 	};
-
-
 
 
 	/* Single */
@@ -3557,13 +3632,13 @@ var IDB = (function(){
 				var value = InDB.shorthand.decode( { 'store': request.store, 'data': InDB.row.value( context )  } );
 				request.on_success( value );
 			}
-		}
+		};
 
 		var on_error = function( context ) {
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
-		}
+		};
 
 		var store = request.store;
 		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
@@ -3631,7 +3706,7 @@ var IDB = (function(){
 			data = InDB.shorthand.encode( { 'store': request.store, 'data': data } );
 		}
 
-		InDB.trigger( 'InDB_do_row_put', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger( 'InDB_do_row_put', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
 
 		return this;
 
@@ -3657,6 +3732,13 @@ var IDB = (function(){
 			}
 		};
 
+		var on_complete = function () {
+			if( 'function' == typeof request.on_complete ) {
+				request.on_complete();
+			}
+		};
+
+
 		var data = request.data;
 		if( 'function' !== typeof data ) {
 			data = InDB.shorthand.encode( { 'store': request.store, 'data': data } );
@@ -3665,7 +3747,7 @@ var IDB = (function(){
 		var store = request.store;
 		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
-		InDB.trigger( 'InDB_do_row_add', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger( 'InDB_do_row_add', { 'store': request.store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
 
 		return this;
 
@@ -3709,7 +3791,7 @@ var IDB = (function(){
 			expected = InDB.shorthand.encode( { 'store': request.store, 'data': expected } );
 		}
 
-		InDB.trigger( 'InDB_do_row_update', { 'store': request.store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger( 'InDB_do_row_update', { 'store': request.store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
 
 		return this;
 
@@ -3772,12 +3854,18 @@ var IDB = (function(){
 			}
 		};
 
+		var on_complete = function () {
+			if( 'function' == typeof request.on_complete ) {
+				request.on_complete();
+			}
+		};
+
 		var store = request.store;
 		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		/* Request */
 
-		InDB.trigger( 'InDB_do_cursor_get', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger( 'InDB_do_cursor_get', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
 
 		return this;
 
@@ -3875,6 +3963,13 @@ var IDB = (function(){
 			}
 		};
 
+		var on_complete = function () {
+			if( 'function' == typeof request.on_complete ) {
+				request.on_complete();
+			}
+		};
+
+	
 		var store = request.store;
 		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
@@ -3892,7 +3987,7 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger( 'cursor_update_namespace', { 'data': new_data, "index": index, "key": key, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "replace": replace, 'direction': direction, 'limit': limit, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger( 'cursor_update_namespace', { 'data': new_data, "index": index, "key": key, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "replace": replace, 'direction': direction, 'limit': limit, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
 
 		/* Defaults */
 

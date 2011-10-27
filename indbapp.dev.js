@@ -1,6 +1,10 @@
 /* Begin InDBApp singleton */
 
 var InDBApp = function( request ) {
+	
+
+	var current_database = 'InDBApp';
+	var current_description = '';
 
 	if( 'undefined' !== typeof request ) {
 		if( 'undefined' !== typeof request.database ) {
@@ -12,18 +16,75 @@ var InDBApp = function( request ) {
 		}
 	}
 
-	InDB = new IDB( { 'database': current_database, 'description': current_description } );
+	this.InDB = new IDB( { 'database': current_database, 'description': current_description } );
 	
 };
 
 /* Not chainable */
 InDBApp.prototype.shorthand = InDBApp.prototype.shorthand || {};
 InDBApp.prototype.shorthand.set = function( request ) {
-	return InDB.shorthand.set( request );
+	return this.InDB.shorthand.set( request );
 };
 InDBApp.prototype.shorthand.get = function( request ) {
-	return InDB.shorthand.get( request );
+	return this.InDB.shorthand.get( request );
 };
+
+/* */
+InDBApp.prototype.add = function( request ) {
+
+	/* Setup */
+
+	var store = request.store;
+	if( 'undefined' == typeof store || null === store ) {
+		throw new Error( 'InDBApp.prototype.add: Store cannot be empty' );
+		return null;
+	}
+
+	/* Defaults */
+
+	var index = request.key;
+	index = ( 'undefined' !== typeof index ) ? index : null;
+	var key = request.key;
+	key = ( 'undefined' !== typeof key ) ? key : null;
+
+	/* Callbacks */
+
+	var on_success = function( value ) {
+		/* Debug */
+		if( !!N.prototype.debug ) {
+			console.log( 'InDBApp.prototype.add success', value );
+		}
+		/* Callback */
+		if( 'function' == typeof on_success ) {
+			request.on_success( value );
+		}
+	};
+
+	var on_error = function( context ) {
+		/* Debug */
+		if( !!N.prototype.debug ) {
+			console.log( 'InDBApp.prototype.add error', context );
+		}
+		/* Callback */
+		if( 'function' == typeof on_error ) {
+			request.on_error( context );
+		}
+	};
+
+	/* Request */
+
+	this.InDB.get( {
+		'index': index
+		, 'key': key
+		, 'on_success': on_success
+		, 'on_error': on_error
+		, 'store': store
+	} );
+
+	return this;
+
+};
+
 
 InDBApp.prototype.cursor = InDBApp.prototype.cursor || {};
 InDBApp.prototype.cursor.get = function( request ) {
@@ -42,7 +103,7 @@ InDBApp.prototype.cursor.get = function( request ) {
 	var limit = request.limit;
 	limit = ( 'undefined' !== typeof limit ) ? limit : 20;
 	var direction = request.limit;
-	direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.previous();
+	direction = ( 'undefined' !== typeof direction ) ? direction : this.InDB.cursor.direction.previous();
 	var key = request.key;
 	key = ( 'undefined' !== typeof key ) ? key : null;
 	var left = request.left;
@@ -91,7 +152,7 @@ InDBApp.prototype.cursor.get = function( request ) {
 
 	/* Request */
 
-	InDB.cursor.get( {
+	this.InDB.cursor.get( {
 		'direction': direction
 		, 'key': key
 		, 'index': index
@@ -111,7 +172,7 @@ InDBApp.prototype.cursor.get = function( request ) {
 };
 
 InDBApp.prototype.cursor = InDBApp.prototype.cursor || {};
-InDBApp.prototype.cursor.getAttr = function( request ) {
+InDBApp.prototype.cursor.filterGet = function( request ) {
 
 	/* Setup */
 
@@ -130,7 +191,7 @@ InDBApp.prototype.cursor.getAttr = function( request ) {
 	var limit = request.limit;
 	limit = ( 'undefined' !== typeof limit ) ? limit : 20;
 	var direction = request.limit;
-	direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.previous();
+	direction = ( 'undefined' !== typeof direction ) ? direction : this.InDB.cursor.direction.previous();
 	var key = request.key;
 	key = ( 'undefined' !== typeof key ) ? key : null;
 	var left = request.left;
@@ -147,7 +208,7 @@ InDBApp.prototype.cursor.getAttr = function( request ) {
 	var on_complete = function() {
 		/* Debug */
 		if( !!N.prototype.debug ) {
-			console.log( 'InDBApp.prototype.cursor.getAttr complete' );
+			console.log( 'InDBApp.prototype.cursor.filterGet complete' );
 		}
 		/* Callback */
 		if( 'function' == typeof on_complete ) {
@@ -158,7 +219,7 @@ InDBApp.prototype.cursor.getAttr = function( request ) {
 	var on_success = function( value ) {
 		/* Debug */
 		if( !!N.prototype.debug ) {
-			console.log( 'InDBApp.prototype.cursor.getAttr success', value );
+			console.log( 'InDBApp.prototype.cursor.filterGet success', value );
 		}
 		/* Callback */
 		if( 'function' == typeof on_success ) {
@@ -169,7 +230,7 @@ InDBApp.prototype.cursor.getAttr = function( request ) {
 	var on_error = function( context ) {
 		/* Debug */
 		if( !!N.prototype.debug ) {
-			console.log( 'InDBApp.prototype.cursor.getAttr error', context );
+			console.log( 'InDBApp.prototype.cursor.filterGet error', context );
 		}
 		/* Callback */
 		if( 'function' == typeof on_error ) {
@@ -179,7 +240,7 @@ InDBApp.prototype.cursor.getAttr = function( request ) {
 
 	/* Request */
 
-	InDB.cursor.getAttr( {
+	this.InDB.cursor.filterGet( {
 		'attributes': attributes
 		, 'direction': direction
 		, 'key': key
@@ -244,7 +305,7 @@ InDBApp.prototype.get = function( request ) {
 
 	/* Request */
 
-	InDB.get( {
+	this.InDB.get( {
 		'index': index
 		, 'key': key
 		, 'on_success': on_success
@@ -257,7 +318,7 @@ InDBApp.prototype.get = function( request ) {
 };
 
 
-InDBApp.prototype.getAttr = function( request ) {
+InDBApp.prototype.filterGet = function( request ) {
 
 	/* Setup */
 
@@ -304,7 +365,7 @@ InDBApp.prototype.getAttr = function( request ) {
 
 	/* Request */
 
-	InDB.getAttr( {
+	this.InDB.filterGet( {
 		'attributes': attributes
 		, 'expecting': expecting
 		, 'index': index
@@ -335,7 +396,7 @@ InDBApp.prototype.cursor.update = function( request ) {
 	var limit = request.limit;
 	limit = ( 'undefined' !== typeof limit ) ? limit : 20;
 	var direction = request.limit;
-	direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.previous();
+	direction = ( 'undefined' !== typeof direction ) ? direction : this.InDB.cursor.direction.previous();
 	var key = request.key;
 	key = ( 'undefined' !== typeof key ) ? key : null;
 	var left = request.left;
@@ -384,7 +445,7 @@ InDBApp.prototype.cursor.update = function( request ) {
 
 	/* Request */
 
-	InDB.cursor.update( {
+	this.InDB.cursor.update( {
 		'left': begin
 		, 'direction': direction
 		, 'key': key
@@ -447,7 +508,7 @@ InDBApp.prototype.update = function( key, on_success, on_error ) {
 
 	/* Request */
 
-	InDB.update( {
+	this.InDB.update( {
 		'index': index
 		, 'key': key
 		, 'on_success': on_success
@@ -480,7 +541,7 @@ InDBApp.prototype.cursor.filterUpdate = function( request ) {
 	var limit = request.limit;
 	limit = ( 'undefined' !== typeof limit ) ? limit : 20;
 	var direction = request.limit;
-	direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.previous();
+	direction = ( 'undefined' !== typeof direction ) ? direction : this.InDB.cursor.direction.previous();
 	var key = request.key;
 	key = ( 'undefined' !== typeof key ) ? key : null;
 	var left = request.left;
@@ -529,7 +590,7 @@ InDBApp.prototype.cursor.filterUpdate = function( request ) {
 
 	/* Request */
 
-	InDB.cursor.filterUpdate( {
+	this.InDB.cursor.filterUpdate( {
 		'attributes': attributes
 		, 'direction': direction
 		, 'expecting': expecting
@@ -597,7 +658,7 @@ InDBApp.prototype.filterUpdate = function( key, on_success, on_error ) {
 
 	/* Request */
 
-	InDB.filterUpdate( {
+	this.InDB.filterUpdate( {
 		'index': index
 		, 'key': key
 		, 'attributes': attributes
