@@ -3854,6 +3854,7 @@ var IDB = (function(){
 
 		var on_success = function ( context ) {
 			var value = InDB.shorthand.decode( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
+			console.log("DONE?",value);
 			if( null !== value && 'function' == typeof request.on_success ) {
 
 				if( !!DB.debug ) console.log( 'DB.prototype.cursor.get success', item );
