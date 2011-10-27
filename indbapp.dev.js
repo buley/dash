@@ -32,6 +32,12 @@ var InDBApp = (function() {
 		return InDB.shorthand.get( request );
 	};
 
+	/* Pass-thru */
+
+	App.prototype.install = function( request ) {
+		InDB.install( request );
+	};
+
 	/* Add */
 	App.prototype.add = function( request ) {
 
