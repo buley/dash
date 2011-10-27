@@ -3855,10 +3855,10 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var value = InDB.shorthand.decode( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
+			var value = InDB.cursor.value( context.event ) } );
 			console.log("DONE?",value);
 			if( null !== value && 'function' == typeof request.on_success ) {
-
+				var value = InDB.shorthand.decode( { 'store': request.store, 'data': value } );
 				if( !!DB.debug ) console.log( 'DB.prototype.cursor.get success', item );
 				request.on_success( value );
 			} else if( null === value && 'function' == typeof request.on_complete ) {
