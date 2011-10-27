@@ -187,6 +187,9 @@ var IDB = (function(){
 				reversed[ InDB.shorthand.get( item ) ] = item;
 			}
 		}
+		if( InDB.debug ) {
+			console.log( 'InDB.shorthand.reverse', request, shorthand_map );
+		}
 		if( 'undefined' !== typeof reversed[ k ] ) {
 			return reversed[ k ];
 		} else {
