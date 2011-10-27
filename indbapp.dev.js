@@ -289,7 +289,7 @@ var InDBApp = (function() {
 
 		/* Defaults */
 
-		var index = request.key;
+		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var key = request.key;
 		key = ( 'undefined' !== typeof key ) ? key : null;

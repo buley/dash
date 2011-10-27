@@ -1629,15 +1629,21 @@ var IDB = (function(){
 
 		var request;
 		if ( "undefined" !== typeof index && null !== index ) {
-			var transaction_index = transaction.index( index );
-			if( !!InDB.debug ) {
-				console.log( 'InDB.row.get (using index)', transaction, transaction_index, index, key );
+			try {
+				var transaction_index = transaction.index( index );
+				if( !!InDB.debug ) {
+					console.log( 'InDB.row.get (using index)', transaction, transaction_index, index, key );
+				}
+				/* Optional Index */
+
+				request = transaction_index.get( key );
+				//request = transaction.get( key );
+
+			} catch( error ) {
+				if( 'function' === typeof request.on_error ) {
+					request.on_error( error );
+				}
 			}
-			/* Optional Index */
-
-			request = transaction_index.get( key );
-			//request = transaction.get( key );
-
 		} else {
 
 			/* Optional Index */
