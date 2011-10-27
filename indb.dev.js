@@ -161,12 +161,6 @@ var IDB = (function(){
 
 		var shorthand_map = InDB.shorthand.map.get( request.store );
 
-		/* Debug */
-
-		if( !!InDB.debug ) {
-			console.log("InDB.shorthand.get map", shorthand_map);
-		}
-
 		/* Work */
 
 		if( null !== shorthand_map && 'undefined' !== typeof shorthand_map && 'undefined' !== typeof shorthand_map[ request.key ] ) {
