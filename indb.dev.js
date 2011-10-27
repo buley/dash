@@ -179,7 +179,7 @@ var IDB = (function(){
 
 
 	InDB.shorthand.reverse = function ( request ) {
-		var k = request.key;
+		var k = request.key || request.data;
 		var reversed = {};
 		var shorthand_map = InDB.shorthand.map.get( request.store );
 		for( var item in shorthand_map ) {
@@ -209,10 +209,10 @@ var IDB = (function(){
 				//base case: string value
 				var value = object[ itemobj ];
 				if( 'object' === typeof value ) {
-					encoded[ InDB.shorthand.reverse( { 'store': request.store, 'data': itemobj } ) ] = InDB.shorthand.decode( { 'database': request.database, 'data': value } );
+					encoded[ InDB.shorthand.reverse( { 'store': request.store, 'key': itemobj } ) ] = InDB.shorthand.decode( { 'database': request.database, 'data': value } );
 					delete value;
 				} else { 
-					encoded[ InDB.shorthand.reverse( { 'store': request.store, 'data': itemobj } ) ] = value;
+					encoded[ InDB.shorthand.reverse( { 'store': request.store, 'key': itemobj } ) ] = value;
 					delete value;
 				}
 			}
@@ -3862,7 +3862,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item = InDB.shorthand.reverse( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
+			var item = InDB.shorthand.reverse( { 'store': request.store, 'key': InDB.cursor.value( context.event ) } );
 			console.log('blah',item);
 			if( 'function' == typeof request.on_success ) {
 				if( !!DB.debug ) console.log( 'success', item );
@@ -3973,7 +3973,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item = InDB.shorthand.reverse( { 'store': request.store, 'data': InDB.cursor.value( context.event ) } );
+			var item = InDB.shorthand.reverse( { 'store': request.store, 'key': InDB.cursor.value( context.event ) } );
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( item );
 			}
