@@ -4097,20 +4097,12 @@ var IDB = (function(){
 
 		var shorthand_map = InDB.shorthand.map.get( { 'store': request.store } );
 		if ( 'undefined' === shorthand_map ) {
-			var on_success = request.on_success;
-			if( 'function' === typeof on_success ) {
-				on_success( result );
-			}		return shorthand_map;
-			var result = ( 'undefined' !== typeof request.key ) ? shorthand_map : shorthand_map[ request.key ];
-			if ( 'undefined' === typeof result ) {
-				result = null;		
-			}
-			var on_success = request.on_success;
-			if( 'function' === typeof on_success ) {
-				on_success( result );
-			}
+			var key = request.key;
+			var result = ( 'undefined' !== typeof request.key ) ? key : shorthand_map[ key ];
+
+
 		}
-		return this;	
+		return result;	
 	};
 
 	return DB;
