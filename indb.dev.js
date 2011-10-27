@@ -728,7 +728,7 @@ var IDB = (function(){
 				}
 				/* Request */
 					
-				InDB.store.create( store, key, autoinc_key, unique, on_success, on_error, on_abort );
+				InDB.store.create( store, key, autoinc_key, on_success, on_error, on_abort );
 
 			}
 		}
@@ -758,8 +758,6 @@ var IDB = (function(){
 		var name = context.name;
 		var key = context.key;
 		var autoinc_key = context.incrementing_key;
-		console.log( 'THE BIG REVEAL', context.incrementing_key, autoinc_key );
-		var unique = context.unique;
 		var on_success = context.on_success;
 		var on_error = context.on_error;
 		var on_abort = context.on_abort;
@@ -776,7 +774,7 @@ var IDB = (function(){
 
 		/* Request */
 		
-		InDB.store.create( name, key, autoinc_key, unique, on_success, on_error, on_abort, on_blocked );
+		InDB.store.create( name, key, autoinc_key, on_success, on_error, on_abort, on_blocked );
 
 	} );
 
@@ -784,14 +782,12 @@ var IDB = (function(){
 	/* return true if request is successfully requested (no bearing on result)
 	/* autoinc_key defaults to false if a key is specified;
 	   key gets set to "key" and autoincrements when key is not specified */
-	InDB.store.create = function ( name, key, autoinc_key, unique, on_success, on_error, on_abort, on_blocked ) {
+	InDB.store.create = function ( name, key, autoinc_key, on_success, on_error, on_abort, on_blocked ) {
 		
 		/* Debug */
 		
-		console.log('InDB.store.create', name, key, autoinc_key, unique, on_success, on_error, on_abort );
-
 		if( !!InDB.debug ) {
-			console.log ( "InDB.store.create", name, key, autoinc_key, on_success, on_error, on_abort );
+			console.log ( "InDB.store.create", name, key, autoinc_key, unique, on_success, on_error, on_abort );
 		}
 
 		/* Assertions */	
@@ -811,7 +807,7 @@ var IDB = (function(){
 
 		/* Defaults */
 
-		var keyPath = {};
+		var keyPath = null;
 
 		if ( 'undefined' !== typeof key ) {
 			keyPath = key;	
@@ -837,7 +833,7 @@ var IDB = (function(){
 			on_blocked = InDB.events.onBlocked;
 		}
 		
-		var context =  { "name": name, "keyPath": keyPath, "autoinc_key": autoinc_key };
+		var context =  { "name": name, "keyPath": keyPath, "autoinc_key": autoinc_key, 'unique': unique };
 
 		/* Debug */
 		
