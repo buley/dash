@@ -4100,7 +4100,9 @@ var IDB = (function(){
 			var key = request.key;
 			result = ( 'undefined' !== typeof request.key ) ? key : shorthand_map[ key ];
 
-
+			if( !!InDB.debug ) {
+				console.log( 'DB.prototype.shorthand.get', request, result );
+			}
 		}
 		return result;	
 	};
