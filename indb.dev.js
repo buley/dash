@@ -191,6 +191,7 @@ var IDB = (function(){
 
 //recursive
 	InDB.shorthand.decode = function( request ) {
+		if( null === request ) return null;
 		var encoded = {};
 		var total = 0;
 		var object = request.data;
@@ -219,6 +220,7 @@ var IDB = (function(){
 
 	//recursive
 	InDB.shorthand.encode = function( request ) {
+		if( null === request ) return null;
 		var encoded = {};
 		var object = request.data;
 		for( var item in object ) {
