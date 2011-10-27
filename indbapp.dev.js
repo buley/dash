@@ -1,6 +1,6 @@
 /* Begin App singleton */
 
-var InDBApp = (function(){
+var InDBApp = (function() {
 
 	var InDB;
 	var App = function( request ) {
@@ -675,4 +675,4 @@ var InDBApp = (function(){
 
 	/* End App Singleton */
 
-}()); // End immediately executing anonymous function
+} )(); // End immediately executing anonymous function
