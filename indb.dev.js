@@ -4091,14 +4091,14 @@ var IDB = (function(){
 	DB.prototype.shorthand.get = function( request ) {
 
 		/* Defaults */
-
+		var result;
 		var store = request.store;
 		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var shorthand_map = InDB.shorthand.map.get( { 'store': request.store } );
 		if ( 'undefined' === shorthand_map ) {
 			var key = request.key;
-			var result = ( 'undefined' !== typeof request.key ) ? key : shorthand_map[ key ];
+			result = ( 'undefined' !== typeof request.key ) ? key : shorthand_map[ key ];
 
 
 		}
