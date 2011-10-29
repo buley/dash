@@ -2893,7 +2893,7 @@ var IDB = (function(){
 			}
 
 
-			if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+			if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && 'undefined' !== typeof result && result[ attr ] !== expecting[ attr ] ) {
 
 				if( !!InDB.debug ) {
 					console.log( 'InDB.cursor.update > value was not expected.', result[ attr ], expecting[ attr ] );
