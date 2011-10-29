@@ -1189,9 +1189,7 @@ var IDB = (function(){
 		
 			var result = event.target.result;
 			var databaseTransaction = result.objectStore( store );
-			if( !!InDB.debug ) {
-				console.log( 'InDB.index.delete setVersionRequest.onsuccess', databaseTransaction );
-			}
+			console.log( databaseTransaction );
 			databaseTransaction.deleteIndex( name );
 
 			databaseTransaction.onsuccess = function ( event ) {
@@ -2941,15 +2939,13 @@ var IDB = (function(){
 					instance_data = result;
 				}
 
-				console.log("anyone own a chopper?", flagged, instance_data, cursor );
+				console.log("anyone own a chopper?", flagged, instance_data );
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
-					if( 'function' == typeof cursor.update ) {
-						cursor[ 'update' ]( instance_data );
-					}
+					cursor[ 'update' ]( instance_data );
+
+					
 				}
-				if( 'function' === typeof cursor.continue ) {
-					cursor[ 'continue' ]();
-				}
+				cursor[ 'continue' ]();
 			}
 		}
 
