@@ -2890,7 +2890,7 @@ var IDB = (function(){
 			/* Debug */
 
 			if ( !!InDB.debug ) {
-				console.log ( 'InDB.cursor.update context.data data', instance_data );
+				console.log ( 'InDB.cursor.update context.data cursor', cursor, 'result', result );
 			}
 			
 			if ( "undefined" !== typeof cursor && null !== cursor ) {
