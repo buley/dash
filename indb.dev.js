@@ -2943,10 +2943,9 @@ var IDB = (function(){
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 						cursor[ 'update' ]( instance_data );
 
-					}
-					cursor[ 'continue' ]();
+					
 				}
-
+				cursor[ 'continue' ]();
 			}
 		}
 
