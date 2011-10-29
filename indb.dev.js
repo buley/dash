@@ -2907,6 +2907,7 @@ var IDB = (function(){
 					
 					for ( attr in expecting ) {
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+
 							flagged = true;
 						}
 					}
@@ -2940,12 +2941,13 @@ var IDB = (function(){
 				}
 
 
-				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
+				if( 'undefined' == typeof limit || null == limit || total < limit ) {
 						cursor[ 'update' ]( instance_data );
 
-					
+					}
+					cursor[ 'continue' ]();
 				}
-				cursor[ 'continue' ]();
+
 			}
 		}
 
