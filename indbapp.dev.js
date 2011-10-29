@@ -465,7 +465,8 @@ var InDBApp = (function() {
 		/* Request */
 
 		InDB.cursor.update( {
-			'direction': direction
+			'data': data
+			, 'direction': direction
 			, 'key': key
 			, 'index': index
 			, 'left': left
@@ -489,9 +490,16 @@ var InDBApp = (function() {
 
 		var store = request.store;
 		if( 'undefined' == typeof store || null === store ) {
-			throw new Error( 'App.prototype.get: Store cannot be empty' );
+			throw new Error( 'App.prototype.update: Store cannot be empty' );
 			return null;
 		}
+
+		var data = request.data;
+		if( 'undefined' == typeof data || null === data ) {
+			throw new Error( 'App.prototype.update: Data cannot be empty' );
+			return null;
+		}
+
 
 		/* Defaults */
 
@@ -527,8 +535,9 @@ var InDBApp = (function() {
 		/* Request */
 
 		InDB.update( {
-			'index': index
-			, 'key': key
+			'data': data
+			, 'index': index
+			, 'key': ke
 			, 'on_success': on_success
 			, 'on_error': on_error
 			, 'store': store
