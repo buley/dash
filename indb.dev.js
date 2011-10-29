@@ -436,14 +436,13 @@ var IDB = (function(){
 		return result;
 	}
 
-
 	InDB.clone = function ( obj ) {
 		var clone = {};
-		for( var i in obj ) {
-			if( "object" == typeof obj[i] ) {
-				clone[i] = InDB.clone( obj[i] );
+		for( var x in obj ) {
+			if( "object" == typeof obj[ x ] ) {
+				clone[ x ] = InDB.clone( obj[ x ] );
 			} else {
-				clone[i] = obj[i];
+				clone[ x ] = obj[ x ];
 			}
 		}
 		return clone;
