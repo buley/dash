@@ -100,6 +100,68 @@ var InDBApp = (function() {
 
 	};
 
+	/* Add */
+	App.prototype.put = function( request ) {
+
+		/* Setup */
+
+		var store = request.store;
+		var data = request.data;
+
+		if( 'undefined' === typeof data ) {
+			throw new Error( 'App.prototype.put: Data cannot be empty' );
+			return;
+		}
+
+		if( 'undefined' === typeof store || null === store ) {
+			throw new Error( 'App.prototype.put: Store cannot be empty' );
+			return null;
+		}
+
+		/* Defaults */
+
+		var index = request.key;
+		index = ( 'undefined' !== typeof index ) ? index : null;
+		var key = request.key;
+		key = ( 'undefined' !== typeof key ) ? key : null;
+
+		/* Callbacks */
+
+		var on_success = function( value ) {
+			/* Debug */
+			if( !!debug ) {
+				console.log( 'App.prototype.add success', value );
+			}
+			/* Callback */
+			if( 'function' == typeof request.on_success ) {
+				request.on_success( value );
+			}
+		};
+
+		var on_error = function( context ) {
+			/* Debug */
+			if( !!debug ) {
+				console.log( 'App.prototype.add error', context );
+			}
+			/* Callback */
+			if( 'function' == typeof request.on_error ) {
+				request.on_error( context );
+			}
+		};
+
+		/* Request */
+
+		InDB.put( {
+			'data': data
+			, 'on_success': on_success
+			, 'on_error': on_error
+			, 'store': store
+		} );
+
+		return this;
+
+	};
+
 
 	App.prototype.cursor = App.prototype.cursor || {};
 	App.prototype.cursor.get = function( request ) {
