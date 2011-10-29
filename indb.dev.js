@@ -1189,7 +1189,9 @@ var IDB = (function(){
 		
 			var result = event.target.result;
 			var databaseTransaction = result.objectStore( store );
-			console.log( databaseTransaction );
+			if( !!InDB.debug ) {
+				console.log( 'InDB.index.delete setVersionRequest.onsuccess', databaseTransaction );
+			}
 			databaseTransaction.deleteIndex( name );
 
 			databaseTransaction.onsuccess = function ( event ) {
