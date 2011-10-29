@@ -2941,7 +2941,6 @@ var IDB = (function(){
 					instance_data = result;
 				}
 
-				console.log("anyone own a chopper?", flagged, instance_data, cursor );
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 					if( 'function' == typeof cursor.update ) {
 						cursor[ 'update' ]( instance_data );
