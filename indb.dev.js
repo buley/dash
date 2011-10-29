@@ -437,6 +437,17 @@ var IDB = (function(){
 	}
 
 
+	InDB.clone = function ( mixed_var ) {
+		var clone = {};
+		for( var i in obj ) {
+			if( "object" == typeof obj[i] ) {
+				clone[i] = InDB.clone( obj[i] );
+			} else {
+				clone[i] = obj[i];
+			}
+		}
+		return clone;
+	}
 
 	InDB.exists = function( mixed_var ) {
 		return ( InDB.isEmpty( mixed_var ) ) ? false : true;
@@ -2915,7 +2926,7 @@ var IDB = (function(){
 
 
 				if( false == replace && null !== result && 'undefined' !== result ) {	
-					var temp_data = Object.create( result );
+					var temp_data = InDB.clone( result );
 					for( attr in data ) {
 
 						var value;
