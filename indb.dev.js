@@ -2892,42 +2892,48 @@ var IDB = (function(){
 				}
 			}
 
-			console.log('cant be taking in strays',value,result,instance_data);
+
+			if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+
+					if( !!InDB.debug ) {
+						console.log( 'InDB.cursor.update > value was not expected.', result[ attr ], expecting[ attr ] );
+					}
+
+					var err = new Error( 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] );
+					context[ 'event' ] = err;
+
+					on_error( context );
+
+					return;
+
+				}
+
+			}
+
+			console.log('cant be taking in strays',replace,result);
 			if( false == replace && null !== result && 'undefined' !== result ) {	
-				var temp_data = instance_data;
-				console.log('friday craig',data);
+				var temp_data = result;
 				for( attr in data ) {
 
-					var value = instance_data[ attr ];
-			
-					if( 'function' == typeof value ) {
-						value = value( result[ attr ] );
+					var value;
+					var pre_value = data[ attr ];
+					var previous_value = temp_data[ attr ];
+
+					if( 'function' !== typeof pre_value ) {
+						value = pre_value;
 					}
 
-					if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] ) {
-
-						if( result[ attr ] !== expecting[ attr ] ) {
-
-							if( !!InDB.debug ) {
-								console.log( 'InDB.cursor.update > value was not expected.', result[ attr ], expecting[ attr ] );
-							}
-
-							var err = new Error( 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] );
-							context[ 'event' ] = err;
-
-							on_error( context );
-
-						}
-
+					if( 'function' == typeof pre_value ) {
+						value = pre_value( previous_value );
 					}
-					console.log("richard farnsworth", value, 'tempdata',temp_data, 'attr',attr );
-					if( 'undefined' !== typeof value ) {
-						temp_data[ attr ] = value;
-					} else {
-						temp_data[ attr ] = result[ attr ];
-					}
+
+					// Update the value (can be undefined or null)
+					temp_data[ attr ] = value;
+
 				}
 				instance_data = temp_data;
+			} else {
+				instance_data = result;
 			}
 
 
