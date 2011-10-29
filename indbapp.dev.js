@@ -401,7 +401,11 @@ var InDBApp = (function() {
 
 		var store = request.store;
 		if( 'undefined' === typeof store ) {
-			throw new Error( 'App.prototype.cursor.get: Store must not be empty' );
+			throw new Error( 'App.prototype.cursor.update: Store must not be empty' );
+		}
+		var data = request.data;
+		if( 'undefined' === typeof data ) {
+			throw new Error( 'App.prototype.cursor.update: Data must not be empty' );
 		}
 
 		/* Defaults */
