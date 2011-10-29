@@ -2892,6 +2892,7 @@ var IDB = (function(){
 				}
 			}
 
+			console.log('cant be taking in strays',value,result);
 			if( false == replace && null !== result && 'undefined' !== result ) {	
 				var temp_data = instance_data;
 
