@@ -2756,6 +2756,7 @@ var IDB = (function(){
 			console.log ( 'InDB.cursor.update', store, index, keyRange, data, direction, limit, replace, on_success, on_error, on_abort, on_complete );
 		}
 
+
 		/* Assertions */
 
 		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
@@ -2798,20 +2799,6 @@ var IDB = (function(){
 		if ( "undefined" === typeof on_complete ) {
 			on_abort = InDB.events.onComplete;
 		}
-
-		var request_on_success = function( database ) {
-			if( 'function' == typeof request.on_success ) {
-				on_success( database );
-			}
-		};
-
-		var request_on_error = function( context ) {
-			if( 'function' == typeof request.on_success ) {
-				on_error( context );
-			}
-		};
-
-
 
 
 		/* Context */
@@ -2885,7 +2872,7 @@ var IDB = (function(){
 
 			/* Callback */
 
-			request_on_success( context );
+			on_success( context );
 
 			/* Action */
 
@@ -2972,7 +2959,7 @@ var IDB = (function(){
 
 			/* Callback */
 
-			request_on_error( context );
+			on_error( context );
 
 			/* Action */
 
