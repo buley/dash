@@ -2941,11 +2941,13 @@ var IDB = (function(){
 
 				console.log("anyone own a chopper?", flagged, instance_data, cursor );
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
-					cursor[ 'update' ]( instance_data );
-
-					
+					if( 'function' === typeof cursor.update ) {
+						cursor[ 'update' ]( instance_data );
+					}
 				}
-				cursor[ 'continue' ]();
+				if( 'function' === typeof cursor.continue ) {
+					cursor[ 'continue' ]();
+				}
 			}
 		}
 
