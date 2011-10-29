@@ -594,7 +594,7 @@ var IDB = (function(){
 		}
 		var tx = InDB.transaction.create( store );
 		if( !!InDB.debug ) {
-			console.log( 'InDB.index.show transaction', tx );
+		console.log( 'InDB.index.show transaction', tx );
 		}
 		if( 'undefined' !== typeof tx ) {
 			return {
@@ -664,7 +664,7 @@ var IDB = (function(){
 		var context = { 'stores': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
 
 		if( !!InDB.debug ) {
-			console.log('InDB.stores.create', context );
+		console.log('InDB.stores.create', context );
 		}
 
 		//TODO: Assertions
@@ -682,7 +682,7 @@ var IDB = (function(){
 			if ( !InDB.store.exists( store ) ) {
 				/* Setup */
 				if( !!InDB.debug ) {
-					console.log('Store doesn\'t yet exist', store, options  );
+				console.log('Store doesn\'t yet exist', store, options  );
 				}
 				//TODO: Cleanup; if/else logic here is a little muddy (why the empty_key var?)
 				var key, autoinc_key, empty_key, unique;
@@ -1189,7 +1189,9 @@ var IDB = (function(){
 		
 			var result = event.target.result;
 			var databaseTransaction = result.objectStore( store );
-			console.log( databaseTransaction );
+			if( !!InDB.debug ) {
+				console.log( 'InDB.index.delete setVersionRequest.onsuccess', databaseTransaction );
+			}
 			databaseTransaction.deleteIndex( name );
 
 			databaseTransaction.onsuccess = function ( event ) {
@@ -2907,7 +2909,6 @@ var IDB = (function(){
 					
 					for ( attr in expecting ) {
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
-
 							flagged = true;
 						}
 					}
@@ -2940,14 +2941,15 @@ var IDB = (function(){
 					instance_data = result;
 				}
 
-
-				if( 'undefined' == typeof limit || null == limit || total < limit ) {
+				console.log("anyone own a chopper?", flagged, instance_data, cursor );
+				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
+					if( 'function' == typeof cursor.update ) {
 						cursor[ 'update' ]( instance_data );
-
 					}
+				}
+				if( 'function' === typeof cursor.continue ) {
 					cursor[ 'continue' ]();
 				}
-
 			}
 		}
 
