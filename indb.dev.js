@@ -2914,7 +2914,7 @@ var IDB = (function(){
 				}
 
 
-				if( false == replace && null !== result && 'undefined' !== result ) {	
+				if( 1===2 && false == replace && null !== result && 'undefined' !== result ) {	
 					var temp_data = result;
 					for( attr in data ) {
 
