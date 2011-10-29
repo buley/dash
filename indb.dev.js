@@ -2896,6 +2896,7 @@ var IDB = (function(){
 			if( false == replace && null !== result && 'undefined' !== result ) {	
 				var temp_data = instance_data;
 				var request_data = request.data;
+				console.log('friday craig',request_data);
 				for( attr in request_data ) {
 
 					var value = instance_data[ attr ];
