@@ -2934,9 +2934,7 @@ var IDB = (function(){
 
 						if( 'function' !== typeof pre_value ) {
 							value = pre_value;
-						}
-
-						if( 'function' == typeof pre_value ) {
+						} else {
 							value = pre_value( previous_value );
 						}
 
