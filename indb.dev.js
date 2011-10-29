@@ -2895,9 +2895,8 @@ var IDB = (function(){
 			console.log('cant be taking in strays',value,result,instance_data);
 			if( false == replace && null !== result && 'undefined' !== result ) {	
 				var temp_data = instance_data;
-				var request_data = request.data;
-				console.log('friday craig',request_data);
-				for( attr in request_data ) {
+				console.log('friday craig',data);
+				for( attr in data ) {
 
 					var value = instance_data[ attr ];
 			
