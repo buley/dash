@@ -2874,10 +2874,6 @@ var IDB = (function(){
 
 			context[ 'event' ] = event;
 
-			/* Callback */
-
-			on_success( context );
-
 			/* Action */
 
 			InDB.trigger( 'InDB_cursor_row_update_success', context );
@@ -2893,7 +2889,7 @@ var IDB = (function(){
 				console.log ( 'InDB.cursor.update context.data cursor', cursor, 'result', result );
 			}
 			
-			if ( "undefined" !== typeof cursor && null !== cursor ) {
+			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof cursor && null !== cursor ) {
 		
 				var instance_data = {};
 
@@ -2945,6 +2941,13 @@ var IDB = (function(){
 
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 					if( 'function' == typeof cursor.update ) {
+
+						/* Callback */
+	
+						on_success( context );
+
+						/* Update */
+
 						cursor[ 'update' ]( instance_data );
 					}
 				}
