@@ -2894,7 +2894,7 @@ var IDB = (function(){
 				var instance_data = {};
 
 				if( 'function' == typeof data ) {
-					var result_value = result;
+					var result_value = Object.create( result );
 					instance_data = data( result_value );
 					if( !!InDB.debug ) {
 						console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
