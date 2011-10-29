@@ -437,7 +437,7 @@ var IDB = (function(){
 	}
 
 
-	InDB.clone = function ( mixed_var ) {
+	InDB.clone = function ( obj ) {
 		var clone = {};
 		for( var i in obj ) {
 			if( "object" == typeof obj[i] ) {
