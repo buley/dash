@@ -2889,7 +2889,7 @@ var IDB = (function(){
 				console.log ( 'InDB.cursor.update context.data cursor', cursor, 'result', result );
 			}
 			
-			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof cursor && null !== cursor ) {
+			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
 		
 				var instance_data = {};
 
