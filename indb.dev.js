@@ -2913,7 +2913,7 @@ var IDB = (function(){
 
 				}
 
-				console.log('cant be taking in strays',replace,result);
+
 				if( false == replace && null !== result && 'undefined' !== result ) {	
 					var temp_data = result;
 					for( attr in data ) {
@@ -2939,6 +2939,7 @@ var IDB = (function(){
 					instance_data = result;
 				}
 
+				console.log('cant be taking in strays',replace,'result',result,'flagged',flagged,'instnace',instance_data);
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 					if( 'function' == typeof cursor.update ) {
 
