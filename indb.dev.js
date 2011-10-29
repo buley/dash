@@ -3409,59 +3409,12 @@ var IDB = (function(){
 
 	DB.prototype.cursor = DB.prototype.cursor || {};
 
-	/* Set */
-	DB.prototype.filterUpdate = function( request ) {
-
-		if( !!DB.debug ) {
-			console.log( 'DB.prototype.filterUpdate', request );
-		}
-
-		var on_success =  function( context ) {
-			if( !!DB.debug ) {
-				console.log( 'DB.prototype.filterUpdate success', context );
-			}
-			if( 'function' == typeof request.on_success ) {
-				request.on_success( context );
-			}
-		};
-
-		var on_error =  function( context ) {
-			if( !!DB.debug ) {
-				console.log( 'DB.prototype.filterUpdate error', context );
-			}
-			if( 'function' == typeof request.on_error ) {
-				request.on_error( context );
-			}
-		};
-		
-		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
-
-		/* Request */
-
-		var data = {};
-		data[ DB.prototype.shorthand( request.attribute ) ] = request.strength;
-
-		var update_request = {};
-		for( attr in request ) {
-			update_request[ attr ] = request[ attr ];
-		}
-
-		update_request.on_success = on_success;
-		update_request.on_error = on_error;
-
-		DB.prototype.update( update_request );
-
-		return this;
-
-	};
-
 	// ( 'key': string, 'index': string (requred), 'strength': int, 'on_success': fn, 'on_error': fn }
 	DB.prototype.filterGet = function( request ) {
 		
 		var on_success =  function( context ) {
 			if( !!DB.debug ) {
-				console.log( 'DB.prototype.filterUpdate success', context );
+				console.log( 'DB.prototype.filterGet success', context );
 			}
 			var value = InDB.cursor.value( context.event );
 			var attrs = request.expecting;
@@ -3521,50 +3474,6 @@ var IDB = (function(){
 
 		return this;
 
-	};
-
-	/* Cursor set */
-	// ( 'key': string, 'index': string (requred), 'strength': int, 'on_success': fn, 'on_error': fn }
-	DB.prototype.cursor.filterUpdate = function( request ) {
-		
-		var on_success =  function( value ) {
-			console.log( 'DB.prototype.cursor.filterUpdate success', value );
-			if( 'function' === typeof request.on_success ) {
-				request.on_success( value );
-			}
-		};
-
-		var on_error =  function( context ) {
-			console.log( 'DB.prototype.cursor.filterUpdate error', context );
-			if( 'function' === typeof request.on_complete ) {
-				request.on_error( context );
-			}
-		};
-
-		var on_complete =  function() {
-			console.log( 'DB.prototype.cursor.filterUpdate complete', context );
-			if( 'function' === typeof request.on_complete ) {
-				request.on_complete();
-			}
-		};
-
-		var store = request.store;
-		request.store = ( !InDB.isEmpty( store ) ) ? store : current_store;
-
-		var db_request = {};
-		for( attr in request ) {
-			db_request[ attr ] = request[ attr ];
-		}
-
-		db_request.on_success = on_success;
-		db_request.on_error = on_error;
-		db_request.on_complete = on_complete;
-
-		db_request.data[ DB.prototype.shorthand( request.attribute ) ] = request.strength;
-		
-		DB.prototype.cursor.update( db_request );
-		
-		return this;
 	};
 
 	/* Convenience function

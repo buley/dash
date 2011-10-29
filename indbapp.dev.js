@@ -461,8 +461,7 @@ var InDBApp = (function() {
 		/* Request */
 
 		InDB.cursor.update( {
-			'left': begin
-			, 'direction': direction
+			'direction': direction
 			, 'key': key
 			, 'index': index
 			, 'left': left
