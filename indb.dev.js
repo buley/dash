@@ -2823,7 +2823,7 @@ var IDB = (function(){
 
 		/* Optional Index */
 
-		if ( "undefined" !== typeof index && !InDB.isEmpty( index ) ) {
+		if ( !InDB.isEmpty( index ) ) {
 
 			/* Debug */
 
@@ -3859,6 +3859,10 @@ var IDB = (function(){
 	/* Cursor Update */
 	DB.prototype.cursor.update = function( request ) {
 
+		if( !!InDB.debug ) {
+			console.log( 'DB.prototype.cursor.update', request );
+		}
+
 		/* Setup */
 
 		var index = request.index;
@@ -3912,7 +3916,7 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger( 'cursor_update_namespace', { 'data': new_data, "index": index, "key": key, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "replace": replace, 'direction': direction, 'limit': limit, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
+		InDB.trigger( ( 'cursor_update_' + request.store ), { 'data': new_data, "index": index, "key": key, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "replace": replace, 'direction': direction, 'limit': limit, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
 
 		/* Defaults */
 
