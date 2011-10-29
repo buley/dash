@@ -2000,6 +2000,8 @@ var IDB = (function(){
 
 			InDB.trigger( 'InDB_row_add_error', context );
 
+			throw new Error( 'InDB_row_add error' );
+
 		}
 	}
 
