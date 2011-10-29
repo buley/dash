@@ -2751,9 +2751,11 @@ var IDB = (function(){
 	InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, replace, expecting, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
+
 		if ( !!InDB.debug ) {
 			console.log ( 'InDB.cursor.update', store, index, keyRange, data, direction, limit, replace, on_success, on_error, on_abort, on_complete );
 		}
+
 
 		/* Assertions */
 
@@ -2768,6 +2770,7 @@ var IDB = (function(){
 		if ( !InDB.assert( 'undefined' !== typeof keyRange, 'keyRange must be an IDBKeyRange' ) ) {
 			return;
 		}
+
 
 		/* Defaults */
 
@@ -2802,10 +2805,12 @@ var IDB = (function(){
 
 		var context = { "store": store, "keyRange": keyRange, "index": index, "data": data, 'direction': direction, 'limit': limit, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
+
 		/* Action */
 
 		InDB.trigger( 'InDB_cursor_update', context );
 		
+
 		/* Transaction */
 
 		var transaction = InDB.transaction.create( store, InDB.transaction.read_write(), on_complete );
@@ -2817,9 +2822,11 @@ var IDB = (function(){
 			console.log ( 'InDB.cursor.update transaction', transaction, index, typeof index );
 		}
 
+
 		/* Request */
 
 		var request;
+
 
 		/* Optional Index */
 
@@ -2876,6 +2883,7 @@ var IDB = (function(){
 			var cursor = InDB.row.value( context.event );
 			var result = InDB.cursor.value( context.event );
 			var instance_data = {};
+
 			if( 'function' == typeof data ) {
 				var result_value = result;
 				instance_data = data( result_value );
@@ -2883,14 +2891,18 @@ var IDB = (function(){
 					console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
 				}
 			}
+
 			if( false == replace && null !== result && 'undefined' !== result ) {	
 				var temp_data = instance_data;
+
 				for( attr in result ) {
+
 					var value = instance_data[ attr ];
 			
 					if( 'function' == typeof value ) {
 						value = value( result[ attr ] );
 					}
+
 					if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] ) {
 
 						if( result[ attr ] !== expecting[ attr ] ) {
@@ -2907,6 +2919,7 @@ var IDB = (function(){
 						}
 
 					}
+					console.log("richard farnsworth", value, 'tempdata',temp_data, 'attr',attr );
 					if( 'undefined' !== typeof value ) {
 						temp_data[ attr ] = value;
 					} else {
@@ -2922,6 +2935,7 @@ var IDB = (function(){
 			if ( !!InDB.debug ) {
 				console.log ( 'InDB.cursor.update context.data data', instance_data );
 			}
+			
 			if ( "undefined" !== typeof cursor && null !== cursor ) {
 				if( 'undefined' == typeof limit || null == limit || total < limit ) {
 					cursor[ 'update' ]( instance_data );
