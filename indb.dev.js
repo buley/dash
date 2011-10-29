@@ -2895,18 +2895,17 @@ var IDB = (function(){
 
 			if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
 
-					if( !!InDB.debug ) {
-						console.log( 'InDB.cursor.update > value was not expected.', result[ attr ], expecting[ attr ] );
-					}
-
-					var err = new Error( 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] );
-					context[ 'event' ] = err;
-
-					on_error( context );
-
-					return;
-
+				if( !!InDB.debug ) {
+					console.log( 'InDB.cursor.update > value was not expected.', result[ attr ], expecting[ attr ] );
 				}
+
+				var err = new Error( 'Found ' + result[ attr] + ', expecting ' + expecting[ attr ] );
+				context[ 'event' ] = err;
+
+				on_error( context );
+
+				return;
+
 
 			}
 
