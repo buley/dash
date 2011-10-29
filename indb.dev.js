@@ -2892,11 +2892,10 @@ var IDB = (function(){
 				}
 			}
 
-			console.log('cant be taking in strays',value,result,'in',instance_data);
 			if( false == replace && null !== result && 'undefined' !== result ) {	
 				var temp_data = instance_data;
-
-				for( attr in result ) {
+				var request_data = request.data;
+				for( attr in request_data ) {
 
 					var value = instance_data[ attr ];
 			
@@ -2920,7 +2919,6 @@ var IDB = (function(){
 						}
 
 					}
-					console.log("richard farnsworth", value, 'tempdata',temp_data, 'attr',attr );
 					if( 'undefined' !== typeof value ) {
 						temp_data[ attr ] = value;
 					} else {
