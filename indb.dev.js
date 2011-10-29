@@ -2948,7 +2948,7 @@ var IDB = (function(){
 						on_success( context );
 
 						/* Update */
-
+						console.log('cursor.update turning', result, instance_data );
 						cursor[ 'update' ]( instance_data );
 					}
 				}
