@@ -2936,7 +2936,7 @@ var IDB = (function(){
 					}
 					instance_data = temp_data;
 				} else {
-					instance_data = result;
+					instance_data = data;
 				}
 
 				console.log('cant be taking in strays',replace,'result',result,'flagged',flagged,'instnace',instance_data);
