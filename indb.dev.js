@@ -2886,7 +2886,7 @@ var IDB = (function(){
 			/* Debug */
 
 			if ( !!InDB.debug ) {
-				console.log ( 'InDB.cursor.update context.data cursor', cursor, 'result', result );
+				console.log ( 'InDB.cursor.update context.data result', result );
 			}
 			
 			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
