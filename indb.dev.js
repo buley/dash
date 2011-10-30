@@ -2063,10 +2063,6 @@ var IDB = (function(){
 		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
 			return;
 		}
-			
-		if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a range to get' ) ) {
-			return;
-		}
 
 		if ( !InDB.assert( !InDB.isEmpty( data ), 'Must provide data to update' ) ) {
 			return;
