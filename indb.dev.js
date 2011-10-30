@@ -3248,12 +3248,12 @@ var IDB = (function(){
 
 						var delete_request = cursor[ 'delete' ]();
 
+						console.log("DELETING",delete_request);
 						delete_request.onsuccess = function( delete_result ) {
 
 							total++;
 							
 							on_success( context );
-
 
 							try { 	
 								cursor[ 'continue' ]();
