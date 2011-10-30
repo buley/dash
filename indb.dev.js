@@ -3208,8 +3208,9 @@ var IDB = (function(){
 					
 					on_success( context );
 			
-					//try { 	
-						cursor[ 'delete' ]();
+					try { 	
+						var op = cursor[ 'delete' ] || cursor[ 'remove' ];
+						op();
 
 						try { 	
 							cursor[ 'continue' ]();
@@ -3217,12 +3218,12 @@ var IDB = (function(){
 							context[ 'error' ] = error;			
 							on_error( context );
 						}
-/*
+
 					} catch( error ) {
 						context[ 'error' ] = error;			
 						on_error( context );
 					}
-*/
+
 				}
 			
 			}
