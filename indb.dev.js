@@ -3237,14 +3237,11 @@ var IDB = (function(){
 					}
 				}
 			}
-			console.log('FLAGGED',flagged,cursor);
 
-console.log('m0');
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
 
-console.log('m1');
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
-console.log('m2');
+
 					/* Callback */
 					try {
 
@@ -3256,6 +3253,7 @@ console.log('m2');
 							total++;
 							
 							on_success( context );
+console.log('m2');
 
 							try { 	
 								cursor[ 'continue' ]();
@@ -3270,6 +3268,7 @@ console.log('m2');
 						delete_request.onerror = function( delete_result ) {
 
 							/* Context */
+						console.log('m4',delete_request);
 							
 							context[ 'event' ] = event;
 						
