@@ -3275,6 +3275,12 @@ var IDB = (function(){
 							/* Action */
 
 							InDB.trigger( 'InDB_cursor_row_delete_error', context );
+							try { 	
+								cursor[ 'continue' ]();
+							} catch( error ) {
+								context[ 'error' ] = error;			
+								on_error( context );
+							}
 
 						};
 
@@ -3282,13 +3288,7 @@ var IDB = (function(){
 
 					} catch( error ) {
 						context[ 'error' ] = error;			
-						try { 	
-							cursor[ 'continue' ]();
-						} catch( error ) {
-							context[ 'error' ] = error;			
-							on_error( context );
-						}
-
+						on_error( context );
 					}
 
 				}
