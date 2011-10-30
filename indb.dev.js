@@ -3241,7 +3241,6 @@ var IDB = (function(){
 
 					console.log("DELETE",delete_request);
 
-
 				}
 						
 			}
