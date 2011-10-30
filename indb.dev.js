@@ -2173,7 +2173,6 @@ var IDB = (function(){
 					instance_data = data;
 				}
 
-				console.log('cant be taking in strays',replace,'result',result,'flagged',flagged,'instnace',instance_data);
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 
 					/* Callback */
@@ -2993,7 +2992,6 @@ var IDB = (function(){
 					instance_data = data;
 				}
 
-				console.log('cant be taking in strays',replace,'result',result,'flagged',flagged,'instnace',instance_data);
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 					if( 'function' == typeof cursor.update ) {
 
@@ -3062,7 +3060,8 @@ var IDB = (function(){
 		var keyRange = context.keyRange; // Required
 		var index = context.index; // Required
 		var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
-		var limit = context.limit;
+		var limit = context.limit; //Optional
+		var expecting = context.expecting; //Optional
 
 		/* Assertions */
 
@@ -3079,21 +3078,23 @@ var IDB = (function(){
 		index = ( !InDB.isEmpty( index ) ) ? index : null;
 		
 		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
+		
+		expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
 
 		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
 
 		/* Invocation */
 
-		InDB.cursor.delete( store, index, keyRange, direction, limit, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		InDB.cursor.delete( store, index, keyRange, direction, limit, expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	} );
 
-	InDB.cursor.delete = function ( store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete ) {
+	InDB.cursor.delete = function ( store, index, keyRange, direction, limit, expecting, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
 
 		if ( !!InDB.debug ) {
-			console.log ( 'InDB.cursor.get', store, index, keyRange, on_success, on_error, on_abort, on_complete );
+			console.log ( 'InDB.cursor.get', store, index, keyRange, expecting, on_success, on_error, on_abort, on_complete );
 		}
 
 		/* Assertions */
@@ -3114,6 +3115,8 @@ var IDB = (function(){
 
 		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
 
+		expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
+
 		if ( "undefined" === typeof on_success ) {
 			on_success = InDB.events.onSuccess;
 		}
@@ -3133,7 +3136,7 @@ var IDB = (function(){
 
 		/* Context */
 
-		var context = { "store": store, "keyRange": keyRange, "index": index, 'direction': direction, 'limit': limit, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+		var context = { "store": store, "keyRange": keyRange, "index": index, 'expecting': expecting, 'direction': direction, 'limit': limit, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 		/* Action */
 		
@@ -3202,7 +3205,20 @@ var IDB = (function(){
 			var total = 0;
 			var cursor = event.target.result;
 			var cursor_result = InDB.clone( InDB.cursor.value( event ) );
-			if ( "undefined" !== typeof cursor && null !== cursor ) {
+
+
+			var flagged = false;
+			if( 'undefined' !== typeof expecting && null !== expecting ) {	
+				for ( attr in expecting ) {
+					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+						flagged = true;
+					}
+				}
+
+			}
+
+
+			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
 
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 
@@ -3216,7 +3232,6 @@ var IDB = (function(){
 							total++;
 							
 							on_success( context );
-
 
 						};
 
@@ -3236,14 +3251,7 @@ var IDB = (function(){
 
 						};
 
-						try { 	
-							cursor[ 'continue' ]();
-						} catch( error ) {
-							context[ 'error' ] = error;			
-							on_error( context );
-							cursor.abort();
-						}
-	
+
 
 					} catch( error ) {
 						context[ 'error' ] = error;			
@@ -3253,6 +3261,15 @@ var IDB = (function(){
 				}
 						
 			}
+
+			try { 	
+				cursor[ 'continue' ]();
+			} catch( error ) {
+				context[ 'error' ] = error;			
+				on_error( context );
+				cursor.abort();
+			}
+
 
 		}
 
