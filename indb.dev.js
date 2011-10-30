@@ -3203,49 +3203,48 @@ var IDB = (function(){
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 
 					/* Callback */
-								
-					var delete_request = cursor[ 'delete' ]();
+					try {
 
-					delete_request.onsuccess = function( delete_result ) {
+						var delete_request = cursor[ 'delete' ]();
 
-						console.log("DELETED!", delete_result);
+						delete_request.onsuccess = function( delete_result ) {
+
+							console.log("DELETED!", delete_result);
+							
+							total++;
+							
+							on_success( context );
+						};
+
+						delete_request.onerror = function( delete_result ) {
+
+							/* Context */
+							
+							context[ 'event' ] = event;
 						
-						total++;
-						
-						on_success( context );
-					};
+							/* Callback */
 
-					delete_request.onerror = function( delete_result ) {
+							on_error( context );
+							
+							/* Action */
 
-					};
+							InDB.trigger( 'InDB_cursor_row_delete_error', context );
 
-					delete_request.onerror = function( delete_result ) {
+						};
 
-						/* Context */
-						
-						context[ 'event' ] = event;
-					
-						/* Callback */
+						console.log("DELETE",delete_request);
 
-						on_error( context );
-						
-						/* Action */
-
-						InDB.trigger( 'InDB_cursor_row_delete_error', context );
-
-					};
-
-					console.log("DELETE",delete_request);
-
-					try { 	
-						cursor[ 'continue' ]();
+						try { 	
+							cursor[ 'continue' ]();
+						} catch( error ) {
+							context[ 'error' ] = error;			
+							on_error( context );
+							cursor.abort();
+						}
 					} catch( error ) {
 						context[ 'error' ] = error;			
 						on_error( context );
-						cursor.abort;
 					}
-
-
 
 				}
 						
