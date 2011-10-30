@@ -3216,7 +3216,7 @@ var IDB = (function(){
 							on_success( context );
 
 							try { 	
-								cursor[ 'continue' ]();
+								//cursor[ 'continue' ]();
 							} catch( error ) {
 								context[ 'error' ] = error;			
 								on_error( context );
