@@ -678,7 +678,7 @@ var InDBApp = (function() {
 		InDB.cursor.update( {
 			'data': data
 			, 'direction': direction
-			, 'expecting'
+			, 'expecting': expecting
 			, 'key': key
 			, 'index': index
 			, 'left': left
