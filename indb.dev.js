@@ -3254,6 +3254,16 @@ var IDB = (function(){
 							
 							on_success( context );
 
+
+							try { 	
+								cursor[ 'continue' ]();
+							} catch( error ) {
+								context[ 'error' ] = error;			
+								on_error( context );
+							}
+
+
+
 						};
 
 						delete_request.onerror = function( delete_result ) {
@@ -3282,14 +3292,6 @@ var IDB = (function(){
 				}
 						
 			}
-
-			try { 	
-				cursor[ 'continue' ]();
-			} catch( error ) {
-				context[ 'error' ] = error;			
-				on_error( context );
-			}
-
 
 		}
 
