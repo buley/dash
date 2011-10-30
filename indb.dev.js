@@ -2987,7 +2987,8 @@ var IDB = (function(){
 						if( 'function' == typeof expecting[ attr ] ) {
 							expecting[ attr ] = expecting[ attr ]( result[ attr ] );
 						}
-						console.log("MAN UP", attr, JSON.stringify( result ) );
+						console.log("MAN UP", JSON.stingify( expecting ), JSON.stringify( result ) );
+
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
 							console.log(attr,"FAILED",JSON.stringify(result[attr]),expecting[attr]);
 							flagged = true;
