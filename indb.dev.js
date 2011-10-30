@@ -2717,7 +2717,6 @@ var IDB = (function(){
 
 					total++;
 
-
 					// Move cursor to next key
 					if( 'undefined' == typeof limit || null == limit || total < limit ) {
 						result[ 'continue' ]();
