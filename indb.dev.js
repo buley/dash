@@ -3197,7 +3197,7 @@ var IDB = (function(){
 
 			var total = 0;
 			var cursor = event.target.result;
-			var cursor_result = InDB.cursor.value( event );
+			var cursor_result = InDB.clone( InDB.cursor.value( event ) );
 			if ( "undefined" !== typeof cursor && null !== cursor ) {
 
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
@@ -3207,6 +3207,7 @@ var IDB = (function(){
 					var delete_request = cursor[ 'delete' ]();
 
 					delete_request.onsuccess = function( delete_result ) {
+
 						console.log("DELETED!", delete_result);
 						
 						total++;
