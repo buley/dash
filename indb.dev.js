@@ -1418,8 +1418,8 @@ var IDB = (function(){
 			console.log ( 'InDB.row.value', event );
 		}
 		
-		if( 'undefined' === typeof event || null === typeof event ) {
-			return null;
+		if( 'undefined' === typeof event || null === event ) {
+			return event;
 		}
 
 		if( 'undefined' !== typeof event.event ) {
