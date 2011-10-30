@@ -2693,15 +2693,18 @@ var IDB = (function(){
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
+
 						var expecting_value = expecting[ attr ];
 						var current_value = ( 'undefined' === typeof result && null !== result ) ? result[ attr ]: null;					
 						if( 'function' === typeof expecting_value ) {
 							expecting_value = expecting_value( current_value );
 						}
-
+						console.log('currrrrrrrrrrrent');
+						console.log('ex',expecting_value,'curre',current_value);
 						if( 'undefined' !== typeof result && 'undefined' !== typeof current_value && 'undefined' !== typeof expecting_value && null !== expecting_value && current_value !== expecting_value ) {
 							flagged = true;
 						}
+
 					}
 
 				}
