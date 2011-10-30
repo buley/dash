@@ -2989,8 +2989,8 @@ var IDB = (function(){
 							expecting[ attr ] = expecting[ attr ]( res[ attr ] );
 						}
 						console.log("MAN UP", attr, res[attr],expecting[attr]);
-						if( 'undefined' !== typeof result && 'undefined' !== typeof res[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && res[ attr ] !== expecting[ attr ] ) {
-							console.log(attr,"FAILED",JSON.stringify(res[attr]),expecting[attr]);
+						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+							console.log(attr,"FAILED",JSON.stringify(result[attr]),expecting[attr]);
 							flagged = true;
 						}
 					}
