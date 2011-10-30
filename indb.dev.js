@@ -2985,11 +2985,12 @@ var IDB = (function(){
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
 						var expecting_value = InDB.clone( expecting[ attr ] );
+
 						if( 'function' === typeof expecting_value ) {
 							console.log("FEEDING", result[attr],JSON.stringify(result[attr]));
 							expecting_value = expecting_value( result[ attr ] );
 						}
-						console.log("MAN UP", JSON.stringify( expecting_value ), JSON.stringify( result ) );
+						console.log("MAN UP", JSON.stringify( expecting_value ), JSON.stringify( expecting[ attr ] ) );
 
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && result[ attr ] !== expecting[ attr ] ) {
 							console.log(attr,"FAILED",JSON.stringify(result[attr]),expecting[attr]);
