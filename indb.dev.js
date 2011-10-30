@@ -3019,7 +3019,7 @@ var IDB = (function(){
 				} else {
 					instance_data = data;
 				}
-console.log('m2');
+console.log('m2', flagged, total, limit );
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 console.log('m3');
 					if( 'function' == typeof cursor.update ) {
