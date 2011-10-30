@@ -2107,47 +2107,88 @@ var IDB = (function(){
 
 		var callback = function( callback_context ) {
 
-			var result = InDB.row.value( callback_context.event );
-			if( 'function' == typeof data ) {
-				data = data( result );
+			/* Update */
+
+			var cursor = InDB.row.value( callback_context.event );
+			var result = InDB.cursor.value( callback_context.event );
+
+			/* Debug */
+
+			if ( !!InDB.debug ) {
+				console.log ( 'InDB.cursor.update context.data result', result );
 			}
-			if( false == replace ) {
-				var temp_data = data;
-				for( attr in result ) {
-					var value = data[ attr ];
-					if( 'function' == typeof value ) {
-						value = value( result[ attr ] );
-					}
-					if( 'undefined' !== typeof expecting && null !== expecting && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] ) {
-						if( result[ attr ] !== expecting[ attr ] ) {
+			
+			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
+		
+				var instance_data = {};
 
-							if( !!InDB.debug ) {
-								console.log( 'InDB.row.update > value was not expected.', result[ attr ], expecting[ attr ] );
-							}
-
-							var err = new Error( 'Found ' + result[ attr ] + ', expecting ' + expecting[ attr ] );
-							context[ 'event' ] = err;
-
-							on_error( context );
-
-						}
-
-					}
-					if( 'undefined' !== typeof value ) {
-						temp_data[ attr ] = value;
-					} else {
-						temp_data[ attr ] = result[ attr ];
+				if( 'function' == typeof data ) {
+					var result_value = result;
+					instance_data = data( result_value );
+					if( !!InDB.debug ) {
+						console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
 					}
 				}
-				data = temp_data;
+
+
+				var flagged = false;
+				if( 'undefined' !== typeof expecting && null !== expecting ) {
+					
+					for ( attr in expecting ) {
+						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+							flagged = true;
+						}
+					}
+
+				}
+
+
+				if( false == replace && null !== result && 'undefined' !== result ) {	
+					var temp_data = InDB.clone( result );
+					for( attr in data ) {
+
+						var value;
+						var pre_value = data[ attr ];
+						var previous_value = temp_data[ attr ];
+
+						if( 'function' !== typeof pre_value ) {
+							value = pre_value;
+						}
+
+						if( 'function' == typeof pre_value ) {
+							value = pre_value( previous_value );
+						}
+
+						// Update the value (can be undefined or null)
+						temp_data[ attr ] = value;
+
+					}
+					instance_data = temp_data;
+				} else {
+					instance_data = data;
+				}
+
+				console.log('cant be taking in strays',replace,'result',result,'flagged',flagged,'instnace',instance_data);
+				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
+					if( 'function' == typeof cursor.update ) {
+
+						/* Callback */
+	
+						on_success( context );
+
+						/* Update */
+						console.log('single.update turning', result, instance_data );
+						InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
+					}
+				}
+				if( 'function' === typeof cursor.continue ) {
+					cursor[ 'continue' ]();
+				}
 			}
 
-			if( !!InDB.debug ) {
-				console.log( 'InDB.row.update context', context );
-				console.log( 'InDB.row.update before/after', result, data );
-			}
 
-			InDB.row.put( store, data, null, on_success, on_error, on_abort, on_complete );
+			//xxx
+
 
 		};
 
