@@ -1418,7 +1418,7 @@ var IDB = (function(){
 			console.log ( 'InDB.row.value', event );
 		}
 		
-		if( 'undefined' !== typeof event && null !== typeof event ) {
+		if( 'undefined' === typeof event && null === typeof event ) {
 			return event;
 		}
 
@@ -3741,7 +3741,8 @@ var IDB = (function(){
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = InDB.row.value( context.event );
+				var value = InDB.row.value( context );
+				console.log("PUT SUCC",value);
 				request.on_success( value );
 			}
 		}
