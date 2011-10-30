@@ -3210,6 +3210,14 @@ var IDB = (function(){
 			
 					try { 	
 						cursor[ 'delete' ]();
+
+						try { 	
+							cursor[ 'continue' ]();
+						} catch( error ) {
+							context[ 'error' ] = error;			
+							on_error( context );
+						}
+
 					} catch( error ) {
 						context[ 'error' ] = error;			
 						on_error( context );
@@ -3217,12 +3225,6 @@ var IDB = (function(){
 
 				}
 			
-				try { 	
-					cursor[ 'continue' ]();
-				} catch( error ) {
-					context[ 'error' ] = error;			
-					on_error( context );
-				}
 			}
 
 		}
