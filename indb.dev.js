@@ -3229,16 +3229,15 @@ var IDB = (function(){
 			if( 'undefined' !== typeof expecting && null !== expecting ) {	
 				for ( attr in expecting ) {
 					if( 'function' == typeof expecting[ attr ] ) {
-						expecting[ attr ] = expecting[ attr ]( cursor_result[ attr ] );
+						expecting[ attr ] = expecting[ attr ]( result[ attr ] );
 					}
 					console.log( 'exp',attr,expecting,cursor_result);
 					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && cursor_result[ attr ] !== expecting[ attr ] ) {
 						flagged = true;
 					}
 				}
-
 			}
-
+			console.log('FLAGGED',flagged,cursor);
 
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
 
