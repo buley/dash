@@ -2992,7 +2992,6 @@ var IDB = (function(){
 						if( 'function' === typeof expecting_value ) {
 							expecting_value = expecting_value( result[ attr ] );
 						}
-
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && result[ attr ] !== expecting_value ) {
 							flagged = true;
 						}
@@ -3005,16 +3004,11 @@ var IDB = (function(){
 					var temp_data = InDB.clone( result );
 					for( attr in data ) {
 
-						var value;
-						var pre_value = data[ attr ];
+						var value = data[ attr ];
 						var previous_value = temp_data[ attr ];
 
-						if( 'function' !== typeof pre_value ) {
-							value = pre_value;
-						}
-
-						if( 'function' == typeof pre_value ) {
-							value = pre_value( previous_value );
+						if( 'function' === typeof value ) {
+							value = value( previous_value );
 						}
 
 						// Update the value (can be undefined or null)
