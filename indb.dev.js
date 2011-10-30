@@ -3202,26 +3202,22 @@ var IDB = (function(){
 			var cursor_result = InDB.cursor.value( event );
 			if ( "undefined" !== typeof cursor && null !== cursor ) {
 
-				/* Callback */
+				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 
-
-
-					if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
-						on_success( context );
-				
-						try { 
-						
-							cursor[ 'delete' ]();
-		
-						} catch( error ) {
-							context[ 'error' ] = error;			
-							on_error( context );
-						}
-	
-
+					/* Callback */
+					
+					on_success( context );
+			
+					try { 	
+						cursor[ 'delete' ]();
+					} catch( error ) {
+						context[ 'error' ] = error;			
+						on_error( context );
 					}
-				
-					cursor[ 'continue' ]();
+
+				}
+			
+				cursor[ 'continue' ]();
 			}
 
 		}
