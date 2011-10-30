@@ -1417,12 +1417,16 @@ var IDB = (function(){
 		if ( !!InDB.debug ) {
 			console.log ( 'InDB.row.value', event );
 		}
+		
+		if( 'undefined' !== typeof event && null !== typeof event ) {
+			return event;
+		}
 
-		if( 'undefined' !== typeof event && 'undefined' !== typeof event.event ) {
+		if( 'undefined' !== typeof event.event ) {
 			event = event.event;
 		}
 
-		if ( "undefined" !== typeof event && null !== event && "undefined" !== typeof event.target && "undefined" !== typeof event.target.result && null !== event.target.result ) {
+		if ( "undefined" !== typeof event.target && "undefined" !== typeof event.target.result && null !== event.target.result ) {
 			return event.target.result;
 		} else {
 			return null;
