@@ -3212,9 +3212,11 @@ var IDB = (function(){
 
 
 				}
+			
+				cursor[ 'continue' ]();
 
 			}
-			cursor[ 'continue' ]();
+
 		}
 		request.onerror = function ( event ) {	
 		
