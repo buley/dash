@@ -3213,20 +3213,11 @@ var IDB = (function(){
 
 						delete_request.onsuccess = function( delete_result ) {
 
-							console.log("DELETED!", delete_result);
-							
 							total++;
 							
 							on_success( context );
 
-						try { 	
-							cursor[ 'continue' ]();
-						} catch( error ) {
-							context[ 'error' ] = error;			
-							on_error( context );
-							cursor.abort();
-						}
-	
+
 						};
 
 						delete_request.onerror = function( delete_result ) {
@@ -3243,6 +3234,8 @@ var IDB = (function(){
 
 							InDB.trigger( 'InDB_cursor_row_delete_error', context );
 
+						};
+
 						try { 	
 							cursor[ 'continue' ]();
 						} catch( error ) {
@@ -3251,8 +3244,6 @@ var IDB = (function(){
 							cursor.abort();
 						}
 	
-						};
-
 
 					} catch( error ) {
 						context[ 'error' ] = error;			
