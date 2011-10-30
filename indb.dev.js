@@ -3197,7 +3197,7 @@ var IDB = (function(){
 			/* Result */
 
 			var cursor = event.target.result;
-			var cursor_result = InDB.cursor.value( cursor );
+			var cursor_result = InDB.cursor.value( event );
 			if ( "undefined" !== typeof cursor && null !== cursor ) {
 
 				/* Callback */
