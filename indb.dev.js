@@ -2140,14 +2140,16 @@ var IDB = (function(){
 					}
 				}
 
-
+	
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
-						if( 'function' == typeof expecting[ attr ] ) {
-							expecting[ attr ] = expecting[ attr ]( result[ attr ] );
+						var expecting_value = expecting[ attr ];
+						if( 'function' === typeof expecting_value ) {
+							expecting_value = expecting_value( result[ attr ] );
 						}
-						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+
+						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && result[ attr ] !== expecting_value ) {
 							flagged = true;
 						}
 					}
@@ -2689,12 +2691,14 @@ var IDB = (function(){
 				var result = InDB.row.value( event );
 
 				var flagged = false;
-				if( 'undefined' !== typeof expecting && null !== expecting ) {	
+				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
-						if( 'function' == typeof expecting[ attr ] ) {
-							expecting[ attr ] = expecting[ attr ]( result[ attr ] );
+						var expecting_value = expecting[ attr ];
+						if( 'function' === typeof expecting_value ) {
+							expecting_value = expecting_value( result[ attr ] );
 						}
-						if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+
+						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && result[ attr ] !== expecting_value ) {
 							flagged = true;
 						}
 					}
@@ -2985,15 +2989,11 @@ var IDB = (function(){
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
 						var expecting_value = expecting[ attr ];
-						console.log('streak burritos are delicious, and they\'re real', typeof expecting_value);
 						if( 'function' === typeof expecting_value ) {
-							console.log("FEEDING", result[attr],JSON.stringify(result[attr]));
 							expecting_value = expecting_value( result[ attr ] );
 						}
-						console.log("MAN UP", JSON.stringify( expecting_value ), JSON.stringify( expecting[ attr ] ) );
 
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && result[ attr ] !== expecting_value ) {
-							console.log(attr,"FAILED",JSON.stringify(result[attr]),expecting_value);
 							flagged = true;
 						}
 					}
@@ -3248,17 +3248,21 @@ console.log('m4');
 
 
 			var flagged = false;
-			if( 'undefined' !== typeof expecting && null !== expecting ) {	
+			if( 'undefined' !== typeof expecting && null !== expecting ) {
 				for ( attr in expecting ) {
-					if( 'function' == typeof expecting[ attr ] ) {
-						expecting[ attr ] = expecting[ attr ]( cursor_result[ attr ] );
+					var expecting_value = expecting[ attr ];
+					if( 'function' === typeof expecting_value ) {
+						expecting_value = expecting_value( cursor_result[ attr ] );
 					}
-					console.log( 'exp',attr,expecting,cursor_result);
-					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && cursor_result[ attr ] !== expecting[ attr ] ) {
+
+					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && result[ attr ] !== expecting_value ) {
 						flagged = true;
 					}
 				}
+
 			}
+
+
 
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
 
