@@ -2723,7 +2723,12 @@ var IDB = (function(){
 
 					// Move cursor to next key
 					if( 'undefined' == typeof limit || null == limit || total < limit ) {
-						result[ 'continue' ]();
+						try {
+							result[ 'continue' ]();
+						} catch( error ) {
+							
+
+						}
 					}
 				}
 			}
