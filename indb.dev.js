@@ -2982,14 +2982,15 @@ var IDB = (function(){
 				}
 
 				var flagged = false;
+				var res = InDB.clone( result );
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
 						if( 'function' == typeof expecting[ attr ] ) {
-							expecting[ attr ] = expecting[ attr ]( result[ attr ] );
+							expecting[ attr ] = expecting[ attr ]( res[ attr ] );
 						}
-						console.log("MAN UP", attr, result[attr],expecting[attr]);
-						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
-							console.log(attr,"FAILED",JSON.stringify(result[attr]),expecting[attr]);
+						console.log("MAN UP", attr, res[attr],expecting[attr]);
+						if( 'undefined' !== typeof result && 'undefined' !== typeof res[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && res[ attr ] !== expecting[ attr ] ) {
+							console.log(attr,"FAILED",JSON.stringify(res[attr]),expecting[attr]);
 							flagged = true;
 						}
 					}
