@@ -2961,7 +2961,7 @@ var IDB = (function(){
 			/* Update */
 
 			var cursor = InDB.row.value( context.event );
-			var result = InDB.clone( InDB.cursor.value( context.event ) );
+			var result = InDB.clone( InDB.cursor.value( context.event );
 
 			/* Debug */
 
@@ -3021,12 +3021,7 @@ var IDB = (function(){
 					instance_data = data;
 				}
 console.log('m2', flagged, total, limit );
-console.log('h1',false===flagged);
-console.log('h2','undefined' === typeof limit );
-console.log('h2',null===limit);
-console.log('h3',{}===limit);
-console.log('h4',total<limit);
-				if( false === flagged && ( 'undefined' === typeof limit || null === limit || {} === limit || total < limit ) ) {
+				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 console.log('m3');
 					if( 'function' == typeof cursor.update ) {
 console.log('m4');
