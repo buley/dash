@@ -3742,6 +3742,7 @@ var IDB = (function(){
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
 				var value = InDB.row.value( context );
+				console.log("PUT SUCC",value);
 				request.on_success( value );
 			}
 		}
