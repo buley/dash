@@ -2529,7 +2529,7 @@ var IDB = (function(){
 		var keyRange = context.keyRange; // Required
 		var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
 		var limit = context.limit; //Optional
-		var expecting = InDB.shorthand.encode( { 'store': store, 'data': request.expecting } );
+		var expecting = InDB.shorthand.encode( { 'store': store, 'data': context.expecting } );
 
 
 		/* Assertions */
