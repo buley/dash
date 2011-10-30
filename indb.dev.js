@@ -2689,7 +2689,7 @@ var IDB = (function(){
 				/* Result */
 				
 				var result = InDB.row.value( event );
-
+				console.log("ROUT",result);
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
