@@ -3025,13 +3025,24 @@ console.log('m3');
 					if( 'function' == typeof cursor.update ) {
 console.log('m4');
 						/* Update */
-						console.log('cursor.update turning', result, instance_data );
 						try {
 							cursor[ 'update' ]( instance_data );
 							total++;
 							on_success( context );
 						} catch( error ) {
-							
+
+							/* Context */
+
+							context[ 'error' ] = error;
+
+							/* Callback */
+
+							on_error( context );
+
+							/* Action */
+
+							InDB.trigger( 'InDB_cursor_row_update_error', context );
+
 						}
 					}
 				}
