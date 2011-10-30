@@ -3221,7 +3221,7 @@ var IDB = (function(){
 			/* Result */
 
 			var total = 0;
-			var cursor = InDB.clone( event.target.result );
+			var cursor = event.target.result;
 			var cursor_result = InDB.clone( InDB.cursor.value( event ) );
 
 
@@ -3245,7 +3245,7 @@ var IDB = (function(){
 					/* Callback */
 					try {
 
-						var delete_request = cursor.delete();
+						var delete_request = cursor[ 'delete' ]();
 
 						console.log("DELETING",delete_request);
 						delete_request.onsuccess = function( delete_result ) {
@@ -3253,7 +3253,6 @@ var IDB = (function(){
 							total++;
 							
 							on_success( context );
-console.log('m2');
 
 							try { 	
 								cursor[ 'continue' ]();
