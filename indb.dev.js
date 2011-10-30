@@ -1418,8 +1418,8 @@ var IDB = (function(){
 			console.log ( 'InDB.row.value', event );
 		}
 		
-		if( 'undefined' === typeof event && null === typeof event ) {
-			return event;
+		if( 'undefined' === typeof event || null === typeof event ) {
+			return null;
 		}
 
 		if( 'undefined' !== typeof event.event ) {
@@ -3886,7 +3886,6 @@ var IDB = (function(){
 
 		var on_success = function ( context ) {
 			var value = InDB.cursor.value( context.event );
-			console.log("DONE?",value);
 			if( null !== value && 'function' == typeof request.on_success ) {
 				var value = InDB.shorthand.decode( { 'store': request.store, 'data': value } );
 				if( !!DB.debug ) console.log( 'DB.prototype.cursor.get success', item );
