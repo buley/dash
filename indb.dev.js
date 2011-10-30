@@ -2114,6 +2114,8 @@ var IDB = (function(){
 
 		InDB.trigger( 'InDB_row_update', context );
 
+		var total = 0;
+
 		var callback = function( callback_context ) {
 
 			/* Update */
@@ -2182,6 +2184,8 @@ var IDB = (function(){
 
 					/* Callback */
 
+					total++;
+
 					on_success( context );
 
 					/* Update */
@@ -2192,9 +2196,6 @@ var IDB = (function(){
 					on_error( context );
 				}
 			}
-
-
-			//xxx
 
 
 		};
@@ -2945,6 +2946,8 @@ var IDB = (function(){
 		
 		/* Request Responses */
 
+		var total = 0;
+
 		request.onsuccess = function ( event ) {	
 
 			/* Context */
@@ -3022,6 +3025,8 @@ var IDB = (function(){
 
 						/* Callback */
 	
+						total++;
+						
 						on_success( context );
 
 						/* Update */
@@ -3215,6 +3220,8 @@ var IDB = (function(){
 
 		/* Request Responses */
 
+		var total = 0;
+
 		request.onsuccess = function ( event ) {	
 
 			/* Context */
@@ -3227,7 +3234,7 @@ var IDB = (function(){
 
 			/* Result */
 
-			var total = 0;
+
 			var cursor = event.target.result;
 			var cursor_result = InDB.clone( InDB.cursor.value( event ) );
 
