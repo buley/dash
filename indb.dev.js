@@ -3001,7 +3001,7 @@ var IDB = (function(){
 
 
 				if( false == replace && null !== result && 'undefined' !== result ) {	
-					var temp_data = InDB.clone( result );
+					var temp_data = result;
 					for( attr in data ) {
 
 						var value = InDB.clone( data[ attr ] );
