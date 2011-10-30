@@ -2525,7 +2525,7 @@ var IDB = (function(){
 		var keyRange = context.keyRange; // Required
 		var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
 		var limit = context.limit; //Optional
-		var expecting = context.expecting; //Optional
+		var expecting = InDB.shorthand.encode( { 'store': request.store, 'data': request.expecting } );
 
 
 		/* Assertions */
@@ -2791,7 +2791,7 @@ var IDB = (function(){
 		var keyRange = context.keyRange; // Required
 		var data = context.data; // Required
 		var replace = context.replace; // Optional; Defaults to false
-		var expecting = context.expecting; // Optional; Defaults to null
+		var expecting = InDB.shorthand.encode( { 'store': request.store, 'data': request.expecting } );
 
 		/* Assertions */
 
@@ -3083,7 +3083,7 @@ var IDB = (function(){
 		var index = context.index; // Required
 		var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
 		var limit = context.limit; //Optional
-		var expecting = context.expecting; //Optional
+		var expecting = InDB.shorthand.encode( { 'store': request.store, 'data': request.expecting } );
 
 		/* Assertions */
 
@@ -3908,7 +3908,7 @@ var IDB = (function(){
 		/* Action */
 
 		var index = request.index;
-		var expecting = request.expecting; //Optional
+		var expecting = InDB.shorthand.encode( { 'store': request.store, 'data': request.expecting } );
 		var direction = request.direction;
 		var limit = request.limit;
 		var key = request.key;
@@ -3984,7 +3984,7 @@ var IDB = (function(){
 		var direction = request.direction;
 		var limit = request.limit;
 		var key = request.key;
-		var expecting = request.expecting;
+		var expecting = InDB.shorthand.encode( { 'store': request.store, 'data': request.expecting } );
 		var begin = request.begin;
 		var end = request.end;
 		var left_inclusive = request.left_inclusive;
@@ -4050,7 +4050,7 @@ var IDB = (function(){
 		var direction = request.direction;
 		var limit = request.limit;
 		var key = request.key;
-		var expecting = request.expecting;
+		var expecting = InDB.shorthand.encode( { 'store': request.store, 'data': request.expecting } );
 		var data = request.data;
 		var replace = request.replace;
 		var begin = request.begin;
