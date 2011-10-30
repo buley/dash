@@ -3221,7 +3221,7 @@ var IDB = (function(){
 			/* Result */
 
 			var total = 0;
-			var cursor = event.target.result;
+			var cursor = InDB.clone( event.target.result );
 			var cursor_result = InDB.clone( InDB.cursor.value( event ) );
 
 
@@ -3261,7 +3261,6 @@ var IDB = (function(){
 								context[ 'error' ] = error;			
 								on_error( context );
 							}
-
 
 
 						};
