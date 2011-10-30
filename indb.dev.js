@@ -3205,8 +3205,8 @@ var IDB = (function(){
 				/* Callback */
 
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
-
-					on_success( InDB.clone( cursor_result ) );
+					console.log( 'i know you know', cursor, cursor_result);
+					on_success( InDB.clone( cursor_result );
 
 					cursor[ 'delete' ]();
 
