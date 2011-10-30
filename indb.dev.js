@@ -3204,22 +3204,24 @@ var IDB = (function(){
 
 				/* Callback */
 
-				try { 
+
 
 					if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 						on_success( context );
+				
+						try { 
 						
-						cursor[ 'delete' ]();
-
+							cursor[ 'delete' ]();
+		
+						} catch( error ) {
+					
+								on_error( context );
+						}
+	
 
 					}
 				
 					cursor[ 'continue' ]();
-
-				} catch( error ) {
-					
-					on_error( context );
-				}
 			}
 
 		}
