@@ -3024,16 +3024,15 @@ console.log('m2', flagged, total, limit );
 console.log('m3');
 					if( 'function' == typeof cursor.update ) {
 console.log('m4');
-
-						/* Callback */
-	
-						total++;
-						
-						on_success( context );
-
 						/* Update */
 						console.log('cursor.update turning', result, instance_data );
-						cursor[ 'update' ]( instance_data );
+						try {
+							cursor[ 'update' ]( instance_data );
+							total++;
+							on_success( context );
+						} catch( error ) {
+							
+						}
 					}
 				}
 				if( 'function' === typeof cursor.continue ) {
