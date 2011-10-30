@@ -3209,15 +3209,27 @@ var IDB = (function(){
 					on_success( context );
 			
 					try { 	
-						var op = cursor[ 'delete' ] || cursor[ 'remove' ];
-						op();
+						var delete_request = cursor[ 'delete' ]();
 
-						try { 	
-							cursor[ 'continue' ]();
-						} catch( error ) {
-							context[ 'error' ] = error;			
-							on_error( context );
-						}
+						delete_request.onsuccess = function( delete_result ) {
+
+							try { 	
+								cursor[ 'continue' ]();
+
+							} catch( error ) {
+								context[ 'error' ] = error;			
+								on_error( context );
+							}
+
+						};
+
+						delete_request.onerror = function( delete_result ) {
+
+						};
+
+						delete_request.onerror = function( delete_result ) {
+
+						};
 
 					} catch( error ) {
 						context[ 'error' ] = error;			
