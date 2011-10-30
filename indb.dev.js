@@ -2988,6 +2988,7 @@ var IDB = (function(){
 							expecting[ attr ] = expecting[ attr ]( result[ attr ] );
 						}
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+							console.log(attr,"FAILED",result[attr],expecting[attr]);
 							flagged = true;
 						}
 					}
