@@ -3026,14 +3026,18 @@ console.log('m3');
 console.log('m4');
 						/* Update */
 						try {
+							
 							cursor[ 'update' ]( instance_data );
+							
 							total++;
+							
 							on_success( context );
+
 						} catch( error ) {
 
 							/* Context */
 
-							context[ 'error' ] = error;
+							context[ 'error' ] = event;
 
 							/* Callback */
 
