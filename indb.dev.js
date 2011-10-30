@@ -2961,7 +2961,7 @@ var IDB = (function(){
 			/* Update */
 
 			var cursor = InDB.row.value( context.event );
-			var result = InDB.cursor.value( context.event );
+			var result = InDB.clone( InDB.cursor.value( context.event ) );
 
 			/* Debug */
 
