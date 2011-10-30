@@ -2138,7 +2138,9 @@ var IDB = (function(){
 
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
-					
+					if( 'function' == typeof expecting[ attr ] ) {
+						expecting[ attr ] = expecting[ attr ]( result[ attr ] );
+					}
 					for ( attr in expecting ) {
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
 							flagged = true;
@@ -2674,21 +2676,36 @@ var IDB = (function(){
 
 				context[ 'event' ] = event;
 
-				/* Callback */
-
-				on_success( context ); 
-
-				/* Action */
-
-				InDB.trigger( 'InDB_cursor_row_get_success', context );
-
-				total++;
-
 				/* Result */
 				
-				var result = event.target.result;
+				var result = InDB.row.value( event );
 
-				if ( !InDB.isEmpty( result ) && "undefined" !== typeof result.value ) {
+				var flagged = false;
+				if( 'undefined' !== typeof expecting && null !== expecting ) {	
+					for ( attr in expecting ) {
+						if( 'function' == typeof expecting[ attr ] ) {
+							expecting[ attr ] = expecting[ attr ]( result[ attr ] );
+						}
+						if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
+							flagged = true;
+						}
+					}
+
+				}
+
+				if ( false === flagged && !InDB.isEmpty( result ) ) {
+
+					/* Callback */
+
+					on_success( context ); 
+
+					/* Action */
+
+					InDB.trigger( 'InDB_cursor_row_get_success', context );
+
+					total++;
+
+
 					// Move cursor to next key
 					if( 'undefined' == typeof limit || null == limit || total < limit ) {
 						result[ 'continue' ]();
@@ -2957,7 +2974,9 @@ var IDB = (function(){
 
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
-					
+					if( 'function' == typeof expecting[ attr ] ) {
+						expecting[ attr ] = expecting[ attr ]( result[ attr ] );
+					}
 					for ( attr in expecting ) {
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
 							flagged = true;
@@ -3210,6 +3229,9 @@ var IDB = (function(){
 			var flagged = false;
 			if( 'undefined' !== typeof expecting && null !== expecting ) {	
 				for ( attr in expecting ) {
+					if( 'function' == typeof expecting[ attr ] ) {
+						expecting[ attr ] = expecting[ attr ]( result[ attr ] );
+					}
 					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
 						flagged = true;
 					}
