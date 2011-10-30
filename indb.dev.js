@@ -3214,8 +3214,8 @@ var IDB = (function(){
 							cursor[ 'delete' ]();
 		
 						} catch( error ) {
-					
-								on_error( context );
+							context[ 'error' ] = error;			
+							on_error( context );
 						}
 	
 
