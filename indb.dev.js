@@ -1419,7 +1419,7 @@ var IDB = (function(){
 		}
 		
 		if( 'undefined' === typeof event || null === event ) {
-			return event;
+			return null;
 		}
 
 		if( 'undefined' !== typeof event.event ) {
