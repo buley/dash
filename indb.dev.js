@@ -2117,7 +2117,7 @@ var IDB = (function(){
 				console.log ( 'InDB.cursor.update context.data result', result );
 			}
 			
-			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
+			if ( "undefined" !== typeof result && null !== result ) {
 		
 				var instance_data = {};
 
@@ -2169,19 +2169,17 @@ var IDB = (function(){
 
 				console.log('cant be taking in strays',replace,'result',result,'flagged',flagged,'instnace',instance_data);
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
-					if( 'function' == typeof cursor.update ) {
 
-						/* Callback */
-	
-						on_success( context );
+					/* Callback */
 
-						/* Update */
-						console.log('single.update turning', result, instance_data );
-						InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
-					}
-				}
-				if( 'function' === typeof cursor.continue ) {
-					cursor[ 'continue' ]();
+					on_success( context );
+
+					/* Update */
+					console.log('single.update turning', result, instance_data );
+					InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
+
+				} else {
+					on_error( context );
 				}
 			}
 
