@@ -2688,7 +2688,7 @@ var IDB = (function(){
 
 				/* Result */
 				
-				var result = InDB.row.value( event );
+				var result = InDB.cursor.value( event );
 				console.log("ROUT",result);
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
