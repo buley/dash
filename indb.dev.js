@@ -2825,7 +2825,7 @@ var IDB = (function(){
 
 		/* Invocation */
 
-		InDB.cursor.update( store, index, keyRange, data, replace, expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		InDB.cursor.update( store, index, keyRange, data, direction, limit, replace, expecting, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	} );
 
