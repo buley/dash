@@ -1803,8 +1803,10 @@ var IDB = (function(){
 			context[ 'event' ] = event;
 
 			/* Callback */
+			
+			var result = InDB.row.value( context.event );
 
-			on_success( context );
+			on_success( result );
 		
 			/* Action */
 
@@ -3197,7 +3199,7 @@ var IDB = (function(){
 			/* Result */
 
 			var cursor = event.target.result;
-			var cursor_result = InDB.cursor.value( event );
+			var cursor_result = InDB.clone( InDB.cursor.value( event ) );
 			if ( "undefined" !== typeof cursor && null !== cursor ) {
 
 				/* Callback */
