@@ -3187,7 +3187,7 @@ var IDB = (function(){
 
 			/* Context */
 			
-			context[ 'event' ] = event;
+			context[ 'event' ] = InDB.clone( event );
 
 			/* Action */
 
