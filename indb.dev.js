@@ -3199,7 +3199,7 @@ var IDB = (function(){
 			/* Result */
 
 			var cursor = event.target.result;
-			var cursor_result = InDB.clone( InDB.cursor.value( event ) );
+			var cursor_result = InDB.cursor.value( event );
 			if ( "undefined" !== typeof cursor && null !== cursor ) {
 
 				/* Callback */
@@ -3209,10 +3209,11 @@ var IDB = (function(){
 					on_success( cursor_result );
 
 					cursor[ 'delete' ]();
+					cursor[ 'continue' ]();
 
 				}
 				
-				cursor[ 'continue' ]();
+
 
 			}
 		}
