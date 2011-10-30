@@ -2984,7 +2984,6 @@ var IDB = (function(){
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
-						console.log('attr',attr,'k',typeof expecting[attr]);
 						if( 'function' == typeof expecting[ attr ] ) {
 							console.log("FEEDING", result[attr],JSON.stringify(result[attr]));
 							expecting[ attr ] = expecting[ attr ]( result[ attr ] );
