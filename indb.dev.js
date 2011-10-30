@@ -3020,7 +3020,7 @@ var IDB = (function(){
 					instance_data = data;
 				}
 console.log('m2', flagged, total, limit );
-				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
+				if( false === flagged && ( 'undefined' === typeof limit || null === limit || {} === limit || total < limit ) ) {
 console.log('m3');
 					if( 'function' == typeof cursor.update ) {
 console.log('m4');
