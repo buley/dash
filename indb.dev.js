@@ -2987,8 +2987,9 @@ var IDB = (function(){
 						if( 'function' == typeof expecting[ attr ] ) {
 							expecting[ attr ] = expecting[ attr ]( result[ attr ] );
 						}
+						console.log("MAN UP", attr, result[attr],expecting[attr]);
 						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && result[ attr ] !== expecting[ attr ] ) {
-							console.log(attr,"FAILED",JSON.stringify(result[attr]),JSON.stringify(expecting[attr]));
+							console.log(attr,"FAILED",JSON.stringify(result[attr]),expecting[attr]);
 							flagged = true;
 						}
 					}
