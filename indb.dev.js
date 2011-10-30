@@ -3288,7 +3288,6 @@ var IDB = (function(){
 			} catch( error ) {
 				context[ 'error' ] = error;			
 				on_error( context );
-				cursor.abort();
 			}
 
 
