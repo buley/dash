@@ -3212,16 +3212,6 @@ var IDB = (function(){
 						total++;
 						
 						on_success( context );
-
-
-						try { 	
-							//cursor[ 'continue' ]();
-						} catch( error ) {
-							context[ 'error' ] = error;			
-							on_error( context );
-							cursor.abort;
-						}
-
 					};
 
 					delete_request.onerror = function( delete_result ) {
@@ -3245,6 +3235,15 @@ var IDB = (function(){
 					};
 
 					console.log("DELETE",delete_request);
+
+					try { 	
+						cursor[ 'continue' ]();
+					} catch( error ) {
+						context[ 'error' ] = error;			
+						on_error( context );
+						cursor.abort;
+					}
+
 
 
 				}
