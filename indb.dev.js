@@ -1450,10 +1450,10 @@ var IDB = (function(){
 		if ( !!InDB.debug ) {
 			console.log ( 'InDB.cursor.value', event );
 		}
-		if( 'undefined' !== event && null !== event && 'undefined' !== typeof event.event ) {
+		if( 'undefined' !== typeof event && null !== event && 'undefined' !== typeof event.event ) {
 			event = event.event;
 		}
-		if ( 'undefined' !== event && null !== event && "undefined" !== typeof event.target && "undefined" !== typeof event.target.result && null !== event.target.result ) {
+		if ( 'undefined' !== typeof event && null !== typeof event && "undefined" !== typeof event.target && "undefined" !== typeof event.target.result && null !== event.target.result ) {
 			return event.target.result.value;
 		} else {
 			return null;
