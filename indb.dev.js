@@ -3245,7 +3245,7 @@ var IDB = (function(){
 					/* Callback */
 					try {
 
-						var delete_request = cursor[ 'delete' ]();
+						var delete_request = cursor.delete();
 
 						console.log("DELETING",delete_request);
 						delete_request.onsuccess = function( delete_result ) {
@@ -3268,7 +3268,6 @@ console.log('m2');
 						delete_request.onerror = function( delete_result ) {
 
 							/* Context */
-						console.log('m4',delete_request);
 							
 							context[ 'event' ] = event;
 						
