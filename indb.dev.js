@@ -3256,7 +3256,7 @@ console.log('m4');
 
 
 			var cursor = event.target.result;
-			var cursor_result = InDB.clone( InDB.cursor.value( event ) );
+			var cursor_result = InDB.cursor.value( event );
 
 
 			var flagged = false;
