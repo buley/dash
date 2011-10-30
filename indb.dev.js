@@ -3202,15 +3202,15 @@ var IDB = (function(){
 
 				/* Callback */
 
-				if( "undefined" !== typeof cursor_result && 'undefined' == typeof limit || null == limit || total < limit ) {
+				if( "undefined" !== typeof cursor_result && null !== cursor_result && 'undefined' == typeof limit || null == limit || total < limit ) {
 
 					on_success( cursor_result );
 
 					cursor[ 'delete' ]();
 
-					cursor[ 'continue' ]();
-
 				}
+				
+				cursor[ 'continue' ]();
 
 			}
 		}
