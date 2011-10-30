@@ -3188,11 +3188,6 @@ var IDB = (function(){
 			/* Context */
 			
 			context[ 'event' ] = event;
-
-			/* Callback */
-
-			on_success( context );
-
 			total++;
 
 			/* Action */
@@ -3203,11 +3198,20 @@ var IDB = (function(){
 
 			var cursor = event.target.result;
 			var cursor_result = InDB.cursor.value( cursor );
-			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof cursor_result ) {
-				if( 'undefined' == typeof limit || null == limit || total < limit ) {
-					cursor[ 'continue' ]();
+			if ( "undefined" !== typeof cursor && null !== cursor ) {
+
+				/* Callback */
+
+				if( "undefined" !== typeof cursor_result && 'undefined' == typeof limit || null == limit || total < limit ) {
+
+					on_success( cursor_result );
+
 					cursor[ 'delete' ]();
+
+					cursor[ 'continue' ]();
+
 				}
+
 			}
 		}
 		request.onerror = function ( event ) {	
