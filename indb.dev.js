@@ -3239,10 +3239,12 @@ var IDB = (function(){
 			}
 			console.log('FLAGGED',flagged,cursor);
 
+console.log('m0');
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
 
+console.log('m1');
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
-
+console.log('m2');
 					/* Callback */
 					try {
 
