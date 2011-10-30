@@ -2992,8 +2992,8 @@ var IDB = (function(){
 						}
 						console.log("MAN UP", JSON.stringify( expecting_value ), JSON.stringify( expecting[ attr ] ) );
 
-						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && result[ attr ] !== expecting[ attr ] ) {
-							console.log(attr,"FAILED",JSON.stringify(result[attr]),expecting[attr]);
+						if( 'undefined' !== typeof result && 'undefined' !== typeof result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && result[ attr ] !== expecting_value ) {
+							console.log(attr,"FAILED",JSON.stringify(result[attr]),expecting_value);
 							flagged = true;
 						}
 					}
