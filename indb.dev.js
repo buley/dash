@@ -2794,7 +2794,7 @@ var IDB = (function(){
 		var keyRange = context.keyRange; // Required
 		var data = context.data; // Required
 		var replace = context.replace; // Optional; Defaults to false
-		var expecting = InDB.shorthand.encode( { 'store': store, 'data': request.expecting } );
+		var expecting = InDB.shorthand.encode( { 'store': store, 'data': context.expecting } );
 
 		/* Assertions */
 
