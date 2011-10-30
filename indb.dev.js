@@ -3908,7 +3908,7 @@ var IDB = (function(){
 		/* Action */
 
 		var index = request.index;
-		var expecting = context.expecting; //Optional
+		var expecting = request.expecting; //Optional
 		var direction = request.direction;
 		var limit = request.limit;
 		var key = request.key;
