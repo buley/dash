@@ -2694,7 +2694,7 @@ var IDB = (function(){
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
 						var expecting_value = expecting[ attr ];
-						var current_value = ( 'undefined' === typeof result[ attr ] ) ? result[ attr ]: null;
+						var current_value = ( 'undefined' === typeof result && null !== result ) ? result[ attr ]: null;					
 						if( 'function' === typeof expecting_value ) {
 							expecting_value = expecting_value( current_value );
 						}
