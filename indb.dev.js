@@ -3293,6 +3293,14 @@ var IDB = (function(){
 					} catch( error ) {
 						context[ 'error' ] = error;			
 						on_error( context );
+		try { 	
+								cursor[ 'continue' ]();
+							} catch( error ) {
+								context[ 'error' ] = error;			
+								on_error( context );
+							}
+
+
 					}
 
 				}
