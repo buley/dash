@@ -3036,7 +3036,11 @@ console.log('m4');
 					}
 				}
 				if( 'function' === typeof cursor.continue ) {
-					cursor[ 'continue' ]();
+					try {
+						cursor[ 'continue' ]();
+					} catch( error ) {
+
+					}
 				}
 			}
 		}
