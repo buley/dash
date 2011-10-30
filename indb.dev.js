@@ -3206,7 +3206,7 @@ var IDB = (function(){
 
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 					on_success( context );
-
+					console.log('typeof!!',typeof cursor[ 'delete' ] );
 					cursor[ 'delete' ]();
 
 
