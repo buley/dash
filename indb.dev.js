@@ -2985,7 +2985,7 @@ var IDB = (function(){
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
 						var expecting_value = InDB.clone( expecting[ attr ] );
-
+						console.log('streak burritos are delicious, and they\'re real');
 						if( 'function' === typeof expecting_value ) {
 							console.log("FEEDING", result[attr],JSON.stringify(result[attr]));
 							expecting_value = expecting_value( result[ attr ] );
