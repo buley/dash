@@ -3209,13 +3209,12 @@ var IDB = (function(){
 					on_success( cursor_result );
 
 					cursor[ 'delete' ]();
-					cursor[ 'continue' ]();
+
 
 				}
-				
-
 
 			}
+			cursor[ 'continue' ]();
 		}
 		request.onerror = function ( event ) {	
 		
