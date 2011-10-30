@@ -2525,6 +2525,7 @@ var IDB = (function(){
 		var keyRange = context.keyRange; // Required
 		var direction = context.direction; // Optional; defaults to InDB.cursor.direction.next()
 		var limit = context.limit; //Optional
+		var expecting = context.expecting; //Optional
 
 
 		/* Assertions */
@@ -2546,15 +2547,16 @@ var IDB = (function(){
 
 		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
 
+		expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
 
 		/* Invocation */
 		
-		InDB.cursor.get( store, index, keyRange, direction, limit, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		InDB.cursor.get( store, index, keyRange, direction, expecting, limit, context.on_success, context.on_error, context.on_abort, context.on_complete );
 
 	} );
 
 	/* TODO: Direction? */
-	InDB.cursor.get = function ( store, index, keyRange, direction, limit, on_success, on_error, on_abort, on_complete ) {
+	InDB.cursor.get = function ( store, index, keyRange, direction, expecting, limit, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
 		if ( !!InDB.debug ) {	
@@ -2579,6 +2581,8 @@ var IDB = (function(){
 		
 		limit = ( !InDB.isEmpty( limit ) ) ? limit : null;
 		
+		expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
+		
 		if ( "undefined" == typeof on_success ) {
 			on_success = InDB.events.onSuccess;
 		}
@@ -2597,7 +2601,7 @@ var IDB = (function(){
 
 		/* Context */
 
-		var context =  { "store": store, "index": index, "keyRange": keyRange, 'direction': direction, 'limit': limit, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+		var context =  { "store": store, "index": index, "keyRange": keyRange, 'direction': direction, 'expecting': expecting, 'limit': limit, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 		/* Debug */
 		
@@ -3904,6 +3908,7 @@ var IDB = (function(){
 		/* Action */
 
 		var index = request.index;
+		var expecting = context.expecting; //Optional
 		var direction = request.direction;
 		var limit = request.limit;
 		var key = request.key;
@@ -3922,11 +3927,13 @@ var IDB = (function(){
 		/* Defaults */
 		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
 		limit = ( 'undefined' !== typeof limit ) ? limit : null;
+		expecting = ( 'undefined' !== typeof expecting ) ? expecting : null;
 		begin = ( 'undefined' !== typeof begin ) ? begin : null;
 		end = ( 'undefined' !== typeof end ) ? end : null;
 		left_inclusive = ( 'undefined' !== typeof left_inclusive ) ? left_inclusive : null;
 		right_inclusive = ( 'undefined' !== typeof right_inclusive ) ? right_inclusive : null;
 		key = ( 'undefined' !== typeof begin && 'undefined' !== typeof end ) ? key : null;
+
 
 
 		/* Setup */
@@ -3962,7 +3969,7 @@ var IDB = (function(){
 
 		/* Request */
 
-		InDB.trigger( 'InDB_do_cursor_get', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
+		InDB.trigger( 'InDB_do_cursor_get', { 'store': request.store, 'expecting': expecting, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
 
 		return this;
 
@@ -3977,6 +3984,7 @@ var IDB = (function(){
 		var direction = request.direction;
 		var limit = request.limit;
 		var key = request.key;
+		var expecting = request.expecting;
 		var begin = request.begin;
 		var end = request.end;
 		var left_inclusive = request.left_inclusive;
@@ -4000,12 +4008,13 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger('cursor_delete_namespace', { "index": index, "key": key, 'direction': direction, 'limit': limit, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger('cursor_delete_namespace', { "index": index, "key": key, 'direction': direction, 'expecting': expecting, 'limit': limit, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 
 		/* Defaults */
 
 		begin = ( 'undefined' !== typeof begin ) ? begin : null;
+		expecting = ( 'undefined' !== typeof expecting ) ? expecting : null;
 		end = ( 'undefined' !== typeof end ) ? end : null;
 		left_inclusive = ( 'undefined' !== typeof left_inclusive ) ? left_inclusive : null;
 		right_inclusive = ( 'undefined' !== typeof right_inclusive ) ? right_inclusive : null;
@@ -4022,7 +4031,7 @@ var IDB = (function(){
 
 		/* Request */
 
-		InDB.trigger( 'InDB_do_cursor_delete', { 'store': request.store, 'keyRange': keyRange, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger( 'InDB_do_cursor_delete', { 'store': request.store, 'keyRange': keyRange, 'expecting': expecting, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 
 		return this;
 
@@ -4041,6 +4050,7 @@ var IDB = (function(){
 		var direction = request.direction;
 		var limit = request.limit;
 		var key = request.key;
+		var expecting = request.expecting;
 		var data = request.data;
 		var replace = request.replace;
 		var begin = request.begin;
@@ -4088,13 +4098,14 @@ var IDB = (function(){
 
 		/* Action */
 
-		InDB.trigger( ( 'cursor_update_' + request.store ), { 'data': new_data, "index": index, "key": key, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "replace": replace, 'direction': direction, 'limit': limit, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
+		InDB.trigger( ( 'cursor_update_' + request.store ), { 'data': new_data, "index": index, 'expecting': expecting, "key": key, "begin": begin, "end": end, "left_inclusive": left_inclusive, "right_inclusive": right_inclusive, "replace": replace, 'direction': direction, 'limit': limit, "on_success": on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
 
 		/* Defaults */
 
 		replace = ( true == replace ) ? true : false;
 		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
 		limit = ( 'undefined' !== typeof limit ) ? limit : null;
+		expecting = ( 'undefined' !== typeof expecting ) ? expecting : null;
 		begin = ( 'undefined' !== typeof begin ) ? begin : null;
 		end = ( 'undefined' !== typeof end ) ? end : null;
 		left_inclusive = ( 'undefined' !== typeof left_inclusive ) ? left_inclusive : null;
@@ -4107,7 +4118,7 @@ var IDB = (function(){
 
 		/* Request */
 		
-		InDB.trigger( 'InDB_do_cursor_update', { 'store': request.store, 'data': new_data, 'keyRange': keyRange, 'index': index, 'replace': replace, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
+		InDB.trigger( 'InDB_do_cursor_update', { 'store': request.store, 'data': new_data, 'keyRange': keyRange, 'index': index, 'replace': replace, 'direction': direction, 'expecting': expecting, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 	
 		return this;
 
