@@ -2032,10 +2032,6 @@ var IDB = (function(){
 			return;
 		}
 			
-		if ( !InDB.assert( !InDB.isEmpty( context.key ), 'Must provide a range to get' ) ) {
-			return;
-		}
-
 		if ( !InDB.assert( !InDB.isEmpty( context.data ), 'Must provide data to update' ) ) {
 			return;
 		}
