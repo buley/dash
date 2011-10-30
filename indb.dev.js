@@ -3485,6 +3485,8 @@ console.log('m4');
 
 	DB.prototype.install = function ( request ) {
 
+		var store = request.store;
+
 		DB.prototype.store.create( { 'store': store, 'indexes': request.indexes, 'on_success': function() {
 
 			DB.prototype.index.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( result ) {
