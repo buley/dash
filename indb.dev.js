@@ -3212,7 +3212,7 @@ var IDB = (function(){
 						var delete_request = cursor[ 'delete' ]();
 
 						delete_request.onsuccess = function( delete_result ) {
-
+							console.log("DELETED!", delete_result);
 							on_success( context );
 
 							try { 	
@@ -3220,6 +3220,7 @@ var IDB = (function(){
 							} catch( error ) {
 								context[ 'error' ] = error;			
 								on_error( context );
+								cursor.abort;
 							}
 
 						};
