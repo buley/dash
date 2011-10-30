@@ -3206,16 +3206,17 @@ var IDB = (function(){
 
 					/* Callback */
 					
-					on_success( context );
+
 			
 					try { 	
 						var delete_request = cursor[ 'delete' ]();
 
 						delete_request.onsuccess = function( delete_result ) {
 
+							on_success( context );
+
 							try { 	
 								cursor[ 'continue' ]();
-
 							} catch( error ) {
 								context[ 'error' ] = error;			
 								on_error( context );
@@ -3230,6 +3231,8 @@ var IDB = (function(){
 						delete_request.onerror = function( delete_result ) {
 
 						};
+
+
 
 					} catch( error ) {
 						context[ 'error' ] = error;			
