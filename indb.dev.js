@@ -4135,7 +4135,7 @@ var IDB = (function(){
 		};
 
 		var on_error = function ( context ) {
-			if( 'function' == typeof request.on_error ) {%
+			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
 			}
 		};
