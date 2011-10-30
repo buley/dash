@@ -2032,6 +2032,10 @@ var IDB = (function(){
 			return;
 		}
 			
+		if ( !InDB.assert( !InDB.isEmpty( context.key ), 'Must provide a range to get' ) ) {
+			return;
+		}
+
 		if ( !InDB.assert( !InDB.isEmpty( context.data ), 'Must provide data to update' ) ) {
 			return;
 		}
@@ -2057,6 +2061,10 @@ var IDB = (function(){
 		/* Assertions */
 
 		if ( !InDB.assert( !InDB.isEmpty( store ), 'Must provide an object store' ) ) {
+			return;
+		}
+			
+		if ( !InDB.assert( !InDB.isEmpty( key ), 'Must provide a range to get' ) ) {
 			return;
 		}
 
@@ -2101,8 +2109,7 @@ var IDB = (function(){
 
 			/* Update */
 
-			var cursor = InDB.row.value( callback_context.event );
-			var result = InDB.cursor.value( callback_context.event );
+			var result = InDB.row.value( callback_context.event );
 
 			/* Debug */
 
