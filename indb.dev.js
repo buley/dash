@@ -158,8 +158,8 @@ var IDB = (function(){
 	InDB.shorthand.get = function ( request ) {
 
 		/* Setup */
-
-		var shorthand_map = InDB.shorthand.map.get( request.store );
+		var store = request.store;
+		var shorthand_map = InDB.shorthand.map.get( store );
 
 		/* Work */
 
@@ -176,6 +176,7 @@ var IDB = (function(){
 		var k = request.key || request.data;
 		var reversed = {};
 		var shorthand_map = InDB.shorthand.map.get( request.store );
+		var store = request.store;
 		for( var item in shorthand_map ) {
 			if( shorthand_map.hasOwnProperty( item ) ) {
 				reversed[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = item;
@@ -195,6 +196,7 @@ var IDB = (function(){
 		var encoded = {};
 		var total = 0;
 		var object = request.data;
+		var store = request.store;
 		for( var itemobj in object ) {
 			if( 'undefined' !== typeof itemobj && object.hasOwnProperty( itemobj ) ) {
 				//recursive case: object value
@@ -223,6 +225,7 @@ var IDB = (function(){
 		if( null === request ) return null;
 		var encoded = {};
 		var object = request.data;
+		var store = request.store;
 		for( var item in object ) {
 			if( object.hasOwnProperty( item ) ) {
 				//recursive case: object value
