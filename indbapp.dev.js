@@ -58,7 +58,7 @@ var InDBApp = (function() {
 
 		/* Defaults */
 
-		var index = request.key;
+		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var key = request.key;
 		key = ( 'undefined' !== typeof key ) ? key : null;
@@ -120,7 +120,7 @@ var InDBApp = (function() {
 
 		/* Defaults */
 
-		var index = request.key;
+		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var key = request.key;
 		key = ( 'undefined' !== typeof key ) ? key : null;
@@ -175,7 +175,7 @@ var InDBApp = (function() {
 
 		/* Defaults */
 
-		var index = request.key;
+		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var limit = request.limit;
 		limit = ( 'undefined' !== typeof limit ) ? limit : 20;
@@ -407,7 +407,7 @@ var InDBApp = (function() {
 
 		/* Defaults */
 
-		var index = request.key;
+		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var key = request.key;
 		key = ( 'undefined' !== typeof key ) ? key : null;
@@ -468,7 +468,7 @@ var InDBApp = (function() {
 
 		/* Defaults */
 
-		var index = request.key;
+		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var limit = request.limit;
 		limit = ( 'undefined' !== typeof limit ) ? limit : 20;
