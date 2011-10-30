@@ -3231,6 +3231,7 @@ var IDB = (function(){
 					if( 'function' == typeof expecting[ attr ] ) {
 						expecting[ attr ] = expecting[ attr ]( result[ attr ] );
 					}
+					console.log( 'exp',attr,expecting,cursor_result);
 					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting[ attr ] && null !== expecting[ attr ] && cursor_result[ attr ] !== expecting[ attr ] ) {
 						flagged = true;
 					}
