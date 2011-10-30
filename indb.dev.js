@@ -3004,8 +3004,8 @@ var IDB = (function(){
 					var temp_data = result;
 					for( attr in data ) {
 
-						var value = InDB.clone( data[ attr ] );
-						var previous_value = InDB.clone( temp_data[ attr ] );
+						var value = data[ attr ];
+						var previous_value = temp_data[ attr ];
 
 						if( 'function' === typeof value ) {
 							value = value( previous_value );
@@ -3037,7 +3037,7 @@ console.log('m4');
 
 							/* Context */
 
-							context[ 'error' ] = event;
+							context[ 'error' ] = error;
 
 							/* Callback */
 
