@@ -3217,7 +3217,12 @@ var IDB = (function(){
 
 				}
 			
-				cursor[ 'continue' ]();
+				try { 	
+					cursor[ 'continue' ]();
+				} catch( error ) {
+					context[ 'error' ] = error;			
+					on_error( context );
+				}
 			}
 
 		}
