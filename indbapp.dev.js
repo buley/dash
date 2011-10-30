@@ -178,7 +178,7 @@ var InDBApp = (function() {
 		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var limit = request.limit;
-		limit = ( 'undefined' !== typeof limit ) ? limit : 20;
+		limit = ( 'undefined' !== typeof limit ) ? limit : null;
 		var direction = request.direction;
 		direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.next();
 		var expecting = request.expecting;
@@ -267,7 +267,7 @@ var InDBApp = (function() {
 		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var limit = request.limit;
-		limit = ( 'undefined' !== typeof limit ) ? limit : 20;
+		limit = ( 'undefined' !== typeof limit ) ? limit : null;
 		var direction = request.direction;
 		direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.next();
 		var expecting = request.expecting;
@@ -474,7 +474,7 @@ var InDBApp = (function() {
 		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var limit = request.limit;
-		limit = ( 'undefined' !== typeof limit ) ? limit : 20;
+		limit = ( 'undefined' !== typeof limit ) ? limit : null;
 		var direction = request.direction;
 		direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.next();
 		var expecting = request.expecting;
@@ -622,7 +622,7 @@ var InDBApp = (function() {
 		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var limit = request.limit;
-		limit = ( 'undefined' !== typeof limit ) ? limit : 20;
+		limit = ( 'undefined' !== typeof limit ) ? limit : null;
 		var direction = request.direction;
 		direction = ( 'undefined' !== typeof direction ) ? direction : InDB.cursor.direction.next();
 		var expecting = request.expecting;
