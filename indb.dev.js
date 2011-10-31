@@ -2718,33 +2718,25 @@ var IDB = (function(){
 
 				if ( false === flagged && !InDB.isEmpty( result ) ) {
 
-					/* Callback */
-
-					on_success( context ); 
-
-					/* Action */
-
-					InDB.trigger( 'InDB_cursor_row_get_success', context );
-
-					total++;
-
-					// Move cursor to next key
 					if( 'undefined' == typeof limit || null == limit || total < limit ) {
-						//try {
-							//if( result[ 'continue' ] ) {
+						try {
+							if( result[ 'continue' ] ) {
+								InDB.trigger( 'InDB_cursor_row_get_success', context );
 								result[ 'continue' ]();
-							//}
-						//} catch( error ) {
+								total++;
+								on_success( context ); 
+							}
+						} catch( error ) {
 							
 
-						//}
+						}
 					}
 				} else {
 
 					try {
-						if( result[ 'continue' ] ) {
+						//if( result[ 'continue' ] ) {
 							result[ 'continue' ]();
-						}
+						//}
 					} catch( error ) {
 							
 
