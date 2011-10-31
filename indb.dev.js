@@ -3313,11 +3313,10 @@ var IDB = (function(){
 			InDB.trigger( 'InDB_cursor_row_delete_success', context );
 
 			/* Result */
-			console.log('COURAGE');
-
 			var cursor = event.target.result;
 			var cursor_result = InDB.cursor.value( event );
 			var flagged = false;
+
 			if( 'undefined' !== typeof expecting && null !== expecting ) {
 				for ( attr in expecting ) {
 					var expecting_value = expecting[ attr ];
@@ -3332,9 +3331,7 @@ var IDB = (function(){
 				}
 			}
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
-				console.log('l1');
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
-				console.log('woah',cursor);
 					/* Callback */
 					try {
 
@@ -3345,10 +3342,9 @@ var IDB = (function(){
 							total++;
 							
 							on_success( context );
-						console.log("next1");
+							
 							if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
 								try {
-									console.log("next2");
 									cursor[ 'continue' ]();
 								} catch( error ) {
 									context[ 'error' ] = error;			
@@ -3381,10 +3377,8 @@ var IDB = (function(){
 
 				}	
 			} else {
-				console.log('green');
 				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
 					try {
-						console.log("next12");
 						cursor[ 'continue' ]();
 					} catch( error ) {
 						context[ 'error' ] = error;			
