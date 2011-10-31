@@ -3862,7 +3862,9 @@ var IDB = (function(){
 
 	/* Add */
 	DB.prototype.add = function ( request )  {
-		
+	
+		var store = request.store;
+
 		if( !!DB.debug ) {
 			console.log( 'DB.prototype.add', request );
 		}
