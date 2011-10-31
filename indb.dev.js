@@ -2006,7 +2006,7 @@ var IDB = (function(){
 			/* Debug */
 
 			if ( !!InDB.debug ) {
-				console.log ( event );
+				console.log ( "Error in InDB_row_add event );
 				console.log ( 'errorType', InDB.database.errorType( event.code ) );
 			}	
 			
