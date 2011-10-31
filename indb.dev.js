@@ -2647,7 +2647,7 @@ var IDB = (function(){
 		/* Debug */
 		
 		if( !!InDB.debug ) {
-			console.log( 'indb.js > InDB.cursor.get() > Doing InDB_cursor_get', context );
+			console.log( 'InDB.js > InDB.cursor.get() > Doing InDB_cursor_get', context );
 		}	
 		
 		/* Action */
@@ -3346,7 +3346,7 @@ var IDB = (function(){
 							
 							on_success( context );
 						console.log("next1");
-							if( !indb.isempty( cursor ) && 'function' === typeof cursor.continue ) {
+							if( !InDB.isempty( cursor ) && 'function' === typeof cursor.continue ) {
 								try {
 									console.log("next2");
 									cursor[ 'continue' ]();
@@ -3382,7 +3382,7 @@ var IDB = (function(){
 				}	
 			} else {
 				console.log('green');
-				if( !indb.isempty( cursor ) && 'function' === typeof cursor.continue ) {
+				if( !Indb.isempty( cursor ) && 'function' === typeof cursor.continue ) {
 					try {
 						console.log("next12");
 						cursor[ 'continue' ]();
