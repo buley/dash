@@ -3371,17 +3371,6 @@ var IDB = (function(){
 							/* Action */
 
 							InDB.trigger( 'InDB_cursor_row_delete_error', context );
-							console.log('green');
-							if( !indb.isempty( cursor ) && 'function' === typeof cursor.continue ) {
-								try {
-									console.log("next12");
-									cursor[ 'continue' ]();
-								} catch( error ) {
-									context[ 'error' ] = error;			
-									on_error( context );
-								}
-							}
-
 
 						};
 
@@ -3391,6 +3380,17 @@ var IDB = (function(){
 					
 
 				}	
+			} else {
+				console.log('green');
+				if( !indb.isempty( cursor ) && 'function' === typeof cursor.continue ) {
+					try {
+						console.log("next12");
+						cursor[ 'continue' ]();
+					} catch( error ) {
+						context[ 'error' ] = error;			
+						on_error( context );
+					}
+				}
 			}
 		}		
 
