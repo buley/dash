@@ -2716,26 +2716,44 @@ var IDB = (function(){
 
 				}
 
-				if ( false === flagged && !InDB.isEmpty( result ) ) {
 
-					if( 'undefined' == typeof limit || null == limit || total < limit ) {
+				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
+console.log('m3');
+					if( 'function' == typeof cursor.update ) {
+console.log('m4');
+						/* Update */
 						try {
-				console.log('rs',false === flagged, !InDB.isEmpty( result ));
-							//if( result[ 'continue' ] ) {
-				console.log('flagged and empty', flagged, result);
-								InDB.trigger( 'InDB_cursor_row_get_success', context );
-								result[ 'continue' ]();
-								total++;
-								on_success( context ); 
-							//}
-						} catch( error ) {
 							
-								result[ 'continue' ]();
+							cursor[ 'update' ]( instance_data );
+							
+							total++;
+							
+							on_success( context );
+
+						} catch( error ) {
+
+							/* Context */
+
+							context[ 'error' ] = error;
+
+							/* Callback */
+
+							on_error( context );
+
+							/* Action */
+
+							InDB.trigger( 'InDB_cursor_row_update_error', context );
 
 						}
 					}
-				} 
+				}
+				if( 'function' === typeof cursor.continue ) {
+					try {
+						cursor[ 'continue' ]();
+					} catch( error ) {
 
+					}
+				}
 			}
 
 			request.onerror = function ( event ) {	
