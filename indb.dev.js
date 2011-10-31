@@ -2672,8 +2672,10 @@ var IDB = (function(){
 			/* Request Responses */
 
 			var total = 0;
-
 			request.onsuccess = function ( event ) {	
+
+				var cursor = InDB.row.value( event );
+				var result = InDB.clone( InDB.cursor.value( event ) );
 
 				/* Debug */
 
@@ -2724,11 +2726,12 @@ console.log('m4');
 						/* Update */
 						try {
 							
-							cursor[ 'update' ]( instance_data );
+
 							
 							total++;
 							
 							on_success( context );
+							
 
 						} catch( error ) {
 
