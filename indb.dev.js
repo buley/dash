@@ -3346,7 +3346,7 @@ var IDB = (function(){
 							
 							on_success( context );
 						console.log("next1");
-							if( !InDB.isempty( cursor ) && 'function' === typeof cursor.continue ) {
+							if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
 								try {
 									console.log("next2");
 									cursor[ 'continue' ]();
@@ -3382,7 +3382,7 @@ var IDB = (function(){
 				}	
 			} else {
 				console.log('green');
-				if( !Indb.isempty( cursor ) && 'function' === typeof cursor.continue ) {
+				if( !Indb.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
 					try {
 						console.log("next12");
 						cursor[ 'continue' ]();
