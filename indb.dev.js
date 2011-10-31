@@ -3332,8 +3332,9 @@ var IDB = (function(){
 				}
 			}
 
+			console.log('l0');
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
-
+			console.log('l1');
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 				console.log('woah',cursor);
 					/* Callback */
