@@ -2181,6 +2181,41 @@ var IDB = (function(){
 				} else {
 					instance_data = data;
 				}
+				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
+					if( 'function' == typeof cursor.update ) {
+						/* Update */
+						try {
+							
+							total++;
+							
+							on_success( context );
+					
+							InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
+
+						} catch( error ) {
+
+							/* Context */
+
+							context[ 'error' ] = error;
+
+							/* Callback */
+
+							on_error( context );
+
+							/* Action */
+
+							InDB.trigger( 'InDB_cursor_row_update_error', context );
+
+						}
+					}
+				}
+				if( 'function' === typeof cursor.continue ) {
+					try {
+						cursor[ 'continue' ]();
+					} catch( error ) {
+
+					}
+				}
 
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 
@@ -2192,7 +2227,7 @@ var IDB = (function(){
 
 					/* Update */
 					console.log('single.update turning', result, instance_data );
-					InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
+
 
 				} else {
 					on_error( context );
@@ -2713,18 +2748,12 @@ var IDB = (function(){
 
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
-console.log('m3');
 					if( 'function' == typeof cursor.update ) {
-console.log('m4');
 						/* Update */
 						try {
-							
-
-							
 							total++;
 							
 							on_success( context );
-							
 
 						} catch( error ) {
 
@@ -3053,11 +3082,8 @@ console.log('m4');
 				} else {
 					instance_data = data;
 				}
-console.log('m2', flagged, total, limit );
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
-console.log('m3');
 					if( 'function' == typeof cursor.update ) {
-console.log('m4');
 						/* Update */
 						try {
 							
