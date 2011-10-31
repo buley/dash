@@ -3382,7 +3382,7 @@ var IDB = (function(){
 				}	
 			} else {
 				console.log('green');
-				if( !InDb.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
+				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
 					try {
 						console.log("next12");
 						cursor[ 'continue' ]();
