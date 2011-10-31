@@ -3321,10 +3321,11 @@ var IDB = (function(){
 			if( 'undefined' !== typeof expecting && null !== expecting ) {
 				for ( attr in expecting ) {
 					var expecting_value = expecting[ attr ];
+					var expecting_result = ( 'undefined' !== typeof cursor_result && null !== cursor_result ) ? cursor_result[ attr ] : null;
 					if( 'function' === typeof expecting_value ) {
-						expecting_value = expecting_value( cursor_result[ attr ] );
+						expecting_value = expecting_value( expecting_result );
 					}
-					console.log('comparing',cursor_result[ attr ],expecting_value );
+					console.log('comparing',expecting_result,expecting_value );
 					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && cursor_result[ attr ] !== expecting_value ) {
 						flagged = true;
 					}
