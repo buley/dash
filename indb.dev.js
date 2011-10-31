@@ -3331,10 +3331,8 @@ var IDB = (function(){
 					}
 				}
 			}
-			console.log('lfaffa',flagged);
-			console.log('l0');
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
-			console.log('l1');
+				console.log('l1');
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 				console.log('woah',cursor);
 					/* Callback */
@@ -3347,10 +3345,10 @@ var IDB = (function(){
 							total++;
 							
 							on_success( context );
-						console.log("NEXT1");
-							if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
+						console.log("next1");
+							if( !indb.isempty( cursor ) && 'function' === typeof cursor.continue ) {
 								try {
-									console.log("NEXT2");
+									console.log("next2");
 									cursor[ 'continue' ]();
 								} catch( error ) {
 									context[ 'error' ] = error;			
@@ -3373,6 +3371,17 @@ var IDB = (function(){
 							/* Action */
 
 							InDB.trigger( 'InDB_cursor_row_delete_error', context );
+							console.log('green');
+							if( !indb.isempty( cursor ) && 'function' === typeof cursor.continue ) {
+								try {
+									console.log("next12");
+									cursor[ 'continue' ]();
+								} catch( error ) {
+									context[ 'error' ] = error;			
+									on_error( context );
+								}
+							}
+
 
 						};
 
