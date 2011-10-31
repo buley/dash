@@ -2772,7 +2772,7 @@ var IDB = (function(){
 						}
 					}
 				}
-				if( 'function' === typeof cursor.continue ) {
+				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
 					try {
 						cursor[ 'continue' ]();
 					} catch( error ) {
@@ -3110,7 +3110,7 @@ var IDB = (function(){
 						}
 					}
 				}
-				if( 'function' === typeof cursor.continue ) {
+				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
 					try {
 						cursor[ 'continue' ]();
 					} catch( error ) {
