@@ -2182,31 +2182,29 @@ var IDB = (function(){
 					instance_data = data;
 				}
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
-					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
-						/* Update */
-						try {
-							
-							total++;
-							
-							on_success( context );
-					
-							InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
+					/* Update */
+					try {
+						
+						total++;
+						
+						on_success( context );
+				
+						InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
 
-						} catch( error ) {
+					} catch( error ) {
 
-							/* Context */
+						/* Context */
 
-							context[ 'error' ] = error;
+						context[ 'error' ] = error;
 
-							/* Callback */
+						/* Callback */
 
-							on_error( context );
+						on_error( context );
 
-							/* Action */
+						/* Action */
 
-							InDB.trigger( 'InDB_cursor_row_update_error', context );
+						InDB.trigger( 'InDB_cursor_row_update_error', context );
 
-						}
 					}
 				}
 				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
