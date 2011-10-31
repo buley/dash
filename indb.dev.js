@@ -3892,6 +3892,7 @@ var IDB = (function(){
 			data = InDB.shorthand.encode( { 'store': store, 'data': data } );
 		}
 
+		console.log('EVEYONR SPEAKS CAPITACAN',data,store);
 		var store = request.store;
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
