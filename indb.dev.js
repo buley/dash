@@ -2730,14 +2730,14 @@ var IDB = (function(){
 
 					// Move cursor to next key
 					if( 'undefined' == typeof limit || null == limit || total < limit ) {
-						try {
-							if( result[ 'continue' ] ) {
+						//try {
+							//if( result[ 'continue' ] ) {
 								result[ 'continue' ]();
-							}
-						} catch( error ) {
+							//}
+						//} catch( error ) {
 							
 
-						}
+						//}
 					}
 				} else {
 
@@ -2748,7 +2748,7 @@ var IDB = (function(){
 					} catch( error ) {
 							
 
-					}
+						}
 				}
 			}
 
