@@ -3863,7 +3863,7 @@ var IDB = (function(){
 	/* Add */
 	DB.prototype.add = function ( request )  {
 	
-		var store = request.store;
+
 
 		if( !!DB.debug ) {
 			console.log( 'DB.prototype.add', request );
@@ -3888,15 +3888,13 @@ var IDB = (function(){
 			}
 		};
 
+		var store = request.store;
+		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var data = request.data;
 		if( 'function' !== typeof data ) {
 			data = InDB.shorthand.encode( { 'store': store, 'data': data } );
 		}
-
-		console.log('EVEYONR SPEAKS CAPITACAN',data,store);
-		var store = request.store;
-		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		InDB.trigger( 'InDB_do_row_add', { 'store': store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
 
