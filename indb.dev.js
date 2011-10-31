@@ -3351,14 +3351,6 @@ var IDB = (function(){
 							
 							on_success( context );
 
-							try { 	
-								cursor[ 'continue' ]();
-							} catch( error ) {
-								context[ 'error' ] = error;			
-								on_error( context );
-							}
-
-
 						};
 
 						delete_request.onerror = function( delete_result ) {
@@ -3375,40 +3367,29 @@ var IDB = (function(){
 
 							InDB.trigger( 'InDB_cursor_row_delete_error', context );
 
-							try { 	
-								cursor[ 'continue' ]();
-							} catch( error ) {
-								context[ 'error' ] = error;			
-								on_error( context );
-							}
-
-
 						};
 
-
-
 					} catch( error ) {
-						context[ 'error' ] = error;			
-						on_error( context );
-		try { 	
-								cursor[ 'continue' ]();
-							} catch( error ) {
-								context[ 'error' ] = error;			
-								on_error( context );
-							}
-
-
+					
+					}
+					
+					if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
+						try {
+							cursor[ 'continue' ]();
+						} catch( error ) {
+							context[ 'error' ] = error;			
+							on_error( context );
+						}
 					}
 
-				}
-						
-			}
 
-		}
+				}	
+			}
+		}		
 
 		request.onerror = function ( event ) {	
 		
-			/* Context */
+		/* Context */
 			
 			context[ 'event' ] = event;
 		
