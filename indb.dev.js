@@ -3355,7 +3355,6 @@ var IDB = (function(){
 								}
 							}
 
-
 						};
 
 						delete_request.onerror = function( delete_result ) {
