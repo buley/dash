@@ -3326,7 +3326,7 @@ var IDB = (function(){
 						expecting_value = expecting_value( expecting_result );
 					}
 					console.log('comparing',expecting_result,expecting_value );
-					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && cursor_result[ attr ] !== expecting_value ) {
+					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof expecting_result && 'undefined' !== typeof expecting_value && null !== expecting_value && expecting_result !== expecting_value ) {
 						flagged = true;
 					}
 				}
