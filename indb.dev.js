@@ -2748,7 +2748,7 @@ var IDB = (function(){
 
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
-					if( 'function' == typeof cursor.update ) {
+					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
 						/* Update */
 						try {
 							total++;
@@ -3083,7 +3083,7 @@ var IDB = (function(){
 					instance_data = data;
 				}
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
-					if( 'function' == typeof cursor.update ) {
+					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
 						/* Update */
 						try {
 							
