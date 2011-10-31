@@ -2730,20 +2730,12 @@ var IDB = (function(){
 							//}
 						} catch( error ) {
 							
+								result[ 'continue' ]();
 
 						}
 					}
-				} else {
+				} 
 
-					try {
-						//if( result[ 'continue' ] ) {
-							result[ 'continue' ]();
-						//}
-					} catch( error ) {
-							
-
-						}
-				}
 			}
 
 			request.onerror = function ( event ) {	
