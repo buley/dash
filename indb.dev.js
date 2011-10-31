@@ -2721,13 +2721,13 @@ var IDB = (function(){
 					if( 'undefined' == typeof limit || null == limit || total < limit ) {
 						try {
 				console.log('rs',false === flagged, !InDB.isEmpty( result ));
-							if( result[ 'continue' ] ) {
+							//if( result[ 'continue' ] ) {
 				console.log('flagged and empty', flagged, result);
 								InDB.trigger( 'InDB_cursor_row_get_success', context );
 								result[ 'continue' ]();
 								total++;
 								on_success( context ); 
-							}
+							//}
 						} catch( error ) {
 							
 
