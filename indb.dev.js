@@ -2207,13 +2207,6 @@ var IDB = (function(){
 
 					}
 				}
-				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
-					try {
-						cursor[ 'continue' ]();
-					} catch( error ) {
-
-					}
-				}
 
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 
