@@ -1945,83 +1945,61 @@ var IDB = (function(){
 		}
 
 		//use this[ 'format' ] for function invocation to avoid a Closure compiler error
-		try {
-			var request = transaction[ 'add' ]( data );
-			request.onsuccess = function ( event ) {	
+		var request = transaction[ 'add' ]( data );
+		request.onsuccess = function ( event ) {	
 
-				/* Context */
-
-				context[ 'event' ] = event;
-		
-
-				/* Callback */
-
-				on_success( context );
-		
-
-				/* Action */
-
-				InDB.trigger( 'InDB_row_add_success', context );
-
-			}
-
-			request.onerror = function ( event ) {
-		
-				/* Context */
-
-				context[ 'event' ] = event;
-		
-
-				/* Callback */
-
-				on_error( context );
-
-		
-				/* Action */
-
-				InDB.trigger( 'InDB_row_add_error', context );
-
-			}
-
-			request.onabort = function ( event ) {
-
-				/* Context */
-
-				context[ 'event' ] = event;
-		
-
-				/* Callback */
-
-				on_abort( context );
-
-
-				/* Action */
-
-				InDB.trigger( 'InDB_row_add_abort', context );
-
-			}
-
-		} catch( event ) {
-
-			/* Debug */
-
-			if ( !!InDB.debug ) {
-				console.log ( "Error in InDB_row_add event );
-				console.log ( 'errorType', InDB.database.errorType( event.code ) );
-			}	
-			
 			/* Context */
 
 			context[ 'event' ] = event;
-				
+	
 
+			/* Callback */
+
+			on_success( context );
+	
+
+			/* Action */
+
+			InDB.trigger( 'InDB_row_add_success', context );
+
+		};
+
+		request.onerror = function ( event ) {
+	
+			/* Context */
+
+			context[ 'event' ] = event;
+	
+
+			/* Callback */
+
+			on_error( context );
+
+	
 			/* Action */
 
 			InDB.trigger( 'InDB_row_add_error', context );
 
-			throw new Error( 'InDB_row_add error' );
+		};
 
-		}
+		request.onabort = function ( event ) {
+
+			/* Context */
+
+			context[ 'event' ] = event;
+	
+
+			/* Callback */
+
+			on_abort( context );
+
+
+			/* Action */
+
+			InDB.trigger( 'InDB_row_add_abort', context );
+
+		};
+
 	}
 
 
