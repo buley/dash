@@ -3331,8 +3331,6 @@ var IDB = (function(){
 				}
 			}
 
-
-
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
 
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
@@ -3347,6 +3345,16 @@ var IDB = (function(){
 							total++;
 							
 							on_success( context );
+
+							if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
+								try {
+									cursor[ 'continue' ]();
+								} catch( error ) {
+									context[ 'error' ] = error;			
+									on_error( context );
+								}
+							}
+
 
 						};
 
@@ -3370,15 +3378,6 @@ var IDB = (function(){
 					
 					}
 					
-					if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
-						try {
-							cursor[ 'continue' ]();
-						} catch( error ) {
-							context[ 'error' ] = error;			
-							on_error( context );
-						}
-					}
-
 
 				}	
 			}
