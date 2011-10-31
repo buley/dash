@@ -2739,6 +2739,16 @@ var IDB = (function(){
 
 						}
 					}
+				} else {
+
+					try {
+						if( result[ 'continue' ] ) {
+							result[ 'continue' ]();
+						}
+					} catch( error ) {
+							
+
+					}
 				}
 			}
 
