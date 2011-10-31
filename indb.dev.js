@@ -3317,8 +3317,6 @@ var IDB = (function(){
 
 			var cursor = event.target.result;
 			var cursor_result = InDB.cursor.value( event );
-
-
 			var flagged = false;
 			if( 'undefined' !== typeof expecting && null !== expecting ) {
 				for ( attr in expecting ) {
@@ -3327,11 +3325,10 @@ var IDB = (function(){
 						expecting_value = expecting_value( cursor_result[ attr ] );
 					}
 
-					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && result[ attr ] !== expecting_value ) {
+					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && cursor_result[ attr ] !== expecting_value ) {
 						flagged = true;
 					}
 				}
-
 			}
 
 
