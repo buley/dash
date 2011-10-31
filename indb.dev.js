@@ -2691,25 +2691,18 @@ var IDB = (function(){
 				/* Result */
 				
 				var result = InDB.cursor.value( event );
-				console.log("ROUT",result,"EXPT",expecting);
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
 
 						var expecting_value = expecting[ attr ];
 						var current_value = ( 'undefined' !== typeof result && null !== result ) ? result[ attr ]: null;					
-						console.log('12words',expecting_value,current_value);
-						console.log('because of that',result);
-
 						if( 'function' === typeof current_value ) {
 							current_value = current_value( current_value );
 						}
 						if( 'function' === typeof expecting_value ) {
 							expecting_value = expecting_value( current_value );
 						}
-						console.log('12words',expecting_value,current_value);
-						console.log('currrrrrrrrrrrent attr',attr);
-						console.log('ex',expecting_value,'curre',current_value);
 						if( 'undefined' !== typeof result && 'undefined' !== typeof current_value && 'undefined' !== typeof expecting_value && null !== expecting_value && current_value !== expecting_value ) {
 							flagged = true;
 						}
