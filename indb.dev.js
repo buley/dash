@@ -3335,7 +3335,7 @@ var IDB = (function(){
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
 
 				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
-
+				console.log('woah',cursor);
 					/* Callback */
 					try {
 
