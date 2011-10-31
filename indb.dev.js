@@ -3324,7 +3324,7 @@ var IDB = (function(){
 					if( 'function' === typeof expecting_value ) {
 						expecting_value = expecting_value( cursor_result[ attr ] );
 					}
-
+					console.log('comparing',cursor_result[ attr ],expecting_value );
 					if( 'undefined' !== typeof cursor_result && 'undefined' !== typeof cursor_result[ attr ] && 'undefined' !== typeof expecting_value && null !== expecting_value && cursor_result[ attr ] !== expecting_value ) {
 						flagged = true;
 					}
