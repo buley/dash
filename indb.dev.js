@@ -3313,7 +3313,7 @@ var IDB = (function(){
 			InDB.trigger( 'InDB_cursor_row_delete_success', context );
 
 			/* Result */
-
+			console.log('COURAGE');
 
 			var cursor = event.target.result;
 			var cursor_result = InDB.cursor.value( event );
@@ -3331,7 +3331,7 @@ var IDB = (function(){
 					}
 				}
 			}
-
+			console.log('lfaffa',flagged);
 			console.log('l0');
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
 			console.log('l1');
