@@ -3346,9 +3346,10 @@ var IDB = (function(){
 							total++;
 							
 							on_success( context );
-
+						console.log("NEXT1");
 							if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
 								try {
+									console.log("NEXT2");
 									cursor[ 'continue' ]();
 								} catch( error ) {
 									context[ 'error' ] = error;			
