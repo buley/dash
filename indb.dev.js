@@ -2715,7 +2715,8 @@ var IDB = (function(){
 					}
 
 				}
-
+				console.log('flagged and empty', flagged, result);
+				console.log('rs',false === flagged, !InDB.isEmpty( result ));
 				if ( false === flagged && !InDB.isEmpty( result ) ) {
 
 					if( 'undefined' == typeof limit || null == limit || total < limit ) {
