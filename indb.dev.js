@@ -2695,7 +2695,7 @@ var IDB = (function(){
 					for ( attr in expecting ) {
 
 						var expecting_value = expecting[ attr ];
-						var current_value = ( 'undefined' === typeof result && null !== result ) ? result[ attr ]: null;					
+						var current_value = ( 'undefined' !== typeof result && null !== result ) ? result[ attr ]: null;					
 						console.log('12words',expecting_value,current_value);
 						if( 'function' === typeof current_value ) {
 							current_value = current_value( current_value );
