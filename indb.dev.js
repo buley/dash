@@ -2762,6 +2762,13 @@ var IDB = (function(){
 
 				InDB.trigger( 'InDB_cursor_row_get_error', context );
 
+				try {
+					if( result[ 'continue' ] ) {
+						result[ 'continue' ]();
+					}
+				} catch( error ) {
+				}
+
 			}
 
 			request.onabort = function ( event ) {	
