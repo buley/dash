@@ -2182,7 +2182,7 @@ var IDB = (function(){
 					instance_data = data;
 				}
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
-					if( 'function' == typeof cursor.update ) {
+					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
 						/* Update */
 						try {
 							
