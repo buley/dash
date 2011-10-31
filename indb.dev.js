@@ -2700,6 +2700,7 @@ var IDB = (function(){
 						if( 'function' === typeof expecting_value ) {
 							expecting_value = expecting_value( current_value );
 						}
+						console.log('13words',expecting_value,current_value);
 						console.log('currrrrrrrrrrrent attr',attr);
 						console.log('ex',expecting_value,'curre',current_value);
 						if( 'undefined' !== typeof result && 'undefined' !== typeof current_value && 'undefined' !== typeof expecting_value && null !== expecting_value && current_value !== expecting_value ) {
