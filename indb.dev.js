@@ -3759,15 +3759,13 @@ var IDB = (function(){
 
 		var on_success = function( context ) {
 
-			console.log("HOTBED OF OLDSCHOOL", InDB.row.value( context ) );
 			if( 'function' == typeof request.on_success ) {
-
 				var value = InDB.row.value( context );
-				console.log("BLADE MOVIES AER OLDSCHOOL", value );
 				request.on_success( value );
 			}
 		};
 
+		console.log('of course, wrong', on_success );
 		var on_error = function( context ) {
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
