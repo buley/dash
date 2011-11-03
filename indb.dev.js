@@ -3899,14 +3899,14 @@ var IDB = (function(){
 				}
 				if( prop_length > 0 ) {
 					for( var x = 0; x < prop_length; x++ ) {
-						var prop = properties[ x ];
-						if( 1 === prop_length ) {
-							temp = value[ prop ];
-						} else {
+						var prop = properties[ x ];	
+						if( 'undefined' !== typeof prop ) {
 							temp[ prop ] = value[ prop ];
 						}
 					}
-					if( prop_length > 0 ) {
+					if( prop_lenth === 1 ) {
+						value = properties[ 0 ];	
+					} else if( prop_length > 0 ) {
 						value = temp;
 					}
 				} 
