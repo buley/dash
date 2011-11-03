@@ -3843,6 +3843,7 @@ var IDB = (function(){
 
 		var index = request.index;
 		var properties = request.properties;
+		console.log("PROPERTIES",properties);
 		var expecting = InDB.shorthand.encode( { 'store': store, 'data': request.expecting } );
 		var direction = request.direction;
 		var limit = request.limit;
