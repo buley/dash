@@ -3780,6 +3780,7 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var data = request.data;
+		console.log('alwasy saying hate when you mean love', data );
 		if( 'function' !== typeof data ) {
 			data = InDB.shorthand.encode( { 'store': store, 'data': data } );
 		}
