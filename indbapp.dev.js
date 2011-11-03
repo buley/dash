@@ -40,7 +40,7 @@ var InDBApp = (function() {
 
 	/* Add */
 	App.prototype.add = function( request ) {
-
+		console.log("KEEP IT FIT",request);
 		/* Setup */
 
 		var store = request.store;
