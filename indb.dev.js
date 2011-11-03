@@ -3055,8 +3055,8 @@ var IDB = (function(){
 							cursor[ 'update' ]( instance_data );
 							
 							total++;
-							
-							on_success( instance_data );
+
+							on_success( context );
 
 						} catch( error ) {
 
@@ -4041,7 +4041,6 @@ var IDB = (function(){
 				request.on_complete();
 			}
 		};
-
 	
 		var store = request.store;
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
@@ -4079,7 +4078,7 @@ var IDB = (function(){
 		var keyRange = InDB.range.get( key, begin, end, left_inclusive, right_inclusive );
 
 		/* Request */
-		
+
 		InDB.trigger( 'InDB_do_cursor_update', { 'store': store, 'data': new_data, 'keyRange': keyRange, 'index': index, 'replace': replace, 'direction': direction, 'expecting': expecting, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
 	
 		return this;
