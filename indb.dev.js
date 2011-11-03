@@ -3643,7 +3643,7 @@ var IDB = (function(){
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = InDB.shorthand.decode( { 'store': store, 'data': InDB.row.value( context )  } );
+				var value = InDB.shorthand.decode( { 'store': store, 'data': InDB.row.value( context.event )  } );
 				var prop_length;
 				if( 'undefined' !== typeof properties && null !== properties && 'undefined' !== typeof properties.length ) {
 					prop_length = properties.length;
