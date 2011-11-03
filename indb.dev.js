@@ -3660,7 +3660,7 @@ var IDB = (function(){
 						if( 'undefined' === typeof prop ) {
 							continue;
 						}
-						console.log( 'oh noes', prop_length, prop, value[prop] );
+						console.log( 'oh noes', prop_length, prop, properties, value );
 						if( 1 === prop_length ) {
 							temp = value[ prop ];
 						} else {
