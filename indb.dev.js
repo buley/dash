@@ -3645,7 +3645,7 @@ var IDB = (function(){
 			if( 'function' == typeof request.on_success ) {
 				var value = InDB.shorthand.decode( { 'store': store, 'data': InDB.row.value( context )  } );
 				var prop_length;
-				if( 'undefined' !== typeof properties && 'undefined' !== typeof properties.length ) {
+				if( 'undefined' !== typeof properties && null !== properties && 'undefined' !== typeof properties.length ) {
 					prop_length = properties.length;
 				} else {
 					prop_length = 0;
@@ -3885,7 +3885,7 @@ var IDB = (function(){
 			if( 'function' == typeof request.on_success ) {
 				var value = InDB.shorthand.decode( { 'store': store, 'data': InDB.cursor.value( context )  } );
 				var prop_length;
-				if( 'undefined' !== typeof properties && 'undefined' !== typeof properties.length ) {
+				if( 'undefined' !== typeof properties && null !== properties && 'undefined' !== typeof properties.length ) {
 					prop_length = properties.length;
 				} else {
 					prop_length = 0;
