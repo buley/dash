@@ -3668,6 +3668,7 @@ var IDB = (function(){
 						value = temp;
 					}
 				}
+				request.on_success( value );
 			}
 		};
 
