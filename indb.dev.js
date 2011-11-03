@@ -3758,6 +3758,7 @@ var IDB = (function(){
 		}
 
 		var on_success = function( context ) {
+			console.log("HOTBED OF OLDSCHOOL", InDB.row.value( context ) );
 			if( 'function' == typeof request.on_success ) {
 				var value = InDB.row.value( context );
 				request.on_success( value );
