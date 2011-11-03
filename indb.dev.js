@@ -2990,10 +2990,6 @@ var IDB = (function(){
 
 			context[ 'event' ] = event;
 
-			/* Action */
-
-			InDB.trigger( 'InDB_cursor_row_update_success', context );
-
 			/* Update */
 
 			var cursor = InDB.row.value( context.event );
@@ -3060,7 +3056,7 @@ var IDB = (function(){
 							
 							total++;
 							
-							on_success( context );
+							on_success( instance_data );
 
 						} catch( error ) {
 
