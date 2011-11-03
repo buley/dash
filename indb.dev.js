@@ -3658,6 +3658,9 @@ var IDB = (function(){
 				if( prop_length > 0 ) {
 					for( var x = 0; x < prop_length; x++ ) {
 						var prop = properties[ x ];
+						if( 'undefined' === typeof prop ) {
+							continue;
+						}
 						if( 1 === prop_length ) {
 							temp = value[ prop ];
 						} else {
