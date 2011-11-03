@@ -3811,6 +3811,9 @@ var IDB = (function(){
 		var store = request.store;
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
+		var properties = request.properties;
+		properties = ( !InDB.isEmpty( properties ) ) ? properties : null;
+
 		var data = request.data;
 		var new_data;
 		if( 'function' !== typeof data ) {
@@ -3826,7 +3829,7 @@ var IDB = (function(){
 			expected = InDB.shorthand.encode( { 'store': store, 'data': expected } );
 		}
 
-		InDB.trigger( 'InDB_do_row_update', { 'store': store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
+		InDB.trigger( 'InDB_do_row_update', { 'store': store, 'key': request.key, 'index': request.index, 'data': new_data, 'properties': properties, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
 
 		return this;
 
