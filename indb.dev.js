@@ -3760,12 +3760,12 @@ var IDB = (function(){
 		var on_success = function( context ) {
 
 			if( 'function' == typeof request.on_success ) {
+		console.log('NEGATIVE', context );
 				var value = InDB.row.value( context );
 				request.on_success( value );
 			}
 		};
 
-		console.log('of course, wrong', on_success );
 		var on_error = function( context ) {
 			if( 'function' == typeof request.on_error ) {
 				request.on_error( context );
