@@ -3858,7 +3858,6 @@ var IDB = (function(){
 
 		InDB.trigger('cursor_get_namespace',request);
 
-
 		/* Defaults */
 		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
 		limit = ( 'undefined' !== typeof limit ) ? limit : null;
@@ -3869,8 +3868,6 @@ var IDB = (function(){
 		right_inclusive = ( 'undefined' !== typeof right_inclusive ) ? right_inclusive : null;
 		key = ( 'undefined' !== typeof begin && 'undefined' !== typeof end ) ? key : null;
 
-
-
 		/* Setup */
 
 		var keyRange = InDB.range.get( key, begin, end, left_inclusive, right_inclusive );
@@ -3880,7 +3877,7 @@ var IDB = (function(){
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = InDB.shorthand.decode( { 'store': store, 'data': InDB.row.value( context )  } );
+				var value = InDB.shorthand.decode( { 'store': store, 'data': InDB.cursor.value( context )  } );
 				var prop_length;
 				if( 'undefined' !== typeof properties && 'undefined' !== typeof properties.length ) {
 					prop_length = properties.length;
