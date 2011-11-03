@@ -3650,6 +3650,7 @@ var IDB = (function(){
 				} else {
 					prop_length = 0;
 				}
+				console.log('propppp',prop_length);
 				var temp = {};
 				if( 'string' === typeof properties ) {
 					properties = new Array( properties );
@@ -3660,7 +3661,6 @@ var IDB = (function(){
 						if( 'undefined' === typeof prop ) {
 							continue;
 						}
-						console.log( 'oh noes', prop_length, prop, properties, properties.length );
 						if( 1 === prop_length ) {
 							temp = value[ prop ];
 						} else {
