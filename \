@@ -1562,6 +1562,9 @@ var IDB = (function(){
 
 		var index = context.index;
 
+		var properties = context.properties;
+
+
 		/* Defaults */
 
 		index = ( 'undefined' !== index ) ? index : null;
@@ -1577,16 +1580,16 @@ var IDB = (function(){
 
 		/* Invocation */
 
-		InDB.row.get( store, key, index, context.on_success, context.on_error, context.on_abort, context.on_complete );
+		InDB.row.get( store, key, index, properties, context.on_success, context.on_error, context.on_abort, context.on_complete );
 	} );
 
 
-	InDB.row.get = function ( store, key, index, on_success, on_error, on_abort, on_complete ) {
+	InDB.row.get = function ( store, key, index, properties, on_success, on_error, on_abort, on_complete ) {
 
 		/* Debug */
 
 		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.get', store, key, index, on_success, on_error, on_abort, on_complete );
+			console.log ( 'InDB.row.get', store, key, index, properties, on_success, on_error, on_abort, on_complete );
 		}
 
 		/* Assertions */
@@ -1621,7 +1624,7 @@ var IDB = (function(){
 
 		/* Context */
 
-		var context =  { "store": store, "key": key, "index": index, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+		var context =  { "store": store, "key": key, "index": index, "properties": properties, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 		/* Action */
 
@@ -1645,10 +1648,13 @@ var IDB = (function(){
 		var request;
 		if ( "undefined" !== typeof index && null !== index ) {
 			try {
+
 				var transaction_index = transaction.index( index );
+				
 				if( !!InDB.debug ) {
 					console.log( 'InDB.row.get (using index)', transaction, transaction_index, index, key );
 				}
+				
 				/* Optional Index */
 
 				request = transaction_index.get( key );
@@ -3635,8 +3641,6 @@ var IDB = (function(){
 	/* Get */
 	DB.prototype.get = function ( request )  {
 
-		var properties = request.properties;
-
 		if( !!DB.debug ) {
 			console.log( 'DB.prototype.get', request );
 		}
@@ -3644,29 +3648,7 @@ var IDB = (function(){
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
 				var value = InDB.shorthand.decode( { 'store': store, 'data': InDB.row.value( context )  } );
-				var prop_length;
-				if( 'undefined' !== typeof properties && 'undefined' !== typeof properties.length ) {
-					prop_length = properties.length;
-				} else {
-					prop_length = 0;
-				}
-				var temp = {};
-				if( 'string' === typeof properties ) {
-					properties = new Array( properties );
-				}
-				if( prop_length > 0 ) {
-					for( var x = 0; x < prop_length; x++ ) {
-						var prop = properties[ x ];
-						if( 1 === prop_length ) {
-							temp = value[ prop ];
-						} else {
-							temp[ prop ] = value[ prop ];
-						}
-					}
-					if( prop_length > 0 ) {
-						value = temp;
-					}
-				}
+				request.on_success( value );
 			}
 		};
 
@@ -3751,6 +3733,8 @@ var IDB = (function(){
 	/* Add */
 	DB.prototype.add = function ( request )  {
 	
+
+
 		if( !!DB.debug ) {
 			console.log( 'DB.prototype.add', request );
 		}
@@ -3842,7 +3826,6 @@ var IDB = (function(){
 		/* Action */
 
 		var index = request.index;
-		var properties = request.properties;
 		var expecting = InDB.shorthand.encode( { 'store': store, 'data': request.expecting } );
 		var direction = request.direction;
 		var limit = request.limit;
@@ -3878,34 +3861,13 @@ var IDB = (function(){
 
 		/* Callbacks */
 
-		var on_success = function( context ) {
-			if( 'function' == typeof request.on_success ) {
-				var value = InDB.shorthand.decode( { 'store': store, 'data': InDB.row.value( context )  } );
-				var prop_length;
-				if( 'undefined' !== typeof properties && 'undefined' !== typeof properties.length ) {
-					prop_length = properties.length;
-				} else {
-					prop_length = 0;
-				}
-				var temp = {};
-				if( 'string' === typeof properties ) {
-					properties = new Array( properties );
-				}
-				if( prop_length > 0 ) {
-					for( var x = 0; x < prop_length; x++ ) {
-						var prop = properties[ x ];
-						if( 1 === prop_length ) {
-							temp = value[ prop ];
-						} else {
-							temp[ prop ] = value[ prop ];
-						}
-					}
-					if( prop_length > 0 ) {
-						value = temp;
-					}
-				} 
+		var on_success = function ( context ) {
+			var value = InDB.cursor.value( context.event );
+			if( null !== value && 'function' == typeof request.on_success ) {
+				var value = InDB.shorthand.decode( { 'store': store, 'data': value } );
+				if( !!DB.debug ) console.log( 'DB.prototype.cursor.get success', item );
 				request.on_success( value );
-			}
+			} 
 		};
 
 		var on_error = function ( context ) {
