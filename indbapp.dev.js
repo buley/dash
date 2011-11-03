@@ -175,6 +175,8 @@ var InDBApp = (function() {
 
 		/* Defaults */
 
+		var properties = request.properties;
+		properties = ( 'undefined' !== typeof properties ) ? properties : null;	
 		var index = request.index;
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var limit = request.limit;
@@ -242,6 +244,7 @@ var InDBApp = (function() {
 			, 'on_success': on_success
 			, 'on_complete': on_complete
 			, 'on_error': on_error
+			, 'properties': properties
 			, 'right': right
 			, 'right_inclusive': right_inclusive
 			, 'store': store
@@ -358,6 +361,8 @@ var InDBApp = (function() {
 		index = ( 'undefined' !== typeof index ) ? index : null;
 		var key = request.key;
 		key = ( 'undefined' !== typeof key ) ? key : null;
+		var properties = request.properties;
+		properties = ( 'undefined' !== typeof properties ) ? properties : null;	
 
 		/* Callbacks */
 
@@ -390,6 +395,7 @@ var InDBApp = (function() {
 			, 'key': key
 			, 'on_success': on_success
 			, 'on_error': on_error
+			, 'properties': properties
 			, 'store': store
 		} );
 
