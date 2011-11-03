@@ -3758,9 +3758,7 @@ var IDB = (function(){
 		}
 
 		var on_success = function( context ) {
-
 			if( 'function' == typeof request.on_success ) {
-		console.log('NEGATIVE', request.on_success, value );
 				var value = InDB.row.value( context );
 				request.on_success( value );
 			}
