@@ -70,7 +70,7 @@ var InDBApp = (function() {
 			if( !!debug ) {
 				console.log( 'App.prototype.add success', value );
 			}
-			console.log("WPOMENS GROUP",request.on_success);
+			console.log("WPOMENS GROUP",request);
 			/* Callback */
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
