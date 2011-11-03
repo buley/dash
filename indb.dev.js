@@ -3652,7 +3652,6 @@ var IDB = (function(){
 				} else {
 					prop_length = 0;
 				}
-				console.log('propppp',prop_length,properties);
 				var temp = {};
 				if( 'string' === typeof properties ) {
 					properties = new Array( properties );
