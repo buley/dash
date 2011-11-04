@@ -3893,7 +3893,6 @@ var IDB = (function(){
 				} else {
 					prop_length = 0;
 				}
-				console.log('propert',properties,prop_length);
 				var temp = {};
 				if( 'string' === typeof properties ) {
 					properties = new Array( properties );
@@ -3905,7 +3904,7 @@ var IDB = (function(){
 							temp[ prop ] = value[ prop ];
 						}
 					}
-					if( prop_lenth === 1 ) {
+					if( prop_length === 1 ) {
 						value = properties[ 0 ];	
 					} else if( prop_length > 0 ) {
 						value = temp;
