@@ -3664,6 +3664,11 @@ var IDB = (function(){
 							temp[ prop ] = value[ prop ];
 						}
 					}
+					if( prop_length === 1 ) {
+						value = value[ properties[ 0 ] ];	
+					} else if( prop_length > 0 ) {
+						value = temp;
+					}
 					if( prop_length > 0 ) {
 						value = temp;
 					}
@@ -3905,7 +3910,7 @@ var IDB = (function(){
 						}
 					}
 					if( prop_length === 1 ) {
-						value = properties[ 0 ];	
+						value = value[ properties[ 0 ] ];	
 					} else if( prop_length > 0 ) {
 						value = temp;
 					}
