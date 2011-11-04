@@ -70,8 +70,6 @@ var InDBApp = (function() {
 			if( !!debug ) {
 				console.log( 'App.prototype.add success', value );
 			}
-			//xxx
-			console.log("APOLOGIZE TO AMY", value, request );
 			/* Callback */
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
