@@ -1655,8 +1655,8 @@ var IDB = (function(){
 				//request = transaction.get( key );
 
 			} catch( error ) {
-				if( 'function' === typeof request.on_error ) {
-					request.on_error( error );
+				if( 'function' === typeof on_error ) {
+					on_error( error );
 				}
 			}
 		} else {
