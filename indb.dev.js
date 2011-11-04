@@ -3893,6 +3893,7 @@ var IDB = (function(){
 				} else {
 					prop_length = 0;
 				}
+				console.log('propert',properties,prop_length);
 				var temp = {};
 				if( 'string' === typeof properties ) {
 					properties = new Array( properties );
