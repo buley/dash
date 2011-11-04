@@ -70,7 +70,7 @@ var InDBApp = (function() {
 			if( !!debug ) {
 				console.log( 'App.prototype.add success', value );
 			}
-			console.log("WPOMENS GROUP",request);
+			console.log("APOLOGIZE TO AMY", value, request.on_success );
 			/* Callback */
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( value );
