@@ -2425,20 +2425,9 @@ var IDB = (function(){
 
 		key = ( !!key ) ? key : null;
 
-		/* Setup */
-		
-		var instance_data = {};
-
-		if( 'function' == typeof data ) {
-			instance_data = data();
-			if( !!InDB.debug ) {
-				console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
-			}
-		}
-
 		/* Context */
 
-		var context = { "store": store, "key": key, "data": instance_data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+		var context = { "store": store, "key": key, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 		
 		/* Action */
@@ -2464,9 +2453,9 @@ var IDB = (function(){
 			/* Request */
 			var request;
 			if( !!key ) {
-				request = transaction[ 'put' ]( instance_data, key );
+				request = transaction[ 'put' ]( data, key );
 			} else { 
-				request = transaction[ 'put' ]( instance_data );
+				request = transaction[ 'put' ]( data );
 			}
 
 
