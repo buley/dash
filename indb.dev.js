@@ -2436,7 +2436,6 @@ var IDB = (function(){
 			}
 		}
 
-
 		/* Context */
 
 		var context = { "store": store, "key": key, "data": instance_data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
@@ -3771,6 +3770,7 @@ var IDB = (function(){
 			new_data = InDB.shorthand.encode( { 'store': store, 'data': data } );
 		} else {
 			new_data = function( arg ) {
+				console.log("DOING ENCODING", arg );
 				return InDB.shorthand.encode( { 'store': store, 'data': data( InDB.shorthand.decode( { 'store': store, 'data': arg } ) ) } );
 			};
 		}
