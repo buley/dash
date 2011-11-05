@@ -1924,8 +1924,7 @@ var IDB = (function(){
 		var instance_data = {};
 
 		if( 'function' == typeof data ) {
-			var result_value = result;
-			instance_data = data( result_value );
+			instance_data = data();
 			if( !!InDB.debug ) {
 				console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
 			}
@@ -2431,8 +2430,7 @@ var IDB = (function(){
 		var instance_data = {};
 
 		if( 'function' == typeof data ) {
-			var result_value = result;
-			instance_data = data( result_value );
+			instance_data = data();
 			if( !!InDB.debug ) {
 				console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
 			}
