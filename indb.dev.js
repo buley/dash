@@ -3764,6 +3764,7 @@ var IDB = (function(){
 		var store = request.store;
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
+		console.log("MR DRIVER", request.data);
 		var data = request.data;
 		var new_data;
 		if( 'function' !== typeof data ) {
