@@ -3764,19 +3764,17 @@ var IDB = (function(){
 		var store = request.store;
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
-		console.log("MR DRIVER", request.data);
 		var data = request.data;
 		var new_data;
 		if( 'function' !== typeof data ) {
 			new_data = InDB.shorthand.encode( { 'store': store, 'data': data } );
 		} else {
 			new_data = function( arg ) {
-				console.log("DOING ENCODING", arg );
 				return InDB.shorthand.encode( { 'store': store, 'data': data( InDB.shorthand.decode( { 'store': store, 'data': arg } ) ) } );
 			};
 		}
 
-		InDB.trigger( 'InDB_do_row_put', { 'store': store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
+		InDB.trigger( 'InDB_do_row_put', { 'store': store, 'data': new_data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
 
 		return this;
 
@@ -3821,7 +3819,7 @@ var IDB = (function(){
 			};
 		}
 
-		InDB.trigger( 'InDB_do_row_add', { 'store': store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
+		InDB.trigger( 'InDB_do_row_add', { 'store': store, 'data': new_data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
 
 		return this;
 
