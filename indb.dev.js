@@ -1919,10 +1919,21 @@ var IDB = (function(){
 			on_complete = InDB.events.onComplete;
 		}
 
+		/* Setup */
+		
+		var instance_data = {};
+
+		if( 'function' == typeof data ) {
+			var result_value = result;
+			instance_data = data( result_value );
+			if( !!InDB.debug ) {
+				console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
+			}
+		}
 
 		/* Context */
 
-		var context = { "store": store, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
+		var context = { "store": store, "data": instance_data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
 
 
 		/* Action */
@@ -1945,7 +1956,7 @@ var IDB = (function(){
 		}
 
 		//use this[ 'format' ] for function invocation to avoid a Closure compiler error
-		var request = transaction[ 'add' ]( data );
+		var request = transaction[ 'add' ]( instance_data );
 		request.onsuccess = function ( event ) {	
 
 			/* Context */
@@ -2117,7 +2128,6 @@ var IDB = (function(){
 						console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
 					}
 				}
-
 	
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
@@ -2159,6 +2169,7 @@ var IDB = (function(){
 				} else {
 					instance_data = data;
 				}
+
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					/* Update */
 					try {
@@ -2415,10 +2426,22 @@ var IDB = (function(){
 
 		key = ( !!key ) ? key : null;
 
+		/* Setup */
+		
+		var instance_data = {};
+
+		if( 'function' == typeof data ) {
+			var result_value = result;
+			instance_data = data( result_value );
+			if( !!InDB.debug ) {
+				console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
+			}
+		}
+
 
 		/* Context */
 
-		var context = { "store": store, "key": key, "data": data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
+		var context = { "store": store, "key": key, "data": instance_data, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 		
 		/* Action */
@@ -2444,9 +2467,9 @@ var IDB = (function(){
 			/* Request */
 			var request;
 			if( !!key ) {
-				request = transaction[ 'put' ]( data, key );
+				request = transaction[ 'put' ]( instance_data, key );
 			} else { 
-				request = transaction[ 'put' ]( data );
+				request = transaction[ 'put' ]( instance_data );
 			}
 
 
@@ -3745,8 +3768,13 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var data = request.data;
+		var new_data;
 		if( 'function' !== typeof data ) {
-			data = InDB.shorthand.encode( { 'store': store, 'data': data } );
+			new_data = InDB.shorthand.encode( { 'store': store, 'data': data } );
+		} else {
+			new_data = function( arg ) {
+				return InDB.shorthand.encode( { 'store': store, 'data': data( InDB.shorthand.decode( { 'store': store, 'data': arg } ) ) } );
+			};
 		}
 
 		InDB.trigger( 'InDB_do_row_put', { 'store': store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
@@ -3785,8 +3813,13 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var data = request.data;
+		var new_data;
 		if( 'function' !== typeof data ) {
-			data = InDB.shorthand.encode( { 'store': store, 'data': data } );
+			new_data = InDB.shorthand.encode( { 'store': store, 'data': data } );
+		} else {
+			new_data = function( arg ) {
+				return InDB.shorthand.encode( { 'store': store, 'data': data( InDB.shorthand.decode( { 'store': store, 'data': arg } ) ) } );
+			};
 		}
 
 		InDB.trigger( 'InDB_do_row_add', { 'store': store, 'data': data, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': on_complete } );
