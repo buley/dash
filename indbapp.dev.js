@@ -2,7 +2,7 @@
 
 var InDBApp = (function() {
 
-	var InDB, debug;
+	var InDB, debug = true;
 	var App = function( request ) {
 
 		var current_database = 'App';
