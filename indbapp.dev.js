@@ -5,7 +5,6 @@ var InDBApp = (function() {
 	var InDB, debug;
 	var App = function( request ) {
 
-
 		var current_database = 'App';
 		var current_description = '';
 
