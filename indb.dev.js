@@ -3131,6 +3131,9 @@ var IDB = (function(){
 
 							}
 
+							update_request.on_error = function( event ) {
+								console.log("COULD NOT UPDATE",event);
+							}
 							total++;
 
 							on_success( context );
