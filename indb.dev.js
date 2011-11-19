@@ -3016,6 +3016,7 @@ var IDB = (function(){
 
 			var cursor = InDB.row.value( context.event );
 			var result = InDB.clone( InDB.cursor.value( context.event ) );
+			var attr;
 
 			/* Debug */
 
@@ -3027,13 +3028,30 @@ var IDB = (function(){
 		
 				var instance_data = {};
 
-				if( 'function' == typeof data ) {
+				if( 'function' === typeof data ) {
 					var result_value = result;
-					instance_data = data( result_value );
+					data = data( result_value );
 					if( !!InDB.debug ) {
-						console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
+						console.log('InDB.cursor.update parsed data fn', JSON.stringify( data ) );
+					}
+				} else {
+					
+					for( attr in instance_data ) {
+						if( instance_data.hasOwnProperty( attr ) ) {
+							//
+							var thing = data[ attr ];
+							if( 'function' === typeof thing ) {
+								var result_value = result;
+								data[ attr ] = thing( result_value );
+								if( !!InDB.debug ) {
+									console.log('InDB.cursor.update parsed data fn', JSON.stringify( data ) );
+								}
+							}	
+						}
 					}
 				}
+				
+				instance_data = data;
 
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
