@@ -3051,7 +3051,7 @@ var IDB = (function(){
 			console.log("FOOD ON OUR WAY",cursor,result);
 			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
 		
-				var instance_data = result;
+				var instance_data ={};// result;
 
 				if( 'function' === typeof data ) {
 					var result_value = result;
