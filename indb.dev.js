@@ -3120,15 +3120,6 @@ var IDB = (function(){
 							update_request.on_success = function( event ) {
 									
 								on_success( context );
-								if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
-									try {	
-
-										cursor[ 'continue' ]();
-									} catch( error ) {
-
-									}
-								}
-
 							}
 
 							update_request.on_error = function( event ) {
@@ -3155,6 +3146,18 @@ var IDB = (function(){
 						}
 					}
 				}
+
+				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
+					try {	
+
+						cursor[ 'continue' ]();
+					} catch( error ) {
+
+					}
+				}
+
+
+
 			}
 		}
 
