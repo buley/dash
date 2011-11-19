@@ -90,7 +90,7 @@ var IDB = (function(){
 
 	InDB.database.version = 1;
 
-	InDB.debug = true;
+	InDB.debug = false;
 
 	InDB.events.onComplete = function ( e ) {
 		if ( !!InDB.debug ) {
@@ -2213,8 +2213,8 @@ var IDB = (function(){
 						total++;
 						
 						on_success( context );
-						delete instance_data.i;
-						InDB.row.put( store, instance_data, callback_context.key, on_success, on_error, on_abort, on_complete );
+						
+						InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
 					} catch( error ) {
 
 						/* Context */
