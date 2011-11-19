@@ -2937,7 +2937,7 @@ var IDB = (function(){
 
 		/* Defaults */
 
-		replace = ( InDB.isBoolean( replace ) ) ? replace : false;
+		replace = ( InDB.isBoolean( replace ) ) ? replace : true;
 
 		index = ( !InDB.isEmpty( index ) ) ? index : null;
 		
