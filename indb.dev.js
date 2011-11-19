@@ -3090,7 +3090,7 @@ var IDB = (function(){
 
 
 				if( false == replace && null !== result && 'undefined' !== result ) {	
-					var temp_data = result;
+					var temp_data = {};//result;
 					for( var attr in data ) {
 
 						var value = data[ attr ];
