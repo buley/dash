@@ -3112,7 +3112,9 @@ var IDB = (function(){
 					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
 						/* Update */
 						try {
-							
+						
+							delete instance_data.i;
+							delete instance.data.h;	
 							var update_request = cursor[ 'update' ]( instance_data );
 						
 							context.update = instance_data;
