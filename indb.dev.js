@@ -2912,7 +2912,7 @@ var IDB = (function(){
 
 
 	InDB.cursor.update = function ( store, index, keyRange, data, direction, limit, replace, expecting, on_success, on_error, on_abort, on_complete ) {
-	console.log("CURSOR UPDATE");
+
 		/* Debug */
 
 		if ( !!InDB.debug ) {
@@ -2968,6 +2968,8 @@ var IDB = (function(){
 
 		var context = { "store": store, "keyRange": keyRange, "index": index, "data": data, 'direction': direction, 'limit': limit, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
+
+	console.log("CURSOR UPDATE",JSON.stringify( context ) );
 
 		/* Action */
 
