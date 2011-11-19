@@ -3075,7 +3075,9 @@ var IDB = (function(){
 						try {
 							
 							cursor[ 'update' ]( instance_data );
-							
+						
+							context.update = instance_data;
+
 							total++;
 
 							on_success( context );
