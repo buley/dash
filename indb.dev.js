@@ -2127,6 +2127,7 @@ var IDB = (function(){
 
 			var result = InDB.row.value( callback_context.event );
 
+			console.log("SUMMONING MOTH",attr,JSON.stringify(result));
 			/* Debug */
 
 			if ( !!InDB.debug ) {
@@ -2151,7 +2152,7 @@ var IDB = (function(){
 							var thing = data[ attr ];
 							if( 'function' === typeof thing ) {
 								var result_value = result;
-								console.log("SUMMONING MOTH",attr,JSON.stringify(result_value),JSON.stringify(result_value[attr]));
+
 								data[ attr ] = thing( result_value[ attr ] );
 								console.log("MOTH SUMMONED",attr,data,data[attr]);
 								if( !!InDB.debug ) {
