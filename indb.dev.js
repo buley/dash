@@ -3113,8 +3113,6 @@ var IDB = (function(){
 						/* Update */
 						try {
 						
-							delete instance_data.i;
-							delete instance_data.h;	
 							var update_request = cursor[ 'update' ]( instance_data );
 						
 							context.update = instance_data;
