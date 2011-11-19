@@ -3028,14 +3028,11 @@ var IDB = (function(){
 		/* Request Responses */
 
 		var total = 0;
-		console.log("CURSOR UPDATE",request);
+		
 		request.onsuccess = function ( event ) {	
 
 			/* Context */
 
-
-
-			console.log("CURSOR UDPATE > TX PREGSUCCESS!");
 			context[ 'event' ] = event;
 
 			/* Update */
@@ -3052,7 +3049,6 @@ var IDB = (function(){
 			
 			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
 		
-			console.log("CURSOR UDPATE > TX SUCCESS!");
 				var instance_data = {};
 
 				if( 'function' === typeof data ) {
