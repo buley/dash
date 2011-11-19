@@ -3051,8 +3051,6 @@ var IDB = (function(){
 					}
 				}
 				
-				instance_data = data;
-
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
