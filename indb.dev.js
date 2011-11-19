@@ -2969,8 +2969,6 @@ var IDB = (function(){
 		var context = { "store": store, "keyRange": keyRange, "index": index, "data": data, 'direction': direction, 'limit': limit, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
 
 
-	console.log("CURSOR UPDATE",JSON.stringify( context ) );
-
 		/* Action */
 
 		InDB.trigger( 'InDB_cursor_update', context );
@@ -3030,9 +3028,10 @@ var IDB = (function(){
 		/* Request Responses */
 
 		var total = 0;
+		console.log("CURSOR UPDATE",request, JSON.stringify( context ) );
 		
 		request.onsuccess = function ( event ) {	
-
+			console.log("FOOD ON OUR WAY");
 			/* Context */
 
 			context[ 'event' ] = event;
@@ -3049,7 +3048,7 @@ var IDB = (function(){
 				console.log ( 'InDB.cursor.update context.data result', result );
 			}
 			
-			if ( 1==1||"undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
+			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
 		
 				var instance_data = {};
 
