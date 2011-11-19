@@ -2202,7 +2202,7 @@ var IDB = (function(){
 				} else {
 					instance_data = data;
 				}
-				var instance_id = InDB.clone( instance_data.id );
+				var instance_id = InDB.clone( instance_data[ InDB.shorthand.get( 'id' ) ] );
 				delete instance_data.id;
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
