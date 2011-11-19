@@ -3031,7 +3031,7 @@ var IDB = (function(){
 		console.log("CURSOR UPDATE",request, JSON.stringify( context ) );
 		
 		request.onsuccess = function ( event ) {	
-			console.log("FOOD ON OUR WAY");
+
 			/* Context */
 
 			context[ 'event' ] = event;
@@ -3048,6 +3048,7 @@ var IDB = (function(){
 				console.log ( 'InDB.cursor.update context.data result', result );
 			}
 			
+			console.log("FOOD ON OUR WAY",cursor,result);
 			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
 		
 				var instance_data = {};
