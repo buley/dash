@@ -2202,8 +2202,7 @@ var IDB = (function(){
 				} else {
 					instance_data = data;
 				}
-				var instance_id = InDB.clone( instance_data[ InDB.shorthand.get( { 'store': store, 'key': 'id' } ) ] );
-				delete instance_data[ InDB.shorthand.get( { 'store': store, 'key': 'id' } ) ];
+				var instance_id = InDB.clone( result[ InDB.shorthand.get( { 'store': store, 'key': 'id' } ) ] );
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					/* Update */
@@ -2214,7 +2213,6 @@ var IDB = (function(){
 						on_success( context );
 						
 						InDB.row.put( store, instance_data, instance_id, on_success, on_error, on_abort, on_complete );
-
 					} catch( error ) {
 
 						/* Context */
