@@ -3034,6 +3034,8 @@ var IDB = (function(){
 			/* Context */
 
 
+
+			console.log("CURSOR UDPATE > TX PREGSUCCESS");
 			context[ 'event' ] = event;
 
 			/* Update */
