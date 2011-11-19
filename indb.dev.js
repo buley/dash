@@ -722,7 +722,7 @@ var IDB = (function(){
 					autoinc_key = options.incrementing_key;
 					empty_key = InDB.isEmpty( key );
 				} else {
-					for( attrib in options ) {
+					for( var attrib in options ) {
 						// Don't want prototype attributes
 						if( options.hasOwnProperty( attrib ) ) {
 							key = attrib;
@@ -989,7 +989,7 @@ var IDB = (function(){
 							key = options.key;
 							unique = options.unique;
 						} else {
-							for( attrib in options ) {
+							for( var attrib in options ) {
 								// Don't want prototype attributes
 								if( options.hasOwnProperty( attrib ) ) {
 									key = attrib;
@@ -2127,7 +2127,7 @@ var IDB = (function(){
 
 			var result = InDB.row.value( callback_context.event );
 
-			console.log("SUMMONING MOTH",attr,JSON.stringify(result));
+			console.log("SUMMONING MOTH",JSON.stringify(result));
 			/* Debug */
 
 			if ( !!InDB.debug ) {
@@ -2146,7 +2146,7 @@ var IDB = (function(){
 					}
 				} else {
 					
-					for( attr in data ) {
+					for( var attr in data ) {
 						if( data.hasOwnProperty( attr ) ) {
 							//
 							var thing = data[ attr ];
@@ -2183,7 +2183,7 @@ var IDB = (function(){
 
 				if( false == replace && null !== result && 'undefined' !== result ) {	
 					var temp_data = result;
-					for( attr in data ) {
+					for( var attr in data ) {
 
 						var value;
 						var pre_value = data[ attr ];
@@ -3059,7 +3059,7 @@ var IDB = (function(){
 					}
 				} else {
 					
-					for( attr in data ) {
+					for( var attr in data ) {
 						if( data.hasOwnProperty( attr ) ) {
 							//
 							var thing = data[ attr ];
@@ -3091,7 +3091,7 @@ var IDB = (function(){
 
 				if( false == replace && null !== result && 'undefined' !== result ) {	
 					var temp_data = result;
-					for( attr in data ) {
+					for( var attr in data ) {
 
 						var value = data[ attr ];
 						var previous_value = temp_data[ attr ];
