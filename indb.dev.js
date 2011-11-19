@@ -3113,7 +3113,7 @@ var IDB = (function(){
 						/* Update */
 						try {
 							
-							cursor[ 'update' ]( instance_data );
+							var update_request = cursor[ 'update' ]( instance_data );
 						
 							context.update = instance_data;
 
