@@ -2198,6 +2198,7 @@ var IDB = (function(){
 				} else {
 					instance_data = data;
 				}
+				var instance_id = instance_data.id;
 				delete instance_data.id;
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
@@ -2208,7 +2209,7 @@ var IDB = (function(){
 						
 						on_success( context );
 						
-						InDB.row.put( store, instance_data, key, on_success, on_error, on_abort, on_complete );
+						InDB.row.put( store, instance_data, instance_id, on_success, on_error, on_abort, on_complete );
 
 					} catch( error ) {
 
