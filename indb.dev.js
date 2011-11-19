@@ -3115,9 +3115,12 @@ var IDB = (function(){
 						/* Update */
 						try {
 					
-							console.log("UPDATING",JSON.stringify(instance_data));	
-							var update_request = cursor[ 'update' ]( instance_data );
-						
+							try { 
+								var update_request = cursor[ 'update' ]( instance_data );
+							} catch ( error ) {
+								context.event = error;
+								on_error( context );
+							}
 							context.update = instance_data;
 
 							update_request.on_success = function( event ) {
