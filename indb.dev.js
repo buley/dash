@@ -2937,7 +2937,7 @@ var IDB = (function(){
 
 		/* Defaults */
 
-		replace = ( InDB.isBoolean( replace ) ) ? replace : true;
+		replace = ( InDB.isBoolean( replace ) ) ? replace : false;
 
 		index = ( !InDB.isEmpty( index ) ) ? index : null;
 		
@@ -3119,6 +3119,18 @@ var IDB = (function(){
 						
 							context.update = instance_data;
 
+							update_request.on_success = function( event ) {
+									
+								if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
+									try {
+										cursor[ 'continue' ]();
+									} catch( error ) {
+
+									}
+								}
+
+							}
+
 							total++;
 
 							on_success( context );
@@ -3138,13 +3150,6 @@ var IDB = (function(){
 							InDB.trigger( 'InDB_cursor_row_update_error', context );
 
 						}
-					}
-				}
-				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
-					try {
-						cursor[ 'continue' ]();
-					} catch( error ) {
-
 					}
 				}
 			}
