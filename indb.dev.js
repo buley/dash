@@ -3049,7 +3049,7 @@ var IDB = (function(){
 				console.log ( 'InDB.cursor.update context.data result', result );
 			}
 			
-			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
+			if ( 1==1||"undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
 		
 				var instance_data = {};
 
