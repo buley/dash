@@ -3117,31 +3117,33 @@ var IDB = (function(){
 					
 							try { 
 								var update_request = cursor[ 'update' ]( instance_data );
-								context.update = instance_data;
-
-								update_request.on_success = function( event ) {
-									
-									on_success( context );
-								}
-
-								update_request.on_error = function( event ) {
-									console.log("COULD NOT UPDATE",event);
-								}
-								total++;
-
-								if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
-									try {	
-
-										cursor[ 'continue' ]();
-									} catch( error ) {
-
-									}
-								}
-
 							} catch ( error ) {
-								context.error = error;
+								context.event = error;
 								on_error( context );
 							}
+					
+							context.update = instance_data;
+
+							update_request.on_success = function( event ) {
+									
+								on_success( context );
+							}
+
+							update_request.on_error = function( event ) {
+								console.log("COULD NOT UPDATE",event);
+							}
+							total++;
+
+/*							if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
+								try {	
+
+									cursor[ 'continue' ]();
+								} catch( error ) {
+
+								}
+							}
+
+*/
 
 
 
