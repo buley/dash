@@ -2133,14 +2133,31 @@ var IDB = (function(){
 		
 				var instance_data = {};
 
-				if( 'function' == typeof data ) {
+				if( 'function' === typeof data ) {
 					var result_value = result;
-					instance_data = data( result_value );
+					data = data( result_value );
 					if( !!InDB.debug ) {
-						console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
+						console.log('InDB.cursor.update parsed data fn', JSON.stringify( data ) );
+					}
+				} else {
+					
+					for( attr in data ) {
+						if( data.hasOwnProperty( attr ) ) {
+							//
+							var thing = data[ attr ];
+							if( 'function' === typeof thing ) {
+								var result_value = result;
+								data[ attr ] = thing( result_value[ attr ] );
+								if( !!InDB.debug ) {
+									console.log('InDB.cursor.update parsed data fn', JSON.stringify( data ) );
+								}
+							}	
+						}
 					}
 				}
 	
+
+
 				var flagged = false;
 				if( 'undefined' !== typeof expecting && null !== expecting ) {
 					for ( attr in expecting ) {
