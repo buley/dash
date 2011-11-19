@@ -455,7 +455,7 @@ var IDB = (function(){
 	InDB.clone = function ( obj ) {
 		var clone = {};
 		var num = 0;
-		if( 'number' == obj ) {
+		if( 'number' === typeof obj ) {
 			return num + obj;
 		}
 		for( var x in obj ) {
