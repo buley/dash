@@ -2210,7 +2210,7 @@ var IDB = (function(){
 						total++;
 						
 						on_success( context );
-						
+						delete instance_data.i;
 						InDB.row.put( store, instance_data, callback_context.key, on_success, on_error, on_abort, on_complete );
 					} catch( error ) {
 
