@@ -2206,8 +2206,8 @@ var IDB = (function(){
 						total++;
 						
 						on_success( context );
-				
-						InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
+						
+						InDB.row.put( store, instance_data, key, on_success, on_error, on_abort, on_complete );
 
 					} catch( error ) {
 
