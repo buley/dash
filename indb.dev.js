@@ -2109,7 +2109,7 @@ var IDB = (function(){
 		
 		expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
 		
-		replace = ( InDB.isBoolean( replace ) ) ? replace : false;
+		replace = ( InDB.isBoolean( replace ) ) ? replace : true;
 
 		/* Context */
 
@@ -2179,7 +2179,7 @@ var IDB = (function(){
 
 
 				if( false == replace && null !== result && 'undefined' !== result ) {	
-					var temp_data = InDB.clone( result );
+					var temp_data = {};
 					for( attr in data ) {
 
 						var value;
