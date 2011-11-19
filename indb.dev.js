@@ -2109,7 +2109,7 @@ var IDB = (function(){
 		
 		expecting = ( !InDB.isEmpty( expecting ) ) ? expecting : null;
 		
-		replace = ( InDB.isBoolean( replace ) ) ? replace : true;
+		replace = ( InDB.isBoolean( replace ) ) ? replace : false;
 
 		/* Context */
 
