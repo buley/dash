@@ -3139,7 +3139,7 @@ var IDB = (function(){
 								}
 
 							} catch ( error ) {
-								context.event = error;
+								context.error = error;
 								on_error( context );
 							}
 
