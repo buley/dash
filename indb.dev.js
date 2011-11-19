@@ -2198,6 +2198,7 @@ var IDB = (function(){
 				} else {
 					instance_data = data;
 				}
+				delete instance_data.id;
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					/* Update */
