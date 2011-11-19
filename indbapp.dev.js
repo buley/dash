@@ -635,7 +635,12 @@ var InDBApp = (function() {
 		var key = request.key;
 		key = ( 'undefined' !== typeof key ) ? key : null;
 		var left = request.left;
-		left = ( 'undefined' !== typeof left ) ? left : 0;
+		if( 'undefined' !== typeof key ) {
+			left = ( 'undefined' !== typeof left ) ? left : null;
+		} else {
+			left = ( 'undefined' !== typeof left ) ? left : 0;
+		}
+
 		var right = request.right;
 		right = ( 'undefined' !== typeof right ) ? right : null;
 		var left_inclusive = request.left_inclusive;
