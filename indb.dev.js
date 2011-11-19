@@ -3042,7 +3042,7 @@ var IDB = (function(){
 							var thing = data[ attr ];
 							if( 'function' === typeof thing ) {
 								var result_value = result;
-								data[ attr ] = thing( result_value );
+								data[ attr ] = thing( result_value[ attr ] );
 								if( !!InDB.debug ) {
 									console.log('InDB.cursor.update parsed data fn', JSON.stringify( data ) );
 								}
