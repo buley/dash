@@ -3028,7 +3028,7 @@ var IDB = (function(){
 		/* Request Responses */
 
 		var total = 0;
-
+		console.log("CURSOR UPDATE",request);
 		request.onsuccess = function ( event ) {	
 
 			/* Context */
