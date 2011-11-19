@@ -3128,6 +3128,17 @@ var IDB = (function(){
 							}
 							total++;
 
+							if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
+								try {	
+
+									cursor[ 'continue' ]();
+								} catch( error ) {
+
+								}
+							}
+
+
+
 
 
 						} catch( error ) {
@@ -3147,18 +3158,6 @@ var IDB = (function(){
 						}
 					}
 				}
-
-				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
-					try {	
-
-						cursor[ 'continue' ]();
-					} catch( error ) {
-
-					}
-				}
-
-
-
 			}
 		}
 
