@@ -3121,8 +3121,10 @@ var IDB = (function(){
 
 							update_request.on_success = function( event ) {
 									
+								on_success( context );
 								if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
-									try {
+									try {	
+
 										cursor[ 'continue' ]();
 									} catch( error ) {
 
@@ -3136,7 +3138,7 @@ var IDB = (function(){
 							}
 							total++;
 
-							on_success( context );
+
 
 						} catch( error ) {
 
