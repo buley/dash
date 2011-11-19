@@ -3036,8 +3036,8 @@ var IDB = (function(){
 					}
 				} else {
 					
-					for( attr in instance_data ) {
-						if( instance_data.hasOwnProperty( attr ) ) {
+					for( attr in data ) {
+						if( data.hasOwnProperty( attr ) ) {
 							//
 							var thing = data[ attr ];
 							if( 'function' === typeof thing ) {
