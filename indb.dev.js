@@ -2114,7 +2114,7 @@ var IDB = (function(){
 		/* Context */
 
 		var context =  { "store": store, "key": key, "index": index, "data": data, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
-
+console.log("ROW DEAL",context);
 		/* Action */
 
 		InDB.trigger( 'InDB_row_update', context );
