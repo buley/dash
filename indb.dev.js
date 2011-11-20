@@ -2216,7 +2216,7 @@ var IDB = (function(){
 						console.log("DOING A LITTLE NIBBLE InDB.row.put",JSON.stringify(instance_data));
 						
 						var new_key = '' + instance_data.i;
-						InDB.row.put( store, instance_data, instance_data.i, on_success, on_error, on_abort, on_complete );
+						InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
 					
 					} catch( error ) {
 
