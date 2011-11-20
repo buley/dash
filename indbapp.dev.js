@@ -22,6 +22,8 @@ var InDBApp = (function() {
 		
 	};
 
+	App.prototype.shh = InDB;
+
 	/* Not chainable */
 	App.prototype.shorthand = App.prototype.shorthand || {};
 	App.prototype.shorthand.set = function( request ) {
