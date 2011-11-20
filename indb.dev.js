@@ -3031,7 +3031,6 @@ var IDB = (function(){
 		/* Request Responses */
 
 		var total = 0;
-		console.log("CURSOR UPDATE",request, JSON.stringify( context ) );
 		
 		request.onsuccess = function ( event ) {	
 
@@ -3120,7 +3119,7 @@ var IDB = (function(){
 						try {
 					
 							try { 
-								var update_request = cursor[ 'update' ]( instance_data );
+								var update_request = event.target.result[ 'update' ]( instance_data );
 							} catch ( error ) {
 								context.event = error;
 								on_error( context );
