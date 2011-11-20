@@ -3110,6 +3110,7 @@ var IDB = (function(){
 				} else {
 					instance_data = data;
 				}
+
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
 						/* Update */
