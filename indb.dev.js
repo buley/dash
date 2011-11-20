@@ -2114,7 +2114,7 @@ var IDB = (function(){
 		/* Context */
 
 		var context =  { "store": store, "key": key, "index": index, "data": data, "replace": replace, "expecting": expecting, "on_success": on_success, "on_error": on_error, "on_abort": on_abort, "on_complete": on_complete };
-console.log("ROW DEAL",context);
+		
 		/* Action */
 
 		InDB.trigger( 'InDB_row_update', context );
@@ -2215,7 +2215,8 @@ console.log("ROW DEAL",context);
 						on_success( context );
 						console.log("DOING A LITTLE NIBBLE InDB.row.put",JSON.stringify(instance_data));
 						
-						InDB.row.put( store, instance_data, instance_data.id, on_success, on_error, on_abort, on_complete );
+						var new_key = '' + instance_data.i;
+						InDB.row.put( store, instance_data, instance_data.i, on_success, on_error, on_abort, on_complete );
 					
 					} catch( error ) {
 
