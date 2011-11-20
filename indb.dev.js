@@ -332,8 +332,6 @@ var IDB = (function(){
 	/* This function is indempodent (you can run it multiple times and it won't do anything */
 	InDB.database.load = function ( name, description, on_success, on_error, on_abort ) {
 
-		InDB.fixBrowser();
-
 		/* Begin Debug */
 		if ( !!InDB.debug ) {
 			console.log ( "InDB.database.load", name, description, on_success, on_error, on_abort );
@@ -4261,6 +4259,8 @@ var IDB = (function(){
 		}
 		return result;	
 	};
+
+	DB.prototype.shh = InDB;
 
 	return DB;
 
