@@ -2996,7 +2996,7 @@ var IDB = (function(){
 
 		/* Optional Index */
 		
-		if ( 1==2 && !InDB.isEmpty( index ) ) {
+		if ( !InDB.isEmpty( index ) ) {
 
 			/* Debug */
 
