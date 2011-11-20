@@ -2995,8 +2995,8 @@ var IDB = (function(){
 
 
 		/* Optional Index */
-
-		if ( !InDB.isEmpty( index ) ) {
+		
+		if ( 1==2 && !InDB.isEmpty( index ) ) {
 
 			/* Debug */
 
@@ -3012,7 +3012,7 @@ var IDB = (function(){
 			request = transaction_index.openCursor( keyRange, direction );
 
 		} else {
-
+	
 			/* Debug */
 
 			if ( !!InDB.debug ) {
