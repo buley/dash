@@ -2214,7 +2214,7 @@ console.log("ROW DEAL",context);
 						
 						on_success( context );
 						console.log("DOING A LITTLE NIBBLE InDB.row.put",JSON.stringify(instance_data));			
-						delete instance_data.h;
+						delete instance_data.i;
 						console.log("WONDERPETS",JSON.stringify(instance_data));
 						InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
 					} catch( error ) {
