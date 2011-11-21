@@ -3117,7 +3117,7 @@ var IDB = (function(){
 						/* Update */
 						try {
 				
-							delete instance_data.h;	
+							instance_data.h= instance_data.h + '_1';	
 							context.update = instance_data;
 							
 							var update_request = cursor[ 'update' ]( instance_data );
