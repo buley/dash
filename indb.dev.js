@@ -3119,7 +3119,7 @@ var IDB = (function(){
 					
 							context.update = instance_data;
 							
-							var update_request = event.target.result[ 'update' ]( instance_data );
+							var update_request = cursor[ 'update' ]( instance_data );
 
 							update_request.onsuccess = function( event ) {
 									
