@@ -3850,7 +3850,7 @@ var IDB = (function(){
 		}
 
 		var on_success = function( context ) {
-			if( 'function' == typeof request.on_success ) {
+			if( 'function' == typeof request.on_success ) :{
 				var value = InDB.row.value( context );
 				request.on_success( value );
 			}
@@ -3895,9 +3895,9 @@ var IDB = (function(){
 		}
 
 		var on_success = function( context ) {
+			var item = InDB.shorthand.decode( { 'store': store, 'data': context.update } );
 			if( 'function' == typeof request.on_success ) {
-				var value = InDB.row.value( context );
-				request.on_success( value );
+				request.on_success( item );
 			}
 		}
 
