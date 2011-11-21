@@ -2127,8 +2127,6 @@ var IDB = (function(){
 
 			var result = InDB.row.value( callback_context.event );
 
-			console.log("SUMMONING MOTH",JSON.stringify(result));
-			/* Debug */
 
 			if ( !!InDB.debug ) {
 				console.log ( 'InDB.cursor.update context.data result', result );
@@ -2238,10 +2236,6 @@ var IDB = (function(){
 					total++;
 
 					on_success( context );
-
-					/* Update */
-					console.log('single.update turning', result, instance_data );
-
 
 				} else {
 					on_error( context );
