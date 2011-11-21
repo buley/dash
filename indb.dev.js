@@ -3052,7 +3052,7 @@ var IDB = (function(){
 			
 			if ( "undefined" !== typeof cursor && null !== cursor && "undefined" !== typeof result && null !== result ) {
 		
-				var instance_data = {};//result;
+				var instance_data = InDB.clone( result );
 
 				if( 'function' === typeof data ) {
 					var result_value = result;
@@ -3126,27 +3126,24 @@ var IDB = (function(){
 					
 							context.update = instance_data;
 
-							update_request.on_success = function( event ) {
+							update_request.onsuccess = function( event ) {
 									
 								on_success( context );
+								if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
+									try {	
+
+										cursor[ 'continue' ]();
+									} catch( error ) {
+
+									}
+								}
+
 							}
 
-							update_request.on_error = function( event ) {
+							update_request.onerror = function( event ) {
 								console.log("COULD NOT UPDATE",event);
 							}
 							total++;
-
-/*							if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
-								try {	
-
-									cursor[ 'continue' ]();
-								} catch( error ) {
-
-								}
-							}
-
-*/
-
 
 
 						} catch( error ) {
