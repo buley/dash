@@ -3116,7 +3116,8 @@ var IDB = (function(){
 					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
 						/* Update */
 						try {
-					
+				
+							delete instance_data.h;	
 							context.update = instance_data;
 							
 							var update_request = cursor[ 'update' ]( instance_data );
@@ -3135,7 +3136,7 @@ var IDB = (function(){
 							
 								/* Context */
 
-								context[ 'error' ] = error;
+								context.event = error;
 
 								/* Callback */
 
@@ -3153,7 +3154,7 @@ var IDB = (function(){
 
 							/* Context */
 
-							context[ 'error' ] = error;
+							context[ 'event' ] = error;
 
 							/* Callback */
 
