@@ -2213,9 +2213,7 @@ var IDB = (function(){
 						total++;
 						
 						on_success( context );
-						console.log("DOING A LITTLE NIBBLE InDB.row.put",JSON.stringify(instance_data));
 						
-						var new_key = '' + instance_data.i;
 						InDB.row.put( store, instance_data, null, on_success, on_error, on_abort, on_complete );
 					
 					} catch( error ) {
@@ -3124,6 +3122,7 @@ var IDB = (function(){
 							update_request.onsuccess = function( event ) {
 									
 								context.event = event;
+								context.update = instance_data;
 
 								on_success( context );
 			
@@ -4125,7 +4124,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item = InDB.shorthand.reverse( { 'store': store, 'key': InDB.cursor.value( context.event ) } );
+			var item = InDB.shorthand.reverse( { 'store': store, 'key': context.update } );
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( item );
 			}
