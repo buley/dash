@@ -3117,7 +3117,6 @@ var IDB = (function(){
 						/* Update */
 						try {
 				
-							instance_data.h= instance_data.h + '_' + Math.random().toString();	
 							context.update = instance_data;
 							
 							var update_request = cursor[ 'update' ]( instance_data );
