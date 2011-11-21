@@ -3117,24 +3117,21 @@ var IDB = (function(){
 						/* Update */
 						try {
 					
-							try { 
-								var update_request = event.target.result[ 'update' ]( instance_data );
-							} catch ( error ) {
-								context.event = error;
-								on_error( context );
-							}
-					
 							context.update = instance_data;
+							
+							var update_request = event.target.result[ 'update' ]( instance_data );
 
-							update_request.on_success = function( event ) {
+							update_request.onsuccess = function( event ) {
 									
+								context.event = event;
+
 								on_success( context );
 			
 								cursor[ 'continue' ]();
 
 							}
 
-							update_request.on_error = function( event ) {
+							update_request.onerror = function( error ) {
 							
 								/* Context */
 
