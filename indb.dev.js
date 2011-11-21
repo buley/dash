@@ -2205,32 +2205,14 @@ var IDB = (function(){
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					/* Update */
-					try {
 						
-						total++;
-						
-						InDB.row.put( store, instance_data, null, function( context ) { 
-							context.update = instance_data;
-							if( 'function' === typeof on_success ) {
-								on_success( context );
-							}	
-						}, on_error, on_abort, on_complete );
-					
-					} catch( error ) {
+					InDB.row.put( store, instance_data, null, function( context ) { 
+						context.update = instance_data;
+						if( 'function' === typeof on_success ) {
+							on_success( context );
+						}	
+					}, on_error, on_abort, on_complete );
 
-						/* Context */
-
-						context[ 'error' ] = error;
-
-						/* Callback */
-
-						on_error( context );
-
-						/* Action */
-
-						InDB.trigger( 'InDB_cursor_row_update_error', context );
-
-					}
 				}
 
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
