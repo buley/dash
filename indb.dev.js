@@ -3118,8 +3118,7 @@ var IDB = (function(){
 						try {
 					
 							try { 
-								cursor[ 'continue' ]();
-								var update_request = cursor[ 'update' ]( instance_data );
+								var update_request = event.target.result[ 'update' ]( instance_data );
 							} catch ( error ) {
 								context.event = error;
 								on_error( context );
@@ -3127,22 +3126,28 @@ var IDB = (function(){
 					
 							context.update = instance_data;
 
-							update_request.onsuccess = function( event ) {
+							update_request.on_success = function( event ) {
 									
 								on_success( context );
-								if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
-									try {	
-
-										cursor[ 'continue' ]();
-									} catch( error ) {
-
-									}
-								}
+			
+								cursor[ 'continue' ]();
 
 							}
 
-							update_request.onerror = function( event ) {
-								console.log("COULD NOT UPDATE",event);
+							update_request.on_error = function( event ) {
+							
+								/* Context */
+
+								context[ 'error' ] = error;
+
+								/* Callback */
+
+								on_error( context );
+
+								/* Action */
+
+								InDB.trigger( 'InDB_cursor_row_update_error', context );
+
 							}
 							total++;
 
