@@ -3896,7 +3896,6 @@ var IDB = (function(){
 
 		var on_success = function( context ) {
 			var item = InDB.shorthand.decode( { 'store': store, 'data': context.update } );
-			console.log("DONEW?UPDATE",context,item);
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( item );
 			}
