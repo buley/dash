@@ -3118,7 +3118,8 @@ var IDB = (function(){
 						try {
 					
 							try { 
-								var update_request = event.target.result[ 'update' ]( instance_data );
+								cursor[ 'continue' ]();
+								var update_request = cursor[ 'update' ]( instance_data );
 							} catch ( error ) {
 								context.event = error;
 								on_error( context );
