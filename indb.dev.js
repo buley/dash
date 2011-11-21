@@ -4124,7 +4124,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var item = InDB.shorthand.reverse( { 'store': store, 'key': context.update } );
+			var item = InDB.shorthand.decode( { 'store': store, 'data': context.update } );
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( item );
 			}
