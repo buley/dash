@@ -2134,7 +2134,7 @@ var IDB = (function(){
 			
 			if ( "undefined" !== typeof result && null !== result ) {
 		
-				var instance_data = {};
+				var instance_data = result;
 
 				if( 'function' === typeof data ) {
 					var result_value = result;
