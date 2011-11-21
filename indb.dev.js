@@ -2152,7 +2152,6 @@ var IDB = (function(){
 								var result_value = result;
 
 								data[ attr ] = thing( result_value[ attr ] );
-								console.log("MOTH SUMMONED",attr,data,data[attr]);
 								if( !!InDB.debug ) {
 									console.log('InDB.cursor.update parsed data fn', JSON.stringify( data ) );
 								}
@@ -2213,7 +2212,6 @@ var IDB = (function(){
 						InDB.row.put( store, instance_data, null, function( context ) { 
 							context.update = instance_data;
 							if( 'function' === typeof on_success ) {
-								console.log('doing successful row mupdate',context);
 								on_success( context );
 							}	
 						}, on_error, on_abort, on_complete );
