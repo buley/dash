@@ -2134,7 +2134,7 @@ var IDB = (function(){
 			
 			if ( "undefined" !== typeof result && null !== result ) {
 		
-				var instance_data = result;
+				var instance_data = {};
 
 				if( 'function' === typeof data ) {
 					var result_value = result;
@@ -2213,6 +2213,7 @@ var IDB = (function(){
 						InDB.row.put( store, instance_data, null, function( context ) { 
 							context.update = instance_data;
 							if( 'function' === typeof on_success ) {
+								console.log('doing successful row mupdate',context);
 								on_success( context );
 							}	
 						}, on_error, on_abort, on_complete );
