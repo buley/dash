@@ -1945,6 +1945,8 @@ var IDB = (function(){
 			if( !!InDB.debug ) {
 				console.log('InDB.cursor.update', JSON.stringify( instance_data ) );
 			}
+		} else {
+			instance_data = InDB.clone( data );
 		}
 
 		/* Context */
