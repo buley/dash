@@ -3929,8 +3929,8 @@ var IDB = (function(){
 		var direction = request.direction;
 		var limit = request.limit;
 		var key = request.key;
-		var begin = request.begin;
-		var end = request.end;
+		var begin = request.left;
+		var end = request.right;
 		var left_inclusive = request.left_inclusive;
 		var right_inclusive = request.right_inclusive;
 
