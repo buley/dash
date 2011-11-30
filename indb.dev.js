@@ -218,7 +218,7 @@ var IDB = (function(){
 				//base case: string value
 				var value = object[ itemobj ];
 				if( "[object Object]" === value.toString() ) {
-					encoded[ InDB.shorthand.reverse( { 'store': store, 'key': itemobj } ) ] = InDB.shorthand.decode( { 'database': store, 'data': value } );
+					encoded[ InDB.shorthand.reverse( { 'store': store, 'key': itemobj } ) ] = InDB.shorthand.decode( { 'store': store, 'data': value } );
 					delete value;
 				} else { 
 					encoded[ InDB.shorthand.reverse( { 'store': store, 'key': itemobj } ) ] = value;
