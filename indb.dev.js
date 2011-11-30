@@ -219,6 +219,7 @@ var IDB = (function(){
 					encoded[ InDB.shorthand.reverse( { 'store': store, 'key': itemobj } ) ] = InDB.shorthand.decode( { 'database': request.database, 'data': value } );
 					delete value;
 				} else { 
+					console.log('regular',itemobj,value);
 					encoded[ InDB.shorthand.reverse( { 'store': store, 'key': itemobj } ) ] = value;
 					delete value;
 				}
