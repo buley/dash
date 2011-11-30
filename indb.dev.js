@@ -190,6 +190,7 @@ var IDB = (function(){
 		var reversed = {};
 		var shorthand_map = InDB.shorthand.map.get( request.store );
 		var store = request.store;
+		console.log('requre',request,shorthand_map);
 		for( var item in shorthand_map ) {
 			if( shorthand_map.hasOwnProperty( item ) ) {
 				reversed[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = item;
