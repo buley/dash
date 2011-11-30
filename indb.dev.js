@@ -196,7 +196,7 @@ var IDB = (function(){
 				reversed[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = item;
 			}
 		}
-		console.log('requre',request,shorthand_map,reversed,k);
+		console.log('reversed',k,reversed[k]);
 		if( 'undefined' !== typeof reversed[ k ] ) {
 			return reversed[ k ];
 		} else {
