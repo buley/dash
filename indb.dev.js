@@ -190,12 +190,13 @@ var IDB = (function(){
 		var reversed = {};
 		var shorthand_map = InDB.shorthand.map.get( request.store );
 		var store = request.store;
-		console.log('requre',request,shorthand_map);
+
 		for( var item in shorthand_map ) {
 			if( shorthand_map.hasOwnProperty( item ) ) {
 				reversed[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = item;
 			}
 		}
+		console.log('requre',request,shorthand_map,reversed,k);
 		if( 'undefined' !== typeof reversed[ k ] ) {
 			return reversed[ k ];
 		} else {
@@ -220,7 +221,6 @@ var IDB = (function(){
 					encoded[ InDB.shorthand.reverse( { 'store': store, 'key': itemobj } ) ] = InDB.shorthand.decode( { 'database': request.database, 'data': value } );
 					delete value;
 				} else { 
-					console.log('regular',itemobj,InDB.shorthand.reverse( { 'store': store, 'key': itemobj }));
 					encoded[ InDB.shorthand.reverse( { 'store': store, 'key': itemobj } ) ] = value;
 					delete value;
 				}
