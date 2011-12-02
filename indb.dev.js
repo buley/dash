@@ -3943,6 +3943,7 @@ var IDB = (function(){
 
 		/* Defaults */
 		direction = ( InDB.cursor.isDirection( direction ) ) ? direction : InDB.cursor.direction.next();
+		console.log("BEING HOT AND DOING BABY TALK",limit);
 		limit = ( 'undefined' !== typeof limit ) ? limit : null;
 		expecting = ( 'undefined' !== typeof expecting ) ? expecting : null;
 		begin = ( 'undefined' !== typeof begin ) ? begin : null;
