@@ -90,7 +90,7 @@ var IDB = (function(){
 
 	InDB.database.version = 1;
 
-	InDB.debug = true;;
+	InDB.debug = true;
 
 	InDB.events.onComplete = function ( e ) {
 		if ( !!InDB.debug ) {
@@ -2742,7 +2742,7 @@ var IDB = (function(){
 
 				}
 
-
+				console.log("TOTAL",total,"LIMIT",limit);
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
 						/* Update */
