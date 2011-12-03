@@ -2208,7 +2208,6 @@ var IDB = (function(){
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					/* Update */
-				console.log("DOING PUT",on_success);		
 					InDB.row.put( store, instance_data, null, function( context ) { 
 					console.log("DONE PUT",on_success);
 						context.update = instance_data;
