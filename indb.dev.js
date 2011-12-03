@@ -2208,8 +2208,9 @@ var IDB = (function(){
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					/* Update */
-						
+				console.log("DOING PUT");		
 					InDB.row.put( store, instance_data, null, function( context ) { 
+					console.log("DONE PUT");
 						context.update = instance_data;
 						if( 'function' === typeof on_success ) {
 							on_success( context );
@@ -2223,8 +2224,6 @@ var IDB = (function(){
 					/* Callback */
 
 					total++;
-
-					on_success( context );
 
 				} else {
 					on_error( context );
