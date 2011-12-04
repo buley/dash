@@ -695,7 +695,7 @@ var IDB = (function(){
 		var context = { 'stores': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
 
 		if( !!InDB.debug ) {
-		console.log('InDB.stores.create', context );
+			console.log('InDB.stores.create', context );
 		}
 
 		//TODO: Assertions
@@ -926,6 +926,7 @@ var IDB = (function(){
 
 		setVersionRequest.onblocked = function ( event ) {
 			context[ 'event' ] = event;
+			console.log("COCKBLOCK",event);
 			on_blocked( context );
 			InDB.trigger( "InDB_store_created_error", context );
 		};
