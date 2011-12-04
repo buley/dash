@@ -875,7 +875,7 @@ var IDB = (function(){
 		// Database changes must happen w/in a setVersion transaction
 		var version = parseInt( InDB.db.version, 10 );
 		version = ( isNaN( version ) ) ? 1 : version + 1;
-		
+		console.log("VERSION FOR VERSION CHANGE",version);	
 		var setVersionRequest = InDB.db.setVersion( version );
 		if( !!InDB.debug ) {
 			console.log( 'InDB.store.create setVersionRequest', setVersionRequest );
@@ -926,7 +926,6 @@ var IDB = (function(){
 
 		setVersionRequest.onblocked = function ( event ) {
 			context[ 'event' ] = event;
-			console.log("COCKBLOCK",event);
 			on_blocked( context );
 			InDB.trigger( "InDB_store_created_error", context );
 		};
