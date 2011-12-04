@@ -2739,7 +2739,6 @@ var IDB = (function(){
 
 				}
 
-				console.log("TOTAL",total,"LIMIT",limit);
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
 						/* Update */
@@ -2764,7 +2763,10 @@ var IDB = (function(){
 
 						}
 					}
+				} else {
+					throw "exit";
 				}
+
 				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
 					try {
 						cursor[ 'continue' ]();
