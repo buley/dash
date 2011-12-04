@@ -704,16 +704,16 @@ var IDB = (function(){
 			var options = stores[ store ];
 
 			if ( InDB.isString( options ) ) {
-				/* options object is really a string
-				 * recast options var from a string to a
-				 * real deal options object */
+				/* if options var is a string
+				 * recast options var from a string to an
+				 * options object */
 				options = InDB.store.options( options );
 			}
 
 			if ( !InDB.store.exists( store ) ) {
 				/* Setup */
 				if( !!InDB.debug ) {
-				console.log('Store doesn\'t yet exist', store, options  );
+					console.log('Store doesn\'t yet exist', store, options  );
 				}
 				//TODO: Cleanup; if/else logic here is a little muddy (why the empty_key var?)
 				var key, autoinc_key, empty_key, unique;
@@ -757,6 +757,10 @@ var IDB = (function(){
 					
 				InDB.store.create( store, key, autoinc_key, on_success, on_error, on_abort );
 
+			} else {
+				if( !!InDB.debug ) {
+					console.log( "Store exists", store );
+				}
 			}
 		}
 	};
@@ -3652,7 +3656,7 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var indexes = request.indexes;
-		console.log("HELLO DARLING",indexes);
+		
 		if( !InDB.assert( 'undefined' !== typeof indexes && 'undefined' !== typeof indexes.primary && 'undefined' !== typeof indexes.primary.key, 'Must set a primary key' ) ) {
 			return this;
 		}
