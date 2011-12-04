@@ -2764,7 +2764,7 @@ var IDB = (function(){
 						}
 					}
 				} else {
-					throw "exit";
+					return;
 				}
 
 				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
