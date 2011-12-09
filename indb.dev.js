@@ -89,7 +89,7 @@ var IDB = (function(){
 
 	InDB.database.version = 1;
 
-	InDB.debug = true;
+	InDB.debug = false;
 
 	InDB.events.onComplete = function ( e ) {
 		if ( !!InDB.debug ) {
