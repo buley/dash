@@ -4071,9 +4071,9 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		/* Setup */
-
+		console.log("REMOVEME",key,begin,end,left_inclusive);
 		var keyRange = InDB.range.get( key, begin, end, left_inclusive, right_inclusive );
-
+		console.log("REMOVEMEDONE",keyRange);
 		/* Request */
 
 		InDB.trigger( 'InDB_do_cursor_delete', { 'store': store, 'keyRange': keyRange, 'expecting': expecting, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
