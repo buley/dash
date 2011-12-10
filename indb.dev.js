@@ -3769,8 +3769,8 @@ var IDB = (function(){
 
 		var on_success = function( context ) {
 			if( 'function' == typeof request.on_success ) {
-				var value = InDB.row.value( context );
-				request.on_success( value );
+				var value = InDB.shorthand.decode( { 'store': store, 'data': InDB.row.value( context ) } );
+				request.on_success( result );
 			}
 		}
 
@@ -4038,7 +4038,7 @@ var IDB = (function(){
 		/* Callbacks */
 
 		var on_success = function ( context ) {
-			var result = InDB.cursor.value( context.event );
+			var result = InDB.shorthand.decode( { 'store': store, 'data': InDB.cursor.value( context.event ) } );
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( result );
 			}
