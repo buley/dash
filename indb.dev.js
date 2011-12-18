@@ -29,6 +29,7 @@ var IDB = (function(){
 	/**
 	 * Namespaces:
 	 *   InDB - application namespace
+		console.log( 'Tags installed', context );
 	 *   InDB.db - namespace for the open IndexedDB instance (IDBFactory)
 	 *   InDB.dbs = namespace for open databases (reserved)
 	 *   InDB.database - namepspace for database methods (IDBDatabase)
@@ -643,6 +644,9 @@ var IDB = (function(){
 			return InDB.db.objectStores[ 'contains' ]( name ); //TODO: #Question: Not in IndexedDB spec?
 		} */
 		var stores = InDB.db.objectStoreNames;
+		if( 'undefined' === typeof InDB.db ) {
+			return false;
+		}
 		for( i=0; i < stores.length; i++ ) {
 			if ( name === stores[ i ] ) {
 				return true;
