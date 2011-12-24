@@ -2747,31 +2747,7 @@ var IDB = (function(){
 				}
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
-					if( !InDB.isEmpty( cursor ) && 'function' == typeof cursor.update ) {
-						/* Update */
-						try {
-							total++;
-							
-							on_success( context );
-
-						} catch( error ) {
-
-							/* Context */
-
-							context[ 'error' ] = error;
-
-							/* Callback */
-
-							on_error( context );
-
-							/* Action */
-
-							InDB.trigger( 'InDB_cursor_row_update_error', context );
-
-						}
-					}
-				} else {
-					return;
+					total++;
 				}
 
 				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
