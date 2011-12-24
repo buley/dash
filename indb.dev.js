@@ -2226,12 +2226,7 @@ var IDB = (function(){
 
 				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
 
-					/* Callback */
-
 					total++;
-
-				} else {
-					on_error( context );
 				}
 			}
 
@@ -2748,6 +2743,9 @@ var IDB = (function(){
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					total++;
+					if( 'function' == on_success ) {
+						on_success( context );
+					}
 				}
 
 				if( !InDB.isEmpty( cursor ) && 'function' === typeof cursor.continue ) {
