@@ -1982,7 +1982,14 @@ var IDB = (function(){
 		}
 
 		//use this[ 'format' ] for function invocation to avoid a Closure compiler error
-		var request = transaction[ 'add' ]( instance_data );
+		if( 'function' === typeof transaction[ 'add' ] ) { 
+			var request = transaction[ 'add' ]( instance_data );
+		} else {
+			context[ 'event' ] = event;
+			on_error( context );
+			return;
+		}
+
 		request.onsuccess = function ( event ) {	
 
 			/* Context */
