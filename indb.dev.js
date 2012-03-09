@@ -1388,12 +1388,9 @@ var IDB = (function(){
 
 	/* Transaction factory */
 	InDB.transaction.create = function ( database, type, on_complete, on_error, on_abort ) {
-		InDB.trigger( 'InDB_create_transaction', { "name": name, "type": type, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );		
+		InDB.trigger( 'InDB_create_transaction', { "database": database, "type": type, "on_complete": on_complete, "on_error": on_error, "on_abort": on_abort } );		
 		if ( "undefined" === typeof type ) {
 			type = IDBTransaction.READ_WRITE;
-		}
-		if ( "undefined" === typeof timeout ) {
-			timeout = 1000;
 		}
 		if ( "undefined" === typeof on_complete ) {
 			on_complete = InDB.events.onComplete;
@@ -1406,20 +1403,20 @@ var IDB = (function(){
 		}
 		try {
 			if ( !!InDB.debug ) {
-				console.log ( "InDB.db.transaction.create", database, type, timeout );
+				console.log ( "InDB.db.transaction.create", database, type );
 			}
-			var transaction = InDB.db.transaction( [ database ], type, timeout );
+			var transaction = InDB.db.transaction( [ database ], type );
 			transaction.oncomplete = function ( event ) {
 				on_complete( event );
-				InDB.trigger( 'transaction_complete', { "database": database, "type": type, "timeout": timeout } );
+				InDB.trigger( 'transaction_complete', { "database": database, "type": type } );
 			};
 			transaction.onerror = function ( event ) {
 				on_error( event );
-				InDB.trigger( 'transaction_error', { "database": database, "type": type, "timeout": timeout } );
+				InDB.trigger( 'transaction_error', { "database": database, "type": type } );
 			};
 			transaction.onabort = function ( event ) {
 				on_abort( event );
-				InDB.trigger( 'transaction_abort', { "database": database, "type": type, "timeout": timeout } );
+				InDB.trigger( 'transaction_abort', { "database": database, "type": type } );
 			};
 			return transaction.objectStore( database );
 		} catch ( event ) {
