@@ -89,6 +89,7 @@ var IDB = (function(){
 	/* Begin Defaults */
 
 	InDB.database.version = 1;
+	InDB.database.name = 'InDB_DB';
 
 	InDB.debug = false;
 
@@ -119,6 +120,12 @@ var IDB = (function(){
 	InDB.events.onBlocked = function ( e ) {
 		if ( !!InDB.debug ) {
 			console.log ( "IndexedDB request blocked", e.event.target.result );
+		}
+	};
+
+	InDB.events.onUpgradeNeeded = function ( e ) {
+		if ( !!InDB.debug ) {
+			console.log ( "IndexedDB upgrade needed", e.event.target.result );
 		}
 	};
 
@@ -332,6 +339,9 @@ var IDB = (function(){
 
 	/* This function is indempodent (you can run it multiple times and it won't do anything */
 	InDB.database.load = function ( name, version, on_success, on_error, on_abort ) {
+
+		InDB.database.name = name;
+		InDB.database.version = version;
 
 		/* Begin Debug */
 		if ( !!InDB.debug ) {
@@ -816,7 +826,7 @@ var IDB = (function(){
 	/* return true if request is successfully requested (no bearing on result)
 	/* autoinc_key defaults to false if a key is specified;
 	   key gets set to "key" and autoincrements when key is not specified */
-	InDB.store.create = function ( name, key, autoinc_key, on_success, on_error, on_abort, on_blocked ) {
+	InDB.store.create = function ( name, key, autoinc_key, on_success, on_error, on_abort, on_blocked, on_upgrade_needed, version ) {
 		
 		/* Debug */
 		
@@ -843,6 +853,10 @@ var IDB = (function(){
 
 		var keyPath = null;
 
+		if ( 'undefined' === typeof version ) {
+			version = null;
+		}
+
 		if ( 'undefined' !== typeof key ) {
 			keyPath = key;	
 		}
@@ -866,8 +880,11 @@ var IDB = (function(){
 		if ( "undefined" === typeof on_blocked ) {
 			on_blocked = InDB.events.onBlocked;
 		}
+		if ( "undefined" === typeof on_upgrade_needed ) {
+			on_upgrade_needed = InDB.events.onUpgradeNeeded;
+		}
 		
-		var context =  { "name": name, "keyPath": keyPath, "autoinc_key": autoinc_key };
+		var context =  { "name": name, "version": version, "keyPath": keyPath, "autoinc_key": autoinc_key };
 
 		/* Debug */
 		
@@ -877,48 +894,76 @@ var IDB = (function(){
 
 		if( 'function' !== typeof InDB.db.setVersion ) { 
 
-			try {
+			version = ( isNaN( version ) ) ? 1 : parseInt( InDB.db.version, 10 ) + 1;
 
-				/* Database options */
+			var upgradeRequest = window.indexedDB.open( InDB.database.name, version );
 
-				var options = {};
-				
-				if( 'undefined' !== typeof keyPath && null !== keyPath ) {
-					if( !!InDB.debug ) {
-						console.log( 'InDB.store.create keyPath', keyPath );
+			if( !!InDB.debug ) {
+				console.log( 'InDB.store.create upgradeRequest', upgradeRequest );
+			}
+			upgradeRequest.onupgradeneeded = function ( event ) {
+				try {
+
+					/* Database options */
+
+					var options = {};
+					
+					if( 'undefined' !== typeof keyPath && null !== keyPath ) {
+						if( !!InDB.debug ) {
+							console.log( 'InDB.store.create keyPath', keyPath );
+						}
+						options[ 'keyPath' ] = keyPath;
+					} 
+					if( 'undefined' !== typeof autoinc_key && null !== autoinc_key ) {
+						if( !!InDB.debug ) {
+							console.log( 'InDB.store.create autoIncrement', autoinc_key );
+						}
+						options[ 'autoIncrement' ] = autoinc_key;
 					}
-					options[ 'keyPath' ] = keyPath;
-				} 
-				if( 'undefined' !== typeof autoinc_key && null !== autoinc_key ) {
+					
 					if( !!InDB.debug ) {
-						console.log( 'InDB.store.create autoIncrement', autoinc_key );
+						console.log('InDB.store.create options', options );
+					}	
+					InDB.db.createObjectStore( name, options );
+
+					context[ 'event' ] = event;
+
+					on_success( context );
+
+					InDB.trigger( "InDB_store_created_success", context );
+
+				} catch( error ) {
+
+					// createdObject store threw an error 
+					context[ 'error' ] = error;
+					on_error( context );
+					InDB.trigger( "InDB_store_created_error", context );
+					//if already created, then the store already exists
+					if ( IDBDatabaseException.CONSTRAINT_ERR === error.code ) {
+						InDB.trigger( "InDB_store_already_exists", context );
 					}
-					options[ 'autoIncrement' ] = autoinc_key;
 				}
-				
-				if( !!InDB.debug ) {
-					console.log('InDB.store.create options', options );
-				}	
+			};
 
-				var e = InDB.db.createObjectStore( name, options );
+			upgradeRequest.onblocked = function ( event ) {
+				context[ 'event' ] = event;
+				on_blocked( context );
+				InDB.trigger( "InDB_store_created_error", context );
+			};
 
-				context[ 'event' ] = e;
-
-				on_success( context );
-
-				InDB.trigger( "InDB_store_created_success", context );
-
-			} catch( error ) {
-
-				// createdObject store threw an error 
-				context[ 'error' ] = error;
+			upgradeRequest.onerror = function ( event ) {
+				context[ 'event' ] = event;
 				on_error( context );
 				InDB.trigger( "InDB_store_created_error", context );
-				//if already created, then the store already exists
-				if ( IDBDatabaseException.CONSTRAINT_ERR === error.code ) {
-					InDB.trigger( "InDB_store_already_exists", context );
-				}
-			}
+			};
+
+			upgradeRequest.onabort = function ( event ) {
+				context[ 'event' ] = event;
+				on_abort( context );
+				InDB.trigger( "InDB_store_created_abort", context );
+			};
+
+
 
 		} else {
 
