@@ -3985,9 +3985,9 @@ var IDB = (function(){
 			}
 		};
 
-		var on_complete = function () {
+		var on_complete = function ( req ) {
 			if( 'function' == typeof request.on_complete ) {
-				request.on_complete();
+				request.on_complete( req );
 			}
 		};
 
