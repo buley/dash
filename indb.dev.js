@@ -381,7 +381,9 @@ var IDB = (function(){
 			InDB.trigger( 'InDB_database_load_success', context );
 			InDB.trigger( 'InDB_stores_load_success', context );
 		} else {
-			var open_request = window.indexedDB.open( name, description );
+			window.indexedDB.open( name, description );
+			//xxx
+			/*
 			open_request.onsuccess = function ( event ) {
 				var result = event.target.result;
 				InDB.db = result;
@@ -389,7 +391,7 @@ var IDB = (function(){
 				if ( isNaN( InDB.db.version ) ) {
 					InDB.trigger( 'InDB_database_load_success', result );
 					InDB.trigger( 'InDB_database_created_success', result );
-					/* Database is unversioned, so create object stores */
+					//Database is unversioned, so create object stores
 					InDB.trigger( 'InDB_stores_load_success', result );
 				} else {
 					InDB.trigger( 'InDB_database_load_success', result );
@@ -405,7 +407,7 @@ var IDB = (function(){
 				context[ 'event' ] = event;
 				on_abort( context );
 				InDB.trigger( 'InDB_database_load_error' )
-			}
+			}*/
 		}
 	}
 
