@@ -3663,12 +3663,12 @@ var IDB = (function(){
 		DB.prototype.store.create( { 'store': store, 'indexes': request.indexes, 'on_success': function() {
 
 			DB.prototype.index.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( result ) {
-				console.log( 'DB.install() success' );
+				console.log( 'DB.install() index success' );
 				if( 'function' === typeof request.on_success ) {
 					request.on_success( result );
 				}			
 			}, 'on_error': function( context ) {
-				console.log( 'DB.install() error' );
+				console.log( 'DB.install() index error' );
 				if( 'function' === typeof request.on_error ) {
 					request.on_error( context );
 				}
