@@ -405,7 +405,7 @@ var IDB = (function(){
 				context[ 'event' ] = event;
 				on_abort( context );
 				InDB.trigger( 'InDB_database_load_error' )
-			}*/
+			}
 		}
 	}
 
