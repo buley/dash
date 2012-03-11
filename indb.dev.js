@@ -875,15 +875,8 @@ var IDB = (function(){
 			console.log( 'InDB.store.create context', context );
 		}
 
-		// Database changes must happen w/in a setVersion transaction
-		var version = parseInt( InDB.db.version, 10 );
-		version = ( isNaN( version ) ) ? 1 : version + 1;
+		if( 'function' !== typeof InDB.db.setVersion ) { 
 
-		var setVersionRequest = InDB.db.setVersion( version );
-		if( !!InDB.debug ) {
-			console.log( 'InDB.store.create setVersionRequest', setVersionRequest );
-		}
-		setVersionRequest.onsuccess = function ( event ) {
 			try {
 
 				/* Database options */
@@ -925,25 +918,81 @@ var IDB = (function(){
 					InDB.trigger( "InDB_store_already_exists", context );
 				}
 			}
-		};
 
-		setVersionRequest.onblocked = function ( event ) {
-			context[ 'event' ] = event;
-			on_blocked( context );
-			InDB.trigger( "InDB_store_created_error", context );
-		};
+		} else {
 
-		setVersionRequest.onerror = function ( event ) {
-			context[ 'event' ] = event;
-			on_error( context );
-			InDB.trigger( "InDB_store_created_error", context );
-		};
+			// Pre FF10:
+			// Database changes must happen w/in a setVersion transaction
+			var version = parseInt( InDB.db.version, 10 );
+			version = ( isNaN( version ) ) ? 1 : version + 1;
 
-		setVersionRequest.onabort = function ( event ) {
-			context[ 'event' ] = event;
-			on_abort( context );
-			InDB.trigger( "InDB_store_created_abort", context );
-		};
+			var setVersionRequest = InDB.db.setVersion( version );
+			if( !!InDB.debug ) {
+				console.log( 'InDB.store.create setVersionRequest', setVersionRequest );
+			}
+			setVersionRequest.onsuccess = function ( event ) {
+				try {
+
+					/* Database options */
+
+					var options = {};
+					
+					if( 'undefined' !== typeof keyPath && null !== keyPath ) {
+						if( !!InDB.debug ) {
+							console.log( 'InDB.store.create keyPath', keyPath );
+						}
+						options[ 'keyPath' ] = keyPath;
+					} 
+					if( 'undefined' !== typeof autoinc_key && null !== autoinc_key ) {
+						if( !!InDB.debug ) {
+							console.log( 'InDB.store.create autoIncrement', autoinc_key );
+						}
+						options[ 'autoIncrement' ] = autoinc_key;
+					}
+					
+					if( !!InDB.debug ) {
+						console.log('InDB.store.create options', options );
+					}	
+					InDB.db.createObjectStore( name, options );
+
+					context[ 'event' ] = event;
+
+					on_success( context );
+
+					InDB.trigger( "InDB_store_created_success", context );
+
+				} catch( error ) {
+
+					// createdObject store threw an error 
+					context[ 'error' ] = error;
+					on_error( context );
+					InDB.trigger( "InDB_store_created_error", context );
+					//if already created, then the store already exists
+					if ( IDBDatabaseException.CONSTRAINT_ERR === error.code ) {
+						InDB.trigger( "InDB_store_already_exists", context );
+					}
+				}
+			};
+
+			setVersionRequest.onblocked = function ( event ) {
+				context[ 'event' ] = event;
+				on_blocked( context );
+				InDB.trigger( "InDB_store_created_error", context );
+			};
+
+			setVersionRequest.onerror = function ( event ) {
+				context[ 'event' ] = event;
+				on_error( context );
+				InDB.trigger( "InDB_store_created_error", context );
+			};
+
+			setVersionRequest.onabort = function ( event ) {
+				context[ 'event' ] = event;
+				on_abort( context );
+				InDB.trigger( "InDB_store_created_abort", context );
+			};
+		
+		}
 
 	}
 
@@ -1120,13 +1169,8 @@ var IDB = (function(){
 
 		/* Request */
 
-		// Database changes need to happen from w/in a setVersionRequest
-		var version = ( parseInt( InDB.db.version, 10 ) ) ? parseInt( InDB.db.version, 10 ) : 0;
-		var setVersionRequest = InDB.db.setVersion( version );
+		if( 'function' !== typeof InDB.db.setVersion ) {
 
-		/* Request Responses */
-
-		setVersionRequest.onsuccess = function ( event ) {
 			var result = event.target.result;
 			var databaseTransaction = result.objectStore( store );
 			context[ 'event' ] = event;
@@ -1140,18 +1184,42 @@ var IDB = (function(){
 				console.log( error );
 				on_error( error );
 			}
-		};
 
-		setVersionRequest.onerror = function ( event ) {
-			context[ 'event' ] = event;
-			on_error( context );
-		};
+		} else {
+			//pre FF10
+		
+			// Database changes need to happen from w/in a setVersionRequest
+			var version = ( parseInt( InDB.db.version, 10 ) ) ? parseInt( InDB.db.version, 10 ) : 0;
+			var setVersionRequest = InDB.db.setVersion( version );
 
-		setVersionRequest.onabort = function ( event ) {
-			context[ 'event' ] = event;
-			on_abort( context );
-		};
+			/* Request Responses */
 
+			setVersionRequest.onsuccess = function ( event ) {
+				var result = event.target.result;
+				var databaseTransaction = result.objectStore( store );
+				context[ 'event' ] = event;
+				try {
+					databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
+					if( !!InDB.debug ) {
+						console.log( 'InDB.index.create transaction', databaseTransaction );
+					}
+					on_success( context );
+				} catch ( error ) {
+					console.log( error );
+					on_error( error );
+				}
+			};
+
+			setVersionRequest.onerror = function ( event ) {
+				context[ 'event' ] = event;
+				on_error( context );
+			};
+
+			setVersionRequest.onabort = function ( event ) {
+				context[ 'event' ] = event;
+				on_abort( context );
+			};
+		}
 	}
 
 	//context.store, context.key, context.index, context.on_success, context.on_error, context.on_abort
@@ -1217,14 +1285,8 @@ var IDB = (function(){
 
 		/* Request */
 
-		// Database changes need to happen from w/in a setVersionRequest
-		var version = ( parseInt( InDB.db.version, 10 ) ) ? parseInt( InDB.db.version, 10 ) : 0;
-		var setVersionRequest = InDB.db.setVersion( version );
+		if( 'function' !== typeof InDB.db.setVersion ) {
 
-		/* Request Responses */
-
-		setVersionRequest.onsuccess = function ( event ) {
-		
 			var result = event.target.result;
 			var databaseTransaction = result.objectStore( store );
 			if( !!InDB.debug ) {
@@ -1250,18 +1312,54 @@ var IDB = (function(){
 				InDB.trigger( 'index_created_abort', context );
 			};		
 
-		};
+		} else {
+			// pre-FF10:
+			// Database changes need to happen from w/in a setVersionRequest
+			var version = ( parseInt( InDB.db.version, 10 ) ) ? parseInt( InDB.db.version, 10 ) : 0;
+			var setVersionRequest = InDB.db.setVersion( version );
 
-		setVersionRequest.onerror = function ( event ) {
-			context[ 'event' ] = event;
-			on_error( context );
-		};
+			/* Request Responses */
 
-		setVersionRequest.onabort = function ( event ) {
-			context[ 'event' ] = event;
-			on_abort( context );
-		};
+			setVersionRequest.onsuccess = function ( event ) {
+			
+				var result = event.target.result;
+				var databaseTransaction = result.objectStore( store );
+				if( !!InDB.debug ) {
+					console.log( 'InDB.index.delete setVersionRequest.onsuccess', databaseTransaction );
+				}
+				databaseTransaction.deleteIndex( name );
 
+				databaseTransaction.onsuccess = function ( event ) {
+					context[ 'event' ] = event;
+					on_success( context );
+					InDB.trigger( 'index_created_success', context );
+				};
+
+				databaseTransaction.onerror = function ( event ) {
+					context[ 'event' ] = event;
+					on_error( context );
+					InDB.trigger( 'index_created_error', context );
+				};
+
+				databaseTransaction.onabort = function ( event ) {
+					context[ 'event' ] = event;
+					on_abort( context );
+					InDB.trigger( 'index_created_abort', context );
+				};		
+
+			};
+
+			setVersionRequest.onerror = function ( event ) {
+				context[ 'event' ] = event;
+				on_error( context );
+			};
+
+			setVersionRequest.onabort = function ( event ) {
+				context[ 'event' ] = event;
+				on_abort( context );
+			};
+
+		}
 	}
 
 	InDB.database.open = function ( name, description, on_success, on_error, on_abort ) {
