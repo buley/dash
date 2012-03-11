@@ -331,15 +331,15 @@ var IDB = (function(){
 
 
 	/* This function is indempodent (you can run it multiple times and it won't do anything */
-	InDB.database.load = function ( name, description, on_success, on_error, on_abort ) {
+	InDB.database.load = function ( name, version, on_success, on_error, on_abort ) {
 
 		/* Begin Debug */
 		if ( !!InDB.debug ) {
-			console.log ( "InDB.database.load", name, description, on_success, on_error, on_abort );
+			console.log ( "InDB.database.load", name, version, on_success, on_error, on_abort );
 		}
 		/* End Debug */
 
-		var context = { "name": name, "description": description, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
+		var context = { "name": name, "version": version, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
 
 
 		/* Assertions */	
@@ -381,9 +381,7 @@ var IDB = (function(){
 			InDB.trigger( 'InDB_database_load_success', context );
 			InDB.trigger( 'InDB_stores_load_success', context );
 		} else {
-			window.indexedDB.open( name, description );
-			//xxx
-			/*
+			var open_request = window.indexedDB.open( name, version );
 			open_request.onsuccess = function ( event ) {
 				var result = event.target.result;
 				InDB.db = result;
