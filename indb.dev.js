@@ -2080,9 +2080,12 @@ var IDB = (function(){
 		if( 'function' === typeof transaction[ 'add' ] ) { 
 			var request = transaction[ 'add' ]( instance_data );
 		} else {
-			context[ 'event' ] = event;
+		
+			if( 'undefined' !== typeof event ) {
+				context[ 'event' ] = event;
+			}
+		
 			on_error( context );
-			return;
 		}
 
 		request.onsuccess = function ( event ) {	
