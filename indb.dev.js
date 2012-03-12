@@ -392,6 +392,9 @@ var IDB = (function(){
 			InDB.trigger( 'InDB_stores_load_success', context );
 		} else {
 			var open_request = window.indexedDB.open( name, version );
+			open_request.onupgradeneeeded = function ( event ) {
+				console.log("UPGRADE NEEDED FOR open_request",event);
+			};
 			open_request.onsuccess = function ( event ) {
 				var result = event.target.result;
 				InDB.db = result;
