@@ -897,7 +897,10 @@ var IDB = (function(){
 
 		if( 'function' !== typeof InDB.db.setVersion ) { 
 
-			version = ( isNaN( version ) ) ? 1 : parseInt( InDB.db.version, 10 ) + 1;
+			version = ( isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
+			if( 'undefined' === typeof version || null === version ) {
+				version = 1;
+			}
 			console.log("UPGRADE",InDB.db.version,InDB.database.name,version);
 			var upgradeRequest = window.indexedDB.open( InDB.database.name, version );
 
