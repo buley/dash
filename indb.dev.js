@@ -657,7 +657,7 @@ var IDB = (function(){
 		if( 'undefined' === typeof InDB.db ) {
 			return false;
 		}
-		if( 'undefined' === typeof stores.length ) {
+		if( null === stores || 'undefined' === typeof stores || 'undefined' === typeof stores.length ) {
 			return false;
 		}
 		for( i=0; i < stores.length; i++ ) {
