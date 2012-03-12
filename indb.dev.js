@@ -921,8 +921,8 @@ var IDB = (function(){
 			}
 		
 			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
-			var name = JSON.decode( JSON.stringify( InDB.db.name ) );
-			var ver = JSON.decode( JSON.stringify( version ) );
+			var name = JSON.parse( JSON.stringify( InDB.db.name ) );
+			var ver = JSON.parse( JSON.stringify( version ) );
 			InDB.db.close();
 
 			var upgradeRequest = window.indexedDB.open( name, ver );
