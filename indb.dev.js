@@ -901,7 +901,7 @@ var IDB = (function(){
 			version = ( isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
 			
 			if( 'undefined' === typeof version || null === version ) {
-				version = 1;
+				version = 0;
 			}
 		
 			/*if( version > 9 ) { 
@@ -911,11 +911,8 @@ var IDB = (function(){
 			}*/
 			var upgradeRequest = window.indexedDB.open( InDB.database.name, version );
 
-			if( !!InDB.debug ) {
-				console.log( 'InDB.store.create upgradeRequest', upgradeRequest );
-			}
-
 			upgradeRequest.onupgradeneeded = function ( event ) {
+
 				console.log("UPGRADE NEEDED",event);
 				try {
 
@@ -985,7 +982,9 @@ var IDB = (function(){
 				InDB.trigger( "InDB_store_created_abort", context );
 			};
 
-
+			if( !!InDB.debug ) {
+				console.log( 'InDB.store.create upgradeRequest', upgradeRequest );
+			}
 
 		} else {
 
