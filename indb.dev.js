@@ -91,7 +91,7 @@ var IDB = (function(){
 	InDB.database.version = 1;
 	InDB.database.name = 'InDB_DB';
 
-	InDB.debug = false;
+	InDB.debug = true;
 
 	InDB.events.onComplete = function ( e ) {
 		if ( !!InDB.debug ) {
@@ -958,6 +958,12 @@ var IDB = (function(){
 						InDB.trigger( "InDB_store_already_exists", context );
 					}
 				}
+			};
+
+			upgradeRequest.onsuccess = function ( event ) {
+				context[ 'event' ] = event;
+				on_success( context );
+				InDB.trigger( "InDB_store_created_success", context );
 			};
 
 			upgradeRequest.onblocked = function ( event ) {
