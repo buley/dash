@@ -1115,6 +1115,7 @@ var IDB = (function(){
 
 	} );
 
+	//TODO: Needs to be contingent (one by one hooked on success)
 	InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
 		var context = { 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
 		if( !!InDB.debug ) {
@@ -1172,7 +1173,11 @@ var IDB = (function(){
 				/* Request */
 				
 				InDB.index.create( store, key, name, unique, multirow, on_success, on_error, on_abort );
-				
+	
+				delete stores[ store ];		
+				InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
+
+				return;	
 			}
 		}
 	};
