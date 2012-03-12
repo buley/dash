@@ -355,7 +355,7 @@ var IDB = (function(){
 
 		/* Assertions */	
 		
-		if ( "IDBDatabase" === typeof InDB.db && name === InDB.db.name ) {
+		if ( "IDBDatabase" === typeof InDB.db && name === InDB.database.name ) {
 			on_error( new Error( "Database already loaded" ) );
 			InDB.trigger( 'InDB_database_already_loaded', context );
 			return;
@@ -398,7 +398,7 @@ var IDB = (function(){
 		
 		/* Request Responses */
 
-		if ( "undefined" !== typeof InDB.db && name === InDB.db.name ) {
+		if ( "undefined" !== typeof InDB.database && name === InDB.database.name && version === InDB.database.version  ) {
 			InDB.trigger( 'InDB_database_load_success', context );
 			InDB.trigger( 'InDB_stores_load_success', context );
 		} else {
