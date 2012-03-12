@@ -399,6 +399,8 @@ var IDB = (function(){
 			var open_request = window.indexedDB.open( name, version );
 			open_request.onupgradeneeded = function ( event ) {
 				context[ 'event' ] = event;
+				var result = event.target.result;
+				InDB.db = result;
 				on_upgrade_needed( context );
 				InDB.trigger( 'InDB_database_load_upgrade_needed' );
 			};
@@ -929,6 +931,8 @@ var IDB = (function(){
 
 			upgradeRequest.onupgradeneeded = function ( event ) {
 
+				var result = event.target.result;
+				InDB.db = result;
 				console.log("UPGRADE NEEDED",event);
 				try {
 
@@ -1257,10 +1261,9 @@ var IDB = (function(){
 
 		if( 'function' !== typeof InDB.db.setVersion ) {
 
-			version = ( isNaN( version ) ) ? parseInt( version, 10 ) : version;
-			version = ( null === version || isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
+			var version = parseInt( InDB.db.version, 10 ) + 1;
 			
-			if( 'undefined' === typeof version || null === version ) {
+			if( 'undefined' === typeof version || null === version || isNaN( version ) ) {
 				version = 1;
 			}
 		
@@ -1273,9 +1276,11 @@ var IDB = (function(){
 
 			upgradeRequest.onupgradeneeded = function ( event ) {
 
-				console.log("INDEX UPGRADE NEEDED",event);
+				console.log("INDEX UPGRADE NEEDED",event.target.result);
+				var result = event.target.result;
+				InDB.db = result;
+
 				try {
-					var result = event.target.result;
 					var databaseTransaction = result.objectStore( store );
 					context[ 'event' ] = event;
 					try {
