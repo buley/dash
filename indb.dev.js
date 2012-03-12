@@ -912,6 +912,7 @@ var IDB = (function(){
 			} else {
 				version = version.toPrecision( 2 );
 			}*/
+			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.database.name,version);
 			var upgradeRequest = window.indexedDB.open( InDB.database.name, version );
 
 			upgradeRequest.onupgradeneeded = function ( event ) {
