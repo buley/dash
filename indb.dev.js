@@ -914,7 +914,7 @@ var IDB = (function(){
 		if( 'function' !== typeof InDB.db.setVersion ) { 
 
 			version = ( isNaN( version ) ) ? parseInt( version, 10 ) : version;
-			version = ( null === version || isNaN( version ) ) ? parseInt( InDB.database.version, 10 ) + 1 : version;
+			version = ( null === version || isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
 			
 			if( 'undefined' === typeof version || null === version ) {
 				version = 1;
@@ -925,8 +925,8 @@ var IDB = (function(){
 			} else {
 				version = version.toPrecision( 2 );
 			}*/
-			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.database.name,version);
-			var upgradeRequest = window.indexedDB.open( InDB.database.name, version );
+			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
+			var upgradeRequest = window.indexedDB.open( InDB.db.name, version );
 
 			upgradeRequest.onupgradeneeded = function ( event ) {
 
