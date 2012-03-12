@@ -1257,19 +1257,74 @@ var IDB = (function(){
 
 		if( 'function' !== typeof InDB.db.setVersion ) {
 
-			//var result = event.target.result;
-			var databaseTransaction = result.objectStore( store );
-			//context[ 'event' ] = event;
-			try {
-				databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
-				if( !!InDB.debug ) {
-					console.log( 'InDB.index.create transaction', databaseTransaction );
-				}
-				on_success( context );
-			} catch ( error ) {
-				console.log( error );
-				on_error( error );
+			version = ( isNaN( version ) ) ? parseInt( version, 10 ) : version;
+			version = ( null === version || isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
+			
+			if( 'undefined' === typeof version || null === version ) {
+				version = 1;
 			}
+		
+			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
+			var name = JSON.parse( JSON.stringify( InDB.db.name ) );
+			var ver = JSON.parse( JSON.stringify( version ) );
+			InDB.db.close();
+
+			var upgradeRequest = window.indexedDB.open( name, ver );
+
+			upgradeRequest.onupgradeneeded = function ( event ) {
+
+				console.log("UPGRADE NEEDED",event);
+				try {
+					var result = event.target.result;
+					var databaseTransaction = result.objectStore( store );
+					context[ 'event' ] = event;
+					try {
+						databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
+						if( !!InDB.debug ) {
+							console.log( 'InDB.index.create transaction', databaseTransaction );
+						}
+						on_success( context );
+					} catch ( error ) {
+						console.log( error );
+						on_error( error );
+					}
+
+				} catch( error ) {
+					context[ 'error' ] = error;
+					on_error( context );
+					InDB.trigger( "InDB_index_created_error", context );
+				}
+			};
+
+			upgradeRequest.onsuccess = function ( event ) {
+				context[ 'event' ] = event;
+				on_success( context );
+				InDB.trigger( "InDB_store_created_success", context );
+			};
+
+			upgradeRequest.onblocked = function ( event ) {
+				context[ 'event' ] = event;
+				on_blocked( context );
+				InDB.trigger( "InDB_store_created_error", context );
+			};
+
+			upgradeRequest.onerror = function ( event ) {
+				context[ 'event' ] = event;
+				on_error( context );
+				InDB.trigger( "InDB_store_created_error", context );
+			};
+
+			upgradeRequest.onabort = function ( event ) {
+				context[ 'event' ] = event;
+				on_abort( context );
+				InDB.trigger( "InDB_store_created_abort", context );
+			};
+
+			if( !!InDB.debug ) {
+				console.log( 'InDB.store.create upgradeRequest', upgradeRequest );
+			}
+
+
 
 		} else {
 			//pre FF10
