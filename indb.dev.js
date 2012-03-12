@@ -897,17 +897,18 @@ var IDB = (function(){
 
 		if( 'function' !== typeof InDB.db.setVersion ) { 
 
+			version = ( isNaN( version ) ) ? parseInt( version, 10 ) : version;
 			version = ( isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
 			
 			if( 'undefined' === typeof version || null === version ) {
 				version = 1;
 			}
 		
-			if( version > 9 ) { 
+			/*if( version > 9 ) { 
 				version = version.toPrecision( 3 );
 			} else {
 				version = version.toPrecision( 2 );
-			}	
+			}*/
 			var upgradeRequest = window.indexedDB.open( InDB.database.name, version );
 
 			if( !!InDB.debug ) {
