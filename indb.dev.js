@@ -898,16 +898,19 @@ var IDB = (function(){
 		if( 'function' !== typeof InDB.db.setVersion ) { 
 
 			version = ( isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
+			
 			if( 'undefined' === typeof version || null === version ) {
 				version = 1;
 			}
-			console.log("UPGRADE",InDB.db.version,InDB.database.name,version);
+			
 			var upgradeRequest = window.indexedDB.open( InDB.database.name, version );
 
 			if( !!InDB.debug ) {
 				console.log( 'InDB.store.create upgradeRequest', upgradeRequest );
 			}
+
 			upgradeRequest.onupgradeneeded = function ( event ) {
+				console.log("UPGRADE NEEDED",event);
 				try {
 
 					/* Database options */
