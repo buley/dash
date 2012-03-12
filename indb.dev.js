@@ -1281,7 +1281,7 @@ var IDB = (function(){
 				InDB.db = result;
 
 				try {
-					var databaseTransaction = result.objectStore( store );
+					var databaseTransaction = InDB.db.transaction( store, InDB.transaction.read_write() ).objectStore( store );
 					context[ 'event' ] = event;
 					try {
 						databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
