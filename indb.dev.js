@@ -320,6 +320,7 @@ var IDB = (function(){
 		var name = context.name;
 		var description = context.description;
 		var on_success = context.on_success;
+		var on_success = context.on_upgrade_needed;
 		var on_error = context.on_error;
 		var on_abort = context.on_abort;
 
@@ -3683,7 +3684,15 @@ var IDB = (function(){
 			}
 		};
 
-		InDB.trigger( 'InDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error } ) ;
+		var on_upgrade_needed = function( database ) {
+			request.target = database;
+			if( 'function' == typeof request.on_upgrad_needed ) {
+				request.on_upgrade_needed( database );
+			}
+		};
+
+
+		InDB.trigger( 'InDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error, 'on_upgrade_needed': on_upgrade_needed } ) ;
 
 		return this;
 	};
