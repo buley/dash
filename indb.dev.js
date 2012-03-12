@@ -320,7 +320,7 @@ var IDB = (function(){
 		var name = context.name;
 		var description = context.description;
 		var on_success = context.on_success;
-		var on_success = context.on_upgrade_needed;
+		var on_upgrade_needed = context.on_upgrade_needed;
 		var on_error = context.on_error;
 		var on_abort = context.on_abort;
 
