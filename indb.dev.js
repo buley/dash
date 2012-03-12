@@ -928,7 +928,7 @@ var IDB = (function(){
 			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
 			var upgradeRequest = window.indexedDB.open( InDB.db.name, version );
 
-			upgradeRequest.addEventListener( 'onupgradeneeded', function ( event ) {
+			upgradeRequest.addEventListener( 'upgradeneeded', function ( event ) {
 
 				console.log("UPGRADE NEEDED",event);
 				try {
