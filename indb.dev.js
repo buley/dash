@@ -88,9 +88,6 @@ var IDB = (function(){
 
 	/* Begin Defaults */
 
-	InDB.database.version = 1;
-	InDB.database.name = 'InDB_DB';
-
 	InDB.debug = true;
 
 	InDB.events.onComplete = function ( e ) {
@@ -341,9 +338,6 @@ var IDB = (function(){
 	/* This function is indempodent (you can run it multiple times and it won't do anything */
 	InDB.database.load = function ( name, version, on_success, on_error, on_abort, on_blocked, on_upgrade_needed ) {
 
-		InDB.database.name = name;
-		InDB.database.version = version;
-
 		/* Begin Debug */
 		if ( !!InDB.debug ) {
 			console.log ( "InDB.database.load", name, version, on_success, on_error, on_abort );
@@ -355,7 +349,7 @@ var IDB = (function(){
 
 		/* Assertions */	
 		
-		if ( "IDBDatabase" === typeof InDB.db && name === InDB.database.name ) {
+		if ( "IDBDatabase" === typeof InDB.db && name === InDB.db.name ) {
 			on_error( new Error( "Database already loaded" ) );
 			InDB.trigger( 'InDB_database_already_loaded', context );
 			return;
@@ -398,7 +392,7 @@ var IDB = (function(){
 		
 		/* Request Responses */
 
-		if ( "undefined" !== typeof InDB.database && name === InDB.database.name && version === InDB.database.version  ) {
+		if ( "undefined" !== typeof InDB.db && name === InDB.db.name && version === InDB.db.version  ) {
 			InDB.trigger( 'InDB_database_load_success', context );
 			InDB.trigger( 'InDB_stores_load_success', context );
 		} else {
@@ -411,6 +405,7 @@ var IDB = (function(){
 			open_request.onsuccess = function ( event ) {
 				var result = event.target.result;
 				InDB.db = result;
+				console.log("SET INDB.DB",result);
 				on_success( result );
 				if ( isNaN( InDB.database.version ) || 0 === InDB.database.version ) {
 					InDB.trigger( 'InDB_database_load_success', result );
