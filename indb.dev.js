@@ -407,7 +407,7 @@ var IDB = (function(){
 				InDB.db = result;
 				console.log("SET INDB.DB",result);
 				on_success( result );
-				if ( isNaN( InDB.database.version ) || 0 === InDB.database.version ) {
+				if ( isNaN( InDB.db.version ) || 0 === InDB.db.version ) {
 					InDB.trigger( 'InDB_database_load_success', result );
 					InDB.trigger( 'InDB_database_created_success', result );
 					//Database is unversioned, so create object stores
