@@ -332,13 +332,13 @@ var IDB = (function(){
 
 		/* Request */
 
-		InDB.database.load( name, description, on_success, on_error, on_abort );
+		InDB.database.load( name, description, on_success, on_error, on_abort, on_upgrade_needed );
 
 	} );
 
 
 	/* This function is indempodent (you can run it multiple times and it won't do anything */
-	InDB.database.load = function ( name, version, on_success, on_error, on_abort, on_blocked ) {
+	InDB.database.load = function ( name, version, on_success, on_error, on_abort, on_blocked, on_upgrade_needed ) {
 
 		InDB.database.name = name;
 		InDB.database.version = version;
@@ -386,6 +386,11 @@ var IDB = (function(){
 			on_blocked = InDB.events.onBlocked;
 		}
 
+		if ( "undefined" === typeof on_upgrade_needed ) {
+			on_upgrade_needed = InDB.events.onUpgradeNeeded;
+		}
+
+
 
 		/* Action */
 		InDB.trigger( 'InDB_database_loading', context );
@@ -398,13 +403,15 @@ var IDB = (function(){
 		} else {
 			var open_request = window.indexedDB.open( name, version );
 			open_request.onupgradeneeded = function ( event ) {
-				console.log("UPGRADE NEEDED FOR open_request",event);
+				context[ 'event' ] = event;
+				on_upgrade_needed( context );
+				InDB.trigger( 'InDB_database_load_upgrade_needed' );
 			};
 			open_request.onsuccess = function ( event ) {
 				var result = event.target.result;
 				InDB.db = result;
 				on_success( result );
-				if ( isNaN( InDB.db.version ) ) {
+				if ( isNaN( InDB.database.version ) || 0 === InDB.database.version ) {
 					InDB.trigger( 'InDB_database_load_success', result );
 					InDB.trigger( 'InDB_database_created_success', result );
 					//Database is unversioned, so create object stores
