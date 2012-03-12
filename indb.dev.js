@@ -2218,8 +2218,9 @@ var IDB = (function(){
 		}
 
 		//use this[ 'format' ] for function invocation to avoid a Closure compiler error
+		var request;
 		if( 'function' === typeof transaction[ 'add' ] ) { 
-			var request = transaction[ 'add' ]( instance_data );
+			request = transaction[ 'add' ]( instance_data );
 		} else {
 		
 			if( 'undefined' !== typeof event ) {
@@ -2227,6 +2228,8 @@ var IDB = (function(){
 			}
 		
 			on_error( context );
+
+			return;
 		}
 
 		request.onsuccess = function ( event ) {	
