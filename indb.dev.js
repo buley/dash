@@ -953,9 +953,10 @@ var IDB = (function(){
 						console.log('InDB.store.create options', options );
 					}
 
-					InDB.db.createObjectStore( name, options );
+					var store = InDB.db.createObjectStore( name, options );
 
 					context[ 'event' ] = event;
+					context[ 'store' ] = store;
 
 					on_success( context );
 
@@ -1036,8 +1037,10 @@ var IDB = (function(){
 					if( !!InDB.debug ) {
 						console.log('InDB.store.create options', options );
 					}	
-					InDB.db.createObjectStore( name, options );
+					
+					var store = InDB.db.createObjectStore( name, options );
 
+					context[ 'store' ] = store;
 					context[ 'event' ] = event;
 
 					on_success( context );
