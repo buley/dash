@@ -1264,7 +1264,7 @@ var IDB = (function(){
 				version = 1;
 			}
 		
-			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
+			console.log("INDEX UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
 			var db_name = JSON.parse( JSON.stringify( InDB.db.name ) );
 			var db_ver = JSON.parse( JSON.stringify( version ) );
 			InDB.db.close();
@@ -1273,7 +1273,7 @@ var IDB = (function(){
 
 			upgradeRequest.onupgradeneeded = function ( event ) {
 
-				console.log("UPGRADE NEEDED",event);
+				console.log("INDEX UPGRADE NEEDED",event);
 				try {
 					var result = event.target.result;
 					var databaseTransaction = result.objectStore( store );
@@ -1297,6 +1297,7 @@ var IDB = (function(){
 			};
 
 			upgradeRequest.onsuccess = function ( event ) {
+				console.log("INDEX OPEN SUCCESS",event);
 				context[ 'event' ] = event;
 				on_success( context );
 				InDB.trigger( "InDB_store_created_success", context );
