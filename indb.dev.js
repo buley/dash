@@ -910,7 +910,7 @@ var IDB = (function(){
 					/* Database options */
 
 					var options = {};
-					
+					/*
 					if( 'undefined' !== typeof keyPath && null !== keyPath ) {
 						if( !!InDB.debug ) {
 							console.log( 'InDB.store.create keyPath', keyPath );
@@ -922,12 +922,13 @@ var IDB = (function(){
 							console.log( 'InDB.store.create autoIncrement', autoinc_key );
 						}
 						options[ 'autoIncrement' ] = autoinc_key;
-					}
+					}*/
 					
 					if( !!InDB.debug ) {
 						console.log('InDB.store.create options', options );
-					}	
-					InDB.db.createObjectStore( name, options );
+					}
+
+					InDB.db.createObjectStore( name, keyPath, autoinc_key );
 
 					context[ 'event' ] = event;
 
