@@ -928,12 +928,13 @@ var IDB = (function(){
 			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
 			var upgradeRequest = window.indexedDB.open( InDB.db.name, version );
 
+			/*
 			upgradeRequest.onupgradeneeded = function ( event ) {
 
 				console.log("UPGRADE NEEDED",event);
 				try {
 
-					/* Database options */
+					// Database options
 
 					var options = {};
 					
@@ -973,6 +974,11 @@ var IDB = (function(){
 						InDB.trigger( "InDB_store_already_exists", context );
 					}
 				}
+			};*/
+
+
+			upgradeRequest.onupgradeneeded = function ( event ) {
+				console.log("UPGRADE",event);
 			};
 
 			upgradeRequest.onsuccess = function ( event ) {
