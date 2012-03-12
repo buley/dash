@@ -1254,9 +1254,9 @@ var IDB = (function(){
 
 		if( 'function' !== typeof InDB.db.setVersion ) {
 
-			var result = event.target.result;
+			//var result = event.target.result;
 			var databaseTransaction = result.objectStore( store );
-			context[ 'event' ] = event;
+			//context[ 'event' ] = event;
 			try {
 				databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
 				if( !!InDB.debug ) {
