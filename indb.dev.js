@@ -338,7 +338,7 @@ var IDB = (function(){
 
 
 	/* This function is indempodent (you can run it multiple times and it won't do anything */
-	InDB.database.load = function ( name, version, on_success, on_error, on_abort ) {
+	InDB.database.load = function ( name, version, on_success, on_error, on_abort, on_blocked ) {
 
 		InDB.database.name = name;
 		InDB.database.version = version;
@@ -382,6 +382,11 @@ var IDB = (function(){
 			on_abort = InDB.events.onAbort;
 		}
 		
+		if ( "undefined" === typeof on_success ) {
+			on_blocked = InDB.events.onBlocked;
+		}
+
+
 		/* Action */
 		InDB.trigger( 'InDB_database_loading', context );
 		
@@ -408,6 +413,11 @@ var IDB = (function(){
 					InDB.trigger( 'InDB_database_load_success', result );
 					InDB.trigger( 'InDB_stores_load_success', result );
 				}
+			}
+			open_request.onblocked = function ( event ) {
+				context[ 'event' ] = event;
+				on_blocked( context );
+				InDB.trigger( 'InDB_database_load_blocked' );
 			}
 			open_request.onerror = function ( event ) {
 				context[ 'event' ] = event;
