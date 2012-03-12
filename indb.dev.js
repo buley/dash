@@ -1175,7 +1175,7 @@ var IDB = (function(){
 				InDB.index.create( store, key, name, unique, multirow, on_success, on_error, on_abort );
 	
 				delete stores[ store ];		
-				InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
+				InDB.indexes.create = function ( stores, on_success, on_error, on_abort );
 
 				return;	
 			}
