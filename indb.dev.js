@@ -920,15 +920,10 @@ var IDB = (function(){
 				version = 1;
 			}
 		
-			/*if( version > 9 ) { 
-				version = version.toPrecision( 3 );
-			} else {
-				version = version.toPrecision( 2 );
-			}*/
 			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
 			var upgradeRequest = window.indexedDB.open( InDB.db.name, version );
 
-			upgradeRequest.addEventListener( 'upgradeneeded', function ( event ) {
+			upgradeRequest.onupgradeneeded = function ( event ) {
 
 				console.log("UPGRADE NEEDED",event);
 				try {
@@ -973,7 +968,7 @@ var IDB = (function(){
 						InDB.trigger( "InDB_store_already_exists", context );
 					}
 				}
-			} );
+			};
 
 			upgradeRequest.onsuccess = function ( event ) {
 				context[ 'event' ] = event;
