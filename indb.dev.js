@@ -1216,7 +1216,12 @@ var IDB = (function(){
 		if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !== context.event.target && 'undefined' !== typeof context.event.target.result && null !== context.event.target.result ) {
 			console.log("WOOT");
 			InDB.db = context.event.target.result;
-			console.log("MADE IT INSIDE",InDB.db);
+			//begin try 2
+			var dtx = context.event.target.result.transaction( store );
+			console.log("TRANSACTION",store,dtx);
+			var databaseTransaction = dtx.objectStore( store );
+
+			console.log("MADE IT INSIDE",databaseTransaction);
 			main_body();
 		} else {
 
