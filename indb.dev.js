@@ -1103,7 +1103,7 @@ var IDB = (function(){
 		var on_error = context.on_error;
 		var on_abort = context.on_abort;
 		var target;
-		if ( 'undefined' !== context.target && null !== context.target ) {
+		if ( 'undefined' !== typeof context.target && null !== context.target ) {
 
 			target = context.target;
 			console.log("T1",target);
