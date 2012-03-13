@@ -1102,7 +1102,15 @@ var IDB = (function(){
 		var on_success = context.on_success;
 		var on_error = context.on_error;
 		var on_abort = context.on_abort;
-		var req = context.event;
+		var target;
+		if ( 'undefined' !== context.target && null !== context.target ) {
+			target = context.target;
+		} else if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !== context.event.target && 'undefined' !== typeof context.event.target.result && null !== context.event.target.result ) {
+			console.log("WOOT1");
+			target = context.event.target.result;
+		}
+
+
 
 		/* Assertions */
 
@@ -1113,13 +1121,13 @@ var IDB = (function(){
 
 		/* Request */
 		
-		InDB.indexes.create( indexes, on_success, on_error, on_abort, req );
+		InDB.indexes.create( indexes, on_success, on_error, on_abort, target );
 
 	} );
 
 	//TODO: Needs to be contingent (one by one hooked on success)
 	InDB.indexes.create = function ( stores, on_success, on_error, on_abort, req ) {
-		var context = { 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort, 'event': req }; 
+		var context = { 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort, 'target': target }; 
 		if( !!InDB.debug ) {
 			console.log( 'InDB.indexes.create', context );
 		}
@@ -1213,11 +1221,11 @@ var IDB = (function(){
 
 		};
 
-		if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !== context.event.target && 'undefined' !== typeof context.event.target.result && null !== context.event.target.result ) {
-			console.log("WOOT");
-			InDB.db = context.event.target.result;
+		if( 'undefined' !== typeof target && null !== typeof target ) {
+			console.log("TARGET ACQUIRED");
+			InDB.db = target;
 			//begin try 2
-			var dtx = context.event.target.result.transaction( store );
+			var dtx = target.transaction( store );
 			console.log("TRANSACTION",store,dtx);
 			var databaseTransaction = dtx.objectStore( store );
 
@@ -4013,14 +4021,14 @@ var IDB = (function(){
 
 		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( result ) {
 			if( !!InDB.debug ) {
-				console.log( 'DB.prototype.store.create success', result );
+				console.log( 'DB.prototype.store.create success doing InDB_do_stores_create', result );
 			}
 			if( 'function' === typeof request.on_success ) {
 				request.on_success( result );
 			}
 		}, 'on_error': function( context ) {
 			if( !!InDB.debug ) {
-				console.log( 'DB.prototype.store.create error' );
+				console.log( 'DB.prototype.store.create error doing InDB_do_stores_create', context );
 			}
 			if( 'function' === typeof request.on_error ) {
 				request.on_error( context );
