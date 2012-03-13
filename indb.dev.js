@@ -1200,7 +1200,7 @@ var IDB = (function(){
 						
 						try {
 							//begin try 2
-							var databaseTransaction = InDB.db.objectStore( store );
+							var databaseTransaction = InDB.db.transaction( store, InDB.transaction.version_change() ).objectStore( store );
 							console.log("ATTEMPTING CREATE",name,key,{ 'unique': unique, 'multirow': multirow });
 							databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
 							if( !!InDB.debug ) {
