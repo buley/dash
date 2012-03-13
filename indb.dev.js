@@ -1184,7 +1184,7 @@ var IDB = (function(){
 						
 						try {
 							//begin try 2
-							var dtx = InDB.db.transaction( store, InDB.transaction.version_change() );
+							var dtx = InDB.db.transaction();
 							console.log("TRANSACTION",store,dtx);
 							var databaseTransaction = dtx.objectStore( store );
 							console.log("ATTEMPTING CREATE",name,key,{ 'unique': unique, 'multirow': multirow });
@@ -1212,7 +1212,6 @@ var IDB = (function(){
 			}
 
 		};
-		console.log('context!!',context.event);
 		if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !== context.event.target && 'undefined' !== typeof context.event.target.result && null !== context.event.target.result ) {
 			console.log("WOOT");
 			InDB.db = context.event.target.result;
@@ -3917,7 +3916,7 @@ var IDB = (function(){
 	/* Database */
 
 	DB.prototype.install = function ( request ) {
-
+		console.trace();
 		var store = request.store;
 
 		DB.prototype.store.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( store_event ) {
