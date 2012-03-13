@@ -742,6 +742,8 @@ var IDB = (function(){
 			seen_count += 1;
 			if( seen_count === store_count ) {
 				if( 'function' === typeof on_success && false === errored ) {
+					console.log("CAN AND DOING");
+	
 					on_success( res );
 				} else if( 'function' === typeof on_error ) {
 					on_error( res );
@@ -750,6 +752,7 @@ var IDB = (function(){
 		};
 
 		var own_on_error = function( res ) {
+			console.log("OWN ON ERROR");
 			seen_count += 1;
 			errored = false;
 			if( 'function' === typeof on_error && seen_count === store_count ) {
@@ -758,6 +761,7 @@ var IDB = (function(){
 		};
 
 		var own_on_abort = function( res ) {
+			console.log("OWN ON ABORT");
 			if( 'function' === typeof on_abort ) {
 				on_abort( res );
 			}
@@ -954,6 +958,7 @@ var IDB = (function(){
 				version = 1;
 			}
 		
+			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
 			var db_name = JSON.parse( JSON.stringify( InDB.db.name ) );
 			var db_ver = JSON.parse( JSON.stringify( version ) );
 			InDB.db.close();
@@ -991,6 +996,7 @@ var IDB = (function(){
 					var store = InDB.db.createObjectStore( name, options );
 
 					context[ 'event' ] = event;
+					context[ 'store' ] = store;
 
 					on_success( context );
 
@@ -4009,9 +4015,13 @@ var IDB = (function(){
 	/* Database */
 
 	DB.prototype.install = function ( request ) {
+		console.log("STORE INSTALL");
+		console.trace();
 		var store = request.store;
 
 		DB.prototype.store.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( store_event ) {
+			console.trace();
+			console.log("STORE EVENT");
 			DB.prototype.index.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( result ) {
 				console.log( 'DB.install() index success' );
 				if( 'function' === typeof request.on_success ) {
@@ -4074,6 +4084,8 @@ var IDB = (function(){
 
 	DB.prototype.store = DB.prototype.store || {};
 	DB.prototype.store.create = function ( request ) {
+		console.log("SSTORE CRAETE");
+		console.trace();
 		var namespace = {};
 	
 		if( !InDB.assert( 'undefined' !== typeof request, 'Request cannot be empty' ) ) {
