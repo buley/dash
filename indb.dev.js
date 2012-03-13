@@ -991,7 +991,7 @@ var IDB = (function(){
 					var store = InDB.db.createObjectStore( name, options );
 
 					context[ 'event' ] = event;
-					context[ 'target' ] = target;
+					context[ 'target' ] = store;
 
 					on_success( context );
 
