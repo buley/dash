@@ -1185,16 +1185,16 @@ var IDB = (function(){
 		var own_on_success = function( res ) {
 			seen_count += 1;
 
-			if( 'function' === typeof on_success && seen_count === store_count && false === errored ) {
+			if( 'function' === typeof on_success && seen_count === index_count && false === errored ) {
 				on_success( res );
-			} else if( 'function' === typeof on_error && seen_count === store_count && true === errored ) {
+			} else if( 'function' === typeof on_error && seen_count === index_count && true === errored ) {
 				on_error( res );
 			}
 		};
 
 		var own_on_error = function( res ) {
 			seen_count += 1;
-			if( 'function' === typeof on_error && seen_count === store_count ) {
+			if( 'function' === typeof on_error && seen_count === index_count ) {
 				on_error( res );
 			} else {
 				errored = true;
