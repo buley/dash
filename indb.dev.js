@@ -1169,6 +1169,45 @@ var IDB = (function(){
 			console.log( 'InDB.indexes.create', context );
 		}
 
+
+		var index_count = 0, attr, attr2, seen_count = 0, errored = false;
+		for( attr in stores ) {
+			if( stores.hasOwnProperty( attr ) ) {
+				for( attr2 in stores[ store ] ) {
+					if( stores[ store ].hasOwnProperty( attr2 ) ) {
+						index_count += 1;
+					}
+				}
+			}
+		}
+		var own_on_success = function( res ) {
+			seen_count += 1;
+
+			if( 'function' === typeof on_success && seen_count === store_count && false === errored ) {
+				on_success( res );
+			} else if( 'function' === typeof on_error && seen_count === store_count && true === errored ) {
+				on_error( res );
+			}
+		};
+
+		var own_on_error = function( res ) {
+			seen_count += 1;
+			if( 'function' === typeof on_error && seen_count === store_count ) {
+				on_error( res );
+			} else {
+				errored = true;
+			}
+		};
+
+		var own_on_abort = function( res ) {
+			console.log("OWN ON ABORT");
+			if( 'function' === typeof on_abort ) {
+				on_abort( res );
+			}
+		};
+
+
+
 		var main_body = function( db ) {
 
 			try {
@@ -1248,12 +1287,12 @@ var IDB = (function(){
 								console.log( 'InDB.index.create transaction', databaseTransaction );
 							}
 							context[ 'target' ] = db;
-							on_success( context );
+							own_on_success( context );
 							//end try 2
 						} catch ( error ) {
 							console.log( "TRY2 err",error );
 							context[ 'target' ] = db;
-							on_error( error );
+							own_on_error( error );
 						}
 
 					}
@@ -1263,7 +1302,7 @@ var IDB = (function(){
 				//end try 1
 			} catch( error ) {
 				context[ 'error' ] = error;
-				on_error( context );
+				own_on_error( context );
 				InDB.trigger( "InDB_index_created_error", context );
 			}
 
