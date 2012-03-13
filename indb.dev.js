@@ -1311,7 +1311,6 @@ var IDB = (function(){
 		};
 
 		if( 'undefined' !== typeof target && null !== typeof target ) {
-			InDB.db = target;
 			main_body( target );
 		} else {
 
