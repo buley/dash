@@ -1104,10 +1104,14 @@ var IDB = (function(){
 		var on_abort = context.on_abort;
 		var target;
 		if ( 'undefined' !== context.target && null !== context.target ) {
+
 			target = context.target;
+			console.log("T1",target);
 		} else if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !== context.event.target && 'undefined' !== typeof context.event.target.result && null !== context.event.target.result ) {
-			console.log("WOOT1");
 			target = context.event.target.result;
+			console.log("T2",target);
+		} else {
+			console.log("NADA",'undefined' !== typeof context.event , 'undefined' !== typeof context.event.target, null !== context.event.target, 'undefined' !== typeof context.event.target.result, null !== context.event.target.result);
 		}
 
 
@@ -1222,7 +1226,6 @@ var IDB = (function(){
 		};
 
 		if( 'undefined' !== typeof target && null !== typeof target ) {
-			console.log("TARGET ACQUIRED");
 			InDB.db = target;
 			//begin try 2
 			var dtx = target.transaction( store );
