@@ -1844,6 +1844,10 @@ var IDB = (function(){
 			if ( !!InDB.debug ) {
 				console.log ( "InDB.db.transaction.create", database, type );
 			}
+			if( 'undefined' !== typeof InDB.db.transaction && null !== InDB.db.transaction ) {
+				console.log("CHANGING TX",InDB.db.transaction.db);
+				InDB.db = InDB.db.transaction.db;
+			}
 			var transaction = InDB.db.transaction( [ database ], type );
 			transaction.oncomplete = function ( event ) {
 				on_complete( event );
