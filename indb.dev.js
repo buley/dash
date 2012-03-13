@@ -1214,11 +1214,12 @@ var IDB = (function(){
 							if( !!InDB.debug ) {
 								console.log( 'InDB.index.create transaction', databaseTransaction );
 							}
-							context[ 'event' ] = event;
+							context[ 'target' ] = db;
 							on_success( context );
 							//end try 2
 						} catch ( error ) {
 							console.log( "TRY2 err",error );
+							context[ 'target' ] = db;
 							on_error( error );
 						}
 
