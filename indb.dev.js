@@ -732,28 +732,30 @@ var IDB = (function(){
 			console.log('InDB.stores.create', context );
 		}
 
-		var store_count = 0, attr, seen_count = 0;
+		var store_count = 0, attr, seen_count = 0, errored = false;
 		for( attr in stores ) {
 			if( stores.hasOwnProperty( attr ) ) {
 				store_count += 1;
 			}
 		}
 		var own_on_success = function( res ) {
-			console.log("OWN ON SUCCESS");
 			seen_count += 1;
-			if( 'function' === typeof on_success && seen_count === store_count ) {
-				console.log("CAN AND DOING");
+			if( seen_count === store_count ) {
+				if( 'function' === typeof on_success && false === errored ) {
+					console.log("CAN AND DOING");
 	
-				on_success( res );
-			} else {
-				console.log("COULD HAVE WOULD NOT HAVE",seen_count,store_count);
-
+					on_success( res );
+				} else if( 'function' === typeof on_error ) {
+					on_error( res );
+				}
 			}
 		};
 
 		var own_on_error = function( res ) {
 			console.log("OWN ON ERROR");
-			if( 'function' === typeof on_error ) {
+			seen_count += 1;
+			errored = false;
+			if( 'function' === typeof on_error && seen_count === store_count ) {
 				on_error( res );
 			}
 		};
