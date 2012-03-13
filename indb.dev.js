@@ -3945,7 +3945,7 @@ var IDB = (function(){
 				if( 'function' === typeof request.on_error ) {
 					request.on_error( context );
 				}
-			}, 'event': store_event.event } );
+			}, 'event': store_event.event, target: store_event.store } );
 
 		}, 'on_error': function() {
 			console.log( 'DB.install() error' );
@@ -3989,7 +3989,7 @@ var IDB = (function(){
 			if( 'function' === typeof request.on_error ) {
 				request.on_error( context );
 			}
-		}, 'event': request.event } );
+		}, 'event': request.event, target: request.target } );
 
 		return this;
 
