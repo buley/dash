@@ -1213,7 +1213,7 @@ var IDB = (function(){
 
 		};
 
-		if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !=== context.event.target ) {
+		if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !== context.event.target ) {
 			InDB.db = context.event.target;
 			main_body();
 		} else {
