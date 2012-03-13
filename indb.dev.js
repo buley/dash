@@ -1126,7 +1126,7 @@ var IDB = (function(){
 	} );
 
 	//TODO: Needs to be contingent (one by one hooked on success)
-	InDB.indexes.create = function ( stores, on_success, on_error, on_abort, req ) {
+	InDB.indexes.create = function ( stores, on_success, on_error, on_abort, target ) {
 		var context = { 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort, 'target': target }; 
 		if( !!InDB.debug ) {
 			console.log( 'InDB.indexes.create', context );
