@@ -1210,7 +1210,7 @@ var IDB = (function(){
 							on_success( context );
 							//end try 2
 						} catch ( error ) {
-							console.log( error );
+							console.log( "TRY2 err",error );
 							on_error( error );
 						}
 
@@ -1680,7 +1680,9 @@ var IDB = (function(){
 		return IDBTransaction.READ_WRITE;
 	}
 	InDB.transaction.version_change = function () {
-		return IDBTransaction.VERSION_CHANGE;
+		//return IDBTransaction.VERSION_CHANGE;
+		//TODO: Bug report that this returns 2 and SNAPSHOT_READ doesn't exist
+		return 3;
 	}
 
 
