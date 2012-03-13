@@ -1200,7 +1200,9 @@ var IDB = (function(){
 						
 						try {
 							//begin try 2
-							var databaseTransaction = InDB.db.transaction( store, InDB.transaction.version_change() ).objectStore( store );
+							var dtx = InDB.db.transaction( store, InDB.transaction.version_change() );
+							console.log("TRANSACTION",store,dtx);
+							var databaseTransaction = dtx.objectStore( store );
 							console.log("ATTEMPTING CREATE",name,key,{ 'unique': unique, 'multirow': multirow });
 							databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
 							if( !!InDB.debug ) {
@@ -1680,9 +1682,7 @@ var IDB = (function(){
 		return IDBTransaction.READ_WRITE;
 	}
 	InDB.transaction.version_change = function () {
-		//return IDBTransaction.VERSION_CHANGE;
-		//TODO: Bug report that this returns 2 and SNAPSHOT_READ doesn't exist
-		return 3;
+		return IDBTransaction.VERSION_CHANGE;
 	}
 
 
@@ -3904,8 +3904,8 @@ var IDB = (function(){
 
 		var store = request.store;
 
-		DB.prototype.store.create( { 'store': store, 'indexes': request.indexes, 'on_success': function() {
-
+		DB.prototype.store.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( store_event ) {
+			console.log("STORE EVENT",store_event);
 			DB.prototype.index.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( result ) {
 				console.log( 'DB.install() index success' );
 				if( 'function' === typeof request.on_success ) {
@@ -3916,7 +3916,7 @@ var IDB = (function(){
 				if( 'function' === typeof request.on_error ) {
 					request.on_error( context );
 				}
-			} } );
+			}, 'event': store_event } );
 
 		}, 'on_error': function() {
 			console.log( 'DB.install() error' );
