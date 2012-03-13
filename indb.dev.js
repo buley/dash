@@ -1199,7 +1199,14 @@ var IDB = (function(){
 							if( 'undefined' === typeof db || null === db ) {
 								db = InDB.db;
 							}
-							var dtx = db.transaction( store );
+							var dtx;
+						       	if( 'function' !== typeof db.transaction && 'undefined' !== typeof db.transaction ) {
+								dtx = db.transaction;
+							} else {
+
+								dtx = db.transaction( store );
+							}
+
 							console.log("TRANSACTION",store,dtx);
 							var databaseTransaction = dtx.objectStore( store );
 							console.log("ATTEMPTING CREATE",name,key,{ 'unique': unique, 'multirow': multirow });
