@@ -1184,7 +1184,7 @@ var IDB = (function(){
 						
 						try {
 							//begin try 2
-							var dtx = InDB.db.transaction();
+							var dtx = InDB.db.transaction( store );
 							console.log("TRANSACTION",store,dtx);
 							var databaseTransaction = dtx.objectStore( store );
 							console.log("ATTEMPTING CREATE",name,key,{ 'unique': unique, 'multirow': multirow });
