@@ -733,6 +733,7 @@ var IDB = (function(){
 		}
 
 		//TODO: Assertions
+		var store;
 		for( store in stores ) {
 
 			var options = stores[ store ];
@@ -1139,13 +1140,16 @@ var IDB = (function(){
 			console.log("INDEX UPGRADE NEEDED",event.target.result);
 			var result = event.target.result;
 			InDB.db = result;
+			console.log("INDB.db",InDB.db);
 
 			try {
 				//begin try 1
 				//TODO: Assertions
+				var store;
 				for( store in stores ) {
 
 					//TODO: Cache vars to previous()ent wasted nested lookups
+					var index;
 					for( index in stores[store] ) {
 						if( stores[store].hasOwnProperty( index ) ) {
 
@@ -1197,6 +1201,7 @@ var IDB = (function(){
 						try {
 							//begin try 2
 							var databaseTransaction = InDB.db.transaction( store, InDB.transaction.read_write() ).objectStore( store );
+							console.log("ATTEMPTING CREATE",name,key,{ 'unique': unique, 'multirow': multirow });
 							databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
 							if( !!InDB.debug ) {
 								console.log( 'InDB.index.create transaction', databaseTransaction );
