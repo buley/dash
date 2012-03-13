@@ -1846,7 +1846,7 @@ var IDB = (function(){
 			}
 			if( 'undefined' !== typeof InDB.db.transaction && null !== InDB.db.transaction ) {
 				console.log("CHANGING TX",InDB.db.transaction.db);
-				InDB.db = InDB.db.transaction.db;
+				return InDB.db.transaction;
 			}
 			var transaction = InDB.db.transaction( [ database ], type );
 			transaction.oncomplete = function ( event ) {
