@@ -1136,7 +1136,7 @@ var IDB = (function(){
 			console.log( 'InDB.indexes.create', context );
 		}
 
-		var main_body = function() {
+		var main_body = function( db ) {
 
 			try {
 				//begin try 1
@@ -1196,7 +1196,10 @@ var IDB = (function(){
 						
 						try {
 							//begin try 2
-							var dtx = InDB.db.transaction( store );
+							if( 'undefined' === typeof db || null === db ) {
+								db = InDB.db;
+							}
+							var dtx = db.transaction( store );
 							console.log("TRANSACTION",store,dtx);
 							var databaseTransaction = dtx.objectStore( store );
 							console.log("ATTEMPTING CREATE",name,key,{ 'unique': unique, 'multirow': multirow });
@@ -1227,13 +1230,7 @@ var IDB = (function(){
 
 		if( 'undefined' !== typeof target && null !== typeof target ) {
 			InDB.db = target;
-			//begin try 2
-			var dtx = target.transaction( store );
-			console.log("TRANSACTION",store,dtx);
-			var databaseTransaction = dtx.objectStore( store );
-
-			console.log("MADE IT INSIDE",databaseTransaction);
-			main_body();
+			main_body( target );
 		} else {
 
 
@@ -1256,7 +1253,7 @@ var IDB = (function(){
 				var result = event.target.result;
 				InDB.db = result;
 				console.log("INDB.db",InDB.db);
-				main_body();
+				main_body( result );
 			};
 
 			upgradeRequest.onsuccess = function ( event ) {
