@@ -732,6 +732,28 @@ var IDB = (function(){
 			console.log('InDB.stores.create', context );
 		}
 
+		var own_on_success = function( res ) {
+			console.log("OWN ON SUCCESS");
+			if( 'function' === typeof on_success ) {
+				console.log("COULD HAVE WOULD HAVE");
+				//on_success( res );
+			}
+		};
+
+		var own_on_error = function( res ) {
+			console.log("OWN ON ERROR");
+			if( 'function' === typeof on_error ) {
+				on_error( res );
+			}
+		};
+
+		var own_on_abort = function( res ) {
+			console.log("OWN ON ABORT");
+			if( 'function' === typeof on_abort ) {
+				on_abort( res );
+			}
+		};
+
 		//TODO: Assertions
 		var store;
 		for( store in stores ) {
@@ -790,7 +812,7 @@ var IDB = (function(){
 				}
 				/* Request */
 					
-				InDB.store.create( store, key, autoinc_key, on_success, on_error, on_abort );
+				InDB.store.create( store, key, autoinc_key, own_on_success, own_on_error, own_on_abort );
 
 			} else {
 				if( !!InDB.debug ) {
@@ -4007,7 +4029,8 @@ var IDB = (function(){
 
 	DB.prototype.store = DB.prototype.store || {};
 	DB.prototype.store.create = function ( request ) {
-
+		console.log("SSTORE CRAETE");
+		console.trace();
 		var namespace = {};
 	
 		if( !InDB.assert( 'undefined' !== typeof request, 'Request cannot be empty' ) ) {
