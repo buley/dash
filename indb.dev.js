@@ -1102,6 +1102,7 @@ var IDB = (function(){
 		var on_success = context.on_success;
 		var on_error = context.on_error;
 		var on_abort = context.on_abort;
+		var req = context.event;
 
 		/* Assertions */
 
@@ -1112,35 +1113,18 @@ var IDB = (function(){
 
 		/* Request */
 		
-		InDB.indexes.create( indexes, on_success, on_error, on_abort );
+		InDB.indexes.create( indexes, on_success, on_error, on_abort, req );
 
 	} );
 
 	//TODO: Needs to be contingent (one by one hooked on success)
-	InDB.indexes.create = function ( stores, on_success, on_error, on_abort ) {
-		var context = { 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort }; 
+	InDB.indexes.create = function ( stores, on_success, on_error, on_abort, req ) {
+		var context = { 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort, 'event': req }; 
 		if( !!InDB.debug ) {
 			console.log( 'InDB.indexes.create', context );
 		}
-		var version = parseInt( InDB.db.version, 10 ) + 1;
-		
-		if( 'undefined' === typeof version || null === version || isNaN( version ) ) {
-			version = 1;
-		}
-	
-		console.log("INDEX UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
-		var db_name = JSON.parse( JSON.stringify( InDB.db.name ) );
-		var db_ver = JSON.parse( JSON.stringify( version ) );
-		InDB.db.close();
 
-		var upgradeRequest = window.indexedDB.open( db_name, db_ver );
-
-		upgradeRequest.onupgradeneeded = function ( event ) {
-
-			console.log("INDEX UPGRADE NEEDED",event.target.result);
-			var result = event.target.result;
-			InDB.db = result;
-			console.log("INDB.db",InDB.db);
+		var main_body = function() {
 
 			try {
 				//begin try 1
@@ -1226,33 +1210,63 @@ var IDB = (function(){
 				on_error( context );
 				InDB.trigger( "InDB_index_created_error", context );
 			}
+
 		};
 
-		upgradeRequest.onsuccess = function ( event ) {
-			console.log("INDEXES CREATE OPEN SUCCESS",event);
-			context[ 'event' ] = event;
-			on_success( context );
-			InDB.trigger( "InDB_create_indexes_success", context );
-		};
+		if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !=== context.event.target ) {
+			InDB.db = context.event.target;
+			main_body();
+		} else {
 
-		upgradeRequest.onblocked = function ( event ) {
-			context[ 'event' ] = event;
-			on_blocked( context );
-			InDB.trigger( "InDB_create_indexes_error", context );
-		};
 
-		upgradeRequest.onerror = function ( event ) {
-			context[ 'event' ] = event;
-			on_error( context );
-			InDB.trigger( "InDB_create_indexes_error", context );
-		};
+			var version = parseInt( InDB.db.version, 10 ) + 1;
+			
+			if( 'undefined' === typeof version || null === version || isNaN( version ) ) {
+				version = 1;
+			}
+		
+			console.log("INDEX UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
+			var db_name = JSON.parse( JSON.stringify( InDB.db.name ) );
+			var db_ver = JSON.parse( JSON.stringify( version ) );
+			InDB.db.close();
 
-		upgradeRequest.onabort = function ( event ) {
-			context[ 'event' ] = event;
-			on_abort( context );
-			InDB.trigger( "InDB_create_indexes_abort", context );
-		};
+			var upgradeRequest = window.indexedDB.open( db_name, db_ver );
 
+			upgradeRequest.onupgradeneeded = function ( event ) {
+
+				console.log("INDEX UPGRADE NEEDED",event.target.result);
+				var result = event.target.result;
+				InDB.db = result;
+				console.log("INDB.db",InDB.db);
+				main_body();
+			};
+
+			upgradeRequest.onsuccess = function ( event ) {
+				console.log("INDEXES CREATE OPEN SUCCESS",event);
+				context[ 'event' ] = event;
+				on_success( context );
+				InDB.trigger( "InDB_create_indexes_success", context );
+			};
+
+			upgradeRequest.onblocked = function ( event ) {
+				context[ 'event' ] = event;
+				on_blocked( context );
+				InDB.trigger( "InDB_create_indexes_error", context );
+			};
+
+			upgradeRequest.onerror = function ( event ) {
+				context[ 'event' ] = event;
+				on_error( context );
+				InDB.trigger( "InDB_create_indexes_error", context );
+			};
+
+			upgradeRequest.onabort = function ( event ) {
+				context[ 'event' ] = event;
+				on_abort( context );
+				InDB.trigger( "InDB_create_indexes_abort", context );
+			};
+		
+		}
 
 	};
 
@@ -3960,7 +3974,7 @@ var IDB = (function(){
 			if( 'function' === typeof request.on_error ) {
 				request.on_error( context );
 			}
-		} } );
+		}, 'event': request.event } );
 
 		return this;
 
