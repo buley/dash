@@ -1212,6 +1212,7 @@ var IDB = (function(){
 			}
 
 		};
+
 		if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !== context.event.target && 'undefined' !== typeof context.event.target.result && null !== context.event.target.result ) {
 			console.log("WOOT");
 			InDB.db = context.event.target.result;
@@ -3931,7 +3932,7 @@ var IDB = (function(){
 				if( 'function' === typeof request.on_error ) {
 					request.on_error( context );
 				}
-			}, 'event': store_event } );
+			}, 'event': store_event.event } );
 
 		}, 'on_error': function() {
 			console.log( 'DB.install() error' );
@@ -3948,7 +3949,7 @@ var IDB = (function(){
 	DB.prototype.index.create = function ( request ) {
 
 		var namespace = {};
-	
+		
 		if( !InDB.assert( 'undefined' !== typeof request, 'Request cannot be empty' ) ) {
 			return this;
 		}
@@ -4007,7 +4008,7 @@ var IDB = (function(){
 
 		InDB.trigger( 'InDB_do_stores_create', { 'stores': namespace, 'on_success': function( result ) {
 			if( !!InDB.debug ) {
-				console.log( 'DB.prototype.store.create success' );
+				console.log( 'DB.prototype.store.create success', result );
 			}
 			if( 'function' === typeof request.on_success ) {
 				request.on_success( result );
