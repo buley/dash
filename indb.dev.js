@@ -732,11 +732,22 @@ var IDB = (function(){
 			console.log('InDB.stores.create', context );
 		}
 
+		var store_count = 0, attr, seen_count = 0;
+		for( attr in stores ) {
+			if( stores.hasOwnProperty( attr ) ) {
+				store_count += 1;
+			}
+		}
 		var own_on_success = function( res ) {
 			console.log("OWN ON SUCCESS");
-			if( 'function' === typeof on_success ) {
-				console.log("COULD HAVE WOULD HAVE");
-				//on_success( res );
+			seen_count += 1;
+			if( 'function' === typeof on_success && seen_count === store_count ) {
+				console.log("CAN AND DOING");
+	
+				on_success( res );
+			} else {
+				console.log("COULD HAVE WOULD NOT HAVE",seen_count,store_count);
+
 			}
 		};
 
