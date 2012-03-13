@@ -1175,8 +1175,8 @@ var IDB = (function(){
 		var index_count = 0, attr, attr2, seen_count = 0, errored = false;
 		for( attr in stores ) {
 			if( stores.hasOwnProperty( attr ) ) {
-				for( attr2 in stores[ store ] ) {
-					if( stores[ store ].hasOwnProperty( attr2 ) ) {
+				for( attr2 in stores[ attr ] ) {
+					if( stores[ attr ].hasOwnProperty( attr2 ) ) {
 						index_count += 1;
 					}
 				}
