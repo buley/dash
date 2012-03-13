@@ -1121,65 +1121,132 @@ var IDB = (function(){
 		if( !!InDB.debug ) {
 			console.log( 'InDB.indexes.create', context );
 		}
-		//TODO: Assertions
-		for( store in stores ) {
-			//TODO: Cache vars to previous()ent wasted nested lookups
-			for( index in stores[store] ) {
-				if( stores[store].hasOwnProperty( index ) ) {
+		var version = parseInt( InDB.db.version, 10 ) + 1;
+		
+		if( 'undefined' === typeof version || null === version || isNaN( version ) ) {
+			version = 1;
+		}
+	
+		console.log("INDEX UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
+		var db_name = JSON.parse( JSON.stringify( InDB.db.name ) );
+		var db_ver = JSON.parse( JSON.stringify( version ) );
+		InDB.db.close();
 
-					var options = stores[store][index];
-					var key, unique, empty_key, multirow;
-					var name = index;
+		var upgradeRequest = window.indexedDB.open( db_name, db_ver );
 
-					if ( !InDB.index.exists( store, index ) ) {
-						//TODO: Cleanup
-						if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
-							key = options.key;
-							unique = options.unique;
-						} else {
-							for( var attrib in options ) {
-								// Don't want prototype attributes
-								if( options.hasOwnProperty( attrib ) ) {
-									key = attrib;
-									var opts = options[attrib];
-									if( 'undefined' !== typeof opts && 'undefined' !== typeof opts[ 'unique' ] || 'undefined' !== typeof options[ 'multirow' ] ) {
-										unique = opts.unique;
-										multirow = opts.multirow;
-									} else {
-										unique = options[ attrib ];
+		upgradeRequest.onupgradeneeded = function ( event ) {
+
+			console.log("INDEX UPGRADE NEEDED",event.target.result);
+			var result = event.target.result;
+			InDB.db = result;
+
+			try {
+				//begin try 1
+				//TODO: Assertions
+				for( store in stores ) {
+
+					//TODO: Cache vars to previous()ent wasted nested lookups
+					for( index in stores[store] ) {
+						if( stores[store].hasOwnProperty( index ) ) {
+
+							var options = stores[store][index];
+							var key, unique, empty_key, multirow;
+							var name = index;
+
+							if ( !InDB.index.exists( store, index ) ) {
+								//TODO: Cleanup
+								if( "undefined" !== typeof options && !InDB.isEmpty( options.key ) ) {
+									key = options.key;
+									unique = options.unique;
+								} else {
+									for( var attrib in options ) {
+										// Don't want prototype attributes
+										if( options.hasOwnProperty( attrib ) ) {
+											key = attrib;
+											var opts = options[attrib];
+											if( 'undefined' !== typeof opts && 'undefined' !== typeof opts[ 'unique' ] || 'undefined' !== typeof options[ 'multirow' ] ) {
+												unique = opts.unique;
+												multirow = opts.multirow;
+											} else {
+												unique = options[ attrib ];
+											}
+										}
 									}
 								}
 							}
 						}
+
+						if ( "undefined" === typeof unique || !InDB.isBoolean( unique ) ) { 
+
+							unique = false; 
+						}
+
+						/* Assertions */
+						
+						InDB.assert( !InDB.isEmpty( key ), 'Must provide an index key' );  
+						InDB.assert( ( InDB.isBoolean( unique ) ), 'Unique key value must be a boolean' );
+
+						/* Debug */
+
+						if( !!InDB.debug ) {
+							console.log( 'InDB.indexes.create calling InDB.index.create', store, key, name, unique, multirow, on_success, on_error, on_abort );
+						}
+
+						/* Create Request */
+						
+						try {
+							//begin try 2
+							var databaseTransaction = InDB.db.transaction( store, InDB.transaction.read_write() ).objectStore( store );
+							databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
+							if( !!InDB.debug ) {
+								console.log( 'InDB.index.create transaction', databaseTransaction );
+							}
+							context[ 'event' ] = event;
+							on_success( context );
+							//end try 2
+						} catch ( error ) {
+							console.log( error );
+							on_error( error );
+						}
+
 					}
+
 				}
 
-				if ( "undefined" === typeof unique || !InDB.isBoolean( unique ) ) { 
-
-					unique = false; 
-				}
-
-				/* Assertions */
-				
-				InDB.assert( !InDB.isEmpty( key ), 'Must provide an index key' );  
-				InDB.assert( ( InDB.isBoolean( unique ) ), 'Unique key value must be a boolean' );
-
-				/* Debug */
-
-				if( !!InDB.debug ) {
-					console.log( 'InDB.indexes.create calling InDB.index.create', store, key, name, unique, multirow, on_success, on_error, on_abort );
-				}
-
-				/* Request */
-				
-				InDB.index.create( store, key, name, unique, multirow, on_success, on_error, on_abort );
-	
-				delete stores[ store ];		
-				InDB.indexes.create( stores, on_success, on_error, on_abort );
-
-				return;	
+				//end try 1
+			} catch( error ) {
+				context[ 'error' ] = error;
+				on_error( context );
+				InDB.trigger( "InDB_index_created_error", context );
 			}
-		}
+		};
+
+		upgradeRequest.onsuccess = function ( event ) {
+			console.log("INDEXES CREATE OPEN SUCCESS",event);
+			context[ 'event' ] = event;
+			on_success( context );
+			InDB.trigger( "InDB_create_indexes_success", context );
+		};
+
+		upgradeRequest.onblocked = function ( event ) {
+			context[ 'event' ] = event;
+			on_blocked( context );
+			InDB.trigger( "InDB_create_indexes_error", context );
+		};
+
+		upgradeRequest.onerror = function ( event ) {
+			context[ 'event' ] = event;
+			on_error( context );
+			InDB.trigger( "InDB_create_indexes_error", context );
+		};
+
+		upgradeRequest.onabort = function ( event ) {
+			context[ 'event' ] = event;
+			on_abort( context );
+			InDB.trigger( "InDB_create_indexes_abort", context );
+		};
+
+
 	};
 
 
