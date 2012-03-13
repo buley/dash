@@ -1193,14 +1193,14 @@ var IDB = (function(){
 						/* Debug */
 
 						if( !!InDB.debug ) {
-							console.log( 'InDB.indexes.create calling InDB.index.create', store, key, name, unique, multirow, on_success, on_error, on_abort );
+							console.log( 'InDB.indexes.create calling createIndex on InDB.db.transaction()', store, key, name, unique, multirow, on_success, on_error, on_abort );
 						}
 
 						/* Create Request */
 						
 						try {
 							//begin try 2
-							var databaseTransaction = InDB.db.transaction( store, InDB.transaction.read_write() ).objectStore( store );
+							var databaseTransaction = InDB.db.objectStore( store );
 							console.log("ATTEMPTING CREATE",name,key,{ 'unique': unique, 'multirow': multirow });
 							databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
 							if( !!InDB.debug ) {
@@ -1358,7 +1358,7 @@ var IDB = (function(){
 				InDB.db = result;
 
 				try {
-					var databaseTransaction = InDB.db.transaction( store, InDB.transaction.read_write() ).objectStore( store );
+					var databaseTransaction = InDB.db.transaction( store, InDB.transaction.version_change() ).objectStore( store );
 					context[ 'event' ] = event;
 					try {
 						databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
@@ -1679,6 +1679,10 @@ var IDB = (function(){
 	InDB.transaction.write = function () {
 		return IDBTransaction.READ_WRITE;
 	}
+	InDB.transaction.version_change = function () {
+		return IDBTransaction.VERSION_CHANGE;
+	}
+
 
 	/**
 	 * Directions
