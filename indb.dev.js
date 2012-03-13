@@ -1213,7 +1213,6 @@ var IDB = (function(){
 
 		};
 		console.log('context!!',context.event);
-		console.log("CHECK",'undefined' !== typeof context.event,'undefined' !== typeof context.event.target,null !== context.event.target,'undefined' !== typeof context.event.target.result,null !== context.event.target.result);
 		if( 'undefined' !== typeof context.event && 'undefined' !== typeof context.event.target && null !== context.event.target && 'undefined' !== typeof context.event.target.result && null !== context.event.target.result ) {
 			console.log("WOOT");
 			InDB.db = context.event.target.result;
