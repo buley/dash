@@ -143,7 +143,7 @@ var IDB = (function(){
 	InDB.shorthand.map.set = function( request ) {
 		var on_error = request.on_error;
 		var on_success = request.on_success;
-		if( 'undefined' !== typeof shorthand_maps ) {
+		if( 'undefined' === typeof shorthand_maps ) {
 			if( 'function' === typeof on_error ) {
 				on_error( new Error('Internal configuration error: no shorthand_maps' ) );
 			}		
