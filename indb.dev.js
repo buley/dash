@@ -1843,7 +1843,7 @@ var IDB = (function(){
 			if ( !!InDB.debug ) {
 				console.log ( "InDB.db.transaction.create", database, type );
 			}
-			if( 'undefined' !== typeof InDB.db.transaction && null !== InDB.db.transaction ) {
+			if( 'undefined' !== typeof InDB.db && null !== InDB.db && 'undefined' !== typeof InDB.db.transaction && null !== InDB.db.transaction && 'function' !== typeof InDB.db.transaction ) {
 				console.log("CHANGING TX",InDB.db.transaction.db);
 				return InDB.db.transaction;
 			}
