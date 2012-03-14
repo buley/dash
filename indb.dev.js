@@ -143,7 +143,7 @@ var IDB = (function(){
 	InDB.shorthand.map.set = function( request ) {
 		var on_error = request.on_error;
 		var on_success = request.on_success;
-		if( 'undefined' === shorthand_maps ) {
+		if( 'undefined' !== typeof shorthand_maps ) {
 			if( 'function' === typeof on_error ) {
 				on_error( new Error('Internal configuration error: no shorthand_maps' ) );
 			}		
@@ -1844,7 +1844,6 @@ var IDB = (function(){
 				console.log ( "InDB.db.transaction.create", database, type );
 			}
 			if( 'undefined' !== typeof InDB.db && null !== InDB.db && 'undefined' !== typeof InDB.db.transaction && null !== InDB.db.transaction && 'function' !== typeof InDB.db.transaction ) {
-				console.log("CHANGING TX",InDB.db.transaction.db);
 				return InDB.db.transaction;
 			}
 			var transaction = InDB.db.transaction( [ database ], type );
@@ -3195,7 +3194,7 @@ var IDB = (function(){
 
 				if( false === flagged && ( 'undefined' === typeof limit || null === limit || total < limit ) ) {
 					total++;
-					if( 'function' == on_success ) {
+					if( 'function' === typeof on_success ) {
 						on_success( context );
 					}
 				}
@@ -4671,7 +4670,7 @@ var IDB = (function(){
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 
 		var shorthand_map = InDB.shorthand.map.get( { 'store': store } );
-		if ( 'undefined' === shorthand_map ) {
+		if ( 'undefined' !== typeof shorthand_map ) {
 			var key = request.key;
 			result = ( 'undefined' !== typeof request.key ) ? key : shorthand_map[ key ];
 
