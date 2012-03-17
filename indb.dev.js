@@ -88,7 +88,7 @@ var IDB = (function(){
 
 	/* Begin Defaults */
 
-	InDB.debug = true;
+	InDB.debug = false;
 
 	InDB.events.onComplete = function ( e ) {
 		if ( !!InDB.debug ) {
