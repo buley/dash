@@ -249,7 +249,7 @@ var IDB = (function(){
 				//recursive case: object value
 				//base case: string value
 				//zzz
-				if( true === InDB.isArray( typeof object[ item ] ) ) {
+				if( true === InDB.isArray( object[ item ] ) ) {
 					encoded[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = object[ item ];	
 				} else if( 'object' === typeof object[ item ] ) {
 					encoded[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = InDB.shorthand.encode( { 'store': store, 'data': object[ item ] } );	
