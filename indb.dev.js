@@ -248,8 +248,10 @@ var IDB = (function(){
 			if( object.hasOwnProperty( item ) ) {
 				//recursive case: object value
 				//base case: string value
-
-				if( 'object' === typeof object[ item ] ) {
+				//zzz
+				if( true === InDB.isArray( typeof object[ item ] ) ) {
+					encoded[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = object[ item ];	
+				} else if( 'object' === typeof object[ item ] ) {
 					encoded[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = InDB.shorthand.encode( { 'store': store, 'data': object[ item ] } );	
 				} else { 
 					encoded[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = object[ item ];
@@ -523,6 +525,10 @@ var IDB = (function(){
 
 	InDB.isFunction = function ( mixed_var ) {
 		return InDB.isType( "function", mixed_var );
+	}
+
+	InDB.isArray = function ( mixed_var ) {
+		return ( mixed_var instanceof Array );
 	}
 
 	InDB.isNumber = function ( mixed_var ) {
