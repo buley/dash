@@ -369,7 +369,7 @@ var IDB = (function(){
 
 		/* Assertions */	
 		
-		if ( "IDBDatabase" === typeof InDB.db && name === InDB.db.name ) {
+		if ( "IDBDatabase" === typeof InDB.dbs[ name ]  ) {
 			on_error( new Error( "Database already loaded" ) );
 			InDB.trigger( 'InDB_database_already_loaded', context );
 			return;
@@ -1915,7 +1915,7 @@ var IDB = (function(){
 			if( 'undefined' !== typeof dbref && null !== dbref && 'undefined' !== typeof dbref.transaction && null !== dbref.transaction && 'function' !== typeof dbref.transaction ) {
 				return dbref.transaction;
 			}
-			var transaction = InDB.db.transaction( [ database ], type );
+			var transaction = dbref.transaction( [ database ], type );
 			transaction.oncomplete = function ( event ) {
 				on_complete( event );
 				InDB.trigger( 'transaction_complete', { "database": database, store: store, "type": type } );
