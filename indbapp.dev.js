@@ -6,19 +6,19 @@ var InDBApp = (function() {
 	var App = function( request ) {
 
 		var current_database = 'App';
-		var current_description = '';
+		var version = 1;
 
 		if( 'undefined' !== typeof request ) {
 			if( 'undefined' !== typeof request.name ) {
 				current_database = request.name;
 			}
 
-			if( 'undefined' !== typeof request.description ) {
-				current_description = request.description;
+			if( 'undefined' !== typeof request.version || 'undefined' !== typeof request.description ) {
+				version = request.version || request.description; //legacy, remove me
 			}
 		}
 
-		InDB = new IDB( { 'database': current_database, 'description': current_description } );
+		InDB = new IDB( { database: current_database, version: version } );
 		
 	};
 
