@@ -405,12 +405,14 @@ var IDB = (function(){
 				context[ 'event' ] = event;
 				var result = event.target.result;
 				InDB.db = result;
+				InDB.dbs[ name ] = result;
 				on_upgrade_needed( context );
 				InDB.trigger( 'InDB_database_load_upgrade_needed' );
 			};
 			open_request.onsuccess = function ( event ) {
 				var result = event.target.result;
 				InDB.db = result;
+				InDB.dbs[ name ] = result;
 				console.log("SET INDB.DB",result);
 				on_success( result );
 				if ( isNaN( InDB.db.version ) || 0 === InDB.db.version ) {
@@ -978,6 +980,7 @@ var IDB = (function(){
 
 				var result = event.target.result;
 				InDB.db = result;
+				InDB.dbs[ name ] = result;
 				console.log("UPGRADE NEEDED",event);
 				try {
 
@@ -1342,6 +1345,7 @@ var IDB = (function(){
 				console.log("INDEX UPGRADE NEEDED",event.target.result);
 				var result = event.target.result;
 				InDB.db = result;
+				InDB.dbs[ db_name ] = result;
 				console.log("INDB.db",InDB.db);
 				main_body( result );
 			};
@@ -1477,6 +1481,7 @@ var IDB = (function(){
 				console.log("INDEX UPGRADE NEEDED",event.target.result);
 				var result = event.target.result;
 				InDB.db = result;
+				InDB.dbs[ db_name ] = result;
 
 				try {
 					var databaseTransaction = InDB.db.transaction( store, InDB.transaction.version_change() ).objectStore( store );
