@@ -4023,13 +4023,9 @@ var IDB = (function(){
 	/* Database */
 
 	DB.prototype.install = function ( request ) {
-		console.log("STORE INSTALL");
-		console.trace();
 		var store = request.store;
 
 		DB.prototype.store.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( store_event ) {
-			console.trace();
-			console.log("STORE EVENT");
 			DB.prototype.index.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( result ) {
 				console.log( 'DB.install() index success' );
 				if( 'function' === typeof request.on_success ) {
@@ -4092,8 +4088,6 @@ var IDB = (function(){
 
 	DB.prototype.store = DB.prototype.store || {};
 	DB.prototype.store.create = function ( request ) {
-		console.log("SSTORE CRAETE");
-		console.trace();
 		var namespace = {};
 	
 		if( !InDB.assert( 'undefined' !== typeof request, 'Request cannot be empty' ) ) {
