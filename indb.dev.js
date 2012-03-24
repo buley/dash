@@ -4767,9 +4767,9 @@ var IDB = (function(){
 			for( item in data ) {
 				shorthand_map[ item ] = data[ item ];
 			}
-		e else {
+		} else {
 			shorthand_map = data;
-		e
+		}
 
 		/* Defaults */
 		InDB.shorthand.map.set( { database: database, 'store': store, 'data': shorthand_map, 'on_success': request.on_success, 'on_error': request.on_error } );
