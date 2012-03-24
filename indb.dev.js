@@ -47,6 +47,7 @@ var IDB = (function(){
 	 **/
 
 	/* Begin Namespaces */
+
 	var InDB = {};
 	InDB.factory = {};
 	InDB.db = {};
