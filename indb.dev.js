@@ -190,9 +190,11 @@ var IDB = (function(){
 		if( 'undefined' === typeof database || null === database ) {
 			result = shorthand_maps[ store ]; 
 		} else {
-			result = shorthand_maps[ database ][ store ];
+			if( 'undefined' !== typeof shorthand_maps[ database ] && 'undefined' !== typeof shorthand_maps[ database ][ store ] ) {
+				result = shorthand_maps[ database ][ store ];
+			}
 		}	
-		return ( 'undefined' == typeof result ) ? null : result;
+		return ( 'undefined' === typeof result ) ? null : result;
 	};
 
 	InDB.shorthand.get = function ( request ) {
