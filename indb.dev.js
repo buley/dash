@@ -229,7 +229,7 @@ var IDB = (function(){
 		var total = 0;
 		var object = request.data;
 		var store = request.store;
-		var database = request.store;
+		var database = request.database;
 		for( var itemobj in object ) {
 			if( 'undefined' !== typeof itemobj && object.hasOwnProperty( itemobj ) ) {
 				//recursive case: object value
@@ -259,7 +259,7 @@ var IDB = (function(){
 		var encoded = {};
 		var object = request.data;
 		var store = request.store;
-		var database = request.store;
+		var database = request.database;
 		for( var item in object ) {
 			if( object.hasOwnProperty( item ) ) {
 				//recursive case: object value
