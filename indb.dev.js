@@ -1914,7 +1914,7 @@ var IDB = (function(){
 			if( 'undefined' !== typeof dbref && null !== dbref && 'undefined' !== typeof dbref.transaction && null !== dbref.transaction && 'function' !== typeof dbref.transaction ) {
 				return dbref.transaction;
 			}
-			var transaction = dbref.transaction( [ database ], type );
+			var transaction = dbref.transaction( [ store ], type );
 			transaction.oncomplete = function ( event ) {
 				on_complete( event );
 				InDB.trigger( 'transaction_complete', { "database": database, store: store, "type": type } );
