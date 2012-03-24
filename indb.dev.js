@@ -128,10 +128,6 @@ var IDB = (function(){
 
 	/* End Defaults */
 
-	/* Begin Onload */
-	//jQuery document.load callback TK
-	/* End Onload */
-
 	/* Shorthand */
 
 	//global that stores the maps for various dbs
@@ -143,19 +139,28 @@ var IDB = (function(){
 	InDB.shorthand.map.set = function( request ) {
 		var on_error = request.on_error;
 		var on_success = request.on_success;
+		var database = request.database;
+		var store = request.store;
 		if( 'undefined' === typeof shorthand_maps ) {
 			if( 'function' === typeof on_error ) {
 				on_error( new Error('Internal configuration error: no shorthand_maps' ) );
 			}		
 			return this;
 		}
-		if( 'undefined' == shorthand_maps[ request.store ] ) {
-			shorthand_maps[ request.store ] = {};
-		} 
-
-		// Private object shorthand_maps
-		shorthand_maps[ request.store ] = request.data;
-
+		if( 'undefined' === typeof database || null === database ) {
+			if( 'undefined' == shorthand_maps[ store ] ) {
+				shorthand_maps[ store ] = {};
+			} 
+			shorthand_maps[ request.store ] = request.data;
+		} else {
+			if( 'undefined' == shorthand_maps[ database ] ) {
+				shorthand_maps[ database ] = {};
+			}
+			if( 'undefined' == shorthand_maps[ database ][ store ] ) {
+				shorthand_maps[ database ][ store ] = {};
+			}
+			shorthand_maps[ database ][ store ] = request.data;
+		}
 		if( 'undefined' == typeof result ) {
 			result = null;
 		}
@@ -166,9 +171,16 @@ var IDB = (function(){
 	};
 
 	// Private object getter
-	InDB.shorthand.map.get = function( store ) {
-		if( 'undefined' == shorthand_maps ) return null;
-		var result = shorthand_maps[ store ]; 
+	InDB.shorthand.map.get = function( store, database ) {
+		if( 'undefined' === typeof shorthand_maps ) {
+			return null;
+		}
+		var result;
+		if( 'undefined' === typeof database || null === database ) {
+			result = shorthand_maps[ store ]; 
+		} else {
+			result = shorthand_maps[ database ][ store ];
+		}	
 		return ( 'undefined' == typeof result ) ? null : result;
 	};
 
@@ -176,7 +188,8 @@ var IDB = (function(){
 
 		/* Setup */
 		var store = request.store;
-		var shorthand_map = InDB.shorthand.map.get( store );
+		var database = request.database;
+		var shorthand_map = InDB.shorthand.map.get( store, database );
 
 		/* Work */
 
@@ -194,10 +207,10 @@ var IDB = (function(){
 		var reversed = {};
 		var shorthand_map = InDB.shorthand.map.get( request.store );
 		var store = request.store;
-
+		var database = request.database;
 		for( var item in shorthand_map ) {
 			if( shorthand_map.hasOwnProperty( item ) ) {
-				reversed[ InDB.shorthand.get( { 'store': store, 'key': item } ) ] = item;
+				reversed[ InDB.shorthand.get( { 'store': store, 'database': database, 'key': item } ) ] = item;
 			}
 		}
 		if( 'undefined' !== typeof reversed[ k ] ) {
