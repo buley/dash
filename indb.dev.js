@@ -319,7 +319,7 @@ var IDB = (function(){
 		/* Setup */
 
 		var name = context.name;
-		var description = context.description;
+		var version = context.version || context.description; //legacy, remove me
 		var on_success = context.on_success;
 		var on_upgrade_needed = context.on_upgrade_needed;
 		var on_error = context.on_error;
@@ -334,7 +334,7 @@ var IDB = (function(){
 
 		/* Request */
 
-		InDB.database.load( name, description, on_success, on_error, on_abort, on_upgrade_needed );
+		InDB.database.load( name, version, on_success, on_error, on_abort, on_upgrade_needed );
 
 	} );
 
