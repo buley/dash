@@ -4741,6 +4741,7 @@ var IDB = (function(){
 	DB.prototype.shorthand.set = function( request ) {
 
 		var store = request.store;
+		var database = request.database;
 		var data = request.data;
 		var on_error = request.on_error;
 		var shorthand_map = InDB.shorthand.map.get( { database: database, 'store': store } );
@@ -4748,9 +4749,9 @@ var IDB = (function(){
 			for( item in data ) {
 				shorthand_map[ item ] = data[ item ];
 			}
-		} else {
+		e else {
 			shorthand_map = data;
-		}
+		e
 
 		/* Defaults */
 
@@ -4770,6 +4771,7 @@ var IDB = (function(){
 		/* Defaults */
 		var result;
 		var store = request.store;
+		var database = request.database;
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 		var database = request.database;
 		database = ( !InDB.isEmpty( database ) ) ? database : current_database;
