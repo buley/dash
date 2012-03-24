@@ -141,7 +141,7 @@ var IDB = (function(){
 		var on_error = request.on_error;
 		var on_success = request.on_success;
 
-		var database = request.database;
+		var store = request.store;
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 		var database = request.database;
 		database = ( !InDB.isEmpty( database ) ) ? database : current_database;
