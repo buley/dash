@@ -4097,7 +4097,7 @@ var IDB = (function(){
 		var store = request.store;
 		var database = request.database;
 
-		DB.prototype.store.create( { database: database, 'store': store, 'indexes': request.indexes, 'on_success': function( store_event ) {
+		DB.prototype.store.create( { 'database', database, 'store': store, 'indexes': request.indexes, 'on_success': function( store_event ) {
 			DB.prototype.index.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( result ) {
 				console.log( 'DB.install() index success' );
 				if( 'function' === typeof request.on_success ) {
@@ -4416,7 +4416,7 @@ var IDB = (function(){
 
 
 		var on_success = function( context ) {
-			var item = InDB.shorthand.decode( { database: database: 'store': store, 'data': context.update } );
+			var item = InDB.shorthand.decode( { database: database, 'store': store, 'data': context.update } );
 			if( 'function' == typeof request.on_success ) {
 				request.on_success( item );
 			}
@@ -4440,7 +4440,7 @@ var IDB = (function(){
 
 		var expecting = request.expecting;
 		if( 'function' !== typeof expecting ) {
-			expecting = InDB.shorthand.encode( { database: databse, 'store': store, 'data': expecting } );
+			expecting = InDB.shorthand.encode( { database: database, 'store': store, 'data': expecting } );
 		}
 
 		InDB.trigger( 'InDB_do_row_update', { database: database, 'store': store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expecting, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
