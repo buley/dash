@@ -149,15 +149,15 @@ var IDB = (function(){
 			return this;
 		}
 		if( 'undefined' === typeof database || null === database ) {
-			if( 'undefined' == shorthand_maps[ store ] ) {
+			if( 'undefined' == typeof shorthand_maps[ store ] ) {
 				shorthand_maps[ store ] = {};
 			} 
 			shorthand_maps[ request.store ] = request.data;
 		} else {
-			if( 'undefined' == shorthand_maps[ database ] ) {
+			if( 'undefined' == typeof shorthand_maps[ database ] ) {
 				shorthand_maps[ database ] = {};
 			}
-			if( 'undefined' == shorthand_maps[ database ][ store ] ) {
+			if( 'undefined' == typeof shorthand_maps[ database ][ store ] ) {
 				shorthand_maps[ database ][ store ] = {};
 			}
 			shorthand_maps[ database ][ store ] = request.data;
