@@ -389,8 +389,6 @@ var IDB = (function(){
 			on_upgrade_needed = InDB.events.onUpgradeNeeded;
 		}
 
-
-
 		/* Action */
 		InDB.trigger( 'InDB_database_loading', context );
 		
