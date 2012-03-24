@@ -3958,7 +3958,9 @@ var IDB = (function(){
 		};
 
 
-		InDB.trigger( 'InDB_do_database_load', { 'name': request.database, 'description': request.description, 'on_success': on_success, 'on_error': on_error, 'on_upgrade_needed': on_upgrade_needed } ) ;
+		var version = ( 'undefined' !== typeof request.version ) ? request.version : 1;
+
+		InDB.trigger( 'InDB_do_database_load', { 'name': request.database, 'version': version, 'on_success': on_success, 'on_error': on_error, 'on_upgrade_needed': on_upgrade_needed } ) ;
 
 		return this;
 	};
