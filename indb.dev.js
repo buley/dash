@@ -366,7 +366,6 @@ var IDB = (function(){
 
 		var context = { "name": name, "version": version, "on_success": on_success, "on_error": on_error, "on_abort": on_abort };
 
-
 		/* Assertions */	
 		
 		if ( "IDBDatabase" === typeof InDB.dbs[ name ]  ) {
