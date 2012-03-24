@@ -178,7 +178,7 @@ var IDB = (function(){
 	// Private object getter
 	InDB.shorthand.map.get = function( request ) {
 
-		var database = request.database;
+		var store = request.store;
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 		var database = request.database;
 		database = ( !InDB.isEmpty( database ) ) ? database : current_database;
@@ -199,7 +199,7 @@ var IDB = (function(){
 
 		/* Setup */
 
-		var database = request.database;
+		var store = request.store;
 		store = ( !InDB.isEmpty( store ) ) ? store : current_store;
 		var database = request.database;
 		database = ( !InDB.isEmpty( database ) ) ? database : current_database;
@@ -221,9 +221,9 @@ var IDB = (function(){
 	InDB.shorthand.reverse = function ( request ) {
 		var k = request.key || request.data;
 		var reversed = {};
-		var shorthand_map = InDB.shorthand.map.get( { database: database, 'store': store } );
 		var store = request.store;
 		var database = request.database;
+		var shorthand_map = InDB.shorthand.map.get( { database: database, 'store': store } );
 		for( var item in shorthand_map ) {
 			if( shorthand_map.hasOwnProperty( item ) ) {
 				reversed[ InDB.shorthand.get( { 'store': store, 'database': database, 'key': item } ) ] = item;
