@@ -4354,12 +4354,12 @@ var IDB = (function(){
 			};
 		}
 
-		var expected = request.expected;
-		if( 'function' !== typeof expected ) {
-			expected = InDB.shorthand.encode( { 'store': store, 'data': expected } );
+		var expecting = request.expecting;
+		if( 'function' !== typeof expecting ) {
+			expecting = InDB.shorthand.encode( { 'store': store, 'data': expecting } );
 		}
 
-		InDB.trigger( 'InDB_do_row_update', { 'store': store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expected, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
+		InDB.trigger( 'InDB_do_row_update', { 'store': store, 'key': request.key, 'index': request.index, 'data': new_data, 'replace': request.replace, 'expected': expecting, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort } );
 
 		return this;
 
