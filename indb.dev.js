@@ -962,7 +962,7 @@ var IDB = (function(){
 			version = ( isNaN( version ) ) ? parseInt( version, 10 ) : version;
 			version = ( null === version || isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
 			
-			if( 'undefined' === typeof version || null === version ) {
+			if( 'undefined' === typeof version || null === version || isNaN( version ) ) {
 				version = 1;
 			}
 		
