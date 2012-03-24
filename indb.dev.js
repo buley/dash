@@ -172,7 +172,7 @@ var IDB = (function(){
 	};
 
 	// Private object getter
-	InDB.shorthand.map.get = function( store, database ) {
+	InDB.shorthand.map.get = function( database, store ) {
 		if( 'undefined' === typeof shorthand_maps ) {
 			return null;
 		}
@@ -190,7 +190,7 @@ var IDB = (function(){
 		/* Setup */
 		var store = request.store;
 		var database = request.database;
-		var shorthand_map = InDB.shorthand.map.get( store, database );
+		var shorthand_map = InDB.shorthand.map.get( { database: database, 'store': store } );
 
 		/* Work */
 
@@ -206,7 +206,7 @@ var IDB = (function(){
 	InDB.shorthand.reverse = function ( request ) {
 		var k = request.key || request.data;
 		var reversed = {};
-		var shorthand_map = InDB.shorthand.map.get( request.store );
+		var shorthand_map = InDB.shorthand.map.get( { database: database, 'store': store } );
 		var store = request.store;
 		var database = request.database;
 		for( var item in shorthand_map ) {
@@ -4743,7 +4743,7 @@ var IDB = (function(){
 		var store = request.store;
 		var data = request.data;
 		var on_error = request.on_error;
-		var shorthand_map = InDB.shorthand.map.get( { 'store': store } );
+		var shorthand_map = InDB.shorthand.map.get( { database: database, 'store': store } );
 		if( 'undefined' !== typeof request.replace && false === request.replace ) {
 			for( item in data ) {
 				shorthand_map[ item ] = data[ item ];
