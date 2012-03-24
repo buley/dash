@@ -966,7 +966,7 @@ var IDB = (function(){
 				version = 1;
 			}
 		
-			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB.db.name,version);
+			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB,InDB.db.name,version);
 			//var db_name = JSON.parse( JSON.stringify( InDB.db.name ) );
 			var db_name = InDB.db.name;
 			//var db_ver = JSON.parse( JSON.stringify( version ) );
