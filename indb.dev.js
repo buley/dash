@@ -4043,7 +4043,7 @@ var IDB = (function(){
 				}
 			}, 'event': store_event.event, target: store_event.store } );
 
-		}, 'on_error': function() {
+		}, 'on_error': function( context ) {
 			console.log( 'DB.install() error' );
 			if( 'function' === typeof request.on_error ) {
 				request.on_error( context );
