@@ -1235,6 +1235,7 @@ var IDB = (function(){
 
 	//TODO: Needs to be contingent (one by one hooked on success)
 	InDB.indexes.create = function ( database,  store, stores, on_success, on_error, on_abort, target ) {
+
 		var context = { database: database, store: store, 'indexes': stores, 'on_success': on_success, 'on_error': on_error, 'on_abort': on_abort, 'target': target }; 
 		if( !!InDB.debug ) {
 			console.log( 'InDB.indexes.create', context );
@@ -1275,6 +1276,12 @@ var IDB = (function(){
 			}
 		};
 
+		var dbref;
+		if( 'undefined' === typeof InDB.dbs[ database ] ) {
+			dbref = InDB.dbs[ database ];
+		} else {
+			dbref = InDB.db;
+		}
 
 		var main_body = function( db ) {
 
@@ -1335,34 +1342,24 @@ var IDB = (function(){
 						/* Create Request */
 						
 						try {
-							var db;
-							//begin try 2
-							if( 'undefined' === typeof InDB.dbs[ database ] ) {
-								db = InDB.dbs[ database ];
-							} else {
-								db = InDB.db;
-							}
+
 							var dtx;
-						       	if( 'function' !== typeof db.transaction && 'undefined' !== typeof db.transaction ) {
-								dtx = db.transaction;
+						    if( 'function' !== typeof dbref.transaction && 'undefined' !== typeof dbref.transaction ) {
+								dtx = dbref.transaction;
 							} else {
-
-								dtx = db.transaction( store );
+								dtx = dbref.transaction( store );
 							}
-
-							console.log("TRANSACTION",store,dtx);
 							var databaseTransaction = dtx.objectStore( store );
-							console.log("ATTEMPTING CREATE",database, name,key,{ 'unique': unique, 'multirow': multirow });
 							databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
 							if( !!InDB.debug ) {
 								console.log( 'InDB.index.create transaction', databaseTransaction );
 							}
-							context[ 'target' ] = db;
+							context[ 'target' ] = dbref;
 							own_on_success( context );
 							//end try 2
 						} catch ( error ) {
 							console.log( "TRY2 err",error );
-							context[ 'target' ] = db;
+							context[ 'target' ] = dbref;
 							own_on_error( error );
 						}
 
