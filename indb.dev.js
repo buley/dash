@@ -1018,7 +1018,6 @@ var IDB = (function(){
 			//var db_ver = JSON.parse( JSON.stringify( version ) );
 			var db_ver = version;
 
-			dbref.close();
 			var upgradeRequest = window.indexedDB.open( db_name, db_ver );
 
 			upgradeRequest.onupgradeneeded = function ( event ) {
@@ -1339,7 +1338,7 @@ var IDB = (function(){
 						}
 
 						/* Create Request */
-						
+						console.log("OPENED DB REF","type",opened_dbref.type,"mode",opened_dbref.mode);
 						try {
 
 							var dtx;
@@ -1355,6 +1354,7 @@ var IDB = (function(){
 							}
 							context[ 'target' ] = opened_dbref;
 							own_on_success( context );
+
 							//end try 2
 						} catch ( error ) {
 							console.log( "TRY2 err",error );
