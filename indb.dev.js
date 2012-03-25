@@ -1276,15 +1276,14 @@ var IDB = (function(){
 			}
 		};
 
-		var dbref;
 		if( 'undefined' === typeof InDB.dbs[ database ] ) {
 			dbref = InDB.dbs[ database ];
 		} else {
 			dbref = InDB.db;
 		}
 
-		var main_body = function( db ) {
-
+		var main_body = function( opened_dbref ) {
+	
 			try {
 				//begin try 1
 				//TODO: Assertions
@@ -1344,22 +1343,22 @@ var IDB = (function(){
 						try {
 
 							var dtx;
-						    if( 'function' !== typeof dbref.transaction && 'undefined' !== typeof dbref.transaction ) {
-								dtx = dbref.transaction;
+						    if( 'function' !== typeof opened_dbref.transaction && 'undefined' !== typeof opened_dbref.transaction ) {
+								dtx = opened_dbref.transaction;
 							} else {
-								dtx = dbref.transaction( store );
+								dtx = opened_dbref.transaction( store );
 							}
 							var databaseTransaction = dtx.objectStore( store );
 							databaseTransaction.createIndex( name, key, { 'unique': unique, 'multirow': multirow } );
 							if( !!InDB.debug ) {
 								console.log( 'InDB.index.create transaction', databaseTransaction );
 							}
-							context[ 'target' ] = dbref;
+							context[ 'target' ] = opened_dbref;
 							own_on_success( context );
 							//end try 2
 						} catch ( error ) {
 							console.log( "TRY2 err",error );
-							context[ 'target' ] = dbref;
+							context[ 'target' ] = opened_dbref;
 							own_on_error( error );
 						}
 
@@ -1399,7 +1398,6 @@ var IDB = (function(){
 			var upgradeRequest = window.indexedDB.open( db_name, db_ver );
 
 			upgradeRequest.onupgradeneeded = function ( event ) {
-
 				console.log("INDEX UPGRADE NEEDED",event.target.result);
 				var result = event.target.result;
 				InDB.db = result;
