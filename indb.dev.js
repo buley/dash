@@ -986,7 +986,14 @@ var IDB = (function(){
 			console.log( 'InDB.store.create context', context );
 		}
 
-		if( 'function' !== typeof InDB.db.setVersion ) { 
+		var dbref;
+		if( 'undefined' === typeof InDB.dbs[ database ] ) {
+			dbref = InDB.db;
+		} else {
+			dbref = InDB.dbs[ database ];
+		}
+
+		if( 'function' !== typeof dbref.setVersion ) { 
 
 			version = ( isNaN( version ) ) ? parseInt( version, 10 ) : version;
 			version = ( null === version || isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
@@ -995,9 +1002,8 @@ var IDB = (function(){
 				version = 1;
 			}
 		
-			console.log("UPGRADE REQUESTING FOR upgradeRequest",InDB,InDB.db.name,version);
 			//var db_name = JSON.parse( JSON.stringify( InDB.db.name ) );
-			var db_name = database || InDB.db.name;
+			var db_name = database || dbref.name;
 			//var db_ver = JSON.parse( JSON.stringify( version ) );
 			var db_ver = version;
 
@@ -1008,7 +1014,7 @@ var IDB = (function(){
 				var result = event.target.result;
 				InDB.db = result;
 				InDB.dbs[ name ] = result;
-				console.log("UPGRADE NEEDED",event);
+				
 				try {
 
 					// Database options
