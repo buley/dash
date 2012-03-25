@@ -1007,6 +1007,7 @@ var IDB = (function(){
 			//var db_ver = JSON.parse( JSON.stringify( version ) );
 			var db_ver = version;
 
+			dbref.close();
 			var upgradeRequest = window.indexedDB.open( db_name, db_ver );
 
 			upgradeRequest.onupgradeneeded = function ( event ) {
@@ -1595,6 +1596,7 @@ var IDB = (function(){
 
 
 		} else {
+
 			//pre FF10
 		
 			// Database changes need to happen from w/in a setVersionRequest
