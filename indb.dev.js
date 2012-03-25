@@ -437,8 +437,9 @@ var IDB = (function(){
 			} else {
 				dbref = InDB.dbs[ name ];
 			}
-
-			dbref.close();
+			if( 'function' === typeof  dbref.close ) {
+				dbref.close();
+			}
 
 			var open_request = window.indexedDB.open( name, version );
 			open_request.onupgradeneeded = function ( event ) {
