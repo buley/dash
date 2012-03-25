@@ -4115,7 +4115,7 @@ var IDB = (function(){
 		var database = request.database;
 
 		DB.prototype.store.create( { 'database': database, 'store': store, 'indexes': request.indexes, 'on_success': function( store_event ) {
-			DB.prototype.index.create( { 'store': store, 'indexes': request.indexes, 'on_success': function( result ) {
+			DB.prototype.index.create( { database: database, 'store': store, 'indexes': request.indexes, 'on_success': function( result ) {
 				console.log( 'DB.install() index success' );
 				if( 'function' === typeof request.on_success ) {
 					request.on_success( result );
