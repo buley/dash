@@ -1006,8 +1006,9 @@ var IDB = (function(){
 
 		if( 'function' !== typeof dbref.setVersion ) { 
 
+			console.log("THE STATUS",dbref.transaction.mode,dbref.transaction);
 			version = ( isNaN( version ) ) ? parseInt( version, 10 ) : version;
-			version = ( null === version || isNaN( version ) ) ? parseInt( InDB.db.version, 10 ) + 1 : version;
+			version = ( null === version || isNaN( version ) ) ? parseInt( dbref.version, 10 ) + 1 : version;
 			
 			if( 'undefined' === typeof version || null === version || isNaN( version ) ) {
 				version = 1;
@@ -4129,23 +4130,30 @@ var IDB = (function(){
 		var database = request.database;
 
 		DB.prototype.store.create( { 'database': database, 'store': store, 'indexes': request.indexes, 'on_success': function( store_event ) {
+
 			DB.prototype.index.create( { database: database, 'store': store, 'indexes': request.indexes, 'on_success': function( result ) {
+
 				console.log( 'DB.install() index success' );
 				if( 'function' === typeof request.on_success ) {
 					request.on_success( result );
 				}			
+
 			}, 'on_error': function( context ) {
+
 				console.log( 'DB.install() index error' );
 				if( 'function' === typeof request.on_error ) {
 					request.on_error( context );
 				}
+
 			}, 'event': store_event.event, target: store_event.store } );
 
 		}, 'on_error': function( context ) {
+
 			console.log( 'DB.install() error' );
 			if( 'function' === typeof request.on_error ) {
 				request.on_error( context );
 			}
+
 		} } );
 
 		return this;
