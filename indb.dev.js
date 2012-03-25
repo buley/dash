@@ -432,10 +432,10 @@ var IDB = (function(){
 		} else {
 
 			var dbref;
-			if( 'undefined' === typeof InDB.dbs[ database ] ) {
+			if( 'undefined' === typeof InDB.dbs[ name ] ) {
 				dbref = InDB.db;
 			} else {
-				dbref = InDB.dbs[ database ];
+				dbref = InDB.dbs[ name ];
 			}
 
 			dbref.close();
