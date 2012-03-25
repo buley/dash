@@ -1338,7 +1338,7 @@ var IDB = (function(){
 						}
 
 						/* Create Request */
-						console.log("OPENED DB REF","type",opened_dbref.type,"mode",opened_dbref.mode);
+						console.log("OPENED DB REF","type",opened_dbref.transaction.readyState,"mode",opened_dbref.transaction.mode);
 						try {
 
 							var dtx;
