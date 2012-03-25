@@ -4168,7 +4168,7 @@ var IDB = (function(){
 			namespace_idxs[ store ][ index ][ InDB.shorthand.get( { database: database, 'store': store, 'key': index } ) ] = uniqueness;
 		}
 
-		InDB.trigger( 'InDB_do_indexes_create', { database: database, 'indexes': namespace_idxs, 'on_success': function( value ) {
+		InDB.trigger( 'InDB_do_indexes_create', { database: database, store: store, 'indexes': namespace_idxs, 'on_success': function( value ) {
 			if( 'function' === typeof request.on_success ) {
 				request.on_success( value );
 			}
