@@ -430,6 +430,16 @@ var IDB = (function(){
 			InDB.trigger( 'InDB_database_load_success', context );
 			InDB.trigger( 'InDB_stores_load_success', context );
 		} else {
+
+			var dbref;
+			if( 'undefined' === typeof InDB.dbs[ database ] ) {
+				dbref = InDB.db;
+			} else {
+				dbref = InDB.dbs[ database ];
+			}
+
+			dbref.close();
+
 			var open_request = window.indexedDB.open( name, version );
 			open_request.onupgradeneeded = function ( event ) {
 				context[ 'event' ] = event;
