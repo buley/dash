@@ -1017,7 +1017,8 @@ var IDB = (function(){
 			var db_name = database || dbref.name;
 			//var db_ver = JSON.parse( JSON.stringify( version ) );
 			var db_ver = version;
-
+			
+			dbref.close();
 			var upgradeRequest = window.indexedDB.open( db_name, db_ver );
 
 			upgradeRequest.onupgradeneeded = function ( event ) {
