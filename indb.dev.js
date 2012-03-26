@@ -1021,12 +1021,7 @@ var IDB = (function(){
 			dbref.close();
 			var upgradeRequest = window.indexedDB.open( db_name, db_ver );
 
-			upgradeRequest.onupgradeneeded = function ( event ) {
-
-				var result = event.target.result;
-				InDB.db = result;
-				InDB.dbs[ name ] = result;
-				
+			var own_callback = function() {
 				try {
 
 					// Database options
@@ -1075,10 +1070,22 @@ var IDB = (function(){
 						InDB.trigger( "InDB_store_already_exists", context );
 					}
 				}
+
+
+			};
+		
+
+			upgradeRequest.onupgradeneeded = function ( event ) {
+
+				var result = event.target.result;
+				InDB.db = result;
+				InDB.dbs[ name ] = result;
+				own_callback();
 			};
 
 			upgradeRequest.onsuccess = function ( event ) {
 				context[ 'event' ] = event;
+				own_callback();
 				on_success( context );
 				InDB.trigger( "InDB_store_created_success", context );
 			};
