@@ -1007,8 +1007,7 @@ var IDB = (function(){
 		if( 'function' !== typeof dbref.setVersion ) { 
 
 			console.log("THE STATUS",dbref.transaction.mode,dbref.transaction);
-			version = ( isNaN( version ) ) ? parseInt( version, 10 ) : version;
-			version = ( null === version || isNaN( version ) ) ? parseInt( dbref.version, 10 ) + 1 : version;
+			version = ( null === version || isNaN( version ) ) ? parseInt( dbref.version, 10 ) + 1 : null;
 			
 			if( 'undefined' === typeof version || null === version || isNaN( version ) ) {
 				version = 1;
