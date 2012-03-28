@@ -1,4 +1,4 @@
-/**
+/*s
  * InDB by Taylor Buley
  * Github -> http://github.com/editor/indb 
  * Twitter -> @taylorbuley
@@ -2157,7 +2157,7 @@ var IDB = (function(){
 		/* Debug */
 
 		if ( !!InDB.debug ) {
-			console.log ( 'InDB.row.get', database, store, key, index, on_success, on_error, on_abort, on_complete );
+			console.log ( 'InDB.row.get', database, store, key, index, typeof on_success, typeof on_error, typeof on_abort, typeof on_complete );
 		}
 
 		/* Assertions */
