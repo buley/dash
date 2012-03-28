@@ -2788,7 +2788,7 @@ var IDB = (function(){
 
 		};
 
-		InDB.row.get( context, database, store, key, index, callback, on_error, on_abort );
+		InDB.row.get( database, store, key, index, callback, on_error, on_abort );
 
 	}
 
