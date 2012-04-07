@@ -4060,7 +4060,7 @@ var IDB = (function(){
 
 		var on_upgrade_needed = function( database ) {
 			request.target = database;
-			if( 'function' == typeof request.on_upgrad_needed ) {
+			if( 'function' == typeof request.on_upgrade_needed ) {
 				request.on_upgrade_needed( database );
 			}
 		};
