@@ -284,7 +284,6 @@ var IDB = (function(){
 			if( object.hasOwnProperty( item ) ) {
 				//recursive case: object value
 				//base case: string value
-				//zzz
 				if( 'object' === typeof object[ item ] ) {
 					if( true === InDB.isArray( object[ item ] ) ) {
 						encoded[ InDB.shorthand.get( { 'database': database, 'store': store, 'key': item } ) ] = object[ item ];	
@@ -4870,8 +4869,7 @@ var IDB = (function(){
 
 	window.addEventListener( "beforeunload", function() {
 		InDB.database.closeAll();
-		console.log('closed',InDB.dbs);
-		return 'closing test';
+		return null;
 	} );
 
 	return DB;
