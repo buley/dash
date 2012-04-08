@@ -153,20 +153,20 @@ var IDB = (function(){
 			return this;
 		}
 		if( 'undefined' === typeof database || null === database ) {
-			if( 'undefined' == typeof shorthand_maps[ store ] ) {
+			if( 'undefined' === typeof shorthand_maps[ store ] ) {
 				shorthand_maps[ store ] = {};
 			} 
 			shorthand_maps[ request.store ] = request.data;
 		} else {
-			if( 'undefined' == typeof shorthand_maps[ database ] ) {
+			if( 'undefined' === typeof shorthand_maps[ database ] ) {
 				shorthand_maps[ database ] = {};
 			}
-			if( 'undefined' == typeof shorthand_maps[ database ][ store ] ) {
+			if( 'undefined' === typeof shorthand_maps[ database ][ store ] ) {
 				shorthand_maps[ database ][ store ] = {};
 			}
 			shorthand_maps[ database ][ store ] = request.data;
 		}
-		if( 'undefined' == typeof result ) {
+		if( 'undefined' === typeof result ) {
 			result = null;
 		}
 		if( 'function' === typeof on_success ) {
@@ -243,41 +243,44 @@ var IDB = (function(){
 	InDB.shorthand.decode = function( request ) {
 		if( null === request ) return null;
 		var encoded = {};
-		var total = 0;
+		var total = 0, value;
 		var object = request.data;
 		var store = request.store;
 		var database = request.database;
-		for( var itemobj in object ) {
-			if( 'undefined' !== typeof itemobj && object.hasOwnProperty( itemobj ) ) {
-				//recursive case: object value
-				//base case: string value
-				var value = object[ itemobj ];
-				if( "[object Object]" === value.toString() ) {
-					encoded[ InDB.shorthand.reverse( { 'store': store, 'database': database, 'key': itemobj } ) ] = InDB.shorthand.decode( { 'database': database, 'store': store, 'data': value } );
-					delete value;
-				} else { 
-					encoded[ InDB.shorthand.reverse( { 'store': store, 'database': database, 'key': itemobj } ) ] = value;
-					delete value;
+		var itemobj;
+		for( itemobj in object ) {
+			if( object.hasOwnProperty( itemobj ) ) {
+				if( 'undefined' !== typeof itemobj && object.hasOwnProperty( itemobj ) ) {
+					//recursive case: object value
+					//base case: string value
+					value = object[ itemobj ];
+					if( "[object Object]" === value.toString() ) {
+						encoded[ InDB.shorthand.reverse( { 'store': store, 'database': database, 'key': itemobj } ) ] = InDB.shorthand.decode( { 'database': database, 'store': store, 'data': value } );
+					} else { 
+						encoded[ InDB.shorthand.reverse( { 'store': store, 'database': database, 'key': itemobj } ) ] = value;
+					}
 				}
+				total++;
 			}
-			total++;
 		}
 		if( total > 0 ) {
 			return encoded;
 		} else {
 			return {};
 		}
-	}
-
+	};
 
 	//recursive
 	InDB.shorthand.encode = function( request ) {
-		if( null === request ) return null;
+		if( null === request ) {
+			return null;
+		}
 		var encoded = {};
 		var object = request.data;
 		var store = request.store;
 		var database = request.database;
-		for( var item in object ) {
+		var item;
+		for( item in object ) {
 			if( object.hasOwnProperty( item ) ) {
 				//recursive case: object value
 				//base case: string value
@@ -966,7 +969,7 @@ var IDB = (function(){
 			keyPath = key;	
 		}
 
-		if ( 'undefined' == typeof autoinc_key ) {
+		if ( 'undefined' === typeof autoinc_key ) {
 			autoinc_key = false;
 		}
 
@@ -2809,7 +2812,7 @@ var IDB = (function(){
 
 				}
 
-				if( false === flagged && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
+				if( false === flagged && ( 'undefined' === typeof limit || null == limit || total < limit ) ) {
 
 					total++;
 				}
@@ -3932,7 +3935,7 @@ var IDB = (function(){
 			}
 
 			if ( false === flagged && "undefined" !== typeof cursor && null !== cursor ) {
-				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' == typeof limit || null == limit || total < limit ) ) {
+				if( "undefined" !== typeof cursor_result && null !== cursor_result && ( 'undefined' === typeof limit || null == limit || total < limit ) ) {
 					/* Callback */
 					try {
 
@@ -4125,7 +4128,7 @@ var IDB = (function(){
 		if ( 'undefined' === typeof request ) {
 			request = {};
 			request.database = null;
-		} else if( 'undefined' == typeof request.database ) {
+		} else if( 'undefined' === typeof request.database ) {
 			request.database = null;
 		}
 		return InDB.database.show( request.database );
