@@ -1875,7 +1875,37 @@ var IDB = (function(){
 
 		}
 
-	}
+	};
+
+	InDB.database.close = function ( name ) {
+
+		/* Context */
+
+		var context = { "name": name };
+
+		/* Action */
+
+		InDB.trigger( 'InDB_close_database', context );
+
+		/* Request */
+
+		if( 'undefined' === typeof name || null === name ) {
+			return InDB.db.close();
+		}
+		if( 'undefined' !== InDB.dbs[ name ] ) {
+			InDB.dbs[ name ].close();
+		}
+	};
+
+	InDB.database.closeAll = function() {
+		var attr;
+		for( attr in InDB.dbs ) {
+			if( 'undefined' !== typeof InDB.dbs[ attr ] && null !== typeof InDB.dbs[ attr ] ) {
+				InDB.dbs[ attr ].close();
+			}
+		}
+	};
+
 
 	/**
 	 * Transactions
@@ -4831,7 +4861,15 @@ var IDB = (function(){
 		return result;	
 	};
 
+	/* Shh */
+
 	DB.prototype.shh = InDB;
+
+	window.addEventListener( "beforeunload", function() {
+		InDB.database.closeAll();
+		console.log('closed',InDB.dbs);
+		return 'closing test';
+	} );
 
 	return DB;
 
