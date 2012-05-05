@@ -1008,7 +1008,6 @@ var IDB = (function(){
 
 		if( 'function' !== typeof dbref.setVersion ) { 
 
-			console.log("THE STATUS",dbref.transaction.mode,dbref.transaction);
 			version = ( null === version || isNaN( version ) ) ? parseInt( dbref.version, 10 ) + 1 : null;
 			
 			if( 'undefined' === typeof version || null === version || isNaN( version ) ) {
@@ -4685,9 +4684,9 @@ var IDB = (function(){
 		key = ( 'undefined' !== typeof begin && 'undefined' !== typeof end ) ? key : null;
 
 		/* Setup */
-		console.log("REMOVEME",key,begin,end,left_inclusive);
+
 		var keyRange = InDB.range.get( key, begin, end, left_inclusive, right_inclusive );
-		console.log("REMOVEMEDONE",keyRange);
+
 		/* Request */
 
 		InDB.trigger( 'InDB_do_cursor_delete', { database: database, 'store': store, 'keyRange': keyRange, 'expecting': expecting, 'index': index, 'direction': direction, 'limit': limit, 'on_success': on_success, 'on_error': on_error, 'on_abort': request.on_abort, 'on_complete': request.on_complete } );
