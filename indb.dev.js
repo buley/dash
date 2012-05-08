@@ -254,7 +254,7 @@ var IDB = (function(){
 					//recursive case: object value
 					//base case: string value
 					value = object[ itemobj ];
-					if( "[object Object]" === value.toString() ) {
+					if( 'undefined' !== typeof value && "[object Object]" === value.toString() ) {
 						encoded[ InDB.shorthand.reverse( { 'store': store, 'database': database, 'key': itemobj } ) ] = InDB.shorthand.decode( { 'database': database, 'store': store, 'data': value } );
 					} else { 
 						encoded[ InDB.shorthand.reverse( { 'store': store, 'database': database, 'key': itemobj } ) ] = value;
