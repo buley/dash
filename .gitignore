@@ -1,2 +1,6 @@
 #swap files
 *.swp
+#node
+./node_modules
+#bower
+./bower_components

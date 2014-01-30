@@ -1,0 +1,12 @@
+{
+  "name": "dash",
+  "version": "0.0.1",
+  "main": "lib/dash.js",
+  "ignore": [
+    ".jshintrc",
+    ".jslintrc",
+    "CNAME"
+  ],
+  "dependencies": {}
+  "devDependencies": {}
+}
