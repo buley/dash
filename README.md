@@ -1,53 +1,100 @@
+## Overview
+
+IndexeDB (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most HTML5-enabled browsers.[0][1]
+
+Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexeDB terminology. Databases are the outermost container of data in IndexeDB, and contain object stores. They are unique to each domain or "host". Object stores contain "lists" of "records", where each list is a JavaScript object and each record is breaks down into a "key" and "value". IDB is, in essence, a key/value store. Keys are sorted using indexes, which sort primarily on key but secondarily on the associated value.
+
+### Records
+
+IndexeDB is capable of storing as records most standard types of JavaScript data. To copy values to the database, IDB uses something called the "structured clone algorithm".(http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm).
+
+IDB only stores JavaScript list objects, but the values associated with keys on those objects that can typically be any value that "cloned", which includes both the basic JavaSript primitives and more complex object types: null values, `Boolean`s, `Number`s, `String`s, `Date`s, `Array`s, other `Object`s and even advanced types such as RegExp, Blob, File, FileList and ImageData objects. The only standard object type IDB's structured clone algorithm cannot deal with are function objects. (https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/The_structured_clone_algorithm) Thus, JavaScript functions cannot be stored in their object form.  
+
+### Keys
+
+A key identifies a record and the value is what's being stored. The list of records associated is represented by a JavaScript object, so there can be only one value per key. A key can be any of these types: String, Dates, floats and Arrays. The key that identifies a record is found using something called a "key path." 
+
+To specify a key path, a "plain string" will create a key matching a shallow attribute on a stored record. To specify the key among nested attributes in JavaScript objects, the key path syntax uses "dot notation". For example, "first.second.third" would be the key path for an index on the "third" key in the following JavaScript object:
+
+	{ "first": {
+	    "second": {
+	      "third": [ "string value 1", "string value 2" ]
+	    }
+	  }
+	}
+
+As shown above, it's possible to put indexes on array objects in addition to primitive values such as numbers. In such cases, the "multirow" (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow) allow the programmer to specify when creating a database whether an index record will be created on each object in a particular array (multirow set to `true`) or whether a record is created for only the first (multirow set to `false`). When an empty array is passed as the value of a multirow index, no record will be added.
+
+### Transactions
+
+In IDB, work tasked to a database is called a "transaction" and a transaction is characterized by its "scope". Transaction scope, in turn, is characterized by both the work to be done and where the programmer wants the work to happen. To create a transaction against an open database, a programmer names the object stores on which she'd like to operate, and optionally specifies what type of transaction she'd like to create.
+
+There are three types of transactions: "readwrite", "readonly" and "versionchange". The default is "readonly", convienient because changing a data via a "write" is generally more expensive than to "read" that data. The granularity and providing of "readonly" vs. "readwrite" offers the programmer an the opportunity to speed up her code depending on her needs. The final transaction type, "versionchange", is used when changing the schema of a database.
+
+> database.upgrade
+
+### Requests
+
+Certain transactions return data from the database. These transactions are called "requests" and the values are always various combinations of object "keys" and "values".[3] Notably, requests are just that: the act of asking for something rather than the getting of it. Unlike many databases, requests are not fulfilled immediately, or "synconronously"; however, these non-immediate responses are rather "asyncronous", and the mechanism a programmer uses to await an asynconrous reponse is by coding a "callback" function IDB can invoke on various "events" such as a successful response.
+
+There are various types of callbacks in IDB depending on the type of transaction. Requests generally have "onsuccess", "onerror and "onabort" callbacks. Others include "onupgradeneeded", "onclose" and "onblocked," sometimes seen when working with databases. Each event has a different meaning depending on the transaction, but for example "onsuccess", "onupgraded" are generally a good event for the programmer while "onerror", "onabort" and "onblocked" mean something went awry for him.
+
+## API
 
 ### Databases
-IDBDatabase https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase
-IDBOpenDBRequest https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest
-IDBRequest https://developer.mozilla.org/en-US/docs/Web/API/IDBRequest
-IDBTransaction https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction
-https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction#VERSION_CHANGE
 
-IDBVersionChangeEvent https://developer.mozilla.org/en-US/docs/Web/API/IDBVersionChangeEvent
+Database house object stores and have two distinguishing characteristics: a name (string) and version (number). Together they represent a given database layout or "schema" - and any other schema would be under either a different database name or a different version number.
 
-IndexeDB (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most HTML5-enabled browsers.[0][1] Using IDB, programmers can organize data and make it findable inside two types of containers, called "databases" and "object stores" in IndexeDB terminology. Object stores store "lists" of "records", where each record is breaks down into a "key" and "value". A key identifies a record and the value is what's being stored. The list of records associated iis represented by a JavaScript object, sorted by key, and otherwise much of the same rules apply as with JavaScript objects: for example, there can be only one value per key. 
+#### Names
 
-IndexeDB is capable of storing most standard types of data and to copy values to the database uses something called the "structured clone algorithm".(http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm) IDB only stores JavaScript objects, but the values associated with keys on those objects that can be "cloned" include the basic JavaSript primitives and most complex object types: null values, booleans, numbers, strings, dates, arrays, other objects and advanced types such as RegExp, Blob, File, FileList and ImageData objects. The only standard object type IDB's structured clone algorithm cannot deal with are function objects. (https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/The_structured_clone_algorithm) Thus, JavaScript functions cannot be stored in their object form.  
-Databases are the outermost container of data in IndexeDB.  Databases have a case-sensitive name (and a version) and under this name group together another type of data container called an "object store". With an open database you can create an object store or delete(http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#database-interface)
+Databases names are case-sensitive. When opening a database, a programmer must specify a databases name and optionally its version. Speficying a version greather than the current allows us to entry a "version change" transaction that enables database schema changes. When no version is specified, the database will open with the most recent database version.
 
-> database.create
+#### Version 
 
-Object stores (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#object-store), like their name implies, store JavaScript objects, or data, called "entries". And via an object store we can access these entries by looking up "keys" and "indexes". We store entries in an object store and store object stores in a database.
+While a database's name can never change, the database "version" changes all the time. version numbers are whole numbers greater than zero. A programmer can set a database's version manually or implictly by opening an existing database name with a greater version number than the database contains.
 
-> databases.show
+Changing a version numbers
 
-To get to objects, you have to through object stores, and to get to object stores you have to go through databases. The first step in interaction with IndexedDB is almost always to open a database. To open a database we typically must already know the name of our database in advance of opening it*, or get a reference by creating a new one.
+A version number can represent only one schema for particular database, but a programmer can change a database's layout by incrementing its version number, triggering something called a "versionchange" transaction.
+
+as many object stores as we'd like, but typically each database layout change requires a version change as well. In addition to creation of object stores, database operations that require a version change include deleting an object store and both creating and deleting indexes. Database versions are stored as 8-byte "int long long" in the underlying C programming language implementation of IDB (https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB#Opening_a_database) and can number anywhere between 1 and 18446744073709551615.
+
+#### Opening
+
+To get to objects, you have to through object stores, and to get to object stores you have to go through databases. So the first step in interaction with IndexedDB is almost always to open a database. 
 
 > database.open
 
-Just as opening a database is the first step to doing anything in IndexedDB, closing a database is usually a good last step.
+Opening an existing database and creating a new one work in the same way: if the name passed matches an existing database, that database is opened; if the name doesn't match an existing database, a new one will be created when opened using a unique name. To open a database we typically must already know the name of our database in advance of opening it*, or get a reference by creating a new one. The exception is in chrome, which offers a non-standard way of enumerating existing databases for a host.
+
+> databases.show
+
+#### Closing
+
+Databases are browser resources and, like all resources, expensive for the brower to maintain. Just as opening a database is the first step to doing anything in IndexedDB, closing a database is usually a good last step.
 
 > database.close
 
-A database's name can never change, but the database "version" is a positive integer that represents the layout of a database and its contents. When a database is open we can add to a database as many object stores as we'd like, but typically each database layout change requires a version change as well. In addition to creation of object stores, database operations that require a version change include deleting an object store and both creating and deleting indexes. Database versions are stored as 8-byte "int long long" in the underlying C programming language implementation of IDB (https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB#Opening_a_database) and can number anywhere between 1 and 18446744073709551615.
+#### Deleting
+
+Databases can be "deleted".
+
+> database.delete
 
 Unlike when deleting a database, reusing it by "migrating" it's schema doesn't destroy any data.
 
-> database.delete
+
 
 With an open database, we can also either list all the object stores in that database or do something with one of the object stores contained therein.
 
 In a version change, the database's version number increases by at least one. Operations that trigger version changes include creating and deleting object stores and the entry "indexes" we create upon them.
 
+###  Stores
+
+Object stores (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#object-store), like their name implies, store JavaScript objects, or data, called "entries". And via an object store we can access these entries by looking up "keys" and "indexes". We store entries in an object store and store object stores in a database.
+
+
 > stores.show
-
-In IDB, work tasked to a database is called a "transaction". A transaction is characterized by so-called "scope". Transaction scope, in turn, breaks down into two pieces: the thing (usually an object store) on which you want to do something and thing kind of thing you want to do. When creating a transaction against an opened database, a programmer names the object stores on which she'd like to operate, and optionally specify what type of transaction she'd like to create.
-
-There are three types of transactions: "readwrite", "readonly" and "versionchange". The default is "readonly" because changing a data via a "write" is generally more expensive than to "read" that data. The granularity and providing of "readonly" vs. "readwrite" offers the programmer an the opportunity to speed up her code depending on her needs. The final transaction type, "versionchange", is used when changing the schema of a database.
-
-> database.upgrade
-
-Certain transactions return data from the database. These transactions are called "requests" and the values are always various combinations of object "keys" and "values".[3] Notably, requests are just that: the act of asking for something rather than the getting of it. Unlike many databases, requests are not fulfilled immediately, or "synconronously"; however, these non-immediate responses are rather "asyncronous", and the mechanism a programmer uses to await an asynconrous reponse is by coding a "callback" function IDB can invoke on various "events" such as a successful response.
-
-There are various types of callbacks in IDB depending on the type of transaction. Requests generally have "onsuccess", "onerror and "onabort" callbacks. Others include "onupgradeneeded", "onclose" and "onblocked," sometimes seen when working with databases. Each event has a different meaning depending on the transaction, but for example "onsuccess", "onupgraded" are generally a good event for the programmer while "onerror", "onabort" and "onblocked" mean something went awry for him.
 
 The way values are generally found in an object store is by using an "index". Indexes break down into two pieces: the way to find the data, called a "key path", and the value itself, found by its key.
 
@@ -61,18 +108,7 @@ Every store has a built-in index, but we can optionally (http://www.w3.org/TR/20
 
 Another parameter under the programmer's control is the optional "unique" parameter, which tells the browser to enforce that all values that correspond to that key path are "unique".[4] (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow#dfn-unique). When true, IDB makes sure no two records have the same key value and will throw an error if the programmer tries to break the uniqueness guarantee.
 
-The key path is optional when putting an object into an object store only if the "autoIncrement" parameter is set to true. Otherwise the programmer will have to include a non-null key on each object added or put into the object store. When the key is provided, a plain string will create a key on a shallow attribute. To specify the key among nested attributes in JavaScript objects, the key path syntax uses "dot notation". For example,  "first.second.third" would be the key path for an index on the "third" key in the following JavaScript object:
-
-{ "first": {
-    "second": {
-      "third": [ "string value 1", "string value 2" ]
-    }
-  }
-}
-
-A key can be any of these types: String, Dates, floats and Arrays. 
-
-It's possible to put indexes on array objects as well. When adding objects that have arrays as key values, it can be useful to set the optional "multirow" (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow) flag to `true` when creating a database. When set to the boolean value `true` an index record will be created on each object in a particular array. When `false`, a record is created for only the first. When an empty array is passed, no record is added.
+The key path is optional when putting an object into an object store only if the "autoIncrement" parameter is set to true. Otherwise the programmer will have to include a non-null key on each object added or put into the object store. 
 
 > store.clear
 
@@ -213,6 +249,15 @@ IDBKeyRange https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange
 
 cursor.delete
 cursor.get
+
+IDBDatabase https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase
+IDBOpenDBRequest https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest
+IDBRequest https://developer.mozilla.org/en-US/docs/Web/API/IDBRequest
+IDBTransaction https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction
+https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction#VERSION_CHANGE
+
+IDBVersionChangeEvent https://developer.mozilla.org/en-US/docs/Web/API/IDBVersionChangeEvent
+
 
 
 
