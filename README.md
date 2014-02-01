@@ -2,9 +2,9 @@
 
 IndexeDB (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most HTML5-enabled browsers.[0]
 
-Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexeDB terminology. Databases are the outermost container of data in IndexeDB, and contain object stores. They are unique to each domain or "host". Object stores contain "lists" of "records", where each list is a JavaScript object and each record is breaks down into a "key" and "value". IDB is, in essence, a key/value store. Keys are sorted using indexes, which sort primarily on key but secondarily on the associated value.
+Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexeDB terminology. Databases are the outermost container of data in IndexeDB, and contain object stores. They are unique to each domain or "host". Object stores contain "lists" of "records", where each list is a JavaScript object and each record is breaks down into a "key" and "value".
 
-For data that doesn't need to be accessed via index, a lighter weight client-side technology such as localStorage or sessionStorage, or cookies may be more appropriate.*
+IDB is, in essence, an indexed key/value store. For data that doesn't need to be accessed via index, for an otherwise non-indexed key/value store, a lighter weight client-side technologies such as localStorage or sessionStorage, or cookies may be more appropriate.
 
 [0] Although IndexedDB is has very little to do with HTML5 standard beyond using some interfaces such as the "structured clone algorithm", IDB is typically grouped with so-called "HTML5" technologies.
 
@@ -45,8 +45,7 @@ There are various types of callbacks in IDB depending on the type of transaction
 
 Same-origin. Size limits.
 
-
-## API
+## The IndexedDB API
 
 ### IndexedDB Databases
 
@@ -134,19 +133,25 @@ The "autoIncrement" parameter creates a IDB ["key generator"](http://www.w3.org/
 
 > stores.show
 
-### Indexes
+### IndexedDB Indexes
 
 The way values are generally found in an object store is by using an "index". Indexes break down into two pieces: the way to find the data, called a "key path", and the value itself, found by its key.
 
-> index.create
-
-Another parameter under the programmer's control is the optional ["unique"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow#dfn-unique) parameter, which tells the browser to enforce that no two values that correspond to that key are the same.
-
 Indexes are stored by key, and secondarily by their record values, in ascending order.
 
-Indexes can be created and deleted at any time so long as the database version increases which each change to the schema. The same options used when creating an index at object store creation, unique and multirow, can be used when create an index at any time. 
+Indexes can be created and deleted at any time so long as the database version increases which each change to the schema.
+
+#### Creating IndexedDB Indexes
+
+The options for creating a new index are similar to those when creating an object store: a `key path` is given using the standard key syntax and the `unique` and `multirow` options can both be used. The ["unique"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow#dfn-unique) parameter tells the browser not to allow two values to correspond to the same key and the ["multirow"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow) flag controls how the index behaves when dealing with `Array` values.
+
+> index.create
+
+#### Showing IndexedDB Indexes
 
 > index.show
+
+#### Deleting IndexedDB Indexes
 
 > index.delete
 
@@ -154,7 +159,7 @@ Indexes can be created and deleted at any time so long as the database version i
 
 > indexes.show
 
-### Objects
+### IndexedDB Entries
 
 It's possible to "add" (create), "put" (add or update), "get" (read) and "delete" (destroy) single objects in an object store using a record key path and value associated with a store.
 
@@ -174,20 +179,19 @@ When you delete, get or put a single object you can specify the object store's p
 > objects.update
 > objects.delete
 
+### IndexedDB Indexes
 
-### Cursors
+When querying for more than one object we must use indexes, and to use indexes we in complex manners we typically need to use a special type of request called a "cursor." When you want to ask for a range of data on an index, what you get back is not the data itself but rather a reference to a cursor, which offers asyncronous callbacks that fire when it retrieves objects from the store. When these callbacks fire, the programmer must either "continue" the cursor or abandon it. This process continues until either the programmer is done with the request or the cursor has exhausted the results from the request.
+
+#### IndexedDB Cursors
+
+Using an index and a key range for that index, you can use cursors to get, put and delete records one at a time but in single request. Cursors are also capable of "advancing" (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBCursor-advance) and, in effect, skip a number of objects in an index for a given key range. 
 
 Cursors traverse an index matching a given "key range".
 
 Two different types of cursors: IDBCursor and IDBCursorWithValue which are created on a X using openKeyCursor http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBIndex-openKeyCursor and openCursor http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBIndex-openCursor respectively  
 
-Using an index and a key range for that index, You can use cursors to get, put and delete records one at a time but in single request. Cursors are also capable of "advancing" (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBCursor-advance) and, in effect, skip a number of objects in an index for a given key range. 
-
-#### Indexes
-
-When querying for more than one object we must use indexes, and to use indexes we in complex manners we typically need to use a special type of request called a "cursor." When you want to ask for a range of data on an index, what you get back is not the data itself but rather a reference to a cursor, which offers asyncronous callbacks that fire when it retrieves objects from the store. When these callbacks fire, the programmer must either "continue" the cursor or abandon it. This process continues until either the programmer is done with the request or the cursor has exhausted the results from the request.
-
-#### Key Ranges
+#### IndexedDB Key Ranges
 
 Each cursor request needs an index against which to search and a range of keys to match, called a "key range". Key ranges break down into its "bounds" and "direction". Bounds describe how the range of keys start and end, using the keywords "only", "lower", "upper". The latter two allow optional modifiers "lowerOpen" and "upperOpen". The modifiers default to false.
 
@@ -206,6 +210,10 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 * lower "A", upper "Z", with "lowerOpen" set to `true` and and "upperOpen" set to `false` would return 25 objects
 
 Key ranges can also be used as a key when getting (but not adding, putting or deleting) single values with object stores or indexes, in which case the programmer will recieve the first matching value for in that key range.
+
+
+
+
 
 
 
