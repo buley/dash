@@ -5,6 +5,8 @@
   "ignore": [
     ".jshintrc",
     ".jslintrc",
+	"docs",
+	"index.html",
     "CNAME"
   ],
   "dependencies": {}
