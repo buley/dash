@@ -58,7 +58,7 @@ Databases names are case-sensitive. When opening a database, a programmer must s
 
 While a database's name can never change, the database "version" changes all the time. version numbers are whole numbers greater than zero. A programmer can set a database's version manually or implictly by opening an existing database name with a greater version number than the database contains.
 
-Database version numbers are stored as 8-byte "int long long" in the underlying C programming language implementation of IDB (https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB#Opening_a_database) and can number anywhere between 1 and 18446744073709551615.
+Database version numbers are stored as [8-byte "int long long"](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB#Opening_a_database) in the underlying C programming language implementation of IDB  and can number anywhere between `0` and `18446744073709551615`.
 
 ##### `versionchange` transactions
 
