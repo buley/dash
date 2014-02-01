@@ -1,10 +1,12 @@
 ## IndexedDB Overview
 
-IndexeDB (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most HTML5-enabled browsers.[0][1]
+IndexeDB (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most HTML5-enabled browsers.[0]
 
 Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexeDB terminology. Databases are the outermost container of data in IndexeDB, and contain object stores. They are unique to each domain or "host". Object stores contain "lists" of "records", where each list is a JavaScript object and each record is breaks down into a "key" and "value". IDB is, in essence, a key/value store. Keys are sorted using indexes, which sort primarily on key but secondarily on the associated value.
 
 For data that doesn't need to be accessed via index, a lighter weight client-side technology such as localStorage or sessionStorage, or cookies may be more appropriate.*
+
+[0] Although IndexedDB is has very little to do with HTML5 standard beyond using some interfaces such as the "structured clone algorithm", IDB is typically grouped with so-called "HTML5" technologies.
 
 ### IndexedDB Records
 
@@ -46,27 +48,27 @@ Same-origin. Size limits.
 
 ## API
 
-### Databases
+### IndexedDB Databases
 
 Database house object stores and have two distinguishing characteristics: a name (string) and version (number). Together they represent a given database layout or "schema" - and any other schema would be under either a different database name or a different version number.
 
-#### Names
+#### IndexedDB Database Names
 
 Databases names are case-sensitive. When opening a database, a programmer must specify a databases name and optionally its version. Speficying a version greather than the current allows us to entry a "version change" transaction that enables database schema changes. When no version is specified, the database will open with the most recent database version.
 
-#### Version 
+#### IndexedDB Database Versions
 
 While a database's name can never change, the database "version" changes all the time. version numbers are whole numbers greater than zero. A programmer can set a database's version manually or implictly by opening an existing database name with a greater version number than the database contains.
 
 Database version numbers are stored as [8-byte "int long long"](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB#Opening_a_database) in the underlying C programming language implementation of IDB  and can number anywhere between `0` and `18446744073709551615`.
 
-##### `versionchange` transactions
+##### IndexedDB `versionchange` transactions
 
 A version number can represent only one schema for particular database, but a programmer can change a database's layout by incrementing its version number, triggering something called a "versionchange" transaction. Version changes preserve databases object stores and indexes, but from within a versionchange callback the programmer is allowed to make modifications to a database schema.
 
 Database operations that require a version change include both creating and deleting object stores, and both creating and deleting indexes. 
 
-#### Opening
+#### Opening IndexedDB Databases
 
 To get to objects, you have to through object stores, and to get to object stores you have to go through databases. So the first step in interaction with IndexedDB is almost always to open a database. 
 
@@ -80,13 +82,13 @@ Opening an existing database and creating a new one work in the same way: if the
 
 > databases.show
 
-#### Closing
+#### Closing IndexedDB Databases
 
 Databases are browser resources and, like all resources, expensive for the brower to maintain. Just as opening a database is the first step to doing anything in IndexedDB, closing a database is usually a good last step.
 
 > database.close
 
-#### Deleting
+#### Deleting IndexedDB Databases
 
 Databases can be "deleted" and their resources will be freed up for use elsewhere.
 
@@ -94,37 +96,51 @@ Databases can be "deleted" and their resources will be freed up for use elsewher
 
 Once a database is deleted you can open a new one with the same name; this is similar to a `versionchange` transaction but destroys and object stores and their contents.
 
-### Stores
+### IndexedDB Object Stores
 
-Object stores (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#object-store), like their name implies, store JavaScript objects, or data, called "entries". And via an object store we can access these entries by looking up keys using "indexes".
+[Object stores](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#object-store), like their name implies, store JavaScript objects as entries. We store entries in an object store and store object stores in a database. Only after opening a database can we list all the object stores in that database or do something with a store contained therein.
 
-We store entries in an object store and store object stores in a database. Only after opening a database can we list all the object stores in that database or do something with a store contained therein.
+Via an object store we can access these entries by looking up objects using key paths on those objects, optionally enlisting the help of "indexes" to enable for various combinations of key lookups.
 
-> stores.show
+After creation, object stores can be either be `delete`ed, or `clear`ed of their values. Deleting an object store removes any indexes associated with it, whereas clearing an object store maintains any indexes.
 
-The way values are generally found in an object store is by using an "index". Indexes break down into two pieces: the way to find the data, called a "key path", and the value itself, found by its key.
+#### Creating IndexedDB Object Stores
+
+[Creating an object store](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBDatabase-createObjectStore) requires a "versionchange" type transaction.
 
 > store.create
 
-Every store record must have a key by which it can be identified. This is, in effect, an index. When creating an object store it's possible to provide a "key path" from which IDB can source it's key. If no key path is provided on object store creation, then a key must be specified with each addition. (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#idl-def-IDBCursorWithValueSync#widl-IDBObjectStoreSync-keyPath) 
+##### Key Paths
+
+Every store record must have a key by which it can be identified. This is called a ["`key path`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#idl-def-IDBCursorWithValueSync#widl-IDBObjectStoreSync-keyPath) , and the regular key syntax rules apply. It's OK to omit a key path when creating an object store, in which case the keys are said to be "`out-of-line`". In that case, IDB knows not from where to source it's key, and so the programmer must supply a key parameter with each object addition.  
+
+The key path provided with an object store on creation works, in effect, like an "`index`"; however, unlike an index it's possible to delegate key generation to IndexedDB. The key is optional when putting an object into an object store if the "autoIncrement" parameter is set to true on object store creation. Otherwise the programmer will have to include a non-null key on each object added or put into the object store. 
+
+The "autoIncrement" parameter creates a IDB ["key generator"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-key-generator) that will create a monotonically increasing integer key automatically for each new object added to the store. For example, first object added to a database with the key "`foo`" and the `autoIncrement` set to `true`, will have the value `1` for its key path, the second value `2`, and so on for the object attribute `foo`.
 
 > store.show
 
+> store.delete
+
+#### Clearing IndexedDB Object Stores
+
+[`Clear`ing](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-clear) an object store requires a "readwrite" type transaction.
+
 > store.clear
 
-> store.delete
+#### Deleting IndexedDB Object Stores
+
+[`Delete`ing](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-delete) an object store requires a "versionchange" type transaction.
 
 > stores.show
 
 ### Indexes
 
+The way values are generally found in an object store is by using an "index". Indexes break down into two pieces: the way to find the data, called a "key path", and the value itself, found by its key.
+
 > index.create
 
-Every store has a built-in index, but we can optionally (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-options-object) delegate the key creation to IndexeDB. The optional optional "autoIncrement" parameter is supplied on object store creation with the non-default value of true. This create a so-called "key generator" (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-key-generator) that automatically creates a monotonically increasing integer key for every new object created. The first object added to a database will have the value `1` for its key path, the second value `2`, and so on.
-
-Another parameter under the programmer's control is the optional "unique" parameter, which tells the browser to enforce that all values that correspond to that key path are "unique".[4] (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow#dfn-unique). When true, IDB makes sure no two records have the same key value and will throw an error if the programmer tries to break the uniqueness guarantee.
-
-The key path is optional when putting an object into an object store only if the "autoIncrement" parameter is set to true. Otherwise the programmer will have to include a non-null key on each object added or put into the object store. 
+Another parameter under the programmer's control is the optional ["unique"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow#dfn-unique) parameter, which tells the browser to enforce that no two values that correspond to that key are the same.
 
 Indexes are stored by key, and secondarily by their record values, in ascending order.
 
@@ -196,8 +212,6 @@ Key ranges can also be used as a key when getting (but not adding, putting or de
 
 
 
-[0] Although IndexedDB is has very little to do with HTML5 standard beyond using the structured clone algorithm, IDB is typically grouped with so-called "HTML5" technologies.
-[x] onversionchange (FF only?) onclosed (chrome only?)
 [1] Chrome offers an exception via the non-standard but insanely useful webkitGetDatabaseNames() method.
 [2] WebSQL is dead.
 [3] The way the browsers themselves store the data depends on the vendor. Chrome uses a key/value technology called LevelDB, which Firefox uses the relational SQLLite database. Both store data in a mix of plaintext and binaryCK.
