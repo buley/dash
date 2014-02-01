@@ -1,4 +1,4 @@
-## Overview
+## IndexedDB Overview
 
 IndexeDB (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most HTML5-enabled browsers.[0][1]
 
@@ -6,13 +6,13 @@ Using IDB, programmers can organize JavaScript data and make it findable inside 
 
 For data that doesn't need to be accessed via index, a lighter weight client-side technology such as localStorage or sessionStorage, or cookies may be more appropriate.*
 
-### Records
+### IndexedDB Records
 
 IndexeDB is capable of storing as records most standard types of JavaScript data. To copy values to the database, IDB uses something called the "structured clone algorithm".(http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm).
 
 IDB only stores JavaScript list objects, but the values associated with keys on those objects that can typically be any value that "cloned", which includes both the basic JavaSript primitives and more complex object types: null values, `Boolean`s, `Number`s, `String`s, `Date`s, `Array`s, other `Object`s and even advanced types such as RegExp, Blob, File, FileList and ImageData objects. The only standard object type IDB's structured clone algorithm cannot deal with are function objects. (https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/The_structured_clone_algorithm) Thus, JavaScript functions cannot be stored in their object form.  
 
-### Keys
+### IndexedDB Keys
 
 A key identifies a record and the value is what's being stored. The list of records associated is represented by a JavaScript object, so there can be only one value per key. A key can be any of these types: String, Dates, floats and Arrays. The key that identifies a record is found using something called a "key path." 
 
@@ -27,19 +27,19 @@ To specify a key path, a "plain string" will create a key matching a shallow att
 
 As shown above, it's possible to put indexes on array objects in addition to primitive values such as numbers. In such cases, the "multirow" (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow) allow the programmer to specify when creating a database whether an index record will be created on each object in a particular array (multirow set to `true`) or whether a record is created for only the first (multirow set to `false`). When an empty array is passed as the value of a multirow index, no record will be added.
 
-### Transactions
+### IndexedDB Transactions
 
 In IDB, work tasked to a database is called a "transaction" and a transaction is characterized by its "scope". Transaction scope, in turn, is characterized by both the work to be done and where the programmer wants the work to happen. To create a transaction against an open database, a programmer names the object stores on which she'd like to operate, and optionally specifies what type of transaction she'd like to create.
 
 There are three types of transactions: "readwrite", "readonly" and "versionchange". The default is "readonly", convienient because changing a data via a "write" is generally more expensive than to "read" that data. The granularity and providing of "readonly" vs. "readwrite" offers the programmer an the opportunity to speed up her code depending on her needs. The final transaction type, "versionchange", is used when changing the schema of a database.
 
-### Requests
+### IndexedDB Requests
 
-Certain transactions return data from the database. These transactions are called "requests" and the values are always various combinations of object "keys" and "values".[3] Notably, requests are just that: the act of asking for something rather than the getting of it. Unlike many databases, requests are not fulfilled immediately, or "synconronously"; however, these non-immediate responses are rather "asyncronous", and the mechanism a programmer uses to await an asynconrous reponse is by coding a "callback" function IDB can invoke on various "events" such as a successful response.
+Certain transactions return data from the database. These transactions are called "requests" and the values are always various combinations of object "keys" and "values".[3] Requests are just that: a "request," namely the act of asking for something rather than the getting of it. Unlike many databases, requests are not fulfilled immediately, or "synconronously"; however, these non-immediate responses are rather "asyncronous", and the mechanism a programmer uses to await an asynconrous reponse is by coding a "callback" function IDB can invoke on various "events" such as a successful response.
 
 There are various types of callbacks in IDB depending on the type of transaction. Requests generally have "onsuccess", "onerror and "onabort" callbacks. Others include "onupgradeneeded", "onclose" and "onblocked," sometimes seen when working with databases. Each event has a different meaning depending on the transaction, but for example "onsuccess", "onupgraded" are generally a good event for the programmer while "onerror", "onabort" and "onblocked" mean something went awry for him.
  
-### Restrictions
+### IndexedDB Restrictions
 
 Same-origin. Size limits.
 
@@ -96,9 +96,9 @@ Once a database is deleted you can open a new one with the same name; this is si
 
 ### Stores
 
-Object stores (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#object-store), like their name implies, store JavaScript objects, or data, called "entries". And via an object store we can access these entries by looking up "keys" and "indexes". We store entries in an object store and store object stores in a database.
+Object stores (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#object-store), like their name implies, store JavaScript objects, or data, called "entries". And via an object store we can access these entries by looking up keys using "indexes".
 
-Only after opening a database can we list all the object stores in that database or do something with a store contained therein.
+We store entries in an object store and store object stores in a database. Only after opening a database can we list all the object stores in that database or do something with a store contained therein.
 
 > stores.show
 
@@ -106,7 +106,7 @@ The way values are generally found in an object store is by using an "index". In
 
 > store.create
 
-Every store record must have a key by which it can be identified. When creating an object store it's possible to provide a "key path" from which IDB can source it's key. If no key path is provided on object store creation, then a key must be specified with each addition. (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#idl-def-IDBCursorWithValueSync#widl-IDBObjectStoreSync-keyPath) 
+Every store record must have a key by which it can be identified. This is, in effect, an index. When creating an object store it's possible to provide a "key path" from which IDB can source it's key. If no key path is provided on object store creation, then a key must be specified with each addition. (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#idl-def-IDBCursorWithValueSync#widl-IDBObjectStoreSync-keyPath) 
 
 > store.show
 
