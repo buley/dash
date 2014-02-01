@@ -73,11 +73,11 @@ To get to objects, you have to through object stores, and to get to object store
 
 > database.open
 
-To open a database typically the programmer must already know the name of our database in advance of opening it[1], else create a new one.
-
 Opening an existing database and creating a new one work in the same way: if the name passed matches an existing database, that database is opened; if the name doesn't match an existing database, a new one will be created when opened using a unique name. Opening a new database, or opening an existing database with a version greather than the current version, will trigger a `versionchange` event.  
 
-[1] The exception is in chrome, which offers a non-standard way of enumerating existing databases for a host.
+#### Showing IndexedDB Databases
+
+It's typically not possible to enumerate all databases for a host. Typically the programmer must already know the name of our database in order to of opening it, else create a new one. The exception is in Chrome, which offers a non-standard way of enumerating existing databases for a host.
 
 > databases.show
 
@@ -135,11 +135,9 @@ The "autoIncrement" parameter creates a IDB ["key generator"](http://www.w3.org/
 
 ### IndexedDB Indexes
 
-The way values are generally found in an object store is by using an "index". Indexes break down into two pieces: the way to find the data, called a "key path", and the value itself, found by its key.
+Indexes are the way values are generally found in an object store. Indexes are lists of keys and values and have two characterizing components: the key path to find the data and the record value itself. Indexes stored primarily by key, and secondarily by their values, in lexicographically ascending order.
 
-Indexes are stored by key, and secondarily by their record values, in ascending order.
-
-Indexes can be created and deleted at any time so long as the database version increases which each change to the schema.
+To modify an index requires a `versionchange` transaction.
 
 #### Creating IndexedDB Indexes
 
@@ -149,15 +147,21 @@ The options for creating a new index are similar to those when creating an objec
 
 #### Showing IndexedDB Indexes
 
+Using an object store on an open database, it's possible to get a list of indexes names. This list is an `Array`-like collection of string names.
+
+> indexes.show
+
+#### Showing IndexedDB Indexes
+
+With a string index name, it's possible to get a reference to an existing index from an object store.
+
 > index.show
 
 #### Deleting IndexedDB Indexes
 
+With a string index name, it's possible to get a reference to an existing index from an object store.
+
 > index.delete
-
-> index.exists
-
-> indexes.show
 
 ### IndexedDB Entries
 
