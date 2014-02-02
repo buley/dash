@@ -4,7 +4,7 @@
 
 Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexedDB terminology. Databases are the outermost container of data in IndexedDB, and contain object stores. They are unique to each domain or "host". Object stores contain ["`lists`" of "`records`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-index-record-list), where each list is a JavaScript object and each record is breaks down into a "key" and "value".
 
-IDB is, in essence, an indexed key/value store. For data that doesn't need to be accessed via index, a lighter weight client-side technologies such as localStorage, sessionStorage or cookies may be more appropriate.
+IDB is, in essence, an indexed key/value store. For data that doesn't need to be accessed via index, a lighter weight client-side technology such as localStorage, sessionStorage or cookies may be more appropriate.
 
 ### Records
 
