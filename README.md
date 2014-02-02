@@ -10,7 +10,7 @@ IDB is, in essence, an indexed key/value store. For data that doesn't need to be
 
 The base unit of data in IDB is a [`record`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-record) and IndexeDB is capable of storing as records most standard types of JavaScript data. To copy values to the database, IDB uses something called the "[`structured clone algorithm`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm)".
 
-IDB only stores JavaScript list objects, but the values associated with keys on those objects that can typically be any value that "[cloned](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone)", which includes both the basic JavaSript primitives and more complex object types: null values, `Boolean`s, `Number`s, `String`s, `Date`s, `Array`s, other `Object`s and even advanced types such as RegExp, Blob, File, FileList and ImageData objects. The only standard object type IDB's structured clone algorithm cannot deal with are function objects. (https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/The_structured_clone_algorithm) Thus, JavaScript functions cannot be stored in their object form.  
+IDB only stores JavaScript list objects, but the values associated with keys on those objects that can typically be any value that "[cloned](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone)", which includes both the basic JavaSript primitives and more complex object types: null values, `Boolean`s, `Number`s, `String`s, `Date`s, `Array`s, other `Object`s and even advanced types such as RegExp, Blob, File, FileList and ImageData objects. The only standard object type IDB's structured clone algorithm cannot deal with are function objects. Thus JavaScript functions cannot be stored in their native object form.  
 
 ### Keys
 
@@ -25,7 +25,7 @@ To specify a key path, a "plain string" will create a key matching a shallow att
 	  }
 	}
 
-As shown above, it's possible to put indexes on array objects in addition to primitive values such as numbers. In such cases, the "multirow" (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow) allow the programmer to specify when creating a database whether an index record will be created on each object in a particular array (multirow set to `true`) or whether a record is created for only the first (multirow set to `false`). When an empty array is passed as the value of a multirow index, no record will be added.
+As shown above, it's possible to put indexes on array objects in addition to primitive values such as numbers. In such cases, the "[`multirow`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow)" allow the programmer to specify when creating a database whether an index record will be created on each object in a particular array (multirow set to `true`) or whether a record is created for only the first (multirow set to `false`). When an empty array is passed as the value of a multirow index, no record will be added.
 
 ### Transactions
 
@@ -358,7 +358,7 @@ In addition to use on indexes, key ranges can also be used as a key when getting
 
 ##### Key Range Direction
 
-[`Direction`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-direction) is the way in which you query the index: "next" (forward) or "previous" (backward). The default value is next. The programmer can dictate whether or not to include duplicate keys in the request using two other directions (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#idl-def-IDBCursor): "next no duplicates" and "previous no duplicates". The programmer represents these directions using a number: 0 for "next", 1 for "next no duplicates", 2 for "previous" and 3 for "previous no duplicates".
+[`Direction`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-direction) is the way in which you query the index: "next" (forward) or "previous" (backward). The default value is next. The programmer can dictate whether or not to include duplicate keys in the [request](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#idl-def-IDBCursor) using two other directions: "next no duplicates" and "previous no duplicates". The programmer represents these directions using a number: 0 for "next", 1 for "next no duplicates", 2 for "previous" and 3 for "previous no duplicates".
 
 ##### Key Range Bounds
 
