@@ -6,11 +6,9 @@ Using IDB, programmers can organize JavaScript data and make it findable inside 
 
 IDB is, in essence, an indexed key/value store. For data that doesn't need to be accessed via index, for an otherwise non-indexed key/value store, a lighter weight client-side technologies such as localStorage or sessionStorage, or cookies may be more appropriate.
 
-[0] Although `IndexedDB` is has very little to do with HTML5 standard beyond using some interfaces such as the "[structured clone algorithm](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm)", IDB is typically grouped with so-called "HTML5" technologies.
-
 ### Records
 
-The base unit of data in IDB is a [`record`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-record) and IndexeDB is capable of storing as records most standard types of JavaScript data. To copy values to the database, IDB uses something called the "structured clone algorithm".(http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm).
+The base unit of data in IDB is a [`record`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-record) and IndexeDB is capable of storing as records most standard types of JavaScript data. To copy values to the database, IDB uses something called the "[`structured clone algorithm`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm)".
 
 IDB only stores JavaScript list objects, but the values associated with keys on those objects that can typically be any value that "[cloned](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone)", which includes both the basic JavaSript primitives and more complex object types: null values, `Boolean`s, `Number`s, `String`s, `Date`s, `Array`s, other `Object`s and even advanced types such as RegExp, Blob, File, FileList and ImageData objects. The only standard object type IDB's structured clone algorithm cannot deal with are function objects. (https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/The_structured_clone_algorithm) Thus, JavaScript functions cannot be stored in their object form.  
 
@@ -421,3 +419,6 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 		    console.log('dash: object was deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
 		})
 		.then(dash.close.database);
+
+
+[0] Although `IndexedDB` is has very little to do with HTML5 standard beyond some shared nomenclaure, IDB is typically grouped with so-called "HTML5" technologies.
