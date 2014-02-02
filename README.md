@@ -4,7 +4,7 @@
 
 Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexedDB terminology. Databases are the outermost container of data in IndexedDB, and contain object stores. They are unique to each domain or "host". Object stores contain ["`lists`" of "`records`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-index-record-list), where each list is a JavaScript object and each record is breaks down into a "key" and "value".
 
-IDB is, in essence, an indexed key/value store. For data that doesn't need to be accessed via index, for an otherwise non-indexed key/value store, a lighter weight client-side technologies such as localStorage or sessionStorage, or cookies may be more appropriate.
+IDB is, in essence, an indexed key/value store. For data that doesn't need to be accessed via index, a lighter weight client-side technologies such as localStorage or sessionStorage, or cookies may be more appropriate.
 
 ### Records
 
@@ -119,7 +119,7 @@ It's typically not possible to enumerate all databases for a host. Typically the
 	    console.log('dash: databases not fetched', context.databases);
 	}).then(dash.close.database);
 
-##### Getting Existing Databases Example: List Of Databases Is Instance Of NodeList
+##### Getting Existing Databases Example: List Of Databases Is Instance Of DOMStringList
 
 	dash.get.databases().then( function(context) {
 		dash.assert(context.databases instanceof DOMStringList, 'Database list should be an instanceof DOMStringList');
@@ -191,16 +191,20 @@ Object stores are instances of [`IDBObjectStore`](https://developer.mozilla.org/
 		console.log('dash: store not created', context.db, context.error);
 	}).then(dash.close.database);
 
-##### Creating An Object Store Test: Created Object Should Be An Instance Of IDBObjectStore
+##### Creating An Object Store Test: Created Object Should Be The One Created And An Instance Of IDBObjectStore
 
-	dash.open.database({ database: 'foo', store: 'strage-create-test-' + new Date().getTime() })
-		.then(dash.create.store)
-		.then(function(context) {
-			dash.tools.assert(context.objectstore instanceof IDBObjectStore, 'Object store should be an instance of IDBObjectStore');
-		}, function(context) {
-			dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been created');
-		})
-		.then(dash.close.database);
+	(function() {
+		var db_name = 'store-create-test-' + new Date().getTime();
+		dash.open.database({ database: 'foo', store: db_name })
+			.then(dash.create.store)
+			.then(function(context) {
+				dash.tools.assert(context.objectstore instanceof IDBObjectStore, 'Object store should be an instance of IDBObjectStore');
+				dash.tools.assert
+			}, function(context) {
+				dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been created');
+			})
+			.then(dash.close.database);
+	}());
 
 
 ##### Key Paths
