@@ -92,14 +92,17 @@ To get to objects, you have to through object stores, and to get to object store
 		})
 		.then(dash.close.database);
 
-#### Opening A Database Test: Database Object Returned Is An Instance Of IDBDatabase
+##### Opening A Database Test: Database Object Returned Is An Instance Of IDBDatabase
 
 	dash.open.database({ database: 'foo' })
 		.then(function(context) {
-			var db = context.db;
-			dash.assert(db instanceof IDBDatabase, 'Database should be an instanceof IDBDatabase');
-			dash.assert(dash.tools.exists(db.name), 'Database should have a name');
-			dash.assert(dash.tools.exists(db.version), 'Database should have a version');
+			var db = context.db,
+				assert = dash.tools.assert,
+				isnt = dash.tools.is;
+			assert(db instanceof IDBDatabase, 'Database should be an instanceof IDBDatabase');
+			assert(dash.tools.exists(db.name), 'Database should have a name');
+			assert(dash.tools.exists(db.version), 'Database should have a version');
+			assert(dash.tools.isnt(isNaN(db.version), true), 'Database version should be a number');
 		}, function(context) {
 			console.log('dash: database was not opened', context.error);
 		})
@@ -119,10 +122,11 @@ It's typically not possible to enumerate all databases for a host. Typically the
 	    console.log('dash: databases not fetched', context.databases);
 	}).then(dash.close.database);
 
-##### Getting Existing Databases Example: List Of Databases Is Instance Of DOMStringList
+###### Getting Existing Databases Test: List Of Databases Is Instance Of DOMStringList
 
 	dash.get.databases().then( function(context) {
-		dash.assert(context.databases instanceof DOMStringList, 'Database list should be an instanceof DOMStringList');
+		dash.tools.assert(dash.tools.exists(context.databases), 'Database fetch should return a database');
+		dash.tools.assert(context.databases instanceof DOMStringList, 'Database list should be an instanceof DOMStringList');
 	}, function(context) {
 	    console.log('dash: databases not fetched', context.databases);
 	}).then(dash.close.database);
@@ -135,6 +139,14 @@ Databases can be [`close`d](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn
 ##### Closing A Database Example: Simple Case
 
 	dash.open.database({ database: 'foo' }).then(dash.close.database).then(function(context) {
+		console.log('dash: database closed');
+	}, function(context) {
+		console.log('dash: database not closed');
+	});
+
+###### Closing A Database Test: Stores are only readable when the database is open
+
+	dash.open.database({ database: 'foo', store: 'db-close-' + new Date().getTime() }).then(dash.close.database).then(function(context) {
 		console.log('dash: database closed');
 	}, function(context) {
 		console.log('dash: database not closed');
@@ -160,7 +172,7 @@ Databases can be "deleted" and their resources will be freed up for use elsewher
 		.then(dash.create.database)
 		.then(dash.delete.database)
 		.then(null, function(context) {
-			dash.assert(false, 'Deleted database should have been deleted');
+			dash.tools.assert(false, 'Deleted database should have been deleted');
 		})
 		.then(dash.get.database)
 		.then(function(context) {
