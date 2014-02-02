@@ -95,13 +95,16 @@ To get to objects, you have to through object stores, and to get to object store
 ##### Opening A Database Test: Database Object Returned Is An Instance Of IDBDatabase
 
 	(function(){
-		dash.open.database({ database: 'foo' })
+		var start_time = new Date().getTime(),
+			db_name = 'store-open-test-' + start_time,
+		dash.open.database({ database: db_name })
 			.then(function(context) {
 				var db = context.db,
 					assert = dash.tools.assert,
 					isnt = dash.tools.is;
 				assert(db instanceof IDBDatabase, 'Database should be an instanceof IDBDatabase');
 				assert(dash.tools.exists(db.name), 'Database should have a name');
+				assert(dash.tools.is(db.name, db_name), 'Database should have the correct name');
 				assert(dash.tools.exists(db.version), 'Database should have a version');
 				assert(dash.tools.isnt(isNaN(db.version), true), 'Database version should be a number');
 			}, function(context) {
