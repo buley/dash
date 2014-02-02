@@ -105,6 +105,8 @@ Databases are browser resources and, like all resources, expensive for the browe
 
 Databases can be "deleted" and their resources will be freed up for use elsewhere.
 
+##### Deleting Databases Example: Simple Case
+
 	dash.open.database({ database: 'foo' }).then(dash.delete.database).then(function(context) {
 	    console.log('dash: database deleted');
 	}, function(context) {
@@ -125,6 +127,8 @@ After creation, object stores can be either be `delete`ed, or `clear`ed of their
 
 [Creating an object store](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBDatabase-createObjectStore) requires a "versionchange" type transaction.
 
+##### Creating Object Stores Example: Simple Case
+
 	dash.open.database({ database: 'foo', store: 'bar' }).then(dash.create.store).then(function(context) {
 		console.log('dash: store created', context.db, context.objectstore);
 	}, function(context) {
@@ -143,6 +147,8 @@ The "autoIncrement" parameter creates a IDB ["key generator"](http://www.w3.org/
 
 With an open database it's possible to get a reference to an object store. [`Get`ting](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-get) an object store accepts both "readonly" and "readwrite" typed transactions.
 
+##### Getting An Object Store Example: Simple Case
+
 	dash.open.database({ database: 'foo', store: 'bar' })
 		.then(dash.get.store)
 		.then(function(context) {
@@ -152,9 +158,11 @@ With an open database it's possible to get a reference to an object store. [`Get
 		})
 		.then(dash.close.database);
 
-#### Clearing Object Stores
+#### Clearing An Object Store
 
 [`Clear`ing](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-clear) an object store requires a "readwrite" type transaction.
+
+##### Clearing An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
 		.then(dash.clear.store)
@@ -165,9 +173,11 @@ With an open database it's possible to get a reference to an object store. [`Get
 		})
 		.then(dash.close.database);
 
-#### Removing Object Stores
+#### Removing An Object Store
 
 [`Delete`ing](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-delete) an object store requires a "versionchange" type transaction.
+
+##### Removing An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
 		.then(dash.remove.store)
@@ -181,6 +191,8 @@ With an open database it's possible to get a reference to an object store. [`Get
 #### Getting Multiple Object Stores
 
 With an open database it's possible to get a list of all object store names. This list is an `Array`-like collection of string object store names.
+
+##### Getting Multiple Object Stores Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
 		.then(dash.get.stores)
@@ -201,6 +213,8 @@ Both adding and removing indexes requires a `versionchange` transaction.
 
 The options for creating a new index are similar to those when creating an object store: a `key path` is given using the standard key syntax and the `unique` and `multirow` options can both be used. The ["unique"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow#dfn-unique) parameter tells the browser not to allow two values to correspond to the same key and the ["multirow"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow) flag controls how the index behaves when dealing with `Array` values.
 
+##### Creating An Index Example: Simple Case
+
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
 		.then(dash.create.index)
 		.then(function(context) {
@@ -213,6 +227,8 @@ The options for creating a new index are similar to those when creating an objec
 #### Getting An Index
 
 With a string index name, it's possible to get a reference to an existing index from an object store.
+
+##### Getting An Index Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
 		.then(dash.get.index)
@@ -228,6 +244,8 @@ With a string index name, it's possible to get a reference to an existing index 
 
 With a string index name, it's possible to get a reference to an existing index from an object store.
 
+##### Removing An Index Example: Simple Case
+
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
 		.then(dash.remove.index)
 		.then(function(context) {
@@ -242,6 +260,8 @@ With a string index name, it's possible to get a reference to an existing index 
 
 Using an object store on an open database, it's possible to get a list of indexes names. This list is an `Array`-like collection of string names.
 
+##### Getting Multiple Indexes Example: Simple Case
+
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
 		.then(dash.create.index)
 		.then(function(context) {
@@ -255,9 +275,11 @@ Using an object store on an open database, it's possible to get a list of indexe
 
 It's possible to ["`add`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-add) (create), ["`get`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-get) (read), ["`put`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-put) (update an existing object, else create a new one) and ["`delete`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-delete) (destroy) single objects in an object store. Generally, to `delete` or `get` a record requires using its `key`, but both `add` and `put` operations do not require a key and will handily return an object's object store key value when added or put (useful when using a key-generator and the key is unknown until after insertion).
 
+#### Adding An Object To An Object Store
+
 When adding or putting values, the various uniqueness rules for the store and indexes together apply to any entries added to that object store. 
 
-#### Adding IndexedDB Object Into An Object Store
+##### Adding An Object To An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
 		.then(dash.add.object)
@@ -268,7 +290,9 @@ When adding or putting values, the various uniqueness rules for the store and in
 		})
 		.then(dash.close.database);
 
-#### Removing IndexedDB Object From An Object Store
+#### Removing Object From An Object Store
+
+##### Removing An Object From An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', key: 'baz' })
 		.then(dash.remove.object)
@@ -281,6 +305,8 @@ When adding or putting values, the various uniqueness rules for the store and in
 
 #### Getting An Object From An Object Store
 
+##### Getting An Object From An Object Store Example: Simple Case
+
 	dash.open.database({ database: 'foo', store: 'bar', key: 'baz' })
 		.then(dash.get.object)
 		.then(function(context) {
@@ -292,6 +318,8 @@ When adding or putting values, the various uniqueness rules for the store and in
 
 #### Putting An Object Into An Object Store
 
+##### Putting An Object Into An Object Store Example: Simple Case
+
 	dash.open.database({ database: 'foo', store: 'bar', key: 'baz', data: { bang: 'boom' } })
 		.then(dash.put.object)
 		.then(function(context) {
@@ -301,7 +329,7 @@ When adding or putting values, the various uniqueness rules for the store and in
 		})
 		.then(dash.close.database);
 
-### Working With Multiple IndexedDB Objects
+### Working With Multiple Objects
 
 When querying for more than one object we must use indexes, and to use indexes we in complex manners we typically need to use a special type of request called a "cursor." When you want to ask for a range of data on an index, what you get back is not the data itself but rather a reference to a cursor, which offers asyncronous callbacks that fire when it retrieves objects from the store. When these callbacks fire, the programmer must either "continue" the cursor or abandon it. This process continues until either the programmer is done with the request or the cursor has exhausted the results from the request.
 
@@ -315,9 +343,15 @@ Two different types of cursors: IDBCursor and IDBCursorWithValue which are creat
 
 #### IndexedDB Key Ranges
 
-Each cursor request needs an index against which to search and a range of keys to match, called a "key range". Key ranges break down into its "bounds" and "direction". Bounds describe how the range of keys start and end, using the keywords "only", "lower", "upper". The latter two allow optional modifiers "lowerOpen" and "upperOpen". The modifiers default to false.
+Each cursor request needs an index against which to search and a range of keys to match, called a "key range". Key ranges break down into its "bounds" and "direction". 
+
+In addition to use on indexes, key ranges can also be used as a key when getting (but not adding, putting or deleting) single values with object stores or indexes, in which case the programmer will recieve the first matching value for in that key range.
+
+##### Direction
 
 Direction is the way in which you query the index: "next" (forward) or "previous" (backward). The default value is next. The programmer can dictate whether or not to include duplicate keys in the request using two other directions (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#idl-def-IDBCursor): "next no duplicates" and "previous no duplicates". The programmer represents these directions using a number: 0 for "next", 1 for "next no duplicates", 2 for "previous" and 3 for "previous no duplicates".
+
+##### Bounds
 
 For example, say there's an index with 26 records containing the alphabet "A" to "Z". Here are some ways we could query it: 
 * "only" "Z" would return just one object.
@@ -331,13 +365,24 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 * lower "A", upper "Z", with "lowerOpen" and "upperOpen" set to `false` would return 24 objects
 * lower "A", upper "Z", with "lowerOpen" set to `true` and and "upperOpen" set to `false` would return 25 objects
 
-Key ranges can also be used as a key when getting (but not adding, putting or deleting) single values with object stores or indexes, in which case the programmer will recieve the first matching value for in that key range.
+### Getting Multiple Objects From A Database
 
-### Getting Multiple Objects From An IndexedDB Database
+#### Getting Multiple Objects From A Database Example: Simple Case
 
-> objects.get
+	dash.open.database({ database: 'foo', store: 'bar', index: 'baz', left: 'a', left_open: true })
+		.then(dash.get.objects)
+		.then(function(context) {
+		    console.log('dash: all objects fetched', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		}, function(context) {
+		    console.log('dash: object not fetched', context.db, context.objectstore, context.idx, context.cursor, context.error);
+		}, function(context) {
+		    console.log('dash: object was fetched', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		})
+		.then(dash.close.database);
 
-### Deleting Multiple Objects From An IndexedDB Database
+### Deleting Multiple Objects From A Database
+
+#### Deleting Multiple Objects From A Database Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz', left: 'a', left_open: true })
 		.then(dash.delete.objects)
@@ -351,7 +396,9 @@ Key ranges can also be used as a key when getting (but not adding, putting or de
 		.then(dash.close.database);
 
 
-### Updating Multiple Objects In An IndexedDB Database
+### Updating Multiple Objects In A Database
+
+#### Updating Multiple Objects In A Database Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz', left: 0, left_open: true, data: { updated: new Date().getTime() } })
 		.then(dash.update.objects)
