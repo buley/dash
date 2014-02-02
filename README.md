@@ -1,14 +1,14 @@
 ## Overview
 
-[`IndexeDB`](https://developer.mozilla.org/en-US/docs/IndexedDB) (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most [`HTML5`](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)-enabled browsers. [1]
+[`IndexedDB`](https://developer.mozilla.org/en-US/docs/IndexedDB) (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most [`HTML5`](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)-enabled browsers. [1]
 
-Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexeDB terminology. Databases are the outermost container of data in IndexeDB, and contain object stores. They are unique to each domain or "host". Object stores contain ["`lists`" of "`records`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-index-record-list), where each list is a JavaScript object and each record is breaks down into a "key" and "value".
+Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexedDB terminology. Databases are the outermost container of data in IndexedDB, and contain object stores. They are unique to each domain or "host". Object stores contain ["`lists`" of "`records`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-index-record-list), where each list is a JavaScript object and each record is breaks down into a "key" and "value".
 
 IDB is, in essence, an indexed key/value store. For data that doesn't need to be accessed via index, for an otherwise non-indexed key/value store, a lighter weight client-side technologies such as localStorage or sessionStorage, or cookies may be more appropriate.
 
 ### Records
 
-The base unit of data in IDB is a [`record`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-record) and IndexeDB is capable of storing as records most standard types of JavaScript data. To copy values to the database, IDB uses something called the "[`structured clone algorithm`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm)".
+The base unit of data in IDB is a [`record`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-record) and IndexedDB is capable of storing as records most standard types of JavaScript data. To copy values to the database, IDB uses something called the "[`structured clone algorithm`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm)".
 
 IDB only stores JavaScript list objects, but the values associated with keys on those objects that can typically be any value that "[cloned](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone)", which includes both the basic JavaSript primitives and more complex object types: null values, `Boolean`s, `Number`s, `String`s, `Date`s, `Array`s, other `Object`s and even advanced types such as RegExp, Blob, File, FileList and ImageData objects. The only standard object type IDB's structured clone algorithm cannot deal with are function objects. Thus JavaScript functions cannot be stored in their native object form.  
 
