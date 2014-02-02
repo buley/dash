@@ -66,11 +66,11 @@ When opening a database, a programmer must specify a databases [`name`](http://w
 
 #### Database Versions
 
-[`Version`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-version) numbers are whole numbers greater than zero. A programmer can set a database's version manually or implictly by opening an existing database name with a greater version number than the database contains. While a database's name can never change, the database version changes all the time. 
+[`Version`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-version) numbers are positive whole numbers greater than zero. A programmer can set a database's version manually or implictly by opening an existing database name with a greater version number than the database contains. While a database's name can never change, the database version changes all the time. 
 
 Speficying a version greather than the current allows us to entry a "version change" transaction that enables database schema changes. When no version is specified, the database will open with the most recent database version.
 
-Database version numbers are stored as [8-byte "int long long"](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB#Opening_a_database) in the underlying C programming language implementation of IDB  and can number anywhere between `0` and `18446744073709551615`.
+Database version numbers are stored as [8-byte "int long long"](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB#Opening_a_database) in the underlying C programming language implementation of IDB  and can number anywhere between `1` and `18446744073709551615`.
 
 ##### `versionchange` transactions
 
@@ -82,11 +82,26 @@ Database operations that require a version change include both creating and dele
 
 To get to objects, you have to through object stores, and to get to object stores you have to go through databases. So the first step in interaction with `IndexedDB` is almost always to open a database. Database open requests are instances of [`IDBOpenDBRequest`](https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest).
 
+#### Opening A Database Example: Simple Case
+
 	dash.open.database({ database: 'foo' })
 		.then(function(context) {
 			console.log('dash: database opened', context.db);
 		}, function(context) {
 			console.log('dash: database not opened', context.error);
+		})
+		.then(dash.close.database);
+
+#### Opening A Database Test: Database Object Returned Is An Instance Of IDBDatabase
+
+	dash.open.database({ database: 'foo' })
+		.then(function(context) {
+			var db = context.db;
+			dash.assert(db instanceof IDBDatabase, 'Database should be an instanceof IDBDatabase');
+			dash.assert(dash.tools.exists(db.name), 'Database should have a name');
+			dash.assert(dash.tools.exists(db.version), 'Database should have a version');
+		}, function(context) {
+			console.log('dash: database was not opened', context.error);
 		})
 		.then(dash.close.database);
 
@@ -96,16 +111,29 @@ Opening an existing database and creating a new one work in the same way: if the
 
 It's typically not possible to enumerate all databases for a host. Typically the programmer must already know the name of our database in order to of opening it, else create a new one. The exception is in Chrome, which offers a non-standard way of enumerating existing databases for a host.
 
+##### Getting Existing Databases Example: Simple Case
+
 	dash.get.databases().then( function(context) {
 	    console.log('dash: databases fetched', context.databases);
 	}, function(context) {
 	    console.log('dash: databases not fetched', context.databases);
 	}).then(dash.close.database);
 
+##### Getting Existing Databases Example: List Of Databases Is Instance Of NodeList
+
+	dash.get.databases().then( function(context) {
+		dash.assert(context.databases instanceof DOMStringList, 'Database list should be an instanceof DOMStringList');
+	}, function(context) {
+	    console.log('dash: databases not fetched', context.databases);
+	}).then(dash.close.database);
+
+
 #### Closing Databases
 
 Databases can be [`close`d](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-database-close-1).
-	
+
+##### Closing A Database Example: Simple Case
+
 	dash.open.database({ database: 'foo' }).then(dash.close.database).then(function(context) {
 		console.log('dash: database closed');
 	}, function(context) {
@@ -118,13 +146,28 @@ Databases are browser resources and, like all resources, expensive for the browe
 
 Databases can be "deleted" and their resources will be freed up for use elsewhere.
 
-##### Deleting Databases Example: Simple Case
+##### Deleting A Database Example: Simple Case
 
 	dash.open.database({ database: 'foo' }).then(dash.delete.database).then(function(context) {
 	    console.log('dash: database deleted');
 	}, function(context) {
 	    console.log('dash: database not deleted');
 	}).then(dash.close.database);
+
+##### Deleting A Database Test: Database Actually Gets Deleted
+
+	dash.open.database({ database: 'db-delete-test-' + new Date().getTime() })
+		.then(dash.create.database)
+		.then(dash.delete.database)
+		.then(null, function(context) {
+			dash.assert(false, 'Deleted database should have been deleted');
+		})
+		.then(dash.get.database)
+		.then(function(context) {
+			dash.assert(dash.tools.empty(context.db), 'Deleted database should not be fetchable');
+		})
+		.then(dash.close.database);
+
 
 Once a database is deleted you can open a new one with the same name; this is similar to a `versionchange` transaction but destroys and object stores and their contents.
 
@@ -140,13 +183,25 @@ Object stores are instances of [`IDBObjectStore`](https://developer.mozilla.org/
 
 [Creating an object store](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBDatabase-createObjectStore) requires a "versionchange" type transaction.
 
-##### Creating Object Stores Example: Simple Case
+##### Creating An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' }).then(dash.create.store).then(function(context) {
 		console.log('dash: store created', context.db, context.objectstore);
 	}, function(context) {
 		console.log('dash: store not created', context.db, context.error);
 	}).then(dash.close.database);
+
+##### Creating An Object Store Test: Created Object Should Be An Instance Of IDBObjectStore
+
+	dash.open.database({ database: 'foo', store: 'strage-create-test-' + new Date().getTime() })
+		.then(dash.create.store)
+		.then(function(context) {
+			dash.tools.assert(context.objectstore instanceof IDBObjectStore, 'Object store should be an instance of IDBObjectStore');
+		}, function(context) {
+			dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been created');
+		})
+		.then(dash.close.database);
+
 
 ##### Key Paths
 
@@ -161,6 +216,17 @@ The "autoIncrement" parameter creates a IDB ["key generator"](http://www.w3.org/
 With an open database it's possible to get a reference to an object store. [`Get`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-get)ting an object store accepts both "readonly" and "readwrite" typed transactions.
 
 ##### Getting An Object Store Example: Simple Case
+
+	dash.open.database({ database: 'foo', store: 'bar' })
+		.then(dash.get.store)
+		.then(function(context) {
+		    console.log('dash: store fetched', context.db, context.objectstore);
+		}, function(context) {
+		    console.log('dash: store not fetched', context.db, context.error);
+		})
+		.then(dash.close.database);
+
+##### Getting An Object Store Text: Object Store Should Be Instance of IDBObjectStore
 
 	dash.open.database({ database: 'foo', store: 'bar' })
 		.then(dash.get.store)
@@ -188,7 +254,7 @@ With an open database it's possible to get a reference to an object store. [`Get
 
 #### Removing An Object Store
 
-[`Delete`ing](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-delete) an object store requires a "versionchange" type transaction.
+[`Delete`ing](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-delete) an object store removes the object store, any associated indexes and its content. A `delete` requires a "versionchange" type transaction.
 
 ##### Removing An Object Store Example: Simple Case
 
