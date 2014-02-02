@@ -163,13 +163,15 @@ With a string index name, it's possible to get a reference to an existing index 
 
 > index.delete
 
-### IndexedDB Entries
+### IndexedDB Objects
 
-It's possible to "add" (create), "put" (add or update), "get" (read) and "delete" (destroy) single objects in an object store using a record key path and value associated with a store.
+It's possible to ["`add`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-add) (create), ["`get`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-get) (read), ["`put`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-put) (update an existing object, else create a new one) and ["`delete`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-delete) (destroy) single objects in an object store. Generally, to `delete` or `get` a record requires using its `key`, but `add` and `put` operations do not require a key and will actually return an object's object store key value when added or put (handy when using a key-generator and the key is unknown until after insertion).
 
-You can fetch one object at a time using a straightforward request it from the object store in which it resides using a key value to identify a record using the main key path. You can optionally use an index to fetch a single object at a time and, when doing so, optionally retrieve just the value of the key rather than return the entire object to which it's attached.
+When adding or putting values, the various uniqueness rules that you create when using indexes on an object store together apply to any entries  added to that object store. 
 
-The various uniqueness rules that you create when using indexes on an object store together apply to any entries (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-add) added to that object store. 
+Requests for single objects generally happen against an object store or index. When using an index, it's possible to retrieve just the value of the key rather than return the entire object to which it's attached.
+
+#### IndexedDB Objects
 
 > object.add
 
@@ -218,83 +220,16 @@ Key ranges can also be used as a key when getting (but not adding, putting or de
 
 
 
-
-
-
-
-
-
-[1] Chrome offers an exception via the non-standard but insanely useful webkitGetDatabaseNames() method.
-[2] WebSQL is dead.
-[3] The way the browsers themselves store the data depends on the vendor. Chrome uses a key/value technology called LevelDB, which Firefox uses the relational SQLLite database. Both store data in a mix of plaintext and binaryCK.
-[4] When a key is not provided on object store creation, it's said that your store uses "out-of-line" keys.
-
-Edit note: remove you anywhere it appears; don't seem condescending
-
-API notes: databases are opened. stores and indexes are shown. using an open database and object store we can check if stores and indexes exist, but cannot check if database exist without opening them.
-
-async is absolutely crucial to feasibility. but a pita to manage, thus promises.
-
-contet object; less memory, fewer variables. some uncached lookups but worth it.
-
-normalize target.result, result, request.result, target.result.value
-
-Spec notes:
-http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-put
-error? "The object store uses in-line keys and the key parameter was provided." in-line means key would be provided manually. 
-
-version change required:
-create index
-delete index
-delete object store
-
-
-database.close
-database.create
-database.delete
-database.open
-database.show
-database.upgrade
-databases.show
-
-### Stores
 IDBObjectStore https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore
-store.create
-store.show
-store.delete
-stores.show
-store.exists
-
-### Indexes
 IDBIndex https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex
-index.create
-index.exists
-index.show
-index.delete
-indexes.show
-
-### Entries
-entry.add
-entry.delete
-entry.get
-entry.put
-
-### Cursors
 IDBCursorWithValue https://developer.mozilla.org/en-US/docs/Web/API/IDBCursorWithValue
 IDBKeyRange https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange
-
-cursor.delete
-cursor.get
-
 IDBDatabase https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase
 IDBOpenDBRequest https://developer.mozilla.org/en-US/docs/Web/API/IDBOpenDBRequest
 IDBRequest https://developer.mozilla.org/en-US/docs/Web/API/IDBRequest
 IDBTransaction https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction
 https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction#VERSION_CHANGE
-
 IDBVersionChangeEvent https://developer.mozilla.org/en-US/docs/Web/API/IDBVersionChangeEvent
-
-
 
 
 {
