@@ -71,7 +71,9 @@ Database operations that require a version change include both creating and dele
 
 To get to objects, you have to through object stores, and to get to object stores you have to go through databases. So the first step in interaction with IndexedDB is almost always to open a database. 
 
-> database.open
+	dash.open.database({ database: 'foo', version: 1 }).then( function(context) {
+		console.log('dash: database', context.db.name, context.db.version);
+	});
 
 Opening an existing database and creating a new one work in the same way: if the name passed matches an existing database, that database is opened; if the name doesn't match an existing database, a new one will be created when opened using a unique name. Opening a new database, or opening an existing database with a version greather than the current version, will trigger a `versionchange` event.  
 
@@ -79,19 +81,31 @@ Opening an existing database and creating a new one work in the same way: if the
 
 It's typically not possible to enumerate all databases for a host. Typically the programmer must already know the name of our database in order to of opening it, else create a new one. The exception is in Chrome, which offers a non-standard way of enumerating existing databases for a host.
 
-> databases.show
+	dash.get.databases().then( function(context) {
+	    console.log('dash: databases', context.databases);
+	});
 
 #### Closing IndexedDB Databases
 
 Databases are browser resources and, like all resources, expensive for the brower to maintain. Just as opening a database is the first step to doing anything in IndexedDB, closing a database is usually a good last step.
-
-> database.close
+	
+	dash.open.database({ database: 'foo', version: 1 }).then( function(context) {
+	    var db = context.db;
+	    dash.close.database({ database: 'foo', version: 1 }).then( function(context) {
+	    	console.log('dash: database', context.db.name, context.db.version, context.db);
+		});
+	});
 
 #### Deleting IndexedDB Databases
 
 Databases can be "deleted" and their resources will be freed up for use elsewhere.
 
-> database.delete
+	dash.open.database({ database: 'foo', version: 1 }).then( function(context) {
+	    var db = context.db;
+	    dash.delete.database(context).then( function(context) {
+	    	console.log('dash: database', context.db.name, context.db.version, context.db);
+		});
+	});
 
 Once a database is deleted you can open a new one with the same name; this is similar to a `versionchange` transaction but destroys and object stores and their contents.
 
@@ -161,31 +175,31 @@ With a string index name, it's possible to get a reference to an existing index 
 
 With a string index name, it's possible to get a reference to an existing index from an object store.
 
-> index.delete
+> index.remove
 
-### IndexedDB Objects
+### Working With Singular IndexedDB Object
 
-It's possible to ["`add`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-add) (create), ["`get`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-get) (read), ["`put`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-put) (update an existing object, else create a new one) and ["`delete`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-delete) (destroy) single objects in an object store. Generally, to `delete` or `get` a record requires using its `key`, but `add` and `put` operations do not require a key and will actually return an object's object store key value when added or put (handy when using a key-generator and the key is unknown until after insertion).
+It's possible to ["`add`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-add) (create), ["`get`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-get) (read), ["`put`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-put) (update an existing object, else create a new one) and ["`delete`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-delete) (destroy) single objects in an object store. Generally, to `delete` or `get` a record requires using its `key`, but both `add` and `put` operations do not require a key and will handily return an object's object store key value when added or put (useful when using a key-generator and the key is unknown until after insertion).
 
-When adding or putting values, the various uniqueness rules that you create when using indexes on an object store together apply to any entries  added to that object store. 
+When adding or putting values, the various uniqueness rules for the store and indexes together apply to any entries added to that object store. 
 
-Requests for single objects generally happen against an object store or index. When using an index, it's possible to retrieve just the value of the key rather than return the entire object to which it's attached.
-
-#### IndexedDB Objects
+#### Adding IndexedDB Object Into An Object Store
 
 > object.add
 
-When you delete, get or put a single object you can specify the object store's primary key path in order to fetch it.
+#### Removing IndexedDB Object From An Object Store
 
-> object.delete
+> object.remove
+
+#### Getting IndexedDB Object From An Object Store
+
 > object.get
+
+#### Putting An IndexedDB Object Into An Object Store
+
 > object.put
 
-> objects.get
-> objects.update
-> objects.delete
-
-### IndexedDB Indexes
+### Working With Multiple IndexedDB Objects
 
 When querying for more than one object we must use indexes, and to use indexes we in complex manners we typically need to use a special type of request called a "cursor." When you want to ask for a range of data on an index, what you get back is not the data itself but rather a reference to a cursor, which offers asyncronous callbacks that fire when it retrieves objects from the store. When these callbacks fire, the programmer must either "continue" the cursor or abandon it. This process continues until either the programmer is done with the request or the cursor has exhausted the results from the request.
 
@@ -217,7 +231,17 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 
 Key ranges can also be used as a key when getting (but not adding, putting or deleting) single values with object stores or indexes, in which case the programmer will recieve the first matching value for in that key range.
 
+### Deleting Multiple Objects From An IndexedDB Database
 
+> objects.delete
+
+### Getting Multiple Objects From An IndexedDB Database
+
+> objects.get
+
+### Updating Multiple Objects In An IndexedDB Database
+
+> objects.update
 
 
 IDBObjectStore https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore
