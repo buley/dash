@@ -43,10 +43,16 @@ There are various types of callbacks in IDB depending on the type of transaction
  
 ### Restrictions
 
-Restricted to a given [`origin`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-origin).
-[`Same-origin`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-same-origin). Size limits.
+IDB is typically available in both the main `window` and in Web Workers thanks to an abstracted [`IDBEnvironment`](https://developer.mozilla.org/en-US/docs/Web/API/IDBEnvironment) interface. It is restricted to a given [`origin`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-origin), and 
+[`same-origin`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-same-origin) security restrictions apply. 
 
-IDB is typically available in both the main `window` and in Web Workers thanks to an abstracted [`IDBEnvironment`](https://developer.mozilla.org/en-US/docs/Web/API/IDBEnvironment) interface.
+Most browsers will ask a user's permission before allowing IDB to store data locally. Although the specification does not specify a size limit, some browsers enforce one.
+
+Firefox has no size limit but will ask permission before storing data larger than 50mb. It exposes "quota" information via the `dom.indexedDB.warningQuota` factory attribute for the programmer to judge utilization.
+
+Chrome automatically grants "[`temporary`](https://developers.google.com/chrome/whitepapers/storage#temporary)" storage to IDB and allocates a maximum of 20% of its "shared storage pool". Chrome also allows "offline" storage with no limitations on size other than user disk space. A user is prompted to authorize a host for offline storage.
+
+IE allows IDB up to 250 megabytes of space and provides the [`window.indexedDB.remainingSpace`](http://msdn.microsoft.com/en-us/library/windows/apps/cc197016.aspx) factory attribute for the programmer to judge utilization.
 
 ## The `IndexedDB` API
 
@@ -346,7 +352,7 @@ When a cursor's callbacks fire, the programmer can place a request and then eith
 
 Using an index and a key range for that index, you can use a "[`cursor`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-cursor)" to get, put and delete [`values`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-cursor-value) one at a time but in single request. Cursors are also capable of "[`advancing`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBCursor-advance)" and, in effect, skip a number of objects in an index for a given key range. 
 
-Cursors traverse an index matching a given "key range".
+Cursors traverse an index matching a given "key range". There is no limit on the number of cursors that can be used at the same time.
 
 Two different types of cursors: cursors that read just keys (instances of [`IDBCursor`](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor)) and cursors that read keys and values [`IDBCursorWithValue`](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursorWithValue) which are created on an index using the [`openKeyCursor`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBIndex-openKeyCursor) and [`openCursor`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBIndex-openCursor) methods respectively.
 
