@@ -71,9 +71,13 @@ Database operations that require a version change include both creating and dele
 
 To get to objects, you have to through object stores, and to get to object stores you have to go through databases. So the first step in interaction with IndexedDB is almost always to open a database. 
 
-	dash.open.database({ database: 'foo', version: 1 }).then( function(context) {
-		console.log('dash: database', context.db.name, context.db.version);
-	});
+	dash.open.database({ database: 'foo' })
+		.then(function(context) {
+			console.log('dash: database opened', context.db);
+		}, function(context) {
+			console.log('dash: database not opened', context.error);
+		})
+		.then(dash.close.database);
 
 Opening an existing database and creating a new one work in the same way: if the name passed matches an existing database, that database is opened; if the name doesn't match an existing database, a new one will be created when opened using a unique name. Opening a new database, or opening an existing database with a version greather than the current version, will trigger a `versionchange` event.  
 
@@ -82,33 +86,30 @@ Opening an existing database and creating a new one work in the same way: if the
 It's typically not possible to enumerate all databases for a host. Typically the programmer must already know the name of our database in order to of opening it, else create a new one. The exception is in Chrome, which offers a non-standard way of enumerating existing databases for a host.
 
 	dash.get.databases().then( function(context) {
-	    console.log('dash: databases', context.databases);
+	    console.log('dash: databases fetched', context.databases);
+	}, function(context) {
+	    console.log('dash: databases not fetched', context.databases);
 	}).then(dash.close.database);
 
 #### Closing Databases
 
 Databases are browser resources and, like all resources, expensive for the brower to maintain. Just as opening a database is the first step to doing anything in IndexedDB, closing a database is usually a good last step.
 	
-	(function() {
-		var db;
-		dash.open.database({ database: 'foo' }).then( function(context) {
-		    db = context.db;
-		}).then(dash.close.database).then(function(context) {
-		    console.log('dash: database', db.name, db);
-		}).then(dash.close.database);
-	)();
+	dash.open.database({ database: 'foo' }).then(dash.close.database).then(function(context) {
+		console.log('dash: database closed');
+	}, function(context) {
+		console.log('dash: database not closed');
+	});
 
 #### Deleting Databases
 
 Databases can be "deleted" and their resources will be freed up for use elsewhere.
 
-	(function(db) {
-		dash.open.database({ database: 'foo' }).then( function(context) {
-		    db = context.db;
-		}).then(dash.delete.database).then(function(context) {
-		    console.log('dash: database', db.name, db);
-		}).then(dash.close.database);
-	)(null);
+	dash.open.database({ database: 'foo' }).then(dash.delete.database).then(function(context) {
+	    console.log('dash: database deleted');
+	}, function(context) {
+	    console.log('dash: database not deleted');
+	}).then(dash.close.database);
 
 Once a database is deleted you can open a new one with the same name; this is similar to a `versionchange` transaction but destroys and object stores and their contents.
 
@@ -125,7 +126,9 @@ After creation, object stores can be either be `delete`ed, or `clear`ed of their
 [Creating an object store](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBDatabase-createObjectStore) requires a "versionchange" type transaction.
 
 	dash.open.database({ database: 'foo', store: 'bar' }).then(dash.create.store).then(function(context) {
-		console.log('dash: store', context.objectstore, context.db.version);
+		console.log('dash: store created', context.db, context.objectstore);
+	}, function(context) {
+		console.log('dash: store not created', context.db, context.error);
 	}).then(dash.close.database);
 
 ##### Key Paths
