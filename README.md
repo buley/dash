@@ -1,4 +1,4 @@
-## IndexedDB Overview
+## Overview
 
 IndexeDB (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most HTML5-enabled browsers.[0]
 
@@ -8,13 +8,13 @@ IDB is, in essence, an indexed key/value store. For data that doesn't need to be
 
 [0] Although IndexedDB is has very little to do with HTML5 standard beyond using some interfaces such as the "structured clone algorithm", IDB is typically grouped with so-called "HTML5" technologies.
 
-### IndexedDB Records
+### Records
 
 IndexeDB is capable of storing as records most standard types of JavaScript data. To copy values to the database, IDB uses something called the "structured clone algorithm".(http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-structured-clone-algorithm).
 
 IDB only stores JavaScript list objects, but the values associated with keys on those objects that can typically be any value that "cloned", which includes both the basic JavaSript primitives and more complex object types: null values, `Boolean`s, `Number`s, `String`s, `Date`s, `Array`s, other `Object`s and even advanced types such as RegExp, Blob, File, FileList and ImageData objects. The only standard object type IDB's structured clone algorithm cannot deal with are function objects. (https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/The_structured_clone_algorithm) Thus, JavaScript functions cannot be stored in their object form.  
 
-### IndexedDB Keys
+### Keys
 
 A key identifies a record and the value is what's being stored. The list of records associated is represented by a JavaScript object, so there can be only one value per key. A key can be any of these types: String, Dates, floats and Arrays. The key that identifies a record is found using something called a "key path." 
 
@@ -29,45 +29,45 @@ To specify a key path, a "plain string" will create a key matching a shallow att
 
 As shown above, it's possible to put indexes on array objects in addition to primitive values such as numbers. In such cases, the "multirow" (http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow) allow the programmer to specify when creating a database whether an index record will be created on each object in a particular array (multirow set to `true`) or whether a record is created for only the first (multirow set to `false`). When an empty array is passed as the value of a multirow index, no record will be added.
 
-### IndexedDB Transactions
+### Transactions
 
 In IDB, work tasked to a database is called a "transaction" and a transaction is characterized by its "scope". Transaction scope, in turn, is characterized by both the work to be done and where the programmer wants the work to happen. To create a transaction against an open database, a programmer names the object stores on which she'd like to operate, and optionally specifies what type of transaction she'd like to create.
 
 There are three types of transactions: "readwrite", "readonly" and "versionchange". The default is "readonly", convienient because changing a data via a "write" is generally more expensive than to "read" that data. The granularity and providing of "readonly" vs. "readwrite" offers the programmer an the opportunity to speed up her code depending on her needs. The final transaction type, "versionchange", is used when changing the schema of a database.
 
-### IndexedDB Requests
+### Requests
 
 Certain transactions return data from the database. These transactions are called "requests" and the values are always various combinations of object "keys" and "values".[3] Requests are just that: a "request," namely the act of asking for something rather than the getting of it. Unlike many databases, requests are not fulfilled immediately, or "synconronously"; however, these non-immediate responses are rather "asyncronous", and the mechanism a programmer uses to await an asynconrous reponse is by coding a "callback" function IDB can invoke on various "events" such as a successful response.
 
 There are various types of callbacks in IDB depending on the type of transaction. Requests generally have "onsuccess", "onerror and "onabort" callbacks. Others include "onupgradeneeded", "onclose" and "onblocked," sometimes seen when working with databases. Each event has a different meaning depending on the transaction, but for example "onsuccess", "onupgraded" are generally a good event for the programmer while "onerror", "onabort" and "onblocked" mean something went awry for him.
  
-### IndexedDB Restrictions
+### Restrictions
 
 Same-origin. Size limits.
 
 ## The IndexedDB API
 
-### IndexedDB Databases
+### Databases
 
 Database house object stores and have two distinguishing characteristics: a name (string) and version (number). Together they represent a given database layout or "schema" - and any other schema would be under either a different database name or a different version number.
 
-#### IndexedDB Database Names
+#### Database Names
 
 Databases names are case-sensitive. When opening a database, a programmer must specify a databases name and optionally its version. Speficying a version greather than the current allows us to entry a "version change" transaction that enables database schema changes. When no version is specified, the database will open with the most recent database version.
 
-#### IndexedDB Database Versions
+#### Database Versions
 
 While a database's name can never change, the database "version" changes all the time. version numbers are whole numbers greater than zero. A programmer can set a database's version manually or implictly by opening an existing database name with a greater version number than the database contains.
 
 Database version numbers are stored as [8-byte "int long long"](https://developer.mozilla.org/en-US/docs/IndexedDB/Using_IndexedDB#Opening_a_database) in the underlying C programming language implementation of IDB  and can number anywhere between `0` and `18446744073709551615`.
 
-##### IndexedDB `versionchange` transactions
+##### `versionchange` transactions
 
 A version number can represent only one schema for particular database, but a programmer can change a database's layout by incrementing its version number, triggering something called a "versionchange" transaction. Version changes preserve databases object stores and indexes, but from within a versionchange callback the programmer is allowed to make modifications to a database schema.
 
 Database operations that require a version change include both creating and deleting object stores, and both creating and deleting indexes. 
 
-#### Opening IndexedDB Databases
+#### Opening Databases
 
 To get to objects, you have to through object stores, and to get to object stores you have to go through databases. So the first step in interaction with IndexedDB is almost always to open a database. 
 
@@ -77,39 +77,42 @@ To get to objects, you have to through object stores, and to get to object store
 
 Opening an existing database and creating a new one work in the same way: if the name passed matches an existing database, that database is opened; if the name doesn't match an existing database, a new one will be created when opened using a unique name. Opening a new database, or opening an existing database with a version greather than the current version, will trigger a `versionchange` event.  
 
-#### Showing IndexedDB Databases
+#### Getting Existing Databases
 
 It's typically not possible to enumerate all databases for a host. Typically the programmer must already know the name of our database in order to of opening it, else create a new one. The exception is in Chrome, which offers a non-standard way of enumerating existing databases for a host.
 
 	dash.get.databases().then( function(context) {
 	    console.log('dash: databases', context.databases);
-	});
+	}).then(dash.close.database);
 
-#### Closing IndexedDB Databases
+#### Closing Databases
 
 Databases are browser resources and, like all resources, expensive for the brower to maintain. Just as opening a database is the first step to doing anything in IndexedDB, closing a database is usually a good last step.
 	
-	dash.open.database({ database: 'foo', version: 1 }).then( function(context) {
-	    var db = context.db;
-	    dash.close.database({ database: 'foo', version: 1 }).then( function(context) {
-	    	console.log('dash: database', context.db.name, context.db.version, context.db);
-		});
-	});
+	(function() {
+		var db;
+		dash.open.database({ database: 'foo' }).then( function(context) {
+		    db = context.db;
+		}).then(dash.close.database).then(function(context) {
+		    console.log('dash: database', db.name, db);
+		}).then(dash.close.database);
+	)();
 
-#### Deleting IndexedDB Databases
+#### Deleting Databases
 
 Databases can be "deleted" and their resources will be freed up for use elsewhere.
 
-	dash.open.database({ database: 'foo', version: 1 }).then( function(context) {
-	    var db = context.db;
-	    dash.delete.database(context).then( function(context) {
-	    	console.log('dash: database', context.db.name, context.db.version, context.db);
-		});
-	});
+	(function(db) {
+		dash.open.database({ database: 'foo' }).then( function(context) {
+		    db = context.db;
+		}).then(dash.delete.database).then(function(context) {
+		    console.log('dash: database', db.name, db);
+		}).then(dash.close.database);
+	)(null);
 
 Once a database is deleted you can open a new one with the same name; this is similar to a `versionchange` transaction but destroys and object stores and their contents.
 
-### IndexedDB Object Stores
+### Object Stores
 
 [Object stores](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#object-store), like their name implies, store JavaScript objects as entries. We store entries in an object store and store object stores in a database. Only after opening a database can we list all the object stores in that database or do something with a store contained therein.
 
@@ -117,11 +120,13 @@ Via an object store we can access these entries by looking up objects using key 
 
 After creation, object stores can be either be `delete`ed, or `clear`ed of their values. Deleting an object store removes any indexes associated with it, whereas clearing an object store maintains any indexes.
 
-#### Creating IndexedDB Object Stores
+#### Creating Object Stores
 
 [Creating an object store](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBDatabase-createObjectStore) requires a "versionchange" type transaction.
 
-> store.create
+	dash.open.database({ database: 'foo', store: 'bar' }).then(dash.create.store).then(function(context) {
+		console.log('dash: store', context.objectstore, context.db.version);
+	}).then(dash.close.database);
 
 ##### Key Paths
 
@@ -131,51 +136,117 @@ The key path provided with an object store on creation works, in effect, like an
 
 The "autoIncrement" parameter creates a IDB ["key generator"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-key-generator) that will create a monotonically increasing integer key automatically for each new object added to the store. For example, first object added to a database with the key "`foo`" and the `autoIncrement` set to `true`, will have the value `1` for its key path, the second value `2`, and so on for the object attribute `foo`.
 
-> store.show
+#### Getting An Object Stores
 
-> store.delete
+With an open database it's possible to get a reference to an object store. [`Get`ting](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-get) an object store accepts both "readonly" and "readwrite" typed transactions.
 
-#### Clearing IndexedDB Object Stores
+	dash.open.database({ database: 'foo', store: 'bar' })
+		.then(dash.get.store)
+		.then(function(context) {
+		    console.log('dash: store fetched', context.db, context.objectstore);
+		}, function(context) {
+		    console.log('dash: store not fetched', context.db, context.error);
+		})
+		.then(dash.close.database);
+
+#### Clearing Object Stores
 
 [`Clear`ing](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-clear) an object store requires a "readwrite" type transaction.
 
-> store.clear
+	dash.open.database({ database: 'foo', store: 'bar' })
+		.then(dash.clear.store)
+		.then(function(context) {
+			console.log( 'dash: store was cleared', context.db, context.objectstore );
+		}, function(context) {
+			console.log( 'dash: store wasn't cleared', context.db, context.objectstore, context.error );
+		})
+		.then(dash.close.database);
 
-#### Deleting IndexedDB Object Stores
+#### Removing Object Stores
 
 [`Delete`ing](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-delete) an object store requires a "versionchange" type transaction.
 
-> stores.show
+	dash.open.database({ database: 'foo', store: 'bar' })
+		.then(dash.remove.store)
+		.then(function(context) {
+			console.log( 'dash: store was removed', context.db, context.objectstore);
+		}, function(context) {
+			console.log( 'dash: store wasn't removed', context.db, context.objectstore, context.error);
+		})
+		.then(dash.close.database);
 
-### IndexedDB Indexes
+#### Getting Multiple Object Stores
+
+With an open database it's possible to get a list of all object store names. This list is an `Array`-like collection of string object store names.
+
+	dash.open.database({ database: 'foo', store: 'bar' })
+		.then(dash.get.stores)
+		.then(function(context) {
+		    console.log('dash: stores fetched', context.db, context.stores);
+		}, function(context) {
+		    console.log('dash: stores not fetched', context.db, context.error);
+		})
+		.then(dash.close.database);
+
+### Indexes
 
 Indexes are the way values are generally found in an object store. Indexes are lists of keys and values and have two characterizing components: the key path to find the data and the record value itself. Indexes stored primarily by key, and secondarily by their values, in lexicographically ascending order.
 
-To modify an index requires a `versionchange` transaction.
+Both adding and removing indexes requires a `versionchange` transaction.
 
-#### Creating IndexedDB Indexes
+#### Creating An Index
 
 The options for creating a new index are similar to those when creating an object store: a `key path` is given using the standard key syntax and the `unique` and `multirow` options can both be used. The ["unique"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow#dfn-unique) parameter tells the browser not to allow two values to correspond to the same key and the ["multirow"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-multirow) flag controls how the index behaves when dealing with `Array` values.
 
-> index.create
+	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
+		.then(dash.create.index)
+		.then(function(context) {
+		    console.log('dash: index created', context.db, context.objectstore, context.idx);
+		}, function(context) {
+		    console.log('dash: index was not created', context.db, context.objectstore, context.error);
+		})
+		.then(dash.close.database);
 
-#### Showing IndexedDB Indexes
+#### Getting An Index
+
+With a string index name, it's possible to get a reference to an existing index from an object store.
+
+	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
+		.then(dash.get.index)
+		.then(function(context) {
+		    console.log('dash: index fetched', context.db, context.objectstore, context.idx);
+		}, function(context) {
+		    console.log('dash: index was not fetched', context.db, context.objectstore, context.error);
+		})
+		.then(dash.close.database);
+
+
+#### Removing An Index
+
+With a string index name, it's possible to get a reference to an existing index from an object store.
+
+	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
+		.then(dash.remove.index)
+		.then(function(context) {
+		    console.log('dash: index removed', context.db, context.objectstore);
+		}, function(context) {
+		    console.log('dash: index was not removed', context.db, context.objectstore, context.idx, context.error);
+		})
+		.then(dash.close.database);
+
+
+#### Getting Multiple Indexes
 
 Using an object store on an open database, it's possible to get a list of indexes names. This list is an `Array`-like collection of string names.
 
-> indexes.show
-
-#### Showing IndexedDB Indexes
-
-With a string index name, it's possible to get a reference to an existing index from an object store.
-
-> index.show
-
-#### Deleting IndexedDB Indexes
-
-With a string index name, it's possible to get a reference to an existing index from an object store.
-
-> index.remove
+	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
+		.then(dash.create.index)
+		.then(function(context) {
+		    console.log('dash: index created', context.index, context.idx);
+		}, function(context) {
+		    console.log('dash: index was not created', context.index, context.idx);
+		})
+		.then(dash.close.database);
 
 ### Working With Singular IndexedDB Object
 
@@ -185,19 +256,47 @@ When adding or putting values, the various uniqueness rules for the store and in
 
 #### Adding IndexedDB Object Into An Object Store
 
-> object.add
+	dash.open.database({ database: 'foo', store: 'bar' })
+		.then(dash.add.object)
+		.then(function(context) {
+		    console.log('dash: object added', context.db, context.objectstore, context.idx, context.result);
+		}, function(context) {
+		    console.log('dash: object not added', context.db, context.objectstore, context.idx, context.error);
+		})
+		.then(dash.close.database);
 
 #### Removing IndexedDB Object From An Object Store
 
-> object.remove
+	dash.open.database({ database: 'foo', store: 'bar', key: 'baz' })
+		.then(dash.remove.object)
+		.then(function(context) {
+		    console.log('dash: object removed', context.db, context.objectstore, context.idx, context.result);
+		}, function(context) {
+		    console.log('dash: object not removed', context.db, context.objectstore, context.idx, context.error);
+		})
+		.then(dash.close.database);
 
-#### Getting IndexedDB Object From An Object Store
+#### Getting An Object From An Object Store
 
-> object.get
+	dash.open.database({ database: 'foo', store: 'bar', key: 'baz' })
+		.then(dash.get.object)
+		.then(function(context) {
+		    console.log('dash: object removed', context.db, context.objectstore, context.idx, context.result);
+		}, function(context) {
+		    console.log('dash: object not removed', context.db, context.objectstore, context.idx, context.error);
+		})
+		.then(dash.close.database);
 
-#### Putting An IndexedDB Object Into An Object Store
+#### Putting An Object Into An Object Store
 
-> object.put
+	dash.open.database({ database: 'foo', store: 'bar', key: 'baz', data: { bang: 'boom' } })
+		.then(dash.put.object)
+		.then(function(context) {
+		    console.log('dash: object put', context.db, context.objectstore, context.idx, context.result);
+		}, function(context) {
+		    console.log('dash: object not put', context.db, context.objectstore, context.idx, context.error);
+		})
+		.then(dash.close.database);
 
 ### Working With Multiple IndexedDB Objects
 
@@ -231,17 +330,36 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 
 Key ranges can also be used as a key when getting (but not adding, putting or deleting) single values with object stores or indexes, in which case the programmer will recieve the first matching value for in that key range.
 
-### Deleting Multiple Objects From An IndexedDB Database
-
-> objects.delete
-
 ### Getting Multiple Objects From An IndexedDB Database
 
 > objects.get
 
+### Deleting Multiple Objects From An IndexedDB Database
+
+	dash.open.database({ database: 'foo', store: 'bar', index: 'baz', left: 'a', left_open: true })
+		.then(dash.delete.objects)
+		.then(function(context) {
+		    console.log('dash: all objects deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		}, function(context) {
+		    console.log('dash: object not deleted', context.db, context.objectstore, context.idx, context.cursor, context.error);
+		}, function(context) {
+		    console.log('dash: object was deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		})
+		.then(dash.close.database);
+
+
 ### Updating Multiple Objects In An IndexedDB Database
 
-> objects.update
+	dash.open.database({ database: 'foo', store: 'bar', index: 'baz', left: 0, left_open: true, data: { updated: new Date().getTime() } })
+		.then(dash.update.objects)
+		.then(function(context) {
+		    console.log('dash: all objects deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		}, function(context) {
+		    console.log('dash: object not deleted', context.db, context.objectstore, context.idx, context.cursor, context.error);
+		}, function(context) {
+		    console.log('dash: object was deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		})
+		.then(dash.close.database);
 
 
 IDBObjectStore https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore
