@@ -167,19 +167,38 @@ Databases can be "deleted" and their resources will be freed up for use elsewher
 	}).then(dash.close.database);
 
 ##### Deleting A Database Test: Database Actually Gets Deleted
-
-	dash.open.database({ database: 'db-delete-test-' + new Date().getTime() })
-		.then(dash.create.database)
-		.then(dash.delete.database)
-		.then(null, function(context) {
-			dash.tools.assert(false, 'Deleted database should have been deleted');
-		})
-		.then(dash.get.database)
-		.then(function(context) {
-			dash.assert(dash.tools.empty(context.db), 'Deleted database should not be fetchable');
-		})
-		.then(dash.close.database);
-
+	(function(){
+		var v1;
+		/* We know a database was actually deleted if we know it was created, can open and close it,
+		 * then no longer open and close it after we delete it */
+		dash.open.database({ database: 'db-delete-test-' + new Date().getTime() })
+			.then(dash.create.database)
+			.then(function(context) {
+				dash.tools.assert(dash.tools.exists(context.db), 'Database delete test setup failed. Created database reference was empty.');
+			}, function(context) {
+				dash.tools.assert(false, 'Database delete test setup failed. Could not create database to delete.');
+			})
+			.then(dash.database.close)
+			.then(dash.database.open)
+			.then(function(context) {
+				dash.tools.assert(dash.tools.exists(context.db), 'Database delete test setup failed. Created database reference was empty.');
+			}, function(context) {
+				dash.tools.assert(false, 'Database delete test setup failed. Could not create database to delete.');
+			})
+			.then(dash.delete.database)
+			.then(null, function(context) {
+				dash.tools.assert(dash.tools.empty(context.db), 'Deleted database reference should be removed from context.');
+			}, function(context) {
+				dash.tools.assert(false, 'Deleted database should have been deleted');
+			})
+			.then(dash.get.database)
+			.then(function(context) {
+				dash.assert(dash.tools.empty(context.db), 'Deleted database should not be fetchable');
+			}, function(context) {
+				dash.assert(dash.tools.empty(context.db), 'Deleted database should return an empty reference.');
+			})
+			.then(dash.close.database);
+	})();
 
 Once a database is deleted you can open a new one with the same name; this is similar to a `versionchange` transaction but destroys and object stores and their contents.
 
@@ -206,16 +225,23 @@ Object stores are instances of [`IDBObjectStore`](https://developer.mozilla.org/
 ##### Creating An Object Store Test: Created Object Should Be The One Created And An Instance Of IDBObjectStore
 
 	(function() {
-		var db_name = 'store-create-test-' + new Date().getTime();
-		dash.open.database({ database: 'foo', store: db_name })
+		var store_name = 'store-create-test-' + new Date().getTime(),
+			v1 = Infinity;
+		dash.open.database({ database: 'foo', store: store_name })
+			.then(function(context) {
+				v1 = context.db.version;
+			})
 			.then(dash.create.store)
 			.then(function(context) {
-				dash.tools.assert(context.objectstore instanceof IDBObjectStore, 'Object store should be an instance of IDBObjectStore');
-				dash.tools.assert
+				var objectstore = context.objectstore;
+				dash.tools.assert(objectstore instanceof IDBObjectStore, 'Object store should be an instance of IDBObjectStore');
+				dash.tools.assert(dash.tools.is(objectstore.name, store_name), 'Object store that\'s returned should have the name we gave it.' );
+				dash.tools.assert(db.version > v1), 'Database should have undergone a version change');
 			}, function(context) {
 				dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been created');
+				dash.tools.assert(db.version > v1), 'Database should have undergone a version change');
 			})
-			.then(dash.close.database);
+			.then(dash.remove.store).then(dash.close.database);
 	}());
 
 
@@ -242,16 +268,34 @@ With an open database it's possible to get a reference to an object store. [`Get
 		})
 		.then(dash.close.database);
 
-##### Getting An Object Store Text: Object Store Should Be Instance of IDBObjectStore
+##### Getting An Object Store Test: Object Store Should Be Instance of IDBObjectStore
 
 	dash.open.database({ database: 'foo', store: 'bar' })
 		.then(dash.get.store)
 		.then(function(context) {
-		    console.log('dash: store fetched', context.db, context.objectstore);
+		    dash.tools.assert(dash.tools.is(objectstore.name,db_name), 'Object store that\'s returned should have the name we gave it.' );
 		}, function(context) {
-		    console.log('dash: store not fetched', context.db, context.error);
+		    dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been fetched');
 		})
 		.then(dash.close.database);
+
+
+	(function() {
+		var store_name = 'store-create-test-' + new Date().getTime();
+		dash.open.database({ database: 'foo', store: store_name })
+			.then(dash.create.store)
+			.then(dash.close.database)
+			.then(dash.open.database)
+			.then(dash.get.store)
+			.then(function(context) {
+				var objectstore = context.objectstore;
+				dash.tools.assert(objectstore instanceof IDBObjectStore, 'Object store should be an instance of IDBObjectStore');
+				dash.tools.assert(dash.tools.is(objectstore.name, store_name), 'Object store that\'s returned should be the one we asked for,' );
+			}, function(context) {
+				dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been fetched');
+			})
+			.then(dash.remove.store).then(dash.close.database);
+	}());
 
 #### Clearing An Object Store
 
@@ -267,6 +311,27 @@ With an open database it's possible to get a reference to an object store. [`Get
 			console.log( 'dash: store wasn't cleared', context.db, context.objectstore, context.error );
 		})
 		.then(dash.close.database);
+
+##### Clearing An Object Store Example: Objects Should Be Removed From Object Store
+
+	(function() {
+		var current_time = new Date().getTime(),
+			db_name = 'store-clear-test-' + current_time,
+			store_name = 'store-clear-test-' + current_time;
+		dash.open.database({ database: db_name, store: store_name })
+			.then(dash.create.store)
+			.then(dash.close.database)
+			.then(dash.open.database)
+			.then(dash.get.store)
+			.then(function(context) {
+				var objectstore = context.objectstore;
+				dash.tools.assert(objectstore instanceof IDBObjectStore, 'Object store should be an instance of IDBObjectStore');
+				dash.tools.assert(dash.tools.is(objectstore.name, store_name), 'Object store that\'s returned should be the one we asked for,' );
+			}, function(context) {
+				dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been fetched');
+			})
+			.then(dash.remove.store).then(dash.close.database);
+	}());
 
 #### Removing An Object Store
 
