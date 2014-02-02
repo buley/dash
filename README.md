@@ -1,6 +1,6 @@
 ## Overview
 
-[`IndexeDB`](https://developer.mozilla.org/en-US/docs/IndexedDB) (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most [`HTML5`](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)-enabled browsers.[0]
+[`IndexeDB`](https://developer.mozilla.org/en-US/docs/IndexedDB) (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most [`HTML5`](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)-enabled browsers. [1]
 
 Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexeDB terminology. Databases are the outermost container of data in IndexeDB, and contain object stores. They are unique to each domain or "host". Object stores contain ["`lists`" of "`records`"](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-index-record-list), where each list is a JavaScript object and each record is breaks down into a "key" and "value".
 
@@ -421,4 +421,4 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 		.then(dash.close.database);
 
 
-[0] Although `IndexedDB` is has very little to do with HTML5 standard beyond some shared nomenclaure, IDB is typically grouped with so-called "HTML5" technologies.
+[1] Although `IndexedDB` is has very little to do with HTML5 standard beyond some shared nomenclaure, IDB is typically grouped with so-called "HTML5" technologies.
