@@ -497,7 +497,7 @@ The options for creating a new `index` are similar to those when creating an obj
 				dash.tools.assert(context.db instanceof IDBDatabase, 'Created index store should have an instance of IDBDatabase');
 				dash.tools.assert(dash.tools.is(context.db.name, db_name), 'Database should be the correct one.' );
 				dash.tools.assert(context.objectstore instanceof IDBObjectStore, 'Created index store should be an instance of IDBIndex');
-				dash.tools.assert(dash.tools.is(context.objecstore.name, store_name), 'Store should be the correct one.' );
+				dash.tools.assert(dash.tools.is(context.objectstore.name, store_name), 'Store should be the correct one.' );
 				dash.tools.assert(context.idx instanceof IDBIndex, 'Created index store should be an instance of IDBIndex');
 				dash.tools.assert(dash.tools.is(context.idx.name, index_name), 'Index should be the correct one.' );
 			}, function(context){
@@ -570,6 +570,36 @@ With a string index name, it's possible to get a reference to an existing index 
 		})
 		.then(dash.close.database);
 
+##### Removing An Index Test: Index Is Removed
+
+	(function() {
+		var start_time = new Date().getTime(),
+			db_name = 'idx-create-test-' + start_time,
+			store_name = 'idx-create-test-' + start_time,
+			index_name = 'idx-create-text' + start_time;
+		dash.open.database({ database: db_name, store: store_name, index: index_name })
+			.then(dash.create.store)
+			.then(dash.create.index)
+			.then(function(context){
+				dash.tools.assert(dash.tools.is(context.idx.name, index_name), 'Index should be the correct one.' );
+			}, function(context){
+				dash.tools.assert(false, 'Should have created an index');
+			})
+			.then(dash.remove.index)
+			.then(function(context){
+				dash.tools.assert((new Date().getTime() - start_time) < 100, 'Index should delete in a timely manner.');
+				dash.tools.assert(context.db instanceof IDBDatabase, 'Created index store should have an instance of IDBDatabase');
+				dash.tools.assert(dash.tools.is(context.db.name, db_name), 'Database should be the correct one.' );
+				dash.tools.assert(context.objectstore instanceof IDBObjectStore, 'Index delete should return an instance of IDBObjectStore');
+				dash.tools.assert(dash.tools.is(context.objectstore.name, store_name), 'Store should be the correct one.' );
+				dash.tools.assert(dash.tools.empty(context.idx), 'Index deletes should not return any index references');
+			}, function(context){
+				dash.tools.assert(false, 'Should have created an index');
+			})
+			.then(dash.get.index)
+			.then(dash.remove.store)
+			.then(dash.close.database);
+	}());
 
 #### Getting Multiple Indexes
 
@@ -585,6 +615,39 @@ Using an object store on an open database, it's possible to get a list of indexe
 		    console.log('dash: index was not created', context.index, context.idx);
 		})
 		.then(dash.close.database);
+
+###### Getting Multiple Object Stores Test: Object Stores List Should List All Databases In A DOMStringList
+
+	(function(){
+		var start_time = new Date().getTime(),
+			db_name = 'indexes-get-test-' + start_time,
+			store_name = 'indexes-get-test-' + start_time,
+			index_name = 'indexes-get-test-' + start_time,
+			index_name_1 = index_name + '-1',
+			index_name_2 = store_name + '-2';
+			slow = 100;
+		dash.open.database({ database: db_name, store: store_name, index: index_name_1 })
+		.then(dash.create.store)
+		.then(dash.create.index)
+		.then(function(context) {
+			context.index = index_name_2;
+			dash.create.index(context)
+				.then(dash.get.indexes)
+				.then(function(context) {
+					dash.tools.assert(( new Date().getTime() - start_time ) < slow , 'Store fetching should be fast.');
+					dash.tools.assert(dash.tools.exists(context.stores), 'Indexes fetch should return a list of indexes');
+					dash.tools.assert(context.indexes instanceof DOMStringList, 'Stores list should be an instanceof DOMStringList');
+					dash.tools.assert(dash.tools.is(context.indexes.length, 2), 'List should contain as many stores as we\'ve created');
+					dash.tools.each(context.stores, functin(key, val)) {
+						dash.tools.assert(dash.tools.is(key, store_name_1) || dash.tools.is(key, store_name_2, 'List should contain only the stores we created');
+					});
+				}, function(context) {
+					dash.tools.assert(dash.tools.empty(context.stores), 'Stores get failure doesn\'t return a store list');
+					dash.tools.assert(false, 'Stores fetch should successfully return a list of stores');
+				})
+				.then(dash.close.database);
+		});
+	})();
 
 ### Working With Singular `IndexedDB` Object
 
