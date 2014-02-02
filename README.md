@@ -94,19 +94,21 @@ To get to objects, you have to through object stores, and to get to object store
 
 ##### Opening A Database Test: Database Object Returned Is An Instance Of IDBDatabase
 
-	dash.open.database({ database: 'foo' })
-		.then(function(context) {
-			var db = context.db,
-				assert = dash.tools.assert,
-				isnt = dash.tools.is;
-			assert(db instanceof IDBDatabase, 'Database should be an instanceof IDBDatabase');
-			assert(dash.tools.exists(db.name), 'Database should have a name');
-			assert(dash.tools.exists(db.version), 'Database should have a version');
-			assert(dash.tools.isnt(isNaN(db.version), true), 'Database version should be a number');
-		}, function(context) {
-			console.log('dash: database was not opened', context.error);
-		})
-		.then(dash.close.database);
+	(function(){
+		dash.open.database({ database: 'foo' })
+			.then(function(context) {
+				var db = context.db,
+					assert = dash.tools.assert,
+					isnt = dash.tools.is;
+				assert(db instanceof IDBDatabase, 'Database should be an instanceof IDBDatabase');
+				assert(dash.tools.exists(db.name), 'Database should have a name');
+				assert(dash.tools.exists(db.version), 'Database should have a version');
+				assert(dash.tools.isnt(isNaN(db.version), true), 'Database version should be a number');
+			}, function(context) {
+				console.log('dash: database was not opened', context.error);
+			})
+			.then(dash.close.database);
+	})();
 
 Opening an existing database and creating a new one work in the same way: if the name passed matches an existing database, that database is opened; if the name doesn't match an existing database, a new one will be created when opened using a unique name. Opening a new database, or opening an existing database with a version greather than the current version, will trigger a `versionchange` event.  
 
@@ -124,12 +126,17 @@ It's typically not possible to enumerate all databases for a host. Typically the
 
 ###### Getting Existing Databases Test: List Of Databases Is Instance Of DOMStringList
 
-	dash.get.databases().then( function(context) {
-		dash.tools.assert(dash.tools.exists(context.databases), 'Database fetch should return a database');
-		dash.tools.assert(context.databases instanceof DOMStringList, 'Database list should be an instanceof DOMStringList');
-	}, function(context) {
-	    console.log('dash: databases not fetched', context.databases);
-	}).then(dash.close.database);
+	(function(){
+		var start_time = new Date().getTime(),
+			slow = 100;
+		dash.get.databases().then( function(context) {
+			dash.tools.assert(dash.tools.exists(context.databases), 'Database fetch should return a database');
+			dash.tools.assert(context.databases instanceof DOMStringList, 'Database list should be an instanceof DOMStringList');
+			dash.tools.assert( ( new Date().getTime() - start_time ) < slow , 'Database lists should be fast.');
+		}, function(context) {
+		    console.log('dash: databases not fetched', context.databases);
+		}).then(dash.close.database);
+	})();
 
 
 #### Closing Databases
@@ -146,11 +153,63 @@ Databases can be [`close`d](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn
 
 ###### Closing A Database Test: Stores are only readable when the database is open
 
-	dash.open.database({ database: 'foo', store: 'db-close-' + new Date().getTime() }).then(dash.close.database).then(function(context) {
-		console.log('dash: database closed');
-	}, function(context) {
-		console.log('dash: database not closed');
-	});
+	(function(){
+		/* We know a database is really closed if we can create it, open it, can read some stores
+		 * then close it and try to read some stores again and fail. A distinguishing characteristic of closed databases is that we shouldn't be able to read any stores on a closed database. */
+		var start_time = new Date().getTime(),
+			db_name = 'store-clear-test-' + start_time,
+			store_name = 'store-clear-test-' + start_time;
+		dash.open.database({ database: db_name, store: store_name })
+		.then(null, function(context) {
+			dash.tools.assert(dash.tools.exists(context.db), 'Database close test failed setup. Database should be openable.');
+		})
+		.then(dash.store.create)
+		.then(null, function(context) {
+			dash.tools.assert(false, 'Database close test failed setup. Database should have at least one readable object store when opened.');
+		})
+		.then(dash.close.database)
+		.then(function(context) {
+			dash.tools.assert(dash.tools.empty(context.db), 'Database close should have removed db reference');
+		}, function(context) {
+			dash.tools.assert(false, 'Database close test failed setup. Database should have closed after create.');
+		})
+		.then(dash.open.database)
+		.then({
+			dash.tools.assert(dash.tools.exists(context.db), 'Database close test failed setup. Database should be regularly openable.');
+		}, function(context) {
+			dash.tools.assert(false, 'Database close test failed setup. Database should have reopened after first closing.');
+		})
+		.then(dash.open.store)
+		.then(function(context) {
+			dash.tools.assert(dash.tools.exists(context.objectstore), 'Database close test failed setup. Database should have at least one readable object store.');
+		}, function(context) {
+			dash.tools.assert(false, 'Database close test failed setup. Database should have at least one readable object store when opened.');
+		})
+		.then(dash.close.database)
+		.then(null, function(context) {
+			dash.tools.assert(dash.tools.exists(context.objectstore), 'Database close test failed setup. Database should have reclosed.');
+		})
+		.then(dash.open.database)
+		.then(null, function(context) {
+			dash.tools.assert(dash.tools.exists(context.objectstore), 'Database close test failed setup. Database should have reopened after second closing.');
+		})
+		.then(dash.close.database)
+		.then(null, function(context) {
+			dash.tools.assert(dash.tools.exists(context.objectstore), 'Database close test failed setup. Database should have reclosed after second opening.');
+		})
+		.then(dash.get.store)
+		.then(function(context) {
+			dash.tools.assert(dash.tools.empty(context.objectstore), 'Closed database should not let stores to be fetchable');
+		}, function(context) {
+			dash.tools.assert(dash.tools.empty(context.objectstore), 'No object store reference should be returned when getting stores on a closed database.');
+		});
+		.then(dash.create.store)
+		.then(function(context) {
+			dash.tools.assert(dash.tools.empty(context.objectstore), 'Closed database should not let stores be creatable');
+		}, function(context) {
+			dash.tools.assert(dash.tools.empty(context.objectstore), 'No object store reference should be returned when creating stores on a closed database.');
+		});
+	})();
 
 Databases are browser resources and, like all resources, expensive for the brower to maintain. Just as opening a database is the first step to doing anything in IndexedDB, closing a database is usually a good last step.
 
@@ -169,24 +228,26 @@ Databases can be "deleted" and their resources will be freed up for use elsewher
 ##### Deleting A Database Test: Database Actually Gets Deleted
 	(function(){
 		var v1;
+		var start_time = new Date().getTime(),
+			db_name = 'db-delete-test-' + start_time,
+			store_name = 'db-delete-test-' + start_time;
 		/* We know a database was actually deleted if we know it was created, can open and close it,
 		 * then no longer open and close it after we delete it */
-		dash.open.database({ database: 'db-delete-test-' + new Date().getTime() })
+		dash.open.database({ database: db_name, store: store_name })
 			.then(dash.create.database)
-			.then(function(context) {
-				dash.tools.assert(dash.tools.exists(context.db), 'Database delete test setup failed. Created database reference was empty.');
-			}, function(context) {
+			.then(null, function(context) {
 				dash.tools.assert(false, 'Database delete test setup failed. Could not create database to delete.');
 			})
 			.then(dash.database.close)
+			.then(null, function(context) {
+				dash.tools.assert(false, 'Database delete test setup failed. Newly created db should be closable.');
+			})
 			.then(dash.database.open)
-			.then(function(context) {
-				dash.tools.assert(dash.tools.exists(context.db), 'Database delete test setup failed. Created database reference was empty.');
-			}, function(context) {
-				dash.tools.assert(false, 'Database delete test setup failed. Could not create database to delete.');
+			.then(null, function(context) {
+				dash.tools.assert(false, 'Database delete test setup failed. Newly created db should be re-openable.');
 			})
 			.then(dash.delete.database)
-			.then(null, function(context) {
+			.then(function(context) {
 				dash.tools.assert(dash.tools.empty(context.db), 'Deleted database reference should be removed from context.');
 			}, function(context) {
 				dash.tools.assert(false, 'Deleted database should have been deleted');
@@ -197,7 +258,20 @@ Databases can be "deleted" and their resources will be freed up for use elsewher
 			}, function(context) {
 				dash.assert(dash.tools.empty(context.db), 'Deleted database should return an empty reference.');
 			})
-			.then(dash.close.database);
+			.then(dash.delete.database)
+			.then(function(context){
+				dash.tools.assert((new Date().getTime() - start_time) > 100, 'Database delete should happen in a timely manner');
+			})
+			.then(dash.close.database)
+			.then(function(context) {
+				dash.assert(false, 'Deleted database should not be closable.');
+			})
+			.then(dash.open.database)
+			.then(function(context) {
+				dash.assert(false, 'Deleted database should not be openable.');
+			}, function(context) {
+				dash.assert(dash.tools.empty(context.db), 'Deleted database should not return a reference.');
+			});
 	})();
 
 Once a database is deleted you can open a new one with the same name; this is similar to a `versionchange` transaction but destroys and object stores and their contents.
@@ -224,9 +298,58 @@ Object stores are instances of [`IDBObjectStore`](https://developer.mozilla.org/
 
 ##### Creating An Object Store Test: Created Object Should Be The One Created And An Instance Of IDBObjectStore
 
+	(function(){
+		var v1;
+		var start_time = new Date().getTime(),
+			db_name = 'store-create-test-' + start_time,
+			store_name = 'store-create-test-' + start_time;
+		/* We know an object store was created if we can open a new database, create it, get a reference, close the  database and open it again to get the object store once more */
+		dash.open.database({ database: db_name, store: store_name })
+			.then(dash.close.database)
+			.then(null, function(context) {
+				dash.tools.assert(false, 'Create store test setup failed. Could not create database.');
+			})
+			.then(dash.database.open)
+			.then(null, function(context) {
+				dash.tools.assert(false, 'Create store test setup failed. Newly created db should be re-openable for testing.');
+			})
+			.then(dash.create.store)
+			.then(function(context) {
+				dash.tools.assert(dash.tools.exists(context.objectstore), 'Creating an object store should return a reference to it');
+				dash.tools.assert(dash.tools.is(context.objectstore.name, store_name), 'Created object store should have the name we gave it');
+				dash.tools.assert((new Date().getTime() - start_time) > 100, 'Store creation should happen in a timely manner.');
+			}, function(context) {
+				dash.tools.assert(false, 'Store should have been created.');
+			})
+			.then(dash.get.store)
+			.then(function(context) {
+				dash.assert(dash.tools.exists(context.objectstore), 'Created store should be fetchable');
+				dash.tools.assert(dash.tools.is(context.objectstore.name, store_name), 'Fetched object store should have the name we gave it on creation.');
+			}, function(context) {
+				dash.assert(false, 'Created object store should be fetchable.');
+			})
+			.then(dash.delete.database)
+			.then(function(context){
+			})
+			.then(dash.close.database)
+			.then(function(context) {
+				dash.assert(false, 'Deleted database should not be closable.');
+			})
+			.then(dash.open.database)
+			.then(function(context) {
+				dash.assert(false, 'Deleted database should not be openable.');
+			}, function(context) {
+				dash.assert(dash.tools.empty(context.db), 'Deleted database should not return a reference.');
+			});
+	})();
+
 	(function() {
 		var store_name = 'store-create-test-' + new Date().getTime(),
 			v1 = Infinity;
+		var current_time = new Date().getTime(),
+			db_name = 'store-clear-test-' + current_time,
+			store_name = 'store-clear-test-' + current_time;
+		dash.open.database({ database: db_name, store: store_name })
 		dash.open.database({ database: 'foo', store: store_name })
 			.then(function(context) {
 				v1 = context.db.version;
@@ -270,18 +393,12 @@ With an open database it's possible to get a reference to an object store. [`Get
 
 ##### Getting An Object Store Test: Object Store Should Be Instance of IDBObjectStore
 
-	dash.open.database({ database: 'foo', store: 'bar' })
-		.then(dash.get.store)
-		.then(function(context) {
-		    dash.tools.assert(dash.tools.is(objectstore.name,db_name), 'Object store that\'s returned should have the name we gave it.' );
-		}, function(context) {
-		    dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been fetched');
-		})
-		.then(dash.close.database);
-
-
 	(function() {
 		var store_name = 'store-create-test-' + new Date().getTime();
+		var current_time = new Date().getTime(),
+			db_name = 'store-clear-test-' + current_time,
+			store_name = 'store-clear-test-' + current_time;
+		dash.open.database({ database: db_name, store: store_name })
 		dash.open.database({ database: 'foo', store: store_name })
 			.then(dash.create.store)
 			.then(dash.close.database)
