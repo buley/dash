@@ -98,27 +98,6 @@ To get to objects, you have to through object stores, and to get to object store
 		})
 		.then(dash.close.database);
 
-##### Opening A Database Test: Database Object Returned Is An Instance Of IDBDatabase
-
-	(function(){
-		var start_time = new Date().getTime(),
-			db_name = 'store-open-test-' + start_time,
-		dash.open.database({ database: db_name })
-			.then(function(context) {
-				var db = context.db,
-					assert = dash.tools.assert,
-					isnt = dash.tools.is;
-				assert(db instanceof IDBDatabase, 'Database should be an instanceof IDBDatabase');
-				assert(dash.tools.exists(db.name), 'Database should have a name');
-				assert(dash.tools.is(db.name, db_name), 'Database should have the correct name');
-				assert(dash.tools.exists(db.version), 'Database should have a version');
-				assert(dash.tools.isnt(isNaN(db.version), true), 'Database version should be a number');
-			}, function(context) {
-				console.log('dash: database was not opened', context.error);
-			})
-			.then(dash.close.database);
-	})();
-
 Opening an existing database and creating a new one work in the same way: if the name passed matches an existing database, that database is opened; if the name doesn't match an existing database, a new one will be created when opened using a unique name. Opening a new database, or opening an existing database with a version greather than the current version, will trigger a `versionchange` event.  
 
 #### Getting Existing Databases
@@ -132,21 +111,6 @@ It's typically not possible to enumerate all databases for a host. Typically the
 	}, function(context) {
 	    console.log('dash: databases not fetched', context.databases);
 	}).then(dash.close.database);
-
-###### Getting Existing Databases Test: List Of Databases Is Instance Of DOMStringList
-
-	(function(){
-		var start_time = new Date().getTime(),
-			slow = 100;
-		dash.get.databases().then( function(context) {
-			dash.tools.assert(dash.tools.exists(context.databases), 'Database fetch should return a database');
-			dash.tools.assert(context.databases instanceof DOMStringList, 'Database list should be an instanceof DOMStringList');
-			dash.tools.assert( ( new Date().getTime() - start_time ) < slow , 'Database lists should be fast.');
-		}, function(context) {
-		    console.log('dash: databases not fetched', context.databases);
-		}).then(dash.close.database);
-	})();
-
 
 #### Closing Databases
 
