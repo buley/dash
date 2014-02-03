@@ -1,10 +1,8 @@
 'use strict';
 
 module.exports = function(grunt) {
-
   var plugins = [];
   var browsers = [];
-
   if (process.env.TRAVIS) {
     plugins.push('karma-firefox-launcher');
     browsers.push('Firefox');
@@ -12,7 +10,6 @@ module.exports = function(grunt) {
     plugins.push('karma-chrome-launcher');
     browsers.push('Chrome');
   }
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     karma: {
@@ -22,7 +19,7 @@ module.exports = function(grunt) {
 		  'lib/dash.dev.js',
           'specs/**/*.js'
         ],
-        frameworks: ['mocha'],
+        frameworks: [],
         plugins: plugins
       },
       continuous: {
@@ -36,10 +33,7 @@ module.exports = function(grunt) {
         autoWatch: true
       }
     }
-
-
   });
   grunt.loadTasks('tasks');
-  grunt.registerTask('test', ['karma:continuous']);
   grunt.registerTask('default', ['test']);
 };

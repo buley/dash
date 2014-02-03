@@ -17,7 +17,9 @@
     "grunt": "~0.4.2",
     "karma": "~0.9",
     "karma-jasmine": "*",
-    "grunt-karma": "~0.4"
+    "grunt-karma": "~0.6.2",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-chrome-launcher": "~0.1.2"
   },
   "peerDependencies": {
     "karma": ">=0.9"
