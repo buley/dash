@@ -2,14 +2,6 @@
   "name": "dash",
   "version": "0.0.1",
   "dependencies": {
-    "karma-chrome-launcher": {
-      "version": "0.1.2",
-      "from": "karma-chrome-launcher@*"
-    },
-    "karma-firefox-launcher": {
-      "version": "0.1.3",
-      "from": "karma-firefox-launcher@*"
-    },
     "karma-html2js-preprocessor": {
       "version": "0.1.0",
       "from": "karma-html2js-preprocessor@*"
@@ -18,13 +10,13 @@
       "version": "0.2.1",
       "from": "karma-requirejs@*"
     },
-    "requirejs": {
-      "version": "2.1.10",
-      "from": "requirejs@~2.1"
-    },
     "karma-script-launcher": {
       "version": "0.1.0",
       "from": "karma-script-launcher@*"
+    },
+    "requirejs": {
+      "version": "2.1.10",
+      "from": "requirejs@~2.1"
     },
     "karma-coffee-preprocessor": {
       "version": "0.1.2",
