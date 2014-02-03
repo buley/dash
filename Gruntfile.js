@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(grunt) {
-  var plugins = [];
+  var plugins = [ 'karma-jasmine' ];
   var browsers = [];
   if (process.env.TRAVIS) {
     plugins.push('karma-firefox-launcher');
@@ -13,9 +13,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     karma: {
-	  configFile: 'karma.conf.js',
-	  browsers: browsers,
-	  plugins: plugins
+      options: {
+	    configFile: 'karma.conf.js'
+      },
+	  dev: {
+	    browsers: browsers,
+	    plugins: plugins,
+	    autoWatch: false,
+	    singleRun: true,
+	    reporters: [ 'dots' ]
+	  }
     }
   });
   //grunt.loadTasks('tasks');
