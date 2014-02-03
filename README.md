@@ -1,5 +1,10 @@
 # Library
 
+A work in progress slated for a 0.1 release in February.
+
+Original Size:	7.51KB gzipped (35.44KB uncompressed)
+Compiled Size:	3.72KB gzipped (12.85KB uncompressed)
+
 [![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash)
 
 # Documentation
