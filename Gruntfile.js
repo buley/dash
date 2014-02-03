@@ -13,27 +13,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     karma: {
-      options: {
-        browsers: browsers,
-        files: [
-		  'lib/dash.dev.js',
-          'specs/**/*.js'
-        ],
-        frameworks: [],
-        plugins: plugins
-      },
-      continuous: {
-        singleRun: true
-      },
-      dev: {
-        reporters: 'dots',
-        background: true
-      },
-      auto: {
-        autoWatch: true
-      }
+	  configFile: 'karma.conf.js',
+	  browsers: browsers,
+	  plugins: plugins
     }
   });
-  grunt.loadTasks('tasks');
+  //grunt.loadTasks('tasks');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.registerTask('test', ['karma']);
   grunt.registerTask('default', ['test']);
 };
