@@ -42,7 +42,7 @@
 						expect(this.success).toBe(true);
 					});
 					it("should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(false);
+						expect(this.context.db instanceof IDBDatabase).toBe(true);
 					});
 					
 					it( "database.close should clenup after itself", function(){
