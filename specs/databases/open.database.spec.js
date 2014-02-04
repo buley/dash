@@ -23,9 +23,13 @@
 
 	describe("open.database", function() {
 		var start_time = new Date().getTime(),
-			db_name = 'store-open-test-' + start_time;
+			db_name = 'store-open-test-' + start_time,
+			store_name = 'store-open-test-' + start_time,
+			isClosed = false,
+			dashDbIsClosed = function() {
+				return isClosed;
+			}
 		it ('should handle both existing and new databases', function() {
-
 			/* Test for database creation when opening store that doesn't yet exist */
 			runs(function(){
 				describe( 'new database example', function(){
@@ -52,7 +56,7 @@
 							});
 						waitsFor(dashIsFinished, 'the open.database operation to finish', 3000);
 						runs(function() {
-							describe('should finish cleanly', function() {
+							describe('the open.database operation should finish cleanly', function() {
 								beforeEach(function() {
 									this.context = ctx;
 									this.success = success;
@@ -60,24 +64,21 @@
 									this.notify = notify;
 									this.dbname = db_name;
 								});
-								it("should be a success", function() {
+								it("the open.database operation should be a success", function() {
 									beSuccess(this);
 								});
-								it("should have references to the database and opening request", function() {
+								it("the open.database operation should have references to the database and opening request", function() {
 									haveReferences(this);
 								});
-								it('should have the correct attributes', function() {
+								it('the open.database operation should have the correct attributes', function() {
 									haveNameAndVersion(this);
 								});
-								it('should be an upgrade', function() {
+								it('the open.database operation should be an upgrade', function() {
 									expect(this.context.upgrade).toBe(true);
 								});
-								it("should have a context.transaction that's an instanceof IDBTransaction", function() {
-									expect(this.context.transaction instanceof IDBTransaction).toBe(true);
-								});
-							});
-							runs(function(){
-								dash.close.database(ctx);
+								it('the open.database operation cleanup after itself',function(){
+									dash.close.database(this.context)
+								})
 							});
 						});
 					});
@@ -87,7 +88,7 @@
 			/* Test for opening an existing database: should handle
 			 * in the same way, execept with upgrade flags as false */
 			runs(function(){
-				describe( 'new database example', function(){
+				describe( 'existing database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
 							return isFinished;
@@ -109,9 +110,9 @@
 							}, function(context) {
 								notify = true;
 							});
-						waitsFor(dashIsFinished, 'the open.database operation to finish', 3000);
+						waitsFor(dashIsFinished, 'the open.database operation to finish', 10000);
 						runs(function() {
-							describe('should finish cleanly', function() {
+							describe('secondary should finish cleanly', function() {
 								beforeEach(function() {
 									this.context = ctx;
 									this.success = success;
@@ -119,28 +120,26 @@
 									this.notify = notify;
 									this.dbname = db_name;
 								});
-								it("should be a success", function() {
+								it("secondary should be a success", function() {
 									beSuccess(this);
 								});
-								it("should have references to the database and opening request", function() {
+								it("secondary should have references to the database and opening request", function() {
 									haveReferences(this);
 								});
-								it('should have the correct attributes', function() {
+								it('secondary should have the correct attributes', function() {
 									haveNameAndVersion(this);
 								});
-								it('should not be an upgrade', function() {
+								it('secondary should not be an upgrade', function() {
 									expect(this.context.upgrade).toBe(false);
 								});
-							});
-							runs(function(){
-								dash.close.database(ctx)
-								.then(dash.remove.database);
+								it("open.database secondary test should clenup after itself", function(){
+									dash.close.database(this.context).then(dash.remove.database);
+								});
 							});
 						});
 					});
 				});
 			});
-			
 		});
 	});
 }());

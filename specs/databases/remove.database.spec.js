@@ -1,23 +1,30 @@
 (function(){
 	'use strict';
-	describe("close.database", function() {
+	describe("remove.database", function() {
 		var start_time = new Date().getTime(),
-			db_name = 'store-close-test-' + start_time,
+			db_name = 'store-remove-test-' + start_time,
 			isFinished = false,
 			dashIsFinished = function() { 
 				return isFinished;
 			},
 			error = false,
+			seconderror = false,
+			secondsuccess = false,
+			secondnotify = false,
 			success = false,
 			notify = false,
+			prectx,
 			ctx;	
-		it( 'should open and then close', function() {
-			dash.open.database({ database: db_name })
-				.then(dash.close.database)
+		it( 'should open and then remove', function() {
+			dash.open.database({ database: db_name, store: db_name })
+				.then(function(context) {
+					prectx = context;
+				})
+				.then(dash.remove.database)
 				.then(function(context) {
 					ctx = context;
-					isFinished = true;
 					success = true;
+					isFinished = true;
 				}, function(context) {
 					ctx = context;
 					error = true;
@@ -25,11 +32,13 @@
 				}, function(context) {
 					notify = true;
 				});
-			waitsFor(dashIsFinished, 'the close.database operation to finish', 3000);
+
+			waitsFor(dashIsFinished, 'the remove.database operation to finish', 3000);
 			runs(function() {
-				describe('database.close should finish cleanly', function() {
+				describe('database.remove should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
+						this.setup = prectx;
 						this.success = success;
 						this.error = error;
 						this.notify = notify;
@@ -42,14 +51,17 @@
 						expect(this.success).toBe(true);
 					});
 					it("should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(false);
+						expect(this.context.db instanceof IDBDatabase).toBe(true);
 					});
-					
-					it( "database.close should clenup after itself", function(){
-						dash.remove.database(ctx);
+					it("should be the db we asked for", function(){
+						expect(this.context.db.name).toBe(this.dbname);
 					});
+				});
+				runs(function(){
+					//No cleanup
 				});
 			});
 		});
 	});
 }());
+
