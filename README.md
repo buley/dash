@@ -42,7 +42,7 @@ As shown above, it's possible to put indexes on array objects in addition to pri
 
 In IDB, work [tasked](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-task) to a database [queue](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-queue-a-task) is called a "[`transaction`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-transaction)". A transaction is an instance of [`IDBTransaction`](https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction) and characterized by its "[`scope`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-scope)". Transaction scope, in turn, is characterized by both the work to be done and where the programmer wants the work to happen. To create a transaction against an open database, a programmer names the object stores on which she'd like to operate, and optionally specifies what type of transaction she'd like to create.
 
-There are three "[`modes`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-mode)" of transactions: "[`readwrite`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-read_write)", "[`readonly`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-read_only)" and "[`versionchange`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-version_change)". The default is "readonly", convienient because changing a data via a "write" is generally more expensive than to "read" that data. The granularity and providing of "readonly" vs. "readwrite" offers the programmer an the opportunity to speed up her code depending on her needs. The final transaction type, "versionchange", is used when changing the schema of a database.
+There are three "[`modes`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-mode)" of transactions: "[`readwrite`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-read_write)", "[`readonly`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-read_only)" and "[`versionchange`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-version_change)". These are an instance of an interface called IDBTransactionMode. The default is "readonly", convienient because changing a data via a "write" is generally more expensive than to "read" that data. The granularity and providing of "readonly" vs. "readwrite" offers the programmer an the opportunity to speed up her code depending on her needs. The final transaction type, "versionchange", is used when changing the schema of a database.
 
 The [`lifetime`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-transaction-lifetime) of a transactions lasts as long as it's referenced: it's "`active`" so long as it's being referenced, after which it is said to be "`finished`" and the transaction is [`commited`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-commit).
 
@@ -167,8 +167,6 @@ Object stores are instances of [`IDBObjectStore`](https://developer.mozilla.org/
 		console.log('dash: store not created', context.db, context.error);
 	}).then(dash.close.database);
 
-
-
 ##### Key Paths
 
 Every store record must have a key by which it can be identified. This is called a "[`key path`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#idl-def-IDBCursorWithValueSync#widl-IDBObjectStoreSync-keyPath)", and the regular key syntax rules apply. It's OK to omit a key path when creating an object store, in which case the keys are said to be "[`out-of-line`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-out-of-line)" (vs. [`in-line`](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn-in-line-keys)). In that case, IDB knows not from where to source it's key, and so the programmer must supply a key parameter with each object addition.  
@@ -192,28 +190,6 @@ With an open database it's possible to get a reference to an object store. [`Get
 		})
 		.then(dash.close.database);
 
-##### Getting An Object Store Test: Object Store Should Be Instance of IDBObjectStore
-
-	(function() {
-		var start_time = new Date().getTime(),
-			db_name = 'store-clear-test-' + start_time,
-			store_name = 'store-clear-test-' + start_time;
-		dash.open.database({ database: db_name, store: store_name })
-			.then(dash.create.store)
-			.then(dash.close.database)
-			.then(dash.open.database)
-			.then(dash.get.store)
-			.then(function(context) {
-				dash.tools.assert(dash.tools.is(context.objectstore.name, store_name), 'Object store that\'s returned should be the one we asked for,' );
-				dash.tools.assert(context.objectstore instanceof IDBObjectStore, 'Object store should be an instance of IDBObjectStore');
-				dash.tools.assert(dash.tools.is(context.objectstore.name, store_name), 'Object store that\'s returned should be the one we asked for,' );
-			}, function(context) {
-				dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been fetched');
-			})
-			.then(dash.remove.store)
-			.then(dash.close.database);
-	}());
-
 #### Clearing An Object Store
 
 [`Clear`ing](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#widl-IDBObjectStore-clear) an object store requires a "readwrite" type transaction.
@@ -229,26 +205,6 @@ With an open database it's possible to get a reference to an object store. [`Get
 		})
 		.then(dash.close.database);
 
-##### Clearing An Object Store Example: Objects Should Be Removed From Object Store
-
-	(function() {
-		var current_time = new Date().getTime(),
-			db_name = 'store-clear-test-' + current_time,
-			store_name = 'store-clear-test-' + current_time;
-		dash.open.database({ database: db_name, store: store_name })
-			.then(dash.create.store)
-			.then(dash.close.database)
-			.then(dash.open.database)
-			.then(dash.get.store)
-			.then(function(context) {
-				var objectstore = context.objectstore;
-				dash.tools.assert(objectstore instanceof IDBObjectStore, 'Object store should be an instance of IDBObjectStore');
-				dash.tools.assert(dash.tools.is(objectstore.name, store_name), 'Object store that\'s returned should be the one we asked for,' );
-			}, function(context) {
-				dash.tools.assert(dash.tools.exists(context.objectstore), 'Object store should have been fetched');
-			})
-			.then(dash.remove.store).then(dash.close.database);
-	}());
 
 #### Removing An Object Store
 
