@@ -33,7 +33,7 @@
 					notify = true;
 				});
 
-			waitsFor(dashIsFinished, 'the remove.database operation to finish', 3000);
+			waitsFor(dashIsFinished, 'the remove.database operation to finish', 10000);
 			runs(function() {
 				describe('database.remove should finish cleanly', function() {
 					beforeEach(function() {
@@ -56,9 +56,7 @@
 					it("should be the db we asked for", function(){
 						expect(this.context.db.name).toBe(this.dbname);
 					});
-				});
-				runs(function(){
-					//No cleanup
+					/* datanse removal test === no cleanup */
 				});
 			});
 		});

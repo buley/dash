@@ -1,30 +1,28 @@
+
 (function(){
 	'use strict';
-	describe("remove.store", function() {
+	describe("clear.store", function() {
 		var start_time = new Date().getTime(),
-			db_name = 'store-remove-test-' + start_time,
-			store_name = 'store-remove-test-store-' + start_time,
+			db_name = 'idx-create-test-' + start_time,
+			store_name = 'idx-create-test-store-' + start_time,
+			index_name = 'idx-create-text' + start_time,
 			isFinished = false,
 			dashIsFinished = function() { 
 				return isFinished;
 			},
 			error = false,
-			seconderror = false,
-			secondsuccess = false,
-			secondnotify = false,
 			success = false,
 			notify = false,
-			prectx,
 			ctx;	
-		it( 'should open a database then add and then get a store', function() {
-			dash.open.database({ database: db_name, store: store_name })
+		it( 'should open a database, add a store and an index to it', function() {
+			dash.open.database({ database: db_name, store: store_name, index: index_name })
 				.then(dash.add.store)
-				.then(dash.get.store)
-				.then(dash.remove.store)
+				.then(dash.add.index)
 				.then(function(context) {
 					success = true;
 					isFinished = true;
 					ctx = context;
+					console.log('index create'+context.index,context.idx,context.error);
 				}, function(context) {
 					ctx = context;
 					error = true;
@@ -32,12 +30,11 @@
 				}, function(context) {
 					notify = true;
 				})
-			waitsFor(dashIsFinished, 'the remove.store operation to finish', 10000);
+			waitsFor(dashIsFinished, 'the clear.store operation to finish', 10000);
 			runs(function() {
-				describe('remove.store should finish cleanly', function() {
+				describe('clear.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
-						this.setup = prectx;
 						this.success = success;
 						this.error = error;
 						this.notify = notify;
@@ -45,31 +42,33 @@
 						this.storename = store_name;
 					});
 					
-					it("remove.store should be a success", function() {
+					it("clear.store should be a success", function() {
 						expect(this.notify).toBe(false);
 						expect(this.error).toBe(false);
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
 					});
 
-					it("remove.store should have the correct references", function() {
+					it("clear.store should have the correct references", function() {
 						expect(this.context.db instanceof IDBDatabase).toBe(true);
 						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
+						expect(this.context.idx instanceof IDBIndex).toBe(true);
 					});
 					
-					it("remove.store should have the correct parent/child relationship", function() {
-						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(false);
+					it("clear.store should have the correct parent/child relationship", function() {
+						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
 					});
 
-					it("remove.store references should be the db and store we asked for", function(){
+					it("clear.store references should be the db and store we asked for", function(){
 						expect(this.context.db.name).toBe(this.dbname);
 						expect(this.context.objectstore.name).toBe(this.storename);
 					});
 
-					it("remove.store should clean up after itself", function() {
-						dash.remove.store(this.context)
-						.then(dash.close.database)
-						.then(dash.remove.database);
+					it("clear.store should clean up after itself", function() {
+						dash.remove.index(this.context)
+							.then(dash.remove.store)
+							.then(dash.close.database)
+							.then(dash.remove.database);
 					});
 
 				});

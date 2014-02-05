@@ -26,7 +26,7 @@
 				});
 			waitsFor(function() { 
 				return isFinished;
-			}, 'the get.stores operation to finish', 3000);
+			}, 'the get.stores operation to finish', 10000);
 			runs(function() {
 				describe('get.stores should finish cleanly', function() {
 					beforeEach(function() {

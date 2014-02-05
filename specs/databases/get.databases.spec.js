@@ -24,7 +24,7 @@
 				}, function(context) {
 					notify = true;
 				});
-			waitsFor(dashIsFinished, 'the open.databases operation to finish', 3000);
+			waitsFor(dashIsFinished, 'the open.databases operation to finish', 10000);
 			runs(function() {
 				describe('open.databases should finish cleanly', function() {
 					beforeEach(function() {
@@ -49,10 +49,12 @@
 							expect(this.context.databases).toBeUndefined();
 						}
 					});
+					it('the open.database operation cleanup after itself',function(){
+						dash.close.database(this.context)
+						.then(dash.remove.database);
+					});					
 				});
-				runs(function(){
-					//No cleanup
-				});
+
 			});
 		});
 	});

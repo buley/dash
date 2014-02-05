@@ -221,36 +221,6 @@ With an open database it's possible to get a reference to an object store. [`Get
 		})
 		.then(dash.close.database);
 
-##### Removing An Object Store Test: Object Store Should Be Removed
-
-	(function(){
-		var v1,
-			start_time = new Date().getTime(),
-			db_name = 'store-create-test-' + start_time,
-			store_name = 'store-create-test-' + start_time;
-		/* We know an object store was deleted if we can open a new database, create it, get a reference, delete it, then close the database and open it again to be unable get the object store once more */
-		dash.open.database({ database: db_name, store: store_name })
-			.then(function(context) {
-				v1 = context.db.version;
-			})
-			.then(dash.create.store)
-			.then(dash.get.store)
-			.then(dash.delete.store)
-			.then( function(context){
-				dash.assert(dash.tools.empty(context.objectstore), 'Object store deletion should never return an object store reference.');
-				dash.assert(dash.tools.empty(context.idx), 'Object store deletion should never return an index reference.');
-				dash.tools.assert(context.db.version > v1, 'Database version should have increased when creating an object store.');
-			}, function(context){
-				dash.assert(false, 'Should have deleted object store.');
-			})
-			.then(dash.get.store)
-			.then(function(context) {
-				dash.assert(dash.tools.empty(context.objectstore), 'Deleted store should not be fetchable');
-			})
-			.then(dash.delete.database);
-	})();
-
-
 #### Getting Multiple Object Stores
 
 With an open database it's possible to get a list of all object store names. This list is an `Array`-like collection of string object store names.
@@ -266,35 +236,6 @@ With an open database it's possible to get a list of all object store names. Thi
 		})
 		.then(dash.close.database);
 
-###### Getting Multiple Object Stores Test: Object Stores List Should List All Databases In A DOMStringList
-
-	(function(){
-		var start_time = new Date().getTime(),
-			db_name = 'stores-get-test-' + start_time,
-			store_name_1 = 'stores-get-test-' + start_time;
-		dash.open.database({ database: db_name, store: store_name + '-1' })
-		.then(dash.get.stores)
-		.then(dash.create.store)
-		.then(function(context) {
-			store_name_2 = store_name + '-2';
-			context.store = store_name_2;
-			dash.create.store(context)
-				.then(dash.get.stores)
-				.then(function(context) {
-					dash.tools.assert( ( new Date().getTime() - start_time ) < slow , 'Store fetching should be fast.');
-					dash.tools.assert(dash.tools.exists(context.stores), 'Stores fetch should return a list of stores');
-					dash.tools.assert(context.stores instanceof DOMStringList, 'Stores list should be an instanceof DOMStringList');
-					dash.tools.assert(dash.tools.is(context.stores.length, 2), 'List should contain as many stores as we\'ve created');
-					dash.tools.each(context.stores, functin(key, val)) {
-						dash.tools.assert(dash.tools.is(key, store_name_1) || dash.tools.is(key, store_name_2, 'List should contain only the stores we created');
-					});
-				}, function(context) {
-					dash.tools.assert(dash.tools.empty(context.stores), 'Stores get failure doesn\'t return a store list');
-					dash.tools.assert(false, 'Stores fetch should successfully return a list of stores');
-				})
-				.then(dash.close.database);
-		});
-	})();
 
 ### Indexes
 
@@ -317,31 +258,6 @@ The options for creating a new `index` are similar to those when creating an obj
 		})
 		.then(dash.close.database);
 
-###### Creating An Index Text: IDBIndex Is Created With Correct Name And Default Options
-
-	(function() {
-		var start_time = new Date().getTime(),
-			db_name = 'idx-create-test-' + start_time,
-			store_name = 'idx-create-test-' + start_time,
-			index_name = 'idx-create-text' + start_time;
-		dash.open.database({ database: db_name, store: store_name, index: index_name })
-			.then(dash.create.store)
-			.then(dash.create.index)
-			.then(function(context){
-				dash.tools.assert((new Date().getTime() - start_time) < 100, 'Index should be created in a timely manner.');
-				dash.tools.assert(context.db instanceof IDBDatabase, 'Created index store should have an instance of IDBDatabase');
-				dash.tools.assert(dash.tools.is(context.db.name, db_name), 'Database should be the correct one.' );
-				dash.tools.assert(context.objectstore instanceof IDBObjectStore, 'Created index store should be an instance of IDBIndex');
-				dash.tools.assert(dash.tools.is(context.objectstore.name, store_name), 'Store should be the correct one.' );
-				dash.tools.assert(context.idx instanceof IDBIndex, 'Created index store should be an instance of IDBIndex');
-				dash.tools.assert(dash.tools.is(context.idx.name, index_name), 'Index should be the correct one.' );
-			}, function(context){
-				dash.tools.assert(false, 'Should have created an index');
-			})
-			.then(dash.remove.index)
-			.then(dash.remove.store)
-			.then(dash.close.database);
-	}());
 
 #### Getting An Index
 

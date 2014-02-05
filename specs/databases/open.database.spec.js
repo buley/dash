@@ -77,8 +77,8 @@
 									expect(this.context.upgrade).toBe(true);
 								});
 								it('the open.database operation cleanup after itself',function(){
-									dash.close.database(this.context)
-								})
+									//dash.close.database(this.context);
+								});
 							});
 						});
 					});
@@ -133,7 +133,8 @@
 									expect(this.context.upgrade).toBe(false);
 								});
 								it("open.database secondary test should clenup after itself", function(){
-									dash.close.database(this.context).then(dash.remove.database);
+									dash.close.database(this.context)
+									//.then(dash.remove.database);
 								});
 							});
 						});

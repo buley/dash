@@ -26,7 +26,7 @@
 				}, function(context) {
 					notify = true;
 				})
-			waitsFor(dashIsFinished, 'the add.store operation to finish', 3000);
+			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
 				describe('add.store should finish cleanly', function() {
 					beforeEach(function() {

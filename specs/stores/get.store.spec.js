@@ -9,9 +9,6 @@
 				return isFinished;
 			},
 			error = false,
-			seconderror = false,
-			secondsuccess = false,
-			secondnotify = false,
 			success = false,
 			notify = false,
 			prectx,
@@ -31,7 +28,7 @@
 				}, function(context) {
 					notify = true;
 				})
-			waitsFor(dashIsFinished, 'the get.store operation to finish', 3000);
+			waitsFor(dashIsFinished, 'the get.store operation to finish', 10000);
 			runs(function() {
 				describe('get.store should finish cleanly', function() {
 					beforeEach(function() {
