@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	ddescribe("add.index", function() {
+	describe("add.index", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'idx-create-test-' + start_time,
 			store_name = 'idx-create-test-store-' + start_time,
@@ -32,7 +32,7 @@
 				})
 			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
 			runs(function() {
-				ddescribe('add.index should finish cleanly', function() {
+				describe('add.index should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;
