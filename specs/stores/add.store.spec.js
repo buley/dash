@@ -59,6 +59,10 @@
 						expect(this.context.objectstore.name).toBe(this.storename);
 					});
 
+					it("add.store objectstore should have default properties", function(){
+						expect(this.context.objectstore.keyPath).toBe(null);
+					});
+
 					it("add.store should clean up after itself", function() {
 						dash.remove.store(this.context).then(dash.close.database);
 					});
