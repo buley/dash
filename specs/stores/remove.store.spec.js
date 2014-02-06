@@ -14,11 +14,14 @@
 			secondnotify = false,
 			success = false,
 			notify = false,
-			prectx,
+			addcount,
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
 			dash.open.database({ database: db_name, store: store_name })
 				.then(dash.add.store)
+				.then(function(context) {
+					addcount = context.db.objectStoreNames.length;
+				})
 				.then(dash.get.store)
 				.then(dash.remove.store)
 				.then(function(context) {
@@ -37,12 +40,12 @@
 				describe('remove.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
-						this.setup = prectx;
 						this.success = success;
 						this.error = error;
 						this.notify = notify;
 						this.dbname = db_name;
 						this.storename = store_name;
+						this.addcount = addcount;
 					});
 					
 					it("remove.store should be a success", function() {
@@ -56,7 +59,9 @@
 						expect(this.context.db instanceof IDBDatabase).toBe(true);
 						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
 					});
-					
+					it("remove.store should return fewer stores than before the delete", function() {
+						expect(this.context.db.objectStoreNames.length < this.addcount).toBe(true);
+					});
 					it("remove.store should have the correct parent/child relationship", function() {
 						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(false);
 					});
