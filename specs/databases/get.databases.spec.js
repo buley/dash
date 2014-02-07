@@ -12,7 +12,6 @@
 			ctx;	
 		it( 'should get all databases, when available', function() {
 			dash.get.databases()
-				.then(dash.open.databases)
 				.then(function(context) {
 					ctx = context;
 					isFinished = true;
@@ -26,7 +25,7 @@
 				});
 			waitsFor(dashIsFinished, 'the open.databases operation to finish', 10000);
 			runs(function() {
-				describe('open.databases should finish cleanly', function() {
+				describe('get.databases should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -38,7 +37,8 @@
 							expect(this.success).toBe(true);
 							expect(this.error).toBe(false);
 							expect(this.notify).toBe(false);
-							expect(this.context.databases instanceof DOMStringList).toBe(true);
+							//databases not available right away
+							expect(this.context.databases instanceof DOMStringList || null === this.context.databases).toBe(true);
 						}
 					});
 					it("should be an error when unavailable", function() {
@@ -49,7 +49,7 @@
 							expect(this.context.databases).toBeUndefined();
 						}
 					});
-					it('the open.database operation cleanup after itself',function(){
+					it('the get.database operation cleanup after itself',function(){
 						dash.close.database(this.context)
 						.then(dash.remove.database);
 					});					

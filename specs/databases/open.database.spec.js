@@ -54,7 +54,7 @@
 							}, function(context) {
 								notify = true;
 							});
-						waitsFor(dashIsFinished, 'the open.database operation to finish', 3000);
+						waitsFor(dashIsFinished, 'the open.database operation to finish', 10000);
 						runs(function() {
 							describe('the open.database operation should finish cleanly', function() {
 								beforeEach(function() {

@@ -19,6 +19,9 @@
 			dash.open.database({ database: db_name, store: db_name })
 				.then(function(context) {
 					prectx = context;
+				}, function(context) {
+					prectx = context;
+					error = true;
 				})
 				.then(dash.remove.database)
 				.then(function(context) {
@@ -49,12 +52,6 @@
 						expect(this.error).toBe(false);
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
-					});
-					it("should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(true);
-					});
-					it("should be the db we asked for", function(){
-						expect(this.context.db.name).toBe(this.dbname);
 					});
 					/* datanse removal test === no cleanup */
 				});

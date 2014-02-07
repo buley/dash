@@ -12,7 +12,7 @@
 			notify = false,
 			ctx;	
 		it( 'should get all indexes', function() {
-			dash.open.database({ database: db_name, store: store_name, index: index_name, key_path: key_path })
+			dash.open.database({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
 				.then(dash.add.store)
 				.then(dash.add.index)
 				.then(dash.get.indexes)
