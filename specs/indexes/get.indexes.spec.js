@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("get.indexes", function() {
+	ddescribe("get.indexes", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'indexes-get-test-database-' + start_time,
 			store_name = 'indexes-get-test-store-' + start_time,
@@ -14,11 +14,13 @@
 		it( 'should get all indexes', function() {
 			dash.open.database({ database: db_name, store: store_name, index: index_name, key_path: key_path })
 				.then(dash.add.store)
+				/*
 				.then(dash.add.index)
-				.then(dash.get.indexes)
+				.then(dash.get.indexes)*/
 				.then(function(context) {
 					ctx = context;
 					isFinished = true;
+					console.log('what do we have here',context.objectstore)
 					success = true;
 				}, function(context) {
 					ctx = context;

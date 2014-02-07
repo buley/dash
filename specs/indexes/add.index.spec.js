@@ -3,9 +3,9 @@
 	'use strict';
 	describe("add.index", function() {
 		var start_time = new Date().getTime(),
-			db_name = 'idx-create-test-' + start_time,
-			store_name = 'idx-create-test-store-' + start_time,
-			index_name = 'idx-create-text' + start_time,
+			db_name = 'idx-add-test-' + start_time,
+			store_name = 'idx-add-test-store-' + start_time,
+			index_name = 'idx-add-text' + start_time,
 			key_path = 'idx' + start_time,
 			isFinished = false,
 			dashIsFinished = function() { 
