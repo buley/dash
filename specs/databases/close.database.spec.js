@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	xdescribe("close.database", function() {
+	describe("close.database", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'database-close-test-' + start_time,
 			isFinished = false,

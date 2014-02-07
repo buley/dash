@@ -4,6 +4,7 @@
 		var start_time = new Date().getTime(),
 			db_name = 'store-get-test-' + start_time,
 			store_name = 'store-get-test-store-' + start_time,
+			store_key_path = 'storeGetTestKeyPath' + start_time,
 			isFinished = false,
 			dashIsFinished = function() { 
 				return isFinished;
@@ -14,7 +15,7 @@
 			prectx,
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
-			dash.open.database({ database: db_name, store: store_name })
+			dash.open.database({ database: db_name, store: store_name, store_key_path: store_key_path })
 				.then(dash.add.store)
 				.then(dash.get.store)
 				.then(function(context) {
