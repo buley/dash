@@ -23,24 +23,25 @@
 					store_key_path: key_path,
 					data: test_data
 				})
-				.then(function(ctx){
-					dash.add.store(ctx)
-					.then(function(ctx) {
-						dash.add.entry(ctx)
-						.then(function(ctx) {
-							ctx = ctx;
+				.then(function(context){
+					dash.add.store(context)
+					.then(function(context) {
+						dash.add.entry(context)
+						.then(function(context) {
+							ctx = context;
 							isFinished = true;
-						}, function(ctx) {
+							success = true;
+						}, function(context) {
 							isFinished = true;
-							isError = true;
+							error = true;
 						});
-					}, function(ctx) {
+					}, function(context) {
 						isFinished = true;
-						isError = true;
+						error = true;
 					});
-				}, function(ctx) {
+				}, function(context) {
 					isFinished = true;
-					isError = true;
+					error = true;
 				});
 
 			waitsFor(dashIsFinished, 'the add.entry operation to finish', 10000);
@@ -84,16 +85,24 @@
 					});
 
 					it("add.entry should clean up after itself", function() {
-						dash.remove.entry(this.context)
-						.then(function(context) {
-							dash.remove.store(context)
-							.then(function(context) {
-								dash.close.database(context)
-								.then(function() {
-									dash.remove.database(context);
-								})
-							})
+						dash.open.database({
+							db: this.context.db,
+							database: db_name,
+							store: store_name,
+							key: this.context.key
 						})
+						.then(function(context) {
+							dash.remove.entry(context)
+							.then(function(context) {
+								dash.remove.store(context)
+								.then(function(context) {
+									dash.close.database(context)
+									.then(function() {
+										dash.remove.database(context);
+									});
+								});
+							});
+						});
 					});
 
 				});
