@@ -13,13 +13,37 @@
 			ctx;	
 		it( 'should get all indexes', function() {
 			dash.open.database({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
-				.then(dash.add.store)
-				.then(dash.add.index)
-				.then(dash.get.indexes)
 				.then(function(context) {
-					ctx = context;
-					isFinished = true;
-					success = true;
+					dash.add.store(context)
+					.then(function(context) {
+						dash.add.index(context)
+						.then(function(context) {
+							dash.get.indexes(context)
+							.then(function(context){
+								ctx = context;
+								success = true;
+								isFinished = true;
+							}, function(context) {
+								ctx = context;
+								error = true;
+								isFinished = true;
+							}, function(context) {
+								notify = true;
+							});
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						})
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					ctx = context;
 					error = true;
@@ -31,7 +55,7 @@
 				return isFinished;
 			}, 'the get.indexes operation to finish', 10000);
 			runs(function() {
-				describe('get.indexes should finish cleanly', function() {
+				describe('get.indexes should finish successfully', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -50,9 +74,13 @@
 					});
 					it("get.indexes should clean up after itself", function() {
 						dash.remove.index(this.context)
-						.then(dash.remove.store)
-						.then(dash.close.database)
-						.then(dash.remove.database);
+						.then(function(contxt){
+							dash.remove.store(context)
+							.then(function(context) {
+								dash.close.database(context)
+								.then(dash.remove.database);
+							});
+						});
 					});
 				});
 			});

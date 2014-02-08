@@ -1,13 +1,13 @@
 
 (function(){
 	'use strict';
-	describe("add.entry", function() {
+	xdescribe("add.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
-				db_name = 'idx-add-test-' + start_time,
-				store_name = 'idx-add-test-store-' + start_time,
-				key_path = 'idx' + start_time,
-				test_data = { bar: 'baz' },
+				db_name = 'entry-add-test-' + start_time,
+				store_name = 'entry-add-test-store-' + start_time,
+				key_path = 'entry' + start_time,
+				test_data = { test: 'entry-add' },
 				isFinished = false,
 				dashIsFinished = function() { 
 					return isFinished;
@@ -16,31 +16,36 @@
 				success = false,
 				notify = false,
 				ctx;	
-			test_data[key_path] = start_time;
+			test_data[key_path] = 'entry-add-' + start_time;
 			dash.open.database({
 					database: db_name,
 					store: store_name,
 					store_key_path: key_path,
 					data: test_data
 				})
-				.then(dash.add.store)
-				.then(dash.add.entry)
-				.then(function(context) {
-					success = true;
+				.then(function(ctx){
+					dash.add.store(ctx)
+					.then(function(ctx) {
+						dash.add.entry(ctx)
+						.then(function(ctx) {
+							ctx = ctx;
+							isFinished = true;
+						}, function(ctx) {
+							isFinished = true;
+							isError = true;
+						});
+					}, function(ctx) {
+						isFinished = true;
+						isError = true;
+					});
+				}, function(ctx) {
 					isFinished = true;
-					ctx = context;
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
-				}, function(context) {
-					notify = true;
+					isError = true;
 				});
 
 			waitsFor(dashIsFinished, 'the add.entry operation to finish', 10000);
 			runs(function() {
 				describe('add.entry should finish cleanly', function() {
-
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -73,15 +78,22 @@
 						expect(this.context.db.name).toBe(this.dbname);
 						expect(this.context.objectstore.name).toBe(this.storename);
 					});
+					
 					it("add.entry should return the key", function(){
 						expect(this.context.key).toBe(this.key);
 					});
 
 					it("add.entry should clean up after itself", function() {
 						dash.remove.entry(this.context)
-							.then(dash.remove.store)
-							.then(dash.close.database)
-							.then(dash.remove.database);
+						.then(function(context) {
+							dash.remove.store(context)
+							.then(function(context) {
+								dash.close.database(context)
+								.then(function() {
+									dash.remove.database(context);
+								})
+							})
+						})
 					});
 
 				});

@@ -17,19 +17,35 @@
 				notify = false,
 				ctx;		
 			dash.open.database({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
-				.then(dash.add.store)
-				.then(dash.add.index)
 				.then(function(context) {
-					success = true;
-					isFinished = true;
-					ctx = context;
+					dash.add.store(context)
+					.then(function(context) {
+						dash.add.index(context)
+						.then(function(context) {
+							success = true;
+							isFinished = true;
+							ctx = context;
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						})
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					ctx = context;
 					error = true;
 					isFinished = true;
 				}, function(context) {
 					notify = true;
-				})
+				});
 			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
 			runs(function() {
 				describe('add.index should finish cleanly', function() {
@@ -77,9 +93,13 @@
 
 					it("add.index should clean up after itself", function() {
 						dash.remove.index(this.context)
-							.then(dash.remove.store)
-							.then(dash.close.database)
-							.then(dash.remove.database);
+						.then(function(contxt){
+							dash.remove.store(context)
+							.then(function(context) {
+								dash.close.database(context)
+								.then(dash.remove.database);
+							});
+						});
 					});
 
 				});
@@ -111,19 +131,35 @@
 					index_multi_entry: index_multientry,
 					index_unique: index_unique
 				})
-				.then(dash.add.store)
-				.then(dash.add.index)
 				.then(function(context) {
-					success = true;
-					isFinished = true;
-					ctx = context;
+					dash.add.store(context)
+					.then(function(context) {
+						dash.add.index(context)
+						.then(function(context) {
+							success = true;
+							isFinished = true;
+							ctx = context;
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						})
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					ctx = context;
 					error = true;
 					isFinished = true;
 				}, function(context) {
 					notify = true;
-				})
+				});
 			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
 			runs(function() {
 				describe('add.index should finish cleanly', function() {
@@ -150,9 +186,13 @@
 
 					it("add.index should clean up after itself", function() {
 						dash.remove.index(this.context)
-							.then(dash.remove.store)
-							.then(dash.close.database)
-							.then(dash.remove.database);
+						.then(function(contxt){
+							dash.remove.store(context)
+							.then(function(context) {
+								dash.close.database(context)
+								.then(dash.remove.database);
+							});
+						});
 					});
 
 				});

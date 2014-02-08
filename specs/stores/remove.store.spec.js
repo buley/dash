@@ -15,26 +15,44 @@
 			success = false,
 			notify = false,
 			addcount,
+			startcount,
+			finalcount,
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
 			dash.open.database({ database: db_name, store: store_name })
-				.then(dash.add.store)
 				.then(function(context) {
-					addcount = context.db.objectStoreNames.length;
-				})
-				.then(dash.get.store)
-				.then(dash.remove.store)
-				.then(function(context) {
-					success = true;
-					isFinished = true;
-					ctx = context;
+					startcount = context.db.objectStoreNames.length;
+					dash.add.store(context)
+					.then(function(context){
+						addcount = context.db.objectStoreNames.length;
+						dash.remove.store(context)
+						.then(function(context) {
+							ctx = context;
+							finalcount = context.db.objectStoreNames.length;
+							success = true;
+							isFinished = true;
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						});
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					ctx = context;
 					error = true;
 					isFinished = true;
 				}, function(context) {
 					notify = true;
-				})
+				});
+
 			waitsFor(dashIsFinished, 'the remove.store operation to finish', 10000);
 			runs(function() {
 				describe('remove.store should finish cleanly', function() {
@@ -46,6 +64,8 @@
 						this.dbname = db_name;
 						this.storename = store_name;
 						this.addcount = addcount;
+						this.startcount = startcount;
+						this.finalcount = finalcount;
 					});
 					
 					it("remove.store should be a success", function() {
@@ -60,7 +80,8 @@
 						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
 					});
 					it("remove.store should return fewer stores than before the delete", function() {
-						expect(this.context.db.objectStoreNames.length < this.addcount).toBe(true);
+						expect(this.addcount).toBe(this.startcount + 1);
+						expect(this.finalcount).toBe(this.startcount);
 					});
 					it("remove.store should have the correct parent/child relationship", function() {
 						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(false);
@@ -72,9 +93,10 @@
 					});
 
 					it("remove.store should clean up after itself", function() {
-						dash.remove.store(this.context)
-						.then(dash.close.database)
-						.then(dash.remove.database);
+						dash.close.database(this.context)
+						.then(function(context){
+							dash.remove.database(context);
+						});
 					});
 
 				});

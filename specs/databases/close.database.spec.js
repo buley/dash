@@ -13,11 +13,19 @@
 			ctx;	
 		it( 'should open and then close', function() {
 			dash.open.database({ database: db_name })
-				.then(dash.close.database)
-				.then(function(context) {
-					ctx = context;
-					isFinished = true;
-					success = true;
+				.then(function(context){
+					dash.close.database(context)
+					.then(function(context) {
+						ctx = context;
+						isFinished = true;
+						success = true;
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					ctx = context;
 					error = true;
@@ -45,7 +53,7 @@
 						expect(this.context.db instanceof IDBDatabase).toBe(true);
 					});
 					it( "database.close should clenup after itself", function(){
-						dash.remove.database(ctx);
+						dash.remove.database(this.context);
 					});
 				});
 			});

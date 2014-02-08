@@ -16,19 +16,36 @@
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
 			dash.open.database({ database: db_name, store: store_name, store_key_path: store_key_path })
-				.then(dash.add.store)
-				.then(dash.get.store)
 				.then(function(context) {
-					success = true;
-					isFinished = true;
-					ctx = context;
+					dash.add.store(context)
+					.then(function(context){
+						dash.get.store(context)
+						.then(function(context) {
+							ctx = context;
+							success = true;
+							isFinished = true;
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						});
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					ctx = context;
 					error = true;
 					isFinished = true;
 				}, function(context) {
 					notify = true;
-				})
+				});
+
 			waitsFor(dashIsFinished, 'the get.store operation to finish', 10000);
 			runs(function() {
 				describe('get.store should finish cleanly', function() {
@@ -62,11 +79,14 @@
 						expect(this.context.db.name).toBe(this.dbname);
 						expect(this.context.objectstore.name).toBe(this.storename);
 					});
-
 					it("get.store should clean up after itself", function() {
 						dash.remove.store(this.context)
-						.then(dash.close.database)
-						.then(dash.remove.database);
+						.then(function(context) {
+							dash.close.database(context)
+							.then(function(context){
+								dash.remove.database(context);
+							});
+						});
 					});
 
 				});

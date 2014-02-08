@@ -3,9 +3,9 @@
 	'use strict';
 	describe("get.index", function() {
 		var start_time = new Date().getTime(),
-			db_name = 'idx-remove-test-' + start_time,
+			db_name = 'idx-remove-test-db-' + start_time,
 			store_name = 'idx-remove-test-store-' + start_time,
-			index_name = 'idx-remove-text' + start_time,
+			index_name = 'idx-remove-test-idx-' + start_time,
 			key_path = 'idx' + start_time,
 			isFinished = false,
 			dashIsFinished = function() { 
@@ -15,26 +15,53 @@
 			success = false,
 			notify = false,
 			addcount = Infinity,
+			finalcount,
+			startcount,
 			ctx;	
 		it( 'should open a database, add a store and an index to it', function() {
 			dash.open.database({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
-				.then(dash.add.store)
-				.then(dash.add.index)
 				.then(function(context) {
-					addcount = context.objectstore.indexNames.length;
-				})
-				.then(dash.remove.index)
-				.then(function(context) {
-					success = true;
-					isFinished = true;
-					ctx = context;
+					dash.add.store(context)
+					.then(function(context) {
+						startcount = context.objectstore.indexNames.length;
+						dash.add.index(context)
+						.then(function(context) {
+							addcount = context.objectstore.indexNames.length;
+							dash.remove.index(context)
+							.then(function(context) {
+								success = true;
+								finalcount = context.objectstore.indexNames.length;
+								isFinished = true;
+								ctx = context;
+							}, function(context) {
+								ctx = context;
+								error = true;
+								isFinished = true;
+							}, function(context) {
+								notify = true;
+							});
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						});
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					ctx = context;
 					error = true;
 					isFinished = true;
 				}, function(context) {
 					notify = true;
-				})
+				});
+
 			waitsFor(dashIsFinished, 'the get.index operation to finish', 10000);
 			runs(function() {
 				describe('get.index should finish cleanly', function() {
@@ -48,6 +75,8 @@
 						this.indexname = index_name;
 						this.keypath = key_path;
 						this.addcount = addcount;
+						this.finalcount = finalcount;
+						this.startcount = startcount;
 					});
 					it("get.index should be a success", function() {
 						expect(this.notify).toBe(false);
@@ -61,7 +90,8 @@
 						expect(this.context.idx instanceof IDBIndex).toBe(true);
 					});
 					it("get.index should return fewer indexes than before the delete", function() {
-						expect(this.context.objectstore.indexNames.length < this.addcount).toBe(true);
+						expect(this.finalcount).toBe(this.startcount);
+						expect(this.finalcount < this.addcount).toBe(true);
 					});
 					it("get.index should have the correct parent/child relationships", function() {
 						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
@@ -78,10 +108,11 @@
 						expect(this.context.idx.keyPath).toBe(this.keypath);
 					});
 					it("get.index should clean up after itself", function() {
-						dash.remove.index(this.context)
-							.then(dash.remove.store)
-							.then(dash.close.database)
+						dash.remove.store(this.context)
+						.then(function(context) {
+							dash.close.database(context)
 							.then(dash.remove.database);
+						});
 					});
 				});
 			});

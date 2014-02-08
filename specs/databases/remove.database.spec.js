@@ -19,19 +19,21 @@
 			dash.open.database({ database: db_name, store: db_name })
 				.then(function(context) {
 					prectx = context;
+					dash.remove.database(context)
+					.then(function(context) {
+						ctx = context;
+						success = true;
+						isFinished = true;
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					prectx = context;
 					error = true;
-				})
-				.then(dash.remove.database)
-				.then(function(context) {
-					ctx = context;
-					success = true;
-					isFinished = true;
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
 				}, function(context) {
 					notify = true;
 				});
@@ -53,7 +55,6 @@
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
 					});
-					/* datanse removal test === no cleanup */
 				});
 			});
 		});

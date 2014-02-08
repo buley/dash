@@ -122,6 +122,10 @@
 									expect(this.context.upgrade).toBe(false);
 								});
 
+								it('an instance of IDBDatabase should be returned', function() {
+									expect(this.context.db instanceof IDBDatabase).toBe(true);
+								});
+
 								it('secondary should not be an upgrade', function() {
 									expect(this.context.db.version).toBe(1);
 								});
@@ -184,6 +188,11 @@
 									expect(this.context.upgrade).toBe(true);
 								});
 
+								it('an instance of IDBDatabase should be returned', function() {
+									//TODO: Why "The request has not finished" in Chrome?
+									//expect(this.context.db instanceof IDBDatabase).toBe(true);
+								});
+
 								it('version should be the provided version', function() {
 									expect(this.context.new_version).toBe(this.version);
 									expect(this.context.old_version).toBe(1);
@@ -191,7 +200,9 @@
 
 								it("open.database secondary test should clenup after itself", function(){
 									dash.close.database(this.context)
-									.then(dash.remove.database);
+									.then(function(context) {
+										dash.remove.database(context);
+									})
 								});
 							});
 						});

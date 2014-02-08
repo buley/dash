@@ -15,19 +15,36 @@
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
 			dash.open.database({ database: db_name, store: store_name })
-				.then(dash.add.store)
-				.then(dash.clear.store)
 				.then(function(context) {
-					success = true;
-					isFinished = true;
-					ctx = context;
+					dash.add.store(context)
+					.then(function() {
+						dash.clear.store(context)
+						.then(function(context) {
+							success = true;
+							isFinished = true;
+							ctx = context;
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						});
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					ctx = context;
 					error = true;
 					isFinished = true;
 				}, function(context) {
 					notify = true;
-				})
+				});
+					
 			waitsFor(dashIsFinished, 'the clear.store operation to finish', 10000);
 			runs(function() {
 				describe('clear.store should finish cleanly', function() {
@@ -63,13 +80,13 @@
 
 					it("clear.store should clean up after itself", function() {
 						dash.remove.store(this.context)
-						.then(dash.close.database)
-						.then(dash.remove.database);
+						.then(function(context) {
+							dash.close.database(context)
+							.then(dash.remove.database);
+						});
 					});
-
 				});
 			});
-
 		});
 	});
 }());

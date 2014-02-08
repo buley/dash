@@ -14,17 +14,19 @@
 			db_name = 'store-add-test-' + start_time,
 			store_name = 'store-add-test-store-' + start_time;
 			dash.open.database({ database: db_name, store: store_name })
-				.then(dash.add.store)
 				.then(function(context) {
-					ctx = context;
-					success = true;
-					isFinished = true;
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
-				}, function(context) {
-					notify = true;
+					dash.add.store(context)
+					.then(function(context) {
+						ctx = context;
+						success = true;
+						isFinished = true;
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				});
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
@@ -65,7 +67,10 @@
 					});
 
 					it("add.store should clean up after itself", function() {
-						dash.remove.store(this.context).then(dash.close.database);
+						dash.remove.store(this.context)
+						.then(function(context) {
+							dash.close.database(context);
+						});
 					});
 
 				});
@@ -94,17 +99,19 @@
 					store_key_path: store_key_path,
 					auto_increment: store_auto_increment
 				})
-				.then(dash.add.store)
 				.then(function(context) {
-					ctx = context;
-					success = true;
-					isFinished = true;
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
-				}, function(context) {
-					notify = true;
+					dash.add.store(context)
+					.then(function(context) {
+						ctx = context;
+						success = true;
+						isFinished = true;
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				});
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
@@ -124,9 +131,14 @@
 						expect(this.context.objectstore.autoIncrement).toBe(this.autoincrement);
 					});
 
-
 					it("add.store should clean up after itself", function() {
-						dash.remove.store(this.context).then(dash.close.database).then(dash.remove.database);
+						dash.remove.store(this.context)
+						.then(function(context) {
+							dash.close.database(context)
+							.then(function(context){
+								dash.remove.database(context);
+							});
+						});
 					});
 
 				});

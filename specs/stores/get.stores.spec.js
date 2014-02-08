@@ -11,12 +11,28 @@
 			ctx;	
 		it( 'should get all stores, when available', function() {
 			dash.open.database({ database: db_name, store: store_name })
-				.then(dash.add.store)
-				.then(dash.get.stores)
 				.then(function(context) {
-					ctx = context;
-					isFinished = true;
-					success = true;
+					dash.add.store(context)
+					.then(function(context){
+						dash.get.stores(context)
+						.then(function(context) {
+							ctx = context;
+							success = true;
+							isFinished = true;
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						});
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
 				}, function(context) {
 					ctx = context;
 					error = true;
@@ -24,9 +40,11 @@
 				}, function(context) {
 					notify = true;
 				});
+
 			waitsFor(function() { 
 				return isFinished;
 			}, 'the get.stores operation to finish', 10000);
+
 			runs(function() {
 				describe('get.stores should finish cleanly', function() {
 					beforeEach(function() {
@@ -47,8 +65,12 @@
 					});
 					it("get.stores should clean up after itself", function() {
 						dash.remove.store(this.context)
-						.then(dash.close.database)
-						.then(dash.remove.database);
+						.then(function(context) {
+							dash.close.database(context)
+							.then(function(context){
+								dash.remove.database(context);
+							});
+						});
 					});
 				});
 			});

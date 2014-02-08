@@ -48,11 +48,7 @@
 							expect(this.notify).toBe(false);
 							expect(this.context.databases).toBeUndefined();
 						}
-					});
-					it('the get.database operation cleanup after itself',function(){
-						dash.close.database(this.context)
-						.then(dash.remove.database);
-					});					
+					});				
 				});
 
 			});
