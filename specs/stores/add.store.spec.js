@@ -1,18 +1,18 @@
 (function(){
 	'use strict';
 	describe("add.store", function() {
-		var start_time = new Date().getTime(),
-			db_name = 'store-add-test-' + start_time,
-			store_name = 'store-add-test-store-' + start_time,
-			isFinished = false,
+		it( 'should open a database then add a store', function() {
+			var isFinished = false,
 			dashIsFinished = function() { 
 				return isFinished;
 			},
 			error = false,
 			success = false,
 			notify = false,
-			ctx;	
-		it( 'should open a database then add a store', function() {
+			ctx,
+			start_time = new Date().getTime(),
+			db_name = 'store-add-test-' + start_time,
+			store_name = 'store-add-test-store-' + start_time;
 			dash.open.database({ database: db_name, store: store_name })
 				.then(dash.add.store)
 				.then(function(context) {
@@ -25,7 +25,7 @@
 					isFinished = true;
 				}, function(context) {
 					notify = true;
-				})
+				});
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
 				describe('add.store should finish cleanly', function() {
@@ -61,6 +61,7 @@
 
 					it("add.store objectstore should have default properties", function(){
 						expect(this.context.objectstore.keyPath).toBe(null);
+						expect(this.context.objectstore.autoIncrement).toBe(false);
 					});
 
 					it("add.store should clean up after itself", function() {
@@ -71,6 +72,69 @@
 			});
 
 		});
+
+
+		it( 'should open a database then add a store', function() {
+			var isFinished = false,
+			dashIsFinished = function() { 
+				return isFinished;
+			},
+			error = false,
+			success = false,
+			notify = false,
+			ctx,
+			start_time = new Date().getTime(),
+			db_name = 'store-add-test2-' + start_time,
+			store_name = 'store-add-test2-store-' + start_time,
+			store_key_path = 'storeAddTest2Store' + start_time,
+			store_auto_increment = true;
+			dash.open.database({
+					database: db_name,
+					store: store_name,
+					store_key_path: store_key_path,
+					auto_increment: store_auto_increment
+				})
+				.then(dash.add.store)
+				.then(function(context) {
+					ctx = context;
+					success = true;
+					isFinished = true;
+				}, function(context) {
+					ctx = context;
+					error = true;
+					isFinished = true;
+				}, function(context) {
+					notify = true;
+				});
+			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
+			runs(function() {
+				describe('add.store should finish cleanly', function() {
+					beforeEach(function() {
+						this.context = ctx;
+						this.success = success;
+						this.error = error;
+						this.notify = notify;
+						this.dbname = db_name;
+						this.storename = store_name;
+						this.store_key_path = store_key_path;
+						this.autoincrement = store_auto_increment;
+					});
+
+					it("add.store objectstore should use the provided autoincrement setting", function(){
+						expect(this.context.objectstore.autoIncrement).toBe(this.autoincrement);
+					});
+
+
+					it("add.store should clean up after itself", function() {
+						dash.remove.store(this.context).then(dash.close.database).then(dash.remove.database);
+					});
+
+				});
+			});
+
+		});
+
+
 	});
 }());
 

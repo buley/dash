@@ -2,20 +2,20 @@
 (function(){
 	'use strict';
 	describe("add.index", function() {
-		var start_time = new Date().getTime(),
-			db_name = 'idx-add-test-' + start_time,
-			store_name = 'idx-add-test-store-' + start_time,
-			index_name = 'idx-add-text' + start_time,
-			key_path = 'idx' + start_time,
-			isFinished = false,
-			dashIsFinished = function() { 
-				return isFinished;
-			},
-			error = false,
-			success = false,
-			notify = false,
-			ctx;	
-		it( 'should open a database, add a store and an index to it', function() {
+		it( 'should open a database, add a store and an index to it with default parameters', function() {
+			var start_time = new Date().getTime(),
+				db_name = 'idx-add-test-' + start_time,
+				store_name = 'idx-add-test-store-' + start_time,
+				index_name = 'idx-add-text' + start_time,
+				key_path = 'idx' + start_time,
+				isFinished = false,
+				dashIsFinished = function() { 
+					return isFinished;
+				},
+				error = false,
+				success = false,
+				notify = false,
+				ctx;		
 			dash.open.database({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
 				.then(dash.add.store)
 				.then(dash.add.index)
@@ -86,6 +86,80 @@
 			});
 
 		});
+
+		it( 'index creation should support index unique and multientry configuration parameters', function() {
+			var start_time = new Date().getTime(),
+				db_name = 'idx-add-test2-' + start_time,
+				store_name = 'idx-add-test2-store-' + start_time,
+				index_name = 'idx-add-text2' + start_time,
+				key_path = 'idx' + start_time,
+				index_unique = true,
+				index_multientry = true,
+				isFinished = false,
+				dashIsFinished = function() { 
+					return isFinished;
+				},
+				error = false,
+				success = false,
+				notify = false,
+				ctx;		
+			dash.open.database({
+					database: db_name,
+					store: store_name,
+					index: index_name,
+					index_key_path: key_path,
+					index_multi_entry: index_multientry,
+					index_unique: index_unique
+				})
+				.then(dash.add.store)
+				.then(dash.add.index)
+				.then(function(context) {
+					success = true;
+					isFinished = true;
+					ctx = context;
+				}, function(context) {
+					ctx = context;
+					error = true;
+					isFinished = true;
+				}, function(context) {
+					notify = true;
+				})
+			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
+			runs(function() {
+				describe('add.index should finish cleanly', function() {
+
+					beforeEach(function() {
+						this.context = ctx;
+						this.success = success;
+						this.error = error;
+						this.notify = notify;
+						this.dbname = db_name;
+						this.storename = store_name;
+						this.indexname = index_name;
+						this.keypath = key_path;
+						this.unique = index_unique;
+						this.multientry = index_multientry;
+					});
+
+					it("add.index idx should have correct multientry config option", function(){
+						expect(this.context.idx.multiEntry).toBe(this.multientry);
+					});
+					it("add.index idx should have correct uniqueness config option", function(){
+						expect(this.context.idx.unique).toBe(this.unique);
+					});
+
+					it("add.index should clean up after itself", function() {
+						dash.remove.index(this.context)
+							.then(dash.remove.store)
+							.then(dash.close.database)
+							.then(dash.remove.database);
+					});
+
+				});
+			});
+
+		});
+
 	});
 }());
 
