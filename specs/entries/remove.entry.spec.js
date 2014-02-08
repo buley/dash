@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	xdescribe("remove.entry", function() {
+	describe("remove.entry", function() {
 		it( 'should open a database, add a store and add then remove an entry', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-remove-test-' + start_time,
@@ -23,16 +23,16 @@
 					store_key_path: key_path,
 					data: test_data
 				})
-				.then(function(ctx){
-					dash.add.store(ctx)
-					.then(function(ctx2) {
-						dash.add.entry(ctx2)
-						.then(function(ctx3) {
-							dash.remove.entry(ctx3)
-							.then(function(ctx4) {
+				.then(function(context){
+					dash.add.store(context)
+					.then(function(context) {
+						dash.add.entry(context)
+						.then(function(context) {
+							dash.remove.entry(context)
+							.then(function(context) {
 								success = true;
 								isFinished = true;
-								ctx = ctx4;
+								ctx = context;
 							}, function(context) {
 								ctx = context;
 								error = true;
@@ -83,14 +83,28 @@
 					});
 					
 					it("remove.entry should return the key", function(){
-						console.log('donzeo2',this.context.key);
 						expect(this.context.key).toBe(this.key);
 					});
 
 					it("remove.entry should clean up after itself", function() {
-						/*dash.remove.store(this.context)
-							.then(dash.close.database)
-							.then(dash.remove.database);*/
+						dash.open.database({
+							db: this.context.db,
+							database: db_name,
+							store: store_name,
+							key: this.context.key
+						})
+						.then(function(context) {
+							dash.remove.entry(context)
+							.then(function(context) {
+								dash.remove.store(context)
+								.then(function(context) {
+									dash.close.database(context)
+									.then(function() {
+										dash.remove.database(context);
+									});
+								});
+							});
+						});
 					});
 
 				});
