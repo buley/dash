@@ -1,3 +1,4 @@
+//TODO: Better testing; add objects then clear them
 (function(){
 	'use strict';
 	describe("clear.store", function() {
