@@ -49,6 +49,7 @@
 						this.dbname = db_name;
 						this.storename = store_name;
 						this.keypath = key_path;
+						this.key = test_data[key_path];
 						this.data = test_data;
 					});
 					
@@ -57,7 +58,6 @@
 						expect(this.error).toBe(false);
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
-						console.log('ADD ENTRY',this.context.entry, this.data);
 					});
 
 					it("add.entry should have the correct references", function() {
@@ -72,6 +72,9 @@
 					it("add.entry references should be the db, store and index we asked for", function(){
 						expect(this.context.db.name).toBe(this.dbname);
 						expect(this.context.objectstore.name).toBe(this.storename);
+					});
+					it("add.entry should return the key", function(){
+						expect(this.context.key).toBe(this.key);
 					});
 
 					it("add.entry should clean up after itself", function() {
