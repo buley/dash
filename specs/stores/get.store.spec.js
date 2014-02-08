@@ -80,13 +80,14 @@
 						expect(this.context.objectstore.name).toBe(this.storename);
 					});
 					it("get.store should clean up after itself", function() {
-						dash.remove.store(this.context)
+						dash.remove.store({ database: db_name, store: store_name, db: this.context.db })
 						.then(function(context) {
 							dash.close.database(context)
 							.then(function(context){
 								dash.remove.database(context);
 							});
 						});
+
 					});
 
 				});
