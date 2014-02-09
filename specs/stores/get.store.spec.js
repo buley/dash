@@ -19,18 +19,23 @@
 				.then(function(context) {
 					dash.add.store(context)
 					.then(function(context){
-						dash.get.store(context)
-						.then(function(context) {
-							ctx = context;
-							success = true;
-							isFinished = true;
-						}, function(context) {
-							ctx = context;
-							error = true;
-							isFinished = true;
-						}, function(context) {
-							notify = true;
-						});
+						delete context.objectstore;
+						delete context.request;
+						delete context.transaction;
+						setTimeout(function() {
+							dash.get.store(context)
+							.then(function(context) {
+								ctx = context;
+								success = true;
+								isFinished = true;
+							}, function(context) {
+								ctx = context;
+								error = true;
+								isFinished = true;
+							}, function(context) {
+								notify = true;
+							});
+						}, 20);
 					}, function(context) {
 						ctx = context;
 						error = true;

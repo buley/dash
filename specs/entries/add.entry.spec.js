@@ -26,15 +26,20 @@
 				.then(function(context){
 					dash.add.store(context)
 					.then(function(context) {
-						dash.add.entry(context)
-						.then(function(context) {
-							ctx = context;
-							isFinished = true;
-							success = true;
-						}, function(context) {
-							isFinished = true;
-							error = true;
-						});
+						delete context.transaction;
+						delete context.objectstore; 
+						delete context.request; 
+			            setTimeout(function(){
+              				dash.add.entry(context)
+							.then(function(context) {
+								ctx = context;
+								isFinished = true;
+								success = true;
+							}, function(context) {
+								isFinished = true;
+								error = true;
+							});
+						},20);
 					}, function(context) {
 						isFinished = true;
 						error = true;

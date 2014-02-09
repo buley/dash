@@ -4,8 +4,8 @@
 	describe("put.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
-				db_name = 'entry-add-test-' + start_time,
-				store_name = 'entry-add-test-store-' + start_time,
+				db_name = 'entry-put-test-' + start_time,
+				store_name = 'entry-put-test-store-' + start_time,
 				key_path = 'entry' + start_time,
 				test_data = { version: 1 },
 				isFinished = false,
@@ -16,7 +16,7 @@
 				success = false,
 				notify = false,
 				ctx;	
-			test_data[key_path] = 'entry-add-1-' + start_time;
+			test_data[key_path] = 'entry-put-1-' + start_time;
 			dash.open.database({
 					database: db_name,
 					store: store_name,
@@ -26,27 +26,37 @@
 				.then(function(context){
 					dash.add.store(context)
 					.then(function(context) {
-						dash.add.entry(context)
-						.then(function(context) {
-							delete context.key;
-							context.data = { version: 2 };
-							context.data[key_path] = 'entry-add-1-' + start_time;
-							dash.put.entry(context)
+						setTimeout(function() {
+							delete context.transaction;
+							delete context.objectstore;
+							delete context.request;
+							dash.add.entry(context)
 							.then(function(context) {
-								dash.get.entry(context)
+								delete context.key;
+								context.data = { version: 2 };
+								context.data[key_path] = 'entry-put-1-' + start_time;
+								dash.put.entry(context)
 								.then(function(context) {
-									ctx = context;
+									delete context.transaction;
+									delete context.objectstore;
+									delete context.request;
+									setTimeout(function(){
+										dash.get.entry(context)
+										.then(function(context) {
+											ctx = context;
+											isFinished = true;
+											success = true;
+										});
+									}, 20);
+								}, function(context) {
 									isFinished = true;
-									success = true;
+									error = true;
 								});
 							}, function(context) {
 								isFinished = true;
 								error = true;
 							});
-						}, function(context) {
-							isFinished = true;
-							error = true;
-						});
+						},20);
 					}, function(context) {
 						isFinished = true;
 						error = true;

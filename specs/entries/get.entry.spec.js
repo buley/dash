@@ -27,22 +27,26 @@
         .then(function(context){
           dash.add.store(context)
           .then(function(context) {
-            dash.add.entry(context)
-            .then(function(context) {
-              dash.get.entry(context)
+            delete context.transaction;
+            delete context.objectstore;
+            delete context.request;
+            setTimeout(function(){
+              dash.add.entry(context)
               .then(function(context) {
-                success = true;
-                isFinished = true;
-                ctx = context;
-              }, function(context) {
-                ctx = context;
-                error = true;
-                isFinished = true;
-              }, function(context) {
-                notify = true;
+                dash.get.entry(context)
+                .then(function(context) {
+                  success = true;
+                  isFinished = true;
+                  ctx = context;
+                }, function(context) {
+                  ctx = context;
+                  error = true;
+                  isFinished = true;
+                }, function(context) {
+                  notify = true;
+                });
               });
-
-            })
+            },20)
           });
         })
 
@@ -95,26 +99,21 @@
           });
 
           it("get.entry should clean up after itself", function() {
-            dash.open.database({
+            dash.remove.entry({
               db: this.context.db,
-              database: db_name,
               store: store_name,
               key: this.context.key
             })
             .then(function(context) {
-              dash.get.entry(context)
+              dash.remove.store(context)
               .then(function(context) {
-                dash.remove.store(context)
-                .then(function(context) {
-                  dash.close.database(context)
-                  .then(function() {
-                    dash.remove.database(context);
-                  });
+                dash.close.database(context)
+                .then(function() {
+                  dash.remove.database(context);
                 });
               });
             });
           });
-
         });
       });
 

@@ -18,18 +18,23 @@
 					.then(function(context) {
 						dash.add.index(context)
 						.then(function(context) {
-							dash.get.indexes(context)
-							.then(function(context){
-								ctx = context;
-								success = true;
-								isFinished = true;
-							}, function(context) {
-								ctx = context;
-								error = true;
-								isFinished = true;
-							}, function(context) {
-								notify = true;
-							});
+							setTimeout(function() {
+								delete context.transaction;
+								delete context.objectstore;
+								delete context.request;
+								dash.get.indexes(context)
+								.then(function(context){
+									ctx = context;
+									success = true;
+									isFinished = true;
+								}, function(context) {
+									ctx = context;
+									error = true;
+									isFinished = true;
+								}, function(context) {
+									notify = true;
+								});
+							}, 20);
 						}, function(context) {
 							ctx = context;
 							error = true;
