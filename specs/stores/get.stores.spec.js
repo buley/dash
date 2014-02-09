@@ -13,24 +13,19 @@
 			dash.open.database({ database: db_name, store: store_name })
 				.then(function(context) {
 					dash.add.store(context)
-					.then(function(context){
-						setTimeout(function() {
-							delete context.objectstore;
-							delete context.request;
-							delete context.transaction;
-							dash.get.stores(context)
-							.then(function(context) {
-								ctx = context;
-								success = true;
-								isFinished = true;
-							}, function(context) {
-								ctx = context;
-								error = true;
-								isFinished = true;
-							}, function(context) {
-								notify = true;
-							});
-						}, 20);
+					.commit(function(context){
+						dash.get.stores(context)
+						.then(function(context) {
+							ctx = context;
+							success = true;
+							isFinished = true;
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						});
 					}, function(context) {
 						ctx = context;
 						error = true;

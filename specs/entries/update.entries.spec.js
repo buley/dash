@@ -35,30 +35,26 @@
           dash.add.store(context)
           .then(function(context) {
             dash.add.index(context)
-            .then(function(context) {
-              setTimeout(function(){
-                delete context.transaction;
-                delete context.objectstore;
-                dash.add.entry(context)
+            .commit(function(context) {
+              dash.add.entry(context)
+              .then(function(context) {
+                context.data.version = random_update;
+                dash.update.entries(context)
                 .then(function(context) {
-                  context.data.version = random_update;
-                  dash.update.entries(context)
+                  dash.get.entries(context)
                   .then(function(context) {
-                    dash.get.entries(context)
-                    .then(function(context) {
-                      success = true;
-                      isFinished = true;
-                      ctx = context;
-                    });
-                  }, function(context) {
-                      ctx = context;
-                      error = true;
-                      isFinished = true;
-                    }, function(context) {
-                      notify = true;
-                    });
+                    success = true;
+                    isFinished = true;
+                    ctx = context;
+                  });
+                }, function(context) {
+                  ctx = context;
+                  error = true;
+                  isFinished = true;
+                }, function(context) {
+                  notify = true;
                 });
-              },10);
+              });
             });
           });
         })

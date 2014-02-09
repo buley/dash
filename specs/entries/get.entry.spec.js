@@ -26,27 +26,22 @@
         })
         .then(function(context){
           dash.add.store(context)
-          .then(function(context) {
-            delete context.transaction;
-            delete context.objectstore;
-            delete context.request;
-            setTimeout(function(){
-              dash.add.entry(context)
+          .commit(function(context) {
+            dash.add.entry(context)
+            .then(function(context) {
+              dash.get.entry(context)
               .then(function(context) {
-                dash.get.entry(context)
-                .then(function(context) {
-                  success = true;
-                  isFinished = true;
-                  ctx = context;
-                }, function(context) {
-                  ctx = context;
-                  error = true;
-                  isFinished = true;
-                }, function(context) {
-                  notify = true;
-                });
+                success = true;
+                isFinished = true;
+                ctx = context;
+              }, function(context) {
+                ctx = context;
+                error = true;
+                isFinished = true;
+              }, function(context) {
+                notify = true;
               });
-            },20)
+            });
           });
         })
 

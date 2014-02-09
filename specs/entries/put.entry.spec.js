@@ -15,7 +15,8 @@
 				error = false,
 				success = false,
 				notify = false,
-				ctx;	
+				ctx,
+				key;
 			test_data[key_path] = 'entry-put-1-' + start_time;
 			dash.open.database({
 					database: db_name,
@@ -25,38 +26,29 @@
 				})
 				.then(function(context){
 					dash.add.store(context)
-					.then(function(context) {
-						setTimeout(function() {
-							delete context.transaction;
-							delete context.objectstore;
-							delete context.request;
-							dash.add.entry(context)
+					.commit(function(context) {
+						dash.add.entry(context)
+						.then(function(context) {
+							key = context.key;
+							delete context.key;
+							context.data = { version: 2 };
+							context.data[key_path] = 'entry-put-1-' + start_time;
+							dash.put.entry(context)
 							.then(function(context) {
-								delete context.key;
-								context.data = { version: 2 };
-								context.data[key_path] = 'entry-put-1-' + start_time;
-								dash.put.entry(context)
+								dash.get.entry(context)
 								.then(function(context) {
-									delete context.transaction;
-									delete context.objectstore;
-									delete context.request;
-									setTimeout(function(){
-										dash.get.entry(context)
-										.then(function(context) {
-											ctx = context;
-											isFinished = true;
-											success = true;
-										});
-									}, 20);
-								}, function(context) {
+									ctx = context;
 									isFinished = true;
-									error = true;
+									success = true;
 								});
 							}, function(context) {
 								isFinished = true;
 								error = true;
 							});
-						},20);
+						}, function(context) {
+							isFinished = true;
+							error = true;
+						});
 					}, function(context) {
 						isFinished = true;
 						error = true;

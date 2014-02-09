@@ -17,24 +17,19 @@
 					dash.add.store(context)
 					.then(function(context) {
 						dash.add.index(context)
-						.then(function(context) {
-							setTimeout(function() {
-								delete context.transaction;
-								delete context.objectstore;
-								delete context.request;
-								dash.get.indexes(context)
-								.then(function(context){
-									ctx = context;
-									success = true;
-									isFinished = true;
-								}, function(context) {
-									ctx = context;
-									error = true;
-									isFinished = true;
-								}, function(context) {
-									notify = true;
-								});
-							}, 20);
+						.commit(function(context) {
+							dash.get.indexes(context)
+							.then(function(context){
+								ctx = context;
+								success = true;
+								isFinished = true;
+							}, function(context) {
+								ctx = context;
+								error = true;
+								isFinished = true;
+							}, function(context) {
+								notify = true;
+							});
 						}, function(context) {
 							ctx = context;
 							error = true;
@@ -56,9 +51,11 @@
 				}, function(context) {
 					notify = true;
 				});
+
 			waitsFor(function() { 
 				return isFinished;
 			}, 'the get.indexes operation to finish', 10000);
+
 			runs(function() {
 				describe('get.indexes should finish successfully', function() {
 					beforeEach(function() {

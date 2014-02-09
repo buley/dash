@@ -21,31 +21,26 @@
 					dash.add.store(context)
 					.then(function(context) {
 						dash.add.index(context)
-						.then(function(context) {
-							delete context.transaction;
-							delete context.request;
-							delete context.objectstore;
-							setTimeout(function() {
-								dash.get.index(context)
-								.then(function(context) {
-									success = true;
-									isFinished = true;
-									ctx = context;
-								}, function(context) {
-									ctx = context;
-									error = true;
-									isFinished = true;
-								}, function(context) {
-									notify = true;
-								});
-							}, 20);
+						.commit(function(context) {
+							dash.get.index(context)
+							.then(function(context) {
+								success = true;
+								isFinished = true;
+								ctx = context;
+							}, function(context) {
+								ctx = context;
+								error = true;
+								isFinished = true;
+							}, function(context) {
+								notify = true;
+							});
 						}, function(context) {
 							ctx = context;
 							error = true;
 							isFinished = true;
 						}, function(context) {
 							notify = true;
-						})
+						});
 					}, function(context) {
 						ctx = context;
 						error = true;

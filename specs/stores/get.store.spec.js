@@ -18,35 +18,28 @@
 			dash.open.database({ database: db_name, store: store_name, store_key_path: store_key_path })
 				.then(function(context) {
 					dash.add.store(context)
-					.then(function(context){
-						delete context.objectstore;
-						delete context.request;
-						delete context.transaction;
-						setTimeout(function() {
-							dash.get.store(context)
-							.then(function(context) {
-								ctx = context;
-								success = true;
-								isFinished = true;
-							}, function(context) {
-								ctx = context;
-								error = true;
-								isFinished = true;
-							}, function(context) {
-								notify = true;
-							});
-						}, 20);
+					.commit(function(context){
+						dash.get.store(context)
+						.then(function(context) {
+							ctx = context;
+							success = true;
+							isFinished = true;
+						}, function(context) {
+							ctx = context;
+							error = true;
+							isFinished = true;
+						}, function(context) {
+							notify = true;
+						});
 					}, function(context) {
 						ctx = context;
 						error = true;
-						isFinished = true;
 					}, function(context) {
 						notify = true;
 					});
 				}, function(context) {
 					ctx = context;
 					error = true;
-					isFinished = true;
 				}, function(context) {
 					notify = true;
 				});
