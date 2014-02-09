@@ -79,11 +79,7 @@
 					});
 
 					it("clear.store should clean up after itself", function() {
-						dash.remove.store(this.context)
-						.then(function(context) {
-							dash.close.database(context)
-							.then(dash.remove.database);
-						});
+						dash.remove.database(this.context);
 					});
 				});
 			});

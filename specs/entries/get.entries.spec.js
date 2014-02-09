@@ -107,23 +107,7 @@
           });
 
           it("get.entries should clean up after itself", function() {
-            dash.remove.index({
-              db: this.context.db,
-              database: db_name,
-              store: store_name,
-              key: this.context.key,
-              version: this.context.db.version,
-              idx: this.context.idx
-            })
-            .then(function(context) {
-              dash.remove.store(context)
-              .then(function(context) {
-                dash.close.database(context)
-                .then(function() {
-                  dash.remove.database(context);
-                });
-              });
-            });
+            dash.remove.database(this.context);
           });
 
         });

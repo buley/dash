@@ -102,14 +102,7 @@
 					});
 
 					it("get.index should clean up after itself", function() {
-						dash.remove.index(this.context)
-						.then(function(contxt){
-							dash.remove.store(context)
-							.then(function(context) {
-								dash.close.database(context)
-								.then(dash.remove.database);
-							});
-						});
+						dash.remove.database(this.context);
 					});
 
 				});

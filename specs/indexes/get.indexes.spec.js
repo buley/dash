@@ -75,14 +75,7 @@
 						expect(this.context.indexes.contains(this.context.index)).toBe(true);
 					});
 					it("get.indexes should clean up after itself", function() {
-						dash.remove.index(this.context)
-						.then(function(contxt){
-							dash.remove.store(context)
-							.then(function(context) {
-								dash.close.database(context)
-								.then(dash.remove.database);
-							});
-						});
+						dash.remove.database(this.context);
 					});
 				});
 			});

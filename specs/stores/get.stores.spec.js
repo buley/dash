@@ -64,13 +64,7 @@
 						expect(this.context.stores.contains(this.context.store)).toBe(true);
 					});
 					it("get.stores should clean up after itself", function() {
-						dash.remove.store(this.context)
-						.then(function(context) {
-							dash.close.database(context)
-							.then(function(context){
-								dash.remove.database(context);
-							});
-						});
+						dash.remove.database(this.context);
 					});
 				});
 			});

@@ -32,6 +32,8 @@
 							isFinished = true;
 							success = true;
 						}, function(context) {
+							ctx = context;
+							console.log('add error');
 							isFinished = true;
 							error = true;
 						});
@@ -85,24 +87,7 @@
 					});
 
 					it("add.entry should clean up after itself", function() {
-						dash.open.database({
-							db: this.context.db,
-							database: db_name,
-							store: store_name,
-							key: this.context.key
-						})
-						.then(function(context) {
-							dash.remove.entry(context)
-							.then(function(context) {
-								dash.remove.store(context)
-								.then(function(context) {
-									dash.close.database(context)
-									.then(function() {
-										dash.remove.database(context);
-									});
-								});
-							});
-						});
+						dash.remove.database(this.context);
 					});
 
 				});

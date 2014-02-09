@@ -67,10 +67,7 @@
 					});
 
 					it("add.store should clean up after itself", function() {
-						dash.remove.store(this.context)
-						.then(function(context) {
-							dash.close.database(context);
-						});
+						dash.remove.database(this.context);
 					});
 
 				});
@@ -132,13 +129,7 @@
 					});
 
 					it("add.store should clean up after itself", function() {
-						dash.remove.store(this.context)
-						.then(function(context) {
-							dash.close.database(context)
-							.then(function(context){
-								dash.remove.database(context);
-							});
-						});
+						dash.remove.database(this.context);
 					});
 
 				});

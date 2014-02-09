@@ -94,20 +94,7 @@
           });
 
           it("get.entry should clean up after itself", function() {
-            dash.remove.entry({
-              db: this.context.db,
-              store: store_name,
-              key: this.context.key
-            })
-            .then(function(context) {
-              dash.remove.store(context)
-              .then(function(context) {
-                dash.close.database(context)
-                .then(function() {
-                  dash.remove.database(context);
-                });
-              });
-            });
+            dash.remove.database(this.context);
           });
         });
       });
