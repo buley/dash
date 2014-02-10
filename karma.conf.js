@@ -5,7 +5,7 @@ module.exports = function(config) {
     files: [
       'specs/*.js',
       'specs/*/*.js',
-      'lib/dash.dev.js'
+      'lib/dash.js'
     ],
     exclude: [],
     reporters: ['progress'],

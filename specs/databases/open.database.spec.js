@@ -1,13 +1,8 @@
 (function(){
 	'use strict';
-	
-	/* Shared expectations across open of new and existing database */
-
 	var start_time = new Date().getTime(),
 		db_name = 'store-open-test-' + start_time,
 		store_name = 'store-open-test-' + start_time;
-		
-
 	describe("open.database", function() {
 		it ('should handle a new database', function() {
 			var isClosed = false,
@@ -25,8 +20,7 @@
 						notify = false,
 						ctx;	
 					it( 'should open a new database when none exists', function() {
-						dash.open.database({ database: db_name })
-							.then(function(context) {
+						dash.open.database({ database: db_name }).then(function(context) {
 								ctx = context;
 								isFinished = true;
 								success = true;
@@ -95,8 +89,7 @@
 						notify = false,
 						ctx;
 					it( 'should open an existing database when one exists', function() {
-						dash.open.database({ database: db_name })
-							.then(function(context) {
+						dash.open.database({ database: db_name }).then(function(context) {
 								ctx = context;
 								isFinished = true;
 								success = true;
@@ -161,8 +154,7 @@
 						random_version = Math.floor(Math.random() * 100) + 1,
 						ctx;
 					it( 'should open an existing database when one exists', function() {
-						dash.open.database({ database: db_name, version: random_version })
-							.then(function(context) {
+						dash.open.database({ database: db_name, version: random_version }).then(function(context) {
 								ctx = context;
 								isFinished = true;
 								success = true;
@@ -199,10 +191,7 @@
 								});
 
 								it("open.database secondary test should clenup after itself", function(){
-									dash.close.database(this.context)
-									.then(function(context) {
-										dash.remove.database(context);
-									})
+									dash.remove.database(this.context);
 								});
 							});
 						});
