@@ -101,10 +101,10 @@ To get to objects, you have to through object stores, and to get to object store
 	dash.open.database({ database: 'foo' })
 		.then(function(context) {
 			console.log('dash: database opened', context.db);
+			dash.close.database(context);
 		}, function(context) {
 			console.log('dash: database not opened', context.error);
 		})
-		.then(dash.close.database);
 
 Opening an existing database and creating a new one work in the same way: if the name passed matches an existing database, that database is opened; if the name doesn't match an existing database, a new one will be created when opened using a unique name. Opening a new database, or opening an existing database with a version greather than the current version, will trigger a `versionchange` event.  
 
@@ -116,9 +116,10 @@ It's typically not possible to enumerate all databases for a host. Typically the
 
 	dash.get.databases().then( function(context) {
 	    console.log('dash: databases fetched', context.databases);
+	    dash.close.database(context));
 	}, function(context) {
 	    console.log('dash: databases not fetched', context.databases);
-	}).then(dash.close.database);
+	});
 
 #### Closing Databases
 
@@ -126,10 +127,14 @@ Databases can be [`close`d](http://www.w3.org/TR/2011/WD-IndexedDB-20110419/#dfn
 
 ##### Closing A Database Example: Simple Case
 
-	dash.open.database({ database: 'foo' }).then(dash.close.database).then(function(context) {
-		console.log('dash: database closed');
-	}, function(context) {
-		console.log('dash: database not closed');
+	dash.open.database({ database: 'foo' })
+	.then(function(context) {
+		dash.close.database(context)
+		.then(function(context) {
+			console.log('dash: database closed');
+		}, function(context) {
+			console.log('dash: database not closed');
+		});
 	});
 
 
@@ -141,11 +146,15 @@ Databases can be "deleted" and their resources will be freed up for use elsewher
 
 ##### Deleting A Database Example: Simple Case
 
-	dash.open.database({ database: 'foo' }).then(dash.remove.database).then(function(context) {
-	    console.log('dash: database deleted');
-	}, function(context) {
-	    console.log('dash: database not deleted');
-	}).then(dash.close.database);
+	dash.open.database({ database: 'foo' })
+	.then(function(context) {
+		dash.remove.database(context)
+		.then(function(context) {
+	    	console.log('dash: database deleted');
+		}, function(context) {
+	    	console.log('dash: database not deleted');
+		});
+	});
 
 
 Once a database is deleted you can open a new one with the same name; this is similar to a `versionchange` transaction but destroys and object stores and their contents.
@@ -164,11 +173,16 @@ Object stores are instances of [`IDBObjectStore`](https://developer.mozilla.org/
 
 ##### Creating An Object Store Example: Simple Case
 
-	dash.open.database({ database: 'foo', store: 'bar' }).then(dash.create.store).then(function(context) {
-		console.log('dash: store created', context.db, context.objectstore);
-	}, function(context) {
-		console.log('dash: store not created', context.db, context.error);
-	}).then(dash.close.database);
+	dash.open.database({ database: 'foo', store: 'bar' })
+	.then(function(context) {
+		dash.create.store(context)
+		.then(function(context) {
+			console.log('dash: store created', context.db, context.objectstore);
+			dash.close.database(context);
+		}, function(context) {
+			console.log('dash: store not created', context.db, context.error);
+		});
+	});
 
 ##### Key Paths
 
@@ -185,13 +199,15 @@ With an open database it's possible to get a reference to an object store. [`Get
 ##### Getting An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
-		.then(dash.get.store)
 		.then(function(context) {
-		    console.log('dash: store fetched', context.db, context.objectstore);
-		}, function(context) {
-		    console.log('dash: store not fetched', context.db, context.error);
-		})
-		.then(dash.close.database);
+			dash.get.store(context)
+			.then(function(context) {
+		    	console.log('dash: store fetched', context.db, context.objectstore);
+				dash.close.database(context);
+			}, function(context) {
+		    	console.log('dash: store not fetched', context.db, context.error);
+		    });
+		});
 
 #### Clearing An Object Store
 
@@ -200,14 +216,15 @@ With an open database it's possible to get a reference to an object store. [`Get
 ##### Clearing An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
-		.then(dash.clear.store)
 		.then(function(context) {
-			console.log( 'dash: store was cleared', context.db, context.objectstore );
-		}, function(context) {
-			console.log( 'dash: store wasn't cleared', context.db, context.objectstore, context.error );
-		})
-		.then(dash.close.database);
-
+			dash.clear.store(context)
+			.then(function(context) {
+		    	console.log('dash: store cleared', context.db, context.objectstore);
+				dash.close.database(context);
+			}, function(context) {
+		    	console.log('dash: store not cleared', context.db, context.error);
+		    });
+		});
 
 #### Removing An Object Store
 
@@ -231,14 +248,15 @@ With an open database it's possible to get a list of all object store names. Thi
 ##### Getting Multiple Object Stores Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
-		.then(dash.get.stores)
+	.then(function(context) {
+		dash.get.stores(context)
 		.then(function(context) {
 		    console.log('dash: stores fetched', context.db, context.stores);
+			dash.close.database(context);
 		}, function(context) {
-		    console.log('dash: stores not fetched', context.db, context.error);
+	    	console.log('dash: stores not fetched', context.db, context.error);
 		})
-		.then(dash.close.database);
-
+	});
 
 ### Indexes
 
@@ -253,13 +271,15 @@ The options for creating a new `index` are similar to those when creating an obj
 ##### Creating An Index Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
-		.then(dash.create.index)
+	.then(function(context) {
+		dash.create.index(context)
 		.then(function(context) {
 		    console.log('dash: index created', context.db, context.objectstore, context.idx);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: index was not created', context.db, context.objectstore, context.error);
-		})
-		.then(dash.close.database);
+		});
+	});
 
 
 #### Getting An Index
@@ -269,13 +289,15 @@ With a string index name, it's possible to get a reference to an existing index 
 ##### Getting An Index Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
-		.then(dash.get.index)
+	.then(function(context) {
+		dash.get.index(context)
 		.then(function(context) {
 		    console.log('dash: index fetched', context.db, context.objectstore, context.idx);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: index was not fetched', context.db, context.objectstore, context.error);
-		})
-		.then(dash.close.database);
+		});
+	});
 
 
 #### Removing An Index
@@ -285,13 +307,15 @@ With a string index name, it's possible to get a reference to an existing index 
 ##### Removing An Index Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
-		.then(dash.remove.index)
+	.then(function(context) {
+		dash.remove.index(context)
 		.then(function(context) {
 		    console.log('dash: index removed', context.db, context.objectstore);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: index was not removed', context.db, context.objectstore, context.idx, context.error);
-		})
-		.then(dash.close.database);
+		});
+	});
 
 #### Getting Multiple Indexes
 
@@ -300,13 +324,15 @@ Using an object store on an open database, it's possible to get a list of indexe
 ##### Getting Multiple Indexes Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz' })
-		.then(dash.create.index)
+	.then(function(context) {
+		dash.create.index(context)
 		.then(function(context) {
 		    console.log('dash: index created', context.index, context.idx);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: index was not created', context.index, context.idx);
-		})
-		.then(dash.close.database);
+		});
+	});
 
 ### Working With Singular `IndexedDB` Object
 
@@ -319,52 +345,60 @@ When adding or putting values, the various uniqueness rules for the store and in
 ##### Adding An Object To An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
-		.then(dash.add.object)
+	.then(function(context) {
+		dash.add.object(context)
 		.then(function(context) {
 		    console.log('dash: object added', context.db, context.objectstore, context.idx, context.result);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not added', context.db, context.objectstore, context.idx, context.error);
-		})
-		.then(dash.close.database);
+		});
+	});
 
 #### Removing Object From An Object Store
 
 ##### Removing An Object From An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', key: 'baz' })
-		.then(dash.remove.object)
+	.then(function(context) {
+		dash.remove.object(context)
 		.then(function(context) {
 		    console.log('dash: object removed', context.db, context.objectstore, context.idx, context.result);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not removed', context.db, context.objectstore, context.idx, context.error);
-		})
-		.then(dash.close.database);
+		});
+	});
 
 #### Getting An Object From An Object Store
 
 ##### Getting An Object From An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', key: 'baz' })
-		.then(dash.get.object)
+	.then(function(context) {
+		dash.get.object(context)
 		.then(function(context) {
 		    console.log('dash: object removed', context.db, context.objectstore, context.idx, context.result);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not removed', context.db, context.objectstore, context.idx, context.error);
-		})
-		.then(dash.close.database);
+		});
+	});
 
 #### Putting An Object Into An Object Store
 
 ##### Putting An Object Into An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', key: 'baz', data: { bang: 'boom' } })
-		.then(dash.put.object)
+	.then(function(context) {
+		dash.put.object(context)
 		.then(function(context) {
 		    console.log('dash: object put', context.db, context.objectstore, context.idx, context.result);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not put', context.db, context.objectstore, context.idx, context.error);
-		})
-		.then(dash.close.database);
+		});
+	});
 
 ### Working With Multiple Objects
 
@@ -409,46 +443,50 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 #### Getting Multiple Objects From A Database Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz', left: 'a', left_open: true })
-		.then(dash.get.objects)
+	.then(function(context) {
+		dash.get.objects(context)
 		.then(function(context) {
 		    console.log('dash: all objects fetched', context.db, context.objectstore, context.idx, context.cursor, context.result);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not fetched', context.db, context.objectstore, context.idx, context.cursor, context.error);
 		}, function(context) {
 		    console.log('dash: object was fetched', context.db, context.objectstore, context.idx, context.cursor, context.result);
-		})
-		.then(dash.close.database);
+		});
+	});
 
 ### Deleting Multiple Objects From A Database
 
 #### Deleting Multiple Objects From A Database Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz', left: 'a', left_open: true })
-		.then(dash.delete.objects)
+	.then(function(context) {
+		dash.delete.objects(context)
 		.then(function(context) {
 		    console.log('dash: all objects deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not deleted', context.db, context.objectstore, context.idx, context.cursor, context.error);
 		}, function(context) {
 		    console.log('dash: object was deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
-		})
-		.then(dash.close.database);
-
+		});
+	});
 
 ### Updating Multiple Objects In A Database
 
 #### Updating Multiple Objects In A Database Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar', index: 'baz', left: 0, left_open: true, data: { updated: new Date().getTime() } })
-		.then(dash.update.objects)
+	.then(function(context) {
+		dash.update.objects(context)
 		.then(function(context) {
 		    console.log('dash: all objects deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not deleted', context.db, context.objectstore, context.idx, context.cursor, context.error);
 		}, function(context) {
 		    console.log('dash: object was deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
-		})
-		.then(dash.close.database);
-
+		});
+	});
 
 [1] Although `IndexedDB` is has very little to do with HTML5 standard beyond some shared nomenclaure, IDB is typically grouped with so-called "HTML5" technologies.
