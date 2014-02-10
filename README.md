@@ -4,10 +4,10 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
 #### Key Features
 
-* Transaction-free for simplified IDB interaction
+* Mostly transaction-free IndexedDB
 * Just 4KB gzipped (~15KB Uncompressed)
 * Good test coverage with 150+ tests
-* Promise API for simplified callbacks
+* Promise API for simple callbacks
 
 #### Installation
 
@@ -22,7 +22,7 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 	.then(function(context) { /* use the simple promise API */
 		context.store = 'bar'; /* name of the store we'll create */
 		dash.add.store(context) /* create the store(/
-		.commit(function(context){ /* simple promise plus new call stack */
+		.commit(function(context){ /* use a simple promise but start a new call stack */
 			context.data = { baz: new Date().getTime() }; /* prepare some dummy data */
 			dash.add.object(context) /* add the data */
 			.commit(function(context) { /* for good measure, let the data addition commit */
