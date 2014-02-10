@@ -8,25 +8,77 @@ module.exports = function(grunt) {
     browsers.push('Firefox');
   } else {
     plugins.push('karma-chrome-launcher');
+    plugins.push('karma-firefox-launcher');
     browsers.push('Chrome');
+    browsers.push('Firefox');
   }
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     karma: {
       options: {
-	    configFile: 'karma.conf.js'
-      },
-	  dev: {
+	    configFile: 'karma.conf.js',
 	    browsers: browsers,
-	    plugins: plugins,
-	    autoWatch: false,
+	    plugins: plugins
+      },
+	  prod: {
 	    singleRun: true,
+	    autoWatch: false,
+		browsers: browsers,
+		options: {
+			files: [
+			  'lib/dash.js',
+			  'specs/*.js',
+			  'specs/*/*.js'
+			]
+		},
 	    reporters: [ 'dots' ]
-	  }
+	  },
+	  dev: {
+	    singleRun: false,
+	    autoWatch: true,
+		browsers: browsers,
+		options: {
+			files: [
+			  'lib/dash.dev.js',
+			  'specs/*.js',
+			  'specs/*/*.js'
+			]
+		},
+	    reporters: [ 'dots' ]
+	  },
+	  chrome: {
+	    singleRun: false,
+	    autoWatch: true,
+		browsers: [ 'Chrome' ],
+		options: {
+			files: [
+			  'lib/dash.dev.js',
+			  'specs/*.js',
+			  'specs/*/*.js'
+			]
+		},
+	    reporters: [ 'dots' ]
+	  },
+	  firefox: {
+	    singleRun: false,
+	    autoWatch: true,
+		browsers: [ 'Firefox' ],
+		options: {
+			files: [
+			  'lib/dash.dev.js',
+			  'specs/*.js',
+			  'specs/*/*.js'
+			]
+		},
+		reporters: [ 'dots' ]
+	  },
     }
   });
-  //grunt.loadTasks('tasks');
+  grunt.loadTasks('tasks');
   grunt.loadNpmTasks('grunt-karma');
-  grunt.registerTask('test', ['karma']);
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('prod', ['karma:prod']);
+  grunt.registerTask('dev', ['karma:dev']);
+  grunt.registerTask('firefox', ['karma:firefox']);
+  grunt.registerTask('chrome', ['karma:chrome']);
+  grunt.registerTask('default', ['prod']);
 };

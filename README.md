@@ -1,11 +1,12 @@
-# Library
+# dash ![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash)
 
-A work in progress slated for a 0.1 release in February.
+A cookie-sized JavaSript library offering a promise-based wrapper for the IndexedDB HTML5 database API.
 
 #### Key Features:
-* 4KB gzipped (15KB uncompressed)
-* Tested ([![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash))
-* Promise API
+* Promise API for simplified callbacks
+* Transaction-free for simplified interaction
+* Good test coverage with 150+ tests
+* Just 4KB gzipped (~15KB Uncompressed)
 
 # Documentation
 
