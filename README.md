@@ -5,9 +5,9 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 #### Key Features
 
 * Mostly transaction-free IndexedDB
+* Promise API for simple callbacks
 * Just 4KB gzipped (~15KB Uncompressed)
 * Good test coverage with 150+ tests
-* Promise API for simple callbacks
 
 #### Installation
 
