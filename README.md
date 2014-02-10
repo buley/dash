@@ -2,17 +2,27 @@
 
 A cookie-sized JavaSript library wrapping the IndexedDB (IDB) HTML5 database API.
 
-#### Key Features:
+#### Key Features
+
 * Promise API for simplified callbacks
 * Transaction-free for simplified IDB interaction
 * Good test coverage with 150+ tests
 * Just 4KB gzipped (~15KB Uncompressed)
 
-# Demo
+#### Quickstart
+
+* Download the [lastest build](https://raw.github.com/editor/dash/master/lib/dash.js)
+* Install via [bower](https://github.com/bower/bower): `bower install dash`
+
+#### License
+
+MIT
+
+#### Demo
 
 [http://dashdb.com](http://dashdb.com)
 
-## Overview
+## IndexedDB Overview
 
 [`IndexedDB`](https://developer.mozilla.org/en-US/docs/IndexedDB) (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most [`HTML5`](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)-enabled browsers. [1]
 
