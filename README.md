@@ -99,12 +99,12 @@ To get to objects, you have to through object stores, and to get to object store
 #### Opening A Database Example: Simple Case
 
 	dash.open.database({ database: 'foo' })
-		.then(function(context) {
-			console.log('dash: database opened', context.db);
-			dash.close.database(context);
-		}, function(context) {
-			console.log('dash: database not opened', context.error);
-		})
+	.then(function(context) {
+		console.log('dash: database opened', context.db);
+		dash.close.database(context);
+	}, function(context) {
+		console.log('dash: database not opened', context.error);
+	});
 
 Opening an existing database and creating a new one work in the same way: if the name passed matches an existing database, that database is opened; if the name doesn't match an existing database, a new one will be created when opened using a unique name. Opening a new database, or opening an existing database with a version greather than the current version, will trigger a `versionchange` event.  
 
@@ -114,7 +114,8 @@ It's typically not possible to enumerate all databases for a host. Typically the
 
 ##### Getting Existing Databases Example: Simple Case
 
-	dash.get.databases().then( function(context) {
+	dash.get.databases()
+	.then( function(context) {
 	    console.log('dash: databases fetched', context.databases);
 	    dash.close.database(context));
 	}, function(context) {
@@ -199,15 +200,15 @@ With an open database it's possible to get a reference to an object store. [`Get
 ##### Getting An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
+	.then(function(context) {
+		dash.get.store(context)
 		.then(function(context) {
-			dash.get.store(context)
-			.then(function(context) {
-		    	console.log('dash: store fetched', context.db, context.objectstore);
-				dash.close.database(context);
-			}, function(context) {
-		    	console.log('dash: store not fetched', context.db, context.error);
-		    });
-		});
+	    	console.log('dash: store fetched', context.db, context.objectstore);
+			dash.close.database(context);
+		}, function(context) {
+	    	console.log('dash: store not fetched', context.db, context.error);
+	    });
+	});
 
 #### Clearing An Object Store
 
@@ -216,15 +217,15 @@ With an open database it's possible to get a reference to an object store. [`Get
 ##### Clearing An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
+	.then(function(context) {
+		dash.clear.store(context)
 		.then(function(context) {
-			dash.clear.store(context)
-			.then(function(context) {
-		    	console.log('dash: store cleared', context.db, context.objectstore);
-				dash.close.database(context);
-			}, function(context) {
-		    	console.log('dash: store not cleared', context.db, context.error);
-		    });
-		});
+	    	console.log('dash: store cleared', context.db, context.objectstore);
+			dash.close.database(context);
+		}, function(context) {
+	    	console.log('dash: store not cleared', context.db, context.error);
+	    });
+	});
 
 #### Removing An Object Store
 
@@ -233,13 +234,13 @@ With an open database it's possible to get a reference to an object store. [`Get
 ##### Removing An Object Store Example: Simple Case
 
 	dash.open.database({ database: 'foo', store: 'bar' })
-		.then(dash.remove.store)
-		.then(function(context) {
-			console.log( 'dash: store was removed', context.db, context.objectstore);
-		}, function(context) {
-			console.log( 'dash: store wasn't removed', context.db, context.objectstore, context.error);
-		})
-		.then(dash.close.database);
+	.then(dash.remove.store)
+	.then(function(context) {
+		console.log( 'dash: store was removed', context.db, context.objectstore);
+		dash.close.database(context);
+	}, function(context) {
+		console.log( 'dash: store wasn't removed', context.db, context.objectstore, context.error);
+	});
 
 #### Getting Multiple Object Stores
 
