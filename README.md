@@ -3,10 +3,9 @@
 A work in progress slated for a 0.1 release in February.
 
 #### Key Features:
-* Transparent transactions
-* Promise API
-* Tested [![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash)
 * 4KB gzipped (15KB uncompressed)
+* Tested ([![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash))
+* Promise API
 
 # Documentation
 
