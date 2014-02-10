@@ -14,9 +14,7 @@
     "test",
     "tests"
   ],
-  "dependencies": {
-    "foundation": "zurb/bower-foundation#~5.1.1"
-  },
+  "dependencies": {},
   "homepage": "http://dashdb.com",
   "authors": [
     "Taylor Buley <taylor.buley@gmail.com>"
