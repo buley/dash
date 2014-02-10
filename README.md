@@ -4,14 +4,15 @@ A cookie-sized JavaSript library wrapping the IndexedDB (IDB) HTML5 database API
 
 #### Key Features
 
-* Promise API for simplified callbacks
 * Transaction-free for simplified IDB interaction
-* Good test coverage with 150+ tests
 * Just 4KB gzipped (~15KB Uncompressed)
+* Good test coverage with 150+ tests
+* Promise API for simplified callbacks
 
 #### Quickstart
 
-* Download the [lastest build](https://raw.github.com/editor/dash/master/lib/dash.js) or install via [bower](https://github.com/bower/bower): `bower install dash`
+* Download the [lastest build](https://raw.github.com/editor/dash/master/lib/dash.js)
+* Install via [bower](https://github.com/bower/bower): `bower install dash`
 
 #### License
 
