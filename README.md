@@ -14,17 +14,22 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 * Download the [lastest build](https://raw.github.com/editor/dash/master/lib/dash.js)
 * Install via [bower](https://github.com/bower/bower): `bower install dash`
 
-
-		dash.open.database({ database: 'foo', store: 'bar' })
+		/* To get started with IndexedDB, just open a database,
+		 * create an object store and put something in it. */
+		dash.open.database({ database: 'foo' })
 		.then(function(context) {
-			context.data = { baz: new Date().getTime() };
-			dash.add.object(context)
-			.then(function(context) {
-				console.log('dash: object added', context.db, context.objectstore, context.idx, context.key);
-				dash.get.object(context)
+			context.store = 'bar';
+			dash.add.store(context)
+			.then(function(context){
+				context.data = { baz: new Date().getTime() };
+				dash.add.object(context)
 				.then(function(context) {
-				    console.log('dash: object gotten', context.db, context.objectstore, context.idx, context.entry);
-					dash.close.database(context);
+					console.log('dash: object added', context.db.name, context.objectstore.name, context.key);
+					dash.get.object(context)
+					.then(function(context) {
+					    console.log('dash: object gotten', context.db.name, context.objectstore, context.entry);
+						dash.close.database(context);
+					});
 				});
 			});
 		});
