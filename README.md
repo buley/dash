@@ -1,10 +1,10 @@
 # dash.js [![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash)
 
-A cookie-sized JavaSript library offering a promise-based wrapper for the IndexedDB HTML5 database API.
+A cookie-sized JavaSript library offering a promise-based wrapper for the IndexedDB (IDB) HTML5 database API.
 
 #### Key Features:
 * Promise API for simplified callbacks
-* Transaction-free for simplified interaction
+* Transaction-free for simplified IDB interaction
 * Good test coverage with 150+ tests
 * Just 4KB gzipped (~15KB Uncompressed)
 

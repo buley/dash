@@ -16,14 +16,13 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     karma: {
       options: {
-	    configFile: 'karma.conf.js',
-	    browsers: browsers,
-	    plugins: plugins
+	    configFile: 'karma.conf.js'
       },
 	  prod: {
 	    singleRun: true,
 	    autoWatch: false,
 		browsers: browsers,
+	    plugins: plugins,
 		options: {
 			files: [
 			  'lib/dash.js',
@@ -37,6 +36,7 @@ module.exports = function(grunt) {
 	    singleRun: false,
 	    autoWatch: true,
 		browsers: browsers,
+	    plugins: plugins,
 		options: {
 			files: [
 			  'lib/dash.dev.js',
@@ -50,6 +50,7 @@ module.exports = function(grunt) {
 	    singleRun: false,
 	    autoWatch: true,
 		browsers: [ 'Chrome' ],
+	    plugins: plugins,
 		options: {
 			files: [
 			  'lib/dash.dev.js',
@@ -63,6 +64,7 @@ module.exports = function(grunt) {
 	    singleRun: false,
 	    autoWatch: true,
 		browsers: [ 'Firefox' ],
+	    plugins: plugins,
 		options: {
 			files: [
 			  'lib/dash.dev.js',
