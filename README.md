@@ -19,7 +19,7 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 	/* To get started with IndexedDB, just open a database,
 	 * create an object store and put something in it. */
 	dash.open.database({ database: 'foo' }) /* open/create a db using the given name */
-	.then(function(context) { /* simple promise API */
+	.then(function(context) { /* use the simple promise API */
 		context.store = 'bar'; /* name of the store we'll create */
 		dash.add.store(context) /* create the store(/
 		.commit(function(context){ /* simple promise plus new call stack */
