@@ -1,6 +1,6 @@
 # dash [![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash)
 
-A cookie-sized JavaSript library wrapping the IndexedDB (IDB) HTML5 database API.
+A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
 #### Key Features
 
