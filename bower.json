@@ -7,8 +7,29 @@
     ".jslintrc",
     "docs",
     "index.html",
-    "CNAME"
+    "CNAME",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
   ],
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "foundation": "zurb/bower-foundation#~5.1.1"
+  },
+  "homepage": "http://dashdb.com",
+  "authors": [
+    "Taylor Buley <taylor.buley@gmail.com>"
+  ],
+  "description": "A cookie-sized JavaSript library offering a promise-based wrapper for the IndexedDB (IDB) HTML5 database API.",
+  "keywords": [
+    "indexeddb",
+    "databases",
+    "objectstores",
+    "indexes",
+    "data",
+    "html5",
+    "idb"
+  ],
+  "license": "MIT"
 }
