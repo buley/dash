@@ -9,30 +9,32 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 * Good test coverage with 150+ tests
 * Promise API for simplified callbacks
 
-#### Quickstart
+#### Installation
 
 * Download the [lastest build](https://raw.github.com/editor/dash/master/lib/dash.js)
 * Install via [bower](https://github.com/bower/bower): `bower install dash`
 
-		/* To get started with IndexedDB, just open a database,
-		 * create an object store and put something in it. */
-		dash.open.database({ database: 'foo' })
-		.then(function(context) {
-			context.store = 'bar';
-			dash.add.store(context)
-			.then(function(context){
-				context.data = { baz: new Date().getTime() };
-				dash.add.object(context)
+#### Up And Running
+
+	/* To get started with IndexedDB, just open a database,
+	 * create an object store and put something in it. */
+	dash.open.database({ database: 'foo' })
+	.then(function(context) {
+		context.store = 'bar';
+		dash.add.store(context)
+		.then(function(context){
+			context.data = { baz: new Date().getTime() };
+			dash.add.object(context)
+			.then(function(context) {
+				console.log('dash: object added', context.db.name, context.objectstore.name, context.key);
+				dash.get.object(context)
 				.then(function(context) {
-					console.log('dash: object added', context.db.name, context.objectstore.name, context.key);
-					dash.get.object(context)
-					.then(function(context) {
-					    console.log('dash: object gotten', context.db.name, context.objectstore, context.entry);
-						dash.close.database(context);
-					});
+					console.log('dash: object gotten', context.db.name, context.objectstore, context.entry);
+					dash.close.database(context);
 				});
 			});
 		});
+	});
 
 
 #### Demo
