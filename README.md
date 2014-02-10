@@ -18,19 +18,19 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
 	/* To get started with IndexedDB, just open a database,
 	 * create an object store and put something in it. */
-	dash.open.database({ database: 'foo' })
-	.then(function(context) {
-		context.store = 'bar';
-		dash.add.store(context)
-		.then(function(context){
-			context.data = { baz: new Date().getTime() };
-			dash.add.object(context)
-			.then(function(context) {
+	dash.open.database({ database: 'foo' }) /* open/create a db using the given name */
+	.then(function(context) { /* simple promise API */
+		context.store = 'bar'; /* name of the store we'll create */
+		dash.add.store(context) /* create the store(/
+		.commit(function(context){ /* simple promise plus new call stack */
+			context.data = { baz: new Date().getTime() }; /* prepare some dummy data */
+			dash.add.object(context) /* add the data */
+			.commit(function(context) { /* for good measure, let the data addition commit */
 				console.log('dash: object added', context.db.name, context.objectstore.name, context.key);
-				dash.get.object(context)
+				dash.get.object(context) /* get the object we just added */
 				.then(function(context) {
 					console.log('dash: object gotten', context.db.name, context.objectstore, context.entry);
-					dash.close.database(context);
+					dash.close.database(context); /* close the database since we're done */
 				});
 			});
 		});
