@@ -1,8 +1,9 @@
-#swap files
+#vim swap files
 *.swp
-#node
+#node/npm
 ./node_modules/*
 node_modules
 npm-debug.log
 #bower
-./bower_components
+bower_components
+./bower_components/*
