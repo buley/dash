@@ -43,19 +43,19 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             tags: [ 'general', 'quickstart', 'overview' ],
             children: [
                 { 'path': 'overview/keys',
-                    'title': 'Keys', children: []
+                    'title': 'Keys'
                 },
                 { 'path': 'overview/records',
-                    'title': 'Records', children: []
+                    'title': 'Records'
                 },
                 { 'path': 'overview/requests',
-                    'title': 'Requests', children: []
+                    'title': 'Requests'
                 },
                 { 'path': 'overview/security',
-                    'title': 'Security', children: []
+                    'title': 'Security'
                 },
                 { 'path': 'overview/transactions',
-                    'title': 'Transactions', children: []
+                    'title': 'Transactions'
                 },
             ]
         },
@@ -69,40 +69,40 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                     'title': 'Databases',
                     'children': [
                         { 'path': 'indexeddb/database/closing',
-                            'title': 'Closing', children: []
+                            'title': 'Closing'
                         },
                         { 'path': 'indexeddb/database/removing',
-                            'title': 'Removing', children: []
+                            'title': 'Removing'
                         },
                         { 'path': 'indexeddb/database/getting',
-                            'title': 'Getting', children: []
+                            'title': 'Getting'
                         },
                         { 'path': 'indexeddb/database/names',
-                            'title': 'Names', children: []
+                            'title': 'Names'
                         },
                         { 'path': 'indexeddb/database/opening',
-                            'title': 'Opening', children: []
+                            'title': 'Opening'
                         },
                         { 'path': 'indexeddb/database/versionchanges',
-                            'title': 'Version Changes', children: []
+                            'title': 'Version Changes'
                         },
                         { 'path': 'indexeddb/database/versions',
-                            'title': 'Versions', children: []
+                            'title': 'Versions'
                         } ]
                 },
                 { 'path': 'indexeddb/entries',
                     'title': 'Entries',
                     'children': [
                         { 'path': 'indexeddb/entry/adding',
-                            'title': 'Adding', children: [] },
+                            'title': 'Adding' },
                         { 'path': 'indexeddb/entry/getting',
-                            'title': 'Getting', children: [] },
+                            'title': 'Getting' },
                         { 'path': 'indexeddb/entry/putting',
-                            'title': 'Putting', children: [] },
+                            'title': 'Putting' },
                         { 'path': 'indexeddb/entry/removing',
-                            'title': 'Removing', children: [] },
+                            'title': 'Removing' },
                         { 'path': 'indexeddb/entry/updating',
-                            'title': 'Updating', children: [] }
+                            'title': 'Updating' }
                     ]
                 },
                 { 'path': 'indexeddb/indexes',
@@ -110,13 +110,13 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                     'children': [
                         { 'path': 'indexeddb/index/creating',
 
-                            'title': 'Creating', children: [] },
+                            'title': 'Creating' },
                         { 'path': 'indexeddb/index/getting',
-                            'title': 'Getting', children: []},
+                            'title': 'Getting'},
                         { 'path': 'indexeddb/index/iterating',
-                            'title': 'Iterating', children: [] },
+                            'title': 'Iterating' },
                         { 'path': 'indexeddb/index/removing',
-                            'title': 'Removing', children: []
+                            'title': 'Removing'
                         }
                     ]
                 },
@@ -124,24 +124,24 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                     'title': 'Keyranges',
                     'children': [
                         { 'path': 'indexeddb/keyrange/bounds',
-                            'title': 'Bounds', children: [] },
+                            'title': 'Bounds' },
                         { 'path': 'indexeddb/keyrange/direction',
-                            'title': 'Direction', children: [] }
+                            'title': 'Direction' }
                     ]
                 },
                 { 'path': 'indexeddb/stores',
                     'title': 'Stores',
                     'children': [
-                        { 'path': 'indexeddb/objectstore/clearing', 'title': 'Clearing', children: [] },
-                        { 'path': 'indexeddb/objectstore/creating', 'title': 'Creating', children: [] },
-                        { 'path': 'indexeddb/objectstore/getting', 'title': 'Getting', children: [] },
-                        { 'path': 'indexeddb/objectstore/iteration', 'title': 'Iterating', children: [] },
-                        { 'path': 'indexeddb/objectstore/keypaths', 'title': 'Keypaths', children: [] },
-                        { 'path': 'indexeddb/objectstore/removing', 'title': 'Removing', children: [] }
+                        { 'path': 'indexeddb/objectstore/clearing', 'title': 'Clearing' },
+                        { 'path': 'indexeddb/objectstore/creating', 'title': 'Creating' },
+                        { 'path': 'indexeddb/objectstore/getting', 'title': 'Getting' },
+                        { 'path': 'indexeddb/objectstore/iteration', 'title': 'Iterating' },
+                        { 'path': 'indexeddb/objectstore/keypaths', 'title': 'Keypaths' },
+                        { 'path': 'indexeddb/objectstore/removing', 'title': 'Removing' }
                     ]
                 },
                 { 'path': 'indexeddb/cursors',
-                    'title': 'Cursors', children: []
+                    'title': 'Cursors'
                 }
 
             ]
@@ -155,14 +155,14 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
     }
     console.log('docs controller', $scope.documents);
     var process = function(item) {
-      $http.get( getPath(item.path), { cache: $templateCache } );
-      if (!item.children) {
-        return;
-      } else {
-          _.map(item.children, function(datum) {
-            process(datum);
-          });
-      }
+        $http.get( getPath(item.path), { cache: $templateCache } );
+        if (!item.children) {
+            return;
+        } else {
+            _.map(item.children, function(datum) {
+                process(datum);
+            });
+        }
     };
     _.map( $scope.documents, process );
 
