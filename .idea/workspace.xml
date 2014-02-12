@@ -29,7 +29,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="39" selection-start="3323" selection-end="3323" vertical-scroll-proportion="0.3545611" vertical-offset="1189" max-vertical-offset="3165">
+            <state line="104" column="42" selection-start="3902" selection-end="3902" vertical-scroll-proportion="0.6385542" vertical-offset="1189" max-vertical-offset="3165">
               <folding />
             </state>
           </provider>
@@ -591,7 +591,11 @@
       <created>1392185721050</created>
       <updated>1392185721050</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="merge confl&#10;">
+      <created>1392185778116</created>
+      <updated>1392185778116</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -865,7 +869,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="39" selection-start="3323" selection-end="3323" vertical-scroll-proportion="0.3545611" vertical-offset="1189" max-vertical-offset="3165">
+        <state line="104" column="42" selection-start="3902" selection-end="3902" vertical-scroll-proportion="0.6385542" vertical-offset="1189" max-vertical-offset="3165">
           <folding />
         </state>
       </provider>
