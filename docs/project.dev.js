@@ -35,11 +35,11 @@ dashApp.controller('dashAppAboutController', [ function() {
     console.log('about controller');
 }]);
 
-dashApp.controller('dashAppDocsController', [ function() {
+dashApp.controller('dashAppDocsController', [ '$scope', function( $scope ) {
     console.log('docs controller');
     $scope.documentation = [ {
-        'slug': 'quickstart',
-        'description': ''
+        'slug': 'overview',
+        'description': $templateCache.get('/docs/documents/overview.md')
     } ];
 }]);
 dashApp.controller('dashAppDocsContentController', [ function() {
