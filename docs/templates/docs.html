@@ -8,6 +8,23 @@
                     <section markdown="documentContent(document.path)"></section>
                 </div>
             </div>
+            <div class="row" ng-repeat="child in document.children">
+                <div class="small-12 columns">
+                    <div class="row" ng-hide="child.hidden">
+                        <h1>{{child.title}}</h1>
+                        <section markdown="documentContent(child.path)"></section>
+                    </div>
+                </div>
+                <div class="row" ng-repeat="grandchild in child.children">
+                    <div class="small-12 columns">
+                        <div class="row" ng-hide="grandchild.hidden">
+                            <h1>{{grandchild.title}}</h1>
+                            <section markdown="documentContent(grandchild.path)"></section>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
