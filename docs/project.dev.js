@@ -65,9 +65,6 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             hidden: true,
             tags: [ 'indexeddb', 'spec', 'overview', 'html5' ],
             children: [
-                { 'path': 'indexeddb/cursors',
-                    'title': 'Cursors'
-                },
                 { 'path': 'indexeddb/databases',
                     'title': 'Databases',
                     children: [
@@ -142,7 +139,11 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                         { 'path': 'indexeddb/objectstore/keypaths', 'title': 'Keypaths' },
                         { 'path': 'indexeddb/objectstore/removing', 'title': 'Removing' }
                     ]
+                },
+                { 'path': 'indexeddb/cursors',
+                    'title': 'Cursors'
                 }
+
             ]
         }
     ];
