@@ -43,7 +43,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
         'stores'
     ];
     _.each( $scope.documents, function(slug) {
-        $http.get(['/docs/documents/', slug, '.md' ].join(), { cache: $templateCache } );
+        $http.get(['/docs/documents/', slug, '.md' ].join(''), { cache: $templateCache } );
     });
 }]);
 dashApp.controller('dashAppDocsContentController', [ function() {
