@@ -37,16 +37,23 @@ dashApp.controller('dashAppAboutController', [ function() {
 
 dashApp.controller('dashAppDocsController', [ '$scope', '$templateCache', function( $scope, $templateCache ) {
     console.log('docs controller');
-    $scope.documentation = [ {
-        'slug': 'overview',
-        'description': $templateCache.get('/docs/documents/overview.md')
-    } ];
+    $scope.documents = [
+        'overview',
+        'databases',
+        'stores'
+    ];
+    _.each( $scope.documents, function(slug) {
+        $http.get(['/docs/documents/', slug, '.md' ].join(), { cache: $templateCache } );
+    });
 }]);
 dashApp.controller('dashAppDocsContentController', [ function() {
     console.log('content controller');
 }]);
 dashApp.controller('dashAppDocsSidebarController', [ function() {
     console.log('sidebar controller');
+    _.each( [], function() {
+
+    });
 }]);
 dashApp.controller('dashAppSplashController', [ function() {
     console.log('splash controller');
