@@ -29,7 +29,7 @@
       <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="59" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.53859967" vertical-offset="0" max-vertical-offset="885">
+            <state line="7" column="27" selection-start="462" selection-end="462" vertical-scroll-proportion="0.18850988" vertical-offset="0" max-vertical-offset="885">
               <folding />
             </state>
           </provider>
@@ -551,7 +551,11 @@
       <created>1392184580434</created>
       <updated>1392184580434</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="merge confl&#10;">
+      <created>1392184650464</created>
+      <updated>1392184650464</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -825,7 +829,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="59" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.53859967" vertical-offset="0" max-vertical-offset="885">
+        <state line="7" column="27" selection-start="462" selection-end="462" vertical-scroll-proportion="0.18850988" vertical-offset="0" max-vertical-offset="885">
           <folding />
         </state>
       </provider>

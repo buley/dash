@@ -3,21 +3,21 @@
     <div class="large-8 columns dash-app-docs-content" ng-controller="dashAppDocsContentController">
 
         <!--Navigation -->
-        <ul class="row dash-document-navigation" ng-repeat="document in documents">
-            <li class="small-12 columns dash-document-item-container">
-                <div class="row dash-document-item" ng-hide="document.hidden">
+        <ul class="dash-document-navigation" ng-repeat="document in documents">
+            <li class="dash-document-item-container">
+                <div class="dash-document-item" ng-hide="document.hidden">
                     <span>{{document.title}}</span>
                 </div>
             </li>
-            <ul class="row dash-document-navigation" ng-repeat="child in document.children">
-                <li class="small-12 columns dash-document-item-container">
-                    <div class="row dash-document-item" ng-hide="child.hidden">
+            <ul class="dash-document-navigation" ng-repeat="child in document.children">
+                <li class="dash-document-item-container">
+                    <div class="dash-document-item" ng-hide="child.hidden">
                         <span>{{child.title}}</span>
                     </div>
                 </ul>
-                <ul class="row dash-document-navigation" ng-repeat="grandchild in child.children">
-                    <li class="small-12 columns dash-document-item-container">
-                        <div class="row dash-document-item" ng-hide="grandchild.hidden">
+                <ul class="dash-document-navigation" ng-repeat="grandchild in child.children">
+                    <li class="dash-document-item-container">
+                        <div class="dash-document-item" ng-hide="grandchild.hidden">
                             <span>{{grandchild.title}}</span>
                         </div>
                     </li>
