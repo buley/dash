@@ -1,0 +1,7 @@
+.dash-docs-search {
+  margin: 0px;
+  width: 440px;
+}
+.dash-docs-search input[type="text"] {
+  height: 29px;
+}
