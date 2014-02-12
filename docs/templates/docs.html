@@ -21,7 +21,7 @@
                             <span>{{grandchild.title}}  {{grandchild.children.length}}</span>
                         </div>
                     </li>
-                    <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children" ng-if="grandchild.children.length">
+                    <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children">
                         <li class="dash-document-item-container">
                             <div class="dash-document-item">
                                 <span>{{greatgrandchild.title}}</span>
