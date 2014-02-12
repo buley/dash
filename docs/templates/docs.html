@@ -14,14 +14,14 @@
                     <div class="dash-document-item">
                         <span>{{child.title}} {{child.children.length}}</span>
                     </div>
-                </ul>
+                </li>
                 <ul class="dash-document-navigation" ng-repeat="grandchild in child.children" ng-if="child.children.length">
                     <li class="dash-document-item-container">
                         <div class="dash-document-item">
                             <span>{{grandchild.title}}  {{grandchild.children.length}}</span>
                         </div>
                     </li>
-                    <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children">
+                    <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children" ng-if="grandchild.children.length">
                         <li class="dash-document-item-container">
                             <div class="dash-document-item">
                                 <span>{{greatgrandchild.title}}</span>
