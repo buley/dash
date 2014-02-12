@@ -21,6 +21,13 @@
                             <span>{{grandchild.title}}</span>
                         </div>
                     </li>
+                    <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children">
+                        <li class="dash-document-item-container">
+                            <div class="dash-document-item">
+                                <span>{{greatgrandchild.title}}</span>
+                            </div>
+                        </li>
+                    </ul>                    
                 </ul>
             </ul>
         </ul>        
@@ -45,6 +52,14 @@
                         <div class="row dash-document-item" ng-hide="grandchild.hidden">
                             <h3>{{grandchild.title}}</h3>
                             <section markdown="documentContent(grandchild.path)"></section>
+                        </div>
+                    </div>
+                    <div class="row dash-document-list" ng-repeat="greatgrandchild in grandchild.children">
+                        <div class="small-12 columns dash-document-item-container">
+                            <div class="row dash-document-item" ng-hide="greatgrandchild.hidden">
+                                <h3>{{greatgrandchild.title}}</h3>
+                                <section markdown="documentContent(greatgrandchild.path)"></section>
+                            </div>
                         </div>
                     </div>
                 </div>
