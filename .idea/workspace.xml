@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/templates/docs.html" afterPath="$PROJECT_DIR$/docs/templates/docs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -26,28 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="update.entries.spec.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/entries/update.entries.spec.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="8" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1980">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.entry.spec.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/entries/add.entry.spec.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="38" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1590">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="28" selection-start="2044" selection-end="2044" vertical-scroll-proportion="-6.1666665" vertical-offset="437" max-vertical-offset="975">
+            <state line="57" column="7" selection-start="2774" selection-end="2774" vertical-scroll-proportion="-34.25" vertical-offset="33" max-vertical-offset="960">
               <folding />
             </state>
           </provider>
@@ -56,7 +38,7 @@
       <file leaf-file-name="project.less" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="15" selection-start="50" selection-end="50" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="255">
+            <state line="14" column="1" selection-start="215" selection-end="215" vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="300">
               <folding />
             </state>
           </provider>
@@ -65,16 +47,25 @@
       <file leaf-file-name="project.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/project.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="195">
+            <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.dev.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="6" selection-start="890" selection-end="890" vertical-scroll-proportion="0.0" vertical-offset="231" max-vertical-offset="765">
+            <state line="41" column="24" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.4311377" vertical-offset="399" max-vertical-offset="900">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="0" selection-start="431" selection-end="1452" vertical-scroll-proportion="-8.4" vertical-offset="0" max-vertical-offset="7485">
               <folding />
             </state>
           </provider>
@@ -98,10 +89,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="24" selection-start="163" selection-end="188" vertical-scroll-proportion="0.16025642" vertical-offset="0" max-vertical-offset="468">
+            <state line="12" column="6" selection-start="527" selection-end="527" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="270">
               <folding />
             </state>
           </provider>
@@ -129,11 +120,11 @@
         <option value="$PROJECT_DIR$/lib/dash.dev.js" />
         <option value="$PROJECT_DIR$/specs/entries/add.entry.spec.js" />
         <option value="$PROJECT_DIR$/docs/templates/splash.html" />
-        <option value="$PROJECT_DIR$/docs/project.dev.js" />
-        <option value="$PROJECT_DIR$/docs/project.less" />
         <option value="$PROJECT_DIR$/docs/vendor/css/foundation.css" />
+        <option value="$PROJECT_DIR$/docs/project.less" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/docs/templates/docs.html" />
+        <option value="$PROJECT_DIR$/docs/project.dev.js" />
       </list>
     </option>
   </component>
@@ -415,12 +406,54 @@
       <created>1392097907184</created>
       <updated>1392097907184</updated>
     </task>
+    <task id="LOCAL-00001" summary="finally, working on /docs&#10;">
+      <created>1392172766702</created>
+      <updated>1392172766702</updated>
+    </task>
+    <task id="LOCAL-00002" summary="finally, working on /docs&#10;">
+      <created>1392172812225</created>
+      <updated>1392172812225</updated>
+    </task>
+    <task id="LOCAL-00003" summary="WIP">
+      <created>1392172900375</created>
+      <updated>1392172900375</updated>
+    </task>
+    <task id="LOCAL-00004" summary="WIP&#10;">
+      <created>1392173075832</created>
+      <updated>1392173075832</updated>
+    </task>
+    <task id="LOCAL-00005" summary="WIP&#10;">
+      <created>1392173276687</created>
+      <updated>1392173276687</updated>
+    </task>
+    <task id="LOCAL-00006" summary="WIP&#10;">
+      <created>1392173341358</created>
+      <updated>1392173341358</updated>
+    </task>
+    <task id="LOCAL-00007" summary="WIP&#10;">
+      <created>1392173381530</created>
+      <updated>1392173381530</updated>
+    </task>
+    <task id="LOCAL-00008" summary="WIP&#10;">
+      <created>1392173517569</created>
+      <updated>1392173517569</updated>
+    </task>
+    <task id="LOCAL-00009" summary="WIP&#10;">
+      <created>1392173583377</created>
+      <updated>1392173583377</updated>
+    </task>
+    <task id="LOCAL-00010" summary="WIP&#10;">
+      <created>1392173650021</created>
+      <updated>1392173650021</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="960" y="0" width="960" height="1055" extended-state="4" />
+    <frame x="960" y="0" width="960" height="1055" extended-state="5" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -452,6 +485,10 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="finally, working on /docs&#10;" />
+    <MESSAGE value="WIP" />
+    <MESSAGE value="WIP&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -522,13 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/templates/splash.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/about.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
@@ -543,23 +573,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="6" selection-start="890" selection-end="890" vertical-scroll-proportion="0.0" vertical-offset="231" max-vertical-offset="765">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="195">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="15" selection-start="50" selection-end="50" vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="255">
+        <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
           <folding />
         </state>
       </provider>
@@ -571,16 +587,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="1" selection-start="215" selection-end="215" vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="28" selection-start="2044" selection-end="2044" vertical-scroll-proportion="-6.1666665" vertical-offset="437" max-vertical-offset="975">
+        <state line="57" column="7" selection-start="2774" selection-end="2774" vertical-scroll-proportion="-34.25" vertical-offset="33" max-vertical-offset="960">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/templates/splash.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="24" selection-start="163" selection-end="188" vertical-scroll-proportion="0.16025642" vertical-offset="0" max-vertical-offset="468">
+        <state line="12" column="6" selection-start="527" selection-end="527" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="270">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="431" selection-end="1452" vertical-scroll-proportion="-8.4" vertical-offset="0" max-vertical-offset="7485">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="24" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.4311377" vertical-offset="399" max-vertical-offset="900">
           <folding />
         </state>
       </provider>

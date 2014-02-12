@@ -37,6 +37,10 @@ dashApp.controller('dashAppAboutController', [ function() {
 
 dashApp.controller('dashAppDocsController', [ function() {
     console.log('docs controller');
+    $scope.documentation = [ {
+        'slug': 'quickstart',
+        'description': ''
+    } ];
 }]);
 dashApp.controller('dashAppDocsContentController', [ function() {
     console.log('content controller');
