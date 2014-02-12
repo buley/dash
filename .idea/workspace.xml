@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/documents/indexeddb/database/deleting.md" afterPath="$PROJECT_DIR$/docs/documents/indexeddb/database/removing.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/documents/keys.md" afterPath="$PROJECT_DIR$/docs/documents/overview/keys.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/documents/records.md" afterPath="$PROJECT_DIR$/docs/documents/overview/records.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/documents/requests.md" afterPath="$PROJECT_DIR$/docs/documents/overview/requests.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/documents/security.md" afterPath="$PROJECT_DIR$/docs/documents/overview/security.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/docs/documents/transactions.md" afterPath="$PROJECT_DIR$/docs/documents/overview/transactions.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -36,7 +29,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="139" column="51" selection-start="5501" selection-end="5501" vertical-scroll-proportion="0.81989706" vertical-offset="1607" max-vertical-offset="2595">
+            <state line="157" column="0" selection-start="6123" selection-end="6123" vertical-scroll-proportion="0.8003442" vertical-offset="1890" max-vertical-offset="2715">
               <folding />
             </state>
           </provider>
@@ -630,14 +623,19 @@
       <created>1392175920129</created>
       <updated>1392175920129</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="merge confl&#10;">
+      <created>1392181992814</created>
+      <updated>1392181992814</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="960" y="0" width="956" height="1055" extended-state="4" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3365282" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33724654" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -651,7 +649,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -673,7 +670,8 @@
     <MESSAGE value="WIP" />
     <MESSAGE value="WIP&#10;" />
     <MESSAGE value=".&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value=".&#10;" />
+    <MESSAGE value="merge confl&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge confl&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -880,7 +878,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="51" selection-start="5501" selection-end="5501" vertical-scroll-proportion="0.81989706" vertical-offset="1607" max-vertical-offset="2595">
+        <state line="157" column="0" selection-start="6123" selection-end="6123" vertical-scroll-proportion="0.8003442" vertical-offset="1890" max-vertical-offset="2715">
           <folding />
         </state>
       </provider>

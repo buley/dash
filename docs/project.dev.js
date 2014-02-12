@@ -98,13 +98,13 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                         { 'path': 'indexeddb/entry/adding',
                             title: 'Adding' },
                         { 'path': 'indexeddb/entry/getting',
-                        'title': 'Getting' },
+                            'title': 'Getting' },
                         { 'path': 'indexeddb/entry/putting',
-                        'title': 'Putting' },
+                            'title': 'Putting' },
                         { 'path': 'indexeddb/entry/removing',
-                        'title': 'Removing' },
+                            'title': 'Removing' },
                         { 'path': 'indexeddb/entry/updating',
-                        'title': 'Updating' }
+                            'title': 'Updating' }
                     ]
                 },
                 { 'path': 'indexeddb/indexes',
@@ -114,11 +114,11 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 
                             'title': 'Creating' },
                         { 'path': 'indexeddb/index/getting',
-                        'title': 'Getting'},
+                            'title': 'Getting'},
                         { 'path': 'indexeddb/index/iterating',
-                           'title': 'Iterating' },
+                            'title': 'Iterating' },
                         { 'path': 'indexeddb/index/removing',
-                        'title': 'Removing'
+                            'title': 'Removing'
                         }
                     ]
                 },
@@ -126,9 +126,9 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                     'title': 'Keyranges',
                     'children': [
                         { 'path': 'indexeddb/keyrange/bounds',
-                        'title': 'Bounds' },
+                            'title': 'Bounds' },
                         { 'path': 'indexeddb/keyrange/direction',
-                        'title': 'Direction' }
+                            'title': 'Direction' }
                     ]
                 },
                 { 'path': 'indexeddb/stores',
@@ -145,9 +145,17 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             ]
         }
     ];
-    _.each( $scope.documents, function(slug) {
-        $http.get(['/docs/documents/', slug, '.md' ].join(''), { cache: $templateCache } );
-    });
+    var process = function(item) {
+      $http.get(['/docs/documents/', item.path, '.md' ].join(''), { cache: $templateCache } );
+      if (!item.children) {
+        return;
+      } else {
+          _.map(item.children, function(datum) {
+            process(datum);
+          });
+      }
+    };
+
 }]);
 
 dashApp.controller('dashAppDocsContentController', [ function() {
