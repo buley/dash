@@ -10,31 +10,37 @@
         <script src='./docs/project.dev.js'></script>
         <script src='./lib/dash.dev.js'></script>
     </head>
-    <body ng-app="dashApp">
+    <body ng-app="dashApp" ng-controller="dashAppController">
         <header>
             <nav class="top-bar" data-topbar>
                 <ul class="title-area">
                     <li class="name">
                         <h1><a href="#">dash</a></h1>
                     </li>
-                    <li class="toggle-topbar menu-icon">
-                        <a href="#">Menu</a>
-                    </li>
                 </ul>
                 <section class="top-bar-section">
                     <ul class="right">
-                        <li class="active"><a href="#">Right Button Active</a></li>
-                        <li class="has-dropdown">
-                            <a href="#">Right Button with Dropdown</a>
-                            <ul class="dropdown">
-                                <li><a href="#">First link in dropdown</a></li>
-                            </ul>
+                        <li>
+                            <a href="http://github.com/editor/dash">Github</a>
+                        </li>
+                        <li class="has-form">
+                            <a class="button success" href="https://raw.github.com/editor/dash/master/lib/dash.js">Download</a>
                         </li>
                     </ul>
                     <ul class="left">
                        <li><a ng-href="#/">Home</a></li>
                        <li><a ng-href="#/docs">Docs</a></li>
                        <li><a ng-href="#/about">About</a></li>
+                       <li class="has-form" ng-show="isDocs()">
+                            <div class="row collapse">
+                                <div class="large-8 small-9 columns">
+                                    <input type="text" placeholder="Search">
+                                </div>
+                                <div class="large-4 small-3 columns">
+                                    <a href="#" class="button expand">Search</a>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </section>
             </nav>

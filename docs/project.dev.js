@@ -19,6 +19,18 @@ dashApp.config(['$routeProvider', function($routeProvider) {
         });
 }]);
 
+dashApp.controller( 'dashAppController', [ '$location', '$scope', function( $location, $scope ) {
+    $scope.isSplash = function() {
+        return '/' === $location.hash();
+    };
+    $scope.isDocs = function() {
+        return '/docs' === $location.hash();
+    };
+    $scope.isAbout = function() {
+        return '/about' === $location.hash();
+    };
+}]);
+
 dashApp.controller('dashAppAboutController', [ function() {
     console.log('about controller');
 }]);
@@ -30,3 +42,4 @@ dashApp.controller('dashAppDocsController', [ function() {
 dashApp.controller('dashAppSplashController', [ function() {
     console.log('splash controller');
 }]);
+
