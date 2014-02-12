@@ -26,19 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="29" selection-start="1687" selection-end="1687" vertical-scroll-proportion="-13.125" vertical-offset="105" max-vertical-offset="1110">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="33" selection-start="1723" selection-end="1723" vertical-scroll-proportion="-1.5817556" vertical-offset="1714" max-vertical-offset="3150">
+            <state line="93" column="39" selection-start="3323" selection-end="3323" vertical-scroll-proportion="0.3545611" vertical-offset="1189" max-vertical-offset="3165">
               <folding />
             </state>
           </provider>
@@ -72,8 +63,8 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/docs/documents/overview/records.md" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/docs/project.dev.js" />
         <option value="$PROJECT_DIR$/docs/templates/docs.html" />
+        <option value="$PROJECT_DIR$/docs/project.dev.js" />
       </list>
     </option>
   </component>
@@ -588,7 +579,15 @@
       <created>1392185353488</created>
       <updated>1392185353488</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="merge confl&#10;">
+      <created>1392185527266</created>
+      <updated>1392185527266</updated>
+    </task>
+    <task id="LOCAL-00043" summary="merge confl&#10;">
+      <created>1392185624113</created>
+      <updated>1392185624113</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -855,14 +854,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="29" selection-start="1687" selection-end="1687" vertical-scroll-proportion="-13.125" vertical-offset="105" max-vertical-offset="1110">
+        <state line="28" column="29" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.56552964" vertical-offset="105" max-vertical-offset="1110">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="33" selection-start="1723" selection-end="1723" vertical-scroll-proportion="-1.5817556" vertical-offset="1714" max-vertical-offset="3150">
+        <state line="93" column="39" selection-start="3323" selection-end="3323" vertical-scroll-proportion="0.3545611" vertical-offset="1189" max-vertical-offset="3165">
           <folding />
         </state>
       </provider>
