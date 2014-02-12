@@ -2,17 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dash.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/get.entries.spec.js" afterPath="$PROJECT_DIR$/specs/entries/get.entries.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/karma.conf.js" afterPath="$PROJECT_DIR$/karma.conf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" afterPath="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/remove.entry.spec.js" afterPath="$PROJECT_DIR$/specs/entries/remove.entry.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/update.entries.spec.js" afterPath="$PROJECT_DIR$/specs/entries/update.entries.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,6 +25,7 @@
     <favorites_list name="dash" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf>
       <file leaf-file-name="remove.entry.spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/entries/remove.entry.spec.js">
@@ -99,6 +91,9 @@
         </entry>
       </file>
     </leaf>
+=======
+    <leaf />
+>>>>>>> gh-pages
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -119,6 +114,17 @@
         <option value="$PROJECT_DIR$/karma.conf.js" />
         <option value="$PROJECT_DIR$/lib/dash.dev.js" />
         <option value="$PROJECT_DIR$/specs/entries/add.entry.spec.js" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/docs/templates/splash.html" />
+        <option value="$PROJECT_DIR$/docs/vendor/css/foundation.css" />
+        <option value="$PROJECT_DIR$/docs/templates/docs.html" />
+        <option value="$PROJECT_DIR$/docs/documents/overview.md" />
+        <option value="$PROJECT_DIR$/docs/project.less" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/docs/project.dev.js" />
+        <option value="$PROJECT_DIR$/README.md" />
+>>>>>>> gh-pages
       </list>
     </option>
   </component>
@@ -127,7 +133,11 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="960" />
+<<<<<<< HEAD
     <option name="width" value="960" />
+=======
+    <option name="width" value="956" />
+>>>>>>> gh-pages
     <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -137,7 +147,11 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
+<<<<<<< HEAD
     <ConfirmationsSetting value="0" id="Add" />
+=======
+    <ConfirmationsSetting value="2" id="Add" />
+>>>>>>> gh-pages
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -156,6 +170,10 @@
       <sortByType />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+>>>>>>> gh-pages
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -238,9 +256,184 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
         </subPane>
       </pane>
       <pane id="Scope" />
+=======
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project.less" />
+              <option name="myItemType" value="com.intellij.plugins.watcher.projectView.NestingTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="documents" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="underscore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+>>>>>>> gh-pages
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -252,12 +445,58 @@
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/node_modules/grunt-cli/bin/grunt" />
     <property name="restartRequiresConfirmation" value="true" />
+<<<<<<< HEAD
   </component>
   <component name="RunManager" selected="Karma.dash">
+=======
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="FullScreen" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/vendor/js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/vendor" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JavaScript Debug.dash">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="name" value="Dart" />
+      <option name="saveOutputToFile" value="false" />
+      <option name="showConsoleOnStdErr" value="false" />
+      <option name="showConsoleOnStdOut" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+>>>>>>> gh-pages
     <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
       <envs />
       <method />
     </configuration>
+<<<<<<< HEAD
+=======
+    <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
+      <setting name="configLocationType" value="CONFIG_FILE" />
+      <setting name="settingsFile" value="" />
+      <setting name="serverType" value="INTERNAL" />
+      <setting name="preferredDebugBrowser" value="CHROME" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+>>>>>>> gh-pages
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
       <browser start="false" url="" with-js-debugger="false" />
       <method />
@@ -280,10 +519,23 @@
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
+<<<<<<< HEAD
     <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Karma.dash" />
       <item index="1" class="java.lang.String" itemvalue="Node.js.Chrome" />
       <item index="2" class="java.lang.String" itemvalue="Node.js.Firefox" />
+=======
+    <configuration default="false" name="dash" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true" uri="http://dashdb.com">
+      <RunnerSettings RunnerId="JavascriptDebugRunner" />
+      <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
+      <method />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Karma.dash" />
+      <item index="1" class="java.lang.String" itemvalue="Node.js.Chrome" />
+      <item index="2" class="java.lang.String" itemvalue="Node.js.Firefox" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.dash" />
+>>>>>>> gh-pages
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -310,6 +562,7 @@
       <created>1392097907184</created>
       <updated>1392097907184</updated>
     </task>
+<<<<<<< HEAD
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -329,6 +582,109 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+=======
+    <task id="LOCAL-00001" summary="finally, working on /docs&#10;">
+      <created>1392172766702</created>
+      <updated>1392172766702</updated>
+    </task>
+    <task id="LOCAL-00002" summary="finally, working on /docs&#10;">
+      <created>1392172812225</created>
+      <updated>1392172812225</updated>
+    </task>
+    <task id="LOCAL-00003" summary="WIP">
+      <created>1392172900375</created>
+      <updated>1392172900375</updated>
+    </task>
+    <task id="LOCAL-00004" summary="WIP&#10;">
+      <created>1392173075832</created>
+      <updated>1392173075832</updated>
+    </task>
+    <task id="LOCAL-00005" summary="WIP&#10;">
+      <created>1392173276687</created>
+      <updated>1392173276687</updated>
+    </task>
+    <task id="LOCAL-00006" summary="WIP&#10;">
+      <created>1392173341358</created>
+      <updated>1392173341358</updated>
+    </task>
+    <task id="LOCAL-00007" summary="WIP&#10;">
+      <created>1392173381530</created>
+      <updated>1392173381530</updated>
+    </task>
+    <task id="LOCAL-00008" summary="WIP&#10;">
+      <created>1392173517569</created>
+      <updated>1392173517569</updated>
+    </task>
+    <task id="LOCAL-00009" summary="WIP&#10;">
+      <created>1392173583377</created>
+      <updated>1392173583377</updated>
+    </task>
+    <task id="LOCAL-00010" summary="WIP&#10;">
+      <created>1392173650021</created>
+      <updated>1392173650021</updated>
+    </task>
+    <task id="LOCAL-00011" summary=".&#10;">
+      <created>1392174429194</created>
+      <updated>1392174429194</updated>
+    </task>
+    <task id="LOCAL-00012" summary=".&#10;">
+      <created>1392174547608</created>
+      <updated>1392174547608</updated>
+    </task>
+    <task id="LOCAL-00013" summary=".&#10;">
+      <created>1392174585878</created>
+      <updated>1392174585878</updated>
+    </task>
+    <task id="LOCAL-00014" summary=".&#10;">
+      <created>1392174791064</created>
+      <updated>1392174791064</updated>
+    </task>
+    <task id="LOCAL-00015" summary=".&#10;">
+      <created>1392174977390</created>
+      <updated>1392174977390</updated>
+    </task>
+    <task id="LOCAL-00016" summary=".&#10;">
+      <created>1392175055978</created>
+      <updated>1392175055978</updated>
+    </task>
+    <task id="LOCAL-00017" summary=".&#10;">
+      <created>1392175090318</created>
+      <updated>1392175090318</updated>
+    </task>
+    <task id="LOCAL-00018" summary=".&#10;">
+      <created>1392175820407</created>
+      <updated>1392175820407</updated>
+    </task>
+    <task id="LOCAL-00019" summary=".&#10;">
+      <created>1392175883396</created>
+      <updated>1392175883396</updated>
+    </task>
+    <task id="LOCAL-00020" summary=".&#10;">
+      <created>1392175920129</created>
+      <updated>1392175920129</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="960" y="0" width="956" height="1055" extended-state="5" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39504844" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5004878" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31056562" sideWeight="0.4995122" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+>>>>>>> gh-pages
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -347,6 +703,7 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+<<<<<<< HEAD
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -357,62 +714,258 @@
     <entry file="file://$PROJECT_DIR$/specs/databases/remove.database.spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="4" selection-start="29" selection-end="29" vertical-scroll-proportion="0.05319149" vertical-offset="0" max-vertical-offset="1050">
+=======
+    <MESSAGE value="finally, working on /docs&#10;" />
+    <MESSAGE value="WIP" />
+    <MESSAGE value="WIP&#10;" />
+    <MESSAGE value=".&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value=".&#10;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="5" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="36" selection-start="1061" selection-end="1061" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
+>>>>>>> gh-pages
           <folding />
         </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/remove.entries.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="75" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.31914893" vertical-offset="720" max-vertical-offset="1935">
+=======
+    <entry file="file://$PROJECT_DIR$/docs/project.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="1" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="300">
+>>>>>>> gh-pages
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/remove.entry.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="78" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1575">
+=======
+    <entry file="file://$PROJECT_DIR$/docs/project.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
+>>>>>>> gh-pages
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="489" column="110" selection-start="15620" selection-end="15641" vertical-scroll-proportion="-6.185185" vertical-offset="7168" max-vertical-offset="17370">
+=======
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="59" selection-start="1318" selection-end="1318" vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="900">
+>>>>>>> gh-pages
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
+=======
+    <entry file="file://$PROJECT_DIR$/docs/documents/overview.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+>>>>>>> gh-pages
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/get.entries.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="40" selection-start="2351" selection-end="2351" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1890">
+=======
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="0" selection-start="431" selection-end="1452" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="7485">
+>>>>>>> gh-pages
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/databases/open.database.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="4" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3135">
+=======
+    <entry file="file://$PROJECT_DIR$/docs/templates/splash.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+>>>>>>> gh-pages
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/update.entries.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="8" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="1980">
+=======
+    <entry file="file://$PROJECT_DIR$/docs/templates/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+>>>>>>> gh-pages
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/add.entry.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="38" selection-start="668" selection-end="668" vertical-scroll-proportion="0.5393836" vertical-offset="0" max-vertical-offset="1590">
+=======
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="6" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="270">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/databases/remove.database.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="4" selection-start="29" selection-end="29" vertical-scroll-proportion="0.05319149" vertical-offset="0" max-vertical-offset="1050" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/specs/entries/remove.entries.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="75" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.31914893" vertical-offset="720" max-vertical-offset="1935">
-          <folding />
-        </state>
+        <state line="60" column="75" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.31914893" vertical-offset="720" max-vertical-offset="1935" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/specs/entries/remove.entry.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="78" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1575">
+        <state line="46" column="78" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1575" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/entries/get.entries.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="40" selection-start="2351" selection-end="2351" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1890" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/databases/open.database.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="4" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3135" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/entries/update.entries.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="8" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="1980" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/entries/add.entry.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="38" selection-start="668" selection-end="668" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1590" />
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/web-forms2.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="632" column="23" selection-start="14253" selection-end="14253" vertical-scroll-proportion="0.33274022" vertical-offset="9293" max-vertical-offset="12210">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="345">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/vendor/css/foundation.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="786" column="2" selection-start="12733" selection-end="12733" vertical-scroll-proportion="0.33260393" vertical-offset="11638" max-vertical-offset="76110">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/templates/splash.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="6" selection-start="527" selection-end="527" vertical-scroll-proportion="0.31914893" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/templates/about.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="356" selection-end="356" vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="480">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/vendor/js/underscore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="20190">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="33" selection-start="1510" selection-end="1510" vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="1035">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/documents/overview.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="190" selection-start="997" selection-end="997" vertical-scroll-proportion="0.1590106" vertical-offset="0" max-vertical-offset="566">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="489" column="110" selection-start="15620" selection-end="15641" vertical-scroll-proportion="-6.185185" vertical-offset="7168" max-vertical-offset="17370">
+        <state line="1033" column="37" selection-start="34157" selection-end="34161" vertical-scroll-proportion="0.3326886" vertical-offset="15323" max-vertical-offset="17370">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
+        <state line="17" column="0" selection-start="743" selection-end="743" vertical-scroll-proportion="0.07653061" vertical-offset="210" max-vertical-offset="7485">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/specs/entries/get.entries.spec.js">
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="40" selection-start="2351" selection-end="2351" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1890">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/databases/open.database.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="4" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3135">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/entries/update.entries.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="8" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="1980">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/entries/add.entry.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="38" selection-start="668" selection-end="668" vertical-scroll-proportion="0.5393836" vertical-offset="0" max-vertical-offset="1590">
+        <state line="45" column="60" selection-start="1447" selection-end="1447" vertical-scroll-proportion="0.45759717" vertical-offset="416" max-vertical-offset="1005">
+>>>>>>> gh-pages
           <folding />
         </state>
       </provider>

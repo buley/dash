@@ -1,12 +1,64 @@
 <!doctype html>
 <html>
-	<head>
-			<title>Dash - HTML5 IndexedDB JavaScript Library</title>
-			<link rel='stylesheet' href='./docs/project.css'>
-	</head>
-	<body ng-app="DashProject">
-			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
-			<script src='./docs/project.dev.js'></script>
-			<script src='./lib/dash.dev.js'></script>
-	</body>
+    <head>
+        <title>Dash - HTML5 IndexedDB JavaScript Library</title>
+        <meta charset="utf-8"><link rel="stylesheet" href="./docs/vendor/css/foundation.css">
+        <link rel='stylesheet' href='./docs/project.css'>
+        <script src="./docs/vendor/js/modernizr.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.min.js"></script>
+        <script src='./docs/vendor/js/showdown.js'></script>
+        <script src='./docs/vendor/js/markdown.js'></script>
+        <script src='./docs/vendor/js/underscore.js'></script>
+        <script src='./docs/project.dev.js'></script>
+        <script src='./lib/dash.dev.js'></script>
+    </head>
+    <body ng-app="dashApp" ng-controller="dashAppController">
+        <header>
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+                    <li class="name">
+                        <h1><a href="#">dash</a></h1>
+                    </li>
+                </ul>
+                <section class="top-bar-section">
+                    <ul class="right">
+                        <li class="divider"></li>
+                        <li><a href="http://github.com/editor/dash">
+                            <img class="dash-repo-button" src="./docs/vendor/img/GitHub-Mark-Light-120px-plus.png" alt="Github repository">
+                        </a></li>
+                        <li class="has-form">
+                            <a class="button success" href="https://raw.github.com/editor/dash/master/lib/dash.js">Download</a>
+                        </li>
+                    </ul>
+                    <ul class="left">
+                        <li class="divider"></li>
+                        <li><a ng-href="#/docs">Docs</a></li>
+                        <li><a ng-href="#/about">About</a></li>
+                    </ul>
+                    <ul class="right">
+                        <li class="divider"></li>
+                        <li class="has-form" ng-show="isDocs()">
+                            <div class="row collapse  dash-docs-search">
+                                <div class="large-8 small-9 columns dash-docs-search-input">
+                                    <input type="text" placeholder="Questions about dash or IndexedDB?">
+                                </div>
+                                <div class="large-4 small-3 columns dash-docs-search-button">
+                                    <a href="#" class="button expand">Search</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </nav>
+        </header>
+        <section ng-view></section>
+        <footer>
+            <script src="./docs/vendor/js/jquery.js"></script>
+            <script src="./docs/vendor/js/foundation/foundation.js"></script>
+            <script>
+                $(document).foundation();
+            </script>
+        </footer>
+</body>
 </html>

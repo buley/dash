@@ -7,3 +7,5 @@ npm-debug.log
 #bower
 bower_components
 ./bower_components/*
+docs/bower_components
+./docs/bower_components/*

@@ -1,0 +1,3 @@
+##### Key Range Direction
+
+[`Direction`](http://www.w3.org/TR/IndexedDB/#dfn-direction) is the way in which you query the index: "next" (forward) or "previous" (backward). The default value is next. The programmer can dictate whether or not to include duplicate keys in the [request](http://www.w3.org/TR/IndexedDB/#idl-def-IDBCursor) using two other directions: "next no duplicates" and "previous no duplicates". The programmer represents these directions using a number: 0 for "next", 1 for "next no duplicates", 2 for "previous" and 3 for "previous no duplicates".

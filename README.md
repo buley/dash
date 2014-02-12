@@ -90,7 +90,7 @@ Certain transactions return data, or "[`results`](http://www.w3.org/TR/IndexedDB
 
 There are various types of callbacks in IDB depending on the type of transaction. Requests generally have "onsuccess", "onerror and "onabort" callbacks. Others include "onupgradeneeded", "onclose" and "onblocked," sometimes seen when working with databases. Each event has a different meaning depending on the transaction, but for example "onsuccess", "onupgraded" are generally a good event for the programmer while "onerror", "onabort" and "onblocked" mean something went awry for him.
  
-### Restrictions
+### Security
 
 IDB is typically available in both the main `window` and in Web Workers thanks to an abstracted [`IDBEnvironment`](https://developer.mozilla.org/en-US/docs/Web/API/IDBEnvironment) interface. It is restricted to a given [`origin`](http://www.w3.org/TR/IndexedDB/#dfn-origin), and 
 [`same-origin`](http://www.w3.org/TR/IndexedDB/#dfn-same-origin) security restrictions apply. 

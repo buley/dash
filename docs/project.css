@@ -1,0 +1,17 @@
+/* Foundation-based Header */
+.dash-docs-search {
+  margin: 0px;
+  width: 440px;
+}
+.dash-docs-search input[type="text"] {
+  height: 29px;
+}
+.dash-repo-button {
+  height: 20px;
+  width: 20px;
+  margin: 0 0 5px 0;
+}
+/* Angular-based Application */
+.dash-app-docs-content {
+  margin: 20px 0 20px 0;
+}
