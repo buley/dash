@@ -5,3 +5,6 @@
 .dash-docs-search input[type="text"] {
   height: 29px;
 }
+.dash-app-docs-content {
+  margin: 20px 0 20px 0;
+}
