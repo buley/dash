@@ -9,7 +9,7 @@
                     <span>{{document.title}}</span>
                 </div>
             </li>
-            <ul class="dash-document-navigation" ng-repeat="child in documents.children" ng-if="child.children">
+            <ul class="dash-document-navigation" ng-repeat="child in document.children" ng-if="document.children">
                 <li class="dash-document-item-container">
                     <div class="dash-document-item">
                         <span>{{child.title}}</span>
