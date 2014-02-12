@@ -1,0 +1,5 @@
+#### Key Ranges
+
+Each cursor request needs an index against which to search and a range of keys to match, called a "[`key range`](http://www.w3.org/TR/IndexedDB/#dfn-key-range)". Key ranges are instances of [`IDBKeyRange`](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange) and the [contents](http://www.w3.org/TR/IndexedDB/#dfn-in-a-key-range) of a key range are characterized by their "bounds" and "direction".
+
+In addition to use on indexes, key ranges can also be used as a key when getting (but not adding, putting or deleting) single values with object stores or indexes, in which case the programmer will recieve the first matching value for in that key range.
