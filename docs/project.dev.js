@@ -36,7 +36,7 @@ dashApp.controller('dashAppAboutController', [ function() {
 }]);
 
 dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache', function( $scope, $http, $templateCache ) {
-    console.log('docs controller');
+
     $scope.documents = [
         { path: 'overview',
             title: 'Overview',
@@ -145,6 +145,8 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             ]
         }
     ];
+
+    console.log('docs controller', $scope.documents);
     var process = function(item) {
       $http.get(['/docs/documents/', item.path, '.md' ].join(''), { cache: $templateCache } );
       if (!item.children) {
@@ -155,6 +157,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
           });
       }
     };
+    _.map( $scope.documents, process );
 
 }]);
 
