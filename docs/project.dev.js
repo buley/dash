@@ -35,7 +35,7 @@ dashApp.controller('dashAppAboutController', [ function() {
     console.log('about controller');
 }]);
 
-dashApp.controller('dashAppDocsController', [ '$scope', '$templateCache', function( $scope, $templateCache ) {
+dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache', function( $scope, $http, $templateCache ) {
     console.log('docs controller');
     $scope.documents = [
         'overview',
