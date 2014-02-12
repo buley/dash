@@ -6,19 +6,19 @@
         <ul class="row dash-document-navigation" ng-repeat="document in documents">
             <li class="small-12 columns dash-document-item-container">
                 <div class="row dash-document-item" ng-hide="document.hidden">
-                    <h1>{{document.title}}</h1>
+                    <span>{{document.title}}</span>
                 </div>
             </li>
             <ul class="row dash-document-navigation" ng-repeat="child in document.children">
                 <li class="small-12 columns dash-document-item-container">
                     <div class="row dash-document-item" ng-hide="child.hidden">
-                        <h2>{{child.title}}</h1>
+                        <span>{{child.title}}</span>
                     </div>
                 </ul>
                 <ul class="row dash-document-navigation" ng-repeat="grandchild in child.children">
                     <li class="small-12 columns dash-document-item-container">
                         <div class="row dash-document-item" ng-hide="grandchild.hidden">
-                            <h3>{{grandchild.title}}</h1>
+                            <span>{{grandchild.title}}</span>
                         </div>
                     </li>
                 </ul>
