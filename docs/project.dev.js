@@ -148,7 +148,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
         }
     ];
     var getPath = function(path) {
-        return ['/docs/documents/', path, '.md' ].join('');
+        return ['/documentation/', path, '.md' ].join('');
     }
     $scope.documentContent = function(path) {
         return $templateCache.get(getPath(path))[1];
