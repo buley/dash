@@ -145,10 +145,15 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             ]
         }
     ];
-
+    var getPath = function(path) {
+        return ['/docs/documents/', path, '.md' ].join('');
+    }
+    $scope.documentContent = function(item.path) {
+        return $templateCache.get(getPath(item.path));
+    }
     console.log('docs controller', $scope.documents);
     var process = function(item) {
-      $http.get(['/docs/documents/', item.path, '.md' ].join(''), { cache: $templateCache } );
+      $http.get( getPath(item.path), { cache: $templateCache } );
       if (!item.children) {
         return;
       } else {
