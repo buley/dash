@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/templates/docs.html" afterPath="$PROJECT_DIR$/docs/templates/docs.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -624,7 +624,11 @@
       <created>1392186437739</created>
       <updated>1392186437739</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="WIP&#10;">
+      <created>1392186483751</created>
+      <updated>1392186483751</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -664,11 +668,11 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="finally, working on /docs&#10;" />
-    <MESSAGE value="WIP&#10;" />
     <MESSAGE value=".&#10;" />
     <MESSAGE value="merge confl&#10;" />
     <MESSAGE value="WIP" />
-    <option name="LAST_COMMIT_MESSAGE" value="WIP" />
+    <MESSAGE value="WIP&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

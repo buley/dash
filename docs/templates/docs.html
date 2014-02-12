@@ -1,6 +1,5 @@
 <div class="row dash-app-docs-container">
-    <div class="large-4 columns dash-app-docs-sidebar right panel" ng-controller="dashAppDocsSidebarController">OUTER RIGHT</div>
-    <div class="large-8 columns dash-app-docs-content" ng-controller="dashAppDocsContentController">
+    <div class="large-4 columns dash-app-docs-sidebar right panel" ng-controller="dashAppDocsSidebarController">
 
         <!--Navigation -->
         <ul class="dash-document-navigation" ng-repeat="document in documents" ng-if="documents.length">
@@ -30,7 +29,10 @@
                     </ul>                    
                 </ul>
             </ul>
-        </ul>        
+        </ul>     
+        
+    </div>
+    <div class="large-8 columns dash-app-docs-content" ng-controller="dashAppDocsContentController">   
 
         <!-- Document List -->
         <div class="row dash-document-list" ng-repeat="document in documents">
