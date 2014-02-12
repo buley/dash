@@ -189,11 +189,15 @@ dashApp.directive('markdown', function () {
         link: function (scope, element, attrs) {
             if (attrs.markdown) {
                 scope.$watch(attrs.markdown, function (newVal) {
+                    if (!newVal) {
+                        return;
+                    }
                     var html = converter.makeHtml(newVal);
                     element.html(html);
                 });
             } else {
-                var html = converter.makeHtml(element.text());
+                var text = element.text(),
+                    html = text ? converter.makeHtml(element.text()) : '';
                 element.html(html);
             }
         }
