@@ -149,7 +149,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
         return ['/docs/documents/', path, '.md' ].join('');
     }
     $scope.documentContent = function(path) {
-        return $templateCache.get(getPath(path));
+        return $templateCache.get(getPath(path))[1];
     }
     console.log('docs controller', $scope.documents);
     var process = function(item) {
@@ -181,3 +181,20 @@ dashApp.controller('dashAppSplashController', [ function() {
     console.log('splash controller');
 }]);
 
+dashApp.directive('markdown', function () {
+    var converter = new Showdown.converter();
+    return {
+        restrict: 'AE',
+        link: function (scope, element, attrs) {
+            if (attrs.markdown) {
+                scope.$watch(attrs.markdown, function (newVal) {
+                    var html = converter.makeHtml(newVal);
+                    element.html(html);
+                });
+            } else {
+                var html = converter.makeHtml(element.text());
+                element.html(html);
+            }
+        }
+    };
+});
