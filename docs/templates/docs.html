@@ -3,7 +3,7 @@
     <div class="large-8 columns dash-app-docs-content" ng-controller="dashAppDocsContentController">
 
         <!--Navigation -->
-        <ul class="dash-document-navigation" ng-repeat="document in documents" ng-if="document.children">
+        <ul class="dash-document-navigation" ng-repeat="document in documents" ng-if="documents.children">
             <li class="dash-document-item-container">
                 <div class="dash-document-item">
                     <span>{{document.title}}</span>

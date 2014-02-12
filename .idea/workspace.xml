@@ -29,7 +29,7 @@
       <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="29" selection-start="1651" selection-end="1651" vertical-scroll-proportion="-13.125" vertical-offset="90" max-vertical-offset="1110">
+            <state line="28" column="29" selection-start="1687" selection-end="1687" vertical-scroll-proportion="-13.125" vertical-offset="105" max-vertical-offset="1110">
               <folding />
             </state>
           </provider>
@@ -38,7 +38,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="33" selection-start="1723" selection-end="1723" vertical-scroll-proportion="0.5094664" vertical-offset="499" max-vertical-offset="3150">
+            <state line="53" column="33" selection-start="1723" selection-end="1723" vertical-scroll-proportion="-1.5817556" vertical-offset="1714" max-vertical-offset="3150">
               <folding />
             </state>
           </provider>
@@ -584,7 +584,11 @@
       <created>1392185299688</created>
       <updated>1392185299688</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="merge confl&#10;">
+      <created>1392185353488</created>
+      <updated>1392185353488</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -851,14 +855,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="29" selection-start="1651" selection-end="1651" vertical-scroll-proportion="-13.125" vertical-offset="90" max-vertical-offset="1110">
+        <state line="28" column="29" selection-start="1687" selection-end="1687" vertical-scroll-proportion="-13.125" vertical-offset="105" max-vertical-offset="1110">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="33" selection-start="1723" selection-end="1723" vertical-scroll-proportion="0.5094664" vertical-offset="499" max-vertical-offset="3150">
+        <state line="53" column="33" selection-start="1723" selection-end="1723" vertical-scroll-proportion="-1.5817556" vertical-offset="1714" max-vertical-offset="3150">
           <folding />
         </state>
       </provider>
