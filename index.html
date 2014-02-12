@@ -11,6 +11,34 @@
         <script src='./lib/dash.dev.js'></script>
     </head>
     <body ng-app="dashApp">
+        <header>
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+                    <li class="name">
+                        <h1><a href="#">dash</a></h1>
+                    </li>
+                    <li class="toggle-topbar menu-icon">
+                        <a href="#">Menu</a>
+                    </li>
+                </ul>
+                <section class="top-bar-section">
+                    <ul class="right">
+                        <li class="active"><a href="#">Right Button Active</a></li>
+                        <li class="has-dropdown">
+                            <a href="#">Right Button with Dropdown</a>
+                            <ul class="dropdown">
+                                <li><a href="#">First link in dropdown</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="left">
+                       <li><a ng-href="#/">Home</a></li>
+                       <li><a ng-href="#/docs">Docs</a></li>
+                       <li><a ng-href="#/about">About</a></li>
+                    </ul>
+                </section>
+            </nav>
+        </header>
         <section ng-view></section>
         <footer>
             <script src="./docs/vendor/js/jquery.js"></script>
