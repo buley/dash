@@ -62,6 +62,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 
         {   path: 'indexeddb',
             title: 'IndexedDB',
+            hidden: true,
             tags: [ 'indexeddb', 'spec', 'overview', 'html5' ],
             children: [
                 { 'path': 'indexeddb/cursors',

@@ -3,7 +3,7 @@
     <div class="large-8 columns dash-app-docs-content" ng-controller="dashAppDocsContentController">
         <div class="row" ng-repeat="document in documents">
             <div class="small-12 columns">
-                <div class="row">
+                <div class="row" ng-hide="document.hidden">
                     <h1>{{document.title}}</h1>
                     <section markdown="documentContent(document.path)"></section>
                 </div>
