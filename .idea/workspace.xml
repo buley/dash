@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/vendor/img/GitHub-Mark-120px-plus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/vendor/img/GitHub-Mark-32px.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/vendor/img/GitHub-Mark-64px.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/vendor/img/GitHub-Mark-Light-120px-plus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/vendor/img/GitHub-Mark-Light-32px.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/docs/vendor/img/GitHub-Mark-Light-64px.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.css" afterPath="$PROJECT_DIR$/docs/project.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.less" afterPath="$PROJECT_DIR$/docs/project.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -32,19 +28,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="46" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.39806998" vertical-offset="0" max-vertical-offset="1020">
+            <state line="26" column="46" selection-start="1320" selection-end="1320" vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="1020">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.less" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="1" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="300">
+            <state line="18" column="20" selection-start="267" selection-end="267" vertical-scroll-proportion="0.3206651" vertical-offset="0" max-vertical-offset="842">
               <folding />
             </state>
           </provider>
@@ -53,7 +49,7 @@
       <file leaf-file-name="project.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/project.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
+            <state line="17" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="345">
               <folding />
             </state>
           </provider>
@@ -136,11 +132,11 @@
         <option value="$PROJECT_DIR$/specs/entries/add.entry.spec.js" />
         <option value="$PROJECT_DIR$/docs/templates/splash.html" />
         <option value="$PROJECT_DIR$/docs/vendor/css/foundation.css" />
-        <option value="$PROJECT_DIR$/docs/project.less" />
         <option value="$PROJECT_DIR$/docs/templates/docs.html" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
         <option value="$PROJECT_DIR$/docs/documents/overview.md" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/docs/project.less" />
       </list>
     </option>
   </component>
@@ -573,7 +569,11 @@
       <created>1392174585878</created>
       <updated>1392174585878</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary=".&#10;">
+      <created>1392174791064</created>
+      <updated>1392174791064</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -585,7 +585,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39504844" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39504844" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5004878" order="7" side_tool="true" content_ui="tabs" />
@@ -741,7 +741,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
+        <state line="17" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="345">
           <folding />
         </state>
       </provider>
@@ -749,13 +749,6 @@
     <entry file="file://$PROJECT_DIR$/docs/vendor/css/foundation.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="786" column="2" selection-start="12733" selection-end="12733" vertical-scroll-proportion="0.33260393" vertical-offset="11638" max-vertical-offset="76110">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="1" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="300">
           <folding />
         </state>
       </provider>
@@ -788,13 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="21" selection-start="431" selection-end="1452" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="7485">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/documents/overview.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="190" selection-start="997" selection-end="997" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
@@ -804,7 +790,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="46" selection-start="1112" selection-end="1112" vertical-scroll-proportion="0.39806998" vertical-offset="0" max-vertical-offset="1020">
+        <state line="26" column="46" selection-start="1320" selection-end="1320" vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="1020">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="21" selection-start="431" selection-end="1452" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="7485">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="20" selection-start="267" selection-end="267" vertical-scroll-proportion="0.3206651" vertical-offset="0" max-vertical-offset="842">
           <folding />
         </state>
       </provider>
