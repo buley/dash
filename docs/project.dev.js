@@ -21,13 +21,13 @@ dashApp.config(['$routeProvider', function($routeProvider) {
 
 dashApp.controller( 'dashAppController', [ '$location', '$scope', function( $location, $scope ) {
     $scope.isSplash = function() {
-        return '/' === $location.hash();
+        return '/' === $location.path();
     };
     $scope.isDocs = function() {
-        return '/docs' === $location.hash();
+        return '/docs' === $location.path();
     };
     $scope.isAbout = function() {
-        return '/about' === $location.hash();
+        return '/about' === $location.path();
     };
 }]);
 

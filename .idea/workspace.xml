@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -54,19 +53,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="27" selection-start="2142" selection-end="2142" vertical-scroll-proportion="0.58178437" vertical-offset="302" max-vertical-offset="930">
+            <state line="37" column="27" selection-start="1913" selection-end="1913" vertical-scroll-proportion="-10.541667" vertical-offset="302" max-vertical-offset="930">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.dev.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="978" selection-end="978" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="765">
+            <state line="26" column="0" selection-start="839" selection-end="839" vertical-scroll-proportion="0.33194155" vertical-offset="231" max-vertical-offset="765">
               <folding />
             </state>
           </provider>
@@ -130,8 +129,8 @@
         <option value="$PROJECT_DIR$/lib/dash.dev.js" />
         <option value="$PROJECT_DIR$/specs/entries/add.entry.spec.js" />
         <option value="$PROJECT_DIR$/docs/templates/splash.html" />
-        <option value="$PROJECT_DIR$/docs/project.dev.js" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/docs/project.dev.js" />
       </list>
     </option>
   </component>
@@ -304,7 +303,7 @@
       <recent name="$PROJECT_DIR$/docs/vendor" />
     </key>
   </component>
-  <component name="RunManager" selected="Karma.dash">
+  <component name="RunManager" selected="JavaScript Debug.dash">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -359,10 +358,16 @@
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
-    <list size="3">
+    <configuration default="false" name="dash" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true" uri="http://dashdb.com">
+      <RunnerSettings RunnerId="JavascriptDebugRunner" />
+      <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
+      <method />
+    </configuration>
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Karma.dash" />
       <item index="1" class="java.lang.String" itemvalue="Node.js.Chrome" />
       <item index="2" class="java.lang.String" itemvalue="Node.js.Firefox" />
+      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.dash" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -401,10 +406,10 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3954984" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5004878" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31056562" sideWeight="0.4995122" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31056562" sideWeight="0.4995122" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -429,7 +434,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -524,16 +529,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="978" selection-end="978" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="765">
+        <state line="37" column="27" selection-start="1913" selection-end="1913" vertical-scroll-proportion="-10.541667" vertical-offset="302" max-vertical-offset="930">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="27" selection-start="2142" selection-end="2142" vertical-scroll-proportion="0.58178437" vertical-offset="302" max-vertical-offset="930">
+        <state line="26" column="0" selection-start="839" selection-end="839" vertical-scroll-proportion="0.33194155" vertical-offset="231" max-vertical-offset="765">
           <folding />
         </state>
       </provider>
