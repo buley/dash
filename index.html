@@ -1,12 +1,23 @@
 <!doctype html>
 <html>
-	<head>
-			<title>Dash - HTML5 IndexedDB JavaScript Library</title>
-			<link rel='stylesheet' href='./docs/project.css'>
-	</head>
-	<body ng-app="DashProject">
-			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
-			<script src='./docs/project.dev.js'></script>
-			<script src='./lib/dash.dev.js'></script>
-	</body>
+    <head>
+        <title>Dash - HTML5 IndexedDB JavaScript Library</title>
+        <meta charset="utf-8"><link rel="stylesheet" href="./docs/vendor/css/foundation.css">
+        <link rel='stylesheet' href='./docs/project.css'>
+        <script src="./docs/vendor/js/modernizr.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.min.js"></script>
+        <script src='./docs/project.dev.js'></script>
+        <script src='./lib/dash.dev.js'></script>
+    </head>
+    <body ng-app="dashApp">
+        <section ng-view></section>
+        <footer>
+            <script src="./docs/vendor/js/jquery.js"></script>
+            <script src="./docs/vendor/js/foundation/foundation.js"></script>
+            <script>
+                $(document).foundation();
+            </script>
+        </footer>
+</body>
 </html>
