@@ -39,10 +39,10 @@ dashApp.controller('dashAppDocsController', [ function() {
     console.log('docs controller');
 }]);
 dashApp.controller('dashAppDocsContentController', [ function() {
-    console.log('about controller');
+    console.log('content controller');
 }]);
 dashApp.controller('dashAppDocsSidebarController', [ function() {
-    console.log('about controller');
+    console.log('sidebar controller');
 }]);
 dashApp.controller('dashAppSplashController', [ function() {
     console.log('splash controller');
