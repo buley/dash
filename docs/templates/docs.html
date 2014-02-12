@@ -5,19 +5,19 @@
         <!--Navigation -->
         <ul class="dash-document-navigation" ng-repeat="document in documents">
             <li class="dash-document-item-container">
-                <div class="dash-document-item" ng-hide="document.hidden">
+                <div class="dash-document-item">
                     <span>{{document.title}}</span>
                 </div>
             </li>
             <ul class="dash-document-navigation" ng-repeat="child in document.children">
                 <li class="dash-document-item-container">
-                    <div class="dash-document-item" ng-hide="child.hidden">
+                    <div class="dash-document-item">
                         <span>{{child.title}}</span>
                     </div>
                 </ul>
                 <ul class="dash-document-navigation" ng-repeat="grandchild in child.children">
                     <li class="dash-document-item-container">
-                        <div class="dash-document-item" ng-hide="grandchild.hidden">
+                        <div class="dash-document-item">
                             <span>{{grandchild.title}}</span>
                         </div>
                     </li>
