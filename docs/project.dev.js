@@ -195,7 +195,7 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         if ($routeParams.doc3) {
             params.push($routeParams.doc3);
         }
-        if ($routeParams.doc4) it{
+        if ($routeParams.doc4) {
             params.push($routeParams.doc4);
         }
         return params.join('/');
