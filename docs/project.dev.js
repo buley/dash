@@ -200,7 +200,9 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         }
         return params.join('/');
     };
-
+    $scope.pathLevel = function(level) {
+        return $routeParams['doc'+ level];
+    }
 }]);
 
 dashApp.controller('dashAppSplashController', [ function() {
