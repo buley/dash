@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/templates/docs.html" afterPath="$PROJECT_DIR$/docs/templates/docs.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -47,7 +46,7 @@
       <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="91" selection-start="2768" selection-end="2768" vertical-scroll-proportion="0.5532646" vertical-offset="237" max-vertical-offset="1170">
+            <state line="19" column="43" selection-start="1263" selection-end="1263" vertical-scroll-proportion="0.32646048" vertical-offset="0" max-vertical-offset="1170">
               <folding />
             </state>
           </provider>
@@ -734,7 +733,11 @@
       <created>1392269030693</created>
       <updated>1392269030693</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="WIP&#10;">
+      <created>1392269073250</created>
+      <updated>1392269073250</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -985,7 +988,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="91" selection-start="2768" selection-end="2768" vertical-scroll-proportion="0.5532646" vertical-offset="237" max-vertical-offset="1170">
+        <state line="19" column="43" selection-start="1263" selection-end="1263" vertical-scroll-proportion="0.32646048" vertical-offset="0" max-vertical-offset="1170">
           <folding />
         </state>
       </provider>
