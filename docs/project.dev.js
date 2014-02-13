@@ -6,7 +6,7 @@ dashApp.config(['$routeProvider', function($routeProvider) {
             templateUrl: '/docs/templates/about.html',
             controller: 'dashAppAboutController'
         }).
-        when('/docs', {
+        when('/docs/:doc', {
             templateUrl: '/docs/templates/docs.html',
             controller: 'dashAppDocsController'
         }).
@@ -166,8 +166,8 @@ dashApp.controller('dashAppDocsContentController', [ function() {
     console.log('content controller');
 }]);
 
-dashApp.controller('dashAppDocsSidebarController', [ function() {
-    console.log('sidebar controller');
+dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', function($routeParams) {
+    console.log('sidebar controller', $routeParams);
     _.each( [], function() {
 
     });
