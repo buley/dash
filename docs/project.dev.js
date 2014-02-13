@@ -195,10 +195,7 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
         }
         return params.join('/');
     };
-    $scope.pathLevel = function(level, slug) {
-        if ( !slug ) {
-            console.log('no slug',$scope.currentTopic());
-        }
+    $scope.pathLevel = function(slug) {
         return slug === $scope.currentTopic();
     };
 }]);
