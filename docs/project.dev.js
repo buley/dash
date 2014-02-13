@@ -178,7 +178,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 
 }]);
 
-dashApp.controller('dashAppDocsContentController', [ function() {
+dashApp.controller('dashAppDocsContentController', [ '$scope', function( $scope ) {
     console.log('content controller');
     $scope.pathLevel = function(level, slug) {
         console.log('loevel',slug,level, $routeParams['doc'+level]);
