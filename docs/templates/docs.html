@@ -2,26 +2,26 @@
     <div class="large-4 columns dash-app-docs-sidebar right panel" ng-controller="dashAppDocsSidebarController">
 
         <!--Navigation -->
-        <ul class="dash-document-navigation" ng-if="documents.length">
-            <li class="dash-document-item-container" ng-repeat="document in documents" >
+        <ul class="dash-document-navigation" ng-repeat="document in documents" ng-if="documents.length">
+            <li class="dash-document-item-container">
                 <div class="dash-document-item">
                     <span>{{document.title}}</span>
                 </div>
             </li>
-            <ul class="dash-document-navigation" ng-if="document.children.length">
-                <li class="dash-document-item-container" ng-repeat="child in document.children" >
+            <ul class="dash-document-navigation" ng-repeat="child in document.children" ng-if="document.children.length">
+                <li class="dash-document-item-container">
                     <div class="dash-document-item">
                         <span>{{child.title}}</span>
                     </div>
                 </li>
-                <ul class="dash-document-navigation" ng-if="child.children.length">
-                    <li class="dash-document-item-container" ng-repeat="grandchild in child.children">
+                <ul class="dash-document-navigation" ng-repeat="grandchild in child.children" ng-if="child.children.length">
+                    <li class="dash-document-item-container">
                         <div class="dash-document-item">
                             <span>{{grandchild.title}}</span>
                         </div>
                     </li>
-                    <ul class="dash-document-navigation" ng-if="grandchild.children.length">
-                        <li class="dash-document-item-container" ng-repeat="greatgrandchild in grandchild.children">
+                    <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children" ng-if="grandchild.children.length">
+                        <li class="dash-document-item-container">
                             <div class="dash-document-item">
                                 <span>{{greatgrandchild.title}}</span>
                             </div>
