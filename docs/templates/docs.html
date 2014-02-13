@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="row dash-document-list" ng-repeat="child in document.children">
-                <div class="small-12 columns dash-document-item-container"ng-if="pathLevel(1, child.slug)">
+                <div class="small-12 columns dash-document-item-container" ng-if="pathLevel(1, child.slug)">
                     <div class="row dash-document-item" ng-hide="child.hidden" ng-if="child.title">
                         <h2 name="{{child.path}}">{{child.title}}</h2>
                         <section markdown="documentContent(child.path)"></section>
