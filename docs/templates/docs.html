@@ -12,19 +12,19 @@
                 <ul class="dash-document-navigation" ng-repeat="child in document.children" ng-if="document.children.length">
                     <li class="dash-document-item-container">
                         <div class="dash-document-item">
-                            <span>{{child.title}}</span>
+                            <h4>{{child.title}}</h4>
                         </div>
                     </li>
                     <ul class="dash-document-navigation" ng-repeat="grandchild in child.children" ng-if="child.children.length">
                         <li class="dash-document-item-container">
                             <div class="dash-document-item">
-                                <span>{{grandchild.title}}</span>
+                                <h5>{{grandchild.title}}</h5>
                             </div>
                         </li>
                         <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children" ng-if="grandchild.children.length">
                             <li class="dash-document-item-container">
                                 <div class="dash-document-item">
-                                    <span>{{greatgrandchild.title}}</span>
+                                    <h6>{{greatgrandchild.title}}</h6>
                                 </div>
                             </li>
                         </ul>
