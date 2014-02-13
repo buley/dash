@@ -2,7 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/cursors.md" afterPath="$PROJECT_DIR$/documentation/cursors.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/closing.md" afterPath="$PROJECT_DIR$/documentation/database/closing.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/getting.md" afterPath="$PROJECT_DIR$/documentation/database/getting.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/names.md" afterPath="$PROJECT_DIR$/documentation/database/names.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/opening.md" afterPath="$PROJECT_DIR$/documentation/database/opening.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/removing.md" afterPath="$PROJECT_DIR$/documentation/database/removing.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/versionchanges.md" afterPath="$PROJECT_DIR$/documentation/database/versionchanges.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/versions.md" afterPath="$PROJECT_DIR$/documentation/database/versions.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/databases.md" afterPath="$PROJECT_DIR$/documentation/databases.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entries.md" afterPath="$PROJECT_DIR$/documentation/entries.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/adding.md" afterPath="$PROJECT_DIR$/documentation/entry/adding.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/getting.md" afterPath="$PROJECT_DIR$/documentation/entry/getting.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/putting.md" afterPath="$PROJECT_DIR$/documentation/entry/putting.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/removing.md" afterPath="$PROJECT_DIR$/documentation/entry/removing.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/updating.md" afterPath="$PROJECT_DIR$/documentation/entry/updating.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/index/creating.md" afterPath="$PROJECT_DIR$/documentation/index/creating.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/index/getting.md" afterPath="$PROJECT_DIR$/documentation/index/getting.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/index/iterating.md" afterPath="$PROJECT_DIR$/documentation/index/iterating.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/index/removing.md" afterPath="$PROJECT_DIR$/documentation/index/removing.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/indexes.md" afterPath="$PROJECT_DIR$/documentation/indexes.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/keyrange/bounds.md" afterPath="$PROJECT_DIR$/documentation/keyrange/bounds.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/keyrange/direction.md" afterPath="$PROJECT_DIR$/documentation/keyrange/direction.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/keyranges.md" afterPath="$PROJECT_DIR$/documentation/keyranges.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/clearing.md" afterPath="$PROJECT_DIR$/documentation/objectstore/clearing.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/creating.md" afterPath="$PROJECT_DIR$/documentation/objectstore/creating.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/getting.md" afterPath="$PROJECT_DIR$/documentation/objectstore/getting.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/iteration.md" afterPath="$PROJECT_DIR$/documentation/objectstore/iteration.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/keypaths.md" afterPath="$PROJECT_DIR$/documentation/objectstore/keypaths.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/removing.md" afterPath="$PROJECT_DIR$/documentation/objectstore/removing.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/stores.md" afterPath="$PROJECT_DIR$/documentation/stores.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -29,7 +58,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="18" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.15457788" vertical-offset="875" max-vertical-offset="3615">
+            <state line="142" column="19" selection-start="5267" selection-end="5267" vertical-scroll-proportion="0.47562426" vertical-offset="1730" max-vertical-offset="3615">
               <folding />
             </state>
           </provider>
@@ -212,6 +241,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="documentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="documentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="overview" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="docs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -296,24 +357,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -337,6 +380,7 @@
       <recent name="$PROJECT_DIR$/docs/vendor/js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/documentation" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/docs/documents" />
       <recent name="$PROJECT_DIR$/docs/documents/overview" />
@@ -818,7 +862,11 @@
       <created>1392296462746</created>
       <updated>1392296462746</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="WIP&#10;">
+      <created>1392296516922</created>
+      <updated>1392296516922</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -905,12 +953,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/documentation/overview.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="431" selection-end="1452" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="7485" />
+        <state line="14" column="0" selection-start="431" selection-end="1452" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="7485">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/splash.html">
@@ -1003,17 +1055,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/vendor/js/underscore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="20190" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="20190">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1033" column="37" selection-start="34157" selection-end="34161" vertical-scroll-proportion="0.3326886" vertical-offset="15323" max-vertical-offset="17370" />
+        <state line="1033" column="37" selection-start="34157" selection-end="34161" vertical-scroll-proportion="0.3326886" vertical-offset="15323" max-vertical-offset="17370">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="743" selection-end="743" vertical-scroll-proportion="0.07653061" vertical-offset="210" max-vertical-offset="7485" />
+        <state line="17" column="0" selection-start="743" selection-end="743" vertical-scroll-proportion="0.07653061" vertical-offset="210" max-vertical-offset="7485">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/documentation/overview/records.md">
@@ -1047,7 +1105,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/documentation/overview.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="6" selection-start="319" selection-end="319" vertical-scroll-proportion="0.10810811" vertical-offset="0" max-vertical-offset="555" />
+        <state line="4" column="6" selection-start="319" selection-end="319" vertical-scroll-proportion="0.10810811" vertical-offset="0" max-vertical-offset="555">
+          <folding />
+        </state>
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
@@ -1069,7 +1129,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="18" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.15457788" vertical-offset="875" max-vertical-offset="3615">
+        <state line="142" column="19" selection-start="5267" selection-end="5267" vertical-scroll-proportion="0.47562426" vertical-offset="1730" max-vertical-offset="3615">
           <folding />
         </state>
       </provider>
