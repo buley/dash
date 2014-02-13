@@ -29,7 +29,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="26" selection-start="443" selection-end="443" vertical-scroll-proportion="0.2006689" vertical-offset="0" max-vertical-offset="3135">
+            <state line="24" column="0" selection-start="865" selection-end="865" vertical-scroll-proportion="0.4013378" vertical-offset="0" max-vertical-offset="3255">
               <folding />
             </state>
           </provider>
@@ -330,7 +330,7 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="FullScreen" value="false" />
-    <property name="SearchEverywhereHistory" value="" />
+    <property name="SearchEverywhereHistory" value="&#10;/" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -754,7 +754,11 @@
       <created>1392269757991</created>
       <updated>1392269757991</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="WIP&#10;">
+      <created>1392269863389</created>
+      <updated>1392269863389</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1005,7 +1009,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="26" selection-start="443" selection-end="443" vertical-scroll-proportion="0.2006689" vertical-offset="0" max-vertical-offset="3135">
+        <state line="24" column="0" selection-start="865" selection-end="865" vertical-scroll-proportion="0.4013378" vertical-offset="0" max-vertical-offset="3255">
           <folding />
         </state>
       </provider>
