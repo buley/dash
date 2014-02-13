@@ -6,7 +6,11 @@ dashApp.config(['$routeProvider', function($routeProvider) {
             templateUrl: '/docs/templates/about.html',
             controller: 'dashAppAboutController'
         }).
-        when('/docs/:doc', {
+        when('/docs', {
+            templateUrl: '/docs/templates/docs.html',
+            controller: 'dashAppDocsController'
+        }).
+         when('/docs/:doc', {
             templateUrl: '/docs/templates/docs.html',
             controller: 'dashAppDocsController'
         }).
