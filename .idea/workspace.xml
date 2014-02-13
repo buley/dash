@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/templates/docs.html" afterPath="$PROJECT_DIR$/docs/templates/docs.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -26,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="project.dev.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="203" column="34" selection-start="7673" selection-end="7673" vertical-scroll-proportion="0.0" vertical-offset="2344" max-vertical-offset="3570">
+            <state line="188" column="22" selection-start="7226" selection-end="7226" vertical-scroll-proportion="0.53065777" vertical-offset="2344" max-vertical-offset="3570">
               <folding />
             </state>
           </provider>
@@ -44,10 +43,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="8" selection-start="2058" selection-end="2058" vertical-scroll-proportion="0.2611684" vertical-offset="282" max-vertical-offset="1170">
+            <state line="58" column="30" selection-start="3666" selection-end="3666" vertical-scroll-proportion="-24.5" vertical-offset="282" max-vertical-offset="1170">
               <folding />
             </state>
           </provider>
@@ -790,7 +789,11 @@
       <created>1392296077259</created>
       <updated>1392296077259</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="WIP&#10;">
+      <created>1392296115072</created>
+      <updated>1392296115072</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1032,16 +1035,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="34" selection-start="7673" selection-end="7673" vertical-scroll-proportion="0.0" vertical-offset="2344" max-vertical-offset="3570">
+        <state line="58" column="30" selection-start="3666" selection-end="3666" vertical-scroll-proportion="-24.5" vertical-offset="282" max-vertical-offset="1170">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="8" selection-start="2058" selection-end="2058" vertical-scroll-proportion="0.2611684" vertical-offset="282" max-vertical-offset="1170">
+        <state line="188" column="22" selection-start="7226" selection-end="7226" vertical-scroll-proportion="0.53065777" vertical-offset="2344" max-vertical-offset="3570">
           <folding />
         </state>
       </provider>
