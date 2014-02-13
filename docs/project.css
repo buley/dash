@@ -15,3 +15,20 @@
 .dash-app-docs-content {
   margin: 20px 0 20px 0;
 }
+ul.dash-document-navigation {
+  margin: 0 0 10px 0;
+}
+ul.dash-document-navigation ul {
+  margin: 0 0 0 10px;
+}
+ul.dash-document-navigation ul li {
+  margin: 0;
+  padding: 10px 0 10px 0;
+}
+ul.dash-document-navigation ul ul {
+  margin: 0 0 0 20px;
+}
+ul.dash-document-navigation ul ul li {
+  margin: 0;
+  padding: 10px 0 10px 0;
+}
