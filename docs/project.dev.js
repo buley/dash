@@ -182,11 +182,25 @@ dashApp.controller('dashAppDocsContentController', [ function() {
     console.log('content controller');
 }]);
 
-dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', function($routeParams) {
+dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', function($routeParams, $scope) {
     console.log('sidebar controller', $routeParams);
-    _.each( [], function() {
+    $scope.currentTopic = function() {
+       var params = [];
+        if ($routeParams.doc1) {
+            params.push($routeParams.doc1);
+        }
+        if ($routeParams.doc2) {
+            params.push($routeParams.doc2);
+        }
+        if ($routeParams.doc3) {
+            params.push($routeParams.doc3);
+        }
+        if ($routeParams.doc4) it{
+            params.push($routeParams.doc4);
+        }
+        return params.join('/');
+    };
 
-    });
 }]);
 
 dashApp.controller('dashAppSplashController', [ function() {
