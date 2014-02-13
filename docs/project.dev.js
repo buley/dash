@@ -39,7 +39,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 
     $scope.documents = [
         { path: 'overview',
-            title: '',
+            title: 'Topics',
             hidden: true,
             tags: [ 'general', 'quickstart', 'overview' ],
             children: [
