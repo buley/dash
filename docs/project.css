@@ -15,12 +15,6 @@
 .dash-app-docs-content {
   margin: 20px 0 20px 0;
 }
-.dash-app-docs-sidebar-container {
-  padding: 10px;
-}
-.dash-app-docs-sidebar-container > ul > li {
-  font-weight: bold;
-}
 ul.dash-document-navigation {
   margin: 0 0 10px 0;
 }
@@ -37,4 +31,13 @@ ul.dash-document-navigation ul ul {
 ul.dash-document-navigation ul ul li {
   margin: 0;
   padding: 0 0 0 0;
+}
+.dash-app-docs-sidebar-container {
+  padding: 10px;
+}
+.dash-app-docs-sidebar-container > ul > li {
+  font-weight: bold;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
