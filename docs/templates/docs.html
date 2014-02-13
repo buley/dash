@@ -4,25 +4,25 @@
         <!--Navigation -->
         <nav class="dash-app-docs-sidebar-container">
             <ul class="dash-document-navigation" ng-repeat="document in documents" ng-if="documents.length">
-                <li class="dash-document-item-container">
+                <li class="dash-document-item-container" ng-if="document.title">
                     <div class="dash-document-item">
                         <h3>{{document.title}}</h3>
                     </div>
                 </li>
                 <ul class="dash-document-navigation" ng-repeat="child in document.children" ng-if="document.children.length">
-                    <li class="dash-document-item-container">
+                    <li class="dash-document-item-container" ng-if="child.title">
                         <div class="dash-document-item">
                             <h4>{{child.title}}</h4>
                         </div>
                     </li>
                     <ul class="dash-document-navigation" ng-repeat="grandchild in child.children" ng-if="child.children.length">
-                        <li class="dash-document-item-container">
+                        <li class="dash-document-item-container" ng-if="grandchild.title">
                             <div class="dash-document-item">
                                 <h5>{{grandchild.title}}</h5>
                             </div>
                         </li>
                         <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children" ng-if="grandchild.children.length">
-                            <li class="dash-document-item-container">
+                            <li class="dash-document-item-container" ng-if="greatgrandchild.title">
                                 <div class="dash-document-item">
                                     <h6>{{greatgrandchild.title}}</h6>
                                 </div>
