@@ -39,7 +39,7 @@
       <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="1" selection-start="763" selection-end="763" vertical-scroll-proportion="0.9142212" vertical-offset="0" max-vertical-offset="915">
+            <state line="53" column="19" selection-start="790" selection-end="790" vertical-scroll-proportion="0.8972912" vertical-offset="0" max-vertical-offset="930">
               <folding />
             </state>
           </provider>
@@ -707,7 +707,11 @@
       <created>1392268124487</created>
       <updated>1392268124487</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="WIP&#10;">
+      <created>1392268190579</created>
+      <updated>1392268190579</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -958,7 +962,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="1" selection-start="763" selection-end="763" vertical-scroll-proportion="0.9142212" vertical-offset="0" max-vertical-offset="915">
+        <state line="53" column="19" selection-start="790" selection-end="790" vertical-scroll-proportion="0.8972912" vertical-offset="0" max-vertical-offset="930">
           <folding />
         </state>
       </provider>
