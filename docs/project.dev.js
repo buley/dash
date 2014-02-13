@@ -179,17 +179,8 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 }]);
 
 dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', function( $routeParams, $scope ) {
-    console.log('content controller');
-    $scope.pathLevel = function(level, slug) {
-        console.log('loevel',slug,level, $routeParams['doc'+level]);
-        return slug === $routeParams['doc'+ level];
-    };
-}]);
-
-dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', function($routeParams, $scope) {
-    console.log('sidebar controller', $routeParams);
     $scope.currentTopic = function() {
-       var params = [];
+        var params = [];
         if ($routeParams.doc1) {
             params.push($routeParams.doc1);
         }
@@ -204,6 +195,17 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         }
         return params.join('/');
     };
+    console.log('content controller');
+    $scope.pathLevel = function(level, slug) {
+        console.log('loevel',slug, level, $routeParams['doc'+level]);
+        return $scope.currentTopic();
+        //slug === $routeParams['doc'+ level];
+    };
+}]);
+
+dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', function($routeParams, $scope) {
+    console.log('sidebar controller', $routeParams);
+
 
 }]);
 
