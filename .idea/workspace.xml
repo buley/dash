@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/cursors.md" afterPath="$PROJECT_DIR$/documentation/cursors.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/closing.md" afterPath="$PROJECT_DIR$/documentation/database/closing.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/getting.md" afterPath="$PROJECT_DIR$/documentation/database/getting.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/names.md" afterPath="$PROJECT_DIR$/documentation/database/names.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/opening.md" afterPath="$PROJECT_DIR$/documentation/database/opening.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/removing.md" afterPath="$PROJECT_DIR$/documentation/database/removing.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/versionchanges.md" afterPath="$PROJECT_DIR$/documentation/database/versionchanges.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/database/versions.md" afterPath="$PROJECT_DIR$/documentation/database/versions.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/databases.md" afterPath="$PROJECT_DIR$/documentation/databases.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entries.md" afterPath="$PROJECT_DIR$/documentation/entries.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/adding.md" afterPath="$PROJECT_DIR$/documentation/entry/adding.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/getting.md" afterPath="$PROJECT_DIR$/documentation/entry/getting.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/putting.md" afterPath="$PROJECT_DIR$/documentation/entry/putting.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/removing.md" afterPath="$PROJECT_DIR$/documentation/entry/removing.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/entry/updating.md" afterPath="$PROJECT_DIR$/documentation/entry/updating.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/index/creating.md" afterPath="$PROJECT_DIR$/documentation/index/creating.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/index/getting.md" afterPath="$PROJECT_DIR$/documentation/index/getting.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/index/iterating.md" afterPath="$PROJECT_DIR$/documentation/index/iterating.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/index/removing.md" afterPath="$PROJECT_DIR$/documentation/index/removing.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/indexes.md" afterPath="$PROJECT_DIR$/documentation/indexes.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/keyrange/bounds.md" afterPath="$PROJECT_DIR$/documentation/keyrange/bounds.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/keyrange/direction.md" afterPath="$PROJECT_DIR$/documentation/keyrange/direction.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/keyranges.md" afterPath="$PROJECT_DIR$/documentation/keyranges.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/clearing.md" afterPath="$PROJECT_DIR$/documentation/objectstore/clearing.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/creating.md" afterPath="$PROJECT_DIR$/documentation/objectstore/creating.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/getting.md" afterPath="$PROJECT_DIR$/documentation/objectstore/getting.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/iteration.md" afterPath="$PROJECT_DIR$/documentation/objectstore/iteration.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/keypaths.md" afterPath="$PROJECT_DIR$/documentation/objectstore/keypaths.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/objectstore/removing.md" afterPath="$PROJECT_DIR$/documentation/objectstore/removing.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/indexeddb/stores.md" afterPath="$PROJECT_DIR$/documentation/stores.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -58,7 +29,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="142" column="19" selection-start="5267" selection-end="5267" vertical-scroll-proportion="0.47562426" vertical-offset="1730" max-vertical-offset="3615">
+            <state line="199" column="37" selection-start="7254" selection-end="7254" vertical-scroll-proportion="0.2508918" vertical-offset="2774" max-vertical-offset="3615">
               <folding />
             </state>
           </provider>
@@ -866,7 +837,11 @@
       <created>1392296516922</created>
       <updated>1392296516922</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="WIP&#10;">
+      <created>1392296597334</created>
+      <updated>1392296597334</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1129,7 +1104,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="19" selection-start="5267" selection-end="5267" vertical-scroll-proportion="0.47562426" vertical-offset="1730" max-vertical-offset="3615">
+        <state line="199" column="37" selection-start="7254" selection-end="7254" vertical-scroll-proportion="0.2508918" vertical-offset="2774" max-vertical-offset="3615">
           <folding />
         </state>
       </provider>
