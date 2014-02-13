@@ -10,7 +10,7 @@ dashApp.config(['$routeProvider', function($routeProvider) {
             templateUrl: '/docs/templates/docs.html',
             controller: 'dashAppDocsController'
         }).
-         when('/docs/:doc1', {
+        when('/docs/:doc1', {
             templateUrl: '/docs/templates/docs.html',
             controller: 'dashAppDocsController'
         }).
@@ -163,7 +163,6 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
     $scope.documentContent = function(path) {
         return $templateCache.get(getPath(path))[1];
     }
-    console.log('docs controller', $scope.documents);
     var process = function(item) {
         $http.get( getPath(item.path), { cache: $templateCache } );
         if (!item.children) {
@@ -181,6 +180,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', function( $routeParams, $scope ) {
     $scope.currentTopic = function() {
         var params = [];
+        console.log('$',$routeParams);
         if ($routeParams.doc1) {
             params.push($routeParams.doc1);
         }
