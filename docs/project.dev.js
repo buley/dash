@@ -42,20 +42,20 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             title: 'Overview',
             tags: [ 'general', 'quickstart', 'overview' ],
             children: [
-                { 'path': 'overview/keys',
-                    'title': 'Keys'
-                },
-                { 'path': 'overview/records',
-                    'title': 'Records'
-                },
-                { 'path': 'overview/requests',
-                    'title': 'Requests'
-                },
                 { 'path': 'overview/security',
                     'title': 'Security'
                 },
                 { 'path': 'overview/transactions',
                     'title': 'Transactions'
+                },
+                { 'path': 'overview/requests',
+                    'title': 'Requests'
+                },
+                { 'path': 'overview/records',
+                    'title': 'Records'
+                },
+                { 'path': 'overview/keys',
+                    'title': 'Keys'
                 },
                 { 'path': 'indexeddb/databases',
                     'title': 'Databases',
