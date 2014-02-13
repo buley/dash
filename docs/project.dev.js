@@ -180,7 +180,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', function( $routeParams, $scope ) {
     $scope.currentTopic = function() {
         var params = [];
-        console.log('$',$routeParams);
+
         if ($routeParams.doc1) {
             params.push($routeParams.doc1);
         }
@@ -193,6 +193,7 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
         if ($routeParams.doc4) {
             params.push($routeParams.doc4);
         }
+        console.log('$',$routeParams.doc1, params);
         return params.join('/');
     };
     console.log('content controller');
