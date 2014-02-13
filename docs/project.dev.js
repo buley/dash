@@ -197,6 +197,7 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
     };
     console.log('content controller');
     $scope.pathLevel = function(level, slug) {
+        console.log(slug, $scope.currentTopic());
         return slug === $scope.currentTopic();
     };
 }]);
