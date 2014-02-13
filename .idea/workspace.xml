@@ -39,7 +39,7 @@
       <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="31" selection-start="599" selection-end="599" vertical-scroll-proportion="0.6772009" vertical-offset="0" max-vertical-offset="886">
+            <state line="40" column="22" selection-start="586" selection-end="586" vertical-scroll-proportion="0.6772009" vertical-offset="0" max-vertical-offset="886">
               <folding />
             </state>
           </provider>
@@ -646,7 +646,11 @@
       <created>1392264658433</created>
       <updated>1392264658433</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="WIP&#10;">
+      <created>1392264839348</created>
+      <updated>1392264839348</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -719,7 +723,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240" />
+        <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
@@ -801,7 +807,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="345" />
+        <state line="17" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="345">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/vendor/css/foundation.css">
@@ -885,7 +893,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="31" selection-start="599" selection-end="599" vertical-scroll-proportion="0.6772009" vertical-offset="0" max-vertical-offset="886">
+        <state line="40" column="22" selection-start="586" selection-end="586" vertical-scroll-proportion="0.6772009" vertical-offset="0" max-vertical-offset="886">
           <folding />
         </state>
       </provider>
