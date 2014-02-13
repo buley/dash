@@ -60,19 +60,19 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                 { 'path': 'overview',
                     'title': 'Overview'
                 },
-                { 'path': 'overview/security',
+                { 'path': 'security',
                     'title': 'Security'
                 },
-                { 'path': 'overview/transactions',
+                { 'path': 'transactions',
                     'title': 'Transactions'
                 },
-                { 'path': 'overview/requests',
+                { 'path': 'requests',
                     'title': 'Requests'
                 },
-                { 'path': 'overview/records',
+                { 'path': 'records',
                     'title': 'Records'
                 },
-                { 'path': 'overview/keys',
+                { 'path': 'keys',
                     'title': 'Keys'
                 },
                 { 'path': 'databases',
