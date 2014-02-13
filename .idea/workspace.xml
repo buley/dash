@@ -39,7 +39,16 @@
       <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="22" selection-start="586" selection-end="586" vertical-scroll-proportion="0.6772009" vertical-offset="0" max-vertical-offset="886">
+            <state line="30" column="20" selection-start="436" selection-end="436" vertical-scroll-proportion="0.50790066" vertical-offset="0" max-vertical-offset="886">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="52" selection-start="340" selection-end="340" vertical-scroll-proportion="-1.25" vertical-offset="45" max-vertical-offset="1140">
               <folding />
             </state>
           </provider>
@@ -72,8 +81,8 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/docs/documents/overview/records.md" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/docs/templates/docs.html" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
+        <option value="$PROJECT_DIR$/docs/templates/docs.html" />
         <option value="$PROJECT_DIR$/docs/project.less" />
       </list>
     </option>
@@ -650,7 +659,19 @@
       <created>1392264839348</created>
       <updated>1392264839348</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="WIP&#10;">
+      <created>1392264908756</created>
+      <updated>1392264908756</updated>
+    </task>
+    <task id="LOCAL-00058" summary="WIP&#10;">
+      <created>1392265049732</created>
+      <updated>1392265049732</updated>
+    </task>
+    <task id="LOCAL-00059" summary="WIP&#10;">
+      <created>1392265218124</created>
+      <updated>1392265218124</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -662,7 +683,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3416216" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3416216" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5004878" order="7" side_tool="true" content_ui="tabs" />
@@ -757,7 +778,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="6" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="270" />
+        <state line="12" column="6" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="270">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/specs/databases/remove.database.spec.js">
@@ -881,7 +904,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="29" selection-start="1687" selection-end="1687" vertical-scroll-proportion="0.56552964" vertical-offset="105" max-vertical-offset="1110" />
+        <state line="5" column="52" selection-start="340" selection-end="340" vertical-scroll-proportion="-1.25" vertical-offset="45" max-vertical-offset="1140">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
@@ -893,7 +918,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="22" selection-start="586" selection-end="586" vertical-scroll-proportion="0.6772009" vertical-offset="0" max-vertical-offset="886">
+        <state line="30" column="20" selection-start="436" selection-end="436" vertical-scroll-proportion="0.50790066" vertical-offset="0" max-vertical-offset="886">
           <folding />
         </state>
       </provider>

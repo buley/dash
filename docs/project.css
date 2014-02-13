@@ -23,12 +23,12 @@ ul.dash-document-navigation ul {
 }
 ul.dash-document-navigation ul li {
   margin: 0;
-  padding: 0 0 5px 0;
+  padding: 0 0 0 0;
 }
 ul.dash-document-navigation ul ul {
   margin: 0 0 0 20px;
 }
 ul.dash-document-navigation ul ul li {
   margin: 0;
-  padding: 0 0 5px 0;
+  padding: 0 0 0 0;
 }
