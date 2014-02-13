@@ -45,7 +45,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             children: [
                 { 'path': 'overview',
                     'title': 'Overview'
-                }
+                },
                 { 'path': 'overview/security',
                     'title': 'Security'
                 },
