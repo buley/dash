@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/templates/docs.html" afterPath="$PROJECT_DIR$/docs/templates/docs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.css" afterPath="$PROJECT_DIR$/docs/project.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.less" afterPath="$PROJECT_DIR$/docs/project.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -35,19 +36,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.less" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="0" selection-start="606" selection-end="606" vertical-scroll-proportion="-25.666666" vertical-offset="44" max-vertical-offset="930">
+            <state line="56" column="4" selection-start="856" selection-end="856" vertical-scroll-proportion="0.89841986" vertical-offset="44" max-vertical-offset="975">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="30" selection-start="886" selection-end="886" vertical-scroll-proportion="0.25773194" vertical-offset="0" max-vertical-offset="1170">
+            <state line="15" column="30" selection-start="886" selection-end="886" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="1170">
               <folding />
             </state>
           </provider>
@@ -81,8 +82,8 @@
         <option value="$PROJECT_DIR$/docs/documents/overview/records.md" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
-        <option value="$PROJECT_DIR$/docs/project.less" />
         <option value="$PROJECT_DIR$/docs/templates/docs.html" />
+        <option value="$PROJECT_DIR$/docs/project.less" />
       </list>
     </option>
   </component>
@@ -718,7 +719,11 @@
       <created>1392268456966</created>
       <updated>1392268456966</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="WIP&#10;">
+      <created>1392268581778</created>
+      <updated>1392268581778</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -960,16 +965,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.less">
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="0" selection-start="606" selection-end="606" vertical-scroll-proportion="-25.666666" vertical-offset="44" max-vertical-offset="930">
+        <state line="15" column="30" selection-start="886" selection-end="886" vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="1170">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+    <entry file="file://$PROJECT_DIR$/docs/project.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="30" selection-start="886" selection-end="886" vertical-scroll-proportion="0.25773194" vertical-offset="0" max-vertical-offset="1170">
+        <state line="56" column="4" selection-start="856" selection-end="856" vertical-scroll-proportion="0.89841986" vertical-offset="44" max-vertical-offset="975">
           <folding />
         </state>
       </provider>
