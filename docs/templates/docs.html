@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="row dash-document-list" ng-repeat="child in document.children">
-                <div class="small-12 columns dash-document-item-container"ng-if="grandchild.path == $routeParams.doc1">
+                <div class="small-12 columns dash-document-item-container"ng-if="child.path == $routeParams.doc1">
                     <div class="row dash-document-item" ng-hide="child.hidden" ng-if="child.title">
                         <h2 name="{{child.path}}">{{child.title}}</h2>
                         <section markdown="documentContent(child.path)"></section>
@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="row dash-document-list" ng-repeat="greatgrandchild in grandchild.children">
-                        <div class="small-12 columns dash-document-item-container" ng-if="grandchild.path == $routeParams.doc3">
+                        <div class="small-12 columns dash-document-item-container" ng-if="greatgrandchild.path == $routeParams.doc3">
                             <div class="row dash-document-item" ng-hide="greatgrandchild.hidden" ng-if="greatgrandchild.title">
                                 <h3 name="{{greatgrandchild.path}}">{{greatgrandchild.title}}</h3>
                                 <section markdown="documentContent(greatgrandchild.path)"></section>
