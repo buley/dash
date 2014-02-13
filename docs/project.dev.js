@@ -75,82 +75,82 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                 { 'path': 'overview/keys',
                     'title': 'Keys'
                 },
-                { 'path': 'indexeddb/databases',
+                { 'path': 'databases',
                     'title': 'Databases',
                     'children': [
-                        { 'path': 'indexeddb/database/closing',
+                        { 'path': 'database/closing',
                             'title': 'Closing'
                         },
-                        { 'path': 'indexeddb/database/removing',
+                        { 'path': 'database/removing',
                             'title': 'Removing'
                         },
-                        { 'path': 'indexeddb/database/getting',
+                        { 'path': 'database/getting',
                             'title': 'Getting'
                         },
-                        { 'path': 'indexeddb/database/names',
+                        { 'path': 'database/names',
                             'title': 'Names'
                         },
-                        { 'path': 'indexeddb/database/opening',
+                        { 'path': 'database/opening',
                             'title': 'Opening'
                         },
-                        { 'path': 'indexeddb/database/versionchanges',
+                        { 'path': 'database/versionchanges',
                             'title': 'Version Changes'
                         },
-                        { 'path': 'indexeddb/database/versions',
+                        { 'path': 'database/versions',
                             'title': 'Versions'
                         } ]
                 },
-                { 'path': 'indexeddb/entries',
+                { 'path': 'entries',
                     'title': 'Entries',
                     'children': [
-                        { 'path': 'indexeddb/entry/adding',
+                        { 'path': 'entry/adding',
                             'title': 'Adding' },
-                        { 'path': 'indexeddb/entry/getting',
+                        { 'path': 'entry/getting',
                             'title': 'Getting' },
-                        { 'path': 'indexeddb/entry/putting',
+                        { 'path': 'entry/putting',
                             'title': 'Putting' },
-                        { 'path': 'indexeddb/entry/removing',
+                        { 'path': 'entry/removing',
                             'title': 'Removing' },
-                        { 'path': 'indexeddb/entry/updating',
+                        { 'path': 'entry/updating',
                             'title': 'Updating' }
                     ]
                 },
-                { 'path': 'indexeddb/indexes',
+                { 'path': 'indexes',
                     'title': 'Indexes',
                     'children': [
-                        { 'path': 'indexeddb/index/creating',
+                        { 'path': 'index/creating',
 
                             'title': 'Creating' },
-                        { 'path': 'indexeddb/index/getting',
+                        { 'path': 'index/getting',
                             'title': 'Getting'},
-                        { 'path': 'indexeddb/index/iterating',
+                        { 'path': 'index/iterating',
                             'title': 'Iterating' },
-                        { 'path': 'indexeddb/index/removing',
+                        { 'path': 'index/removing',
                             'title': 'Removing'
                         }
                     ]
                 },
-                { 'path': 'indexeddb/keyranges',
+                { 'path': 'keyranges',
                     'title': 'Keyranges',
                     'children': [
-                        { 'path': 'indexeddb/keyrange/bounds',
+                        { 'path': 'keyrange/bounds',
                             'title': 'Bounds' },
-                        { 'path': 'indexeddb/keyrange/direction',
+                        { 'path': 'keyrange/direction',
                             'title': 'Direction' }
                     ]
                 },
-                { 'path': 'indexeddb/stores',
+                { 'path': 'stores',
                     'title': 'Stores',
                     'children': [
-                        { 'path': 'indexeddb/objectstore/clearing', 'title': 'Clearing' },
-                        { 'path': 'indexeddb/objectstore/creating', 'title': 'Creating' },
-                        { 'path': 'indexeddb/objectstore/getting', 'title': 'Getting' },
-                        { 'path': 'indexeddb/objectstore/iteration', 'title': 'Iterating' },
-                        { 'path': 'indexeddb/objectstore/keypaths', 'title': 'Keypaths' },
-                        { 'path': 'indexeddb/objectstore/removing', 'title': 'Removing' }
+                        { 'path': 'objectstore/clearing', 'title': 'Clearing' },
+                        { 'path': 'objectstore/creating', 'title': 'Creating' },
+                        { 'path': 'objectstore/getting', 'title': 'Getting' },
+                        { 'path': 'objectstore/iteration', 'title': 'Iterating' },
+                        { 'path': 'objectstore/keypaths', 'title': 'Keypaths' },
+                        { 'path': 'objectstore/removing', 'title': 'Removing' }
                     ]
                 },
-                { 'path': 'indexeddb/cursors',
+                { 'path': 'cursors',
                     'title': 'Cursors'
                 }
 
