@@ -18,6 +18,9 @@
 .dash-app-docs-sidebar-container {
   padding: 10px;
 }
+.dash-app-docs-sidebar-container > ul > li {
+  font-weight: bold;
+}
 ul.dash-document-navigation {
   margin: 0 0 10px 0;
 }
