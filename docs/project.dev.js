@@ -180,6 +180,10 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 
 dashApp.controller('dashAppDocsContentController', [ function() {
     console.log('content controller');
+    $scope.pathLevel = function(level, slug) {
+        console.log('loevel',slug,level, $routeParams['doc'+level]);
+        return slug === $routeParams['doc'+ level];
+    };
 }]);
 
 dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', function($routeParams, $scope) {
@@ -200,10 +204,7 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         }
         return params.join('/');
     };
-    $scope.pathLevel = function(level, slug) {
-        console.log('loevel',slug,level, $routeParams['doc'+level]);
-        return slug === $routeParams['doc'+ level];
-    }
+
 }]);
 
 dashApp.controller('dashAppSplashController', [ function() {
