@@ -39,28 +39,28 @@
         <!-- Document List -->
         <div class="row dash-document-list" ng-repeat="document in documents">
             <div class="small-12 columns dash-document-item-container">
-                <div class="row dash-document-item" ng-hide="document.hidden">
+                <div class="row dash-document-item" ng-hide="document.hidden" ng-if="document.title">
                     <h1>{{document.title}}</h1>
                     <section markdown="documentContent(document.path)"></section>
                 </div>
             </div>
             <div class="row dash-document-list" ng-repeat="child in document.children">
                 <div class="small-12 columns dash-document-item-container">
-                    <div class="row dash-document-item" ng-hide="child.hidden">
+                    <div class="row dash-document-item" ng-hide="child.hidden" ng-if="document.title">
                         <h2>{{child.title}}</h2>
                         <section markdown="documentContent(child.path)"></section>
                     </div>
                 </div>
                 <div class="row dash-document-list" ng-repeat="grandchild in child.children">
                     <div class="small-12 columns dash-document-item-container">
-                        <div class="row dash-document-item" ng-hide="grandchild.hidden">
+                        <div class="row dash-document-item" ng-hide="grandchild.hidden"  ng-if="document.title">
                             <h3>{{grandchild.title}}</h3>
                             <section markdown="documentContent(grandchild.path)"></section>
                         </div>
                     </div>
                     <div class="row dash-document-list" ng-repeat="greatgrandchild in grandchild.children">
                         <div class="small-12 columns dash-document-item-container">
-                            <div class="row dash-document-item" ng-hide="greatgrandchild.hidden">
+                            <div class="row dash-document-item" ng-hide="greatgrandchild.hidden" ng-if="document.title">
                                 <h3>{{greatgrandchild.title}}</h3>
                                 <section markdown="documentContent(greatgrandchild.path)"></section>
                             </div>
