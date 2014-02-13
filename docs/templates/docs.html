@@ -6,7 +6,7 @@
             <ul class="dash-document-navigation" ng-repeat="document in documents" ng-if="documents.length">
                 <li class="dash-document-item-container">
                     <div class="dash-document-item">
-                        <span>{{document.title}}</span>
+                        <h3>{{document.title}}</h3>
                     </div>
                 </li>
                 <ul class="dash-document-navigation" ng-repeat="child in document.children" ng-if="document.children.length">
