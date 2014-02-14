@@ -23,7 +23,7 @@ body {
   margin: 10px 0 10px 0;
 }
 .dash-app-docs-content .dash-app-docs-content-container {
-  padding: 20px;
+  padding: 0 20px 0 20px;
 }
 ul.dash-document-navigation {
   margin: 0 0 10px 0;
