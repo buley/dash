@@ -1,4 +1,4 @@
-<div class="dash-app-docs-container row columns">
+<div class="dash-app-docs-container columns">
     <div class="large-2 columns dash-app-docs-sidebar right panel" ng-controller="dashAppDocsSidebarController">
         <!--Navigation -->
         <nav class="dash-app-docs-sidebar-container">
@@ -33,7 +33,7 @@
         </nav>
     </div>
     <div class="large-4 columns dash-app-docs-demos right" ng-controller="dashAppDocsDemosController">
-       <aside class='dash-app-docs-demos-demo small-12' ng-repeat="demo in demos()">
+       <aside class='dash-app-docs-demos-demo row' ng-repeat="demo in demos()">
            <h6 ng-if="demo.title">{{demo.title}}</h6>
            <iframe width="100%" height="300" ng-src="{{demoUrl(demo)}}" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
        </aside>
