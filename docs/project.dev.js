@@ -52,7 +52,26 @@ dashApp.controller('dashAppAboutController', [ function() {
 }]);
 
 dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache', '$routeParams', function( $scope, $http, $templateCache, $routeParams ) {
-
+    $scope.parentSelected = function(parent) {
+        var current = $scope.currentTopic();
+        return parent.path === current;
+    };
+    $scope.currentTopic = function() {
+        var params = [];
+        if ($routeParams.doc1) {
+            params.push($routeParams.doc1);
+        }
+        if ($routeParams.doc2) {
+            params.push($routeParams.doc2);
+        }
+        if ($routeParams.doc3) {
+            params.push($routeParams.doc3);
+        }
+        if ($routeParams.doc4) {
+            params.push($routeParams.doc4);
+        }
+        return params.join('/');
+    };
     $scope.parentShowing = function(obj, child) {
         var params = [],
             match,
@@ -262,23 +281,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             ]
         }
     ];
-    $scope.currentTopic = function() {
-        var params = [];
 
-        if ($routeParams.doc1) {
-            params.push($routeParams.doc1);
-        }
-        if ($routeParams.doc2) {
-            params.push($routeParams.doc2);
-        }
-        if ($routeParams.doc3) {
-            params.push($routeParams.doc3);
-        }
-        if ($routeParams.doc4) {
-            params.push($routeParams.doc4);
-        }
-        return params.join('/');
-    };
     var getPath = function(path) {
         return ['/documentation/', path, '.md' ].join('');
     }

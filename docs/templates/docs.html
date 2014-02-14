@@ -49,14 +49,14 @@
                     </div>
                 </div>
                 <div class="dash-document-list" ng-repeat="grandchild in child.children">
-                    <div class="dash-document-item-container" ng-if="parentShowing(child, grandchild)">
+                    <div class="dash-document-item-container" ng-if="parentSelected(child, grandchild)">
                         <div class="dash-document-item" ng-hide="grandchild.hidden"  ng-if="grandchild.title">
                             <h3 name="{{grandchild.path}}">{{grandchild.title}}</h3>
                             <section markdown="documentContent(grandchild.path)"></section>
                         </div>
                     </div>
                     <div class="dash-document-list" ng-repeat="greatgrandchild in grandchild.children">
-                        <div class="dash-document-item-container" ng-if="pathLevel(greatgrandchild)">
+                        <div class="dash-document-item-container" ng-if="parentSelected(greatgrandchild)">
                             <div class="dash-document-item" ng-hide="greatgrandchild.hidden" ng-if="greatgrandchild.title">
                                 <h3 name="{{greatgrandchild.path}}">{{greatgrandchild.title}}</h3>
                                 <section markdown="documentContent(greatgrandchild.path)"></section>
