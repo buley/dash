@@ -49,14 +49,14 @@
                     </div>
                 </div>
                 <div class="dash-document-list" ng-repeat="grandchild in child.children">
-                    <div class="dash-document-item-container" ng-if="parentSelected(child, grandchild) || pathLevel(grandchild)">
+                    <div class="dash-document-item-container" ng-if="parentSelected(child, grandchild) || pathLevel(grandchild) || emptyPath()">
                         <div class="dash-document-item" ng-hide="grandchild.hidden"  ng-if="grandchild.title">
                             <h3 name="{{grandchild.path}}">{{grandchild.title}}</h3>
                             <section markdown="documentContent(grandchild.path)"></section>
                         </div>
                     </div>
                     <div class="dash-document-list" ng-repeat="greatgrandchild in grandchild.children">
-                        <div class="dash-document-item-container" ng-if="parentSelected(grandchild, greatgrandchild) || parentSelected(child, grandchild) || pathLevel(greatgrandchild)">
+                        <div class="dash-document-item-container" ng-if="parentSelected(grandchild, greatgrandchild) || parentSelected(child, grandchild) || pathLevel(greatgrandchild) || emptyPath()">
                             <div class="dash-document-item" ng-hide="greatgrandchild.hidden" ng-if="greatgrandchild.title">
                                 <h3 name="{{greatgrandchild.path}}">{{greatgrandchild.title}}</h3>
                                 <section markdown="documentContent(greatgrandchild.path)"></section>
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="dash-document-list" ng-repeat="greatgreatgrandchild in greatgrandchild.children">
-                        <div class="dash-document-item-container" ng-if="parentSelected(greatgrandchild, greatgreatgrandchild) || parentSelected(grandchild, greatgrandchild) || pathLevel(greatgreatgrandchild)">
+                        <div class="dash-document-item-container" ng-if="parentSelected(greatgrandchild, greatgreatgrandchild) || parentSelected(grandchild, greatgrandchild) || pathLevel(greatgreatgrandchild) || emptyPath()">
                             <div class="dash-document-item" ng-hide="greatgreatgrandchild.hidden" ng-if="greatgreatgrandchild.title">
                                 <h3 name="{{greatgreatgrandchild.path}}">{{greatgreatgrandchild.title}}</h3>
                                 <section markdown="documentContent(greatgreatgrandchild.path)"></section>

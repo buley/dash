@@ -284,7 +284,9 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             ]
         }
     ];
-
+    $scope.emptyPath = function() {
+        return '' === $scope.currentTarget();
+    };
     var getPath = function(path) {
         return ['/documentation/', path, '.md' ].join('');
     }
