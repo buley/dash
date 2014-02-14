@@ -58,7 +58,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             children: [
                 { 'path': 'overview',
                     'title': 'Overview',
-                    default: true
+                    'default': true
                 },
                 { 'path': 'security',
                     'title': 'Security'
@@ -79,13 +79,24 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                     'title': 'Databases',
                     'children': [
                         { 'path': 'database/closing',
-                            'title': 'Closing'
+                            'title': 'Closing',
+                            'demos': [
+                                {
+                                    'title': 'Closing A Database Example: Simple Case',
+                                    'id': 'dashdb/SFYx5'
+                                }
+                            ]
                         },
                         { 'path': 'database/removing',
                             'title': 'Removing'
                         },
                         { 'path': 'database/getting',
-                            'title': 'Getting'
+                            'title': 'Getting',
+                            'demos': [
+                                { 'title': 'Getting Existing Databases Example: Simple Case',
+                                    'id': 'dashdb/5ZWMg'
+                                }
+                            ]
                         },
                         { 'path': 'database/names',
                             'title': 'Names'
