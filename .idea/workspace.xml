@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/records.md" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/entries.md" afterPath="$PROJECT_DIR$/documentation/entries.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -1179,7 +1181,11 @@
       <created>1392352026866</created>
       <updated>1392352026866</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="WIP&#10;">
+      <created>1392352114165</created>
+      <updated>1392352114165</updated>
+    </task>
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="ToolWindowManager">

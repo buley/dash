@@ -69,9 +69,6 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                 { 'path': 'requests',
                     'title': 'Requests'
                 },
-                { 'path': 'records',
-                    'title': 'Records'
-                },
                 { 'path': 'keys',
                     'title': 'Keys'
                 },
