@@ -21,7 +21,7 @@
                             </a>
                         </li>
                         <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children" ng-if="grandchild.children.length">
-                            <li class="dash-document-item-container" ng-if="greatgrandchild.title" ng-show="parentShowing(grandchild, greatgrandchild)">
+                            <li class="dash-document-item-container" ng-if="greatgrandchild.title" ng-show="parentShowing(grandchild, greatgrandchild) || parentShowing(child, grandchild)">
                                 <a href="#docs/{{greatgrandchild.path}}" class="dash-document-item">
                                     <h7>{{greatgrandchild.title}}</h7>
                                 </a>
