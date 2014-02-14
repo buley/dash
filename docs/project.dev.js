@@ -191,6 +191,33 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
     $scope.documentContent = function(path) {
         return $templateCache.get(getPath(path))[1];
     }
+    $scope.currentDocument = function() {
+        var topic = $scope.currentTopic(),
+            found = false;
+        _,map($scope.documents, function(item) {
+           if (item.path === topic) {
+               found = item;
+               return;
+           }
+           if(item.children) {
+               _.map(item.children, function(item2) {
+                   if (item2.path === topic) {
+                       found = item2;
+                       return;
+                   }
+                   if (item2.children) {
+                       _map(item2.children, function(item3) {
+                           if(item3.path === topic) {
+                               found = item3;
+                               return;
+                           }
+                       });
+                   }
+               });
+           }
+        });
+        return found;
+    }
     var process = function(item) {
         $http.get( getPath(item.path), { cache: $templateCache } );
         if (!item.children) {
@@ -260,7 +287,7 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
 }]);
 
 dashApp.controller('dashAppDocsDemosController', [ '$scope', function( $scope ) {
-    console.log('demo controller', $scope.currentTopic());
+    console.log('demo controller', $scope.currentDocument());
 }]);
 
 dashApp.controller('dashAppSplashController', [ function() {
