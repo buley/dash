@@ -51,7 +51,7 @@ dashApp.controller('dashAppAboutController', [ function() {
     console.log('about controller');
 }]);
 
-dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache', function( $scope, $http, $templateCache ) {
+dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache', '$routeParams', function( $scope, $http, $templateCache, $routeParams ) {
 
     $scope.documents = [
         { path: 'overview',
@@ -168,6 +168,23 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             ]
         }
     ];
+    $scope.currentTopic = function() {
+        var params = [];
+
+        if ($routeParams.doc1) {
+            params.push($routeParams.doc1);
+        }
+        if ($routeParams.doc2) {
+            params.push($routeParams.doc2);
+        }
+        if ($routeParams.doc3) {
+            params.push($routeParams.doc3);
+        }
+        if ($routeParams.doc4) {
+            params.push($routeParams.doc4);
+        }
+        return params.join('/');
+    };
     var getPath = function(path) {
         return ['/documentation/', path, '.md' ].join('');
     }
@@ -242,8 +259,8 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
     };
 }]);
 
-dashApp.controller('dashAppDocsDemosController', [ function() {
-    console.log('demo controller');
+dashApp.controller('dashAppDocsDemosController', [ '$scope', function( $scope ) {
+    console.log('demo controller', $scope.currentTopic());
 }]);
 
 dashApp.controller('dashAppSplashController', [ function() {
