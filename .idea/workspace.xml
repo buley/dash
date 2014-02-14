@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/keyrange/bounds.md" afterPath="$PROJECT_DIR$/documentation/cursor/keyrange/bounds.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/keyrange/direction.md" afterPath="$PROJECT_DIR$/documentation/cursor/keyrange/direction.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/keyranges.md" afterPath="$PROJECT_DIR$/documentation/cursor/keyranges.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/templates/docs.html" afterPath="$PROJECT_DIR$/docs/templates/docs.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -28,19 +26,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="project.dev.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="266" column="20" selection-start="11391" selection-end="11391" vertical-scroll-proportion="0.48494983" vertical-offset="3555" max-vertical-offset="5805">
+            <state line="266" column="20" selection-start="11391" selection-end="11391" vertical-scroll-proportion="0.0" vertical-offset="3555" max-vertical-offset="5805">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="48" selection-start="1693" selection-end="1693" vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="1215">
+            <state line="73" column="22" selection-start="5084" selection-end="5084" vertical-scroll-proportion="0.7250859" vertical-offset="462" max-vertical-offset="1335">
               <folding />
             </state>
           </provider>
@@ -93,8 +91,8 @@
         <option value="$PROJECT_DIR$/documentation/database/versionchanges.md" />
         <option value="$PROJECT_DIR$/documentation/database/versions.md" />
         <option value="$PROJECT_DIR$/documentation/database/removing.md" />
-        <option value="$PROJECT_DIR$/docs/templates/docs.html" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
+        <option value="$PROJECT_DIR$/docs/templates/docs.html" />
       </list>
     </option>
   </component>
@@ -120,7 +118,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="Scope" currentSubView="Project Files" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="Scope" currentSubView="Changed Files" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -306,6 +304,14 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="templates">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Changed Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -1270,7 +1276,11 @@
       <created>1392354104455</created>
       <updated>1392354104455</updated>
     </task>
-    <option name="localTasksCounter" value="211" />
+    <task id="LOCAL-00211" summary="WIP&#10;">
+      <created>1392354213534</created>
+      <updated>1392354213534</updated>
+    </task>
+    <option name="localTasksCounter" value="212" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1684,16 +1694,16 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="48" selection-start="1693" selection-end="1693" vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="1215">
+        <state line="266" column="20" selection-start="11391" selection-end="11391" vertical-scroll-proportion="0.0" vertical-offset="3555" max-vertical-offset="5805">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="266" column="20" selection-start="11391" selection-end="11391" vertical-scroll-proportion="0.48494983" vertical-offset="3555" max-vertical-offset="5805">
+        <state line="73" column="22" selection-start="5084" selection-end="5084" vertical-scroll-proportion="0.7250859" vertical-offset="462" max-vertical-offset="1335">
           <folding />
         </state>
       </provider>

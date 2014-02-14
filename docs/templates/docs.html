@@ -63,6 +63,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="dash-document-list" ng-repeat="greatgreatgrandchild in greatgrandchild.children">
+                        <div class="dash-document-item-container" ng-if="parentSelected(greatgreatgrandchild, greatgrandchild)">
+                            <div class="dash-document-item" ng-hide="greatgreatgrandchild.hidden" ng-if="greatgreatgrandchild.title">
+                                <h3 name="{{greatgreatgrandchild.path}}">{{greatgreatgrandchild.title}}</h3>
+                                <section markdown="documentContent(greatgreatgrandchild.path)"></section>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
