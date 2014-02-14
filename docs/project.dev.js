@@ -202,7 +202,6 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
 }]);
 
 dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', function($routeParams, $scope) {
-    console.log('sidebar controller', $routeParams);
     $scope.parentShowing = function(obj, child) {
         var params = [],
             match,
@@ -228,14 +227,12 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         others.pop();
         others = others.join('/');
         regx = new RegExp( '^' + others);
-        console.log('others',others);
-
         return match || ( null !== current.match( regx ) ) ? true : false;
     };
 }]);
 
 dashApp.controller('dashAppDocsDemoController', [ function() {
-    console.log('splash controller');
+    console.log('demo controller');
 }]);
 
 dashApp.controller('dashAppSplashController', [ function() {
