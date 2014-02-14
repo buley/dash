@@ -8,16 +8,26 @@ module.exports = function(config) {
       'lib/dash.js'
     ],
     exclude: [],
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
     port: 9876,
     colors: true,
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_DEBUG,
     autoWatch: true,
-    browsers: ['Chrome', 'Firefox' ],
-    //browsers: ['Chrome'],
+    //browsers: ['Chrome', 'Firefox' ],
+    browsers: ['Chrome'],
     //browsers: ['Firefox'],
     captureTimeout: 60000,
-    singleRun: false
+    singleRun: false,
+    preprocessors: {
+      "lib/*js": "coverage"
+    },
+    coverageReporter: {
+      type: "lcov",
+      dir: "coverage/"
+    },
+    plugins: [
+      'karma-coverage',
+    ]
   });
 };

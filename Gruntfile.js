@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(grunt) {
-  var plugins = [ 'karma-jasmine' ];
+  var plugins = [ 'karma-jasmine', 'karma-coverage' ];
   var browsers = [];
   if (process.env.TRAVIS) {
     plugins.push('karma-firefox-launcher');
@@ -30,7 +30,14 @@ module.exports = function(grunt) {
 			  'specs/*/*.js'
 			]
 		},
-	    reporters: [ 'dots' ]
+	    reporters: [ 'dots', 'coverage' ],
+	    preprocessors: {
+	      "lib/*js": "coverage"
+	    },
+	    coverageReporter: {
+	      type: "lcov",
+	      dir: "coverage/"
+	    },
 	  },
 	  dev: {
 	    singleRun: false,
@@ -44,7 +51,14 @@ module.exports = function(grunt) {
 			  'specs/*/*.js'
 			]
 		},
-	    reporters: [ 'dots' ]
+	    reporters: [ 'dots', 'coverage' ],
+	    preprocessors: {
+	      "lib/*.dev.js": "coverage"
+	    },
+	    coverageReporter: {
+	      type: "lcov",
+	      dir: "coverage/"
+	    },
 	  },
 	  chrome: {
 	    singleRun: false,
@@ -74,10 +88,17 @@ module.exports = function(grunt) {
 		},
 		reporters: [ 'dots' ]
 	  },
-    }
+    },
+	coveralls: {
+	    options: {
+		debug: true,
+		coverage_dir: 'lib'
+	    }
+	}
   });
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-karma-coveralls');
   grunt.registerTask('prod', ['karma:prod']);
   grunt.registerTask('dev', ['karma:dev']);
   grunt.registerTask('firefox', ['karma:firefox']);
