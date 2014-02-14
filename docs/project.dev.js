@@ -234,6 +234,10 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
     };
 }]);
 
+dashApp.controller('dashAppDemoController', [ function() {
+    console.log('splash controller');
+}]);
+
 dashApp.controller('dashAppSplashController', [ function() {
     console.log('splash controller');
 }]);
