@@ -246,7 +246,6 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                 { 'path': 'stores',
                     'title': 'Stores',
                     'children': [
-                        { 'path': 'objectstore/keypaths', 'title': 'Keypaths' },
                         { 'path': 'objectstore/clearing', 'title': 'Clearing',
                             'demos': [ {
                                     'title': 'Clearing An Object Store Example: Simple Case',
