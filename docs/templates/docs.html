@@ -34,7 +34,7 @@
     </div>
     <div class="row large-6 left dash-app-docs-content" ng-controller="dashAppDocsContentController">
         <!-- Document List -->
-        <div class="dash-document-list dash-app-docs-content-container" ng-repeat="document in documents">
+        <div class="dash-document-list columns dash-app-docs-content-container" ng-repeat="document in documents">
             <div class="dash-document-item-container">
                 <div class="dash-document-item" ng-hide="document.hidden" ng-if="document.title">
                     <h1>{{document.title}}</h1>
