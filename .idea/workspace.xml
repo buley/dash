@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/cursor/keyrange/bounds.md" afterPath="$PROJECT_DIR$/documentation/key/range/bounds.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/cursor/keyrange/direction.md" afterPath="$PROJECT_DIR$/documentation/key/range/direction.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/cursor/keyranges.md" afterPath="$PROJECT_DIR$/documentation/key/ranges.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/cursors.md" afterPath="$PROJECT_DIR$/documentation/key/cursors.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/requests.md" afterPath="$PROJECT_DIR$/documentation/transaction/requests.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -34,7 +29,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="212" column="13" selection-start="8307" selection-end="8307" vertical-scroll-proportion="0.48657718" vertical-offset="2745" max-vertical-offset="5850">
+            <state line="127" column="23" selection-start="4203" selection-end="4203" vertical-scroll-proportion="0.26845637" vertical-offset="1665" max-vertical-offset="5850">
               <folding />
             </state>
           </provider>
@@ -1381,7 +1376,11 @@
       <created>1392354822495</created>
       <updated>1392354822495</updated>
     </task>
-    <option name="localTasksCounter" value="217" />
+    <task id="LOCAL-00217" summary="WIP&#10;">
+      <created>1392355170225</created>
+      <updated>1392355170225</updated>
+    </task>
+    <option name="localTasksCounter" value="218" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1393,7 +1392,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3626493" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3626493" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5004878" order="7" side_tool="true" content_ui="tabs" />
@@ -1802,7 +1801,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="212" column="13" selection-start="8307" selection-end="8307" vertical-scroll-proportion="0.48657718" vertical-offset="2745" max-vertical-offset="5850">
+        <state line="127" column="23" selection-start="4203" selection-end="4203" vertical-scroll-proportion="0.26845637" vertical-offset="1665" max-vertical-offset="5850">
           <folding />
         </state>
       </provider>

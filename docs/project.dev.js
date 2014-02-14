@@ -111,8 +111,8 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                     'default': true,
                     'children': [
                         { 'path': 'general/security',
-                        'title': 'Security'
-                    } ]
+                            'title': 'Security'
+                        } ]
                 },
 
                 { 'path': 'transactions',
@@ -133,9 +133,9 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                         { 'path': 'database/opening',
                             'title': 'Opening',
                             'demos': [ {
-                                    'title': 'Opening A Database Example: Simple Case',
-                                    'id': 'dashdb/ZCngL'
-                                } ]
+                                'title': 'Opening A Database Example: Simple Case',
+                                'id': 'dashdb/ZCngL'
+                            } ]
                         },
                         { 'path': 'database/closing',
                             'title': 'Closing',
@@ -167,29 +167,29 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                     'children': [
                         { 'path': 'objectstore/clearing', 'title': 'Clearing',
                             'demos': [ {
-                                    'title': 'Clearing An Object Store Example: Simple Case',
-                                    'id': 'dashdb/YCj4Q'
-                                } ] },
+                                'title': 'Clearing An Object Store Example: Simple Case',
+                                'id': 'dashdb/YCj4Q'
+                            } ] },
                         { 'path': 'objectstore/creating', 'title': 'Creating',
                             'demos': [ {
-                                    'title': 'Creating An Object Store Example: Simple Case',
-                                    'id': 'dashdb/8mCew'
-                                } ] },
+                                'title': 'Creating An Object Store Example: Simple Case',
+                                'id': 'dashdb/8mCew'
+                            } ] },
                         { 'path': 'objectstore/getting', 'title': 'Getting',
                             'demos': [ {
-                                    'title': 'Getting An Object Store Example: Simple Case',
-                                    'id': 'dashdb/LJqjA'
-                                } ] },
+                                'title': 'Getting An Object Store Example: Simple Case',
+                                'id': 'dashdb/LJqjA'
+                            } ] },
                         { 'path': 'objectstore/iteration', 'title': 'Iterating',
                             'demos': [ {
-                                    'title': 'Getting Multiple Object Stores Example: Simple Case',
-                                    'id': 'dashdb/ZCngL'
-                                } ] },
+                                'title': 'Getting Multiple Object Stores Example: Simple Case',
+                                'id': 'dashdb/ZCngL'
+                            } ] },
                         { 'path': 'objectstore/removing', 'title': 'Removing',
                             'demos': [ {
-                                    'title': 'Removing An Object Store Example: Simple Case',
-                                    'id': 'dashdb/Zcw46'
-                                } ] }
+                                'title': 'Removing An Object Store Example: Simple Case',
+                                'id': 'dashdb/Zcw46'
+                            } ] }
                     ]
                 },
 
@@ -204,10 +204,10 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                                 { 'path': 'keyrange/direction',
                                     'title': 'Direction' }
                             ]
-                    },
-                    { 'path': 'key/cursors',
-                        'title': 'Cursors'
-                    } ]
+                        },
+                        { 'path': 'key/cursors',
+                            'title': 'Cursors'
+                        } ]
                 },
                 { 'path': 'entries',
                     'title': 'Entries',
@@ -215,15 +215,15 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                         { 'path': 'entry/adding',
                             'title': 'Adding',
                             'demos': [ {
-                                    'title': 'Adding An Object To An Object Store Example: Simple Case',
-                                    'id': 'dashdb/LD42e'
-                                } ] },
+                                'title': 'Adding An Object To An Object Store Example: Simple Case',
+                                'id': 'dashdb/LD42e'
+                            } ] },
                         { 'path': 'entry/getting',
                             'title': 'Getting',
                             'demos': [ {
-                                    'title': 'Getting An Object From An Object Store Example: Simple Case',
-                                    'id': 'dashdb/ALXu8'
-                                }, 
+                                'title': 'Getting An Object From An Object Store Example: Simple Case',
+                                'id': 'dashdb/ALXu8'
+                            },
                                 {
                                     'title': 'Getting Multiple Objects From A Database Example: Simple Case',
                                     'id': 'dashdb/R8ZL4'
@@ -231,15 +231,15 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                         { 'path': 'entry/putting',
                             'title': 'Putting',
                             'demos': [ {
-                                    'title': 'Putting An Object Into An Object Store Example: Simple Case',
-                                    'id': 'dashdb/zHLWL'
-                                } ] },
+                                'title': 'Putting An Object Into An Object Store Example: Simple Case',
+                                'id': 'dashdb/zHLWL'
+                            } ] },
                         { 'path': 'entry/removing',
                             'title': 'Removing',
                             'demos': [ {
-                                    'title': 'Removing An Object From An Object Store Example: Simple Case',
-                                    'id': 'dashdb/Gb2CC'
-                                },
+                                'title': 'Removing An Object From An Object Store Example: Simple Case',
+                                'id': 'dashdb/Gb2CC'
+                            },
                                 {
                                     'title': 'Removing Multiple Objects From A Database Example: Simple Case',
                                     'id': 'dashdb/H6r9x'
@@ -247,9 +247,9 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                         { 'path': 'entry/updating',
                             'title': 'Updating',
                             'demos': [ {
-                                    'title': 'Updating Multiple Objects In A Database Example: Simple Case',
-                                    'id': 'dashdb/dqx4R'
-                                } ] }
+                                'title': 'Updating Multiple Objects In A Database Example: Simple Case',
+                                'id': 'dashdb/dqx4R'
+                            } ] }
                     ]
                 },
                 { 'path': 'indexes',
@@ -258,27 +258,27 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                         { 'path': 'index/creating',
                             'title': 'Creating',
                             'demos': [ {
-                                    'title': 'Creating An Index Example: Simple Case',
-                                    'id': 'dashdb/kM4sQ'
-                                } ] },
+                                'title': 'Creating An Index Example: Simple Case',
+                                'id': 'dashdb/kM4sQ'
+                            } ] },
                         { 'path': 'index/getting',
                             'title': 'Getting',
                             'demos': [ {
-                                    'title': 'Getting An Index Example: Simple Case',
-                                    'id': 'dashdb/2vqYW'
-                                } ]},
+                                'title': 'Getting An Index Example: Simple Case',
+                                'id': 'dashdb/2vqYW'
+                            } ]},
                         { 'path': 'index/iterating',
                             'title': 'Iterating',
                             'demos': [ {
-                                    'title': 'Getting Multiple Indexes Example: Simple Case',
-                                    'id': 'dashdb/2FmJg'
-                                } ] },
+                                'title': 'Getting Multiple Indexes Example: Simple Case',
+                                'id': 'dashdb/2FmJg'
+                            } ] },
                         { 'path': 'index/removing',
                             'title': 'Removing',
                             'demos': [ {
-                                    'title': 'Removing An Index Example: Simple Case',
-                                    'id': 'dashdb/2td5q'
-                                } ]
+                                'title': 'Removing An Index Example: Simple Case',
+                                'id': 'dashdb/2td5q'
+                            } ]
                         }
                     ]
                 }
@@ -296,26 +296,26 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
         var topic = $scope.currentTopic(),
             found = false;
         _.map($scope.documents, function(item) {
-           if (item.path === topic) {
-               found = item;
-               return;
-           }
-           if(item.children) {
-               _.map(item.children, function(item2) {
-                   if (item2.path === topic) {
-                       found = item2;
-                       return;
-                   }
-                   if (item2.children) {
-                       _.map(item2.children, function(item3) {
-                           if(item3.path === topic) {
-                               found = item3;
-                               return;
-                           }
-                       });
-                   }
-               });
-           }
+            if (item.path === topic) {
+                found = item;
+                return;
+            }
+            if(item.children) {
+                _.map(item.children, function(item2) {
+                    if (item2.path === topic) {
+                        found = item2;
+                        return;
+                    }
+                    if (item2.children) {
+                        _.map(item2.children, function(item3) {
+                            if(item3.path === topic) {
+                                found = item3;
+                                return;
+                            }
+                        });
+                    }
+                });
+            }
         });
         return found;
     }
