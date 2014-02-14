@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/database/names.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/database/versions.md" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/databases.md" afterPath="$PROJECT_DIR$/documentation/databases.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -29,19 +25,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="project.dev.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="24" selection-start="4146" selection-end="4146" vertical-scroll-proportion="0.5631399" vertical-offset="1575" max-vertical-offset="5940">
+            <state line="127" column="24" selection-start="4146" selection-end="4146" vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="5940">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="databases.md" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="databases.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/documentation/databases.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="138" selection-start="2208" selection-end="2208" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="405">
+            <state line="20" column="0" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.53571427" vertical-offset="0" max-vertical-offset="560">
               <folding />
             </state>
           </provider>
@@ -1459,7 +1455,11 @@
       <created>1392356733832</created>
       <updated>1392356733832</updated>
     </task>
-    <option name="localTasksCounter" value="231" />
+    <task id="LOCAL-00231" summary="WIP&#10;">
+      <created>1392357254143</created>
+      <updated>1392357254144</updated>
+    </task>
+    <option name="localTasksCounter" value="232" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1848,21 +1848,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="127" column="24" selection-start="4146" selection-end="4146" vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="5940">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/documentation/databases.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="138" selection-start="2208" selection-end="2208" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="405">
+        <state line="20" column="0" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.53571427" vertical-offset="0" max-vertical-offset="560">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="24" selection-start="4146" selection-end="4146" vertical-scroll-proportion="0.5631399" vertical-offset="1575" max-vertical-offset="5940">
-          <folding />
-        </state>
       </provider>
     </entry>
   </component>
