@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.css" afterPath="$PROJECT_DIR$/docs/project.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -69,7 +68,7 @@
       <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="75" selection-start="2559" selection-end="2559" vertical-scroll-proportion="0.77319586" vertical-offset="0" max-vertical-offset="1020">
+            <state line="29" column="122" selection-start="1618" selection-end="1618" vertical-scroll-proportion="0.3814433" vertical-offset="102" max-vertical-offset="1020">
               <folding />
             </state>
           </provider>
@@ -1053,7 +1052,11 @@
       <created>1392347832433</created>
       <updated>1392347832433</updated>
     </task>
-    <option name="localTasksCounter" value="193" />
+    <task id="LOCAL-00193" summary="WIP&#10;">
+      <created>1392348141018</created>
+      <updated>1392348141018</updated>
+    </task>
+    <option name="localTasksCounter" value="194" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1457,7 +1460,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="75" selection-start="2559" selection-end="2559" vertical-scroll-proportion="0.77319586" vertical-offset="0" max-vertical-offset="1020">
+        <state line="29" column="122" selection-start="1618" selection-end="1618" vertical-scroll-proportion="0.3814433" vertical-offset="102" max-vertical-offset="1020">
           <folding />
         </state>
       </provider>
