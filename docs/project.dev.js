@@ -91,6 +91,9 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
             params.push($routeParams.doc4);
         }
         current = params.join('\/');
+        if ( '' === current ) {
+            return false;
+        }
         regx = new RegExp( '^' + current );
         match = ( null !== obj.path.match( regx ) ) ? true : false;
         others = child.path.split('/');
