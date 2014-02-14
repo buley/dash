@@ -218,7 +218,7 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         if ($routeParams.doc4) {
             params.push($routeParams.doc4);
         }
-        return null !== obj.path.match( new RegExp( params.join('\/') ) );
+        return null !== obj.path.match( new RegExp( '/^' + params.join('\/') + '/' ) );
     };
 }]);
 
