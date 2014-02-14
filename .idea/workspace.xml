@@ -26,10 +26,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="project.dev.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="201" column="52" selection-start="7864" selection-end="7864" vertical-scroll-proportion="0.0" vertical-offset="2775" max-vertical-offset="5820">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cursors.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/documentation/key/cursors.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="9" selection-start="560" selection-end="560" vertical-scroll-proportion="0.06912442" vertical-offset="0" max-vertical-offset="868">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="127" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.27586207" vertical-offset="0" max-vertical-offset="1335">
+            <state line="16" column="127" selection-start="1143" selection-end="1143" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="1335">
               <folding />
             </state>
           </provider>
@@ -1379,7 +1400,11 @@
       <created>1392355249202</created>
       <updated>1392355249202</updated>
     </task>
-    <option name="localTasksCounter" value="220" />
+    <task id="LOCAL-00220" summary="WIP&#10;">
+      <created>1392355482494</created>
+      <updated>1392355482494</updated>
+    </task>
+    <option name="localTasksCounter" value="221" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1587,16 +1612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/key/cursors.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/documentation/databases.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
@@ -1791,18 +1806,28 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="0" selection-start="3194" selection-end="3194" vertical-scroll-proportion="0.08389262" vertical-offset="1395" max-vertical-offset="5820">
+        <state line="16" column="127" selection-start="1143" selection-end="1143" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="1335">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="127" selection-start="1143" selection-end="1143" vertical-scroll-proportion="0.27586207" vertical-offset="0" max-vertical-offset="1335">
+        <state line="201" column="52" selection-start="7864" selection-end="7864" vertical-scroll-proportion="0.0" vertical-offset="2775" max-vertical-offset="5820">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/documentation/key/cursors.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="9" selection-start="560" selection-end="560" vertical-scroll-proportion="0.06912442" vertical-offset="0" max-vertical-offset="868">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>

@@ -199,13 +199,43 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                             'children': [
                                 { 'path': 'key/range/bounds',
                                     'title': 'Bounds' },
-                                { 'path': 'keyrange/direction',
+                                { 'path': 'key/range/direction',
                                     'title': 'Direction' }
                             ]
                         },
                         { 'path': 'key/cursors',
                             'title': 'Cursors'
                         } ]
+                },
+                { 'path': 'indexes',
+                    'title': 'Indexes',
+                    'children': [
+                        { 'path': 'index/creating',
+                            'title': 'Creating',
+                            'demos': [ {
+                                'title': 'Creating An Index Example: Simple Case',
+                                'id': 'dashdb/kM4sQ'
+                            } ] },
+                        { 'path': 'index/getting',
+                            'title': 'Getting',
+                            'demos': [ {
+                                'title': 'Getting An Index Example: Simple Case',
+                                'id': 'dashdb/2vqYW'
+                            } ]},
+                        { 'path': 'index/iterating',
+                            'title': 'Iterating',
+                            'demos': [ {
+                                'title': 'Getting Multiple Indexes Example: Simple Case',
+                                'id': 'dashdb/2FmJg'
+                            } ] },
+                        { 'path': 'index/removing',
+                            'title': 'Removing',
+                            'demos': [ {
+                                'title': 'Removing An Index Example: Simple Case',
+                                'id': 'dashdb/2td5q'
+                            } ]
+                        }
+                    ]
                 },
                 { 'path': 'entries',
                     'title': 'Entries',
@@ -250,36 +280,6 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                             } ] }
                     ]
                 },
-                { 'path': 'indexes',
-                    'title': 'Indexes',
-                    'children': [
-                        { 'path': 'index/creating',
-                            'title': 'Creating',
-                            'demos': [ {
-                                'title': 'Creating An Index Example: Simple Case',
-                                'id': 'dashdb/kM4sQ'
-                            } ] },
-                        { 'path': 'index/getting',
-                            'title': 'Getting',
-                            'demos': [ {
-                                'title': 'Getting An Index Example: Simple Case',
-                                'id': 'dashdb/2vqYW'
-                            } ]},
-                        { 'path': 'index/iterating',
-                            'title': 'Iterating',
-                            'demos': [ {
-                                'title': 'Getting Multiple Indexes Example: Simple Case',
-                                'id': 'dashdb/2FmJg'
-                            } ] },
-                        { 'path': 'index/removing',
-                            'title': 'Removing',
-                            'demos': [ {
-                                'title': 'Removing An Index Example: Simple Case',
-                                'id': 'dashdb/2td5q'
-                            } ]
-                        }
-                    ]
-                }
             ]
         }
     ];
