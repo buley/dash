@@ -1,6 +1,4 @@
-##### Key Range Bounds
-
-For example, say there's an index with 26 records containing the alphabet "A" to "Z". Here are some ways we could query it: 
+Say for example there's an index with 26 records containing the alphabet "A" to "Z". Here are some ways we could query it: 
 * "only" "Z" would return just one object.
 * lower "A", upper "Z" would return 24 objects
 * lower "A", upper "Z", with "lowerOpen" and "upperOpen" set to `true` would return 26 objects
