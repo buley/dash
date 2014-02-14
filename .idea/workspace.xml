@@ -59,7 +59,7 @@
       <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="20" selection-start="66" selection-end="66" vertical-scroll-proportion="0.01718213" vertical-offset="0" max-vertical-offset="1215">
+            <state line="36" column="19" selection-start="2315" selection-end="2315" vertical-scroll-proportion="0.6185567" vertical-offset="0" max-vertical-offset="1215">
               <folding />
             </state>
           </provider>
@@ -995,7 +995,11 @@
       <created>1392346375648</created>
       <updated>1392346375648</updated>
     </task>
-    <option name="localTasksCounter" value="181" />
+    <task id="LOCAL-00181" summary="WIP&#10;">
+      <created>1392346455376</created>
+      <updated>1392346455376</updated>
+    </task>
+    <option name="localTasksCounter" value="182" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1395,7 +1399,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="20" selection-start="66" selection-end="66" vertical-scroll-proportion="0.01718213" vertical-offset="0" max-vertical-offset="1215">
+        <state line="36" column="19" selection-start="2315" selection-end="2315" vertical-scroll-proportion="0.6185567" vertical-offset="0" max-vertical-offset="1215">
           <folding />
         </state>
       </provider>
