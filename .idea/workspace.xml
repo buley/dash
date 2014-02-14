@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/keyrange/bounds.md" afterPath="$PROJECT_DIR$/documentation/cursor/keyrange/bounds.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/keyrange/direction.md" afterPath="$PROJECT_DIR$/documentation/cursor/keyrange/direction.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/keyranges.md" afterPath="$PROJECT_DIR$/documentation/cursor/keyranges.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -29,7 +31,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="276" column="41" selection-start="11788" selection-end="11788" vertical-scroll-proportion="0.65217394" vertical-offset="3555" max-vertical-offset="5805">
+            <state line="266" column="20" selection-start="11391" selection-end="11391" vertical-scroll-proportion="0.48494983" vertical-offset="3555" max-vertical-offset="5805">
               <folding />
             </state>
           </provider>
@@ -267,6 +269,24 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="documentation">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="cursor">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dash">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="docs">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
@@ -312,11 +332,11 @@
       <recent name="$PROJECT_DIR$/docs/vendor/js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/documentation/cursor" />
       <recent name="$PROJECT_DIR$/documentation" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/docs/documents" />
       <recent name="$PROJECT_DIR$/docs/documents/overview" />
-      <recent name="$PROJECT_DIR$/docs/vendor" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.dash">
@@ -1246,7 +1266,11 @@
       <created>1392354024338</created>
       <updated>1392354024338</updated>
     </task>
-    <option name="localTasksCounter" value="210" />
+    <task id="LOCAL-00210" summary="WIP&#10;">
+      <created>1392354104455</created>
+      <updated>1392354104455</updated>
+    </task>
+    <option name="localTasksCounter" value="211" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1486,7 +1510,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/keyranges.md">
+    <entry file="file://$PROJECT_DIR$/documentation/cursor/keyranges.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
           <folding />
@@ -1669,7 +1693,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="41" selection-start="11788" selection-end="11788" vertical-scroll-proportion="0.65217394" vertical-offset="3555" max-vertical-offset="5805">
+        <state line="266" column="20" selection-start="11391" selection-end="11391" vertical-scroll-proportion="0.48494983" vertical-offset="3555" max-vertical-offset="5805">
           <folding />
         </state>
       </provider>
