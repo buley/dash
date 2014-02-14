@@ -291,6 +291,9 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', function( $scope ) 
         var current = $scope.currentDocument();
         return current.demos || [];
     };
+    $scope.demoUrl = function(demo) {
+        return 'http://jsfiddle.net/' + demo.id + '/embedded';
+    };
 }]);
 
 dashApp.controller('dashAppSplashController', [ function() {
