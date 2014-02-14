@@ -231,7 +231,7 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
     };
 }]);
 
-dashApp.controller('dashAppDocsDemoController', [ function() {
+dashApp.controller('dashAppDocsDemosController', [ function() {
     console.log('demo controller');
 }]);
 

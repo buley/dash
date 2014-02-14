@@ -26,19 +26,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="project.dev.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="229" column="0" selection-start="8109" selection-end="8109" vertical-scroll-proportion="0.7743786" vertical-offset="3030" max-vertical-offset="4005">
+            <state line="224" column="49" selection-start="7951" selection-end="7951" vertical-scroll-proportion="0.0" vertical-offset="3030" max-vertical-offset="4005">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="21" selection-start="2810" selection-end="2810" vertical-scroll-proportion="-16.416666" vertical-offset="266" max-vertical-offset="1170">
+            <state line="34" column="99" selection-start="2251" selection-end="2251" vertical-scroll-proportion="0.48897797" vertical-offset="266" max-vertical-offset="1170">
               <folding />
             </state>
           </provider>
@@ -84,8 +84,8 @@
         <option value="$PROJECT_DIR$/documentation/security.md" />
         <option value="$PROJECT_DIR$/documentation/stores.md" />
         <option value="$PROJECT_DIR$/documentation/transactions.md" />
-        <option value="$PROJECT_DIR$/docs/templates/docs.html" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
+        <option value="$PROJECT_DIR$/docs/templates/docs.html" />
       </list>
     </option>
   </component>
@@ -976,7 +976,11 @@
       <created>1392340533829</created>
       <updated>1392340533829</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="WIP&#10;">
+      <created>1392340838326</created>
+      <updated>1392340838326</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1347,16 +1351,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="21" selection-start="2810" selection-end="2810" vertical-scroll-proportion="-16.416666" vertical-offset="266" max-vertical-offset="1170">
+        <state line="224" column="49" selection-start="7951" selection-end="7951" vertical-scroll-proportion="0.0" vertical-offset="3030" max-vertical-offset="4005">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="229" column="0" selection-start="8109" selection-end="8109" vertical-scroll-proportion="0.7743786" vertical-offset="3030" max-vertical-offset="4005">
+        <state line="34" column="99" selection-start="2251" selection-end="2251" vertical-scroll-proportion="0.48897797" vertical-offset="266" max-vertical-offset="1170">
           <folding />
         </state>
       </provider>
