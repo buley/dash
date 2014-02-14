@@ -227,8 +227,10 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         others = child.path.split('/');
         others.pop();
         others = others.join('/');
+        regx = new RegExp( '^' + others);
+        console.log('others',others);
 
-        return match || ( null !== others.match( regx ) ) ? true : false;
+        return match || ( null !== current.match( regx ) ) ? true : false;
     };
 }]);
 
