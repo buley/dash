@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 	    coverageReporter: {
 	      type: "lcov",
 	      dir: "coverage/"
-	    },
+	    }
 	  },
 	  chrome: {
 	    singleRun: false,
@@ -92,7 +92,7 @@ module.exports = function(grunt) {
 	coveralls: {
 	    options: {
 		debug: true,
-		coverage_dir: 'lib'
+		coverage_dir: 'coverage/Firefox*'
 	    }
 	}
   });
@@ -103,5 +103,5 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', ['karma:dev']);
   grunt.registerTask('firefox', ['karma:firefox']);
   grunt.registerTask('chrome', ['karma:chrome']);
-  grunt.registerTask('default', ['prod']);
+  grunt.registerTask('default', ['prod', 'coveralls']);
 };
