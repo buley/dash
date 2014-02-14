@@ -56,6 +56,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
     $scope.documents = [
         { path: 'overview',
             title: false,
+            default: true,
             children: [
                 { 'path': 'overview',
                     'title': 'Overview'
@@ -195,8 +196,8 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
         }
         return params.join('/');
     };
-    $scope.pathLevel = function(slug) {
-        return slug === $scope.currentTopic();
+    $scope.pathLevel = function(obj) {
+        return obj.default || obj.path === $scope.currentTopic();
     };
 }]);
 
