@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/templates/docs.html" afterPath="$PROJECT_DIR$/docs/templates/docs.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -30,7 +29,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="39" selection-start="1987" selection-end="1987" vertical-scroll-proportion="0.51839465" vertical-offset="375" max-vertical-offset="5985">
+            <state line="350" column="5" selection-start="14082" selection-end="14082" vertical-scroll-proportion="0.51839465" vertical-offset="4785" max-vertical-offset="5790">
               <folding />
             </state>
           </provider>
@@ -1215,7 +1214,11 @@
       <created>1392352574345</created>
       <updated>1392352574345</updated>
     </task>
-    <option name="localTasksCounter" value="202" />
+    <task id="LOCAL-00202" summary="WIP&#10;">
+      <created>1392352826080</created>
+      <updated>1392352826080</updated>
+    </task>
+    <option name="localTasksCounter" value="203" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1638,7 +1641,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="39" selection-start="1987" selection-end="1987" vertical-scroll-proportion="0.51839465" vertical-offset="375" max-vertical-offset="5985">
+        <state line="350" column="5" selection-start="14082" selection-end="14082" vertical-scroll-proportion="0.51839465" vertical-offset="4785" max-vertical-offset="5790">
           <folding />
         </state>
       </provider>

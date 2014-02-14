@@ -330,23 +330,6 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 }]);
 
 dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', function( $routeParams, $scope ) {
-    $scope.currentTopic = function() {
-        var params = [];
-
-        if ($routeParams.doc1) {
-            params.push($routeParams.doc1);
-        }
-        if ($routeParams.doc2) {
-            params.push($routeParams.doc2);
-        }
-        if ($routeParams.doc3) {
-            params.push($routeParams.doc3);
-        }
-        if ($routeParams.doc4) {
-            params.push($routeParams.doc4);
-        }
-        return params.join('/');
-    };
     $scope.pathLevel = function(obj) {
         var current = $scope.currentTopic();
         return obj.default && '' === current || obj.path === current;
@@ -359,8 +342,12 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
 
 dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $scope, $sce ) {
     $scope.demos = function() {
-        var current = $scope.currentDocument();
-        return current.demos || [];
+        var current = $scope.currentDocument(),
+            stack = current.demos || [];
+        _.map(current.children || [], function(child) {
+            stack.push.apply(stack, child.demos || []);
+        });
+        return stack;
     };
     $scope.demoUrl = function(demo) {
         return $sce.trustAsResourceUrl('http://jsfiddle.net/' + demo.id + '/embedded');
