@@ -103,5 +103,5 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', ['karma:dev']);
   grunt.registerTask('firefox', ['karma:firefox']);
   grunt.registerTask('chrome', ['karma:chrome']);
-  grunt.registerTask('default', ['prod', 'coveralls']);
+  grunt.registerTask('default', ['dev', 'coveralls']);
 };

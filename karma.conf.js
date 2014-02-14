@@ -5,7 +5,7 @@ module.exports = function(config) {
     files: [
       'specs/*.js',
       'specs/*/*.js',
-      'lib/dash.js'
+      'lib/dash.dev.js'
     ],
     exclude: [],
     reporters: ['progress', 'coverage'],
@@ -20,7 +20,7 @@ module.exports = function(config) {
     captureTimeout: 60000,
     singleRun: false,
     preprocessors: {
-      "lib/*js": "coverage"
+      "lib/*.dev.js": "coverage"
     },
     coverageReporter: {
       type: "lcov",
