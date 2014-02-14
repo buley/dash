@@ -204,7 +204,8 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                             ]
                         },
                         { 'path': 'key/cursors',
-                            'title': 'Cursors'
+                            'title': 'Cursors',
+                            'children': []
                         } ]
                 },
                 { 'path': 'indexes',
@@ -309,6 +310,14 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                             if(item3.path === topic) {
                                 found = item3;
                                 return;
+                            }
+                            if (item3.children) {
+                                _.map(item3.children, function(item4) {
+                                    if(item4.path === topic) {
+                                        found = item4;
+                                        return;
+                                    }
+                                });
                             }
                         });
                     }
