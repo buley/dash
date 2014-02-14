@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
+    <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="WIP&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/templates/docs.html" afterPath="$PROJECT_DIR$/docs/templates/docs.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -26,10 +27,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+      <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="191" column="9" selection-start="6913" selection-end="6913" vertical-scroll-proportion="0.47609943" vertical-offset="2616" max-vertical-offset="3570">
+            <state line="16" column="25" selection-start="1008" selection-end="1008" vertical-scroll-proportion="0.48096192" vertical-offset="0" max-vertical-offset="1170">
               <folding />
             </state>
           </provider>
@@ -63,7 +64,6 @@
         <option value="$PROJECT_DIR$/docs/documents/overview/records.md" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/docs/project.less" />
-        <option value="$PROJECT_DIR$/docs/templates/docs.html" />
         <option value="$PROJECT_DIR$/documentation/overview.md" />
         <option value="$PROJECT_DIR$/documentation/cursors.md" />
         <option value="$PROJECT_DIR$/documentation/databases.md" />
@@ -76,6 +76,7 @@
         <option value="$PROJECT_DIR$/documentation/security.md" />
         <option value="$PROJECT_DIR$/documentation/stores.md" />
         <option value="$PROJECT_DIR$/documentation/transactions.md" />
+        <option value="$PROJECT_DIR$/docs/templates/docs.html" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
       </list>
     </option>
@@ -84,8 +85,8 @@
     <data>$PROJECT_DIR$/node_modules/karma</data>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="958" />
-    <option name="width" value="948" />
+    <option name="x" value="899" />
+    <option name="width" value="1007" />
     <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -895,19 +896,23 @@
       <created>1392337896092</created>
       <updated>1392337896092</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="WIP&#10;">
+      <created>1392338204765</created>
+      <updated>1392338204765</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="958" y="0" width="948" height="1055" extended-state="4" />
+    <frame x="899" y="0" width="1007" height="1055" extended-state="4" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33724654" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34093377" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34081632" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5004878" order="7" side_tool="true" content_ui="tabs" />
@@ -1115,13 +1120,6 @@
         <state line="10" column="0" selection-start="584" selection-end="584" vertical-scroll-proportion="0.28037384" vertical-offset="0" max-vertical-offset="1020" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="13" selection-start="1918" selection-end="1918" vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="1170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/documentation/cursors.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
@@ -1271,7 +1269,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="191" column="9" selection-start="6913" selection-end="6913" vertical-scroll-proportion="0.47609943" vertical-offset="2616" max-vertical-offset="3570">
+        <state line="198" column="14" selection-start="7094" selection-end="7094" vertical-scroll-proportion="0.48757172" vertical-offset="2715" max-vertical-offset="3810">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="25" selection-start="1008" selection-end="1008" vertical-scroll-proportion="0.48096192" vertical-offset="0" max-vertical-offset="1170">
           <folding />
         </state>
       </provider>

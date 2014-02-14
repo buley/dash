@@ -16,13 +16,13 @@
                         </a>
                     </li>
                     <ul class="dash-document-navigation" ng-repeat="grandchild in child.children" ng-if="child.children.length">
-                        <li class="dash-document-item-container" ng-if="grandchild.title">
+                        <li class="dash-document-item-container" ng-if="grandchild.title" ng-show="parentShowing(grandchild)">
                             <a href="#/docs/{{grandchild.path}}" class="dash-document-item">
                                 <h5>{{grandchild.title}}</h5>
                             </a>
                         </li>
                         <ul class="dash-document-navigation" ng-repeat="greatgrandchild in grandchild.children" ng-if="grandchild.children.length">
-                            <li class="dash-document-item-container" ng-if="greatgrandchild.title">
+                            <li class="dash-document-item-container" ng-if="greatgrandchild.title" ng-show="parentShowing(greatgrandchild)">
                                 <a href="#docs/{{greatgrandchild.path}}" class="dash-document-item">
                                     <h6>{{greatgrandchild.title}}</h6>
            a                     </a>

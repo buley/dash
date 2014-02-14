@@ -197,13 +197,29 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
     };
     $scope.pathLevel = function(obj) {
         var current = $scope.currentTopic();
-        console.log('current',current);
         return obj.default && '' === current || obj.path === current;
     };
 }]);
 
 dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', function($routeParams, $scope) {
     console.log('sidebar controller', $routeParams);
+    $scope.parentShowing = function(obj) {
+        console.log('obj',obj.path);
+        var params = [];
+        if ($routeParams.doc1) {
+            params.push($routeParams.doc1);
+        }
+        if ($routeParams.doc2) {
+            params.push($routeParams.doc2);
+        }
+        if ($routeParams.doc3) {
+            params.push($routeParams.doc3);
+        }
+        if ($routeParams.doc4) {
+            params.push($routeParams.doc4);
+        }
+        return null !== obj.path.match( new RegExp( params.join('\/') ) );
+    };
 }]);
 
 dashApp.controller('dashAppSplashController', [ function() {
