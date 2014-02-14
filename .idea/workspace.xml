@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/cursors.md" afterPath="$PROJECT_DIR$/documentation/cursors.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/databases.md" afterPath="$PROJECT_DIR$/documentation/databases.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/entries.md" afterPath="$PROJECT_DIR$/documentation/entries.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/indexes.md" afterPath="$PROJECT_DIR$/documentation/indexes.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/keyranges.md" afterPath="$PROJECT_DIR$/documentation/keyranges.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/keys.md" afterPath="$PROJECT_DIR$/documentation/keys.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/overview.md" afterPath="$PROJECT_DIR$/documentation/overview.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/records.md" afterPath="$PROJECT_DIR$/documentation/records.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/requests.md" afterPath="$PROJECT_DIR$/documentation/requests.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/security.md" afterPath="$PROJECT_DIR$/documentation/security.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/stores.md" afterPath="$PROJECT_DIR$/documentation/stores.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/transactions.md" afterPath="$PROJECT_DIR$/documentation/transactions.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -37,43 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="project.less" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/project.less">
+      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="0" selection-start="354" selection-end="354" vertical-scroll-proportion="-11.916667" vertical-offset="89" max-vertical-offset="975">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dash.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/documentation/dash.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="MarkdownPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="indexeddb.md" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/documentation/indexeddb.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="MarkdownPreviewEditor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="13" selection-start="1918" selection-end="1918" vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="1170">
+            <state line="191" column="9" selection-start="6913" selection-end="6913" vertical-scroll-proportion="0.47609943" vertical-offset="2616" max-vertical-offset="3570">
               <folding />
             </state>
           </provider>
@@ -108,7 +64,6 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/docs/project.less" />
         <option value="$PROJECT_DIR$/docs/templates/docs.html" />
-        <option value="$PROJECT_DIR$/docs/project.dev.js" />
         <option value="$PROJECT_DIR$/documentation/overview.md" />
         <option value="$PROJECT_DIR$/documentation/cursors.md" />
         <option value="$PROJECT_DIR$/documentation/databases.md" />
@@ -121,6 +76,7 @@
         <option value="$PROJECT_DIR$/documentation/security.md" />
         <option value="$PROJECT_DIR$/documentation/stores.md" />
         <option value="$PROJECT_DIR$/documentation/transactions.md" />
+        <option value="$PROJECT_DIR$/docs/project.dev.js" />
       </list>
     </option>
   </component>
@@ -935,7 +891,11 @@
       <created>1392337777110</created>
       <updated>1392337777110</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="WIP&#10;">
+      <created>1392337896092</created>
+      <updated>1392337896092</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -983,7 +943,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -1162,13 +1122,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="39" selection-start="1981" selection-end="1981" vertical-scroll-proportion="0.3040153" vertical-offset="726" max-vertical-offset="3540">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/documentation/cursors.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
@@ -1177,13 +1130,6 @@
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="354" selection-end="354" vertical-scroll-proportion="-11.916667" vertical-offset="89" max-vertical-offset="975">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/documentation/databases.md">
@@ -1199,16 +1145,6 @@
     <entry file="file://$PROJECT_DIR$/documentation/entries.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/dash.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
           <folding />
         </state>
       </provider>
@@ -1314,6 +1250,30 @@
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/documentation/dash.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="354" selection-end="354" vertical-scroll-proportion="0.55859375" vertical-offset="89" max-vertical-offset="975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="191" column="9" selection-start="6913" selection-end="6913" vertical-scroll-proportion="0.47609943" vertical-offset="2616" max-vertical-offset="3570">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>

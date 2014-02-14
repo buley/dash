@@ -196,7 +196,9 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
         return params.join('/');
     };
     $scope.pathLevel = function(obj) {
-        return obj.default || obj.path === $scope.currentTopic();
+        var current = $scope.currentTopic();
+        console.log('current',current);
+        return obj.default && '' === current || obj.path === current;
     };
 }]);
 
