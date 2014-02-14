@@ -38,7 +38,7 @@
 
         <!-- Document List -->
         <div class="row dash-document-list" ng-repeat="document in documents">
-            <div class="small-12 dash-document-item-container">
+            <div class="small-12 columns dash-document-item-container">
                 <div class="dash-document-item" ng-hide="document.hidden" ng-if="document.title">
                     <h1>{{document.title}}</h1>
                     <section markdown="documentContent(document.path)"></section>

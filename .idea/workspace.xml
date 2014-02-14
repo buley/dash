@@ -38,7 +38,7 @@
       <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="3" selection-start="3202" selection-end="3203" vertical-scroll-proportion="0.51102203" vertical-offset="540" max-vertical-offset="1170">
+            <state line="53" column="20" selection-start="3228" selection-end="3228" vertical-scroll-proportion="0.51102203" vertical-offset="540" max-vertical-offset="1170">
               <folding />
             </state>
           </provider>
@@ -952,7 +952,11 @@
       <created>1392339840226</created>
       <updated>1392339840226</updated>
     </task>
-    <option name="localTasksCounter" value="126" />
+    <task id="LOCAL-00126" summary="WIP&#10;">
+      <created>1392340115470</created>
+      <updated>1392340115471</updated>
+    </task>
+    <option name="localTasksCounter" value="127" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1046,7 +1050,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240" />
+        <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
@@ -1132,7 +1138,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="345" />
+        <state line="17" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="345">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/vendor/css/foundation.css">
@@ -1328,7 +1336,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="3" selection-start="3202" selection-end="3203" vertical-scroll-proportion="0.51102203" vertical-offset="540" max-vertical-offset="1170">
+        <state line="53" column="20" selection-start="3228" selection-end="3228" vertical-scroll-proportion="0.51102203" vertical-offset="540" max-vertical-offset="1170">
           <folding />
         </state>
       </provider>
