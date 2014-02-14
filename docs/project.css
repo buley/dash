@@ -1,3 +1,8 @@
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
 /* Foundation-based Header */
 .dash-docs-search {
   margin: 0px;
@@ -33,6 +38,12 @@ ul.dash-document-navigation ul ul li {
   margin: 0;
   padding: 0 0 0 0;
   list-style-type: none;
+}
+.dash-app-docs-sidebar {
+  height: 100%;
+  bottom: -20px;
+  position: absolute;
+  top: 45px;
 }
 .dash-app-docs-sidebar-container {
   padding: 10px;
