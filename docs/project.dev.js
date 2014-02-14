@@ -223,8 +223,7 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         current = params.join('\/');
         regx = new RegExp( '^' + current );
         match = ( null !== obj.path.match( regx ) ) ? true : false;
-        console.log('matc',regx, obj.path, match);
-        return match || child.path === current;
+        return match || ( null !== child.path.match( regx ) ) ? true : false;
     };
 }]);
 
