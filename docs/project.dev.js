@@ -204,8 +204,8 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
 dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', function($routeParams, $scope) {
     console.log('sidebar controller', $routeParams);
     $scope.parentShowing = function(obj) {
-        console.log('obj',obj.path);
-        var params = [];
+        var params = [],
+            match;
         if ($routeParams.doc1) {
             params.push($routeParams.doc1);
         }
@@ -218,7 +218,9 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         if ($routeParams.doc4) {
             params.push($routeParams.doc4);
         }
-        return null !== obj.path.match( new RegExp( '/^' + params.join('\/') + '/' ) );
+        match = ( null !== obj.path.match( new RegExp( '/^' + params.join('\/') + '/' ) ) ) ? true : false;
+        console.log('matc',match);
+        return match;
     };
 }]);
 
