@@ -286,13 +286,13 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
     };
 }]);
 
-dashApp.controller('dashAppDocsDemosController', [ '$scope', function( $scope ) {
+dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $scope, $sce ) {
     $scope.demos = function() {
         var current = $scope.currentDocument();
         return current.demos || [];
     };
     $scope.demoUrl = function(demo) {
-        return 'http://jsfiddle.net/' + demo.id + '/embedded';
+        return $sce.trustAsResourceUrl('http://jsfiddle.net/' + demo.id + '/embedded');
     };
 }]);
 
