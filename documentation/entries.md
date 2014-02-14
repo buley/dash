@@ -1,5 +1,3 @@
-### Entries
-
 Entries are objects in an object store.
 
 #### Working With One Entry At A Time

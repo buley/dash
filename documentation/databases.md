@@ -1,3 +1,1 @@
-### Databases
-
-A [`database`](http://www.w3.org/TR/IndexedDB/#dfn-database) houses object stores and have two distinguishing characteristics: a [`name`](http://www.w3.org/TR/IndexedDB/#dfn-object-store-name) (string) and [`version`](http://www.w3.org/TR/IndexedDB/#dfn-version) (number). They are reached through an instance of [`IDBFactory`](https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory) object at the `window.indexedDB` namespace. 
+A [`database`](http://www.w3.org/TR/IndexedDB/#dfn-database) houses object stores and have two distinguishing characteristics: a [`name`](http://www.w3.org/TR/IndexedDB/#dfn-object-store-name) (string) and [`version`](http://www.w3.org/TR/IndexedDB/#dfn-version) (number). They are reached through an instance of [`IDBFactory`](https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory) object at the `window.indexedDB` namespace.

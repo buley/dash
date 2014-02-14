@@ -1,6 +1,4 @@
-#### `IndexedDB` Cursors
-
-Using an index and a key range for that index, you can use a "[`cursor`](http://www.w3.org/TR/IndexedDB/#dfn-cursor)" to get, put and delete [`values`](http://www.w3.org/TR/IndexedDB/#dfn-cursor-value) one at a time but in single request. Cursors are also capable of "[`advancing`](http://www.w3.org/TR/IndexedDB/#widl-IDBCursor-advance)" and, in effect, skip a number of objects in an index for a given key range. 
+Using an index and a key range for that index, you can use a "[`cursor`](http://www.w3.org/TR/IndexedDB/#dfn-cursor)" to get, put and delete [`values`](http://www.w3.org/TR/IndexedDB/#dfn-cursor-value) one at a time but in single request. Cursors are also capable of "[`advancing`](http://www.w3.org/TR/IndexedDB/#widl-IDBCursor-advance)" and, in effect, skip a number of objects in an index for a given key range.
 
 Cursors traverse an index matching a given "key range". There is no limit on the number of cursors that can be used at the same time.
 

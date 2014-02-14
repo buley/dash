@@ -1,5 +1,3 @@
-### Indexes
-
 [`Indexes`](http://www.w3.org/TR/IndexedDB/#dfn-index) are the way values are generally found in an object store. An `index` is an instance of [`IDBIndex`](https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex) and is a list of keys and values and has two characterizing components: the key path to find the data and the record value itself. `Indexes` stored primarily by key, and secondarily by their values, in ascending order.
 
 Both adding and removing indexes requires a `versionchange` transaction.

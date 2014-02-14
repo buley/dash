@@ -1,5 +1,3 @@
-### Object Stores
-
 [Object stores](http://www.w3.org/TR/IndexedDB/#dfn-object-store), like their name implies, store JavaScript objects as entries. We store entries in an object store and store object stores in a database. Only after opening a database can we list all the object stores in that database or do something with a store contained therein.
 
 Via an object store we can access these entries by looking up objects using key paths on those objects, optionally enlisting the help of "indexes" to enable for various combinations of key lookups.
