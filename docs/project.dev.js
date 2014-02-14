@@ -345,7 +345,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', function( $routeParams, $scope ) {
     $scope.pathLevel = function(obj) {
         var current = $scope.currentTopic();
-        return obj.default && '' === current || obj.path === current;
+        return (true === obj.default && '' === current) || obj.path === current;
     };
 }]);
 
