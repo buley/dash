@@ -288,6 +288,8 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
 
 dashApp.controller('dashAppDocsDemosController', [ '$scope', function( $scope ) {
     console.log('demo controller', $scope.currentDocument());
+    var doc = $scope.currentDocument();
+    $scope.demos = doc.demos;
 }]);
 
 dashApp.controller('dashAppSplashController', [ function() {
