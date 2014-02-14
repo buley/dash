@@ -96,9 +96,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
         others = child.path.split('/');
         others.pop();
         others = others.join('/');
-        console.log('one',regx);
         regx = new RegExp( '^' + others);
-        console.log('others',regx,'target',current);
         return match || ( null !== current.match( regx ) ) ? true : false;
     };
 
