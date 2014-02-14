@@ -194,7 +194,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
     $scope.currentDocument = function() {
         var topic = $scope.currentTopic(),
             found = false;
-        _,map($scope.documents, function(item) {
+        _.map($scope.documents, function(item) {
            if (item.path === topic) {
                found = item;
                return;
@@ -206,7 +206,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                        return;
                    }
                    if (item2.children) {
-                       _map(item2.children, function(item3) {
+                       _.map(item2.children, function(item3) {
                            if(item3.path === topic) {
                                found = item3;
                                return;
