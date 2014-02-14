@@ -116,7 +116,10 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                 },
 
                 { 'path': 'transactions',
-                    'title': 'Transactions'
+                    'title': 'Transactions',
+                    'children': [ { 'path': 'requests',
+                        'title': 'Requests'
+                    } ]
                 },
                 { 'path': 'databases',
                     'title': 'Databases',
@@ -189,11 +192,22 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                                 } ] }
                     ]
                 },
-                { 'path': 'requests',
-                    'title': 'Requests'
-                },
+
                 { 'path': 'keys',
                     'title': 'Keys',
+                    'children': [
+                        { 'path': 'key/ranges',
+                            'title': 'Keyranges',
+                            'children': [
+                                { 'path': 'key/range/bounds',
+                                    'title': 'Bounds' },
+                                { 'path': 'keyrange/direction',
+                                    'title': 'Direction' }
+                            ]
+                    },
+                    { 'path': 'key/cursors',
+                        'title': 'Cursors'
+                    } ]
                 },
                 { 'path': 'entries',
                     'title': 'Entries',
@@ -267,19 +281,6 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                                 } ]
                         }
                     ]
-                },
-
-                { 'path': 'cursors',
-                    'title': 'Cursors',
-                    'children': [ { 'path': 'cursor/keyranges',
-                        'title': 'Keyranges',
-                        'children': [
-                        { 'path': 'cursor/keyrange/bounds',
-                            'title': 'Bounds' },
-                        { 'path': 'cursor/keyrange/direction',
-                            'title': 'Direction' }
-                        ]
-                    } ]
                 }
             ]
         }
