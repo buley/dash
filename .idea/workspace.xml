@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/entry/adding.md" afterPath="$PROJECT_DIR$/documentation/entry/adding.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/keyrange/bounds.md" afterPath="$PROJECT_DIR$/documentation/keyrange/bounds.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/objectstore/clearing.md" afterPath="$PROJECT_DIR$/documentation/objectstore/clearing.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/index/creating.md" afterPath="$PROJECT_DIR$/documentation/index/creating.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/objectstore/creating.md" afterPath="$PROJECT_DIR$/documentation/objectstore/creating.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/keyrange/direction.md" afterPath="$PROJECT_DIR$/documentation/keyrange/direction.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/entry/getting.md" afterPath="$PROJECT_DIR$/documentation/entry/getting.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/index/getting.md" afterPath="$PROJECT_DIR$/documentation/index/getting.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/objectstore/getting.md" afterPath="$PROJECT_DIR$/documentation/objectstore/getting.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/index/iterating.md" afterPath="$PROJECT_DIR$/documentation/index/iterating.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/objectstore/iteration.md" afterPath="$PROJECT_DIR$/documentation/objectstore/iteration.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/entry/putting.md" afterPath="$PROJECT_DIR$/documentation/entry/putting.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/database/removing.md" afterPath="$PROJECT_DIR$/documentation/database/removing.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/entry/removing.md" afterPath="$PROJECT_DIR$/documentation/entry/removing.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/index/removing.md" afterPath="$PROJECT_DIR$/documentation/index/removing.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/objectstore/removing.md" afterPath="$PROJECT_DIR$/documentation/objectstore/removing.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/entry/updating.md" afterPath="$PROJECT_DIR$/documentation/entry/updating.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -1192,7 +1175,11 @@
       <created>1392350030283</created>
       <updated>1392350030283</updated>
     </task>
-    <option name="localTasksCounter" value="197" />
+    <task id="LOCAL-00197" summary="WIP&#10;">
+      <created>1392352026866</created>
+      <updated>1392352026866</updated>
+    </task>
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="ToolWindowManager">

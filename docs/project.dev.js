@@ -83,7 +83,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                         },
                         { 'path': 'database/versions',
                             'title': 'Versions'
-                        } ],
+                        },
                         { 'path': 'database/opening',
                             'title': 'Opening',
                             'demos': [ {
@@ -114,7 +114,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                                     'id': 'dashdb/5ZWMg'
                                 }
                             ]
-                        }
+                        } ]
                 },
                 { 'path': 'entries',
                     'title': 'Entries',
@@ -224,8 +224,8 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                                 } ] },
                         { 'path': 'objectstore/removing', 'title': 'Removing',
                             'demos': [ {
-                                    'title': '',
-                                    'id': 'dashdb/'
+                                    'title': 'Removing An Object Store Example: Simple Case',
+                                    'id': 'dashdb/Zcw46'
                                 } ] }
                     ]
                 },
