@@ -1,5 +1,5 @@
 <div class="dash-app-docs-container columns">
-    <div class="large-2 columns dash-app-docs-sidebar left panel" ng-controller="dashAppDocsSidebarController">
+    <div class="row large-2 columns dash-app-docs-sidebar left panel" ng-controller="dashAppDocsSidebarController">
         <!--Navigation -->
         <nav class="dash-app-docs-sidebar-container">
             <ul class="dash-document-navigation" ng-repeat="document in documents" ng-if="documents.length">
@@ -32,7 +32,7 @@
             </ul>
         </nav>
     </div>
-        <div class="large-6 left dash-app-docs-content" ng-controller="dashAppDocsContentController">
+    <div class="row large-6 left dash-app-docs-content" ng-controller="dashAppDocsContentController">
         <!-- Document List -->
         <div class="row dash-document-list dash-app-docs-content-container" ng-repeat="document in documents">
             <div class="dash-document-item-container">
@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    <div class="large-4 right dash-app-docs-demos" ng-controller="dashAppDocsDemosController">
+    <div class="row large-4 right dash-app-docs-demos" ng-controller="dashAppDocsDemosController">
        <aside class='dash-app-docs-demos-demo' ng-repeat="demo in demos()">
            <h6 ng-if="demo.title">{{demo.title}}</h6>
            <iframe width="100%" height="300" ng-src="{{demoUrl(demo)}}" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
