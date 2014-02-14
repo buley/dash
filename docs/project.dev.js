@@ -207,7 +207,8 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         var params = [],
             match,
             regx,
-            current;
+            current,
+            others;
         if ($routeParams.doc1) {
             params.push($routeParams.doc1);
         }
@@ -223,7 +224,11 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         current = params.join('\/');
         regx = new RegExp( '^' + current );
         match = ( null !== obj.path.match( regx ) ) ? true : false;
-        return match || ( null !== child.path.match( regx ) ) ? true : false;
+        others = child.path.split('/');
+        others.pop();
+        others = others.join('/');
+
+        return match || ( null !== others.match( regx ) ) ? true : false;
     };
 }]);
 
