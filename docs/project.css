@@ -17,7 +17,7 @@ body {
 }
 /* Angular-based Application */
 .dash-app-docs-demos .dash-app-docs-demos-demo {
-  padding: 20px;
+  padding: 10px 0 0 0;
 }
 .dash-app-docs-content {
   margin: 10px 0 10px 0;
