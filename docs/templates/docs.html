@@ -33,7 +33,7 @@
         </nav>
     </div>
     <div class="large-4 columns dash-app-docs-demos right" ng-controller="dashAppDocsDemosController">
-       <aside class='dash-app-docs-demos-demo' ng-repeat="demo in demos()">
+       <aside class='dash-app-docs-demos-demo small-12' ng-repeat="demo in demos()">
            <h6 ng-if="demo.title">{{demo.title}}</h6>
            <iframe width="100%" height="300" ng-src="{{demoUrl(demo)}}" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
        </aside>
