@@ -219,7 +219,7 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
         if ($routeParams.doc4) {
             params.push($routeParams.doc4);
         }
-        regx = new RegExp( '/^' + params.join('\/') + '/' );
+        regx = new RegExp( '^' + params.join('\/') );
         match = ( null !== obj.path.match( regx ) ) ? true : false;
         console.log('matc',regx, obj.path, match);
         return match;
