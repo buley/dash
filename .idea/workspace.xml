@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/templates/docs.html" afterPath="$PROJECT_DIR$/docs/templates/docs.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.less" afterPath="$PROJECT_DIR$/docs/project.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.css" afterPath="$PROJECT_DIR$/docs/project.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -57,10 +57,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="46" selection-start="2342" selection-end="2342" vertical-scroll-proportion="0.41237113" vertical-offset="180" max-vertical-offset="1215">
+            <state line="6" column="0" selection-start="433" selection-end="433" vertical-scroll-proportion="-2.4583333" vertical-offset="31" max-vertical-offset="1215">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="75" selection-start="2559" selection-end="2559" vertical-scroll-proportion="0.77319586" vertical-offset="0" max-vertical-offset="1020">
               <folding />
             </state>
           </provider>
@@ -92,7 +101,6 @@
         <option value="$PROJECT_DIR$/docs/documents/overview.md" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/docs/documents/overview/records.md" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/documentation/overview.md" />
         <option value="$PROJECT_DIR$/documentation/cursors.md" />
         <option value="$PROJECT_DIR$/documentation/databases.md" />
@@ -110,6 +118,7 @@
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
         <option value="$PROJECT_DIR$/docs/project.less" />
         <option value="$PROJECT_DIR$/docs/templates/docs.html" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -153,30 +162,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="dash" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="docs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -1064,7 +1049,11 @@
       <created>1392347668695</created>
       <updated>1392347668696</updated>
     </task>
-    <option name="localTasksCounter" value="192" />
+    <task id="LOCAL-00192" summary="WIP&#10;">
+      <created>1392347832433</created>
+      <updated>1392347832433</updated>
+    </task>
+    <option name="localTasksCounter" value="193" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1241,7 +1230,9 @@
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/web-forms2.rnc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="632" column="23" selection-start="14253" selection-end="14253" vertical-scroll-proportion="0.33274022" vertical-offset="9293" max-vertical-offset="12210" />
+        <state line="632" column="23" selection-start="14253" selection-end="14253" vertical-scroll-proportion="0.33274022" vertical-offset="9293" max-vertical-offset="12210">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.css">
@@ -1281,11 +1272,6 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="0" selection-start="743" selection-end="743" vertical-scroll-proportion="0.07653061" vertical-offset="210" max-vertical-offset="7485" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="584" selection-end="584" vertical-scroll-proportion="0.28037384" vertical-offset="0" max-vertical-offset="1020" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/documentation/cursors.md">
@@ -1464,7 +1450,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="46" selection-start="2342" selection-end="2342" vertical-scroll-proportion="0.41237113" vertical-offset="180" max-vertical-offset="1215">
+        <state line="6" column="0" selection-start="433" selection-end="433" vertical-scroll-proportion="-2.4583333" vertical-offset="31" max-vertical-offset="1215">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="75" selection-start="2559" selection-end="2559" vertical-scroll-proportion="0.77319586" vertical-offset="0" max-vertical-offset="1020">
           <folding />
         </state>
       </provider>
