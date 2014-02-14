@@ -2,8 +2,8 @@ body {
   height: 100%;
   width: 100%;
 }
-.title-area {
-  font-size: 32px;
+.top-bar .name h1 {
+  font-size: 32px !important;
 }
 /* Foundation-based Header */
 .dash-docs-search {

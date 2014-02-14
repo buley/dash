@@ -113,14 +113,14 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                     'children': [
                         { 'path': 'general/security',
                             'title': 'Security'
-                        } ]
-                },
-
-                { 'path': 'transactions',
-                    'title': 'Transactions',
-                    'children': [ { 'path': 'transaction/requests',
-                        'title': 'Requests'
-                    } ]
+                        },
+                        { 'path': 'general/transactions',
+                            'title': 'Transactions',
+                            'children': [ { 'path': 'general/transaction/requests',
+                                'title': 'Requests'
+                            } ]
+                        }
+                    ]
                 },
                 { 'path': 'databases',
                     'title': 'Databases',

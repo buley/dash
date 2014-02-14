@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.less" afterPath="$PROJECT_DIR$/docs/project.less" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/dash.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/indexeddb.md" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/transaction/requests.md" afterPath="$PROJECT_DIR$/documentation/general/transaction/requests.md" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/transactions.md" afterPath="$PROJECT_DIR$/documentation/general/transactions.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.css" afterPath="$PROJECT_DIR$/docs/project.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -26,19 +31,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="project.dev.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="24" selection-start="4146" selection-end="4146" vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="5940">
+            <state line="126" column="12" selection-start="4183" selection-end="4183" vertical-scroll-proportion="0.4472477" vertical-offset="1500" max-vertical-offset="5940">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="project.less" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="11" selection-start="319" selection-end="319" vertical-scroll-proportion="0.40069687" vertical-offset="0" max-vertical-offset="1215">
+            <state line="23" column="11" selection-start="319" selection-end="319" vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="1215">
               <folding />
             </state>
           </provider>
@@ -124,8 +129,8 @@
         <option value="$PROJECT_DIR$/documentation/database/names.md" />
         <option value="$PROJECT_DIR$/documentation/database/versions.md" />
         <option value="$PROJECT_DIR$/documentation/databases.md" />
-        <option value="$PROJECT_DIR$/docs/project.dev.js" />
         <option value="$PROJECT_DIR$/docs/project.less" />
+        <option value="$PROJECT_DIR$/docs/project.dev.js" />
       </list>
     </option>
   </component>
@@ -209,24 +214,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="transaction" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="documentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="key" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -268,6 +255,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="general" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="documentation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="general" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="transaction" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -447,9 +456,9 @@
       <recent name="$PROJECT_DIR$/docs/vendor/js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/documentation/general" />
       <recent name="$PROJECT_DIR$/documentation/key" />
       <recent name="$PROJECT_DIR$/documentation/transaction" />
-      <recent name="$PROJECT_DIR$/documentation/general" />
       <recent name="$PROJECT_DIR$/documentation/cursor" />
       <recent name="$PROJECT_DIR$/documentation" />
     </key>
@@ -1477,7 +1486,11 @@
       <created>1392357799109</created>
       <updated>1392357799109</updated>
     </task>
-    <option name="localTasksCounter" value="234" />
+    <task id="LOCAL-00234" summary="WIP&#10;">
+      <created>1392357847740</created>
+      <updated>1392357847740</updated>
+    </task>
+    <option name="localTasksCounter" value="235" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1489,7 +1502,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46270162" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46270162" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5004878" order="7" side_tool="true" content_ui="tabs" />
@@ -1735,7 +1748,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/transaction/requests.md">
+    <entry file="file://$PROJECT_DIR$/documentation/general/transaction/requests.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
           <folding />
@@ -1755,29 +1768,9 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/transactions.md">
+    <entry file="file://$PROJECT_DIR$/documentation/general/transactions.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/indexeddb.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/dash.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
           <folding />
         </state>
       </provider>
@@ -1859,13 +1852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="24" selection-start="4146" selection-end="4146" vertical-scroll-proportion="0.0" vertical-offset="1575" max-vertical-offset="5940">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/documentation/databases.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="0" selection-start="2070" selection-end="2070" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="405">
@@ -1878,7 +1864,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="319" selection-end="319" vertical-scroll-proportion="0.40069687" vertical-offset="0" max-vertical-offset="1215">
+        <state line="23" column="11" selection-start="319" selection-end="319" vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="1215">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="126" column="12" selection-start="4183" selection-end="4183" vertical-scroll-proportion="0.4472477" vertical-offset="1500" max-vertical-offset="5940">
           <folding />
         </state>
       </provider>
