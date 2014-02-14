@@ -88,7 +88,11 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                             ]
                         },
                         { 'path': 'database/removing',
-                            'title': 'Removing'
+                            'title': 'Removing',
+                            'demos': [ {
+                                'title': 'Removing A Database Example: Simple Case',
+                                'id': 'dashdb/retKS'
+                            } ]
                         },
                         { 'path': 'database/getting',
                             'title': 'Getting',
@@ -102,10 +106,13 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                             'title': 'Names'
                         },
                         { 'path': 'database/opening',
-                            'title': 'Opening'
-                        },
-                        { 'path': 'database/versionchanges',
-                            'title': 'Version Changes'
+                            'title': 'Opening',
+                            'demos': [
+                                {
+                                    'title': 'Opening A Database Example: Simple Case',
+                                    'id': 'dashdb/ZCngL'
+                                }
+                            ]
                         },
                         { 'path': 'database/versions',
                             'title': 'Versions'
