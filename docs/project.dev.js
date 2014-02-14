@@ -269,12 +269,12 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 
                 { 'path': 'cursors',
                     'title': 'Cursors',
-                    'children': [ { 'path': 'keyranges',
+                    'children': [ { 'path': 'cursor/keyranges',
                         'title': 'Keyranges',
                         'children': [
-                        { 'path': 'keyrange/bounds',
+                        { 'path': 'cursor/keyrange/bounds',
                             'title': 'Bounds' },
-                        { 'path': 'keyrange/direction',
+                        { 'path': 'cursor/keyrange/direction',
                             'title': 'Direction' }
                         ]
                     } ]
