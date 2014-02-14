@@ -117,7 +117,7 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
 
                 { 'path': 'transactions',
                     'title': 'Transactions',
-                    'children': [ { 'path': 'requests',
+                    'children': [ { 'path': 'transaction/requests',
                         'title': 'Requests'
                     } ]
                 },
