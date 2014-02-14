@@ -53,6 +53,35 @@ dashApp.controller('dashAppAboutController', [ function() {
 
 dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache', '$routeParams', function( $scope, $http, $templateCache, $routeParams ) {
 
+    $scope.parentShowing = function(obj, child) {
+        var params = [],
+            match,
+            regx,
+            current,
+            others;
+        if ($routeParams.doc1) {
+            params.push($routeParams.doc1);
+        }
+        if ($routeParams.doc2) {
+            params.push($routeParams.doc2);
+        }
+        if ($routeParams.doc3) {
+            params.push($routeParams.doc3);
+        }
+        if ($routeParams.doc4) {
+            params.push($routeParams.doc4);
+        }
+        current = params.join('\/');
+        regx = new RegExp( '^' + current );
+        match = ( null !== obj.path.match( regx ) ) ? true : false;
+        others = child.path.split('/');
+        others.pop();
+        others = others.join('/');
+        regx = new RegExp( '^' + others);
+        return match || ( null !== current.match( regx ) ) ? true : false;
+    };
+
+
     $scope.documents = [
         { path: 'overview',
             children: [
@@ -322,33 +351,7 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
 }]);
 
 dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', function($routeParams, $scope) {
-    $scope.parentShowing = function(obj, child) {
-        var params = [],
-            match,
-            regx,
-            current,
-            others;
-        if ($routeParams.doc1) {
-            params.push($routeParams.doc1);
-        }
-        if ($routeParams.doc2) {
-            params.push($routeParams.doc2);
-        }
-        if ($routeParams.doc3) {
-            params.push($routeParams.doc3);
-        }
-        if ($routeParams.doc4) {
-            params.push($routeParams.doc4);
-        }
-        current = params.join('\/');
-        regx = new RegExp( '^' + current );
-        match = ( null !== obj.path.match( regx ) ) ? true : false;
-        others = child.path.split('/');
-        others.pop();
-        others = others.join('/');
-        regx = new RegExp( '^' + others);
-        return match || ( null !== current.match( regx ) ) ? true : false;
-    };
+
 }]);
 
 dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $scope, $sce ) {
