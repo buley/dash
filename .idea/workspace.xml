@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.css" afterPath="$PROJECT_DIR$/docs/project.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.less" afterPath="$PROJECT_DIR$/docs/project.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -34,10 +36,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="databases.md" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/project.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="0" selection-start="54" selection-end="54" vertical-scroll-proportion="0.13562387" vertical-offset="0" max-vertical-offset="1215">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="databases.md" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/documentation/databases.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.53571427" vertical-offset="0" max-vertical-offset="560">
+            <state line="20" column="0" selection-start="2070" selection-end="2070" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="405">
               <folding />
             </state>
           </provider>
@@ -105,7 +116,6 @@
         <option value="$PROJECT_DIR$/documentation/stores.md" />
         <option value="$PROJECT_DIR$/documentation/transactions.md" />
         <option value="$PROJECT_DIR$/documentation/database/closing.md" />
-        <option value="$PROJECT_DIR$/docs/project.less" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/documentation/database/getting.md" />
         <option value="$PROJECT_DIR$/documentation/database/opening.md" />
@@ -116,6 +126,7 @@
         <option value="$PROJECT_DIR$/documentation/database/versions.md" />
         <option value="$PROJECT_DIR$/documentation/databases.md" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
+        <option value="$PROJECT_DIR$/docs/project.less" />
       </list>
     </option>
   </component>
@@ -1459,7 +1470,11 @@
       <created>1392357254143</created>
       <updated>1392357254144</updated>
     </task>
-    <option name="localTasksCounter" value="232" />
+    <task id="LOCAL-00232" summary="WIP&#10;">
+      <created>1392357289404</created>
+      <updated>1392357289405</updated>
+    </task>
+    <option name="localTasksCounter" value="233" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1794,13 +1809,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="516" selection-end="516" vertical-scroll-proportion="-12.916667" vertical-offset="230" max-vertical-offset="1170">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/documentation/database/opening.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="871">
@@ -1857,12 +1865,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/documentation/databases.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.53571427" vertical-offset="0" max-vertical-offset="560">
+        <state line="20" column="0" selection-start="2070" selection-end="2070" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="405">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="54" selection-end="54" vertical-scroll-proportion="0.13562387" vertical-offset="0" max-vertical-offset="1215">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
