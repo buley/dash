@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/database/names.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/database/versions.md" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/databases.md" afterPath="$PROJECT_DIR$/documentation/databases.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -29,9 +32,21 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="7" selection-start="2992" selection-end="2992" vertical-scroll-proportion="0.6911263" vertical-offset="990" max-vertical-offset="6030">
+            <state line="127" column="24" selection-start="4146" selection-end="4146" vertical-scroll-proportion="0.5631399" vertical-offset="1575" max-vertical-offset="5940">
               <folding />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="databases.md" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/documentation/databases.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="138" selection-start="2208" selection-end="2208" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="405">
+              <folding />
+            </state>
+          </provider>
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
           </provider>
         </entry>
       </file>
@@ -84,7 +99,6 @@
         <option value="$PROJECT_DIR$/docs/documents/overview/records.md" />
         <option value="$PROJECT_DIR$/documentation/overview.md" />
         <option value="$PROJECT_DIR$/documentation/cursors.md" />
-        <option value="$PROJECT_DIR$/documentation/databases.md" />
         <option value="$PROJECT_DIR$/documentation/entries.md" />
         <option value="$PROJECT_DIR$/documentation/indexes.md" />
         <option value="$PROJECT_DIR$/documentation/keyranges.md" />
@@ -98,12 +112,13 @@
         <option value="$PROJECT_DIR$/docs/project.less" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/documentation/database/getting.md" />
-        <option value="$PROJECT_DIR$/documentation/database/names.md" />
         <option value="$PROJECT_DIR$/documentation/database/opening.md" />
         <option value="$PROJECT_DIR$/documentation/database/versionchanges.md" />
-        <option value="$PROJECT_DIR$/documentation/database/versions.md" />
         <option value="$PROJECT_DIR$/documentation/database/removing.md" />
         <option value="$PROJECT_DIR$/docs/templates/docs.html" />
+        <option value="$PROJECT_DIR$/documentation/database/names.md" />
+        <option value="$PROJECT_DIR$/documentation/database/versions.md" />
+        <option value="$PROJECT_DIR$/documentation/databases.md" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
       </list>
     </option>
@@ -1440,7 +1455,11 @@
       <created>1392356579389</created>
       <updated>1392356579390</updated>
     </task>
-    <option name="localTasksCounter" value="230" />
+    <task id="LOCAL-00230" summary="WIP&#10;">
+      <created>1392356733832</created>
+      <updated>1392356733832</updated>
+    </task>
+    <option name="localTasksCounter" value="231" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1648,16 +1667,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/databases.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/documentation/entries.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
@@ -1792,29 +1801,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/database/names.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="871">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/documentation/database/opening.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="871">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/database/versions.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="1564" selection-end="1564" vertical-scroll-proportion="0.25832376" vertical-offset="0" max-vertical-offset="871">
           <folding />
         </state>
       </provider>
@@ -1859,9 +1848,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/documentation/databases.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="138" selection-start="2208" selection-end="2208" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="405">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="7" selection-start="2992" selection-end="2992" vertical-scroll-proportion="0.6911263" vertical-offset="990" max-vertical-offset="6030">
+        <state line="127" column="24" selection-start="4146" selection-end="4146" vertical-scroll-proportion="0.5631399" vertical-offset="1575" max-vertical-offset="5940">
           <folding />
         </state>
       </provider>

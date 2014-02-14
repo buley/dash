@@ -125,12 +125,6 @@ dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache
                 { 'path': 'databases',
                     'title': 'Databases',
                     'children': [
-                        { 'path': 'database/names',
-                            'title': 'Names'
-                        },
-                        { 'path': 'database/versions',
-                            'title': 'Versions'
-                        },
                         { 'path': 'database/opening',
                             'title': 'Opening',
                             'demos': [ {
