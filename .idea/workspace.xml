@@ -37,10 +37,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.less" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="7" selection-start="782" selection-end="782" vertical-scroll-proportion="-22.916666" vertical-offset="230" max-vertical-offset="1170">
+            <state line="45" column="20" selection-start="663" selection-end="663" vertical-scroll-proportion="0.50225735" vertical-offset="230" max-vertical-offset="1185">
               <folding />
             </state>
           </provider>
@@ -58,10 +58,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docs.html" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="26" selection-start="72" selection-end="72" vertical-scroll-proportion="0.01718213" vertical-offset="0" max-vertical-offset="1215">
+            <state line="69" column="27" selection-start="4443" selection-end="4443" vertical-scroll-proportion="-28.875" vertical-offset="342" max-vertical-offset="1215">
               <folding />
             </state>
           </provider>
@@ -109,8 +109,8 @@
         <option value="$PROJECT_DIR$/documentation/database/closing.md" />
         <option value="$PROJECT_DIR$/documentation/database/getting.md" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
-        <option value="$PROJECT_DIR$/docs/project.less" />
         <option value="$PROJECT_DIR$/docs/templates/docs.html" />
+        <option value="$PROJECT_DIR$/docs/project.less" />
       </list>
     </option>
   </component>
@@ -1057,7 +1057,11 @@
       <created>1392347439846</created>
       <updated>1392347439846</updated>
     </task>
-    <option name="localTasksCounter" value="190" />
+    <task id="LOCAL-00190" summary="WIP&#10;">
+      <created>1392347600876</created>
+      <updated>1392347600876</updated>
+    </task>
+    <option name="localTasksCounter" value="191" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1448,16 +1452,16 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.less">
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="7" selection-start="782" selection-end="782" vertical-scroll-proportion="-22.916666" vertical-offset="230" max-vertical-offset="1170">
+        <state line="69" column="27" selection-start="4443" selection-end="4443" vertical-scroll-proportion="-28.875" vertical-offset="342" max-vertical-offset="1215">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+    <entry file="file://$PROJECT_DIR$/docs/project.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="26" selection-start="72" selection-end="72" vertical-scroll-proportion="0.01718213" vertical-offset="0" max-vertical-offset="1215">
+        <state line="45" column="20" selection-start="663" selection-end="663" vertical-scroll-proportion="0.50225735" vertical-offset="230" max-vertical-offset="1185">
           <folding />
         </state>
       </provider>
