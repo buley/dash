@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("remove.entry", function() {
+	ddescribe("remove.entry", function() {
 		it( 'should open a database, add a store and add then remove an entry', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-remove-test-' + start_time,
@@ -17,32 +17,29 @@
 				notify = false,
 				ctx;	
 			test_data[key_path] = 'entry-remove-' + start_time;
-			dash.open.database({
-					database: db_name,
-					store: store_name,
-					store_key_path: key_path,
-					data: test_data
-				})
-				.then(function(context){
-					dash.add.store(context)
-					.commit(function(context) {
-						dash.add.entry(context)
-						.then(function(context) {
-							dash.remove.entry(context)
-							.then(function(context) {
-								success = true;
-								isFinished = true;
-								ctx = context;
-							}, function(context) {
-								ctx = context;
-								error = true;
-								isFinished = true;
-							}, function(context) {
-								notify = true;
-							});
-						});
-					});
-				})
+            dash.add.store({
+                database: db_name,
+                store: store_name,
+                store_key_path: key_path,
+                data: test_data
+            })
+            .then(function(context) {
+                dash.add.entry(context)
+                .then(function(context) {
+                    dash.remove.entry(context)
+                    .then(function(context) {
+                        success = true;
+                        isFinished = true;
+                        ctx = context;
+                    }, function(context) {
+                        ctx = context;
+                        error = true;
+                        isFinished = true;
+                    }, function(context) {
+                        notify = true;
+                    });
+                });
+            });
 
 			waitsFor(dashIsFinished, 'the remove.entry operation to finish', 10000);
 			runs(function() {
@@ -86,7 +83,7 @@
 					});
 
 					it("remove.entry should clean up after itself", function() {
-						dash.remove.database(this.context);
+						//dash.remove.database(this.context);
 					});
 
 				});

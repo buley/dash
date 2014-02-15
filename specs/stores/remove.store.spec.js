@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	ddescribe("remove.store", function() {
+	describe("remove.store", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'store-remove-test-' + start_time,
 			store_name = 'store-remove-test-store-' + start_time,
@@ -48,7 +48,7 @@
 
 			waitsFor(dashIsFinished, 'the remove.store operation to finish', 10000);
 			runs(function() {
-				ddescribe('remove.store should finish cleanly', function() {
+				describe('remove.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;

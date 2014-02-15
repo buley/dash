@@ -1,7 +1,7 @@
 
 (function(){
     'use strict';
-    ddescribe("get.entries", function() {
+    describe("get.entries", function() {
         it( 'should open a database, add a store and add then get entries', function() {
             var start_time = new Date().getTime(),
                 db_name = 'entries-get-test-' + start_time,
@@ -30,34 +30,33 @@
                 index: index_name,
                 data: test_data
             })
-                .then(function(context) {
-                    dash.add.index(context)
-                        .then(function(context) {
-                            dash.add.entry(context)
-                                .then(function(context) {
-                                    dash.get.entries(context)
-                                        .then(function(context) {
-                                            success = true;
-                                            isFinished = true;
-                                            ctx = context;
-                                        }, function(context) {
-                                            ctx = context;
-                                            error = true;
-                                            isFinished = true;
-                                        }, function(context) {
-                                            notify = true;
-                                        });
-                                }, function(context) {
-                                    ctx = context;
-                                    error = true;
-                                    isFinished = true;
-                                });
-                        }, function(context) {
-                            ctx = context;
-                            error = true;
-                            isFinished = true;
-                        });
-
+            .then(function(context) {
+                dash.add.index(context)
+                    .then(function(context) {
+                        dash.add.entry(context)
+                            .then(function(context) {
+                                dash.get.entries(context)
+                                    .then(function(context) {
+                                        success = true;
+                                        isFinished = true;
+                                        ctx = context;
+                                    }, function(context) {
+                                        ctx = context;
+                                        error = true;
+                                        isFinished = true;
+                                    }, function(context) {
+                                        notify = true;
+                                    });
+                            }, function(context) {
+                                ctx = context;
+                                error = true;
+                                isFinished = true;
+                            });
+                    }, function(context) {
+                        ctx = context;
+                        error = true;
+                        isFinished = true;
+                    });
                 }, function(context) {
                     ctx = context;
                     error = true;
@@ -66,7 +65,7 @@
 
             waitsFor(dashIsFinished, 'the get.entries operation to finish', 10000);
             runs(function() {
-                ddescribe('get.entries should finish cleanly', function() {
+                describe('get.entries should finish cleanly', function() {
 
                     beforeEach(function() {
                         this.context = ctx;

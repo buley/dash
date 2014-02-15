@@ -27,13 +27,11 @@
       .then(function(context) {
         dash.add.entry(context)
         .then(function(context) {
-           dash.get.entry({
-              database: context.database,
-              store: context.store,
-              key: context.key
-          })
+           console.log('added',context.key);
+           dash.get.entry(context)
           .then(function(context) {
             success = true;
+            console.log('gotten back',context.key, context.entry);
             isFinished = true;
             ctx = context;
           }, function(context) {
@@ -87,15 +85,15 @@
             expect(undefined !== this.context.entry).toBe(true);
             expect(null !== this.context.entry).toBe(true);
             expect(this.context.entry.version).toBe(1);
-            expect(this.context.entry[key_path]).toBe(key_path_value);
           });
 
           it("get.entry should return the key", function(){
+            expect(this.context.entry[key_path]).toBe(key_path_value);
             expect(this.context.key).toBe(this.key);
           });
 
           it("get.entry should clean up after itself", function() {
-            dash.remove.database(this.context);
+            //dash.remove.database(this.context);
           });
         });
       });

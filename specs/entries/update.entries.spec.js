@@ -23,7 +23,7 @@
         key_path_value = 'entries-get-value-' + start_time;
       test_data[key_path] = key_path_value;
       test_data[index_key_path] = index_key_path_value;
-      dash.open.database({
+      dash.add.store({
           database: db_name,
           store: store_name,
           store_key_path: key_path,
@@ -31,33 +31,30 @@
           index: index_name,
           data: test_data
         })
-        .then(function(context){
-          dash.add.store(context)
+      .then(function(context) {
+        dash.add.index(context)
+        .commit(function(context) {
+          dash.add.entry(context)
           .then(function(context) {
-            dash.add.index(context)
-            .commit(function(context) {
-              dash.add.entry(context)
+            context.data.version = random_update;
+            dash.update.entries(context)
+            .then(function(context) {
+              dash.get.entries(context)
               .then(function(context) {
-                context.data.version = random_update;
-                dash.update.entries(context)
-                .then(function(context) {
-                  dash.get.entries(context)
-                  .then(function(context) {
-                    success = true;
-                    isFinished = true;
-                    ctx = context;
-                  });
-                }, function(context) {
-                  ctx = context;
-                  error = true;
-                  isFinished = true;
-                }, function(context) {
-                  notify = true;
-                });
+                success = true;
+                isFinished = true;
+                ctx = context;
               });
+            }, function(context) {
+              ctx = context;
+              error = true;
+              isFinished = true;
+            }, function(context) {
+              notify = true;
             });
           });
-        })
+        });
+      });
 
       waitsFor(dashIsFinished, 'the update.entries operation to finish', 10000);
       runs(function() {

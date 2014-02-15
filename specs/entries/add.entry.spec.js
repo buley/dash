@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	ddescribe("add.entry", function() {
+	describe("add.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-add-test-' + start_time,
@@ -41,7 +41,7 @@
 
 			waitsFor(dashIsFinished, 'the add.entry operation to finish', 10000);
 			runs(function() {
-				ddescribe('add.entry should finish cleanly', function() {
+				describe('add.entry should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;

@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  describe("remove.entries", function() {
+  ddescribe("remove.entries", function() {
     it( 'should open a database, add a store and add then get entries', function() {
       var start_time = new Date().getTime(),
         db_name = 'entries-get-test-' + start_time,
@@ -23,48 +23,56 @@
         key_path_value = 'entries-get-value-' + start_time;
       test_data[key_path] = key_path_value;
       test_data[index_key_path] = index_key_path_value;
-      dash.open.database({
+      dash.add.store({
           database: db_name,
           store: store_name,
           store_key_path: key_path,
           index_key_path: index_key_path,
           index: index_name,
           data: test_data
-        })
-        .then(function(context){
-          dash.add.store(context)
+      })
+      .then(function(context) {
+        dash.add.index(context)
+        .then(function(context) {
+          dash.add.entry(context)
           .then(function(context) {
-            dash.add.index(context)
+            console.log('added ok',context);
+            dash.remove.entries({
+              database: db_name,
+              store: store_name,
+              store_key_path: key_path,
+              index_key_path: index_key_path,
+              index: index_name,
+              data: test_data
+            })
             .then(function(context) {
-              dash.add.entry(context)
+              delete context.transaction;
+              delete context.db;
+              dash.get.entries(context)
               .then(function(context) {
-                dash.remove.entries(context)
-                .then(function(context) {
-                  dash.get.entries(context)
-                  .then(function(context) {
-                    success = true;
-                    isFinished = true;
-                    ctx = context;
-                  }, function(context) {
-                    error = true;
-                    isFinished = true;
-                  });
-                }, function(context) {
-                  console.log('error was removing entries');
-                  ctx = context;
-                  error = true;
-                  isFinished = true;
-                }, function(context) {
-                  notify = true;
-                });
+                success = true;
+                isFinished = true;
+                ctx = context;
+              }, function(context) {
+                console.log('failed to gt');
+                error = true;
+                isFinished = true;
               });
+            }, function(context) {
+              console.log('error was removing entries');
+              ctx = context;
+              error = true;
+              isFinished = true;
+            }, function(context) {
+              notify = true;
             });
           });
-        })
+        });
+      });
 
-      waitsFor(dashIsFinished, 'the remove.entries operation to finish', 10000);
+      waitsFor(dashIsFinished, 'the remove.entries operation to finish', 30000);
       runs(function() {
-        describe('remove.entries should finish cleanly', function() {
+        ddescribe('remove.entries should finish cleanly', function() {
 
           beforeEach(function() {
             this.context = ctx;
@@ -114,14 +122,12 @@
           });
 
           it("remove.entries should clean up after itself", function() {
-            dash.remove.database(this.context);
+            //dash.remove.database(this.context);
           });
 
         });
       });
-
     });
-
   });
 }());
 

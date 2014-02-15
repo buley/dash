@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	ddescribe("get.indexes", function() {
+	describe("get.indexes", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'indexes-get-test-database-' + start_time,
 			store_name = 'indexes-get-test-store-' + start_time,
@@ -43,7 +43,7 @@
 			}, 'the get.indexes operation to finish', 10000);
 
 			runs(function() {
-				ddescribe('get.indexes should finish successfully', function() {
+				describe('get.indexes should finish successfully', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
