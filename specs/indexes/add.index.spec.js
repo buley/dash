@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("add.index", function() {
+	ddescribe("add.index", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'idx-add-test-' + start_time,
@@ -15,39 +15,31 @@
 				success = false,
 				notify = false,
 				ctx;		
-			dash.open.database({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
-				.then(function(context) {
-					dash.add.store(context)
-					.then(function(context) {
-						dash.add.index(context)
-						.then(function(context) {
-							success = true;
-							isFinished = true;
-							ctx = context;
-						}, function(context) {
-							ctx = context;
-							error = true;
-							isFinished = true;
-						}, function(context) {
-							notify = true;
-						})
-					}, function(context) {
-						ctx = context;
-						error = true;
-						isFinished = true;
-					}, function(context) {
-						notify = true;
-					});
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
-				}, function(context) {
-					notify = true;
-				});
+            dash.add.store({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
+            .then(function(context) {
+                dash.add.index(context)
+                .then(function(context) {
+                    success = true;
+                    isFinished = true;
+                    ctx = context;
+                }, function(context) {
+                    ctx = context;
+                    error = true;
+                    isFinished = true;
+                }, function(context) {
+                    notify = true;
+                });
+            }, function(context) {
+                ctx = context;
+                error = true;
+                isFinished = true;
+            }, function(context) {
+                notify = true;
+            });
+
 			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
 			runs(function() {
-				describe('add.index should finish cleanly', function() {
+				ddescribe('add.index should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;
@@ -91,7 +83,7 @@
 					});
 
 					it("add.index should clean up after itself", function() {
-						dash.remove.database(this.context)
+						//dash.remove.database(this.context)
 					});
 
 				});
@@ -115,7 +107,8 @@
 				success = false,
 				notify = false,
 				ctx;		
-			dash.open.database({
+
+            dash.add.store({
 					database: db_name,
 					store: store_name,
 					index: index_name,
@@ -123,8 +116,6 @@
 					index_multi_entry: index_multientry,
 					index_unique: index_unique
 				})
-				.then(function(context) {
-					dash.add.store(context)
 					.then(function(context) {
 						dash.add.index(context)
 						.then(function(context) {
@@ -145,16 +136,10 @@
 					}, function(context) {
 						notify = true;
 					});
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
-				}, function(context) {
-					notify = true;
-				});
+
 			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
 			runs(function() {
-				describe('add.index should finish cleanly', function() {
+				ddescribe('add.index should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;
@@ -177,7 +162,7 @@
 					});
 
 					it("add.index should clean up after itself", function() {
-						dash.remove.database(this.context);
+						//dash.remove.database(this.context);
 					});
 
 				});

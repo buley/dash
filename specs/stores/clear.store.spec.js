@@ -16,10 +16,8 @@
 		it( 'should open a database then add and then get a store', function() {
 					dash.add.store({ database: db_name, store: store_name })
 					.then(function(context) {
-                        console.log('clearing',context.db, context.objectstore);
 						dash.clear.store(context)
 						.then(function(context) {
-                            console.log('cleared');
 							success = true;
 							isFinished = true;
 							ctx = context;

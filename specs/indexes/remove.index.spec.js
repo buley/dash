@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("get.index", function() {
+	ddescribe("get.index", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'idx-remove-test-db-' + start_time,
 			store_name = 'idx-remove-test-store-' + start_time,
@@ -19,52 +19,43 @@
 			startcount,
 			ctx;	
 		it( 'should open a database, add a store and an index to it', function() {
-			dash.open.database({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
-				.then(function(context) {
-					dash.add.store(context)
-					.then(function(context) {
-						startcount = context.objectstore.indexNames.length;
-						dash.add.index(context)
-						.then(function(context) {
-							addcount = context.objectstore.indexNames.length;
-							dash.remove.index(context)
-							.then(function(context) {
-								success = true;
-								finalcount = context.objectstore.indexNames.length;
-								isFinished = true;
-								ctx = context;
-							}, function(context) {
-								ctx = context;
-								error = true;
-								isFinished = true;
-							}, function(context) {
-								notify = true;
-							});
-						}, function(context) {
-							ctx = context;
-							error = true;
-							isFinished = true;
-						}, function(context) {
-							notify = true;
-						});
-					}, function(context) {
-						ctx = context;
-						error = true;
-						isFinished = true;
-					}, function(context) {
-						notify = true;
-					});
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
-				}, function(context) {
-					notify = true;
-				});
+            dash.add.store({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
+            .then(function(context) {
+                startcount = context.objectstore.indexNames.length;
+                dash.add.index(context)
+                .then(function(context) {
+                    addcount = context.objectstore.indexNames.length;
+                    dash.remove.index(context)
+                    .then(function(context) {
+                        success = true;
+                        finalcount = context.objectstore.indexNames.length;
+                        isFinished = true;
+                        ctx = context;
+                    }, function(context) {
+                        ctx = context;
+                        error = true;
+                        isFinished = true;
+                    }, function(context) {
+                        notify = true;
+                    });
+                }, function(context) {
+                    ctx = context;
+                    error = true;
+                    isFinished = true;
+                }, function(context) {
+                    notify = true;
+                });
+            }, function(context) {
+                ctx = context;
+                error = true;
+                isFinished = true;
+            }, function(context) {
+                notify = true;
+            });
 
 			waitsFor(dashIsFinished, 'the get.index operation to finish', 10000);
 			runs(function() {
-				describe('get.index should finish cleanly', function() {
+				ddescribe('get.index should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -108,7 +99,7 @@
 						expect(this.context.idx.keyPath).toBe(this.keypath);
 					});
 					it("get.index should clean up after itself", function() {
-						dash.remove.database(this.context);
+						//dash.remove.database(this.context);
 					});
 				});
 			});

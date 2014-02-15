@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd431261-c0e8-4bb4-a672-9515fb2ec1ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/add.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/add.store.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/add.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/add.index.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/clear.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/clear.store.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/dash.dev.js" afterPath="$PROJECT_DIR$/lib/dash.dev.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/get.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/get.store.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/get.stores.spec.js" afterPath="$PROJECT_DIR$/specs/stores/get.stores.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/remove.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/remove.store.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/get.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/get.index.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/get.indexes.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/get.indexes.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/remove.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/remove.index.spec.js" />
     </list>
     <ignored path="dash.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,55 +30,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="clear.store.spec.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/stores/clear.store.spec.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="16" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1335">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dash.dev.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="dash.dev.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="679" column="4" selection-start="22106" selection-end="22106" vertical-scroll-proportion="0.43526787" vertical-offset="9795" max-vertical-offset="18120">
+            <state line="503" column="3" selection-start="15919" selection-end="15919" vertical-scroll-proportion="0.0" vertical-offset="7545" max-vertical-offset="17370">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get.store.spec.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/stores/get.store.spec.js">
+      <file leaf-file-name="get.indexes.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/indexes/get.indexes.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="33" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1365">
+            <state line="13" column="0" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="6" max-vertical-offset="1125">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add.store.spec.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/stores/add.store.spec.js">
+      <file leaf-file-name="remove.index.spec.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/specs/indexes/remove.index.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="28" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="2205">
+            <state line="67" column="8" selection-start="2394" selection-end="2394" vertical-scroll-proportion="1.1056106" vertical-offset="0" max-vertical-offset="1740">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get.stores.spec.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/stores/get.stores.spec.js">
+      <file leaf-file-name="get.index.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/indexes/get.index.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="41" selection-start="1349" selection-end="1349" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1035">
+            <state line="31" column="41" selection-start="1166" selection-end="1166" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="1665">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="remove.store.spec.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/stores/remove.store.spec.js">
+      <file leaf-file-name="add.index.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/indexes/add.index.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="33" selection-start="1092" selection-end="1092" vertical-scroll-proportion="0.0" vertical-offset="426" max-vertical-offset="1560">
+            <state line="164" column="25" selection-start="5355" selection-end="5355" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2715">
               <folding />
             </state>
           </provider>
@@ -98,9 +88,7 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/specs/indexes/add.index.spec.js" />
         <option value="$PROJECT_DIR$/karma.conf.js" />
-        <option value="$PROJECT_DIR$/specs/indexes/get.index.spec.js" />
         <option value="$PROJECT_DIR$/specs/entries/add.entry.spec.js" />
         <option value="$PROJECT_DIR$/specs/entries/get.entries.spec.js" />
         <option value="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" />
@@ -108,12 +96,16 @@
         <option value="$PROJECT_DIR$/specs/databases/get.databases.spec.js" />
         <option value="$PROJECT_DIR$/specs/databases/remove.database.spec.js" />
         <option value="$PROJECT_DIR$/specs/databases/close.database.spec.js" />
-        <option value="$PROJECT_DIR$/specs/stores/clear.store.spec.js" />
         <option value="$PROJECT_DIR$/specs/stores/add.store.spec.js" />
         <option value="$PROJECT_DIR$/specs/stores/get.stores.spec.js" />
         <option value="$PROJECT_DIR$/specs/stores/remove.store.spec.js" />
         <option value="$PROJECT_DIR$/specs/stores/get.store.spec.js" />
+        <option value="$PROJECT_DIR$/specs/indexes/add.index.spec.js" />
+        <option value="$PROJECT_DIR$/specs/stores/clear.store.spec.js" />
         <option value="$PROJECT_DIR$/lib/dash.dev.js" />
+        <option value="$PROJECT_DIR$/specs/indexes/get.index.spec.js" />
+        <option value="$PROJECT_DIR$/specs/indexes/get.indexes.spec.js" />
+        <option value="$PROJECT_DIR$/specs/indexes/remove.index.spec.js" />
       </list>
     </option>
   </component>
@@ -569,20 +561,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/specs/indexes/add.index.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2955">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/indexes/get.index.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="45" selection-start="963" selection-end="963" vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="1815">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/specs/entries/get.entries.spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="73" column="16" selection-start="2433" selection-end="2433" vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="2145">
@@ -632,13 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/specs/stores/clear.store.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="16" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/specs/stores/add.store.spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="28" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="2205">
@@ -667,9 +638,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/specs/stores/clear.store.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="647" selection-end="647" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1305">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="679" column="4" selection-start="22106" selection-end="22106" vertical-scroll-proportion="0.43526787" vertical-offset="9795" max-vertical-offset="18120">
+        <state line="503" column="3" selection-start="15919" selection-end="15919" vertical-scroll-proportion="0.0" vertical-offset="7545" max-vertical-offset="17370">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/indexes/add.index.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="164" column="25" selection-start="5355" selection-end="5355" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2715">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/indexes/get.index.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="41" selection-start="1166" selection-end="1166" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="1665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/indexes/get.indexes.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="6" max-vertical-offset="1125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/indexes/remove.index.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="8" selection-start="2394" selection-end="2394" vertical-scroll-proportion="1.1056106" vertical-offset="0" max-vertical-offset="1740">
           <folding />
         </state>
       </provider>

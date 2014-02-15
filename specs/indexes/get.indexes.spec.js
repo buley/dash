@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("get.indexes", function() {
+	ddescribe("get.indexes", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'indexes-get-test-database-' + start_time,
 			store_name = 'indexes-get-test-store-' + start_time,
@@ -10,54 +10,40 @@
 			error = false,
 			success = false,
 			notify = false,
-			ctx;	
+			ctx;
+
 		it( 'should get all indexes', function() {
-			dash.open.database({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
-				.then(function(context) {
-					dash.add.store(context)
-					.then(function(context) {
-						dash.add.index(context)
-						.commit(function(context) {
-							dash.get.indexes(context)
-							.then(function(context){
-								ctx = context;
-								success = true;
-								isFinished = true;
-							}, function(context) {
-								ctx = context;
-								error = true;
-								isFinished = true;
-							}, function(context) {
-								notify = true;
-							});
-						}, function(context) {
-							ctx = context;
-							error = true;
-							isFinished = true;
-						}, function(context) {
-							notify = true;
-						})
-					}, function(context) {
-						ctx = context;
-						error = true;
-						isFinished = true;
-					}, function(context) {
-						notify = true;
-					});
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
-				}, function(context) {
-					notify = true;
-				});
+            dash.add.store({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
+            .then(function(context) {
+                dash.add.index(context)
+                .then(function(context) {
+                    dash.get.indexes(context)
+                    .then(function(context){
+                        ctx = context;
+                        success = true;
+                        isFinished = true;
+                    }, function(context) {
+                        ctx = context;
+                        error = true;
+                        isFinished = true;
+                    }, function(context) {
+                        notify = true;
+                    });
+                }, function(context) {
+                    ctx = context;
+                    error = true;
+                    isFinished = true;
+                }, function(context) {
+                    notify = true;
+                });
+            });
 
 			waitsFor(function() { 
 				return isFinished;
 			}, 'the get.indexes operation to finish', 10000);
 
 			runs(function() {
-				describe('get.indexes should finish successfully', function() {
+				ddescribe('get.indexes should finish successfully', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
