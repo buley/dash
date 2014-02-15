@@ -3,14 +3,14 @@
 	var start_time = new Date().getTime(),
 		db_name = 'store-open-test-' + start_time,
 		store_name = 'store-open-test-' + start_time;
-	describe("open.database", function() {
+	ddescribe("open.database", function() {
 		it ('should handle a new database', function() {
 			var isClosed = false,
 				dashDbIsClosed = function() {
 					return isClosed;
 				};
 			runs(function(){
-				describe( 'new database example', function(){
+				ddescribe( 'new database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
 							return isFinished;
@@ -33,7 +33,7 @@
 							});
 						waitsFor(dashIsFinished, 'the open.database operation to finish', 10000);
 						runs(function() {
-							describe('the open.database operation should finish cleanly', function() {
+							ddescribe('the open.database operation should finish cleanly', function() {
 								beforeEach(function() {
 									this.context = ctx;
 									this.success = success;
@@ -79,7 +79,7 @@
 			/* Test for opening an existing database: should handle
 			 * in the same way, execept with upgrade flags as false */
 			runs(function(){
-				describe( 'existing database example', function(){
+				ddescribe( 'existing database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
 							return isFinished;
@@ -102,7 +102,7 @@
 							});
 						waitsFor(dashIsFinished, 'the open.database operation to finish', 10000);
 						runs(function() {
-							describe('secondary should finish cleanly', function() {
+							ddescribe('secondary should finish cleanly', function() {
 								beforeEach(function() {
 									this.context = ctx;
 									this.success = success;
@@ -143,7 +143,7 @@
 			/* Test for opening an existing database: should handle
 			 * in the same way, execept with upgrade flags as false */
 			runs(function(){
-				describe( 'existing database example', function(){
+				ddescribe( 'existing database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
 							return isFinished;
@@ -167,7 +167,7 @@
 							});
 						waitsFor(dashIsFinished, 'the open.database operation to finish', 10000);
 						runs(function() {
-							describe('secondary should finish cleanly', function() {
+							ddescribe('secondary should finish cleanly', function() {
 								beforeEach(function() {
 									this.context = ctx;
 									this.success = success;

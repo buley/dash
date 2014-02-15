@@ -15,8 +15,8 @@ module.exports = function(config) {
     logLevel: config.LOG_DEBUG,
     autoWatch: true,
     //browsers: ['Chrome', 'Firefox' ],
-    browsers: ['Chrome'],
-    //browsers: ['Firefox'],
+    //browsers: ['Chrome'],
+    browsers: ['Firefox'],
     captureTimeout: 60000,
     singleRun: false,
     preprocessors: {
