@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	ddescribe("put.entry", function() {
+	describe("put.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-put-test-' + start_time,
@@ -57,7 +57,7 @@
 
 			waitsFor(dashIsFinished, 'the put.entry operation to finish', 10000);
 			runs(function() {
-				ddescribe('put.entry should finish cleanly', function() {
+				describe('put.entry should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;

@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	ddescribe("remove.entry", function() {
+	describe("remove.entry", function() {
 		it( 'should open a database, add a store and add then remove an entry', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-remove-test-' + start_time,

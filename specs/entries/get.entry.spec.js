@@ -18,29 +18,26 @@
         ctx,
         key_path_value = 'entry-get-value-' + start_time;
       test_data[key_path] = key_path_value;
-      dash.add.store({
+      dash.add.entry({
           database: db_name,
           store: store_name,
           store_key_path: key_path,
           data: test_data
         })
       .then(function(context) {
-        dash.add.entry(context)
+         console.log('TEST S1: added entry',context.key);
+         dash.get.entry(context)
         .then(function(context) {
-           console.log('added',context.key);
-           dash.get.entry(context)
-          .then(function(context) {
-            success = true;
-            console.log('gotten back',context.key, context.entry);
-            isFinished = true;
-            ctx = context;
-          }, function(context) {
-            ctx = context;
-            error = true;
-            isFinished = true;
-          }, function(context) {
-            notify = true;
-          });
+          success = true;
+          console.log('TEST S2: got entry back',context.key, context.entry);
+          isFinished = true;
+          ctx = context;
+        }, function(context) {
+          ctx = context;
+          error = true;
+          isFinished = true;
+        }, function(context) {
+          notify = true;
         });
       });
 
