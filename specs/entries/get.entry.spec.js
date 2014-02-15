@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  describe("get.entry", function() {
+  ddescribe("get.entry", function() {
     it( 'should open a database, add a store and add then get an entry', function() {
       var start_time = new Date().getTime(),
         db_name = 'entry-get-test-' + start_time,
@@ -18,36 +18,37 @@
         ctx,
         key_path_value = 'entry-get-value-' + start_time;
       test_data[key_path] = key_path_value;
-      dash.open.database({
+      dash.add.store({
           database: db_name,
           store: store_name,
           store_key_path: key_path,
           data: test_data
         })
-        .then(function(context){
-          dash.add.store(context)
-          .commit(function(context) {
-            dash.add.entry(context)
-            .then(function(context) {
-              dash.get.entry(context)
-              .then(function(context) {
-                success = true;
-                isFinished = true;
-                ctx = context;
-              }, function(context) {
-                ctx = context;
-                error = true;
-                isFinished = true;
-              }, function(context) {
-                notify = true;
-              });
-            });
+      .then(function(context) {
+        dash.add.entry(context)
+        .then(function(context) {
+           dash.get.entry({
+              database: context.database,
+              store: context.store,
+              key: context.key
+          })
+          .then(function(context) {
+            success = true;
+            isFinished = true;
+            ctx = context;
+          }, function(context) {
+            ctx = context;
+            error = true;
+            isFinished = true;
+          }, function(context) {
+            notify = true;
           });
-        })
+        });
+      });
 
       waitsFor(dashIsFinished, 'the get.entry operation to finish', 10000);
       runs(function() {
-        describe('get.entry should finish cleanly', function() {
+        ddescribe('get.entry should finish cleanly', function() {
 
           beforeEach(function() {
             this.context = ctx;

@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("add.entry", function() {
+	ddescribe("add.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-add-test-' + start_time,
@@ -17,38 +17,31 @@
 				notify = false,
 				ctx;	
 			test_data[key_path] = 'entry-add-' + start_time;
-			dash.open.database({
-					database: db_name,
-					store: store_name,
-					store_key_path: key_path,
-					data: test_data
-				})
-				.then(function(context){
-					dash.add.store(context)
-					.then(function(context) {
-          				dash.add.entry(context)
-						.then(function(context) {
-							ctx = context;
-							isFinished = true;
-							success = true;
-						}, function(context) {
-							ctx = context;
-							console.log('add error');
-							isFinished = true;
-							error = true;
-						});
-					}, function(context) {
-						isFinished = true;
-						error = true;
-					});
-				}, function(context) {
-					isFinished = true;
-					error = true;
-				});
+            dash.add.store({
+                database: db_name,
+                store: store_name,
+                store_key_path: key_path,
+                data: test_data
+            })
+            .then(function(context) {
+                dash.add.entry(context)
+                .then(function(context) {
+                    ctx = context;
+                    isFinished = true;
+                    success = true;
+                }, function(context) {
+                    ctx = context;
+                    isFinished = true;
+                    error = true;
+                });
+            }, function(context) {
+                isFinished = true;
+                error = true;
+            });
 
 			waitsFor(dashIsFinished, 'the add.entry operation to finish', 10000);
 			runs(function() {
-				describe('add.entry should finish cleanly', function() {
+				ddescribe('add.entry should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -87,7 +80,7 @@
 					});
 
 					it("add.entry should clean up after itself", function() {
-						dash.remove.database(this.context);
+						//dash.remove.database(this.context);
 					});
 
 				});
