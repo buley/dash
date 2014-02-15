@@ -13,11 +13,12 @@
   "keywords": [],
   "author": "Taylor Buley <taylor.buley@gmail.com>",
   "dependencies": {
-    "coveralls": "~2.8.0"
+    "coveralls": "~2.8.0",
+    "karma-jasmine": "~0.1.5"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "karma": "~0.10.0",
+    "karma": "~0.10.9",
     "karma-jasmine": "~0.1.5",
     "grunt-karma": "~0.6.2",
     "karma-firefox-launcher": "~0.1.3",

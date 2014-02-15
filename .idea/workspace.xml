@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd431261-c0e8-4bb4-a672-9515fb2ec1ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/databases/close.database.spec.js" afterPath="$PROJECT_DIR$/specs/databases/close.database.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/databases/get.databases.spec.js" afterPath="$PROJECT_DIR$/specs/databases/get.databases.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/add.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/add.index.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/add.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/add.store.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/get.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/get.index.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/karma.conf.js" afterPath="$PROJECT_DIR$/karma.conf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/databases/open.database.spec.js" afterPath="$PROJECT_DIR$/specs/databases/open.database.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/databases/remove.database.spec.js" afterPath="$PROJECT_DIR$/specs/databases/remove.database.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -33,7 +34,7 @@
       <file leaf-file-name="close.database.spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/databases/close.database.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="31" selection-start="830" selection-end="830" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1005">
+            <state line="32" column="31" selection-start="830" selection-end="830" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="1005">
               <folding />
             </state>
           </provider>
@@ -42,7 +43,7 @@
       <file leaf-file-name="get.databases.spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/databases/get.databases.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="25" selection-start="1308" selection-end="1308" vertical-scroll-proportion="0.0" vertical-offset="18" max-vertical-offset="930">
+            <state line="23" column="34" selection-start="580" selection-end="580" vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="930">
               <folding />
             </state>
           </provider>
@@ -51,16 +52,61 @@
       <file leaf-file-name="open.database.spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/databases/open.database.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="178" column="12" selection-start="5761" selection-end="5761" vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="3135">
+            <state line="92" column="40" selection-start="3179" selection-end="3179" vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="3135">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="remove.database.spec.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="remove.database.spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/databases/remove.database.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="19" selection-start="968" selection-end="968" vertical-scroll-proportion="0.625" vertical-offset="0" max-vertical-offset="1050">
+            <state line="17" column="55" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1050">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.store.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/stores/add.store.spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="107" column="42" selection-start="3361" selection-end="3361" vertical-scroll-proportion="0.0" vertical-offset="1605" max-vertical-offset="2235">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.index.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/indexes/add.index.spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2940">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get.index.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/indexes/get.index.spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="28" column="45" selection-start="908" selection-end="908" vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="1800">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="karma.conf.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/karma.conf.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="24" selection-start="678" selection-end="678" vertical-scroll-proportion="0.5208333" vertical-offset="0" max-vertical-offset="585">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dash.dev.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="721" column="42" selection-start="23420" selection-end="23420" vertical-scroll-proportion="0.0" vertical-offset="10575" max-vertical-offset="17385">
               <folding />
             </state>
           </provider>
@@ -83,13 +129,43 @@
         <option value="$PROJECT_DIR$/specs/databases/get.databases.spec.js" />
         <option value="$PROJECT_DIR$/specs/databases/open.database.spec.js" />
         <option value="$PROJECT_DIR$/specs/databases/remove.database.spec.js" />
+        <option value="$PROJECT_DIR$/specs/stores/add.store.spec.js" />
+        <option value="$PROJECT_DIR$/specs/indexes/add.index.spec.js" />
+        <option value="$PROJECT_DIR$/specs/indexes/get.index.spec.js" />
+        <option value="$PROJECT_DIR$/karma.conf.js" />
       </list>
     </option>
   </component>
+  <component name="JsKarmaPackageDirSetting">
+    <data>/usr/local/lib/node_modules/karma</data>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-3" />
-    <option name="width" value="1926" />
-    <option name="height" value="1057" />
+    <option name="x" value="552" />
+    <option name="width" value="1353" />
+    <option name="height" value="1052" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>JavaScript function metricsJavaScript</id>
+          </State>
+          <State>
+            <id>JsTestDriverJavaScript</id>
+          </State>
+          <State>
+            <id>Unit testingJavaScript</id>
+          </State>
+          <State>
+            <id>XPath</id>
+          </State>
+        </expanded-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -117,6 +193,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -163,7 +240,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="databases" />
+              <option name="myItemId" value="indexes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -183,21 +260,36 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="last_opened_file_path" value="/usr/local/lib/node_modules/karma" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="174" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="184" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="189" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1098" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="177" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="187" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="192" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1102" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="FullScreen" value="false" />
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Karma.dev">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -208,14 +300,15 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
-      <setting name="configLocationType" value="CONFIG_FILE" />
-      <setting name="settingsFile" value="" />
-      <setting name="serverType" value="INTERNAL" />
-      <setting name="preferredDebugBrowser" value="CHROME" />
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="$PROJECT_DIR$/karma.conf.js">
       <envs />
       <method />
     </configuration>
@@ -226,7 +319,15 @@
       <browser start="false" url="" with-js-debugger="false" />
       <method />
     </configuration>
-    <list size="0" />
+    <configuration default="false" name="dev" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="$PROJECT_DIR$/karma.conf.js">
+      <envs />
+      <RunnerSettings RunnerId="KarmaJavaScriptTestRunnerRun" />
+      <ConfigurationWrapper RunnerId="KarmaJavaScriptTestRunnerRun" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Karma.dev" />
+    </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
@@ -255,19 +356,19 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="0" width="1926" height="1057" extended-state="6" />
-    <editor active="true" />
+    <frame x="552" y="0" width="1353" height="1052" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11111111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1591252" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3308351" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -294,9 +395,65 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/specs/databases/close.database.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="31" selection-start="830" selection-end="830" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1005">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/databases/get.databases.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="34" selection-start="580" selection-end="580" vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="930">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/databases/open.database.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="40" selection-start="3179" selection-end="3179" vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="3135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/databases/remove.database.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="55" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1050">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/stores/add.store.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="42" selection-start="3361" selection-end="3361" vertical-scroll-proportion="0.0" vertical-offset="1605" max-vertical-offset="2235">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/indexes/add.index.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2940">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/indexes/get.index.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="45" selection-start="908" selection-end="908" vertical-scroll-proportion="0.0" vertical-offset="420" max-vertical-offset="1800">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/karma.conf.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="14" selection-start="292" selection-end="292" vertical-scroll-proportion="0.2138158" vertical-offset="0" max-vertical-offset="912">
+        <state line="20" column="24" selection-start="678" selection-end="678" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="585">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="721" column="42" selection-start="23420" selection-end="23420" vertical-scroll-proportion="0.0" vertical-offset="10575" max-vertical-offset="17385">
           <folding />
         </state>
       </provider>
@@ -308,23 +465,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/specs/databases/get.databases.spec.js">
+    <entry file="file://$PROJECT_DIR$/specs/databases/remove.database.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="25" selection-start="1308" selection-end="1308" vertical-scroll-proportion="0.0" vertical-offset="18" max-vertical-offset="930">
+        <state line="17" column="55" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1050">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/specs/databases/open.database.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="12" selection-start="5761" selection-end="5761" vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="3135">
+        <state line="92" column="40" selection-start="3179" selection-end="3179" vertical-scroll-proportion="0.0" vertical-offset="945" max-vertical-offset="3135">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/specs/databases/remove.database.spec.js">
+    <entry file="file://$PROJECT_DIR$/specs/databases/get.databases.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="19" selection-start="968" selection-end="968" vertical-scroll-proportion="0.625" vertical-offset="0" max-vertical-offset="1050">
+        <state line="23" column="34" selection-start="580" selection-end="580" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/stores/add.store.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="42" selection-start="3361" selection-end="3361" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2235">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/indexes/add.index.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2955">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="721" column="42" selection-start="23420" selection-end="23420" vertical-scroll-proportion="0.0" vertical-offset="10575" max-vertical-offset="17385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/indexes/get.index.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="45" selection-start="908" selection-end="908" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1800">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="24" selection-start="678" selection-end="678" vertical-scroll-proportion="0.5208333" vertical-offset="0" max-vertical-offset="585">
           <folding />
         </state>
       </provider>

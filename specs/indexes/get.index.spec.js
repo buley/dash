@@ -1,4 +1,3 @@
-
 (function(){
 	'use strict';
 	describe("get.index", function() {
@@ -14,7 +13,8 @@
 			error = false,
 			success = false,
 			notify = false,
-			ctx;	
+			ctx;
+
 		it( 'should open a database, add a store and an index to it', function() {
 			dash.open.database({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
 				.then(function(context) {

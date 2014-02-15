@@ -1,18 +1,18 @@
 (function(){
 	'use strict';
-	describe("add.store", function() {
+	ddescribe("add.store", function() {
 		it( 'should open a database then add a store', function() {
 			var isFinished = false,
-			dashIsFinished = function() { 
-				return isFinished;
-			},
-			error = false,
-			success = false,
-			notify = false,
-			ctx,
-			start_time = new Date().getTime(),
-			db_name = 'store-add-test-' + start_time,
-			store_name = 'store-add-test-store-' + start_time;
+                dashIsFinished = function() {
+                    return isFinished;
+                },
+                error = false,
+                success = false,
+                notify = false,
+                ctx,
+                start_time = new Date().getTime(),
+                db_name = 'store-add-test-' + start_time,
+                store_name = 'store-add-test-store-' + start_time;
 			dash.open.database({ database: db_name, store: store_name })
 				.then(function(context) {
 					dash.add.store(context)
@@ -30,7 +30,7 @@
 				});
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
-				describe('add.store should finish cleanly', function() {
+				ddescribe('add.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -112,7 +112,7 @@
 				});
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
-				describe('add.store should finish cleanly', function() {
+				ddescribe('add.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
