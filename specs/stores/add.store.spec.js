@@ -15,18 +15,18 @@
                 store_name = 'store-add-test-store-' + start_time;
 
 
-                dash.add.store({ database: db_name, store: store_name })
-                .then(function(context) {
-                    ctx = context;
-                    success = true;
-                    isFinished = true;
-                }, function(context) {
-                    ctx = context;
-                    error = true;
-                    isFinished = true;
-                }, function(context) {
-                    notify = true;
-                });
+            dash.add.store({ database: db_name, store: store_name })
+            .then(function(context) {
+                ctx = context;
+                success = true;
+                isFinished = true;
+            }, function(context) {
+                ctx = context;
+                error = true;
+                isFinished = true;
+            }, function(context) {
+                notify = true;
+            });
 
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
@@ -67,7 +67,7 @@
 					});
 
 					it("add.store should clean up after itself", function() {
-						dash.remove.database(this.context);
+						//dash.remove.database(this.context);
 					});
 
 				});
@@ -124,6 +124,10 @@
 
 					it("add.store objectstore should use the provided autoincrement setting", function(){
 						expect(this.context.objectstore.autoIncrement).toBe(this.autoincrement);
+					});
+
+					it("add.store should clean up after itself", function() {
+						//dash.remove.database(this.context);
 					});
 
 				});

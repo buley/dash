@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("remove.store", function() {
+	ddescribe("remove.store", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'store-remove-test-' + start_time,
 			store_name = 'store-remove-test-store-' + start_time,
@@ -19,43 +19,36 @@
 			finalcount,
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
-			dash.open.database({ database: db_name, store: store_name })
-				.then(function(context) {
-					startcount = context.db.objectStoreNames.length;
-					dash.add.store(context)
-					.then(function(context){
-						addcount = context.db.objectStoreNames.length;
-						dash.remove.store(context)
-						.then(function(context) {
-							ctx = context;
-							finalcount = context.db.objectStoreNames.length;
-							success = true;
-							isFinished = true;
-						}, function(context) {
-							ctx = context;
-							error = true;
-							isFinished = true;
-						}, function(context) {
-							notify = true;
-						});
-					}, function(context) {
-						ctx = context;
-						error = true;
-						isFinished = true;
-					}, function(context) {
-						notify = true;
-					});
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
-				}, function(context) {
-					notify = true;
-				});
+            startcount = 0;
+            dash.add.store({ database: db_name, store: store_name })
+            .then(function(context){
+                addcount = context.db.objectStoreNames.length;
+                dash.remove.store(context)
+                .then(function(context) {
+                    ctx = context;
+                    finalcount = context.db.objectStoreNames.length;
+                    success = true;
+                    isFinished = true;
+                }, function(context) {
+                    ctx = context;
+                    console.log('errpr',context.error);
+                    error = true;
+                    isFinished = true;
+                }, function(context) {
+                    notify = true;
+                });
+            }, function(context) {
+                ctx = context;
+                error = true;
+                isFinished = true;
+            }, function(context) {
+                notify = true;
+		    });
+
 
 			waitsFor(dashIsFinished, 'the remove.store operation to finish', 10000);
 			runs(function() {
-				describe('remove.store should finish cleanly', function() {
+				ddescribe('remove.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -93,7 +86,7 @@
 					});
 
 					it("remove.store should clean up after itself", function() {
-						dash.remove.database(this.context);
+						//dash.remove.database(this.context);
 					});
 
 				});

@@ -72,6 +72,9 @@
 						expect(this.context.objectstore.name).toBe(this.storename);
 					});
 
+					it("clear.store should clean up after itself", function() {
+						//dash.remove.database(this.context);
+					});
 				});
 			});
 		});

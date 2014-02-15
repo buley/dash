@@ -15,8 +15,9 @@
 			prectx,
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
+
             dash.add.store({ database: db_name, store: store_name, store_key_path: store_key_path })
-            .commit(function(context){
+            .then(function(context){
                 dash.get.store(context)
                 .then(function(context) {
                     ctx = context;
@@ -39,6 +40,7 @@
 			waitsFor(dashIsFinished, 'the get.store operation to finish', 10000);
 			runs(function() {
 				ddescribe('get.store should finish cleanly', function() {
+
 					beforeEach(function() {
 						this.context = ctx;
 						this.setup = prectx;
@@ -68,6 +70,10 @@
 					it("get.store references should be the db and store we asked for", function(){
 						expect(this.context.db.name).toBe(this.dbname);
 						expect(this.context.objectstore.name).toBe(this.storename);
+					});
+
+					it("get.store should clean up after itself", function() {
+						//dash.remove.database(this.context);
 					});
 
 				});

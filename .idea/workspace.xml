@@ -2,23 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd431261-c0e8-4bb4-a672-9515fb2ec1ad" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/webResources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/add.entry.spec.js" afterPath="$PROJECT_DIR$/specs/entries/add.entry.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/add.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/add.index.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/add.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/add.store.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/clear.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/clear.store.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/databases/close.database.spec.js" afterPath="$PROJECT_DIR$/specs/databases/close.database.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/dash.dev.js" afterPath="$PROJECT_DIR$/lib/dash.dev.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dash.iml" afterPath="$PROJECT_DIR$/.idea/dash.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/databases/get.databases.spec.js" afterPath="$PROJECT_DIR$/specs/databases/get.databases.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/get.entries.spec.js" afterPath="$PROJECT_DIR$/specs/entries/get.entries.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/get.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/get.index.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/get.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/get.store.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/databases/open.database.spec.js" afterPath="$PROJECT_DIR$/specs/databases/open.database.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/databases/remove.database.spec.js" afterPath="$PROJECT_DIR$/specs/databases/remove.database.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" afterPath="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/get.stores.spec.js" afterPath="$PROJECT_DIR$/specs/stores/get.stores.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/remove.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/remove.store.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -42,28 +31,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="clear.store.spec.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="clear.store.spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/stores/clear.store.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="0" selection-start="2472" selection-end="2472" vertical-scroll-proportion="0.78547853" vertical-offset="381" max-vertical-offset="1290">
+            <state line="20" column="16" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1335">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dash.dev.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="dash.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="497" column="8" selection-start="15914" selection-end="15914" vertical-scroll-proportion="0.0" vertical-offset="7185" max-vertical-offset="18360">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.store.spec.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/stores/add.store.spec.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="0" selection-start="4245" selection-end="4245" vertical-scroll-proportion="0.0" vertical-offset="1236" max-vertical-offset="2145">
+            <state line="679" column="4" selection-start="22106" selection-end="22106" vertical-scroll-proportion="0.43526787" vertical-offset="9795" max-vertical-offset="18120">
               <folding />
             </state>
           </provider>
@@ -72,7 +52,34 @@
       <file leaf-file-name="get.store.spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/specs/stores/get.store.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="0" selection-start="2503" selection-end="2503" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
+            <state line="60" column="33" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1365">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.store.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/stores/add.store.spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="28" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="2205">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get.stores.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/stores/get.stores.spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="41" selection-start="1349" selection-end="1349" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1035">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="remove.store.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/stores/remove.store.spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="33" selection-start="1092" selection-end="1092" vertical-scroll-proportion="0.0" vertical-offset="426" max-vertical-offset="1560">
               <folding />
             </state>
           </provider>
@@ -101,10 +108,12 @@
         <option value="$PROJECT_DIR$/specs/databases/get.databases.spec.js" />
         <option value="$PROJECT_DIR$/specs/databases/remove.database.spec.js" />
         <option value="$PROJECT_DIR$/specs/databases/close.database.spec.js" />
-        <option value="$PROJECT_DIR$/lib/dash.dev.js" />
-        <option value="$PROJECT_DIR$/specs/stores/get.store.spec.js" />
-        <option value="$PROJECT_DIR$/specs/stores/add.store.spec.js" />
         <option value="$PROJECT_DIR$/specs/stores/clear.store.spec.js" />
+        <option value="$PROJECT_DIR$/specs/stores/add.store.spec.js" />
+        <option value="$PROJECT_DIR$/specs/stores/get.stores.spec.js" />
+        <option value="$PROJECT_DIR$/specs/stores/remove.store.spec.js" />
+        <option value="$PROJECT_DIR$/specs/stores/get.store.spec.js" />
+        <option value="$PROJECT_DIR$/lib/dash.dev.js" />
       </list>
     </option>
   </component>
@@ -623,30 +632,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
+    <entry file="file://$PROJECT_DIR$/specs/stores/clear.store.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="497" column="8" selection-start="15914" selection-end="15914" vertical-scroll-proportion="0.0" vertical-offset="7185" max-vertical-offset="18360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/stores/get.store.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="0" selection-start="2503" selection-end="2503" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
+        <state line="20" column="16" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1335">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/specs/stores/add.store.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="0" selection-start="4245" selection-end="4245" vertical-scroll-proportion="0.0" vertical-offset="1236" max-vertical-offset="2145">
+        <state line="31" column="28" selection-start="1064" selection-end="1064" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="2205">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/specs/stores/clear.store.spec.js">
+    <entry file="file://$PROJECT_DIR$/specs/stores/get.stores.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="2472" selection-end="2472" vertical-scroll-proportion="0.78547853" vertical-offset="381" max-vertical-offset="1290">
+        <state line="41" column="41" selection-start="1349" selection-end="1349" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1035">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/stores/remove.store.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="33" selection-start="1092" selection-end="1092" vertical-scroll-proportion="0.0" vertical-offset="426" max-vertical-offset="1560">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/stores/get.store.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="33" selection-start="1900" selection-end="1900" vertical-scroll-proportion="0.0" vertical-offset="450" max-vertical-offset="1365">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="679" column="4" selection-start="22106" selection-end="22106" vertical-scroll-proportion="0.43526787" vertical-offset="9795" max-vertical-offset="18120">
           <folding />
         </state>
       </provider>
