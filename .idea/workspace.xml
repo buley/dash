@@ -2,24 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd431261-c0e8-4bb4-a672-9515fb2ec1ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/add.entry.spec.js" afterPath="$PROJECT_DIR$/specs/entries/add.entry.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/add.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/add.index.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/add.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/add.store.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/clear.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/clear.store.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/dash.dev.js" afterPath="$PROJECT_DIR$/lib/dash.dev.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/get.entries.spec.js" afterPath="$PROJECT_DIR$/specs/entries/get.entries.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/get.entry.spec.js" afterPath="$PROJECT_DIR$/specs/entries/get.entry.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/get.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/get.index.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/get.indexes.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/get.indexes.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/get.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/get.store.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/get.stores.spec.js" afterPath="$PROJECT_DIR$/specs/stores/get.stores.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/put.entry.spec.js" afterPath="$PROJECT_DIR$/specs/entries/put.entry.spec.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/karma.conf.js" afterPath="$PROJECT_DIR$/karma.conf.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" afterPath="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/remove.entry.spec.js" afterPath="$PROJECT_DIR$/specs/entries/remove.entry.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/indexes/remove.index.spec.js" afterPath="$PROJECT_DIR$/specs/indexes/remove.index.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/stores/remove.store.spec.js" afterPath="$PROJECT_DIR$/specs/stores/remove.store.spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/specs/entries/update.entries.spec.js" afterPath="$PROJECT_DIR$/specs/entries/update.entries.spec.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,35 +29,7 @@
     <favorites_list name="dash" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="dash.dev.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1006" column="35" selection-start="33379" selection-end="33379" vertical-scroll-proportion="0.0" vertical-offset="14865" max-vertical-offset="17565">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get.entries.spec.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/specs/entries/get.entries.spec.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="52" selection-start="1810" selection-end="1810" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2040">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="remove.entry.spec.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/specs/entries/remove.entry.spec.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="0" selection-start="907" selection-end="907" vertical-scroll-proportion="0.46153846" vertical-offset="0" max-vertical-offset="1530">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -99,11 +59,11 @@
         <option value="$PROJECT_DIR$/specs/entries/add.entry.spec.js" />
         <option value="$PROJECT_DIR$/specs/entries/get.entry.spec.js" />
         <option value="$PROJECT_DIR$/specs/entries/put.entry.spec.js" />
-        <option value="$PROJECT_DIR$/specs/entries/update.entries.spec.js" />
-        <option value="$PROJECT_DIR$/lib/dash.dev.js" />
-        <option value="$PROJECT_DIR$/specs/entries/get.entries.spec.js" />
-        <option value="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" />
         <option value="$PROJECT_DIR$/specs/entries/remove.entry.spec.js" />
+        <option value="$PROJECT_DIR$/specs/entries/get.entries.spec.js" />
+        <option value="$PROJECT_DIR$/specs/entries/update.entries.spec.js" />
+        <option value="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" />
+        <option value="$PROJECT_DIR$/lib/dash.dev.js" />
       </list>
     </option>
   </component>
@@ -374,14 +334,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="552" y="0" width="1353" height="1055" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976446" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1591252" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1591252" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -664,37 +624,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/specs/entries/update.entries.spec.js">
+    <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="7" selection-start="2068" selection-end="2068" vertical-scroll-proportion="0.8406593" vertical-offset="135" max-vertical-offset="1935">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/specs/entries/get.entries.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="52" selection-start="1810" selection-end="1810" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2040">
+        <state line="288" column="41" selection-start="8348" selection-end="8348" vertical-scroll-proportion="0.33444816" vertical-offset="4020" max-vertical-offset="17415">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/specs/entries/remove.entries.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="9" selection-start="2564" selection-end="2564" vertical-scroll-proportion="0.72527474" vertical-offset="450" max-vertical-offset="2085">
+        <state line="38" column="23" selection-start="1409" selection-end="1409" vertical-scroll-proportion="0.42857143" vertical-offset="180" max-vertical-offset="1980">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
+    <entry file="file://$PROJECT_DIR$/specs/entries/get.entries.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1006" column="35" selection-start="33379" selection-end="33379" vertical-scroll-proportion="0.0" vertical-offset="14865" max-vertical-offset="17565">
+        <state line="36" column="34" selection-start="1563" selection-end="1563" vertical-scroll-proportion="0.5934066" vertical-offset="0" max-vertical-offset="2040">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/specs/entries/remove.entry.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="0" selection-start="907" selection-end="907" vertical-scroll-proportion="0.46153846" vertical-offset="0" max-vertical-offset="1530">
+        <state line="30" column="0" selection-start="993" selection-end="993" vertical-scroll-proportion="0.4945055" vertical-offset="0" max-vertical-offset="1590">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/specs/entries/update.entries.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="36" selection-start="1559" selection-end="1559" vertical-scroll-proportion="0.47802198" vertical-offset="180" max-vertical-offset="1935">
           <folding />
         </state>
       </provider>

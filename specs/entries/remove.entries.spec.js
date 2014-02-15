@@ -37,29 +37,22 @@
           dash.add.entry(context)
           .then(function(context) {
             console.log('added ok',context);
-            dash.remove.entries({
-              database: db_name,
-              store: store_name,
-              store_key_path: key_path,
-              index_key_path: index_key_path,
-              index: index_name,
-              data: test_data
-            })
+            dash.remove.entries(context)
             .then(function(context) {
               delete context.transaction;
               delete context.db;
+              delete context.event;
+              delete context.request;
               dash.get.entries(context)
               .then(function(context) {
                 success = true;
                 isFinished = true;
                 ctx = context;
               }, function(context) {
-                console.log('failed to gt');
                 error = true;
                 isFinished = true;
               });
             }, function(context) {
-              console.log('error was removing entries');
               ctx = context;
               error = true;
               isFinished = true;

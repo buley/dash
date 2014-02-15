@@ -26,6 +26,10 @@
             .then(function(context) {
                 dash.add.entry(context)
                 .then(function(context) {
+                    delete context.event;
+                    delete context.request;
+                    delete context.transaction;
+                    delete context.db;
                     dash.remove.entry(context)
                     .then(function(context) {
                         success = true;

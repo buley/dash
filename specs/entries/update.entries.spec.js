@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  describe("update.entries", function() {
+  ddescribe("update.entries", function() {
     it( 'should open a database, add a store and add then get entries', function() {
       var start_time = new Date().getTime(),
         db_name = 'entries-get-test-' + start_time,
@@ -35,10 +35,10 @@
         dash.add.index(context)
         .commit(function(context) {
           dash.add.entry(context)
-          .then(function(context) {
+          .commit(function(context) {
             context.data.version = random_update;
             dash.update.entries(context)
-            .then(function(context) {
+            .commit(function(context) {
               dash.get.entries(context)
               .then(function(context) {
                 success = true;
@@ -58,7 +58,7 @@
 
       waitsFor(dashIsFinished, 'the update.entries operation to finish', 10000);
       runs(function() {
-        describe('update.entries should finish cleanly', function() {
+        ddescribe('update.entries should finish cleanly', function() {
 
           beforeEach(function() {
             this.context = ctx;
