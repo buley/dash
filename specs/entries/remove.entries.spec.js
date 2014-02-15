@@ -4,9 +4,9 @@
   describe("remove.entries", function() {
     it( 'should open a database, add a store and add then get entries', function() {
       var start_time = new Date().getTime(),
-        db_name = 'entries-get-test-' + start_time,
-        store_name = 'entries-get-test-store-' + start_time,
-        index_name = 'entries-get-test-index-' + start_time,
+        db_name = 'entries-remove-test-' + start_time,
+        store_name = 'entries-remove-test-store-' + start_time,
+        index_name = 'entries-remove-test-index-' + start_time,
         key_path = 'entries' + start_time,
         index_key_path = 'entriesIndex' + start_time,
         test_data = { version: 1 },
@@ -19,8 +19,8 @@
         success = false,
         notify = false,
         ctx,
-        index_key_path_value = 'entries-get-index-value-' + start_time,
-        key_path_value = 'entries-get-value-' + start_time;
+        index_key_path_value = 'entries-remove-index-value-' + start_time,
+        key_path_value = 'entries-remove-value-' + start_time;
       test_data[key_path] = key_path_value;
       test_data[index_key_path] = index_key_path_value;
       dash.open.database({

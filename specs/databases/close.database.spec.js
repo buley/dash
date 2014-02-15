@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	ddescribe("close.database", function() {
+	describe("close.database", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'database-close-test-' + start_time,
 			isFinished = false,
@@ -35,7 +35,7 @@
 				});
 			waitsFor(dashIsFinished, 'the close.database operation to finish', 10000);
 			runs(function() {
-				ddescribe('database.close should finish cleanly', function() {
+				describe('database.close should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;

@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	ddescribe("add.store", function() {
+	describe("add.store", function() {
 		it( 'should open a database then add a store', function() {
 			var isFinished = false,
                 dashIsFinished = function() {
@@ -30,7 +30,7 @@
 				});
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
-				ddescribe('add.store should finish cleanly', function() {
+				describe('add.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -112,7 +112,7 @@
 				});
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
-				ddescribe('add.store should finish cleanly', function() {
+				describe('add.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;

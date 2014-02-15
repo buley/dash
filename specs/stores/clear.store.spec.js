@@ -3,8 +3,8 @@
 	'use strict';
 	describe("clear.store", function() {
 		var start_time = new Date().getTime(),
-			db_name = 'store-get-test-' + start_time,
-			store_name = 'store-get-test-store-' + start_time,
+			db_name = 'store-clear-test-' + start_time,
+			store_name = 'store-clear-test-store-' + start_time,
 			isFinished = false,
 			dashIsFinished = function() { 
 				return isFinished;
