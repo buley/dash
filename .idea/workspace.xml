@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a74f497-6e29-4ec8-bf3a-f0cb14597379" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/dash.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/documentation/indexeddb.md" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/transaction/requests.md" afterPath="$PROJECT_DIR$/documentation/general/transaction/requests.md" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/documentation/transactions.md" afterPath="$PROJECT_DIR$/documentation/general/transactions.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.css" afterPath="$PROJECT_DIR$/docs/project.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.dev.js" afterPath="$PROJECT_DIR$/docs/project.dev.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="dash.iws" />
@@ -30,59 +25,75 @@
     <favorites_list name="dash" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf>
-      <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+      <file leaf-file-name="remove.entry.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/entries/remove.entry.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="12" selection-start="4183" selection-end="4183" vertical-scroll-proportion="0.4472477" vertical-offset="1500" max-vertical-offset="5940">
+            <state line="46" column="78" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1575">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.less" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/project.less">
+      <file leaf-file-name="update.entries.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/entries/update.entries.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="11" selection-start="319" selection-end="319" vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="1215">
+            <state line="63" column="8" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1980">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="databases.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/documentation/databases.md">
+      <file leaf-file-name="open.database.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/databases/open.database.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="2070" selection-end="2070" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="405">
+            <state line="5" column="4" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3135">
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="MarkdownPreviewEditor">
-            <state />
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="cursors.md" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/documentation/key/cursors.md">
+      <file leaf-file-name="add.entry.spec.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/specs/entries/add.entry.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="9" selection-start="560" selection-end="560" vertical-scroll-proportion="-2.3076923" vertical-offset="0" max-vertical-offset="150">
+            <state line="21" column="38" selection-start="668" selection-end="668" vertical-scroll-proportion="0.5393836" vertical-offset="0" max-vertical-offset="1590">
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="MarkdownPreviewEditor">
-            <state />
+        </entry>
+      </file>
+      <file leaf-file-name="get.entries.spec.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/specs/entries/get.entries.spec.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="67" column="40" selection-start="2351" selection-end="2351" vertical-scroll-proportion="0.0" vertical-offset="1348" max-vertical-offset="1890">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="docs.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+      <file leaf-file-name="karma.conf.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/karma.conf.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1335">
+            <state line="23" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dash.dev.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="489" column="110" selection-start="15620" selection-end="15641" vertical-scroll-proportion="-6.185185" vertical-offset="7168" max-vertical-offset="17370">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+=======
+    <leaf />
+>>>>>>> gh-pages
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -103,34 +114,17 @@
         <option value="$PROJECT_DIR$/karma.conf.js" />
         <option value="$PROJECT_DIR$/lib/dash.dev.js" />
         <option value="$PROJECT_DIR$/specs/entries/add.entry.spec.js" />
+<<<<<<< HEAD
+=======
         <option value="$PROJECT_DIR$/docs/templates/splash.html" />
         <option value="$PROJECT_DIR$/docs/vendor/css/foundation.css" />
-        <option value="$PROJECT_DIR$/docs/documents/overview.md" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/docs/documents/overview/records.md" />
-        <option value="$PROJECT_DIR$/documentation/overview.md" />
-        <option value="$PROJECT_DIR$/documentation/cursors.md" />
-        <option value="$PROJECT_DIR$/documentation/entries.md" />
-        <option value="$PROJECT_DIR$/documentation/indexes.md" />
-        <option value="$PROJECT_DIR$/documentation/keyranges.md" />
-        <option value="$PROJECT_DIR$/documentation/keys.md" />
-        <option value="$PROJECT_DIR$/documentation/records.md" />
-        <option value="$PROJECT_DIR$/documentation/requests.md" />
-        <option value="$PROJECT_DIR$/documentation/security.md" />
-        <option value="$PROJECT_DIR$/documentation/stores.md" />
-        <option value="$PROJECT_DIR$/documentation/transactions.md" />
-        <option value="$PROJECT_DIR$/documentation/database/closing.md" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/documentation/database/getting.md" />
-        <option value="$PROJECT_DIR$/documentation/database/opening.md" />
-        <option value="$PROJECT_DIR$/documentation/database/versionchanges.md" />
-        <option value="$PROJECT_DIR$/documentation/database/removing.md" />
         <option value="$PROJECT_DIR$/docs/templates/docs.html" />
-        <option value="$PROJECT_DIR$/documentation/database/names.md" />
-        <option value="$PROJECT_DIR$/documentation/database/versions.md" />
-        <option value="$PROJECT_DIR$/documentation/databases.md" />
+        <option value="$PROJECT_DIR$/docs/documents/overview.md" />
         <option value="$PROJECT_DIR$/docs/project.less" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/docs/project.dev.js" />
+        <option value="$PROJECT_DIR$/README.md" />
+>>>>>>> gh-pages
       </list>
     </option>
   </component>
@@ -138,9 +132,13 @@
     <data>$PROJECT_DIR$/node_modules/karma</data>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="848" />
-    <option name="width" value="1019" />
-    <option name="height" value="1052" />
+    <option name="x" value="960" />
+<<<<<<< HEAD
+    <option name="width" value="960" />
+=======
+    <option name="width" value="956" />
+>>>>>>> gh-pages
+    <option name="height" value="1055" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -149,7 +147,11 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
+<<<<<<< HEAD
+    <ConfirmationsSetting value="0" id="Add" />
+=======
     <ConfirmationsSetting value="2" id="Add" />
+>>>>>>> gh-pages
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
@@ -168,6 +170,10 @@
       <sortByType />
     </navigator>
     <panes>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+>>>>>>> gh-pages
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -196,7 +202,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="documentation" />
+              <option name="myItemId" value="specs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -210,33 +216,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="documentation" />
+              <option name="myItemId" value="specs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="key" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="documentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="key" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="range" />
+              <option name="myItemId" value="entries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -250,33 +234,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="documentation" />
+              <option name="myItemId" value="specs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dash" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="documentation" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="transaction" />
+              <option name="myItemId" value="databases" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -290,11 +252,44 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="documentation" />
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+<<<<<<< HEAD
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+=======
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="database" />
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project.less" />
+              <option name="myItemType" value="com.intellij.plugins.watcher.projectView.NestingTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -309,6 +304,54 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -330,148 +373,94 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dash">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="documents" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dash">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="documentation">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dash">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="documentation">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="entry">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="underscore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dash">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dash" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="documentation">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docs" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="cursor">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dash">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="docs">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dash">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="docs">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="templates">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Changed Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bower_components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+>>>>>>> gh-pages
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="web.server" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/node_modules/grunt-cli/bin/grunt" />
     <property name="restartRequiresConfirmation" value="true" />
+<<<<<<< HEAD
+  </component>
+  <component name="RunManager" selected="Karma.dash">
+=======
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="FullScreen" value="false" />
-    <property name="SearchEverywhereHistory" value="&#10;/" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/docs/vendor/js" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/documentation/general" />
-      <recent name="$PROJECT_DIR$/documentation/key" />
-      <recent name="$PROJECT_DIR$/documentation/transaction" />
-      <recent name="$PROJECT_DIR$/documentation/cursor" />
-      <recent name="$PROJECT_DIR$/documentation" />
+      <recent name="$PROJECT_DIR$/docs/vendor" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.dash">
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -482,6 +471,21 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
+      <method />
+    </configuration>
+>>>>>>> gh-pages
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
+      <method />
+    </configuration>
+<<<<<<< HEAD
+=======
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
       <setting name="configLocationType" value="CONFIG_FILE" />
       <setting name="settingsFile" value="" />
@@ -489,13 +493,10 @@
       <setting name="preferredDebugBrowser" value="CHROME" />
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
+>>>>>>> gh-pages
     <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
       <browser start="false" url="" with-js-debugger="false" />
       <method />
@@ -518,6 +519,12 @@
       <ConfigurationWrapper RunnerId="NodeJS.run" />
       <method />
     </configuration>
+<<<<<<< HEAD
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Karma.dash" />
+      <item index="1" class="java.lang.String" itemvalue="Node.js.Chrome" />
+      <item index="2" class="java.lang.String" itemvalue="Node.js.Firefox" />
+=======
     <configuration default="false" name="dash" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true" uri="http://dashdb.com">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
@@ -528,6 +535,7 @@
       <item index="1" class="java.lang.String" itemvalue="Node.js.Chrome" />
       <item index="2" class="java.lang.String" itemvalue="Node.js.Firefox" />
       <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.dash" />
+>>>>>>> gh-pages
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
@@ -554,6 +562,27 @@
       <created>1392097907184</created>
       <updated>1392097907184</updated>
     </task>
+<<<<<<< HEAD
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="960" y="0" width="960" height="1055" extended-state="4" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3954984" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5004878" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31056562" sideWeight="0.4995122" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+=======
     <task id="LOCAL-00001" summary="finally, working on /docs&#10;">
       <created>1392172766702</created>
       <updated>1392172766702</updated>
@@ -634,883 +663,28 @@
       <created>1392175920129</created>
       <updated>1392175920129</updated>
     </task>
-    <task id="LOCAL-00021" summary="merge confl&#10;">
-      <created>1392181992814</created>
-      <updated>1392181992814</updated>
-    </task>
-    <task id="LOCAL-00022" summary="merge confl&#10;">
-      <created>1392182447580</created>
-      <updated>1392182447580</updated>
-    </task>
-    <task id="LOCAL-00023" summary="merge confl&#10;">
-      <created>1392182527043</created>
-      <updated>1392182527043</updated>
-    </task>
-    <task id="LOCAL-00024" summary="merge confl&#10;">
-      <created>1392182638260</created>
-      <updated>1392182638260</updated>
-    </task>
-    <task id="LOCAL-00025" summary="merge confl&#10;">
-      <created>1392183149744</created>
-      <updated>1392183149744</updated>
-    </task>
-    <task id="LOCAL-00026" summary="merge confl&#10;">
-      <created>1392183204555</created>
-      <updated>1392183204555</updated>
-    </task>
-    <task id="LOCAL-00027" summary="merge confl&#10;">
-      <created>1392183406523</created>
-      <updated>1392183406523</updated>
-    </task>
-    <task id="LOCAL-00028" summary="merge confl&#10;">
-      <created>1392183450097</created>
-      <updated>1392183450097</updated>
-    </task>
-    <task id="LOCAL-00029" summary="merge confl&#10;">
-      <created>1392183636899</created>
-      <updated>1392183636899</updated>
-    </task>
-    <task id="LOCAL-00030" summary="merge confl&#10;">
-      <created>1392183784875</created>
-      <updated>1392183784875</updated>
-    </task>
-    <task id="LOCAL-00031" summary="merge confl&#10;">
-      <created>1392183884267</created>
-      <updated>1392183884267</updated>
-    </task>
-    <task id="LOCAL-00032" summary="merge confl&#10;">
-      <created>1392184017150</created>
-      <updated>1392184017150</updated>
-    </task>
-    <task id="LOCAL-00033" summary="merge confl&#10;">
-      <created>1392184227554</created>
-      <updated>1392184227554</updated>
-    </task>
-    <task id="LOCAL-00034" summary="merge confl&#10;">
-      <created>1392184580434</created>
-      <updated>1392184580434</updated>
-    </task>
-    <task id="LOCAL-00035" summary="merge confl&#10;">
-      <created>1392184650464</created>
-      <updated>1392184650464</updated>
-    </task>
-    <task id="LOCAL-00036" summary="merge confl&#10;">
-      <created>1392184712299</created>
-      <updated>1392184712299</updated>
-    </task>
-    <task id="LOCAL-00037" summary="merge confl&#10;">
-      <created>1392184799438</created>
-      <updated>1392184799438</updated>
-    </task>
-    <task id="LOCAL-00038" summary="merge confl&#10;">
-      <created>1392185019194</created>
-      <updated>1392185019194</updated>
-    </task>
-    <task id="LOCAL-00039" summary="merge confl&#10;">
-      <created>1392185204057</created>
-      <updated>1392185204057</updated>
-    </task>
-    <task id="LOCAL-00040" summary="merge confl&#10;">
-      <created>1392185299688</created>
-      <updated>1392185299688</updated>
-    </task>
-    <task id="LOCAL-00041" summary="merge confl&#10;">
-      <created>1392185353488</created>
-      <updated>1392185353488</updated>
-    </task>
-    <task id="LOCAL-00042" summary="merge confl&#10;">
-      <created>1392185527266</created>
-      <updated>1392185527266</updated>
-    </task>
-    <task id="LOCAL-00043" summary="merge confl&#10;">
-      <created>1392185624113</created>
-      <updated>1392185624113</updated>
-    </task>
-    <task id="LOCAL-00044" summary="merge confl&#10;">
-      <created>1392185721050</created>
-      <updated>1392185721050</updated>
-    </task>
-    <task id="LOCAL-00045" summary="merge confl&#10;">
-      <created>1392185778116</created>
-      <updated>1392185778116</updated>
-    </task>
-    <task id="LOCAL-00046" summary="merge confl&#10;">
-      <created>1392185909617</created>
-      <updated>1392185909617</updated>
-    </task>
-    <task id="LOCAL-00047" summary="merge confl&#10;">
-      <created>1392185964693</created>
-      <updated>1392185964693</updated>
-    </task>
-    <task id="LOCAL-00048" summary="merge confl&#10;">
-      <created>1392186159278</created>
-      <updated>1392186159278</updated>
-    </task>
-    <task id="LOCAL-00049" summary="merge confl&#10;">
-      <created>1392186261489</created>
-      <updated>1392186261489</updated>
-    </task>
-    <task id="LOCAL-00050" summary="merge confl&#10;">
-      <created>1392186297777</created>
-      <updated>1392186297777</updated>
-    </task>
-    <task id="LOCAL-00051" summary="merge confl&#10;">
-      <created>1392186352018</created>
-      <updated>1392186352018</updated>
-    </task>
-    <task id="LOCAL-00052" summary="WIP">
-      <created>1392186437739</created>
-      <updated>1392186437739</updated>
-    </task>
-    <task id="LOCAL-00053" summary="WIP&#10;">
-      <created>1392186483751</created>
-      <updated>1392186483751</updated>
-    </task>
-    <task id="LOCAL-00054" summary="WIP&#10;">
-      <created>1392186715575</created>
-      <updated>1392186715575</updated>
-    </task>
-    <task id="LOCAL-00055" summary="WIP&#10;">
-      <created>1392264658433</created>
-      <updated>1392264658433</updated>
-    </task>
-    <task id="LOCAL-00056" summary="WIP&#10;">
-      <created>1392264839348</created>
-      <updated>1392264839348</updated>
-    </task>
-    <task id="LOCAL-00057" summary="WIP&#10;">
-      <created>1392264908756</created>
-      <updated>1392264908756</updated>
-    </task>
-    <task id="LOCAL-00058" summary="WIP&#10;">
-      <created>1392265049732</created>
-      <updated>1392265049732</updated>
-    </task>
-    <task id="LOCAL-00059" summary="WIP&#10;">
-      <created>1392265218124</created>
-      <updated>1392265218124</updated>
-    </task>
-    <task id="LOCAL-00060" summary="WIP&#10;">
-      <created>1392265384053</created>
-      <updated>1392265384053</updated>
-    </task>
-    <task id="LOCAL-00061" summary="WIP&#10;">
-      <created>1392266955843</created>
-      <updated>1392266955843</updated>
-    </task>
-    <task id="LOCAL-00062" summary="WIP&#10;">
-      <created>1392267107325</created>
-      <updated>1392267107325</updated>
-    </task>
-    <task id="LOCAL-00063" summary="WIP&#10;">
-      <created>1392267189603</created>
-      <updated>1392267189603</updated>
-    </task>
-    <task id="LOCAL-00064" summary="WIP&#10;">
-      <created>1392267235219</created>
-      <updated>1392267235219</updated>
-    </task>
-    <task id="LOCAL-00065" summary="WIP&#10;">
-      <created>1392267346753</created>
-      <updated>1392267346753</updated>
-    </task>
-    <task id="LOCAL-00066" summary="WIP&#10;">
-      <created>1392267695323</created>
-      <updated>1392267695323</updated>
-    </task>
-    <task id="LOCAL-00067" summary="WIP&#10;">
-      <created>1392267808566</created>
-      <updated>1392267808566</updated>
-    </task>
-    <task id="LOCAL-00068" summary="WIP&#10;">
-      <created>1392268124487</created>
-      <updated>1392268124487</updated>
-    </task>
-    <task id="LOCAL-00069" summary="WIP&#10;">
-      <created>1392268190579</created>
-      <updated>1392268190579</updated>
-    </task>
-    <task id="LOCAL-00070" summary="WIP&#10;">
-      <created>1392268353627</created>
-      <updated>1392268353627</updated>
-    </task>
-    <task id="LOCAL-00071" summary="WIP&#10;">
-      <created>1392268456966</created>
-      <updated>1392268456966</updated>
-    </task>
-    <task id="LOCAL-00072" summary="WIP&#10;">
-      <created>1392268581778</created>
-      <updated>1392268581778</updated>
-    </task>
-    <task id="LOCAL-00073" summary="WIP&#10;">
-      <created>1392268693944</created>
-      <updated>1392268693944</updated>
-    </task>
-    <task id="LOCAL-00074" summary="WIP&#10;">
-      <created>1392268930765</created>
-      <updated>1392268930765</updated>
-    </task>
-    <task id="LOCAL-00075" summary="WIP&#10;">
-      <created>1392269030693</created>
-      <updated>1392269030693</updated>
-    </task>
-    <task id="LOCAL-00076" summary="WIP&#10;">
-      <created>1392269073250</created>
-      <updated>1392269073250</updated>
-    </task>
-    <task id="LOCAL-00077" summary="WIP&#10;">
-      <created>1392269397690</created>
-      <updated>1392269397691</updated>
-    </task>
-    <task id="LOCAL-00078" summary="WIP&#10;">
-      <created>1392269462507</created>
-      <updated>1392269462507</updated>
-    </task>
-    <task id="LOCAL-00079" summary="WIP&#10;">
-      <created>1392269520848</created>
-      <updated>1392269520848</updated>
-    </task>
-    <task id="LOCAL-00080" summary="WIP&#10;">
-      <created>1392269757991</created>
-      <updated>1392269757991</updated>
-    </task>
-    <task id="LOCAL-00081" summary="WIP&#10;">
-      <created>1392269863389</created>
-      <updated>1392269863389</updated>
-    </task>
-    <task id="LOCAL-00082" summary="WIP&#10;">
-      <created>1392270021866</created>
-      <updated>1392270021866</updated>
-    </task>
-    <task id="LOCAL-00083" summary="WIP&#10;">
-      <created>1392270143900</created>
-      <updated>1392270143900</updated>
-    </task>
-    <task id="LOCAL-00084" summary="WIP&#10;">
-      <created>1392295669737</created>
-      <updated>1392295669737</updated>
-    </task>
-    <task id="LOCAL-00085" summary="WIP&#10;">
-      <created>1392295710655</created>
-      <updated>1392295710655</updated>
-    </task>
-    <task id="LOCAL-00086" summary="WIP&#10;">
-      <created>1392295791871</created>
-      <updated>1392295791871</updated>
-    </task>
-    <task id="LOCAL-00087" summary="WIP&#10;">
-      <created>1392295945196</created>
-      <updated>1392295945196</updated>
-    </task>
-    <task id="LOCAL-00088" summary="WIP&#10;">
-      <created>1392295986525</created>
-      <updated>1392295986525</updated>
-    </task>
-    <task id="LOCAL-00089" summary="WIP&#10;">
-      <created>1392296077259</created>
-      <updated>1392296077259</updated>
-    </task>
-    <task id="LOCAL-00090" summary="WIP&#10;">
-      <created>1392296115072</created>
-      <updated>1392296115072</updated>
-    </task>
-    <task id="LOCAL-00091" summary="WIP&#10;">
-      <created>1392296175785</created>
-      <updated>1392296175785</updated>
-    </task>
-    <task id="LOCAL-00092" summary="WIP&#10;">
-      <created>1392296235562</created>
-      <updated>1392296235562</updated>
-    </task>
-    <task id="LOCAL-00093" summary="WIP&#10;">
-      <created>1392296282172</created>
-      <updated>1392296282173</updated>
-    </task>
-    <task id="LOCAL-00094" summary="WIP&#10;">
-      <created>1392296328492</created>
-      <updated>1392296328492</updated>
-    </task>
-    <task id="LOCAL-00095" summary="WIP&#10;">
-      <created>1392296396123</created>
-      <updated>1392296396123</updated>
-    </task>
-    <task id="LOCAL-00096" summary="WIP&#10;">
-      <created>1392296462746</created>
-      <updated>1392296462746</updated>
-    </task>
-    <task id="LOCAL-00097" summary="WIP&#10;">
-      <created>1392296516922</created>
-      <updated>1392296516922</updated>
-    </task>
-    <task id="LOCAL-00098" summary="WIP&#10;">
-      <created>1392296597334</created>
-      <updated>1392296597334</updated>
-    </task>
-    <task id="LOCAL-00099" summary="WIP&#10;">
-      <created>1392296665963</created>
-      <updated>1392296665963</updated>
-    </task>
-    <task id="LOCAL-00100" summary="WIP&#10;">
-      <created>1392296718356</created>
-      <updated>1392296718356</updated>
-    </task>
-    <task id="LOCAL-00101" summary="WIP&#10;">
-      <created>1392298231477</created>
-      <updated>1392298231477</updated>
-    </task>
-    <task id="LOCAL-00102" summary="WIP&#10;">
-      <created>1392298264668</created>
-      <updated>1392298264668</updated>
-    </task>
-    <task id="LOCAL-00103" summary="WIP&#10;">
-      <created>1392298336048</created>
-      <updated>1392298336048</updated>
-    </task>
-    <task id="LOCAL-00104" summary="WIP&#10;">
-      <created>1392298494325</created>
-      <updated>1392298494325</updated>
-    </task>
-    <task id="LOCAL-00105" summary="WIP&#10;">
-      <created>1392298568178</created>
-      <updated>1392298568178</updated>
-    </task>
-    <task id="LOCAL-00106" summary="WIP&#10;">
-      <created>1392298650589</created>
-      <updated>1392298650589</updated>
-    </task>
-    <task id="LOCAL-00107" summary="WIP&#10;">
-      <created>1392299059186</created>
-      <updated>1392299059186</updated>
-    </task>
-    <task id="LOCAL-00108" summary="WIP&#10;">
-      <created>1392299117542</created>
-      <updated>1392299117542</updated>
-    </task>
-    <task id="LOCAL-00109" summary="WIP&#10;">
-      <created>1392299197102</created>
-      <updated>1392299197102</updated>
-    </task>
-    <task id="LOCAL-00110" summary="WIP&#10;">
-      <created>1392337295250</created>
-      <updated>1392337295250</updated>
-    </task>
-    <task id="LOCAL-00111" summary="WIP&#10;">
-      <created>1392337667546</created>
-      <updated>1392337667546</updated>
-    </task>
-    <task id="LOCAL-00112" summary="WIP&#10;">
-      <created>1392337777110</created>
-      <updated>1392337777110</updated>
-    </task>
-    <task id="LOCAL-00113" summary="WIP&#10;">
-      <created>1392337896092</created>
-      <updated>1392337896092</updated>
-    </task>
-    <task id="LOCAL-00114" summary="WIP&#10;">
-      <created>1392338204765</created>
-      <updated>1392338204765</updated>
-    </task>
-    <task id="LOCAL-00115" summary="WIP&#10;">
-      <created>1392338802954</created>
-      <updated>1392338802954</updated>
-    </task>
-    <task id="LOCAL-00116" summary="WIP&#10;">
-      <created>1392338887963</created>
-      <updated>1392338887963</updated>
-    </task>
-    <task id="LOCAL-00117" summary="WIP&#10;">
-      <created>1392338980069</created>
-      <updated>1392338980069</updated>
-    </task>
-    <task id="LOCAL-00118" summary="WIP&#10;">
-      <created>1392339066918</created>
-      <updated>1392339066918</updated>
-    </task>
-    <task id="LOCAL-00119" summary="WIP&#10;">
-      <created>1392339091742</created>
-      <updated>1392339091743</updated>
-    </task>
-    <task id="LOCAL-00120" summary="WIP&#10;">
-      <created>1392339151093</created>
-      <updated>1392339151094</updated>
-    </task>
-    <task id="LOCAL-00121" summary="WIP&#10;">
-      <created>1392339281967</created>
-      <updated>1392339281967</updated>
-    </task>
-    <task id="LOCAL-00122" summary="WIP&#10;">
-      <created>1392339466168</created>
-      <updated>1392339466169</updated>
-    </task>
-    <task id="LOCAL-00123" summary="WIP&#10;">
-      <created>1392339552775</created>
-      <updated>1392339552775</updated>
-    </task>
-    <task id="LOCAL-00124" summary="WIP&#10;">
-      <created>1392339729915</created>
-      <updated>1392339729915</updated>
-    </task>
-    <task id="LOCAL-00125" summary="WIP&#10;">
-      <created>1392339840226</created>
-      <updated>1392339840226</updated>
-    </task>
-    <task id="LOCAL-00126" summary="WIP&#10;">
-      <created>1392340115470</created>
-      <updated>1392340115471</updated>
-    </task>
-    <task id="LOCAL-00127" summary="WIP&#10;">
-      <created>1392340166880</created>
-      <updated>1392340166880</updated>
-    </task>
-    <task id="LOCAL-00128" summary="WIP&#10;">
-      <created>1392340335482</created>
-      <updated>1392340335482</updated>
-    </task>
-    <task id="LOCAL-00129" summary="WIP&#10;">
-      <created>1392340442108</created>
-      <updated>1392340442109</updated>
-    </task>
-    <task id="LOCAL-00130" summary="WIP&#10;">
-      <created>1392340493338</created>
-      <updated>1392340493338</updated>
-    </task>
-    <task id="LOCAL-00131" summary="WIP&#10;">
-      <created>1392340533829</created>
-      <updated>1392340533829</updated>
-    </task>
-    <task id="LOCAL-00132" summary="WIP&#10;">
-      <created>1392340838326</created>
-      <updated>1392340838326</updated>
-    </task>
-    <task id="LOCAL-00133" summary="WIP&#10;">
-      <created>1392340916740</created>
-      <updated>1392340916740</updated>
-    </task>
-    <task id="LOCAL-00134" summary="WIP&#10;">
-      <created>1392341204497</created>
-      <updated>1392341204497</updated>
-    </task>
-    <task id="LOCAL-00135" summary="WIP&#10;">
-      <created>1392341259915</created>
-      <updated>1392341259915</updated>
-    </task>
-    <task id="LOCAL-00136" summary="WIP&#10;">
-      <created>1392341301973</created>
-      <updated>1392341301973</updated>
-    </task>
-    <task id="LOCAL-00137" summary="WIP&#10;">
-      <created>1392341382782</created>
-      <updated>1392341382782</updated>
-    </task>
-    <task id="LOCAL-00138" summary="WIP&#10;">
-      <created>1392341431420</created>
-      <updated>1392341431420</updated>
-    </task>
-    <task id="LOCAL-00139" summary="WIP&#10;">
-      <created>1392341552190</created>
-      <updated>1392341552190</updated>
-    </task>
-    <task id="LOCAL-00140" summary="WIP&#10;">
-      <created>1392342133727</created>
-      <updated>1392342133727</updated>
-    </task>
-    <task id="LOCAL-00141" summary="WIP&#10;">
-      <created>1392342204149</created>
-      <updated>1392342204149</updated>
-    </task>
-    <task id="LOCAL-00142" summary="WIP&#10;">
-      <created>1392342526166</created>
-      <updated>1392342526166</updated>
-    </task>
-    <task id="LOCAL-00143" summary="WIP&#10;">
-      <created>1392343123007</created>
-      <updated>1392343123007</updated>
-    </task>
-    <task id="LOCAL-00144" summary="WIP&#10;">
-      <created>1392343166472</created>
-      <updated>1392343166472</updated>
-    </task>
-    <task id="LOCAL-00145" summary="WIP&#10;">
-      <created>1392343256491</created>
-      <updated>1392343256491</updated>
-    </task>
-    <task id="LOCAL-00146" summary="WIP&#10;">
-      <created>1392343347921</created>
-      <updated>1392343347921</updated>
-    </task>
-    <task id="LOCAL-00147" summary="WIP&#10;">
-      <created>1392343409107</created>
-      <updated>1392343409107</updated>
-    </task>
-    <task id="LOCAL-00148" summary="WIP&#10;">
-      <created>1392343459781</created>
-      <updated>1392343459782</updated>
-    </task>
-    <task id="LOCAL-00149" summary="WIP&#10;">
-      <created>1392343614049</created>
-      <updated>1392343614050</updated>
-    </task>
-    <task id="LOCAL-00150" summary="WIP&#10;">
-      <created>1392343723643</created>
-      <updated>1392343723643</updated>
-    </task>
-    <task id="LOCAL-00151" summary="WIP&#10;">
-      <created>1392343766920</created>
-      <updated>1392343766920</updated>
-    </task>
-    <task id="LOCAL-00152" summary="WIP&#10;">
-      <created>1392343797747</created>
-      <updated>1392343797747</updated>
-    </task>
-    <task id="LOCAL-00153" summary="WIP&#10;">
-      <created>1392343833778</created>
-      <updated>1392343833778</updated>
-    </task>
-    <task id="LOCAL-00154" summary="WIP&#10;">
-      <created>1392343925417</created>
-      <updated>1392343925417</updated>
-    </task>
-    <task id="LOCAL-00155" summary="WIP&#10;">
-      <created>1392343990215</created>
-      <updated>1392343990215</updated>
-    </task>
-    <task id="LOCAL-00156" summary="WIP&#10;">
-      <created>1392344032051</created>
-      <updated>1392344032051</updated>
-    </task>
-    <task id="LOCAL-00157" summary="WIP&#10;">
-      <created>1392344082050</created>
-      <updated>1392344082050</updated>
-    </task>
-    <task id="LOCAL-00158" summary="WIP&#10;">
-      <created>1392344182813</created>
-      <updated>1392344182813</updated>
-    </task>
-    <task id="LOCAL-00159" summary="WIP&#10;">
-      <created>1392344257364</created>
-      <updated>1392344257364</updated>
-    </task>
-    <task id="LOCAL-00160" summary="WIP&#10;">
-      <created>1392344818474</created>
-      <updated>1392344818474</updated>
-    </task>
-    <task id="LOCAL-00161" summary="WIP&#10;">
-      <created>1392344883789</created>
-      <updated>1392344883789</updated>
-    </task>
-    <task id="LOCAL-00162" summary="WIP&#10;">
-      <created>1392345006817</created>
-      <updated>1392345006817</updated>
-    </task>
-    <task id="LOCAL-00163" summary="WIP&#10;">
-      <created>1392345128065</created>
-      <updated>1392345128065</updated>
-    </task>
-    <task id="LOCAL-00164" summary="WIP&#10;">
-      <created>1392345170273</created>
-      <updated>1392345170273</updated>
-    </task>
-    <task id="LOCAL-00165" summary="WIP&#10;">
-      <created>1392345348977</created>
-      <updated>1392345348977</updated>
-    </task>
-    <task id="LOCAL-00166" summary="WIP&#10;">
-      <created>1392345405244</created>
-      <updated>1392345405244</updated>
-    </task>
-    <task id="LOCAL-00167" summary="WIP&#10;">
-      <created>1392345455368</created>
-      <updated>1392345455368</updated>
-    </task>
-    <task id="LOCAL-00168" summary="WIP&#10;">
-      <created>1392345532011</created>
-      <updated>1392345532011</updated>
-    </task>
-    <task id="LOCAL-00169" summary="WIP&#10;">
-      <created>1392345622754</created>
-      <updated>1392345622754</updated>
-    </task>
-    <task id="LOCAL-00170" summary="WIP&#10;">
-      <created>1392345708487</created>
-      <updated>1392345708487</updated>
-    </task>
-    <task id="LOCAL-00171" summary="WIP&#10;">
-      <created>1392345764842</created>
-      <updated>1392345764842</updated>
-    </task>
-    <task id="LOCAL-00172" summary="WIP&#10;">
-      <created>1392345996482</created>
-      <updated>1392345996482</updated>
-    </task>
-    <task id="LOCAL-00173" summary="WIP&#10;">
-      <created>1392346044099</created>
-      <updated>1392346044099</updated>
-    </task>
-    <task id="LOCAL-00174" summary="WIP&#10;">
-      <created>1392346101099</created>
-      <updated>1392346101099</updated>
-    </task>
-    <task id="LOCAL-00175" summary="WIP&#10;">
-      <created>1392346124405</created>
-      <updated>1392346124405</updated>
-    </task>
-    <task id="LOCAL-00176" summary="WIP&#10;">
-      <created>1392346201134</created>
-      <updated>1392346201134</updated>
-    </task>
-    <task id="LOCAL-00177" summary="WIP&#10;">
-      <created>1392346263437</created>
-      <updated>1392346263437</updated>
-    </task>
-    <task id="LOCAL-00178" summary="WIP&#10;">
-      <created>1392346307267</created>
-      <updated>1392346307267</updated>
-    </task>
-    <task id="LOCAL-00179" summary="WIP&#10;">
-      <created>1392346326021</created>
-      <updated>1392346326021</updated>
-    </task>
-    <task id="LOCAL-00180" summary="WIP&#10;">
-      <created>1392346375648</created>
-      <updated>1392346375648</updated>
-    </task>
-    <task id="LOCAL-00181" summary="WIP&#10;">
-      <created>1392346455376</created>
-      <updated>1392346455376</updated>
-    </task>
-    <task id="LOCAL-00182" summary="WIP&#10;">
-      <created>1392346543459</created>
-      <updated>1392346543459</updated>
-    </task>
-    <task id="LOCAL-00183" summary="WIP&#10;">
-      <created>1392347054669</created>
-      <updated>1392347054670</updated>
-    </task>
-    <task id="LOCAL-00184" summary="WIP&#10;">
-      <created>1392347131015</created>
-      <updated>1392347131015</updated>
-    </task>
-    <task id="LOCAL-00185" summary="WIP&#10;">
-      <created>1392347217759</created>
-      <updated>1392347217759</updated>
-    </task>
-    <task id="LOCAL-00186" summary="WIP&#10;">
-      <created>1392347279403</created>
-      <updated>1392347279403</updated>
-    </task>
-    <task id="LOCAL-00187" summary="WIP&#10;">
-      <created>1392347364661</created>
-      <updated>1392347364661</updated>
-    </task>
-    <task id="LOCAL-00188" summary="WIP&#10;">
-      <created>1392347414850</created>
-      <updated>1392347414850</updated>
-    </task>
-    <task id="LOCAL-00189" summary="WIP&#10;">
-      <created>1392347439846</created>
-      <updated>1392347439846</updated>
-    </task>
-    <task id="LOCAL-00190" summary="WIP&#10;">
-      <created>1392347600876</created>
-      <updated>1392347600876</updated>
-    </task>
-    <task id="LOCAL-00191" summary="WIP&#10;">
-      <created>1392347668695</created>
-      <updated>1392347668696</updated>
-    </task>
-    <task id="LOCAL-00192" summary="WIP&#10;">
-      <created>1392347832433</created>
-      <updated>1392347832433</updated>
-    </task>
-    <task id="LOCAL-00193" summary="WIP&#10;">
-      <created>1392348141018</created>
-      <updated>1392348141018</updated>
-    </task>
-    <task id="LOCAL-00194" summary="WIP&#10;">
-      <created>1392348173850</created>
-      <updated>1392348173850</updated>
-    </task>
-    <task id="LOCAL-00195" summary="WIP&#10;">
-      <created>1392349942840</created>
-      <updated>1392349942840</updated>
-    </task>
-    <task id="LOCAL-00196" summary="WIP&#10;">
-      <created>1392350030283</created>
-      <updated>1392350030283</updated>
-    </task>
-    <task id="LOCAL-00197" summary="WIP&#10;">
-      <created>1392352026866</created>
-      <updated>1392352026866</updated>
-    </task>
-    <task id="LOCAL-00198" summary="WIP&#10;">
-      <created>1392352114165</created>
-      <updated>1392352114165</updated>
-    </task>
-    <task id="LOCAL-00199" summary="WIP&#10;">
-      <created>1392352232001</created>
-      <updated>1392352232001</updated>
-    </task>
-    <task id="LOCAL-00200" summary="WIP&#10;">
-      <created>1392352448958</created>
-      <updated>1392352448958</updated>
-    </task>
-    <task id="LOCAL-00201" summary="WIP&#10;">
-      <created>1392352574345</created>
-      <updated>1392352574345</updated>
-    </task>
-    <task id="LOCAL-00202" summary="WIP&#10;">
-      <created>1392352826080</created>
-      <updated>1392352826080</updated>
-    </task>
-    <task id="LOCAL-00203" summary="WIP&#10;">
-      <created>1392353104603</created>
-      <updated>1392353104603</updated>
-    </task>
-    <task id="LOCAL-00204" summary="WIP&#10;">
-      <created>1392353334895</created>
-      <updated>1392353334895</updated>
-    </task>
-    <task id="LOCAL-00205" summary="WIP&#10;">
-      <created>1392353598093</created>
-      <updated>1392353598094</updated>
-    </task>
-    <task id="LOCAL-00206" summary="WIP&#10;">
-      <created>1392353688424</created>
-      <updated>1392353688424</updated>
-    </task>
-    <task id="LOCAL-00207" summary="WIP&#10;">
-      <created>1392353745262</created>
-      <updated>1392353745262</updated>
-    </task>
-    <task id="LOCAL-00208" summary="WIP&#10;">
-      <created>1392353845359</created>
-      <updated>1392353845359</updated>
-    </task>
-    <task id="LOCAL-00209" summary="WIP&#10;">
-      <created>1392354024338</created>
-      <updated>1392354024338</updated>
-    </task>
-    <task id="LOCAL-00210" summary="WIP&#10;">
-      <created>1392354104455</created>
-      <updated>1392354104455</updated>
-    </task>
-    <task id="LOCAL-00211" summary="WIP&#10;">
-      <created>1392354213534</created>
-      <updated>1392354213534</updated>
-    </task>
-    <task id="LOCAL-00212" summary="WIP&#10;">
-      <created>1392354370477</created>
-      <updated>1392354370477</updated>
-    </task>
-    <task id="LOCAL-00213" summary="WIP&#10;">
-      <created>1392354477719</created>
-      <updated>1392354477719</updated>
-    </task>
-    <task id="LOCAL-00214" summary="WIP&#10;">
-      <created>1392354573890</created>
-      <updated>1392354573890</updated>
-    </task>
-    <task id="LOCAL-00215" summary="WIP&#10;">
-      <created>1392354641084</created>
-      <updated>1392354641084</updated>
-    </task>
-    <task id="LOCAL-00216" summary="WIP&#10;">
-      <created>1392354822495</created>
-      <updated>1392354822495</updated>
-    </task>
-    <task id="LOCAL-00217" summary="WIP&#10;">
-      <created>1392355170225</created>
-      <updated>1392355170225</updated>
-    </task>
-    <task id="LOCAL-00218" summary="WIP&#10;">
-      <created>1392355213664</created>
-      <updated>1392355213664</updated>
-    </task>
-    <task id="LOCAL-00219" summary="WIP&#10;">
-      <created>1392355249202</created>
-      <updated>1392355249202</updated>
-    </task>
-    <task id="LOCAL-00220" summary="WIP&#10;">
-      <created>1392355482494</created>
-      <updated>1392355482494</updated>
-    </task>
-    <task id="LOCAL-00221" summary="WIP&#10;">
-      <created>1392355619917</created>
-      <updated>1392355619917</updated>
-    </task>
-    <task id="LOCAL-00222" summary="WIP&#10;">
-      <created>1392355782039</created>
-      <updated>1392355782039</updated>
-    </task>
-    <task id="LOCAL-00223" summary="WIP&#10;">
-      <created>1392355956945</created>
-      <updated>1392355956945</updated>
-    </task>
-    <task id="LOCAL-00224" summary="WIP&#10;">
-      <created>1392356046787</created>
-      <updated>1392356046787</updated>
-    </task>
-    <task id="LOCAL-00225" summary="WIP&#10;">
-      <created>1392356309597</created>
-      <updated>1392356309598</updated>
-    </task>
-    <task id="LOCAL-00226" summary="WIP&#10;">
-      <created>1392356342477</created>
-      <updated>1392356342477</updated>
-    </task>
-    <task id="LOCAL-00227" summary="WIP&#10;">
-      <created>1392356436711</created>
-      <updated>1392356436711</updated>
-    </task>
-    <task id="LOCAL-00228" summary="WIP&#10;">
-      <created>1392356482311</created>
-      <updated>1392356482311</updated>
-    </task>
-    <task id="LOCAL-00229" summary="WIP&#10;">
-      <created>1392356579389</created>
-      <updated>1392356579390</updated>
-    </task>
-    <task id="LOCAL-00230" summary="WIP&#10;">
-      <created>1392356733832</created>
-      <updated>1392356733832</updated>
-    </task>
-    <task id="LOCAL-00231" summary="WIP&#10;">
-      <created>1392357254143</created>
-      <updated>1392357254144</updated>
-    </task>
-    <task id="LOCAL-00232" summary="WIP&#10;">
-      <created>1392357289404</created>
-      <updated>1392357289405</updated>
-    </task>
-    <task id="LOCAL-00233" summary="WIP&#10;">
-      <created>1392357799109</created>
-      <updated>1392357799109</updated>
-    </task>
-    <task id="LOCAL-00234" summary="WIP&#10;">
-      <created>1392357847740</created>
-      <updated>1392357847740</updated>
-    </task>
-    <option name="localTasksCounter" value="235" />
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="848" y="0" width="1019" height="1052" extended-state="0" />
+    <frame x="960" y="0" width="956" height="1055" extended-state="5" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32976446" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33724654" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.46270162" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39504844" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5004878" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31049252" sideWeight="0.4995122" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31056562" sideWeight="0.4995122" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+>>>>>>> gh-pages
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1529,76 +703,134 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="finally, working on /docs&#10;" />
-    <MESSAGE value=".&#10;" />
-    <MESSAGE value="merge confl&#10;" />
-    <MESSAGE value="WIP" />
-    <MESSAGE value="WIP&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="WIP&#10;" />
+<<<<<<< HEAD
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="1" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
+    <entry file="file://$PROJECT_DIR$/specs/databases/remove.database.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="5" selection-start="5931" selection-end="5931" vertical-scroll-proportion="0.0" vertical-offset="2190" max-vertical-offset="3165">
+        <state line="2" column="4" selection-start="29" selection-end="29" vertical-scroll-proportion="0.05319149" vertical-offset="0" max-vertical-offset="1050">
+=======
+    <MESSAGE value="finally, working on /docs&#10;" />
+    <MESSAGE value="WIP" />
+    <MESSAGE value="WIP&#10;" />
+    <MESSAGE value=".&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value=".&#10;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="5" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="36" selection-start="1061" selection-end="1061" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
+>>>>>>> gh-pages
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/remove.entries.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="36" selection-start="1061" selection-end="1061" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990" />
-      </provider>
-    </entry>
+        <state line="60" column="75" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.31914893" vertical-offset="720" max-vertical-offset="1935">
+=======
     <entry file="file://$PROJECT_DIR$/docs/project.less">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="1" selection-start="215" selection-end="215" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="300">
+>>>>>>> gh-pages
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/remove.entry.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="78" selection-start="1285" selection-end="1285" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="1575">
+=======
     <entry file="file://$PROJECT_DIR$/docs/project.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="0" selection-start="110" selection-end="110" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="240">
+>>>>>>> gh-pages
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/lib/dash.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="489" column="110" selection-start="15620" selection-end="15641" vertical-scroll-proportion="-6.185185" vertical-offset="7168" max-vertical-offset="17370">
+=======
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="59" selection-start="1318" selection-end="1318" vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="900">
+>>>>>>> gh-pages
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/overview.md">
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/karma.conf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="0" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
+=======
+    <entry file="file://$PROJECT_DIR$/docs/documents/overview.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+>>>>>>> gh-pages
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/get.entries.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="40" selection-start="2351" selection-end="2351" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1890">
+=======
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="0" selection-start="431" selection-end="1452" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="7485">
+>>>>>>> gh-pages
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/databases/open.database.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="4" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3135">
+=======
     <entry file="file://$PROJECT_DIR$/docs/templates/splash.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90" />
+        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+>>>>>>> gh-pages
+          <folding />
+        </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/update.entries.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="8" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="1980">
+=======
     <entry file="file://$PROJECT_DIR$/docs/templates/about.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90">
+>>>>>>> gh-pages
+          <folding />
+        </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/specs/entries/add.entry.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="38" selection-start="668" selection-end="668" vertical-scroll-proportion="0.5393836" vertical-offset="0" max-vertical-offset="1590">
+=======
     <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="6" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="270">
@@ -1669,17 +901,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/splash.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551" />
+        <state line="0" column="17" selection-start="17" selection-end="17" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="6" selection-start="527" selection-end="527" vertical-scroll-proportion="0.31914893" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/templates/about.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/project.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="356" selection-end="356" vertical-scroll-proportion="-16.25" vertical-offset="0" max-vertical-offset="480">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/vendor/js/underscore.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="20190">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="33" selection-start="1510" selection-end="1510" vertical-scroll-proportion="-17.5" vertical-offset="0" max-vertical-offset="1035">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/documents/overview.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="190" selection-start="997" selection-end="997" vertical-scroll-proportion="0.1590106" vertical-offset="0" max-vertical-offset="566">
           <folding />
         </state>
       </provider>
@@ -1698,180 +962,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/entries.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/indexes.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/key/ranges.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/keys.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/overview.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/general/transaction/requests.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/stores.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/general/transactions.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="497">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/database/closing.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="884">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="122" selection-start="1618" selection-end="1618" vertical-scroll-proportion="-13.875" vertical-offset="102" max-vertical-offset="1020">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/database/getting.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="871">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/database/opening.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="871">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/database/removing.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="27" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="871">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/entry/adding.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="32" selection-start="284" selection-end="284" vertical-scroll-proportion="0.10332951" vertical-offset="0" max-vertical-offset="871">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/key/cursors.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="9" selection-start="560" selection-end="560" vertical-scroll-proportion="-2.3076923" vertical-offset="0" max-vertical-offset="150">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/templates/docs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1335">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/documentation/databases.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="2070" selection-end="2070" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="405">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/project.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="319" selection-end="319" vertical-scroll-proportion="-14.375" vertical-offset="0" max-vertical-offset="1215">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="12" selection-start="4183" selection-end="4183" vertical-scroll-proportion="0.4472477" vertical-offset="1500" max-vertical-offset="5940">
+        <state line="45" column="60" selection-start="1447" selection-end="1447" vertical-scroll-proportion="0.45759717" vertical-offset="416" max-vertical-offset="1005">
+>>>>>>> gh-pages
           <folding />
         </state>
       </provider>

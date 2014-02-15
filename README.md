@@ -1,24 +1,59 @@
-# dash [![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash)
+# dash [![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash) [![Coverage Status](https://coveralls.io/repos/editor/dash/badge.png)](https://coveralls.io/r/editor/dash)
 
-A cookie-sized JavaSript library wrapping the IndexedDB (IDB) HTML5 database API.
+A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
-#### Key Features:
-* Promise API for simplified callbacks
-* Transaction-free for simplified IDB interaction
-* Good test coverage with 150+ tests
+#### Key Features
+
+* Mostly transaction-free IndexedDB
+* Promise API for simple callbacks
 * Just 4KB gzipped (~15KB Uncompressed)
+* Good test coverage with 150+ tests
 
-# Demo
+#### Installation
+
+* Download the [lastest build](https://raw.github.com/editor/dash/master/lib/dash.js)
+* Install via [bower](https://github.com/bower/bower): `bower install dash`
+
+#### Up And Running
+
+	/* To get started with IndexedDB, just open a database,
+	 * create an object store and put something in it. */
+	dash.open.database({ database: 'foo' }) /* open/create a db using the given name */
+	.then(function(context) { /* use the simple promise API */
+		context.store = 'bar'; /* name of the store we'll create */
+		dash.add.store(context) /* create the store(/
+		.commit(function(context){ /* use a simple promise but start a new call stack */
+			context.data = { baz: new Date().getTime() }; /* prepare some dummy data */
+			dash.add.object(context) /* add the data */
+			.commit(function(context) { /* for good measure, let the data addition commit */
+				console.log('dash: object added', context.db.name, context.objectstore.name, context.key);
+				dash.get.object(context) /* get the object we just added */
+				.then(function(context) {
+					console.log('dash: object gotten', context.db.name, context.objectstore, context.entry);
+					dash.close.database(context); /* close the database since we're done */
+				});
+			});
+		});
+	});
+
+
+#### Demo
 
 [http://dashdb.com](http://dashdb.com)
 
-## Overview
+#### License
+
+MIT
+
+## IndexedDB Overview
 
 [`IndexedDB`](https://developer.mozilla.org/en-US/docs/IndexedDB) (abbreviated "IDB") is a way to store data in the browser, exposed to JavaScript programmers as a programmatic interface or "API" in most [`HTML5`](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)-enabled browsers. [1]
 
 Using IDB, programmers can organize JavaScript data and make it findable inside "databases" and "object stores", two types of containers in IndexedDB terminology. Databases are the outermost container of data in IndexedDB, and contain object stores. They are unique to each domain or "host". Object stores contain ["`lists`" of "`records`"](http://www.w3.org/TR/IndexedDB/#dfn-index-record-list), where each list is a JavaScript object and each record is breaks down into a "key" and "value".
 
 IDB is, in essence, an indexed key/value store. For data that doesn't need to be accessed via index, a lighter weight client-side technology such as localStorage, sessionStorage or cookies may be more appropriate.
+
+[1] Although `IndexedDB` is has very little to do with HTML5 standard beyond some shared nomenclaure, IDB is typically grouped with so-called "HTML5" technologies.
 
 ### Records
 
@@ -349,7 +384,7 @@ When adding or putting values, the various uniqueness rules for the store and in
 	.then(function(context) {
 		dash.add.object(context)
 		.then(function(context) {
-		    console.log('dash: object added', context.db, context.objectstore, context.idx, context.result);
+		    console.log('dash: object added', context.db, context.objectstore, context.idx, context.entry);
 			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not added', context.db, context.objectstore, context.idx, context.error);
@@ -364,7 +399,7 @@ When adding or putting values, the various uniqueness rules for the store and in
 	.then(function(context) {
 		dash.remove.object(context)
 		.then(function(context) {
-		    console.log('dash: object removed', context.db, context.objectstore, context.idx, context.result);
+		    console.log('dash: object removed', context.db, context.objectstore, context.idx, context.entry);
 			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not removed', context.db, context.objectstore, context.idx, context.error);
@@ -379,7 +414,7 @@ When adding or putting values, the various uniqueness rules for the store and in
 	.then(function(context) {
 		dash.get.object(context)
 		.then(function(context) {
-		    console.log('dash: object removed', context.db, context.objectstore, context.idx, context.result);
+		    console.log('dash: object removed', context.db, context.objectstore, context.idx, context.entry);
 			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not removed', context.db, context.objectstore, context.idx, context.error);
@@ -394,7 +429,7 @@ When adding or putting values, the various uniqueness rules for the store and in
 	.then(function(context) {
 		dash.put.object(context)
 		.then(function(context) {
-		    console.log('dash: object put', context.db, context.objectstore, context.idx, context.result);
+		    console.log('dash: object put', context.db, context.objectstore, context.idx, context.entry);
 			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not put', context.db, context.objectstore, context.idx, context.error);
@@ -447,12 +482,12 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 	.then(function(context) {
 		dash.get.objects(context)
 		.then(function(context) {
-		    console.log('dash: all objects fetched', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		    console.log('dash: all objects fetched', context.db, context.objectstore, context.idx, context.cursor, context.entries);
 			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not fetched', context.db, context.objectstore, context.idx, context.cursor, context.error);
 		}, function(context) {
-		    console.log('dash: object was fetched', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		    console.log('dash: object was fetched', context.db, context.objectstore, context.idx, context.cursor, context.entry);
 		});
 	});
 
@@ -464,12 +499,12 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 	.then(function(context) {
 		dash.delete.objects(context)
 		.then(function(context) {
-		    console.log('dash: all objects deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		    console.log('dash: all objects deleted', context.db, context.objectstore, context.idx, context.cursor, context.entries);
 			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not deleted', context.db, context.objectstore, context.idx, context.cursor, context.error);
 		}, function(context) {
-		    console.log('dash: object was deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		    console.log('dash: object was deleted', context.db, context.objectstore, context.idx, context.cursor, context.entry);
 		});
 	});
 
@@ -481,13 +516,12 @@ For example, say there's an index with 26 records containing the alphabet "A" to
 	.then(function(context) {
 		dash.update.objects(context)
 		.then(function(context) {
-		    console.log('dash: all objects deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		    console.log('dash: all objects deleted', context.db, context.objectstore, context.idx, context.cursor, context.entries);
 			dash.close.database(context);
 		}, function(context) {
 		    console.log('dash: object not deleted', context.db, context.objectstore, context.idx, context.cursor, context.error);
 		}, function(context) {
-		    console.log('dash: object was deleted', context.db, context.objectstore, context.idx, context.cursor, context.result);
+		    console.log('dash: object was deleted', context.db, context.objectstore, context.idx, context.cursor, context.entry);
 		});
 	});
 
-[1] Although `IndexedDB` is has very little to do with HTML5 standard beyond some shared nomenclaure, IDB is typically grouped with so-called "HTML5" technologies.

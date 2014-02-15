@@ -1,0 +1,138 @@
+{
+  "name": "dash",
+  "version": "0.0.1",
+  "dependencies": {
+    "karma-html2js-preprocessor": {
+      "version": "0.1.0",
+      "from": "http://registry.npmjs.org/karma-html2js-preprocessor/-/karma-html2js-preprocessor-0.1.0.tgz",
+      "resolved": "http://registry.npmjs.org/karma-html2js-preprocessor/-/karma-html2js-preprocessor-0.1.0.tgz"
+    },
+    "karma-requirejs": {
+      "version": "0.2.1",
+      "from": "http://registry.npmjs.org/karma-requirejs/-/karma-requirejs-0.2.1.tgz",
+      "resolved": "http://registry.npmjs.org/karma-requirejs/-/karma-requirejs-0.2.1.tgz"
+    },
+    "karma-script-launcher": {
+      "version": "0.1.0",
+      "from": "http://registry.npmjs.org/karma-script-launcher/-/karma-script-launcher-0.1.0.tgz",
+      "resolved": "http://registry.npmjs.org/karma-script-launcher/-/karma-script-launcher-0.1.0.tgz"
+    },
+    "requirejs": {
+      "version": "2.1.10",
+      "from": "http://registry.npmjs.org/requirejs/-/requirejs-2.1.10.tgz",
+      "resolved": "http://registry.npmjs.org/requirejs/-/requirejs-2.1.10.tgz"
+    },
+    "karma-coffee-preprocessor": {
+      "version": "0.1.2",
+      "from": "http://registry.npmjs.org/karma-coffee-preprocessor/-/karma-coffee-preprocessor-0.1.2.tgz",
+      "resolved": "http://registry.npmjs.org/karma-coffee-preprocessor/-/karma-coffee-preprocessor-0.1.2.tgz",
+      "dependencies": {
+        "coffee-script": {
+          "version": "1.6.3",
+          "from": "http://registry.npmjs.org/coffee-script/-/coffee-script-1.6.3.tgz",
+          "resolved": "http://registry.npmjs.org/coffee-script/-/coffee-script-1.6.3.tgz"
+        }
+      }
+    },
+    "karma-phantomjs-launcher": {
+      "version": "0.1.2",
+      "from": "http://registry.npmjs.org/karma-phantomjs-launcher/-/karma-phantomjs-launcher-0.1.2.tgz",
+      "resolved": "http://registry.npmjs.org/karma-phantomjs-launcher/-/karma-phantomjs-launcher-0.1.2.tgz",
+      "dependencies": {
+        "phantomjs": {
+          "version": "1.9.7-1",
+          "from": "http://registry.npmjs.org/phantomjs/-/phantomjs-1.9.7-1.tgz",
+          "resolved": "http://registry.npmjs.org/phantomjs/-/phantomjs-1.9.7-1.tgz",
+          "dependencies": {
+            "adm-zip": {
+              "version": "0.2.1",
+              "from": "http://registry.npmjs.org/adm-zip/-/adm-zip-0.2.1.tgz",
+              "resolved": "http://registry.npmjs.org/adm-zip/-/adm-zip-0.2.1.tgz"
+            },
+            "kew": {
+              "version": "0.1.7",
+              "from": "http://registry.npmjs.org/kew/-/kew-0.1.7.tgz",
+              "resolved": "http://registry.npmjs.org/kew/-/kew-0.1.7.tgz"
+            },
+            "ncp": {
+              "version": "0.4.2",
+              "from": "http://registry.npmjs.org/ncp/-/ncp-0.4.2.tgz",
+              "resolved": "http://registry.npmjs.org/ncp/-/ncp-0.4.2.tgz"
+            },
+            "npmconf": {
+              "version": "0.0.24",
+              "from": "http://registry.npmjs.org/npmconf/-/npmconf-0.0.24.tgz",
+              "resolved": "http://registry.npmjs.org/npmconf/-/npmconf-0.0.24.tgz",
+              "dependencies": {
+                "config-chain": {
+                  "version": "1.1.8",
+                  "from": "http://registry.npmjs.org/config-chain/-/config-chain-1.1.8.tgz",
+                  "resolved": "http://registry.npmjs.org/config-chain/-/config-chain-1.1.8.tgz",
+                  "dependencies": {
+                    "proto-list": {
+                      "version": "1.2.2",
+                      "from": "http://registry.npmjs.org/proto-list/-/proto-list-1.2.2.tgz",
+                      "resolved": "http://registry.npmjs.org/proto-list/-/proto-list-1.2.2.tgz"
+                    }
+                  }
+                },
+                "inherits": {
+                  "version": "1.0.0",
+                  "from": "http://registry.npmjs.org/inherits/-/inherits-1.0.0.tgz",
+                  "resolved": "http://registry.npmjs.org/inherits/-/inherits-1.0.0.tgz"
+                },
+                "once": {
+                  "version": "1.1.1",
+                  "from": "http://registry.npmjs.org/once/-/once-1.1.1.tgz",
+                  "resolved": "http://registry.npmjs.org/once/-/once-1.1.1.tgz"
+                },
+                "osenv": {
+                  "version": "0.0.3",
+                  "from": "http://registry.npmjs.org/osenv/-/osenv-0.0.3.tgz",
+                  "resolved": "http://registry.npmjs.org/osenv/-/osenv-0.0.3.tgz"
+                },
+                "nopt": {
+                  "version": "2.1.2",
+                  "from": "http://registry.npmjs.org/nopt/-/nopt-2.1.2.tgz",
+                  "resolved": "http://registry.npmjs.org/nopt/-/nopt-2.1.2.tgz",
+                  "dependencies": {
+                    "abbrev": {
+                      "version": "1.0.4",
+                      "from": "http://registry.npmjs.org/abbrev/-/abbrev-1.0.4.tgz",
+                      "resolved": "http://registry.npmjs.org/abbrev/-/abbrev-1.0.4.tgz"
+                    }
+                  }
+                },
+                "semver": {
+                  "version": "1.1.4",
+                  "from": "http://registry.npmjs.org/semver/-/semver-1.1.4.tgz",
+                  "resolved": "http://registry.npmjs.org/semver/-/semver-1.1.4.tgz"
+                },
+                "ini": {
+                  "version": "1.1.0",
+                  "from": "http://registry.npmjs.org/ini/-/ini-1.1.0.tgz",
+                  "resolved": "http://registry.npmjs.org/ini/-/ini-1.1.0.tgz"
+                }
+              }
+            },
+            "mkdirp": {
+              "version": "0.3.5",
+              "from": "http://registry.npmjs.org/mkdirp/-/mkdirp-0.3.5.tgz",
+              "resolved": "http://registry.npmjs.org/mkdirp/-/mkdirp-0.3.5.tgz"
+            },
+            "rimraf": {
+              "version": "2.2.6",
+              "from": "http://registry.npmjs.org/rimraf/-/rimraf-2.2.6.tgz",
+              "resolved": "http://registry.npmjs.org/rimraf/-/rimraf-2.2.6.tgz"
+            },
+            "which": {
+              "version": "1.0.5",
+              "from": "which@~1.0.5",
+              "resolved": "http://registry.npmjs.org/which/-/which-1.0.5.tgz"
+            }
+          }
+        }
+      }
+    }
+  }
+}
