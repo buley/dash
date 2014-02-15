@@ -34,7 +34,7 @@
           dash.add.store(context)
           .then(function(context) {
             dash.add.index(context)
-            .commit(function(context) {
+            .then(function(context) {
               dash.add.entry(context)
               .then(function(context) {
                 dash.get.entries(context)
@@ -49,10 +49,27 @@
                 }, function(context) {
                   notify = true;
                 });
-              });
+                  }, function(context) {
+                  ctx = context;
+                  error = true;
+                  isFinished = true;
+                });
+            }, function(context) {
+                  ctx = context;
+                  error = true;
+                  isFinished = true;
+                });
+
+          }, function(context) {
+              ctx = context;
+              error = true;
+              isFinished = true;
             });
-          });
-        })
+        }, function(context) {
+          ctx = context;
+          error = true;
+          isFinished = true;
+        });
 
       waitsFor(dashIsFinished, 'the get.entries operation to finish', 10000);
       runs(function() {

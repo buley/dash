@@ -25,7 +25,7 @@
 				})
 				.then(function(context){
 					dash.add.store(context)
-					.commit(function(context) {
+					.then(function(context) {
           				dash.add.entry(context)
 						.then(function(context) {
 							ctx = context;

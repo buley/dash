@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("get.store", function() {
+	ddescribe("get.store", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'store-get-test-' + start_time,
 			store_name = 'store-get-test-store-' + start_time,
@@ -15,38 +15,30 @@
 			prectx,
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
-			dash.open.database({ database: db_name, store: store_name, store_key_path: store_key_path })
-				.then(function(context) {
-					dash.add.store(context)
-					.commit(function(context){
-						dash.get.store(context)
-						.then(function(context) {
-							ctx = context;
-							success = true;
-							isFinished = true;
-						}, function(context) {
-							ctx = context;
-							error = true;
-							isFinished = true;
-						}, function(context) {
-							notify = true;
-						});
-					}, function(context) {
-						ctx = context;
-						error = true;
-					}, function(context) {
-						notify = true;
-					});
-				}, function(context) {
-					ctx = context;
-					error = true;
-				}, function(context) {
-					notify = true;
-				});
+            dash.add.store({ database: db_name, store: store_name, store_key_path: store_key_path })
+            .commit(function(context){
+                dash.get.store(context)
+                .then(function(context) {
+                    ctx = context;
+                    success = true;
+                    isFinished = true;
+                }, function(context) {
+                    ctx = context;
+                    error = true;
+                    isFinished = true;
+                }, function(context) {
+                    notify = true;
+                });
+            }, function(context) {
+                ctx = context;
+                error = true;
+            }, function(context) {
+                notify = true;
+            });
 
 			waitsFor(dashIsFinished, 'the get.store operation to finish', 10000);
 			runs(function() {
-				describe('get.store should finish cleanly', function() {
+				ddescribe('get.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.setup = prectx;
@@ -76,9 +68,6 @@
 					it("get.store references should be the db and store we asked for", function(){
 						expect(this.context.db.name).toBe(this.dbname);
 						expect(this.context.objectstore.name).toBe(this.storename);
-					});
-					it("get.store should clean up after itself", function() {
-						dash.remove.database(this.context);
 					});
 
 				});

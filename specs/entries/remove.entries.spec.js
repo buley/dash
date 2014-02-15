@@ -35,7 +35,7 @@
           dash.add.store(context)
           .then(function(context) {
             dash.add.index(context)
-            .commit(function(context) {
+            .then(function(context) {
               dash.add.entry(context)
               .then(function(context) {
                 dash.remove.entries(context)
@@ -45,8 +45,12 @@
                     success = true;
                     isFinished = true;
                     ctx = context;
+                  }, function(context) {
+                    error = true;
+                    isFinished = true;
                   });
                 }, function(context) {
+                  console.log('error was removing entries');
                   ctx = context;
                   error = true;
                   isFinished = true;

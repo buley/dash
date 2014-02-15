@@ -20,6 +20,7 @@
 				.then(function(context) {
 					dash.add.store(context)
 					.then(function(context) {
+                        console.log('adding a store');
 						dash.add.index(context)
 						.commit(function(context) {
 							dash.get.index(context)
