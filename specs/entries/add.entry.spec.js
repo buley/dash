@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("add.entry", function() {
+	ddescribe("add.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-add-test-' + start_time,
@@ -35,7 +35,7 @@
 
 			waitsFor(dashIsFinished, 'the add.entry operation to finish', 10000);
 			runs(function() {
-				describe('add.entry should complete', function() {
+				ddescribe('add.entry should complete', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -56,7 +56,6 @@
 					});
 
 					it("add.entry should have the correct parent/child relationships", function() {
-						console.log(this.context.db.objectStoreNames, this.context.store);
 						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
 					});
 

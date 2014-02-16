@@ -32,16 +32,13 @@
                 data: test_data
             })
             .then(function(context) {
-                console.log('Test Step 1: Complete',context.key);
                 dash.get.entries(context)
                 .then(function(context) {
-                    console.log('ok there not here');
                     success = true;
                     isFinished = true;
                     ctx = context;
                 }, function(context) {
                     ctx = context;
-                    console.log('and here instead');
                     error = true;
                     isFinished = true;
                 }, function(context) {
