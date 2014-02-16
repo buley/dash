@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  describe("update.entries", function() {
+  ddescribe("update.entries", function() {
     it( 'should open a database, add a store and add then get entries', function() {
       var start_time = new Date().getTime(),
         db_name = 'entries-get-test-' + start_time,
@@ -23,7 +23,7 @@
         key_path_value = 'entries-get-value-' + start_time;
       test_data[key_path] = key_path_value;
       test_data[index_key_path] = index_key_path_value;
-      dash.add.store({
+      dash.add.entry({
           database: db_name,
           store: store_name,
           store_key_path: key_path,
@@ -31,34 +31,28 @@
           index: index_name,
           data: test_data
         })
-      .then(function(context) {
-        dash.add.index(context)
-        .commit(function(context) {
-          dash.add.entry(context)
-          .commit(function(context) {
-            context.data.version = random_update;
-            dash.update.entries(context)
-            .commit(function(context) {
-              dash.get.entries(context)
-              .then(function(context) {
-                success = true;
-                isFinished = true;
-                ctx = context;
-              });
-            }, function(context) {
-              ctx = context;
-              error = true;
+        .then(function(context) {
+          context.data.version = random_update;
+          dash.update.entries(context)
+          .then(function(context) {
+            dash.get.entries(context)
+            .then(function(context) {
+              success = true;
               isFinished = true;
-            }, function(context) {
-              notify = true;
+              ctx = context;
             });
+          }, function(context) {
+            ctx = context;
+            error = true;
+            isFinished = true;
+          }, function(context) {
+            notify = true;
           });
         });
-      });
 
       waitsFor(dashIsFinished, 'the update.entries operation to finish', 10000);
       runs(function() {
-        describe('update.entries should finish cleanly', function() {
+        ddescribe('update.entries should finish cleanly', function() {
 
           beforeEach(function() {
             this.context = ctx;
@@ -86,11 +80,6 @@
             expect(this.success).toBe(true);
           });
 
-          it("update.entries should have the correct references", function() {
-            expect(this.context.db instanceof IDBDatabase).toBe(true);
-            expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
-          });
-
           it("update.entries should have the correct parent/child relationships", function() {
             expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
           });
@@ -110,7 +99,7 @@
           });
 
           it("update.entries should clean up after itself", function() {
-            dash.remove.database(this.context);
+            //dash.remove.database(this.context);
           });
 
         });
