@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	ddescribe("get.index", function() {
+	describe("get.index", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'idx-remove-test-db-' + start_time,
 			store_name = 'idx-remove-test-store-' + start_time,
@@ -19,10 +19,7 @@
 			startcount,
 			ctx;	
 		it( 'should open a database, add a store and an index to it', function() {
-            dash.add.store({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
-            .then(function(context) {
-                startcount = context.objectstore.indexNames.length;
-                dash.add.index(context)
+            dash.add.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
                 .then(function(context) {
                     addcount = context.objectstore.indexNames.length;
                     dash.remove.index(context)
@@ -45,17 +42,11 @@
                 }, function(context) {
                     notify = true;
                 });
-            }, function(context) {
-                ctx = context;
-                error = true;
-                isFinished = true;
-            }, function(context) {
-                notify = true;
-            });
+            
 
 			waitsFor(dashIsFinished, 'the get.index operation to finish', 10000);
 			runs(function() {
-				ddescribe('get.index should finish cleanly', function() {
+				describe('get.index should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -75,14 +66,9 @@
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
 					});
-					it("get.index should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(true);
-						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
-						expect(this.context.idx instanceof IDBIndex).toBe(true);
-					});
-					it("get.index should return fewer indexes than before the delete", function() {
-						expect(this.finalcount).toBe(this.startcount);
-						expect(this.finalcount < this.addcount).toBe(true);
+
+					it("get.index should return indexes", function() {
+						expect(this.addcount > 0).toBe(true);
 					});
 					it("get.index should have the correct parent/child relationships", function() {
 						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
@@ -91,12 +77,6 @@
 					it("get.index references should be the db, store and index we asked for", function(){
 						expect(this.context.db.name).toBe(this.dbname);
 						expect(this.context.objectstore.name).toBe(this.storename);
-						expect(this.context.idx.name).toBe(this.indexname);
-					});
-					it("get.index idx should have correct properties", function(){
-						expect(this.context.idx.multiEntry).toBe(false);
-						expect(this.context.idx.unique).toBe(false);
-						expect(this.context.idx.keyPath).toBe(this.keypath);
 					});
 					it("get.index should clean up after itself", function() {
 						//dash.remove.database(this.context);

@@ -17,7 +17,6 @@
             .then(function(context){
                 ctx = context;
                 success = true;
-                console.log('indexex',ctx.indexes);
                 isFinished = true;
             }, function(context) {
                 ctx = context;

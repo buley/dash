@@ -14,7 +14,7 @@
 			notify = false,
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
-					dash.add.store({ database: db_name, store: store_name })
+					dash.add.store()
 					.then(function(context) {
 						dash.clear.store(context)
 						.then(function(context) {
@@ -25,7 +25,6 @@
 							ctx = context;
 							error = true;
 							isFinished = true;
-                            console.log('thisr',context.error.message);
 						}, function(context) {
 							notify = true;
 						});
