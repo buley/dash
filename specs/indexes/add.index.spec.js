@@ -18,7 +18,6 @@
             dash.add.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
             .then(function(context) {
                 success = true;
-                console.log('added index');
                 isFinished = true;
                 ctx = context;
             }, function(context) {
