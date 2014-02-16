@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("get.databases", function() {
+	ddescribe("get.databases", function() {
 		var start_time = new Date().getTime(),
 			isFinished = false,
 			dashIsFinished = function() { 
@@ -25,7 +25,7 @@
 				});
 			waitsFor(dashIsFinished, 'the open.databases operation to finish', 10000);
 			runs(function() {
-				describe('get.databases should finish cleanly', function() {
+				ddescribe('get.databases should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
