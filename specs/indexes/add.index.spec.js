@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("add.index", function() {
+	ddescribe("add.index", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'idx-add-test-' + start_time,
@@ -15,20 +15,12 @@
 				success = false,
 				notify = false,
 				ctx;		
-            dash.add.store({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
+            dash.add.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
             .then(function(context) {
-                dash.add.index(context)
-                .then(function(context) {
-                    success = true;
-                    isFinished = true;
-                    ctx = context;
-                }, function(context) {
-                    ctx = context;
-                    error = true;
-                    isFinished = true;
-                }, function(context) {
-                    notify = true;
-                });
+                success = true;
+                console.log('added index');
+                isFinished = true;
+                ctx = context;
             }, function(context) {
                 ctx = context;
                 error = true;
@@ -39,7 +31,7 @@
 
 			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
 			runs(function() {
-				describe('add.index should finish cleanly', function() {
+				ddescribe('add.index should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;
@@ -58,13 +50,7 @@
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
 					});
-
-					it("add.index should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(true);
-						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
-						expect(this.context.idx instanceof IDBIndex).toBe(true);
-					});
-
+	
 					it("add.index should have the correct parent/child relationships", function() {
 						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
 						expect(this.context.objectstore.indexNames.contains(this.context.index)).toBe(true);
@@ -108,7 +94,7 @@
 				notify = false,
 				ctx;		
 
-            dash.add.store({
+            dash.add.index({
 					database: db_name,
 					store: store_name,
 					index: index_name,
@@ -116,30 +102,21 @@
 					index_multi_entry: index_multientry,
 					index_unique: index_unique
 				})
-					.then(function(context) {
-						dash.add.index(context)
-						.then(function(context) {
-							success = true;
-							isFinished = true;
-							ctx = context;
-						}, function(context) {
-							ctx = context;
-							error = true;
-							isFinished = true;
-						}, function(context) {
-							notify = true;
-						})
-					}, function(context) {
-						ctx = context;
-						error = true;
-						isFinished = true;
-					}, function(context) {
-						notify = true;
-					});
+				.then(function(context) {
+					success = true;
+					isFinished = true;
+					ctx = context;
+				}, function(context) {
+					ctx = context;
+					error = true;
+					isFinished = true;
+				}, function(context) {
+					notify = true;
+				});
 
 			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
 			runs(function() {
-				describe('add.index should finish cleanly', function() {
+				ddescribe('add.index should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;

@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	ddescribe("remove.entry", function() {
+	describe("remove.entry", function() {
 		it( 'should open a database, add a store and add then remove an entry', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-remove-test-' + start_time,
@@ -40,7 +40,7 @@
 
 			waitsFor(dashIsFinished, 'the remove.entry operation to finish', 10000);
 			runs(function() {
-				ddescribe('remove.entry should finish cleanly', function() {
+				describe('remove.entry should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;

@@ -13,30 +13,19 @@
 			ctx;
 
 		it( 'should get all indexes', function() {
-            dash.add.store({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
-            .then(function(context) {
-                dash.add.index(context)
-                .then(function(context) {
-                    dash.get.indexes(context)
-                    .then(function(context){
-                        ctx = context;
-                        success = true;
-                        isFinished = true;
-                    }, function(context) {
-                        ctx = context;
-                        error = true;
-                        isFinished = true;
-                    }, function(context) {
-                        notify = true;
-                    });
-                }, function(context) {
-                    ctx = context;
-                    error = true;
-                    isFinished = true;
-                }, function(context) {
-                    notify = true;
-                });
+            dash.get.indexes({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
+            .then(function(context){
+                ctx = context;
+                success = true;
+                isFinished = true;
+            }, function(context) {
+                ctx = context;
+                error = true;
+                isFinished = true;
+            }, function(context) {
+                notify = true;
             });
+
 
 			waitsFor(function() { 
 				return isFinished;

@@ -1,7 +1,7 @@
 //TODO: Better testing; add objects then clear them
 (function(){
 	'use strict';
-	ddescribe("clear.store", function() {
+	describe("clear.store", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'store-clear-test-' + start_time,
 			store_name = 'store-clear-test-store-' + start_time,
@@ -39,7 +39,7 @@
 
 			waitsFor(dashIsFinished, 'the clear.store operation to finish', 10000);
 			runs(function() {
-				ddescribe('clear.store should finish cleanly', function() {
+				describe('clear.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;

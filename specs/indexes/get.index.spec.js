@@ -16,22 +16,13 @@
 			ctx;
 
         it( 'should open a database, add a store and an index to it', function() {
-            dash.add.store({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
+            dash.add.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
             .then(function(context) {
-                dash.add.index(context)
+                dash.get.index(context)
                 .then(function(context) {
-                    dash.get.index(context)
-                    .then(function(context) {
-                        success = true;
-                        isFinished = true;
-                        ctx = context;
-                    }, function(context) {
-                        ctx = context;
-                        error = true;
-                        isFinished = true;
-                    }, function(context) {
-                        notify = true;
-                    });
+                    success = true;
+                    isFinished = true;
+                    ctx = context;
                 }, function(context) {
                     ctx = context;
                     error = true;
@@ -46,6 +37,7 @@
             }, function(context) {
                 notify = true;
             });
+
 
 			waitsFor(dashIsFinished, 'the get.index operation to finish', 10000);
 			runs(function() {

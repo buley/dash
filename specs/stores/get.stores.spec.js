@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	ddescribe("get.stores", function() {
+	describe("get.stores", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'stores-get-test-' + start_time,
 			store_name = 'stores-get-test-store-' + start_time,
@@ -37,7 +37,7 @@
 			}, 'the get.stores operation to finish', 10000);
 
 			runs(function() {
-				ddescribe('get.stores should finish cleanly', function() {
+				describe('get.stores should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
