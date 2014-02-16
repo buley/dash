@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("remove.entry", function() {
+	ddescribe("remove.entry", function() {
 		it( 'should open a database, add a store and add then remove an entry', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-remove-test-' + start_time,
@@ -17,37 +17,30 @@
 				notify = false,
 				ctx;	
 			test_data[key_path] = 'entry-remove-' + start_time;
-            dash.add.store({
+            dash.add.entry({
                 database: db_name,
                 store: store_name,
                 store_key_path: key_path,
                 data: test_data
             })
             .then(function(context) {
-                dash.add.entry(context)
+                dash.remove.entry(context)
                 .then(function(context) {
-                    delete context.event;
-                    delete context.request;
-                    delete context.transaction;
-                    delete context.db;
-                    dash.remove.entry(context)
-                    .then(function(context) {
-                        success = true;
-                        isFinished = true;
-                        ctx = context;
-                    }, function(context) {
-                        ctx = context;
-                        error = true;
-                        isFinished = true;
-                    }, function(context) {
-                        notify = true;
-                    });
+                    success = true;
+                    isFinished = true;
+                    ctx = context;
+                }, function(context) {
+                    ctx = context;
+                    error = true;
+                    isFinished = true;
+                }, function(context) {
+                    notify = true;
                 });
             });
 
 			waitsFor(dashIsFinished, 'the remove.entry operation to finish', 10000);
 			runs(function() {
-				describe('remove.entry should finish cleanly', function() {
+				ddescribe('remove.entry should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;
@@ -66,11 +59,6 @@
 						expect(this.error).toBe(false);
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
-					});
-
-					it("remove.entry should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(true);
-						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
 					});
 
 					it("remove.entry should have the correct parent/child relationships", function() {
