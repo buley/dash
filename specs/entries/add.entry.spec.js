@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("add.entry", function() {
+	ddescribe("add.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-add-test-' + start_time,
@@ -17,31 +17,25 @@
 				notify = false,
 				ctx;	
 			test_data[key_path] = 'entry-add-' + start_time;
-            dash.add.store({
+            dash.add.entry({
                 database: db_name,
                 store: store_name,
                 store_key_path: key_path,
                 data: test_data
             })
             .then(function(context) {
-                dash.add.entry(context)
-                .then(function(context) {
-                    ctx = context;
-                    isFinished = true;
-                    success = true;
-                }, function(context) {
-                    ctx = context;
-                    isFinished = true;
-                    error = true;
-                });
+                ctx = context;
+                isFinished = true;
+                success = true;
             }, function(context) {
+                ctx = context;
                 isFinished = true;
                 error = true;
             });
 
 			waitsFor(dashIsFinished, 'the add.entry operation to finish', 10000);
 			runs(function() {
-				describe('add.entry should finish cleanly', function() {
+				ddescribe('add.entry should complete', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -61,12 +55,8 @@
 						expect(this.success).toBe(true);
 					});
 
-					it("add.entry should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(true);
-						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
-					});
-
 					it("add.entry should have the correct parent/child relationships", function() {
+						console.log(this.context.db.objectStoreNames, this.context.store);
 						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
 					});
 
