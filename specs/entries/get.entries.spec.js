@@ -86,11 +86,6 @@
                         expect(this.success).toBe(true);
                     });
 
-                    it("get.entries should have the correct references", function() {
-                        expect(this.context.db instanceof IDBDatabase).toBe(true);
-                        expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
-                    });
-
                     it("get.entries should have the correct parent/child relationships", function() {
                         expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
                     });
