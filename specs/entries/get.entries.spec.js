@@ -1,7 +1,7 @@
 
 (function(){
     'use strict';
-    describe("get.entries", function() {
+    ddescribe("get.entries", function() {
         it( 'should open a database, add a store and add then get entries', function() {
             var start_time = new Date().getTime(),
                 db_name = 'entries-get-test-' + start_time,
@@ -32,27 +32,31 @@
                 data: test_data
             })
             .then(function(context) {
+                console.log('added fine');
                 dash.get.entries(context)
                 .then(function(context) {
                     success = true;
+                    console.log('worked fine');
                     isFinished = true;
                     ctx = context;
                 }, function(context) {
                     ctx = context;
+                    console.log('not work fine');
                     error = true;
                     isFinished = true;
                 }, function(context) {
                     notify = true;
+                    console.log('notified');
                 });
             }, function(context) {
-                ctx = context;
+                console.log('error');
                 error = true;
                 isFinished = true;
             });
 
-            waitsFor(dashIsFinished, 'the get.entries operation to finish', 10000);
+            waitsFor(dashIsFinished, 'the get.entries operation to finish', 30000);
             runs(function() {
-                describe('get.entries should finish cleanly', function() {
+                ddescribe('get.entries should finish cleanly', function() {
 
                     beforeEach(function() {
                         this.context = ctx;
@@ -68,8 +72,9 @@
                     });
 
                     //TODO: Why not even w/single object?
+                    //TODO: Still not true?
                     it("get.entries should have sent a success notify", function() {
-                        //expect(this.notify).toBe(true);
+                        expect(this.notify).toBe(true);
                     });
 
                     it("get.entries not have thrown errors", function() {

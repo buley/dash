@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  xdescribe("get.entry", function() {
+  describe("get.entry", function() {
     it( 'should open a database, add a store and add then get an entry', function() {
       var start_time = new Date().getTime(),
         db_name = 'entry-get-test-' + start_time,
