@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  describe("remove.entries", function() {
+  ddescribe("remove.entries", function() {
     it( 'should open a database, add a store and add then get entries', function() {
       var start_time = new Date().getTime(),
         db_name = 'entries-get-test-' + start_time,
@@ -20,10 +20,11 @@
         notify = false,
         ctx,
         index_key_path_value = 'entries-get-index-value-' + start_time,
-        key_path_value = 'entries-get-value-' + start_time;
+        key_path_value = 'entries-get-value-' + start_time,
+        entries;
       test_data[key_path] = key_path_value;
       test_data[index_key_path] = index_key_path_value;
-      dash.add.store({
+      dash.add.entry({
           database: db_name,
           store: store_name,
           store_key_path: key_path,
@@ -32,40 +33,30 @@
           data: test_data
       })
       .then(function(context) {
-        dash.add.index(context)
+        dash.remove.entries(context)
         .then(function(context) {
-          dash.add.entry(context)
+          entries = context.entries;
+          dash.get.entries(context)
           .then(function(context) {
-            console.log('added ok',context);
-            dash.remove.entries(context)
-            .then(function(context) {
-              delete context.transaction;
-              delete context.db;
-              delete context.event;
-              delete context.request;
-              dash.get.entries(context)
-              .then(function(context) {
-                success = true;
-                isFinished = true;
-                ctx = context;
-              }, function(context) {
-                error = true;
-                isFinished = true;
-              });
-            }, function(context) {
-              ctx = context;
-              error = true;
-              isFinished = true;
-            }, function(context) {
-              notify = true;
-            });
+            success = true;
+            isFinished = true;
+            ctx = context;
+          }, function(context) {
+            error = true;
+            isFinished = true;
           });
+        }, function(context) {
+          ctx = context;
+          error = true;
+          isFinished = true;
+        }, function(context) {
+          notify = true;
         });
       });
 
       waitsFor(dashIsFinished, 'the remove.entries operation to finish', 30000);
       runs(function() {
-        describe('remove.entries should finish cleanly', function() {
+        ddescribe('remove.entries should finish cleanly', function() {
 
           beforeEach(function() {
             this.context = ctx;
@@ -79,6 +70,7 @@
             this.key = test_data[key_path];
             this.data = test_data;
             this.random = random_update;
+            this.entries = entries;
           });
           
           it("remove.entries should have sent a success notify", function() {
@@ -93,11 +85,6 @@
             expect(this.success).toBe(true);
           });
 
-          it("remove.entries should have the correct references", function() {
-            expect(this.context.db instanceof IDBDatabase).toBe(true);
-            expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
-          });
-
           it("remove.entries should have the correct parent/child relationships", function() {
             expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
           });
@@ -108,10 +95,14 @@
             expect(this.context.idx.name).toBe(this.indexname);
           });
 
-          it("remove.entries should return entries", function(){
-            expect(undefined !== this.context.entries).toBe(true);
-            expect(null !== this.context.entries).toBe(true);
-            expect(this.context.entries.length).toBe(0);
+          it("remove.entries should have an entries property", function(){
+            expect(undefined !== this.entries).toBe(true);
+          });
+          it("remove.entries entries property should be non null", function(){
+            expect(null !== this.entries).toBe(true);
+          });
+          it("remove.entries should return one deleted entry", function(){
+            expect(this.entries.length).toBe(1);
           });
 
           it("remove.entries should clean up after itself", function() {
