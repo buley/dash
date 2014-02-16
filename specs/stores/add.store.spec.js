@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("add.store", function() {
+	ddescribe("add.store", function() {
 		it( 'should open a database then add a store', function() {
 			var isFinished = false,
                 dashIsFinished = function() {
@@ -30,7 +30,7 @@
 
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
-				describe('add.store should finish cleanly', function() {
+				ddescribe('add.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -45,11 +45,6 @@
 						expect(this.error).toBe(false);
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
-					});
-
-					it("add.store should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(true);
-						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
 					});
 					
 					it("add.store should have the correct parent/child relationship", function() {
