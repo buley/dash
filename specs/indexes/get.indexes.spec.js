@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	xdescribe("get.indexes", function() {
+	describe("get.indexes", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'indexes-get-test-database-' + start_time,
 			store_name = 'indexes-get-test-store-' + start_time,
@@ -17,6 +17,7 @@
             .then(function(context){
                 ctx = context;
                 success = true;
+                console.log('indexex',ctx.indexes);
                 isFinished = true;
             }, function(context) {
                 ctx = context;
