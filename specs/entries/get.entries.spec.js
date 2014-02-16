@@ -32,21 +32,18 @@
                 data: test_data
             })
             .then(function(context) {
-                console.log('add entry success called how many times?',context);
+                console.log('add entry success called how many times?',context.version);
                 dash.get.entries(context)
                 .then(function(context) {
                     success = true;
-                    console.log('test success');
                     isFinished = true;
                     ctx = context;
                 }, function(context) {
                     ctx = context;
-                    console.log('test errored');
                     error = true;
                     isFinished = true;
                 }, function(context) {
                     notify = true;
-                    console.log('test notified');
                 });
             }, function(context) {
                 console.log('test 1st error');
