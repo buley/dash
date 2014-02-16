@@ -105,7 +105,7 @@
 
 			waitsFor(dashIsFinished, 'the add.store operation to finish', 10000);
 			runs(function() {
-				describe('add.store should finish cleanly', function() {
+				ddescribe('add.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
