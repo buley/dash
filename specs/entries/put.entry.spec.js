@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("put.entry", function() {
+	xdescribe("put.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-put-test-' + start_time,
