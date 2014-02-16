@@ -1,7 +1,7 @@
 
 (function(){
     'use strict';
-    describe("get.entries", function() {
+    ddescribe("get.entries", function() {
         it( 'should open a database, add a store and add then get entries', function() {
             var start_time = new Date().getTime(),
                 db_name = 'entries-get-test-' + start_time,
@@ -32,7 +32,7 @@
                 data: test_data
             })
             .then(function(context) {
-                console.log('added entry, now getting',context.key, context.index);
+                console.log('Test Step 1: Complete',context.key);
                 dash.get.entries(context)
                 .then(function(context) {
                     console.log('ok there not here');
