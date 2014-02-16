@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  describe("get.entry", function() {
+  ddescribe("get.entry", function() {
     it( 'should open a database, add a store and add then get an entry', function() {
       var start_time = new Date().getTime(),
         db_name = 'entry-get-test-' + start_time,
@@ -25,11 +25,9 @@
           data: test_data
         })
       .then(function(context) {
-         console.log('TEST S1: added entry',context.key);
          dash.get.entry(context)
         .then(function(context) {
           success = true;
-          console.log('TEST S2: got entry back',context.key, context.entry);
           isFinished = true;
           ctx = context;
         }, function(context) {
@@ -43,7 +41,7 @@
 
       waitsFor(dashIsFinished, 'the get.entry operation to finish', 10000);
       runs(function() {
-        describe('get.entry should finish cleanly', function() {
+        ddescribe('get.entry should finish cleanly', function() {
 
           beforeEach(function() {
             this.context = ctx;
@@ -62,11 +60,6 @@
             expect(this.error).toBe(false);
             expect(this.context.error).toBeUndefined();
             expect(this.success).toBe(true);
-          });
-
-          it("get.entry should have the correct references", function() {
-            expect(this.context.db instanceof IDBDatabase).toBe(true);
-            expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
           });
 
           it("get.entry should have the correct parent/child relationships", function() {
