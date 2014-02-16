@@ -32,24 +32,23 @@
                 data: test_data
             })
             .then(function(context) {
-                console.log('added fine so why the fuck you still on add.entry');
                 dash.get.entries(context)
                 .then(function(context) {
                     success = true;
-                    console.log('worked fine');
+                    console.log('test success');
                     isFinished = true;
                     ctx = context;
                 }, function(context) {
                     ctx = context;
-                    console.log('not work fine');
+                    console.log('test errored');
                     error = true;
                     isFinished = true;
                 }, function(context) {
                     notify = true;
-                    console.log('notified');
+                    console.log('test notified');
                 });
             }, function(context) {
-                console.log('error');
+                console.log('test 1st error');
                 error = true;
                 isFinished = true;
             });
