@@ -32,6 +32,7 @@
                 data: test_data
             })
             .then(function(context) {
+                console.log('add entry success called how many times?',context);
                 dash.get.entries(context)
                 .then(function(context) {
                     success = true;
