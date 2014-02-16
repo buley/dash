@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("get.databases", function() {
+	ddescribe("get.databases", function() {
 		var start_time = new Date().getTime(),
 			isFinished = false,
 			dashIsFinished = function() { 
@@ -25,30 +25,39 @@
 				});
 			waitsFor(dashIsFinished, 'the open.databases operation to finish', 10000);
 			runs(function() {
-				describe('get.databases should finish cleanly', function() {
+				ddescribe('get.databases should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
 						this.error = error;
 						this.notify = notify;
+						this.available = undefined !== window.indexedDB.webkitGetDatabaseNames;
 					});
 					it("should be a success when available", function() {
-						if (undefined !== window.indexedDB.webkitGetDatabaseNames) {
+						if (this.available) {
 							expect(this.success).toBe(true);
 							expect(this.error).toBe(false);
 							expect(this.notify).toBe(false);
-							//databases not available right away
+						}
+					});
+					it("should return a DOMStringList when available", function() {
+						if (this.available) {
 							expect(this.context.databases instanceof DOMStringList || null === this.context.databases).toBe(true);
 						}
 					});
 					it("should be an error when unavailable", function() {
-						if (undefined === window.indexedDB.webkitGetDatabaseNames) {
+						if (!this.available) {
 							expect(this.success).toBe(false);
 							expect(this.error).toBe(true);
 							expect(this.notify).toBe(false);
-							expect(this.context.databases).toBeUndefined();
 						}
 					});				
+					it("should not have database when unavailable", function() {
+						if (!this.available) {
+							expect(this.context.databases).toBeUndefined();
+						}
+					});
+					
 				});
 
 			});
