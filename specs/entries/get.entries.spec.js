@@ -32,7 +32,7 @@
                 data: test_data
             })
             .then(function(context) {
-                console.log('added fine');
+                console.log('added fine so why the fuck you still on add.entry');
                 dash.get.entries(context)
                 .then(function(context) {
                     success = true;
