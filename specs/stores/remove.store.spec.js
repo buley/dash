@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("remove.store", function() {
+	ddescribe("remove.store", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'store-remove-test-' + start_time,
 			store_name = 'store-remove-test-store-' + start_time,
@@ -31,7 +31,6 @@
                     isFinished = true;
                 }, function(context) {
                     ctx = context;
-                    console.log('errpr',context.error);
                     error = true;
                     isFinished = true;
                 }, function(context) {
@@ -46,9 +45,9 @@
 		    });
 
 
-			waitsFor(dashIsFinished, 'the remove.store operation to finish', 10000);
+			waitsFor(dashIsFinished, 'the remove.store operation to finish', 20000);
 			runs(function() {
-				describe('remove.store should finish cleanly', function() {
+				ddescribe('remove.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -68,10 +67,6 @@
 						expect(this.success).toBe(true);
 					});
 
-					it("remove.store should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(true);
-						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
-					});
 					it("remove.store should return fewer stores than before the delete", function() {
 						expect(this.addcount).toBe(this.startcount + 1);
 						expect(this.finalcount).toBe(this.startcount);
@@ -82,7 +77,6 @@
 
 					it("remove.store references should be the db and store we asked for", function(){
 						expect(this.context.db.name).toBe(this.dbname);
-						expect(this.context.objectstore.name).toBe(this.storename);
 					});
 
 					it("remove.store should clean up after itself", function() {
