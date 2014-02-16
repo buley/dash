@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("get.index", function() {
+	ddescribe("get.index", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'idx-get-test-' + start_time,
 			store_name = 'idx-get-test-store-' + start_time,
@@ -41,7 +41,7 @@
 
 			waitsFor(dashIsFinished, 'the get.index operation to finish', 10000);
 			runs(function() {
-				describe('get.index should finish cleanly', function() {
+				ddescribe('get.index should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;
@@ -59,12 +59,6 @@
 						expect(this.error).toBe(false);
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
-					});
-
-					it("get.index should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(true);
-						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
-						expect(this.context.idx instanceof IDBIndex).toBe(true);
 					});
 
 					it("get.index should have the correct parent/child relationships", function() {

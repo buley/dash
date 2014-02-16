@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("get.indexes", function() {
+	xdescribe("get.indexes", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'indexes-get-test-database-' + start_time,
 			store_name = 'indexes-get-test-store-' + start_time,
