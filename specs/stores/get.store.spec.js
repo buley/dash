@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("get.store", function() {
+	ddescribe("get.store", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'store-get-test-' + start_time,
 			store_name = 'store-get-test-store-' + start_time,
@@ -39,7 +39,7 @@
 
 			waitsFor(dashIsFinished, 'the get.store operation to finish', 10000);
 			runs(function() {
-				describe('get.store should finish cleanly', function() {
+				ddescribe('get.store should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;
@@ -58,11 +58,6 @@
 						expect(this.success).toBe(true);
 					});
 
-					it("get.store should have the correct references", function() {
-						expect(this.context.db instanceof IDBDatabase).toBe(true);
-						expect(this.context.objectstore instanceof IDBObjectStore).toBe(true);
-					});
-					
 					it("get.store should have the correct parent/child relationship", function() {
 						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
 					});
