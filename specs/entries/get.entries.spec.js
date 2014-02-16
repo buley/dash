@@ -54,7 +54,7 @@
                 isFinished = true;
             });
 
-            waitsFor(dashIsFinished, 'the get.entries operation to finish', 30000);
+            waitsFor(dashIsFinished, 'the get.entries operation to finish', 3000);
             runs(function() {
                 ddescribe('get.entries should finish cleanly', function() {
 
