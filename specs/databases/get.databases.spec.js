@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	xdescribe("get.databases", function() {
+	describe("get.databases", function() {
 		var start_time = new Date().getTime(),
 			isFinished = false,
 			dashIsFinished = function() { 
