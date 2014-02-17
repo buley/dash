@@ -14,9 +14,7 @@
 			notify = false,
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
-			dash.add.store({database: db_name, store: store_name})
-			.then(function(context) {
-				dash.clear.store(context)
+			dash.clear.store({database: db_name, store: store_name})
 				.then(function(context) {
 					success = true;
 					isFinished = true;
@@ -28,13 +26,6 @@
 				}, function(context) {
 					notify = true;
 				});
-			}, function(context) {
-				ctx = context;
-				error = true;
-				isFinished = true;
-			}, function(context) {
-				notify = true;
-			});
 
 			waitsFor(dashIsFinished, 'the clear.store operation to finish', 10000);
 			runs(function() {

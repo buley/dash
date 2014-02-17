@@ -10,9 +10,7 @@
 			notify = false,
 			ctx;	
 		it( 'should get all stores, when available', function() {
-            dash.add.store({ database: db_name, store: store_name })
-            .then(function(context){
-                dash.get.stores(context)
+            dash.get.stores({ database: db_name, store: store_name })
                 .then(function(context) {
                     ctx = context;
                     success = true;
@@ -24,13 +22,6 @@
                 }, function(context) {
                     notify = true;
                 });
-            }, function(context) {
-                ctx = context;
-                error = true;
-                isFinished = true;
-            }, function(context) {
-                notify = true;
-            });
 
 			waitsFor(function() { 
 				return isFinished;

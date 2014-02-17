@@ -20,7 +20,7 @@
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
             startcount = 0;
-            dash.add.store({ database: db_name, store: store_name })
+            dash.get.store({ database: db_name, store: store_name })
             .then(function(context){
                 addcount = context.db.objectStoreNames.length;
                 dash.remove.store(context)
