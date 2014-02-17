@@ -10,7 +10,7 @@
 			error = false,
 			success = false,
 			notify = false,
-			ctx;	
+			ctx;
 		it( 'should open and then close', function() {
 			dash.open.database({ database: db_name })
 				.then(function(context){
@@ -33,7 +33,7 @@
 				}, function(context) {
 					notify = true;
 				});
-			waitsFor(dashIsFinished, 'the close.database operation to finish', 10000);
+			waitsFor(dashIsFinished, 'the close.database operation to finish', 1000);
 			runs(function() {
 				describe('database.close should finish cleanly', function() {
 					beforeEach(function() {
