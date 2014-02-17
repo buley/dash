@@ -32,7 +32,6 @@
 	            (function(context) {
 	                ctx = context;
 	                successes += 1;
-                    console.log('test success', new Date().getTime())
 	                isFinished = true;
 	                add_response = context;
 	                entry_key = context.key;
@@ -82,7 +81,6 @@
 					
 					it("add.entry should return the key", function(){
 						expect(this.context.key).toBe(this.key);
-						console.log('checking',this.context.key, 'against',this.key);
 					});
 
 					it("add.entry should clean up after itself", function() {
