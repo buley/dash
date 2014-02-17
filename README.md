@@ -7,8 +7,6 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 * Transaction and optionally version-free 
 * Declarative databases, object stores and indexes
 * 4KB gzipped (15KB uncompressed)
-* >90% test coverage
-* Free (MIT licensed)
 
 #### Installation Options
 
@@ -27,6 +25,13 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 					console.log('Data', get_context.entry)
 				});
 		});
+
+### Development Features
+* Free (MIT Licensed)
+* [Task-based](http://gruntjs.com/) Development Workflow
+* [Automated](https://github.com/karma-runner/karma) [Jasmine](http://pivotal.github.io/jasmine/) [Testing](https://github.com/karma-runner/karma-jasmine) 
+* [Coverage](https://github.com/gotwarlost/istanbul) [Testing](https://github.com/karma-runner/karma-coverage)
+* Continuous [Integration](travis-ci.org/editor/dash) and [Coverage](https://github.com/cainus/node-coveralls) Reporting
 
 #### Documention
 
