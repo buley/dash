@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	ddescribe("get.index", function() {
+	describe("get.index", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'idx-get-test-' + start_time,
 			store_name = 'idx-get-test-store-' + start_time,
@@ -41,7 +41,7 @@
 
 			waitsFor(dashIsFinished, 'the get.index operation to finish', 10000);
 			runs(function() {
-				ddescribe('get.index should finish cleanly', function() {
+				describe('get.index should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;
