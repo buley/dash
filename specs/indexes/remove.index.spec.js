@@ -19,7 +19,7 @@
 			startcount,
 			ctx;	
 		it( 'should open a database, add a store and an index to it', function() {
-            dash.add.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
+            dash.get.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
                 .then(function(context) {
                     addcount = context.objectstore.indexNames.length;
                     dash.remove.index(context)

@@ -15,7 +15,7 @@
 				success = false,
 				notify = false,
 				ctx;		
-            dash.add.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
+            dash.get.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
             .then(function(context) {
                 success = true;
                 isFinished = true;
@@ -93,7 +93,7 @@
 				notify = false,
 				ctx;		
 
-            dash.add.index({
+            dash.get.index({
 					database: db_name,
 					store: store_name,
 					index: index_name,
