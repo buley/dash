@@ -4,7 +4,7 @@
   "description": "A promising IndexedDB wrapper, since 2011.",
   "main": "lib/dash.dev.js",
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt dev"
   },
   "repository": {
     "type": "git",
