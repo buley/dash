@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("remove.database", function() {
+	ddescribe("remove.database", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'db-remove-test-' + start_time,
 			isFinished = false,
@@ -40,7 +40,7 @@
 
 			waitsFor(dashIsFinished, 'the remove.database operation to finish', 10000);
 			runs(function() {
-				describe('database.remove should finish cleanly', function() {
+				ddescribe('database.remove should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.setup = prectx;
