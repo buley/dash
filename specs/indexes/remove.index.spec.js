@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("get.index", function() {
+	xdescribe("get.index", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'idx-remove-test-db-' + start_time,
 			store_name = 'idx-remove-test-store-' + start_time,
