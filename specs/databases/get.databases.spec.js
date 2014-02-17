@@ -25,7 +25,7 @@
 					}, function(context) {
 						notify = true;
 					});
-			},100);
+			},500);
 			waitsFor(dashIsFinished, 'the get.databases operation to finish', 10000);
 			runs(function() {
 				describe('get.databases should finish cleanly', function() {
