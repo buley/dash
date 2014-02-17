@@ -23,7 +23,7 @@
 				}, function(context) {
 					notify = true;
 				});
-			waitsFor(dashIsFinished, 'the open.databases operation to finish', 10000);
+			waitsFor(dashIsFinished, 'the get.databases operation to finish', 10000);
 			runs(function() {
 				describe('get.databases should finish cleanly', function() {
 					beforeEach(function() {
