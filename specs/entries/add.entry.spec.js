@@ -30,7 +30,6 @@
 	                ctx = context;
 	                isFinished = true;
 	                add_response = context;
-	                console.log('add.entry entry', context.key);
 	                entry_key = context.key;
 	                success = true;
 	            }, function(context) {
@@ -69,7 +68,6 @@
 					});
 					
 					it("add.entry should return the key", function(){
-						console.log('add.entry checking against',this.context.key);
 						expect(this.context.key).toBe(this.key);
 					});
 

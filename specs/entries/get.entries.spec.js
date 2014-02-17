@@ -32,10 +32,8 @@
                 data: test_data
             })
             .then(function(context) {
-                console.log('get.entries entry',context.entry);
                 dash.get.entries(context)
                 .then(function(context) {
-                    console.log('get.entries entries',context.entries);
                     success = true;
                     isFinished = true;
                     ctx = context;
@@ -45,7 +43,6 @@
                     isFinished = true;
                 }, function(context) {
                     notify = true;
-                    console.log('get.entries notify');
                 });
             }, function(context) {
                 error = true;

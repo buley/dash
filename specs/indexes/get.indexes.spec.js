@@ -45,7 +45,6 @@
 						expect(this.notify).toBe(false);
 					});
 					it("get.indexes return a DOMStringList with the right contents", function() {
-						console.log("YE",this.context);
 						expect(this.context.indexes instanceof DOMStringList).toBe(true);
 						expect(this.context.indexes.length).toBe(1);
 						expect(this.context.indexes.contains(this.context.index)).toBe(true);

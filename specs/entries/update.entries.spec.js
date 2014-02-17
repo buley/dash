@@ -33,13 +33,10 @@
         })
         .then(function(context) {
           context.data.version = random_update;
-          console.log('do update');
           dash.update.entries(context)
           .then(function(context) {
-            console.log('updated enttries',context.entries);
             dash.get.entries(context)
             .then(function(context) {
-              console.log('gotten enttries',context.entries);
               success = true;
               isFinished = true;
               ctx = context;

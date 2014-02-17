@@ -22,10 +22,8 @@
             dash.add.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
                 .then(function(context) {
                     addcount = context.objectstore.indexNames.length;
-                    console.log('added index',addcount);
                     dash.remove.index(context)
                     .then(function(context) {
-                    	console.log('reove index');
                         success = true;
                         finalcount = context.objectstore.indexNames.length;
                         isFinished = true;
