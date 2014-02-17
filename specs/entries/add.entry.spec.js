@@ -26,10 +26,11 @@
             .then(function(context) {
                 ctx = context;
                 isFinished = true;
+                console.log('added entry', context);
                 success = true;
             }, function(context) {
                 ctx = context;
-                isFinished = true;
+                isFinished = false;
                 error = true;
             });
 
