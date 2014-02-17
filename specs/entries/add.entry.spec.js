@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("add.entry", function() {
+	ddescribe("add.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			runs(function() {
 				var start_time = new Date().getTime(),
@@ -18,6 +18,9 @@
 					notify = false,
 					isFinished = false,
 					entry_key,
+					successes = 0,
+					errors = 0,
+					notifies = 0,
 					ctx;	
 				test_data[key_path] = 'entry-add-value-' + start_time;
 	            dash.add.entry({
@@ -28,17 +31,23 @@
 	            })
 	            (function(context) {
 	                ctx = context;
+	                successes += 1;
+                    console.log('test success', new Date().getTime())
 	                isFinished = true;
 	                add_response = context;
 	                entry_key = context.key;
 	                success = true;
 	            }, function(context) {
 	                ctx = context;
+	               	errors += 1;
 	                isFinished = false;
 	                error = true;
+	            }, function(context) {
+	            	notify = true;
+	            	notifies += 1;
 	            });
 				waitsFor(dashIsFinished, 'the add.entry operation to finish', 10000);
-				describe('add.entry should complete', function() {
+				ddescribe('add.entry should complete', function() {
 					beforeEach(function() {
 						this.context = add_response;
 						this.success = success;
@@ -49,6 +58,9 @@
 						this.keypath = key_path;
 						this.key = test_data[key_path];
 						this.data = test_data;
+						this.successes = successes;
+						this.errors = errors;
+						this.notifies = notifies;
 					});
 					
 					it("add.entry should be a success", function() {
@@ -56,6 +68,7 @@
 						expect(this.error).toBe(false);
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
+						expect(this.successes).toBe(1);
 					});
 
 					it("add.entry should have the correct parent/child relationships", function() {
@@ -69,6 +82,7 @@
 					
 					it("add.entry should return the key", function(){
 						expect(this.context.key).toBe(this.key);
+						console.log('checking',this.context.key, 'against',this.key);
 					});
 
 					it("add.entry should clean up after itself", function() {
