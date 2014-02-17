@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	xdescribe("get.index", function() {
+	describe("get.index", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'idx-remove-test-db-' + start_time,
 			store_name = 'idx-remove-test-store-' + start_time,
@@ -22,7 +22,7 @@
             dash.add.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
                 .then(function(context) {
                     addcount = context.objectstore.indexNames.length;
-                    console.log('added index');
+                    console.log('added index',addcount);
                     dash.remove.index(context)
                     .then(function(context) {
                     	console.log('reove index');
