@@ -16,7 +16,7 @@
 				success = false,
 				notify = false,
 				ctx;	
-			test_data[key_path] = 'entry-add-' + start_time;
+			test_data[key_path] = 'entry-add-value-' + start_time;
             dash.add.entry({
                 database: db_name,
                 store: store_name,
