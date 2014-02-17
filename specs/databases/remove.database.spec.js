@@ -16,7 +16,7 @@
 			prectx,
 			ctx;	
 		it( 'should open and then remove', function() {
-			dash.open.database({ database: db_name, store: db_name })
+			dash.get.database({ database: db_name, store: db_name })
 				.then(function(context) {
 					prectx = context;
 					dash.remove.database(context)
