@@ -43,4 +43,4 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
 #### License
 
-MIT (See [http://dashdb.com/about](http://dashdb.com/about) for full license.)
+[http://dashdb.com/about](http://dashdb.com/about)
