@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  describe("get.entry", function() {
+  ddescribe("get.entry", function() {
     it( 'should open a database, add a store and add then get an entry', function() {
       var start_time = new Date().getTime(),
         db_name = 'entry-get-test-' + start_time,
@@ -16,7 +16,8 @@
         success = false,
         notify = false,
         ctx,
-        key_path_value = 'entry-get-value-' + start_time;
+        key_path_value = 'entry-get-value-' + start_time,
+        add_key;
       test_data[key_path] = key_path_value;
       dash.add.entry({
           database: db_name,
@@ -25,10 +26,12 @@
           data: test_data
         })
       .then(function(context) {
+        add_key = context.key;
+        console.log("ADDED KEY",add_key);
          dash.get.entry(context)
         .then(function(context) {
+          console.log("GOT ENTRY", context.entry);
           success = true;
-          console.log('succss',context);
           isFinished = true;
           ctx = context;
         }, function(context) {
@@ -42,7 +45,7 @@
 
       waitsFor(dashIsFinished, 'the get.entry operation to finish', 10000);
       runs(function() {
-        describe('get.entry should finish cleanly', function() {
+        ddescribe('get.entry should finish cleanly', function() {
 
           beforeEach(function() {
             this.context = ctx;
@@ -54,6 +57,7 @@
             this.keypath = key_path;
             this.key = test_data[key_path];
             this.data = test_data;
+            this.entryKey = add_key;
           });
           
           it("get.entry should be a success", function() {
@@ -75,12 +79,13 @@
           it("get.entry should return an entry", function(){
             expect(undefined !== this.context.entry).toBe(true);
             expect(null !== this.context.entry).toBe(true);
+            console.log('TEST',this.context);
             expect(this.context.entry.version).toBe(1);
           });
 
           it("get.entry should return the key", function(){
             expect(this.context.entry[key_path]).toBe(key_path_value);
-            expect(this.context.key).toBe(this.key);
+            expect(this.entryKey).toBe(this.key);
           });
 
           it("get.entry should clean up after itself", function() {
