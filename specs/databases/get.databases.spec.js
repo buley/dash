@@ -11,18 +11,21 @@
 			notify = false,
 			ctx;	
 		it( 'should get all databases, when available', function() {
-			dash.get.databases()
-				.then(function(context) {
-					ctx = context;
-					isFinished = true;
-					success = true;
-				}, function(context) {
-					ctx = context;
-					error = true;
-					isFinished = true;
-				}, function(context) {
-					notify = true;
-				});
+			//TODO: DB's not always available on init
+			setTimeout(function() {
+				dash.get.databases()
+					.then(function(context) {
+						ctx = context;
+						isFinished = true;
+						success = true;
+					}, function(context) {
+						ctx = context;
+						error = true;
+						isFinished = true;
+					}, function(context) {
+						notify = true;
+					});
+			},100);
 			waitsFor(dashIsFinished, 'the get.databases operation to finish', 10000);
 			runs(function() {
 				describe('get.databases should finish cleanly', function() {
