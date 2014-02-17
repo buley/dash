@@ -4,9 +4,9 @@
   describe("remove.entries", function() {
     it( 'should open a database, add a store and add then get entries', function() {
       var start_time = new Date().getTime(),
-        db_name = 'entries-get-test-' + start_time,
-        store_name = 'entries-get-test-store-' + start_time,
-        index_name = 'entries-get-test-index-' + start_time,
+        db_name = 'entries-remove-test-' + start_time,
+        store_name = 'entries-remove-test-store-' + start_time,
+        index_name = 'entries-remove-test-index-' + start_time,
         key_path = 'entries' + start_time,
         index_key_path = 'entriesIndex' + start_time,
         test_data = { version: 1 },
