@@ -16,23 +16,15 @@
 			ctx;	
 		it( 'should open a database then add and then get a store', function() {
 
-            dash.add.store({ database: db_name, store: store_name, store_key_path: store_key_path })
-            .then(function(context){
-                dash.get.store(context)
-                .then(function(context) {
-                    ctx = context;
-                    success = true;
-                    isFinished = true;
-                }, function(context) {
-                    ctx = context;
-                    error = true;
-                    isFinished = true;
-                }, function(context) {
-                    notify = true;
-                });
+            dash.get.store({ database: db_name, store: store_name, store_key_path: store_key_path })
+            .then(function(context) {
+                ctx = context;
+                success = true;
+                isFinished = true;
             }, function(context) {
                 ctx = context;
                 error = true;
+                isFinished = true;
             }, function(context) {
                 notify = true;
             });
