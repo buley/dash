@@ -1,7 +1,7 @@
 
 (function(){
   'use strict';
-  describe("get.entry", function() {
+  ddescribe("get.entry", function() {
     it( 'should open a database, add a store and add then get an entry', function() {
       var start_time = new Date().getTime(),
         db_name = 'entry-get-test-' + start_time,
@@ -27,10 +27,8 @@
         })
       .then(function(context) {
         add_key = context.key;
-        console.log("ADDED KEY",add_key);
          dash.get.entry(context)
         .then(function(context) {
-          console.log("GOT ENTRY", context.entry);
           success = true;
           isFinished = true;
           ctx = context;
@@ -45,7 +43,7 @@
 
       waitsFor(dashIsFinished, 'the get.entry operation to finish', 10000);
       runs(function() {
-        describe('get.entry should finish cleanly', function() {
+        ddescribe('get.entry should finish cleanly', function() {
 
           beforeEach(function() {
             this.context = ctx;
@@ -79,7 +77,6 @@
           it("get.entry should return an entry", function(){
             expect(undefined !== this.context.entry).toBe(true);
             expect(null !== this.context.entry).toBe(true);
-            console.log('TEST',this.context);
             expect(this.context.entry.version).toBe(1);
           });
 
