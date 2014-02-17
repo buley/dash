@@ -21,10 +21,10 @@
 		it( 'should open a database then add and then get a store', function() {
             startcount = 0;
             dash.get.store({ database: db_name, store: store_name })
-            .then(function(context){
+            (function(context){
                 addcount = context.db.objectStoreNames.length;
                 dash.remove.store(context)
-                .then(function(context) {
+                (function(context) {
                     ctx = context;
                     finalcount = context.db.objectStoreNames.length;
                     success = true;

@@ -16,7 +16,7 @@
 				notify = false,
 				ctx;		
             dash.get.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path })
-            .then(function(context) {
+            (function(context) {
                 success = true;
                 isFinished = true;
                 ctx = context;
@@ -101,7 +101,7 @@
 					index_multi_entry: index_multientry,
 					index_unique: index_unique
 				})
-				.then(function(context) {
+				(function(context) {
 					success = true;
 					isFinished = true;
 					ctx = context;

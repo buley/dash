@@ -16,7 +16,7 @@
 
 
             dash.get.store({ database: db_name, store: store_name })
-            .then(function(context) {
+            (function(context) {
                 ctx = context;
                 success = true;
                 isFinished = true;
@@ -91,7 +91,7 @@
                 store_key_path: store_key_path,
                 auto_increment: store_auto_increment
             })
-            .then(function(context) {
+            (function(context) {
                 ctx = context;
                 success = true;
                 isFinished = true;

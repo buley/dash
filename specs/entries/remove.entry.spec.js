@@ -23,9 +23,9 @@
                 store_key_path: key_path,
                 data: test_data
             })
-            .then(function(context) {
+            (function(context) {
                 dash.remove.entry(context)
-                .then(function(context) {
+                (function(context) {
                     success = true;
                     isFinished = true;
                     ctx = context;

@@ -20,15 +20,15 @@
         add_key;
       test_data[key_path] = key_path_value;
       dash.add.entry({
-          database: db_name,
-          store: store_name,
-          store_key_path: key_path,
-          data: test_data
-        })
-      .then(function(context) {
+        database: db_name,
+        store: store_name,
+        store_key_path: key_path,
+        data: test_data
+      })
+      (function(context) {
         add_key = context.key;
-         dash.get.entry(context)
-        .then(function(context) {
+        dash.get.entry(context)
+        (function(context) {
           success = true;
           isFinished = true;
           ctx = context;

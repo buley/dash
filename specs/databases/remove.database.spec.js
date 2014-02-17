@@ -17,10 +17,10 @@
 			ctx;	
 		it( 'should open and then remove', function() {
 			dash.get.database({ database: db_name, store: db_name })
-				.then(function(context) {
+				(function(context) {
 					prectx = context;
 					dash.remove.database(context)
-					.then(function(context) {
+					(function(context) {
 						ctx = context;
 						success = true;
 						isFinished = true;

@@ -20,10 +20,10 @@
 			ctx;	
 		it( 'should open a database, add a store and an index to it', function() {
             dash.get.index({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
-                .then(function(context) {
+                (function(context) {
                     addcount = context.objectstore.indexNames.length;
                     dash.remove.index(context)
-                    .then(function(context) {
+                    (function(context) {
                         success = true;
                         finalcount = context.objectstore.indexNames.length;
                         isFinished = true;

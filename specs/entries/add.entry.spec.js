@@ -26,7 +26,7 @@
 	                store_key_path: key_path,
 	                data: test_data
 	            })
-	            .then(function(context) {
+	            (function(context) {
 	                ctx = context;
 	                isFinished = true;
 	                add_response = context;

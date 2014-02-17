@@ -24,15 +24,15 @@
                 store_key_path: key_path,
                 data: test_data
             })
-            .then(function(context) {
+            (function(context) {
                 key = context.key;
                 delete context.key;
                 context.data = { version: 2 };
                 context.data[key_path] = 'entry-put-1-' + start_time;
                 dash.put.entry(context)
-                .then(function(context) {
+                (function(context) {
                     dash.get.entry(context)
-                    .then(function(context) {
+                    (function(context) {
                         ctx = context;
                         isFinished = true;
                         success = true;

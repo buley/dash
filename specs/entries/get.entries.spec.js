@@ -31,9 +31,9 @@
                 index: index_name,
                 data: test_data
             })
-            .then(function(context) {
+            (function(context) {
                 dash.get.entries(context)
-                .then(function(context) {
+                (function(context) {
                     success = true;
                     isFinished = true;
                     ctx = context;

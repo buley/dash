@@ -32,12 +32,12 @@
           index: index_name,
           data: test_data
       })
-      .then(function(context) {
+      (function(context) {
         dash.remove.entries(context)
-        .then(function(context) {
+        (function(context) {
           entries = context.entries;
           dash.get.entries(context)
-          .then(function(context) {
+          (function(context) {
             success = true;
             isFinished = true;
             ctx = context;

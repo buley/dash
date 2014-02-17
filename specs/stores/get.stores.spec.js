@@ -11,7 +11,7 @@
 			ctx;	
 		it( 'should get all stores, when available', function() {
             dash.get.stores({ database: db_name, store: store_name })
-                .then(function(context) {
+                (function(context) {
                     ctx = context;
                     success = true;
                     isFinished = true;

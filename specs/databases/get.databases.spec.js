@@ -14,7 +14,7 @@
 			//TODO: DB's not always available on init
 			setTimeout(function() {
 				dash.get.databases()
-					.then(function(context) {
+					(function(context) {
 						ctx = context;
 						isFinished = true;
 						success = true;

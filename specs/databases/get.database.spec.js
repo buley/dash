@@ -20,7 +20,7 @@
 						notify = false,
 						ctx;	
 					it( 'should open a new database when none exists', function() {
-						dash.get.database({ database: db_name }).then(function(context) {
+						dash.get.database({ database: db_name })(function(context) {
 								ctx = context;
 								isFinished = true;
 								success = true;
@@ -81,7 +81,7 @@
 						notify = false,
 						ctx;
 					it( 'should open an existing database when one exists', function() {
-						dash.get.database({ database: db_name }).then(function(context) {
+						dash.get.database({ database: db_name })(function(context) {
 								ctx = context;
 								isFinished = true;
 								success = true;
@@ -134,7 +134,7 @@
 						random_version = Math.floor(Math.random() * 100) + 1,
 						ctx;
 					it( 'should open an existing database when one exists', function() {
-						dash.get.database({ database: db_name, version: random_version }).then(function(context) {
+						dash.get.database({ database: db_name, version: random_version })(function(context) {
 								ctx = context;
 								isFinished = true;
 								success = true;

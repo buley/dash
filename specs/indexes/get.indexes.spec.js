@@ -14,7 +14,7 @@
 
 		it( 'should get all indexes', function() {
             dash.get.indexes({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
-            .then(function(context){
+            (function(context){
                 ctx = context;
                 success = true;
                 isFinished = true;
