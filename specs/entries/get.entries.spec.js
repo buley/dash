@@ -1,7 +1,7 @@
 
 (function(){
     'use strict';
-    ddescribe("get.entries", function() {
+    describe("get.entries", function() {
         it( 'should open a database, add a store and add then get entries', function() {
             var start_time = new Date().getTime(),
                 db_name = 'entries-get-test-' + start_time,
@@ -54,7 +54,7 @@
 
             waitsFor(dashIsFinished, 'the get.entries operation to finish', 3000);
             runs(function() {
-                ddescribe('get.entries should finish cleanly', function() {
+                describe('get.entries should finish cleanly', function() {
 
                     beforeEach(function() {
                         this.context = ctx;
