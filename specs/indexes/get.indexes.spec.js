@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("get.indexes", function() {
+	ddescribe("get.indexes", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'indexes-get-test-database-' + start_time,
 			store_name = 'indexes-get-test-store-' + start_time,
@@ -32,7 +32,7 @@
 			}, 'the get.indexes operation to finish', 10000);
 
 			runs(function() {
-				describe('get.indexes should finish successfully', function() {
+				ddescribe('get.indexes should finish successfully', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -45,6 +45,7 @@
 						expect(this.notify).toBe(false);
 					});
 					it("get.indexes return a DOMStringList with the right contents", function() {
+						console.log("YE",this.context);
 						expect(this.context.indexes instanceof DOMStringList).toBe(true);
 						expect(this.context.indexes.length).toBe(1);
 						expect(this.context.indexes.contains(this.context.index)).toBe(true);
