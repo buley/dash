@@ -1,7 +1,7 @@
 
 (function(){
     'use strict';
-    ddescribe("get.entries", function() {
+    describe("get.entries", function() {
         it( 'should open a database, add a store and add then get entries', function() {
             var start_time = new Date().getTime(),
                 db_name = 'entries-get-test-' + start_time,
@@ -46,14 +46,13 @@
                     notify = true;
                 });
             }, function(context) {
-                console.log('test 1st error');
                 error = true;
                 isFinished = true;
             });
 
             waitsFor(dashIsFinished, 'the get.entries operation to finish', 3000);
             runs(function() {
-                ddescribe('get.entries should finish cleanly', function() {
+                describe('get.entries should finish cleanly', function() {
 
                     beforeEach(function() {
                         this.context = ctx;
@@ -77,9 +76,6 @@
                     it("get.entries not have thrown errors", function() {
                         expect(this.error).toBe(false);
                         expect(this.context.error).toBeUndefined();
-                        if(this.context.error) {
-                            console.log("ERR",this.context.error.message);
-                        }
                     });
                     it("get.entries should be a success", function() {
                         expect(this.success).toBe(true);

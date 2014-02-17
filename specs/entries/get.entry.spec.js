@@ -28,6 +28,7 @@
          dash.get.entry(context)
         .then(function(context) {
           success = true;
+          console.log('succss',context);
           isFinished = true;
           ctx = context;
         }, function(context) {

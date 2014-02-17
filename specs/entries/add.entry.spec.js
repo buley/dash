@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	describe("add.entry", function() {
+	ddescribe("add.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-add-test-' + start_time,
@@ -25,11 +25,9 @@
             })
             .then(function(context) {
                 ctx = context;
-                console.log("ADDED",ctx.entry);
                 isFinished = true;
                 success = true;
             }, function(context) {
-            	console.log("FAILED",ctx.entry);
                 ctx = context;
                 isFinished = true;
                 error = true;
@@ -37,7 +35,7 @@
 
 			waitsFor(dashIsFinished, 'the add.entry operation to finish', 10000);
 			runs(function() {
-				describe('add.entry should complete', function() {
+				ddescribe('add.entry should complete', function() {
 					beforeEach(function() {
 						this.context = ctx;
 						this.success = success;
@@ -67,6 +65,7 @@
 					});
 					
 					it("add.entry should return the key", function(){
+						console.log('checking against',this.context);
 						expect(this.context.key).toBe(this.key);
 					});
 
