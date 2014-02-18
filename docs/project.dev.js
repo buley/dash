@@ -371,6 +371,9 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
         url: '/docs/demo/data/2016.json'
     }).success( function(data, status, headers, config) {
         console.log('success',data, status, headers, config);
+        _.each( data, function(datum) {
+            console.log(datum);
+        })
     } ).error( function(data, status, headers, config) {
         console.log('error',data, status, headers, config);
     });
