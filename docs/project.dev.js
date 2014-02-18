@@ -378,7 +378,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                 store: 'imdb',
                 auto_increment: true,
                 store_key_path: null,
-                data: test_data
+                data: datum
             })
             (function(context) {
                 console.log('add success',context);
