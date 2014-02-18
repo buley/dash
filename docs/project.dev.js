@@ -364,8 +364,16 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
     };
 }]);
 
-dashApp.controller('dashAppSplashController', [ function() {
+dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
     console.log('splash controller');
+    $http( {
+        method: 'GET',
+        url: '/docs/demo/data/2016.json'
+    }).success( function(data, status, headers, config) {
+        console.log('success',data, status, headers, config);
+    } ).error( function(data, status, headers, config) {
+        console.log('error',data, status, headers, config);
+    });
 }]);
 
 dashApp.directive('markdown', function () {
