@@ -425,8 +425,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                 console.log('error',data, status, headers, config);
             });
         }
-        localStorage.setItem('dash-demo-installed', 
-    }
+        localStorage.setItem('dash-demo-installed', 'YES');
 }]);
 
 
