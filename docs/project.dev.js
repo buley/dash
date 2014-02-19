@@ -368,7 +368,7 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
 dashApp.directive('dashSplash', function() { 
     return {
         controller: [],
-        compile: [ '$scope', function($scope) {
+        compile: function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
                 layout = IMDBSystem(el);
@@ -382,7 +382,7 @@ dashApp.directive('dashSplash', function() {
                 element.appendChild(el);
                 layout();
             };
-        } ]
+        }
     };
 } );
 
