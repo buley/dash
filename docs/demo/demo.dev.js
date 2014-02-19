@@ -6,12 +6,14 @@ var IMDBSystem = (function(THREE){
         /* WebGL vs. Canvas renderer */
         webGLRenderer = new THREE.WebGLRenderer(),
         /* What we'll create: a particle system */
-        system = { rotation: {} },
+        system,
         /* Our looped render method */
         render = function() {
             var step = 0.01;
-            system.rotation.x = step;
-            system.rotation.z = step;
+            if(system) {
+                system.rotation.x = step;
+                system.rotation.z = step;
+            }
             /* 60fps goodness */
             requestAnimationFrame(render);
             /* WebGL render */
