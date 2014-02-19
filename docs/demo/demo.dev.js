@@ -22,6 +22,7 @@ var IMDBSystem = (function(THREE){
             console.log('laying out');
             var range = 50,
                 geometry = new THREE.Geometry(),
+                /*
                 material = new THREE.ParticleBasicMaterial({
                     size: 32,
                     color: 0x000000,
@@ -51,7 +52,8 @@ var IMDBSystem = (function(THREE){
                         texture.needsUpdate = true;
                         return texture;
                     }())
-                }),
+                }),*/
+                material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0xffffff}),
                 system;
             
             var finish = function(context) {
