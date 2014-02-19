@@ -411,7 +411,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                 processNext();
             });
         },
-        key = 'dash-demo-installed-1',
+        key = 'dash-demo-installed-2',
         dashInstalled = localStorage.getItem(key);
     if (!dashInstalled) {
         for (; start > 2000; start -= 1) {
