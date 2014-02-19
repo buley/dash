@@ -16,12 +16,11 @@ var IMDBSystem = (function(THREE){
             },
             finish = function(context) {
                 console.log('Added particles', context.entries.length, geometry, material);
-                sys = new THREE.ParticleSystem(geometry, material);
-                render = render(sys, sce, cam, rend);
-                sys.sortParticles = true;
-                sys.name = "imdb-particles"; //arbitrary
-                if (sce) {
-                    sce.add(sys);
+                system = new THREE.ParticleSystem(geometry, material);
+                system.sortParticles = true;
+                system.name = "imdb-particles"; //arbitrary
+                if (scene) {
+                    scene.add(system);
                 }
             },
             scene = new THREE.Scene(),
@@ -33,7 +32,50 @@ var IMDBSystem = (function(THREE){
             /* WebGL vs. Canvas renderer */
             renderer = new THREE.WebGLRenderer(),
             /* What we'll create: a particle system */
-            system;
+            system,
+            range = ( width > height ) ? height : width,
+            geometry = new THREE.Geometry(),
+            material = new THREE.ParticleBasicMaterial({
+                size: 8,
+                color: 0xFFFFFF,
+                transparent: true,
+                opacity: .6,
+                sizeAttenuation: true,
+                map: (function () {
+                    var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
+                        var x;
+                        if (!canvas || !ctx) {
+                            if (!canvas) {
+                                canvas = document.createElement('canvas');
+                            }
+                            if (!ctx) {
+                                ctx = canvas.getContext('2d');
+                            }
+                            canvas.height = height;
+                            canvas.width = width;
+                        }
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.translate(center_x, center_y);
+                        ctx.moveTo(0, (0 - radius));
+                        /* super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ */
+                        /* m = "fraction of radius for inset" */
+                        for ( x = 0; x < points; x += 1) {
+                            ctx.rotate(Math.PI / points);
+                            ctx.lineTo(0, (0 - (radius * m)));
+                            ctx.rotate(Math.PI / points);
+                            ctx.lineTo(0, 0 - radius);
+                        }
+                        ctx.fillStyle = 'black';
+                        ctx.fill();
+                        ctx.stroke();
+                        ctx.restore();
+                        return canvas;
+                    }(256, 256, 128, 128, 64, 5, .5)));
+                    texture.needsUpdate = true;
+                    return texture;
+                }())
+            });
 
         return function(node, width, height) {
             renderer.setClearColor(0xFFFFFF, 1.0);
@@ -46,49 +88,7 @@ var IMDBSystem = (function(THREE){
             layout(system, camera, scene, renderer, width, height);
             render(system, camera, scene, renderer, width, height);
             var layout = function(system, camera, scene, renderer, width, height) {
-                    var range = ( width > height ) ? height : width,
-                        geometry = new THREE.Geometry(),
-                        material = new THREE.ParticleBasicMaterial({
-                            size: 8,
-                            color: 0xFFFFFF,
-                            transparent: true,
-                            opacity: .6,
-                            sizeAttenuation: true,
-                            map: (function () {
-                                var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
-                                    var x;
-                                    if (!canvas || !ctx) {
-                                        if (!canvas) {
-                                            canvas = document.createElement('canvas');
-                                        }
-                                        if (!ctx) {
-                                            ctx = canvas.getContext('2d');
-                                        }
-                                        canvas.height = height;
-                                        canvas.width = width;
-                                    }
-                                    ctx.save();
-                                    ctx.beginPath();
-                                    ctx.translate(center_x, center_y);
-                                    ctx.moveTo(0, (0 - radius));
-                                    /* super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ */
-                                    /* m = "fraction of radius for inset" */
-                                    for ( x = 0; x < points; x += 1) {
-                                        ctx.rotate(Math.PI / points);
-                                        ctx.lineTo(0, (0 - (radius * m)));
-                                        ctx.rotate(Math.PI / points);
-                                        ctx.lineTo(0, 0 - radius);
-                                    }
-                                    ctx.fillStyle = 'black';
-                                    ctx.fill();
-                                    ctx.stroke();
-                                    ctx.restore();
-                                    return canvas;
-                                }(256, 256, 128, 128, 64, 5, .5)));
-                                texture.needsUpdate = true;
-                                return texture;
-                            }())
-                        });
+                    
 
                     dash.get.entries({
                         database: 'dash-demo',
