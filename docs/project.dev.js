@@ -384,31 +384,34 @@ dashApp.directive('dashSplash', function() {
 
 dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
     console.log('splash controller');
-    $http( {
-        method: 'GET',
-        url: '/docs/demo/data/2016.json'
-    }).success( function(data, status, headers, config) {
-        console.log('success',data, status, headers, config);
-        _.each( data, function(datum) {
-            //console.log(datum);
-            /*dash.add.entry({
-                database: 'dash-demo',
-                store: 'imdb',
-                auto_increment: true,
-                store_key_path: null,
-                data: datum
+    var start = 2016;
+    for (; start < 2000; start -= 1) {
+        $http( {
+            method: 'GET',
+            url: '/docs/demo/data/' + start + '.json'
+        }).success( function(data, status, headers, config) {
+            console.log('success',data, status, headers, config);
+            _.each( data, function(datum) {
+                //console.log(datum);
+                /*dash.add.entry({
+                    database: 'dash-demo',
+                    store: 'imdb',
+                    auto_increment: true,
+                    store_key_path: null,
+                    data: datum
+                })
+                (function(context) {
+                    console.log('add success',context);
+                }, function(context) {
+                    console.log('add error',context);
+                }, function(context) {
+                    console.log('add notify',context);
+                });*/
             })
-            (function(context) {
-                console.log('add success',context);
-            }, function(context) {
-                console.log('add error',context);
-            }, function(context) {
-                console.log('add notify',context);
-            });*/
-        })
-    } ).error( function(data, status, headers, config) {
-        console.log('error',data, status, headers, config);
-    });
+        } ).error( function(data, status, headers, config) {
+            console.log('error',data, status, headers, config);
+        });
+    }
 }]);
 
 dashApp.directive('markdown', function () {
