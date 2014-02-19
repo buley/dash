@@ -23,10 +23,10 @@ var IMDBSystem = (function(THREE){
             var range = 500,
                 geometry = new THREE.Geometry(),
                 material = new THREE.ParticleBasicMaterial({
-                    size: 5,
-                    color: 0xFFFFFF,
+                    size: 32,
+                    color: 0x000000,
                     transparent: true,
-                    opacity: .8,
+                    opacity: 1,
                     sizeAttenuation: true,
                     map: (function () {
                         console.log('mapping');
