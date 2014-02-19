@@ -346,20 +346,8 @@ dashApp.controller('dashAppDocsContentController', [ '$routeParams', '$scope', f
     };
 }]);
 
-dashApp.controller('dashAppDocsSidebarController', [ '$scope', function($scope) {
-    cconsole.log('dashSplash setup');
-    var el = document.createElement('div'),
-        layout = IMDBSystem(el);
-    el.setAttribute('id', 'dash-splash-container');
-    return function link(scope, element, attrs) {
-        console.log('dashSplash linker');
-        var xel = element.querySelector( '#dash-splash-container' );
-        if ( null !== xel ) {1
-            element.removeChild(xel);
-        }
-        element.appendChild(el);
-        layout();
-    };
+dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', function($routeParams, $scope) {
+
 }]);
 
 dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $scope, $sce ) {
@@ -376,8 +364,20 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
     };
 }]);
 
-dashApp.directive('dashSplash', [ '$scope', function() {
-
+dashApp.controller('dashSplash', [ '$scope', function($scope) {
+    cconsole.log('dashSplash setup');
+    var el = document.createElement('div'),
+        layout = IMDBSystem(el);
+    el.setAttribute('id', 'dash-splash-container');
+    return function link(scope, element, attrs) {
+        console.log('dashSplash linker');
+        var xel = element.querySelector( '#dash-splash-container' );
+        if ( null !== xel ) {1
+            element.removeChild(xel);
+        }
+        element.appendChild(el);
+        layout();
+    };
 }]);
 
 dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
