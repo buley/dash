@@ -19,10 +19,11 @@ var IMDBSystem = (function(THREE){
         },
         /* The bread and butter: the setup for init or when properties change. */
         layout = function() {
-            var geometry = new THREE.Geometry(),
+            var range = 500,
+                geometry = new THREE.Geometry(),
                 material = new THREE.ParticleBasicMaterial({
                     size: 5,
-                    color: '#ffffff',
+                    color: 0x000000,
                     transparent: true,
                     opacity: .8,
                     sizeAttenuation: true,
@@ -74,7 +75,7 @@ var IMDBSystem = (function(THREE){
             layout();
         },
         init = function(node) {
-            webGLRenderer.setClearColorHex(0x000000, 1.0);
+            webGLRenderer.setClearColorHex(0xFFFFFF, 1.0);
             webGLRenderer.setSize(window.innerWidth, window.innerHeight); //Fix
             node.appendChild(webGLRenderer.domElement);
             camera.position.x = 20;
