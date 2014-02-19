@@ -25,7 +25,7 @@ var IMDBSystem = (function(THREE){
                 }
             },
             scene = new THREE.Scene(),
-            camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000),
+            camera,
             /* What the viewer sees */
             scene,
             /* How the viewer sees it */
@@ -38,6 +38,7 @@ var IMDBSystem = (function(THREE){
         return function(node, width, height) {
             webGLRenderer.setClearColor(0xFFFFFF, 1.0);
             webGLRenderer.setSize(width, height);
+            camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(webGLRenderer.domElement);
             camera.position.x = 20;
             camera.position.y = 0;
