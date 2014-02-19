@@ -416,6 +416,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
             url: '/docs/demo/data/' + start + '.json'
         }).success( function(data, status, headers, config) {
             stack.push.apply(stack, data);
+            console.log('stack length', stack.length);
             processNext();
         } ).error( function(data, status, headers, config) {
             console.log('error',data, status, headers, config);
