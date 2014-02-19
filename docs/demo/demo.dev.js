@@ -69,11 +69,28 @@ var IMDBSystem = (function(THREE){
                     }())
                 }),
                 system;
-            geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
-            system = new THREE.ParticleSystem(geometry, material);
-            system.sortParticles = true;
-            system.name = "imdb-particles"; //arbitrary
-            scene.add(system);
+            
+            var finish = function(context) {
+                console.log('Added particles', context.entries.length);
+                system = new THREE.ParticleSystem(geometry, material);
+                system.sortParticles = true;
+                system.name = "imdb-particles"; //arbitrary
+                scene.add(system);
+            };
+
+            dash.get.entries({
+                database: 'dash-demo',
+                store: 'imdb',
+                key: 'id'
+            })
+            (function(context) {
+                finish(context);
+            }, function(context) {
+                console.log('dash error',context);
+            }, function(context) {
+                geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
+            });
+
         },
         /* When properties change we'll need a re-layout */
         relayout = function () {
