@@ -76,7 +76,7 @@ var IMDBSystem = (function(THREE){
         init = function(node) {
             webGLRenderer.setClearColorHex(0x000000, 1.0);
             webGLRenderer.setSize(window.innerWidth, window.innerHeight); //Fix
-            node.addChild(webGLRenderer.domElement);
+            node.appendChild(webGLRenderer.domElement);
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
