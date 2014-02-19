@@ -30,7 +30,7 @@ var IMDBSystem = (function(THREE){
                     sizeAttenuation: true,
                     map: (function () {
                         console.log('mapping');
-                        var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
+                        var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius) {
                             var x;
                             if (!canvas || !ctx) {
                                 if (!canvas) {
@@ -44,28 +44,12 @@ var IMDBSystem = (function(THREE){
                             }
                             ctx.save();
                             ctx.strokeStyle = 'black';
-                            console.log('start',ctx);
                             ctx.beginPath();
                             ctx.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
                             ctx.stroke();
                             return canvas;
-                            ctx.beginPath();
-                            ctx.translate(center_x, center_y);
-                            ctx.moveTo(0, (0 - radius));
-                            /* super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ */
-                            /* m = "fraction of radius for inset" */
-                            for ( x = 0; x < points; x += 1) {
-                                ctx.rotate(Math.PI / points);
-                                ctx.lineTo(0, (0 - (radius * m)));
-                                ctx.rotate(Math.PI / points);
-                                ctx.lineTo(0, 0 - radius);
-                            }
-                            ctx.fillStyle = 'black';
-                            ctx.fill();
-                            ctx.stroke();
-                            ctx.restore();
-                            return canvas;
-                        }(32, 32, 16, 16, 90, 5, .5)));
+                            
+                        }(32, 32, 16, 16, 5, .5)));
                         texture.needsUpdate = true;
                         return texture;
                     }())
