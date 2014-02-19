@@ -15,6 +15,7 @@ var IMDBSystem = (function(THREE){
             finish = function(context) {
                 system = new THREE.ParticleSystem(geometry, material);
                 system.sortParticles = true;
+                console.log('dash context',context.entries ? context.entries.length : NaN);
                 system.name = "imdb-particles"; //arbitrary
                 if (scene) {
                     scene.add(system);
@@ -76,8 +77,6 @@ var IMDBSystem = (function(THREE){
             }),
             layout = function(system, camera, scene, renderer, width, height) {
 
-                var called = false;
-                console.log('layingout');
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
@@ -86,12 +85,7 @@ var IMDBSystem = (function(THREE){
                     auto_increment: true
                 })
                 (function(context) {
-                    if(!called) {
-                        finish(context);
-                        called = true;
-                    } else {
-                        console.log('dupe success');
-                    }
+                    finish(context);
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
