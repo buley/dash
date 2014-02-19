@@ -385,7 +385,7 @@ dashApp.directive('dashSplash', function() {
 dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
     console.log('splash controller');
     var start = 2016;
-    for (; start < 2000; start -= 1) {
+    for (; start > 2000; start -= 1) {
         $http( {
             method: 'GET',
             url: '/docs/demo/data/' + start + '.json'
