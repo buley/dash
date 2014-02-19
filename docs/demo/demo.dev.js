@@ -1,14 +1,6 @@
 var IMDBSystem = (function(THREE){
-    /* What the viewer sees */
-    var scene,
-        /* How the viewer sees it */
-        camera,
-        /* WebGL vs. Canvas renderer */
-        webGLRenderer = new THREE.WebGLRenderer(),
-        /* What we'll create: a particle system */
-        system,
         /* Our looped render method */
-        render,
+    var render,
         /* The bread and butter: the setup for init or when properties change. */
         layout = function(width, height) {
             var range = ( width > height ) ? height : width,
@@ -88,8 +80,16 @@ var IMDBSystem = (function(THREE){
             layout();
         },
         init = function(node, width, height) {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000)
+            var scene = new THREE.Scene(),
+                camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000),
+                /* What the viewer sees */
+                scene,
+                /* How the viewer sees it */
+                camera,
+                /* WebGL vs. Canvas renderer */
+                webGLRenderer = new THREE.WebGLRenderer(),
+                /* What we'll create: a particle system */
+                system;
             webGLRenderer.setClearColor(0xFFFFFF, 1.0);
             webGLRenderer.setSize(width, height);
             node.appendChild(webGLRenderer.domElement);
@@ -98,20 +98,22 @@ var IMDBSystem = (function(THREE){
             camera.position.z = 150;
             layout(width, height);
             render(width, height);
-            render = function() {
-                var step = .01;
-                if(system) {
-                    system.rotation.x += step;
-                    system.rotation.z += step;
-                    console.log('step',system.rotation);
-                } else {
-                    console.log('emtpy',system);
-                }
-                /* 60fps goodness */
-                requestAnimationFrame(render);
-                /* WebGL render */
-                webGLRenderer.render(scene, camera);
-            };
+            render = (function(sys, sce, cam) {
+                return function() {
+                    var step = .01;
+                    if(system) {
+                        system.rotation.x += step;
+                        system.rotation.z += step;
+                        console.log('step',system.rotation);
+                    } else {
+                        console.log('emtpy',system);
+                    }
+                    /* 60fps goodness */
+                    requestAnimationFrame(render);
+                    /* WebGL render */
+                    webGLRenderer.render(sce, cam);
+                };
+            }(system, scene, camera));
             return relayout;
         };
         return init;
