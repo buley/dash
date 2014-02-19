@@ -46,7 +46,7 @@ var IMDBSystem = (function(THREE){
                             ctx.strokeStyle = 'black';
                             console.log('start',ctx);
                             ctx.beginPath();
-                            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                            ctx.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
                             ctx.stroke();
                             ctx.beginPath();
                             ctx.translate(center_x, center_y);
