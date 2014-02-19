@@ -84,6 +84,7 @@ var IMDBSystem = (function(THREE){
             camera.position.z = 150;
             layout();
             render();
+            return relayout;
         };
         return init;
 }(window.THREE));
