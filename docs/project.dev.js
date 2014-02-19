@@ -414,6 +414,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
         dashInstalled = localStorage.getItem('dash-demo-installed');
     if (!dashInstalled) {
         for (; start > 2013; start -= 1) {
+            localStorage.setItem('dash-demo-installed', 'YES');
             $http( {
                 method: 'GET',
                 url: '/docs/demo/data/' + start + '.json'
@@ -425,7 +426,6 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                 console.log('error',data, status, headers, config);
             });
         }
-        localStorage.setItem('dash-demo-installed', 'YES');
     }
 
 }]);
