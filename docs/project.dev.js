@@ -373,7 +373,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
         console.log('success',data, status, headers, config);
         _.each( data, function(datum) {
             console.log(datum);
-            dash.add.entry({
+            /*dash.add.entry({
                 database: 'dash-demo',
                 store: 'imdb',
                 auto_increment: true,
@@ -386,7 +386,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                 console.log('add error',context);
             }, function(context) {
                 console.log('add notify',context);
-            });
+            });*/
         })
     } ).error( function(data, status, headers, config) {
         console.log('error',data, status, headers, config);

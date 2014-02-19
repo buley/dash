@@ -2,7 +2,7 @@ var IMDBSystem = (function(THREE){
     /* What the viewer sees */
     var scene = new THREE.Scene(),
         /* How the viewer sees it */
-        , camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
         /* WebGL vs. Canvas renderer */
         webGLRenderer = new THREE.WebGLRenderer(),
         /* What we'll create: a particle system */
