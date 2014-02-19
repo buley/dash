@@ -388,7 +388,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
         stack = [],
         in_progress = false,
         processNext = function() {
-            if(!in_progress && stack.length) {
+            if(!in_progress && stack.length > 0) {
                 in_progress = true;
                 doNext(stack.shift());
             }
