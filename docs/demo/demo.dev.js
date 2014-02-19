@@ -19,7 +19,6 @@ var IMDBSystem = (function(THREE){
         },
         /* The bread and butter: the setup for init or when properties change. */
         layout = function(width, height) {
-            console.log('laying out');
             var range = ( width > height ) ? height : width,
                 geometry = new THREE.Geometry(),
                 material = new THREE.ParticleBasicMaterial({
