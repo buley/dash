@@ -46,6 +46,9 @@ var IMDBSystem = (function(THREE){
                             ctx.strokeStyle = 'black';
                             console.log('start',ctx);
                             ctx.beginPath();
+                            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                            ctx.stroke();
+                            ctx.beginPath();
                             ctx.translate(center_x, center_y);
                             ctx.moveTo(0, (0 - radius));
                             /* super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ */
