@@ -20,7 +20,7 @@ var IMDBSystem = (function(THREE){
         /* The bread and butter: the setup for init or when properties change. */
         layout = function() {
             console.log('laying out');
-            var range = 500,
+            var range = 50,
                 geometry = new THREE.Geometry(),
                 material = new THREE.ParticleBasicMaterial({
                     size: 32,
@@ -29,7 +29,6 @@ var IMDBSystem = (function(THREE){
                     opacity: 1,
                     sizeAttenuation: true,
                     map: (function () {
-                        console.log('mapping');
                         var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, canvas, ctx) {
                             var x;
                             if (!canvas || !ctx) {
@@ -48,7 +47,6 @@ var IMDBSystem = (function(THREE){
                             ctx.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
                             ctx.stroke();
                             return canvas;
-                            
                         }(32, 32, 16, 16, 5)));
                         texture.needsUpdate = true;
                         return texture;
