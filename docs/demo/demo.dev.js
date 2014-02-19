@@ -1,4 +1,5 @@
 var IMDBSystem = (function(THREE){
+        var render;
         return function(node, width, height) {
             var scene = new THREE.Scene(),
                 camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000),
@@ -10,8 +11,6 @@ var IMDBSystem = (function(THREE){
                 webGLRenderer = new THREE.WebGLRenderer(),
                 /* What we'll create: a particle system */
                 system,
-                /* Our looped render method */
-                render,
                 /* The bread and butter: the setup for init or when properties change. */
                 layout = function(camera, scene, width, height) {
                     var range = ( width > height ) ? height : width,
