@@ -58,7 +58,7 @@ var IMDBSystem = (function(THREE){
                             ctx.stroke();
                             ctx.restore();
                             return canvas;
-                        }(32, 32, 16, 16, 90, 5, .5)));
+                        }(32, 32, 16, 16, 3, 5, .5)));
                         texture.needsUpdate = true;
                         return texture;
                     }())
