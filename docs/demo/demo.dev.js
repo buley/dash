@@ -27,7 +27,7 @@ var IMDBSystem = (function(THREE){
                     opacity: .8,
                     sizeAttenuation: true,
                     map: (function () {
-                        var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx, ) {
+                        var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
                             var x;
                             if (!canvas || !ctx) {
                                 if (!canvas) {
