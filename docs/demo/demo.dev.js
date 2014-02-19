@@ -79,7 +79,7 @@ var IMDBSystem = (function(THREE){
                             return function(context) {
                                 console.log('Added particles', context.entries.length, geometry, material);
                                 sys = new THREE.ParticleSystem(geometry, material);
-                                render = render(sys, sce, cam, rend);
+                                render(sys, sce, cam, rend);
                                 sys.sortParticles = true;
                                 sys.name = "imdb-particles"; //arbitrary
                                 if (sce) {
