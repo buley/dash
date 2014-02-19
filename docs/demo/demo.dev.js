@@ -85,7 +85,7 @@ var IMDBSystem = (function(THREE){
             layout();
         },
         init = function(node) {
-            webGLRenderer.setClearColor(0x000000, 1.0);
+            webGLRenderer.setClearColor(0xFFFFFF, 1.0);
             webGLRenderer.setSize(node.offsetWidth, node.offsetHeight);
             node.appendChild(webGLRenderer.domElement);
             console.log('init', webGLRenderer.domElement);
