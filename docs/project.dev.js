@@ -382,7 +382,7 @@ dashApp.directive('dashSplash', function() {
                 element.appendChild(el);
                 layout();
             };
-        } ];
+        } ]
     }
 );
 
