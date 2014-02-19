@@ -43,6 +43,8 @@ var IMDBSystem = (function(THREE){
                                 canvas.width = width;
                             }
                             ctx.save();
+                            ctx.strokeStyle = 'black';
+                            console.log('start',ctx);
                             ctx.beginPath();
                             ctx.translate(center_x, center_y);
                             ctx.moveTo(0, (0 - radius));
