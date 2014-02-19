@@ -2,17 +2,17 @@ var IMDBSystem = (function(THREE){
         
         var render = function() {
                 var step = .01;
-                if(sys) {
-                    sys.rotation.x += step;
-                    sys.rotation.z += step;
-                    console.log('step',sys.rotation);
+                if(system) {
+                    system.rotation.x += step;
+                    system.rotation.z += step;
+                    console.log('step',system.rotation);
                 } else {
-                    console.log('emtpy',sys);
+                    console.log('emtpy',system);
                 }
                 /* 60fps goodness */
                 requestAnimationFrame(render);
                 /* WebGL render */
-                rend.render(sce, cam);
+                renderer.render(scene, camera);
             },
             finish = function(context) {
                 console.log('Added particles', context.entries.length, geometry, material);
@@ -31,11 +31,19 @@ var IMDBSystem = (function(THREE){
             /* How the viewer sees it */
             camera,
             /* WebGL vs. Canvas renderer */
-            webGLRenderer = new THREE.WebGLRenderer(),
+            renderer = new THREE.WebGLRenderer(),
             /* What we'll create: a particle system */
             system;
 
         return function(node, width, height) {
+            webGLRenderer.setClearColor(0xFFFFFF, 1.0);
+            webGLRenderer.setSize(width, height);
+            node.appendChild(webGLRenderer.domElement);
+            camera.position.x = 20;
+            camera.position.y = 0;
+            camera.position.z = 150;
+            layout(system, camera, scene, webGLRenderer, width, height);
+            render(system, camera, scene, webGLRenderer, width, height);
             var layout = function(system, camera, scene, renderer, width, height) {
                     var range = ( width > height ) ? height : width,
                         geometry = new THREE.Geometry(),
@@ -103,15 +111,7 @@ var IMDBSystem = (function(THREE){
                     }
                     layout();
                 };
-            webGLRenderer.setClearColor(0xFFFFFF, 1.0);
-            webGLRenderer.setSize(width, height);
-            node.appendChild(webGLRenderer.domElement);
-            camera.position.x = 20;
-            camera.position.y = 0;
-            camera.position.z = 150;
-            finish = finish(system, camera, scene, renderer);
-            layout(system, camera, scene, webGLRenderer, width, height);
-            render(system, camera, scene, webGLRenderer, width, height);
+
             return relayout;
         };
 }(window.THREE));
