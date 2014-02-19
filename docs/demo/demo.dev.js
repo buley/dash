@@ -25,9 +25,9 @@ var IMDBSystem = (function(THREE){
                 geometry = new THREE.Geometry(),
                 material = new THREE.ParticleBasicMaterial({
                     size: 32,
-                    color: 0x000000,
+                    color: 0xFFFFFF,
                     transparent: true,
-                    opacity: .8,
+                    opacity: .6,
                     sizeAttenuation: true,
                     map: (function () {
                         var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
