@@ -3,8 +3,9 @@ var IMDBSystem = (function(THREE){
         var render = function() {
                 var step = .01;
                 if(system) {
-                    system.rotation.x += step;
-                    system.rotation.z += step;
+                    system.rotation.y += step;
+                    //system.rotation.x += step;
+                    //system.rotation.z += step;
                     console.log('step',system.rotation);
                 } else {
                     console.log('emtpy',system);
