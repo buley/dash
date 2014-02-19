@@ -398,10 +398,11 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                 store: 'imdb',
                 auto_increment: true,
                 store_key_path: null,
-                data: datum
+                data: next
             })
             (function(context) {
                 in_progress = false;
+                console.log(context.key);
                 processNext();
             }, function(context) {
                 in_progress = false;
