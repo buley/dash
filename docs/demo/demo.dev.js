@@ -64,7 +64,7 @@ var IMDBSystem = (function(THREE){
                             ctx.rotate(Math.PI / points);
                             ctx.lineTo(0, 0 - radius);
                         }
-                        ctx.fillStyle = 'black';
+                        ctx.fillStyle = 'yellow';
                         ctx.fill();
                         ctx.stroke();
                         ctx.restore();
@@ -108,7 +108,7 @@ var IMDBSystem = (function(THREE){
 
         return function(node, width, height) {
             range = ( width > height ) ? height : width;
-            renderer.setClearColor(0xFFFFFF, 1.0);
+            renderer.setClearColor(0x000000, 1.0);
             renderer.setSize(width, height);
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(renderer.domElement);
