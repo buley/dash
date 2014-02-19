@@ -79,13 +79,19 @@ var IMDBSystem = (function(THREE){
             }),
             layout = function(system, camera, scene, renderer, width, height) {
 
+                var called = false;
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
                     key: 'id'
                 })
                 (function(context) {
-                    finish(context);
+                    if(!called) {
+                        finish(context);
+                        called = true;
+                    } else {
+                        console.log('dupe success');
+                    }
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
