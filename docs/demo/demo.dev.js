@@ -16,7 +16,7 @@ var IMDBSystem = (function(THREE){
                 /* WebGL render */
                 webGLRenderer.render(sce, cam);
             };
-        }(system, scene, camera));
+        });
 
         return function(node, width, height) {
             var scene = new THREE.Scene(),
@@ -112,6 +112,7 @@ var IMDBSystem = (function(THREE){
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
+            render = render(system, scene, camera);
             layout(width, height);
             render(width, height);
             return relayout;
