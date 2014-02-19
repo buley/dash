@@ -81,7 +81,9 @@ var IMDBSystem = (function(THREE){
                                 sys = new THREE.ParticleSystem(geometry, material);
                                 sys.sortParticles = true;
                                 sys.name = "imdb-particles"; //arbitrary
-                                sce.add(sys);
+                                if (sce) {
+                                    sce.add(sys);
+                                }
                             };
                         }(system, camera, scene);
 
