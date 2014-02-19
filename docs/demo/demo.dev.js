@@ -91,7 +91,6 @@ var IMDBSystem = (function(THREE){
             webGLRenderer.setSize(node.offsetWidth, node.offsetHeight);
             //node.appendChild(webGLRenderer.domElement);
             $(node).append(webGLRenderer.domElement);
-            console.log('init', node, webGLRenderer.domElement);
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
