@@ -1,7 +1,6 @@
 var IMDBSystem = (function(THREE){
         
-        var render = (function(sys, sce, cam, rend) {
-            return function() {
+        var render = function() {
                 var step = .01;
                 if(sys) {
                     sys.rotation.x += step;
@@ -14,10 +13,8 @@ var IMDBSystem = (function(THREE){
                 requestAnimationFrame(render);
                 /* WebGL render */
                 rend.render(sce, cam);
-            };
-            return render;
-        }), finish = function(sys, cam, sce, rend) {
-            return function(context) {
+            },
+            finish = function(context) {
                 console.log('Added particles', context.entries.length, geometry, material);
                 sys = new THREE.ParticleSystem(geometry, material);
                 render = render(sys, sce, cam, rend);
@@ -26,22 +23,20 @@ var IMDBSystem = (function(THREE){
                 if (sce) {
                     sce.add(sys);
                 }
-            };
-        };
+            },
+            scene = new THREE.Scene(),
+            camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000),
+            /* What the viewer sees */
+            scene,
+            /* How the viewer sees it */
+            camera,
+            /* WebGL vs. Canvas renderer */
+            webGLRenderer = new THREE.WebGLRenderer(),
+            /* What we'll create: a particle system */
+            system;
 
         return function(node, width, height) {
-            var scene = new THREE.Scene(),
-                camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000),
-                /* What the viewer sees */
-                scene,
-                /* How the viewer sees it */
-                camera,
-                /* WebGL vs. Canvas renderer */
-                webGLRenderer = new THREE.WebGLRenderer(),
-                /* What we'll create: a particle system */
-                system,
-                /* The bread and butter: the setup for init or when properties change. */
-                layout = function(system, camera, scene, renderer, width, height) {
+            var layout = function(system, camera, scene, renderer, width, height) {
                     var range = ( width > height ) ? height : width,
                         geometry = new THREE.Geometry(),
                         material = new THREE.ParticleBasicMaterial({
