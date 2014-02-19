@@ -18,9 +18,9 @@ var IMDBSystem = (function(THREE){
             webGLRenderer.render(scene, camera);
         },
         /* The bread and butter: the setup for init or when properties change. */
-        layout = function() {
+        layout = function(width, height) {
             console.log('laying out');
-            var range = 50,
+            var range = ( width > height ) ? height : width,
                 geometry = new THREE.Geometry(),
                 material = new THREE.ParticleBasicMaterial({
                     size: 32,
@@ -106,8 +106,8 @@ var IMDBSystem = (function(THREE){
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
-            layout();
-            render();
+            layout(width, height);
+            render(width, height);
             return relayout;
         };
         return init;
