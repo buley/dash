@@ -375,7 +375,6 @@ dashApp.directive('dashSplash', function() {
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 console.log('dashSplash linker');
-                var xel = element.querySelector( '#dash-splash-container' );
                 if (element[0].firstChild.value) {
                     element[0].removeChild(element[0].firstChild);
                 }
