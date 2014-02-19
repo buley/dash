@@ -1,7 +1,7 @@
 var IMDBSystem = (function(THREE){
         
         var render = function() {
-                var step = .01;
+                var step = .001;
                 if(system) {
                     system.rotation.y += step;
                     //system.rotation.x += step;
@@ -64,7 +64,7 @@ var IMDBSystem = (function(THREE){
                             ctx.rotate(Math.PI / points);
                             ctx.lineTo(0, 0 - radius);
                         }
-                        ctx.fillStyle = 'yellow';
+                        ctx.fillStyle = 'white';
                         ctx.fill();
                         ctx.stroke();
                         ctx.restore();
