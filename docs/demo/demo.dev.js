@@ -8,20 +8,7 @@ var IMDBSystem = (function(THREE){
         /* What we'll create: a particle system */
         system,
         /* Our looped render method */
-        render = function() {
-            var step = .01;
-            if(system) {
-                system.rotation.x += step;
-                system.rotation.z += step;
-                console.log('step',system.rotation);
-            } else {
-                console.log('emtpy',system);
-            }
-            /* 60fps goodness */
-            requestAnimationFrame(render);
-            /* WebGL render */
-            webGLRenderer.render(scene, camera);
-        },
+        render,
         /* The bread and butter: the setup for init or when properties change. */
         layout = function(width, height) {
             var range = ( width > height ) ? height : width,
@@ -111,6 +98,20 @@ var IMDBSystem = (function(THREE){
             camera.position.z = 150;
             layout(width, height);
             render(width, height);
+            render = function() {
+                var step = .01;
+                if(system) {
+                    system.rotation.x += step;
+                    system.rotation.z += step;
+                    console.log('step',system.rotation);
+                } else {
+                    console.log('emtpy',system);
+                }
+                /* 60fps goodness */
+                requestAnimationFrame(render);
+                /* WebGL render */
+                webGLRenderer.render(scene, camera);
+            };
             return relayout;
         };
         return init;
