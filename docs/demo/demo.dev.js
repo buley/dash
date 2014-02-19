@@ -38,9 +38,9 @@ var IMDBSystem = (function(THREE){
                                 if (!ctx) {
                                     ctx = canvas.getContext('2d');
                                 }
-                                canvas.height = height;
-                                canvas.width = width;
                             }
+                            canvas.height = height;
+                            canvas.width = width;
                             ctx.save();
                             ctx.strokeStyle = 'black';
                             ctx.beginPath();
