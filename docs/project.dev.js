@@ -400,7 +400,9 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                     store_key_path: null,
                     data: datum
                 })
-                (null, function(context) {
+                (function(context) {
+                    console.log(context.key);
+                }, function(context) {
                     console.log('add error',context);
                 });
             })
