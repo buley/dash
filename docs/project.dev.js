@@ -410,23 +410,24 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                 in_progress = false;
                 processNext();
             });
-        };
-    var dashInstalled = localStorage.getItem('dash-demo-installed');
+        },
+        dashInstalled = localStorage.getItem('dash-demo-installed');
     if (!dashInstalled) {
         for (; start > 2013; start -= 1) {
             $http( {
                 method: 'GET',
                 url: '/docs/demo/data/' + start + '.json'
-            }).success( function(data, status, headers, config) {
+            }).success(function(data, status, headers, config) {
                 stack.push.apply(stack, data);
                 console.log('stack length', stack.length);
                 processNext();
-            } ).error( function(data, status, headers, config) {
+            }).error( function(data, status, headers, config) {
                 console.log('error',data, status, headers, config);
             });
         }
         localStorage.setItem('dash-demo-installed', 'YES');
     }
+
 }]);
 
 
