@@ -375,7 +375,7 @@ dashApp.directive('dashSplash', function() {
                 layout = IMDBSystem(el);
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
-                element[0].addChild(el);
+                element[0].appendChild(el);
                 layout();
             };
         }
