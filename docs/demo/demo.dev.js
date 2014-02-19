@@ -9,7 +9,7 @@ var IMDBSystem = (function(THREE){
         system,
         /* Our looped render method */
         render = function() {
-            var step = 0.01;
+            var step = 1;
             if(system) {
                 system.rotation.x = step;
                 system.rotation.z = step;
