@@ -53,7 +53,7 @@ var IMDBSystem = (function(THREE){
                         return texture;
                     }())
                 }),*/
-                material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0xffffff}),
+                material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0x000000}),
                 system;
             
             var finish = function(context) {
