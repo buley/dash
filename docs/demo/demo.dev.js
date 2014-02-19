@@ -33,7 +33,7 @@ var IMDBSystem = (function(THREE){
             renderer = new THREE.WebGLRenderer(),
             /* What we'll create: a particle system */
             system,
-            range = ( width > height ) ? height : width,
+            range,
             geometry = new THREE.Geometry(),
             material = new THREE.ParticleBasicMaterial({
                 size: 8,
@@ -102,6 +102,7 @@ var IMDBSystem = (function(THREE){
             };
 
         return function(node, width, height) {
+            range = ( width > height ) ? height : width;
             renderer.setClearColor(0xFFFFFF, 1.0);
             renderer.setSize(width, height);
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
