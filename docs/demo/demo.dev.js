@@ -28,6 +28,7 @@ var IMDBSystem = (function(THREE){
                     color: 0xFFFFFF,
                     transparent: true,
                     opacity: .6,
+                    blending: THREE.AdditiveBlending,
                     sizeAttenuation: true,
                     map: (function () {
                         var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
