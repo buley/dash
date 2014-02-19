@@ -384,7 +384,7 @@ dashApp.directive('dashSplash', function() {
 
 dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
     console.log('splash controller');
-    var start = 2016,
+    var start = 2013,
         stack = [],
         in_progress = false,
         processNext = function() {
@@ -411,10 +411,11 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                 processNext();
             });
         },
-        dashInstalled = localStorage.getItem('dash-demo-installed');
+        key = 'dash-demo-installed-1',
+        dashInstalled = localStorage.getItem(key);
     if (!dashInstalled) {
-        for (; start > 2013; start -= 1) {
-            localStorage.setItem('dash-demo-installed', 'YES');
+        for (; start > 2000; start -= 1) {
+            localStorage.setItem(key, 'YES');
             $http( {
                 method: 'GET',
                 url: '/docs/demo/data/' + start + '.json'
