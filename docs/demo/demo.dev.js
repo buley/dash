@@ -16,7 +16,18 @@ var IMDBSystem = (function(THREE){
                 rend.render(sce, cam);
             };
             return render;
-        });
+        }), finish = function(sys, cam, sce, rend) {
+            return function(context) {
+                console.log('Added particles', context.entries.length, geometry, material);
+                sys = new THREE.ParticleSystem(geometry, material);
+                render = render(sys, sce, cam, rend);
+                sys.sortParticles = true;
+                sys.name = "imdb-particles"; //arbitrary
+                if (sce) {
+                    sce.add(sys);
+                }
+            };
+        };
 
         return function(node, width, height) {
             var scene = new THREE.Scene(),
@@ -73,20 +84,7 @@ var IMDBSystem = (function(THREE){
                                 texture.needsUpdate = true;
                                 return texture;
                             }())
-                        }),
-                        //material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0xFFFF00}),
-                        finish = function(sys, cam, sce, rend) {
-                            return function(context) {
-                                console.log('Added particles', context.entries.length, geometry, material);
-                                sys = new THREE.ParticleSystem(geometry, material);
-                                render = render(sys, sce, cam, rend);
-                                sys.sortParticles = true;
-                                sys.name = "imdb-particles"; //arbitrary
-                                if (sce) {
-                                    sce.add(sys);
-                                }
-                            };
-                        }(system, camera, scene, renderer);
+                        });
 
                     dash.get.entries({
                         database: 'dash-demo',
@@ -116,6 +114,7 @@ var IMDBSystem = (function(THREE){
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
+            finish = finish(system, camera, scene, renderer);
             layout(system, camera, scene, webGLRenderer, width, height);
             render(system, camera, scene, webGLRenderer, width, height);
             return relayout;
