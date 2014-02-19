@@ -1,7 +1,7 @@
 var IMDBSystem = (function(THREE){
         
         var render = function() {
-                var step = .001;
+                var step = .0005;
                 if(system) {
                     system.rotation.y += step;
                     //system.rotation.x += step;
