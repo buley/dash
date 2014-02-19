@@ -1,5 +1,23 @@
 var IMDBSystem = (function(THREE){
-        var render;
+        
+        var render = (function(sys, sce, cam) {
+            var that = this;
+            return function() {
+                var step = .01;
+                if(system) {
+                    system.rotation.x += step;
+                    system.rotation.z += step;
+                    console.log('step',system.rotation);
+                } else {
+                    console.log('emtpy',system);
+                }
+                /* 60fps goodness */
+                requestAnimationFrame(this);
+                /* WebGL render */
+                webGLRenderer.render(sce, cam);
+            };
+        }(system, scene, camera));
+
         return function(node, width, height) {
             var scene = new THREE.Scene(),
                 camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000),
@@ -96,23 +114,6 @@ var IMDBSystem = (function(THREE){
             camera.position.z = 150;
             layout(width, height);
             render(width, height);
-            render = (function(sys, sce, cam) {
-                var that = this;
-                return function() {
-                    var step = .01;
-                    if(system) {
-                        system.rotation.x += step;
-                        system.rotation.z += step;
-                        console.log('step',system.rotation);
-                    } else {
-                        console.log('emtpy',system);
-                    }
-                    /* 60fps goodness */
-                    requestAnimationFrame(this);
-                    /* WebGL render */
-                    webGLRenderer.render(sce, cam);
-                };
-            }(system, scene, camera));
             return relayout;
         };
 }(window.THREE));
