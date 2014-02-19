@@ -52,7 +52,7 @@ var IMDBSystem = (function(THREE){
                                 ctx.rotate(Math.PI / points);
                                 ctx.lineTo(0, 0 - radius);
                             }
-                            ctx.fillStyle = 'white';
+                            ctx.fillStyle = 'black';
                             ctx.fill();
                             ctx.restore();
                             return canvas;
