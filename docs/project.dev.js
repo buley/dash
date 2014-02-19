@@ -376,10 +376,10 @@ dashApp.directive('dashSplash', function() {
             return function link(scope, element, attrs) {
                 console.log('dashSplash linker');
                 var xel = element.querySelector( '#dash-splash-container' );
-                if ( null !== xel ) {1
-                    element.removeChild(xel);
+                if (element[0].firstChild.value) {
+                    element[0].removeChild(element[0].firstChild);
                 }
-                element.appendChild(el);
+                element[0].appendChild(el);
                 layout();
             };
         }
