@@ -368,6 +368,7 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
 dashApp.directive('dashSplash', function() { 
     return {
         scope: {},
+        restrict: 'AE',
         compile: function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
@@ -375,10 +376,10 @@ dashApp.directive('dashSplash', function() {
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 console.log('dashSplash linker');
-                if (element[0].firstChild) {
-                    element[0].removeChild(element[0].firstChild.value);
+                if (element.find(el)) {
+                    element.remove(el);
                 }
-                element[0].appendChild(el);
+                element.append(el);
                 layout();
             };
         }
