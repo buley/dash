@@ -36,15 +36,15 @@ var IMDBSystem = (function(THREE){
             system;
 
         return function(node, width, height) {
-            webGLRenderer.setClearColor(0xFFFFFF, 1.0);
-            webGLRenderer.setSize(width, height);
+            renderer.setClearColor(0xFFFFFF, 1.0);
+            renderer.setSize(width, height);
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(webGLRenderer.domElement);
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
-            layout(system, camera, scene, webGLRenderer, width, height);
-            render(system, camera, scene, webGLRenderer, width, height);
+            layout(system, camera, scene, renderer, width, height);
+            render(system, camera, scene, renderer, width, height);
             var layout = function(system, camera, scene, renderer, width, height) {
                     var range = ( width > height ) ? height : width,
                         geometry = new THREE.Geometry(),
