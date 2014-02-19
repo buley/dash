@@ -383,8 +383,8 @@ dashApp.directive('dashSplash', function() {
                 layout();
             };
         } ]
-    }
-);
+    };
+} );
 
 dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
     console.log('splash controller');
