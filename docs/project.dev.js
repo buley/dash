@@ -375,8 +375,8 @@ dashApp.directive('dashSplash', function() {
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 console.log('dashSplash linker');
-                if (element[0].firstChild.value) {
-                    element[0].removeChild(element[0].firstChild);
+                if (element[0].firstChild) {
+                    element[0].removeChild(element[0].firstChild.value);
                 }
                 element[0].appendChild(el);
                 layout();
