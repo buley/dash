@@ -4,12 +4,12 @@ var IMDBSystem = (function(THREE){
             var that = this;
             return function() {
                 var step = .01;
-                if(system) {
-                    system.rotation.x += step;
-                    system.rotation.z += step;
-                    console.log('step',system.rotation);
+                if(sys) {
+                    sys.rotation.x += step;
+                    sys.rotation.z += step;
+                    console.log('step',sys.rotation);
                 } else {
-                    console.log('emtpy',system);
+                    console.log('emtpy',sys);
                 }
                 /* 60fps goodness */
                 requestAnimationFrame(this);
