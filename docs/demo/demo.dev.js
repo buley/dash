@@ -1,6 +1,7 @@
 var IMDBSystem = (function(THREE){
         
         var render = (function(sys, sce, cam, rend) {
+            console.log('render start',sys, sce, cam, rend);
             return function() {
                 var step = .01;
                 if(sys) {
