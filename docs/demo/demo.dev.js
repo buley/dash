@@ -24,7 +24,7 @@ var IMDBSystem = (function(THREE){
             var range = ( width > height ) ? height : width,
                 geometry = new THREE.Geometry(),
                 material = new THREE.ParticleBasicMaterial({
-                    size: 32,
+                    size: 8,
                     color: 0xFFFFFF,
                     transparent: true,
                     opacity: .6,
@@ -59,7 +59,7 @@ var IMDBSystem = (function(THREE){
                             ctx.stroke();
                             ctx.restore();
                             return canvas;
-                        }(32, 32, 16, 16, 3, 5, .5)));
+                        }(16, 16, 8, 8, 3, 5, .5)));
                         texture.needsUpdate = true;
                         return texture;
                     }())
