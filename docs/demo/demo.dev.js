@@ -116,7 +116,6 @@ var IMDBSystem = (function(THREE){
             camera.position.y = 0;
             camera.position.z = 150;
             console.log('init once');
-            layout(system, camera, scene, renderer, width, height);
             render(system, camera, scene, renderer, width, height);
             return relayout;
         };
