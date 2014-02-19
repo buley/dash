@@ -39,7 +39,7 @@ var IMDBSystem = (function(THREE){
             renderer.setClearColor(0xFFFFFF, 1.0);
             renderer.setSize(width, height);
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-            node.appendChild(webGLRenderer.domElement);
+            node.appendChild(renderer.domElement);
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
