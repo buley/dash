@@ -88,7 +88,7 @@ var IMDBSystem = (function(THREE){
                         scene.remove(scene.getObjectByName("particles"));
                     }
                     layout();
-                },
+                };
             webGLRenderer.setClearColor(0xFFFFFF, 1.0);
             webGLRenderer.setSize(width, height);
             node.appendChild(webGLRenderer.domElement);
