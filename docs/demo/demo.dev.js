@@ -56,6 +56,7 @@ var IMDBSystem = (function(THREE){
                         ctx.beginPath();
                         ctx.translate(center_x, center_y);
                         ctx.moveTo(0, (0 - radius));
+                        points = Math.floor( Math.random() * 100 ) % 15;
                         /* super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ */
                         /* m = "fraction of radius for inset" */
                         for ( x = 0; x < points; x += 1) {
