@@ -75,7 +75,6 @@ var IMDBSystem = (function(THREE){
                             }())
                         }),
                         //material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0xFFFF00}),
-                        system,
                         finish = function(sys, cam, sce) {
                             return function(context) {
                                 console.log('Added particles', context.entries.length, geometry, material);
