@@ -55,7 +55,7 @@ var IMDBSystem = (function(THREE){
                 system;
             
             var finish = function(context) {
-                console.log('Added particles', context.entries.length);
+                console.log('Added particles', context.entries.length, geometry, material);
                 system = new THREE.ParticleSystem(geometry, material);
                 system.sortParticles = true;
                 system.name = "imdb-particles"; //arbitrary
@@ -87,9 +87,10 @@ var IMDBSystem = (function(THREE){
         init = function(node) {
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(45, node.offsetWidth / node.offsetHeight, 0.1, 1000)
-            webGLRenderer.setClearColor(0x000000, 1.0);
+            //webGLRenderer.setClearColor(0x000000, 1.0);
             webGLRenderer.setSize(node.offsetWidth, node.offsetHeight);
-            node.appendChild(webGLRenderer.domElement);
+            //node.appendChild(webGLRenderer.domElement);
+            $(node).append(webGLRenderer.domElement);
             console.log('init', node, webGLRenderer.domElement);
             camera.position.x = 20;
             camera.position.y = 0;
