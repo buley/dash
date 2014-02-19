@@ -1,7 +1,6 @@
 var IMDBSystem = (function(THREE){
         
         var render = (function(sys, sce, cam) {
-            var that = this;
             return function() {
                 var step = .01;
                 if(sys) {
@@ -12,7 +11,7 @@ var IMDBSystem = (function(THREE){
                     console.log('emtpy',sys);
                 }
                 /* 60fps goodness */
-                requestAnimationFrame(this);
+                requestAnimationFrame(render);
                 /* WebGL render */
                 webGLRenderer.render(sce, cam);
             };
