@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cd431261-c0e8-4bb4-a672-9515fb2ec1ad" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.css" afterPath="$PROJECT_DIR$/docs/project.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.less" afterPath="$PROJECT_DIR$/docs/project.less" />
     </list>
     <ignored path="dash.iws" />
@@ -29,7 +28,7 @@
       <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="17" selection-start="303" selection-end="303" vertical-scroll-proportion="0.49393415" vertical-offset="0" max-vertical-offset="1410">
+            <state line="29" column="15" selection-start="414" selection-end="414" vertical-scroll-proportion="0.75389946" vertical-offset="0" max-vertical-offset="1410">
               <folding />
             </state>
           </provider>
@@ -570,7 +569,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="17" selection-start="303" selection-end="303" vertical-scroll-proportion="0.49393415" vertical-offset="0" max-vertical-offset="1410">
+        <state line="29" column="15" selection-start="414" selection-end="414" vertical-scroll-proportion="0.75389946" vertical-offset="0" max-vertical-offset="1410">
           <folding />
         </state>
       </provider>
