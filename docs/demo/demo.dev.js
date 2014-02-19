@@ -2,7 +2,7 @@ var IMDBSystem = (function(THREE){
         
         var render = (function(sys, sce, cam, rend) {
             console.log('render start',sys, sce, cam, rend);
-            return function() {
+            render = function() {
                 var step = .01;
                 if(sys) {
                     sys.rotation.x += step;
@@ -16,6 +16,7 @@ var IMDBSystem = (function(THREE){
                 /* WebGL render */
                 rend.render(sce, cam);
             };
+            return render;
         });
 
         return function(node, width, height) {
