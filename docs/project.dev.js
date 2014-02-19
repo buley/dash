@@ -367,7 +367,7 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
 
 dashApp.directive('dashSplash', function() { 
     return {
-        controller: [],
+        scope: {},
         compile: function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
