@@ -1,6 +1,6 @@
 var IMDBSystem = (function(THREE){
         
-        var render = (function(sys, sce, cam) {
+        var render = (function(sys, sce, cam, rend) {
             return function() {
                 var step = .01;
                 if(sys) {
@@ -13,7 +13,7 @@ var IMDBSystem = (function(THREE){
                 /* 60fps goodness */
                 requestAnimationFrame(render);
                 /* WebGL render */
-                webGLRenderer.render(sce, cam);
+                rend.render(sce, cam);
             };
         });
 
@@ -111,7 +111,7 @@ var IMDBSystem = (function(THREE){
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
-            render = render(system, scene, camera);
+            render = render(system, scene, camera, webGLRenderer);
             layout(width, height);
             render(width, height);
             return relayout;
