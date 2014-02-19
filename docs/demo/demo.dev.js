@@ -1,8 +1,7 @@
 var IMDBSystem = (function(THREE){
         
         var render = (function(sys, sce, cam, rend) {
-            console.log('render start',sys, sce, cam, rend);
-            render = function() {
+            return function() {
                 var step = .01;
                 if(sys) {
                     sys.rotation.x += step;
