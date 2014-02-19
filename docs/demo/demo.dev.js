@@ -53,7 +53,7 @@ var IMDBSystem = (function(THREE){
                         return texture;
                     }())
                 }),*/
-                material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0x000000}),
+                material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0xFFFF00}),
                 system;
             
             var finish = function(context) {
@@ -89,10 +89,10 @@ var IMDBSystem = (function(THREE){
         init = function(node, width, height) {
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000)
-            //webGLRenderer.setClearColor(0x000000, 1.0);
+            webGLRenderer.setClearColor(0xFFFFFF, 1.0);
             webGLRenderer.setSize(width, height);
-            //node.appendChild(webGLRenderer.domElement);
-            $(node).append(webGLRenderer.domElement);
+            node.appendChild(webGLRenderer.domElement);
+            //$(node).append(webGLRenderer.domElement);
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
