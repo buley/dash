@@ -75,7 +75,31 @@ var IMDBSystem = (function(THREE){
                     texture.needsUpdate = true;
                     return texture;
                 }())
-            });
+            }),
+            layout = function(system, camera, scene, renderer, width, height) {
+
+                dash.get.entries({
+                    database: 'dash-demo',
+                    store: 'imdb',
+                    key: 'id'
+                })
+                (function(context) {
+                    finish(context);
+                }, function(context) {
+                    console.log('dash error',context);
+                }, function(context) {
+                    geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
+                });
+
+            },
+            /* When properties change we'll need a re-layout */
+            relayout = function () {
+                console.log('relaying out');
+                if (scene.getObjectByName("particles")) {
+                    scene.remove(scene.getObjectByName("particles"));
+                }
+                layout();
+            };
 
         return function(node, width, height) {
             renderer.setClearColor(0xFFFFFF, 1.0);
@@ -87,32 +111,6 @@ var IMDBSystem = (function(THREE){
             camera.position.z = 150;
             layout(system, camera, scene, renderer, width, height);
             render(system, camera, scene, renderer, width, height);
-            var layout = function(system, camera, scene, renderer, width, height) {
-                    
-
-                    dash.get.entries({
-                        database: 'dash-demo',
-                        store: 'imdb',
-                        key: 'id'
-                    })
-                    (function(context) {
-                        finish(context);
-                    }, function(context) {
-                        console.log('dash error',context);
-                    }, function(context) {
-                        geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
-                    });
-
-                },
-                /* When properties change we'll need a re-layout */
-                relayout = function () {
-                    console.log('relaying out');
-                    if (scene.getObjectByName("particles")) {
-                        scene.remove(scene.getObjectByName("particles"));
-                    }
-                    layout();
-                };
-
             return relayout;
         };
 }(window.THREE));
