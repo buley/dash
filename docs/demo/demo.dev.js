@@ -1,8 +1,8 @@
 var IMDBSystem = (function(THREE){
     /* What the viewer sees */
-    var scene = new THREE.Scene(),
+    var scene,
         /* How the viewer sees it */
-        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000),
+        camera,
         /* WebGL vs. Canvas renderer */
         webGLRenderer = new THREE.WebGLRenderer(),
         /* What we'll create: a particle system */
@@ -85,6 +85,8 @@ var IMDBSystem = (function(THREE){
             layout();
         },
         init = function(node) {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(45, node.offsetWidth / node.offsetHeight, 0.1, 1000)
             webGLRenderer.setClearColor(0xFFFFFF, 1.0);
             webGLRenderer.setSize(node.offsetWidth, node.offsetHeight);
             node.appendChild(webGLRenderer.domElement);

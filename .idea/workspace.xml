@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd431261-c0e8-4bb4-a672-9515fb2ec1ad" name="Default" comment="" />
+    <list default="true" id="cd431261-c0e8-4bb4-a672-9515fb2ec1ad" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/demo/demo.dev.js" afterPath="$PROJECT_DIR$/docs/demo/demo.dev.js" />
+    </list>
     <ignored path="dash.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +28,7 @@
       <file leaf-file-name="project.dev.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="0" selection-start="1236" selection-end="1236" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="6630">
+            <state line="37" column="0" selection-start="1237" selection-end="1237" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="6645">
               <folding />
             </state>
           </provider>
@@ -76,8 +78,8 @@
         <option value="$PROJECT_DIR$/specs/entries/update.entries.spec.js" />
         <option value="$PROJECT_DIR$/specs/entries/remove.entries.spec.js" />
         <option value="$PROJECT_DIR$/lib/dash.dev.js" />
-        <option value="$PROJECT_DIR$/docs/project.dev.js" />
         <option value="$PROJECT_DIR$/docs/templates/splash.html" />
+        <option value="$PROJECT_DIR$/docs/project.dev.js" />
       </list>
     </option>
   </component>
@@ -568,7 +570,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.dev.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1236" selection-end="1236" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="6630">
+        <state line="37" column="0" selection-start="1237" selection-end="1237" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="6645">
           <folding />
         </state>
       </provider>
