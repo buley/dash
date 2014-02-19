@@ -77,6 +77,7 @@ var IMDBSystem = (function(THREE){
             layout = function(system, camera, scene, renderer, width, height) {
 
                 var called = false;
+                console.log('layingout');
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
