@@ -22,15 +22,14 @@ var IMDBSystem = (function(THREE){
             console.log('laying out');
             var range = 50,
                 geometry = new THREE.Geometry(),
-                /*
                 material = new THREE.ParticleBasicMaterial({
                     size: 32,
                     color: 0x000000,
                     transparent: true,
-                    opacity: 1,
+                    opacity: .8,
                     sizeAttenuation: true,
                     map: (function () {
-                        var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, canvas, ctx) {
+                        var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
                             var x;
                             if (!canvas || !ctx) {
                                 if (!canvas) {
@@ -39,21 +38,38 @@ var IMDBSystem = (function(THREE){
                                 if (!ctx) {
                                     ctx = canvas.getContext('2d');
                                 }
+                                canvas.height = height;
+                                canvas.width = width;
                             }
-                            canvas.height = height;
-                            canvas.width = width;
                             ctx.save();
                             ctx.strokeStyle = 'black';
+                            console.log('start',ctx);
                             ctx.beginPath();
                             ctx.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
                             ctx.stroke();
                             return canvas;
-                        }(32, 32, 16, 16, 5)));
+                            ctx.beginPath();
+                            ctx.translate(center_x, center_y);
+                            ctx.moveTo(0, (0 - radius));
+                            /* super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ */
+                            /* m = "fraction of radius for inset" */
+                            for ( x = 0; x < points; x += 1) {
+                                ctx.rotate(Math.PI / points);
+                                ctx.lineTo(0, (0 - (radius * m)));
+                                ctx.rotate(Math.PI / points);
+                                ctx.lineTo(0, 0 - radius);
+                            }
+                            ctx.fillStyle = 'black';
+                            ctx.fill();
+                            ctx.stroke();
+                            ctx.restore();
+                            return canvas;
+                        }(32, 32, 16, 16, 90, 5, .5)));
                         texture.needsUpdate = true;
                         return texture;
                     }())
-                }),*/
-                material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0xFFFF00}),
+                }),
+                //material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0xFFFF00}),
                 system;
             
             var finish = function(context) {
