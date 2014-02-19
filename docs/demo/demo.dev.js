@@ -9,9 +9,9 @@ var IMDBSystem = (function(THREE){
         system,
         /* Our looped render method */
         render = function() {
-            var step = .01;
+            var step = 1;
             if(system) {
-                system.rotation.y += step;
+                system.rotation.x += step;
                 system.rotation.z += step;
             }
             /* 60fps goodness */
@@ -28,7 +28,6 @@ var IMDBSystem = (function(THREE){
                     color: 0xFFFFFF,
                     transparent: true,
                     opacity: .6,
-                    blending: THREE.AdditiveBlending,
                     sizeAttenuation: true,
                     map: (function () {
                         var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
