@@ -372,7 +372,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
     }).success( function(data, status, headers, config) {
         console.log('success',data, status, headers, config);
         _.each( data, function(datum) {
-            console.log(datum);
+            //console.log(datum);
             /*dash.add.entry({
                 database: 'dash-demo',
                 store: 'imdb',
