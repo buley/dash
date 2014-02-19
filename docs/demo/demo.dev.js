@@ -29,7 +29,7 @@ var IMDBSystem = (function(THREE){
                 /* What we'll create: a particle system */
                 system,
                 /* The bread and butter: the setup for init or when properties change. */
-                layout = function(camera, scene, width, height) {
+                layout = function(system, camera, scene, width, height) {
                     var range = ( width > height ) ? height : width,
                         geometry = new THREE.Geometry(),
                         material = new THREE.ParticleBasicMaterial({
@@ -75,13 +75,15 @@ var IMDBSystem = (function(THREE){
                         }),
                         //material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0xFFFF00}),
                         system,
-                        finish = function(context) {
-                            console.log('Added particles', context.entries.length, geometry, material);
-                            system = new THREE.ParticleSystem(geometry, material);
-                            system.sortParticles = true;
-                            system.name = "imdb-particles"; //arbitrary
-                            scene.add(system);
-                        };
+                        finish = function(sys, cam, sce) {
+                            return function(context) {
+                                console.log('Added particles', context.entries.length, geometry, material);
+                                sys = new THREE.ParticleSystem(geometry, material);
+                                sys.sortParticles = true;
+                                sys.name = "imdb-particles"; //arbitrary
+                                sce.add(sys);
+                            };
+                        }(system, camera, scene);
 
                     dash.get.entries({
                         database: 'dash-demo',
@@ -112,8 +114,8 @@ var IMDBSystem = (function(THREE){
             camera.position.y = 0;
             camera.position.z = 150;
             render = render(system, scene, camera, webGLRenderer);
-            layout(width, height);
-            render(width, height);
+            layout(system, camera, scene, width, height);
+            render(system, camera, scene, width, height);
             return relayout;
         };
 }(window.THREE));
