@@ -384,33 +384,44 @@ dashApp.directive('dashSplash', function() {
 
 dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
     console.log('splash controller');
-    var start = 2016;
-    for (; start > 2000; start -= 1) {
+    var start = 2016,
+        stack = [],
+        in_progress = false,
+        processNext = function() {
+            if(!in_progress && stack.length) {
+                doNext(stack.shift());
+            }
+        },
+        doNext = function(next) {
+            dash.add.entry({
+                database: 'dash-demo',
+                store: 'imdb',
+                auto_increment: true,
+                store_key_path: null,
+                data: datum
+            })
+            (function(context) {
+                in_progress = false;
+                processNext();
+            }, function(context) {
+                in_progress = false;
+                processNext();
+            });
+        };
+    for (; start > 2014; start -= 1) {
         $http( {
             method: 'GET',
             url: '/docs/demo/data/' + start + '.json'
         }).success( function(data, status, headers, config) {
-            console.log('success',data, status, headers, config);
-            _.each( data, function(datum) {
-                //console.log(datum);
-                dash.add.entry({
-                    database: 'dash-demo',
-                    store: 'imdb',
-                    auto_increment: true,
-                    store_key_path: null,
-                    data: datum
-                })
-                (function(context) {
-                    console.log(context.key);
-                }, function(context) {
-                    console.log('add error',context);
-                });
-            })
+            stack.push.apply(stack, data);
+            processNext();
         } ).error( function(data, status, headers, config) {
             console.log('error',data, status, headers, config);
         });
     }
 }]);
+
+
 
 dashApp.directive('markdown', function () {
     var converter = new Showdown.converter();
