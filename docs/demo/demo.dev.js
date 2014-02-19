@@ -13,7 +13,6 @@ var IMDBSystem = (function(THREE){
             system.rotation.x = step;
             system.rotation.z = step;
             /* 60fps goodness */
-            console.log('tick');
             requestAnimationFrame(render);
             /* WebGL render */
             webGLRenderer.render(scene, camera);
