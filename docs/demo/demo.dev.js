@@ -58,15 +58,14 @@ var IMDBSystem = (function(THREE){
                             }())
                         }),
                         //material = new THREE.ParticleBasicMaterial({size: 4, vertexColors: true, color: 0xFFFF00}),
-                        system;
-                    
-                    var finish = function(context) {
-                        console.log('Added particles', context.entries.length, geometry, material);
-                        system = new THREE.ParticleSystem(geometry, material);
-                        system.sortParticles = true;
-                        system.name = "imdb-particles"; //arbitrary
-                        scene.add(system);
-                    };
+                        system,
+                        finish = function(context) {
+                            console.log('Added particles', context.entries.length, geometry, material);
+                            system = new THREE.ParticleSystem(geometry, material);
+                            system.sortParticles = true;
+                            system.name = "imdb-particles"; //arbitrary
+                            scene.add(system);
+                        };
 
                     dash.get.entries({
                         database: 'dash-demo',
