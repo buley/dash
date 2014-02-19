@@ -87,7 +87,7 @@ var IMDBSystem = (function(THREE){
         init = function(node) {
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(45, node.offsetWidth / node.offsetHeight, 0.1, 1000)
-            webGLRenderer.setClearColor(0xFFFFFF, 1.0);
+            webGLRenderer.setClearColor(0x000000, 1.0);
             webGLRenderer.setSize(node.offsetWidth, node.offsetHeight);
             node.appendChild(webGLRenderer.domElement);
             console.log('init', node, webGLRenderer.domElement);
