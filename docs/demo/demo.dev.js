@@ -19,6 +19,7 @@ var IMDBSystem = (function(THREE){
         },
         /* The bread and butter: the setup for init or when properties change. */
         layout = function() {
+            console.log('laying out');
             var range = 500,
                 geometry = new THREE.Geometry(),
                 material = new THREE.ParticleBasicMaterial({
@@ -28,6 +29,7 @@ var IMDBSystem = (function(THREE){
                     opacity: .8,
                     sizeAttenuation: true,
                     map: (function () {
+                        console.log('mapping');
                         var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
                             var x;
                             if (!canvas || !ctx) {
@@ -70,12 +72,14 @@ var IMDBSystem = (function(THREE){
         },
         /* When properties change we'll need a re-layout */
         relayout = function () {
-            if (scene.getChildByName("particles")) {
-                scene.remove(scene.getChildByName("particles"));
+            console.log('relaying out');
+            if (scene.getObjectByName("particles")) {
+                scene.remove(scene.getObjectByName("particles"));
             }
             layout();
         },
         init = function(node) {
+            console.log('init');
             webGLRenderer.setClearColor(0xFFFFFF, 1.0);
             webGLRenderer.setSize(window.innerWidth, window.innerHeight); //Fix
             node.appendChild(webGLRenderer.domElement);
