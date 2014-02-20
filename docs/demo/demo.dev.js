@@ -1,5 +1,25 @@
 var IMDBSystem = (function(THREE){        
-        var render = function() {
+        var canvasProgram = function(ctx) {
+                var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5;
+                ctx.save();
+                ctx.beginPath();
+                ctx.translate(center_x, center_y);
+                ctx.moveTo(0, (0 - radius));
+                varpoints = Math.floor( Math.random() * 100 ) % 15;
+                // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
+                // m = "fraction of radius for inset" 
+                for ( x = 0; x < points; x += 1) {
+                    ctx.rotate(Math.PI / points);
+                    ctx.lineTo(0, (0 - (radius * m)));
+                    ctx.rotate(Math.PI / points);
+                    ctx.lineTo(0, 0 - radius);
+                }
+                ctx.fillStyle = '#C3CBC1';
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+                return ctx;
+            }, render = function() {
                 var step = .0005;
                 if(system) {
                     system.rotation.y += step;
@@ -17,12 +37,12 @@ var IMDBSystem = (function(THREE){
                 var INTERSECTED;
                 if ( intersects.length > 0 ) {
                     if ( INTERSECTED != intersects[ 0 ].object ) {
-                        if ( INTERSECTED ) INTERSECTED.material.program = programStroke;
+                        if ( INTERSECTED ) INTERSECTED.material.program = canvasProgram;
                         INTERSECTED = intersects[ 0 ].object;
                         INTERSECTED.material.program = programFill;
                     }
                 } else {
-                    if ( INTERSECTED ) INTERSECTED.material.program = programStroke;
+                    if ( INTERSECTED ) INTERSECTED.material.program = canvasProgram;
                     INTERSECTED = null;
                 }
                 if (INTERSECTED) {
