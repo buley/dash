@@ -142,10 +142,11 @@ var IMDBSystem = (function(THREE){
             }),
             layout = function() {
                 var test = true;
+                console.log('getting dash-demo');
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
-                    key_path: 'id',
+                    key = null,
                     store_key_path: null,
                     auto_increment: true
                 })
