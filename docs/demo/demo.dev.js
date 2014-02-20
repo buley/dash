@@ -120,7 +120,7 @@ var IMDBSystem = (function(THREE){
                     return texture;
                 }())
             }),*/
-            layout = function(system, camera, scene, renderer, width, height) {
+            layout = function() {
 
                 dash.get.entries({
                     database: 'dash-demo',
