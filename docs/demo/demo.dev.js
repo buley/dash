@@ -82,10 +82,8 @@ var IMDBSystem = (function(THREE){
                     INTERSECTED = null;
                 }
                 if (INTERSECTED && INTERSECTED.id !== last_intersected) {
-                    console.log('INTERSECTED',INTERSECTED);
                     last_intersected = INTERSECTED.id;
                 }
-
                 /* WebGL render */
                 renderer.render(scene, camera);
 
@@ -128,6 +126,7 @@ var IMDBSystem = (function(THREE){
                     particle.position.y = Math.random() * 800 - 400;
                     particle.position.z = Math.random() * 800 - 400;
                     particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
+                    console.log('added',particle);
                     scene.add( particle );
                 });
 
@@ -162,10 +161,8 @@ var IMDBSystem = (function(THREE){
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(renderer.domElement);
             node.appendChild( stats.domElement );
-            camera.position.x = 20;
-            camera.position.y = 0;
-            camera.position.z = 150;
-            render(system, camera, scene, renderer, width, height);
+            camera.position.set( 0, 300, 500 );
+            render();
             return relayout;
         };
 }(window.THREE));
