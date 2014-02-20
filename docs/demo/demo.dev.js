@@ -115,7 +115,7 @@ var IMDBSystem = (function(THREE){
                     console.log('dash error',context);
                 }, function(context) {
                     geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
-                    relayout();
+                    //relayout();
                 });
 
             },
