@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cd431261-c0e8-4bb4-a672-9515fb2ec1ad" name="Default" comment="" />
+    <list default="true" id="cd431261-c0e8-4bb4-a672-9515fb2ec1ad" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/demo/demo.dev.js" afterPath="$PROJECT_DIR$/docs/demo/demo.dev.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/project.less" afterPath="$PROJECT_DIR$/docs/project.less" />
+    </list>
     <ignored path="dash.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +29,7 @@
       <file leaf-file-name="project.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/project.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="17" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.8180243" vertical-offset="803" max-vertical-offset="1395">
+            <state line="85" column="22" selection-start="1309" selection-end="1309" vertical-scroll-proportion="0.8180243" vertical-offset="803" max-vertical-offset="1395">
               <folding />
             </state>
           </provider>
@@ -576,7 +579,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/project.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="17" selection-start="1304" selection-end="1304" vertical-scroll-proportion="0.8180243" vertical-offset="803" max-vertical-offset="1395">
+        <state line="85" column="22" selection-start="1309" selection-end="1309" vertical-scroll-proportion="0.8180243" vertical-offset="803" max-vertical-offset="1395">
           <folding />
         </state>
       </provider>

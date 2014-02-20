@@ -33,7 +33,8 @@ var IMDBSystem = (function(THREE){
             system,
             range,
             geometry = new THREE.Geometry(),
-            material = new THREE.ParticleBasicMaterial({
+            material = new THREE.ParticleBasicMaterial({size: 3, vertexColors: false, color: 0xffffff});
+            /*material = new THREE.ParticleBasicMaterial({
                 size: 8,
                 color: 0xFFFFFF,
                 transparent: true,
@@ -57,8 +58,8 @@ var IMDBSystem = (function(THREE){
                         ctx.translate(center_x, center_y);
                         ctx.moveTo(0, (0 - radius));
                         points = Math.floor( Math.random() * 100 ) % 15;
-                        /* super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ */
-                        /* m = "fraction of radius for inset" */
+                        // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
+                        // m = "fraction of radius for inset" 
                         for ( x = 0; x < points; x += 1) {
                             ctx.rotate(Math.PI / points);
                             ctx.lineTo(0, (0 - (radius * m)));
@@ -74,7 +75,7 @@ var IMDBSystem = (function(THREE){
                     texture.needsUpdate = true;
                     return texture;
                 }())
-            }),
+            }),*/
             layout = function(system, camera, scene, renderer, width, height) {
 
                 dash.get.entries({
