@@ -152,6 +152,7 @@ var IMDBSystem = (function(THREE){
                     return;
                 }
                 ran_once = true;
+                console.log('getting dash');
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
@@ -168,6 +169,7 @@ var IMDBSystem = (function(THREE){
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
+                    console.log('added',context.key);
                     var range = context.entries.length;
                     geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
