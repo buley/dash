@@ -48,6 +48,7 @@ var IMDBSystem = (function(THREE){
             scene,
             /* How the viewer sees it */
             camera,
+            projector,
             /* WebGL vs. Canvas renderer */
             renderer = new THREE.CanvasRenderer(),
             //renderer = new THREE.WebGLRenderer(),
