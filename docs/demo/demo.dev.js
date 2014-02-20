@@ -1,5 +1,26 @@
 var IMDBSystem = (function(THREE){        
-        var canvasProgram = function(ctx) {
+        var canvasStarProgram = function(ctx) {
+                var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
+                ctx.save();
+                ctx.beginPath();
+                ctx.strokeStyle = '#ffffff';
+                ctx.translate(center_x, center_y);
+                ctx.moveTo(0, (0 - radius));
+                varpoints = Math.floor( Math.random() * 100 ) % 15;
+                // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
+                // m = "fraction of radius for inset" 
+                for ( x = 0; x < points; x += 1) {
+                    ctx.rotate(Math.PI / points);
+                    ctx.lineTo(0, (0 - (radius * m)));
+                    ctx.rotate(Math.PI / points);
+                    ctx.lineTo(0, 0 - radius);
+                }
+                ctx.fillStyle = 'transparent';
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+                return ctx;
+            }, canvasFilledStarProgram = function(ctx) {
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
@@ -14,7 +35,7 @@ var IMDBSystem = (function(THREE){
                     ctx.rotate(Math.PI / points);
                     ctx.lineTo(0, 0 - radius);
                 }
-                ctx.fillStyle = '#C3CBC1';
+                ctx.fillStyle = 'yellow';
                 ctx.fill();
                 ctx.stroke();
                 ctx.restore();
@@ -37,12 +58,12 @@ var IMDBSystem = (function(THREE){
                 var INTERSECTED;
                 if ( intersects.length > 0 ) {
                     if ( INTERSECTED != intersects[ 0 ].object ) {
-                        if ( INTERSECTED ) INTERSECTED.material.program = canvasProgram;
+                        if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
                         INTERSECTED = intersects[ 0 ].object;
-                        INTERSECTED.material.program = programFill;
+                        INTERSECTED.material.program = canvasFilledStarProgram;
                     }
                 } else {
-                    if ( INTERSECTED ) INTERSECTED.material.program = canvasProgram;
+                    if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
                     INTERSECTED = null;
                 }
                 if (INTERSECTED) {
