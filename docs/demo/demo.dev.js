@@ -15,7 +15,7 @@ var IMDBSystem = (function(THREE){
                     ctx.rotate(Math.PI / points);
                     ctx.lineTo(0, 0 - radius);
                 }
-                ctx.fillStyle = 'transparent';
+                ctx.fillStyle = 'blue';
                 ctx.fill();
                 ctx.stroke();
                 ctx.restore();
@@ -58,12 +58,12 @@ var IMDBSystem = (function(THREE){
                 var INTERSECTED;
                 if ( intersects.length > 0 ) {
                     if ( INTERSECTED != intersects[ 0 ].object ) {
-                        if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
+                        if ( INTERSECTED ) INTERSECTED.material = material;
                         INTERSECTED = intersects[ 0 ].object;
                         INTERSECTED.material.program = canvasFilledStarProgram;
                     }
                 } else {
-                    if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
+                    if ( INTERSECTED ) INTERSECTED.material = material;
                     INTERSECTED = null;
                 }
                 if (INTERSECTED) {
