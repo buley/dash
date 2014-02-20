@@ -7,7 +7,7 @@ var IMDBSystem = (function(THREE){
                 ctx.strokeStyle = '#000000';
                 ctx.translate(center_x, center_y);
                 ctx.moveTo(0, (0 - radius));
-                varpoints = Math.floor( Math.random() * 100 ) % 15;
+                var points = Math.floor( Math.random() * 100 ) % 15;
                 // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
                 // m = "fraction of radius for inset" 
                 for ( x = 0; x < points; x += 1) {
@@ -27,7 +27,7 @@ var IMDBSystem = (function(THREE){
                 ctx.beginPath();
                 ctx.translate(center_x, center_y);
                 ctx.moveTo(0, (0 - radius));
-                varpoints = Math.floor( Math.random() * 100 ) % 15;
+                var points = Math.floor( Math.random() * 100 ) % 15;
                 // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
                 // m = "fraction of radius for inset" 
                 for ( x = 0; x < points; x += 1) {
@@ -69,12 +69,12 @@ var IMDBSystem = (function(THREE){
                 var INTERSECTED;
                 if ( intersects.length > 0 ) {
                     if ( INTERSECTED != intersects[ 0 ].object ) {
-                        if ( INTERSECTED ) INTERSECTED.material = material;
+                        if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
                         INTERSECTED = intersects[ 0 ].object;
                         INTERSECTED.material.program = canvasFilledStarProgram;
                     }
                 } else {
-                    if ( INTERSECTED ) INTERSECTED.material = material;
+                    if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
                     INTERSECTED = null;
                 }
                 if (INTERSECTED && INTERSECTED.id !== last_intersected) {
