@@ -1,6 +1,0 @@
-[submodule "docs/vendor/repos/three.js"]
-	path = docs/vendor/repos/three.js
-	url = git@github.com:mrdoob/stats.js.git
-[submodule "docs/vendor/repos/stats"]
-	path = docs/vendor/repos/stats
-	url = git@github.com:mrdoob/stats.js.git
