@@ -3,10 +3,7 @@ var IMDBSystem = (function(THREE){
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
-                ctx.arc(width/2,height/2,width,0,2*Math.PI);
-                ctx.stroke();
-                return ctx;
-                ctx.strokeStyle = '#ffffff';
+                ctx.strokeStyle = '#000000';
                 ctx.translate(center_x, center_y);
                 ctx.moveTo(0, (0 - radius));
                 varpoints = Math.floor( Math.random() * 100 ) % 15;
@@ -101,8 +98,8 @@ var IMDBSystem = (function(THREE){
             range,
             mouse = { x: 0, y: 0 },
             geometry = new THREE.Geometry(),
-            material = new THREE.ParticleBasicMaterial({size: 3, vertexColors: false, color: 0xffffff}),
-            /*material = new THREE.ParticleBasicMaterial({
+            //material = new THREE.ParticleBasicMaterial({size: 3, vertexColors: false, color: 0xffffff}),
+            material = new THREE.ParticleBasicMaterial({
                 size: 8,
                 color: 0xFFFFFF,
                 transparent: true,
@@ -143,7 +140,7 @@ var IMDBSystem = (function(THREE){
                     texture.needsUpdate = true;
                     return texture;
                 }())
-            }),*/
+            }),
             layout = function() {
 
                 dash.get.entries({
@@ -158,14 +155,14 @@ var IMDBSystem = (function(THREE){
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
-                    var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: 0x000000, program: canvasStarProgram } ) );
+                    //var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: 0x000000, program: canvasStarProgram } ) );
                     //particle.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
-                    particle.position.x = Math.random() * 800 - 400;
-                    particle.position.y = Math.random() * 800 - 400;
-                    particle.position.z = Math.random() * 800 - 400;
-                    particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
-                    scene.add( particle );
-                    //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
+                    //particle.position.x = Math.random() * 800 - 400;
+                    //particle.position.y = Math.random() * 800 - 400;
+                    //particle.position.z = Math.random() * 800 - 400;
+                    //particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
+                    //scene.add( particle );
+                    geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                     //relayout();
                 });
 
