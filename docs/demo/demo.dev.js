@@ -1,6 +1,10 @@
 var IMDBSystem = (function(THREE){        
         var last_intersected,
             canvasStarProgram = function(ctx) {
+                ctx.beginPath();
+                ctx.arc( 0, 0, 0.5, 0, Math.PI2, true );
+                ctx.fill();
+                return;
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
