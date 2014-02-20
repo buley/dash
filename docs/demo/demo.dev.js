@@ -154,6 +154,7 @@ var IMDBSystem = (function(THREE){
             range = ( width > height ) ? height : width;
             renderer.setClearColor(0xFFFFFF, 1.0);
             renderer.setSize(width, height);
+            console.log('init once');
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(renderer.domElement);
             node.appendChild( stats.domElement );
