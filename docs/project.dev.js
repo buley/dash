@@ -440,7 +440,7 @@ dashApp.directive('dashSplashOverlay', function() {
     return {
         scope: {},
         restrict: 'AE',
-        controller: [ 'dashSplashOverlayController']
+        controller: [ 'dashSplashOverlayController'],
         compile: function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
