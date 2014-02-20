@@ -146,6 +146,7 @@ var IMDBSystem = (function(THREE){
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
+                    key: 'id',
                     store_key_path: null,
                     auto_increment: true
                 })
@@ -164,7 +165,7 @@ var IMDBSystem = (function(THREE){
                     var geom = new THREE.CubeGeometry(5,8,3);
                     var cube = new THREE.Mesh(geom,mat);
                     cube.position.y= context.key;
-                    console.log('added',context.entry.id);
+                    console.log('added',context);
                     scene.add( cube );
 
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
