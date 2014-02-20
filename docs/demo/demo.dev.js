@@ -139,7 +139,6 @@ var IMDBSystem = (function(THREE){
             stats = new Stats();
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
-        container.appendChild( stats.domElement );
         document.addEventListener( 'mousemove', onMouseMove, false );
         document.addEventListener( 'resize', onResize, false );
 
@@ -149,6 +148,7 @@ var IMDBSystem = (function(THREE){
             renderer.setSize(width, height);
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(renderer.domElement);
+            node.appendChild( stats.domElement );
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
