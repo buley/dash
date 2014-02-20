@@ -146,7 +146,6 @@ var IMDBSystem = (function(THREE){
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
-                    key: 'id',
                     store_key_path: null,
                     auto_increment: true
                 })
