@@ -1,5 +1,4 @@
-var IMDBSystem = (function(THREE){
-        
+var IMDBSystem = (function(THREE){        
         var render = function() {
                 var step = .0005;
                 if(system) {
@@ -33,6 +32,7 @@ var IMDBSystem = (function(THREE){
             /* What we'll create: a particle system */
             system,
             range,
+            mouse = { x: 0, y: 0 },
             geometry = new THREE.Geometry(),
             material = new THREE.ParticleBasicMaterial({size: 3, vertexColors: false, color: 0xffffff});
             /*material = new THREE.ParticleBasicMaterial({
@@ -102,7 +102,20 @@ var IMDBSystem = (function(THREE){
                     scene.remove(scene.getObjectByName("particles"));
                 }
                 layout();
+            },
+            onMouseMove = function(event) {
+                event.preventDefault();
+                mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+                mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+            },
+            onResize = function(event) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize( window.innerWidth, window.innerHeight );
             };
+
+        document.addEventListener( 'mousemove', onMouseMove, false );
+        document.addEventListener( 'resize', onResize, false );
 
         return function(node, width, height) {
             range = ( width > height ) ? height : width;

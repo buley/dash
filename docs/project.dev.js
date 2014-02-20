@@ -432,6 +432,30 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
 }]);
 
 
+dashApp.controller('dashSplashOverlayController', [ '$scope', function($scope) {
+    console.log('dashSplashOverlayController');
+}]);
+
+dashApp.directive('dashSplashOverlay', function() { 
+    return {
+        scope: {},
+        restrict: 'AE',
+        controller: [ 'dashSplashOverlayController']
+        compile: function() {
+            console.log('dashSplash setup');
+            var el = document.createElement('div'),
+                layout = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height());
+            el.setAttribute('id', 'dash-splash-container');
+            return function link(scope, element, attrs) {
+                element[0].appendChild(el);
+                layout();
+            };
+        }
+    };
+} );
+
+
+
 
 dashApp.directive('markdown', function () {
     var converter = new Showdown.converter();

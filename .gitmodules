@@ -1,0 +1,3 @@
+[submodule "docs/vendor/repos/three.js"]
+	path = docs/vendor/repos/three.js
+	url = git@github.com:mrdoob/stats.js.git
