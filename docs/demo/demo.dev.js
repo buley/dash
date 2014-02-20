@@ -88,9 +88,6 @@ var IMDBSystem = (function(THREE){
                 renderer.render(scene, camera);
 
             },
-            finish = function(context) {
-                render();
-            },
             scene = new THREE.Scene(),
             camera,
             /* What the viewer sees */
@@ -116,7 +113,6 @@ var IMDBSystem = (function(THREE){
                     auto_increment: true
                 })
                 (function(context) {
-                    finish(context);
                     console.log('dash finished',context);
                 }, function(context) {
                     console.log('dash error',context);
@@ -127,7 +123,6 @@ var IMDBSystem = (function(THREE){
                     particle.position.z = Math.random() * 800 - 400;
                     particle.name = context.key;
                     particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
-                    console.log('added',particle);
                     scene.add( particle );
                 });
 
