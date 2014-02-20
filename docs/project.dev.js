@@ -398,8 +398,7 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
                 database: 'dash-demo',
                 store: 'imdb',
                 auto_increment: true,
-                store_key_path: 'se',
-                unique: false,
+                store_key_path: 'id',
                 data: next
             })
             (function(context) {

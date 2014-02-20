@@ -77,7 +77,6 @@ var IMDBSystem = (function(THREE){
             finish = function(context) {
                 system = new THREE.ParticleSystem(geometry, material);
                 system.sortParticles = true;
-                console.log('dash context',context.entries ? context.entries.length : NaN);
                 system.name = "imdb-particles"; //arbitrary
                 if (scene) {
                     scene.add(system);
@@ -146,7 +145,7 @@ var IMDBSystem = (function(THREE){
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
-                    key: 'id',
+                    key_path: 'id',
                     store_key_path: null,
                     auto_increment: true
                 })
