@@ -161,8 +161,12 @@ var IMDBSystem = (function(THREE){
                     //particle.position.y = Math.random() * 800 - 400;
                     //particle.position.z = Math.random() * 800 - 400;
                     //particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
-                    var mesh = new THREE.Mesh(THREE.SphereGeometry(2), new THREE.MeshLambertMaterial( {color: 0x44ff44 } ));
-                    scene.add( mesh );
+                    var mat = new THREE.MeshLambertMaterial( {color: 0x44ff44 } );
+                    var geom = new THREE.CubeGeometry(5,8,3);
+                    var cube = new THREE.Mesh(geom,mat);
+                    cube.position.y= context.key;
+                    scene.add( cube );
+
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                     //relayout();
                 });
