@@ -165,7 +165,7 @@ var IMDBSystem = (function(THREE){
                     var geom = new THREE.CubeGeometry(5,8,3);
                     var cube = new THREE.Mesh(geom,mat);
                     cube.position.y= context.key;
-                    console.log('added',context);
+                    console.log('added',context.entry);
                     scene.add( cube );
 
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
