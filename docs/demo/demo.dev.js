@@ -156,7 +156,7 @@ var IMDBSystem = (function(THREE){
                     auto_increment: true
                 })
                 (function(context) {
-                    console.log('dash finished',context);
+                    console.log('dash finished',context,geometry, material);
                     system = new THREE.ParticleSystem(geometry, material);
                     system.sortParticles = true;
                     system.name = "dash-demo";
