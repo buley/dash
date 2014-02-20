@@ -28,7 +28,8 @@ var IMDBSystem = (function(THREE){
             /* How the viewer sees it */
             camera,
             /* WebGL vs. Canvas renderer */
-            renderer = new THREE.WebGLRenderer(),
+            renderer = new THREE.CanvasRenderer(),
+            //renderer = new THREE.WebGLRenderer(),
             /* What we'll create: a particle system */
             system,
             range,
