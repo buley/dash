@@ -163,7 +163,7 @@ var IMDBSystem = (function(THREE){
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
-                    var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
+                    var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: canvasStarProgram } ) );
                     particle.position.x = Math.random() * 800 - 400;
                     particle.position.y = Math.random() * 800 - 400;
                     particle.position.z = Math.random() * 800 - 400;
