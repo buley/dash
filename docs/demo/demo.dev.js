@@ -8,8 +8,30 @@ var IMDBSystem = (function(THREE){
                 }
                 /* 60fps goodness */
                 requestAnimationFrame(render);
+
+                camera.updateMatrixWorld();
+                var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
+                projector.unprojectVector( vector, camera );
+                var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+                var intersects = raycaster.intersectObjects( scene.children );
+                var INTERSECTED;
+                if ( intersects.length > 0 ) {
+                    if ( INTERSECTED != intersects[ 0 ].object ) {
+                        if ( INTERSECTED ) INTERSECTED.material.program = programStroke;
+                        INTERSECTED = intersects[ 0 ].object;
+                        INTERSECTED.material.program = programFill;
+                    }
+                } else {
+                    if ( INTERSECTED ) INTERSECTED.material.program = programStroke;
+                    INTERSECTED = null;
+                }
+                if (INTERSECTED) {
+                    console.log('INTERSECTED',INTERSECTED);
+                }
+
                 /* WebGL render */
                 renderer.render(scene, camera);
+
             },
             finish = function(context) {
                 system = new THREE.ParticleSystem(geometry, material);
