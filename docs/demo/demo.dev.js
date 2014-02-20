@@ -1,5 +1,6 @@
 var IMDBSystem = (function(THREE){        
-        var canvasStarProgram = function(ctx) {
+        var last_intersected,
+            canvasStarProgram = function(ctx) {
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
@@ -76,8 +77,9 @@ var IMDBSystem = (function(THREE){
                     if ( INTERSECTED ) INTERSECTED.material = material;
                     INTERSECTED = null;
                 }
-                if (INTERSECTED) {
+                if (INTERSECTED && INTERSECTED.id !== last_intersected) {
                     console.log('INTERSECTED',INTERSECTED);
+                    last_intersected = INTERSECTED.id;
                 }
 
                 /* WebGL render */
