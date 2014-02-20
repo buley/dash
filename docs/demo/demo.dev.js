@@ -1,6 +1,6 @@
 var IMDBSystem = (function(THREE){        
         var canvasProgram = function(ctx) {
-                var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5;
+                var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
                 ctx.translate(center_x, center_y);
