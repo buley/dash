@@ -151,26 +151,12 @@ var IMDBSystem = (function(THREE){
                 })
                 (function(context) {
                     finish(context);
+                    console.log('dash finished',context);
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
-                    //var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: 0x000000, program: canvasStarProgram } ) );
-                    //particle.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
-                    //particle.position.x = Math.random() * 800 - 400;
-                    //particle.position.y = Math.random() * 800 - 400;
-                    //particle.position.z = Math.random() * 800 - 400;
-                    //particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
-                    var mat = new THREE.MeshLambertMaterial( {color: 0x44ff44 } );
-                    var geom = new THREE.CubeGeometry(5,8,3);
-                    var cube = new THREE.Mesh(geom,mat);
-                    cube.position.y= context.key;
-                    if (test) {
-                        console.log('added',context);
-                        test = false;
-                    }
-                    scene.add( cube );
-
-                    //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
+                    console.log('context',context.key);
+                    geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                     //relayout();
                 });
 
