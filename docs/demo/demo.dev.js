@@ -125,6 +125,7 @@ var IMDBSystem = (function(THREE){
                     particle.position.x = Math.random() * 800 - 400;
                     particle.position.y = Math.random() * 800 - 400;
                     particle.position.z = Math.random() * 800 - 400;
+                    particle.name = context.key;
                     particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
                     console.log('added',particle);
                     scene.add( particle );
