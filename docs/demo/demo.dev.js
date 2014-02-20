@@ -1,5 +1,6 @@
 var IMDBSystem = (function(THREE){        
         var last_intersected,
+            ran_once = true,
             canvasStarProgram = function(ctx) {
                 ctx.beginPath();
                 ctx.arc( 0, 0, 0.5, 0, Math.PI2, true );
@@ -146,8 +147,11 @@ var IMDBSystem = (function(THREE){
             }),
             mouse = { x: 0, y: 0 },
             layout = function() {
-                var test = true;
                 console.log('getting dash-demo');
+                if (ran_once) {
+                    return;
+                }
+                ran_once = true;
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
@@ -161,7 +165,6 @@ var IMDBSystem = (function(THREE){
                     system.sortParticles = true;
                     system.name = "dash-demo";
                     scene.add(system);
-
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
