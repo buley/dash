@@ -1,13 +1,14 @@
 var IMDBSystem = (function(THREE){        
         var last_intersected,
             canvasStarProgram = function(ctx) {
+                console.log('star');
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
                 ctx.strokeStyle = '#000000';
                 ctx.translate(center_x, center_y);
                 ctx.moveTo(0, (0 - radius));
-                var points = Math.floor( Math.random() * 100 ) % 15;
+                points = Math.floor( Math.random() * 100 ) % 15;
                 // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
                 // m = "fraction of radius for inset" 
                 for ( x = 0; x < points; x += 1) {
@@ -22,12 +23,13 @@ var IMDBSystem = (function(THREE){
                 ctx.restore();
                 return ctx;
             }, canvasFilledStarProgram = function(ctx) {
+                console.log('filled star');
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
                 ctx.translate(center_x, center_y);
                 ctx.moveTo(0, (0 - radius));
-                var points = Math.floor( Math.random() * 100 ) % 15;
+                points = Math.floor( Math.random() * 100 ) % 15;
                 // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
                 // m = "fraction of radius for inset" 
                 for ( x = 0; x < points; x += 1) {
@@ -87,7 +89,7 @@ var IMDBSystem = (function(THREE){
 
             },
             finish = function(context) {
-                
+                render();
             },
             scene = new THREE.Scene(),
             camera,
@@ -103,50 +105,6 @@ var IMDBSystem = (function(THREE){
             system,
             range,
             mouse = { x: 0, y: 0 },
-            geometry = new THREE.Geometry(),
-            //material = new THREE.ParticleBasicMaterial({size: 3, vertexColors: false, color: 0xffffff}),
-            material = new THREE.ParticleBasicMaterial({
-                size: 8,
-                color: 0xFFFFFF,
-                transparent: true,
-                opacity: .6,
-                sizeAttenuation: true,
-                map: (function () {
-                    var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
-                        var x;
-                        if (!canvas || !ctx) {
-                            if (!canvas) {
-                                canvas = document.createElement('canvas');
-                            }
-                            if (!ctx) {
-                                ctx = canvas.getContext('2d');
-                            }
-                            canvas.height = height;
-                            canvas.width = width;
-                        }
-                        ctx.save();
-                        ctx.beginPath();
-                        ctx.translate(center_x, center_y);
-                        ctx.moveTo(0, (0 - radius));
-                        points = Math.floor( Math.random() * 100 ) % 15;
-                        // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
-                        // m = "fraction of radius for inset" 
-                        for ( x = 0; x < points; x += 1) {
-                            ctx.rotate(Math.PI / points);
-                            ctx.lineTo(0, (0 - (radius * m)));
-                            ctx.rotate(Math.PI / points);
-                            ctx.lineTo(0, 0 - radius);
-                        }
-                        ctx.fillStyle = '#C3CBC1';
-                        ctx.fill();
-                        ctx.stroke();
-                        ctx.restore();
-                        return canvas;
-                    }(256, 256, 128, 128, 64, 7, .5)));
-                    texture.needsUpdate = true;
-                    return texture;
-                }())
-            }),
             layout = function() {
                 var test = true;
                 console.log('getting dash-demo');
@@ -197,7 +155,7 @@ var IMDBSystem = (function(THREE){
 
         return function(node, width, height) {
             range = ( width > height ) ? height : width;
-            renderer.setClearColor(0x000000, 1.0);
+            renderer.setClearColor(0xFFFFFF, 1.0);
             renderer.setSize(width, height);
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(renderer.domElement);
@@ -205,7 +163,6 @@ var IMDBSystem = (function(THREE){
             camera.position.x = 20;
             camera.position.y = 0;
             camera.position.z = 150;
-            console.log('init once');
             render(system, camera, scene, renderer, width, height);
             return relayout;
         };
