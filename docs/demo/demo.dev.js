@@ -57,7 +57,7 @@ var IMDBSystem = (function(THREE){
             range,
             mouse = { x: 0, y: 0 },
             geometry = new THREE.Geometry(),
-            material = new THREE.ParticleBasicMaterial({size: 3, vertexColors: false, color: 0xffffff});
+            material = new THREE.ParticleBasicMaterial({size: 3, vertexColors: false, color: 0xffffff}),
             /*material = new THREE.ParticleBasicMaterial({
                 size: 8,
                 color: 0xFFFFFF,
@@ -114,7 +114,10 @@ var IMDBSystem = (function(THREE){
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
-                    geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
+                    var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) ),
+                    particle.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
+                    scene.add( particle );
+                    //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                     //relayout();
                 });
 
