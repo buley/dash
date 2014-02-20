@@ -440,8 +440,8 @@ dashApp.directive('dashSplashOverlay', function() {
     return {
         scope: {},
         restrict: 'AE',
-        controller: [ 'dashSplashOverlayController'],
-        compile: function(dashSplashOverlayController) {
+        controller: 'dashSplashOverlayController',
+        compile: function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
                 layout = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height());
