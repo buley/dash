@@ -3,6 +3,9 @@ var IMDBSystem = (function(THREE){
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
+                ctx.arc(width/2,height/2,width,0,2*Math.PI);
+                ctx.stroke();
+                return ctx;
                 ctx.strokeStyle = '#ffffff';
                 ctx.translate(center_x, center_y);
                 ctx.moveTo(0, (0 - radius));
