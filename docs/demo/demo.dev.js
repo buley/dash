@@ -8,7 +8,7 @@ var IMDBSystem = (function(THREE){
                 }
                 /* 60fps goodness */
                 requestAnimationFrame(render);
-
+                stats.update();
                 camera.updateMatrixWorld();
                 var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
                 projector.unprojectVector( vector, camera );
