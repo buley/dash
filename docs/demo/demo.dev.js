@@ -40,6 +40,16 @@ var IMDBSystem = (function(THREE){
                 ctx.stroke();
                 ctx.restore();
                 return ctx;
+            }, programFill = function ( ctx ) {
+                ctx.beginPath();
+                ctx.arc( 0, 0, 0.5, 0, PI2, true );
+                ctx.fill();
+            }, programStroke = function ( ctx ) {
+                ctx.lineWidth = 0.025;
+                ctx.beginPath();
+                ctx.arc( 0, 0, 0.5, 0, Math.PI2, true );
+                ctx.stroke();
+
             }, render = function() {
                 var step = .0005;
                 if(system) {
