@@ -75,12 +75,7 @@ var IMDBSystem = (function(THREE){
 
             },
             finish = function(context) {
-                system = new THREE.ParticleSystem(geometry, material);
-                system.sortParticles = true;
-                system.name = "imdb-particles"; //arbitrary
-                if (scene) {
-                    scene.add(system);
-                }
+                
             },
             scene = new THREE.Scene(),
             camera,
@@ -156,9 +151,12 @@ var IMDBSystem = (function(THREE){
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
-                    console.log('context',context.key);
-                    geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
-                    //relayout();
+                    var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
+                    particle.position.x = Math.random() * 800 - 400;
+                    particle.position.y = Math.random() * 800 - 400;
+                    particle.position.z = Math.random() * 800 - 400;
+                    particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
+                    scene.add( particle );
                 });
 
             },
