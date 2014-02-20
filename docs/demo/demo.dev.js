@@ -124,7 +124,6 @@ var IMDBSystem = (function(THREE){
             },
             /* When properties change we'll need a re-layout */
             relayout = function () {
-                console.log('relaying out');
                 if (scene.getObjectByName("particles")) {
                     scene.remove(scene.getObjectByName("particles"));
                 }
