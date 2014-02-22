@@ -1,6 +1,6 @@
 var IMDBSystem = (function(THREE){        
         var last_intersected,
-            ran_once = true,
+            ran_once = false,
             canvasStarProgram = function(ctx) {
                 ctx.beginPath();
                 ctx.arc( 0, 0, 0.5, 0, Math.PI2, true );
@@ -148,7 +148,7 @@ var IMDBSystem = (function(THREE){
             }),
             mouse = { x: 0, y: 0 },
             layout = function() {
-                console.log('getting dash-demo');
+                console.log('getting dash-demo', ran_once);
                 if (true === ran_once) {
                     return;
                 }
