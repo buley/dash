@@ -203,6 +203,15 @@ var IMDBSystem = (function(THREE){
             node_height = height;
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
 	    controls = new THREE.TrackballControls( camera );
+controls.rotateSpeed = 1.0;
+	    controls.zoomSpeed = 1.2;
+	    controls.panSpeed = 0.8;
+	    controls.noZoom = false;
+	    controls.noPan = false;
+	    controls.staticMoving = true;
+	    controls.dynamicDampingFactor = 0.3;
+	    controls.keys = [ 65, 83, 68 ];
+	    controls.addEventListener( 'change', render );
             node.appendChild(renderer.domElement);
 	    if (stats) {
             	document.getElementsByTagName('body')[0].appendChild( stats.domElement );
