@@ -1,6 +1,7 @@
 var IMDBSystem = (function(THREE){        
         var last_intersected,
             ran_once = false,
+	    hasFinished = false,
 	    node_width = null,
             node_height = null,
             canvasStarProgram = function(ctx) {
@@ -65,26 +66,28 @@ var IMDBSystem = (function(THREE){
                 requestAnimationFrame(render);
                 stats.update();
 		controls.update();
-                camera.updateMatrixWorld();
-                var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
-                projector.unprojectVector( vector, camera );
-                var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-                var intersects = raycaster.intersectObjects( scene.children );
-                var INTERSECTED;
-                if ( intersects.length > 0 ) {
-                    if ( INTERSECTED != intersects[ 0 ].object ) {
-                        if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
-                        INTERSECTED = intersects[ 0 ].object;
-                        INTERSECTED.material.color = 0xFFFFFF;
-                    }
-                } else {
-                    if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
-                    INTERSECTED = null;
-                }
-                if (!last_intersected || ( INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
-                    last_intersected = INTERSECTED;
-		    console.log("INSERSECT",INTERSECTED);
-                }
+		if (hasFinished) {
+			camera.updateMatrixWorld();
+			var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
+			projector.unprojectVector( vector, camera );
+			var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+			var intersects = raycaster.intersectObjects( scene.children );
+			var INTERSECTED;
+			if ( intersects.length > 0 ) {
+			    if ( INTERSECTED != intersects[ 0 ].object ) {
+				if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
+				INTERSECTED = intersects[ 0 ].object;
+				INTERSECTED.material.color = 0xFFFFFF;
+			    }
+			} else {
+			    if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
+			    INTERSECTED = null;
+			}
+			if (!last_intersected || ( INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
+			    last_intersected = INTERSECTED;
+			    console.log("INSERSECT",INTERSECTED);
+			}
+		}
                 /* WebGL render */
                 renderer.render(scene, camera);
 
@@ -169,6 +172,7 @@ var IMDBSystem = (function(THREE){
                     //system.name = "dash-demo";
                     //scene.add(system);
 		    console.log('system',system,scene);
+		    hasFinished = true;
 		    /*var x = 0,
 			entries = context.entries,
 			xlen = context.entries.length,
