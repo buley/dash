@@ -185,14 +185,14 @@ var IMDBSystem = (function(THREE){
 		    //var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
 		    var particle = new THREE.Mesh( geometry, material ); 
 		    //particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-		    var x, y, z, slop;
+		    var x, y, z = 1, slop;
 		    x = context.key * 20;
 		    if ( ( x / 1000 ) > 1 ) {
 			var row = Math.floor(x / 1000);
 			x = x - (row * 1000);
 			y = row * 20;
 		    }
-		    particle.position = new THREE.Vector3(context.key * 20, context.key, 1);
+		    particle.position = new THREE.Vector3(x, y, z);
 		    var rand =  Math.random() * range - range / 2;
 		    rand = rand - ( rand % 20 )
 		    scene.add( particle );
