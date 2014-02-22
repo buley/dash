@@ -209,6 +209,7 @@ var IMDBSystem = (function(THREE){
 
         return function(node, width, height) {
             range = ( width > height ) ? height : width;
+	    range = range * Math.random() * 10;
             renderer.setClearColor(0x000000, 1.0);
             renderer.setSize(width, height);
             node_width = width;
