@@ -160,10 +160,10 @@ var IMDBSystem = (function(THREE){
                     auto_increment: true
                 })
                 (function(context) {
-                    system = new THREE.ParticleSystem(geometry, material);
-                    system.sortParticles = true;
-                    system.name = "dash-demo";
-                    scene.add(system);
+                    //system = new THREE.ParticleSystem(geometry, material);
+                    //system.sortParticles = true;
+                    //system.name = "dash-demo";
+                    //scene.add(system);
 		    console.log('system',system,scene);
                 }, function(context) {
                     console.log('dash error',context);
@@ -176,7 +176,7 @@ var IMDBSystem = (function(THREE){
 		    particle.position.z = Math.random() * 800 - 400;
 		    particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
 		    scene.add( particle );
-                    geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
+                    //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
 
             },
