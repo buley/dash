@@ -104,10 +104,9 @@ var IMDBSystem = (function(THREE){
             system,
             range,
 	    stats,
-            //geometry = new THREE.Geometry(),
-	    geometry = new THREE.SphereGeometry(20), 
-            material = new THREE.MeshLambertMaterial({wireframe: true, color: 0xFFFFFF, transparent: true, opacity: .8, sizeAttenuation: true }),
-	    /*
+            geometry = new THREE.Geometry(),
+	    //geometry = new THREE.SphereGeometry(20), 
+            //material = new THREE.MeshLambertMaterial({wireframe: true, color: 0xFFFFFF, transparent: true, opacity: .8, sizeAttenuation: true }),
             material = new THREE.ParticleBasicMaterial({
                 size: 8,
                 color: 0xFFFFFF,
@@ -149,7 +148,7 @@ var IMDBSystem = (function(THREE){
                     texture.needsUpdate = true;
                     return texture;
                 }())
-            }),*/
+            }),
             mouse = { x: 0, y: 0 },
             layout = function() {
                 if (true === ran_once) {
