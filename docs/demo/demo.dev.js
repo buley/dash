@@ -176,6 +176,7 @@ var IMDBSystem = (function(THREE){
 		    for ( x = 0; x < xlen; x += 1 ) {
 		        xitem = entries[ x ];
 		    	var particle = new THREE.Mesh( geometry, material ); 
+			console.log('adidng',xitem);
 		    	particle.position = new THREE.Vector3(xitem.key % 20, xitem.key % 10, 1);
 		    	scene.add( particle );
 
