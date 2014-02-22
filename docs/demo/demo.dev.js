@@ -205,7 +205,9 @@ var IMDBSystem = (function(THREE){
             console.log('init once');
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(renderer.domElement);
-            node.parentElement.appendChild( stats.domElement );
+	    if (stats) {
+            	document.getElementsByTagName('body')[0].appendChild( stats.domElement );
+            }
             camera.position.set( 0, 300, 500 );
             render();
             return relayout;
