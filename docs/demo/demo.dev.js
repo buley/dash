@@ -83,7 +83,6 @@ var IMDBSystem = (function(THREE){
                 }
                 if (!last_intersected || ( INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
                     last_intersected = INTERSECTED;
-                    INTERSECTED.material.color = 0x660000;
 		    console.log("INSERSECT",INTERSECTED);
                 }
                 /* WebGL render */
