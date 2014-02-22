@@ -1,11 +1,9 @@
 var IMDBSystem = (function(THREE){        
         var last_intersected,
             ran_once = false,
+	    node_width = null,
+            node_height = null,
             canvasStarProgram = function(ctx) {
-                ctx.beginPath();
-                ctx.arc( 0, 0, 0.5, 0, Math.PI2, true );
-                ctx.fill();
-                return;
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
@@ -140,6 +138,7 @@ var IMDBSystem = (function(THREE){
                         ctx.fill();
                         ctx.stroke();
                         ctx.restore();
+			console.log('canvas',canvas,ctx);
                         return canvas;
                     }(256, 256, 128, 128, 64, 7, .5)));
                     texture.needsUpdate = true;
@@ -168,7 +167,6 @@ var IMDBSystem = (function(THREE){
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
-                    console.log('added',context.key);
                     geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
 
@@ -183,13 +181,13 @@ var IMDBSystem = (function(THREE){
             },
             onMouseMove = function(event) {
                 event.preventDefault();
-                mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-                mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+                mouse.x = ( event.clientX / node_width ) * 2 - 1;
+                mouse.y = - ( event.clientY / node_height ) * 2 + 1;
             },
             onResize = function(event) {
-                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.aspect = node_width / node_height;
                 camera.updateProjectionMatrix();
-                renderer.setSize( window.innerWidth, window.innerHeight );
+                renderer.setSize( node_width, node_height );
             };
         stats = new Stats();
         stats.domElement.style.position = 'absolute';
@@ -199,7 +197,9 @@ var IMDBSystem = (function(THREE){
 
         return function(node, width, height) {
             range = ( width > height ) ? height : width;
-            renderer.setClearColor(0x000000, 1.0);
+            renderer.setClearColor(0x660000, 1.0);
+            node_width = width;
+            node_height = height;
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(renderer.domElement);
 	    if (stats) {
