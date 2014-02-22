@@ -53,13 +53,12 @@ var IMDBSystem = (function(THREE){
                 ctx.beginPath();
                 ctx.arc( 0, 0, 0.5, 0, Math.PI2, true );
                 ctx.stroke();
-
             }, render = function() {
                 var step = .0005;
                 if(system) {
-                    system.rotation.y += step;
-                    //system.rotation.x += step;
-                    //system.rotation.z += step;
+                    //system.rotation.y += step;
+                    system.rotation.x += step;
+                    system.rotation.z += step;
                 }
                 /* 60fps goodness */
                 requestAnimationFrame(render);
@@ -82,6 +81,7 @@ var IMDBSystem = (function(THREE){
                 }
                 if (INTERSECTED && INTERSECTED.id !== last_intersected) {
                     last_intersected = INTERSECTED.id;
+		    console.log("INSERSECT",INTERSECTED);
                 }
                 /* WebGL render */
                 renderer.render(scene, camera);
