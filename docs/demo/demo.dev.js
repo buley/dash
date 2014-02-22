@@ -228,7 +228,7 @@ controls.rotateSpeed = 1.0;
 	    light = new THREE.DirectionalLight( 0xffffff );
 	    light.position.set( 1, 1, 1 );
 	    scene.add( light );
-	    light = new THREE.DirectionalLight( 0x002288 );
+	    light = new THREE.DirectionalLight( 0x111111 );
 	    light.position.set( -1, -1, -1 );
 	    scene.add( light );
 	    light = new THREE.AmbientLight( 0x222222 );
