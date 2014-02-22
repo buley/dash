@@ -10,7 +10,7 @@ var IMDBSystem = (function(THREE){
                 ctx.strokeStyle = '#000000';
                 //ctx.translate(center_x, center_y);
                 ctx.moveTo(0, (0 - radius));
-                points = Math.floor( Math.random() * 100 ) % 15;
+                //points = Math.floor( Math.random() * 100 ) % 15;
                 // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
                 // m = "fraction of radius for inset" 
                 for ( x = 0; x < points; x += 1) {
@@ -82,7 +82,6 @@ var IMDBSystem = (function(THREE){
                 }
                 if (INTERSECTED && INTERSECTED.id !== last_intersected) {
                     last_intersected = INTERSECTED.id;
-		    INTERSECTED.scale = 1;
 		    console.log("INSERSECT",INTERSECTED);
                 }
                 /* WebGL render */
@@ -174,7 +173,6 @@ var IMDBSystem = (function(THREE){
 		    //var particle = new THREE.Sprite( material );
 		    var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
 		    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-		    particle.scale = .5;
 		    scene.add( particle );
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
