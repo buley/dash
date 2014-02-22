@@ -106,7 +106,7 @@ var IMDBSystem = (function(THREE){
             geometry = new THREE.Geometry(),
             material = new THREE.ParticleBasicMaterial({
                 size: 8,
-                color: 0x000000,
+                color: 0xFFFFFF,
                 transparent: true,
                 opacity: .6,
                 sizeAttenuation: true,
@@ -169,13 +169,13 @@ var IMDBSystem = (function(THREE){
                     console.log('dash error',context);
                 }, function(context) {
                     console.log('added',context.key);
-                    var range = context.entries.length;
                     geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
 
             },
             /* When properties change we'll need a re-layout */
             relayout = function () {
+		console.log('relayout');
                 if (scene.getObjectByName("particles")) {
                     scene.remove(scene.getObjectByName("particles"));
                 }
