@@ -55,11 +55,11 @@ ul.dash-document-navigation ul ul li {
   font-size: 22px;
   list-style-type: none;
 }
-#dash-splash {
+#dash-splash-overlay {
   width: 100%;
   height: 100%;
 }
-#dash-splash #dash-splash-container {
+#dash-splash-overlay #dash-splash-container {
   width: 100%;
   height: 100%;
 }
