@@ -106,6 +106,8 @@ var IMDBSystem = (function(THREE){
 	    stats,
             //geometry = new THREE.Geometry(),
 	    geometry = new THREE.SphereGeometry(2), 
+            material = new THREE.MeshLambertMaterial({wireframe: true, color:  Math.random() * 0xffffff }),
+	    /*
             material = new THREE.ParticleBasicMaterial({
                 size: 8,
                 color: 0xFFFFFF,
@@ -147,7 +149,7 @@ var IMDBSystem = (function(THREE){
                     texture.needsUpdate = true;
                     return texture;
                 }())
-            }),
+            }),*/
             mouse = { x: 0, y: 0 },
             layout = function() {
                 if (true === ran_once) {
