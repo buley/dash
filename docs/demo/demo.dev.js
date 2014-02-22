@@ -148,12 +148,10 @@ var IMDBSystem = (function(THREE){
             }),
             mouse = { x: 0, y: 0 },
             layout = function() {
-                console.log('getting dash-demo', ran_once);
                 if (true === ran_once) {
                     return;
                 }
                 ran_once = true;
-                console.log('getting dash fpr the only time');
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
@@ -162,11 +160,11 @@ var IMDBSystem = (function(THREE){
                     auto_increment: true
                 })
                 (function(context) {
-                    console.log('dash finished',context,geometry, material);
                     system = new THREE.ParticleSystem(geometry, material);
                     system.sortParticles = true;
                     system.name = "dash-demo";
                     scene.add(system);
+		    console.log('system',system,scene);
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
@@ -202,7 +200,6 @@ var IMDBSystem = (function(THREE){
         return function(node, width, height) {
             range = ( width > height ) ? height : width;
             renderer.setClearColor(0x000000, 1.0);
-            console.log('init once');
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
             node.appendChild(renderer.domElement);
 	    if (stats) {
