@@ -102,6 +102,7 @@ var IMDBSystem = (function(THREE){
             /* What we'll create: a particle system */
             system,
             range,
+	    stats,
             geometry = new THREE.Geometry(),
             material = new THREE.ParticleBasicMaterial({
                 size: 8,
@@ -191,8 +192,8 @@ var IMDBSystem = (function(THREE){
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize( window.innerWidth, window.innerHeight );
-            },
-            stats = new Stats();
+            };
+        stats = new Stats();
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
         document.addEventListener( 'mousemove', onMouseMove, false );
