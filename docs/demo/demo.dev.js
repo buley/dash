@@ -160,6 +160,7 @@ var IMDBSystem = (function(THREE){
                     return;
                 }
                 ran_once = true;
+		var last_z;
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
@@ -198,6 +199,8 @@ var IMDBSystem = (function(THREE){
 			y = row * 20;
 			var column = Math.floor(y / size);
 			z = column * 20;
+			x = x - z;
+			y = y - z;
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
 		    scene.add( particle );
