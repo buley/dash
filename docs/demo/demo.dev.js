@@ -169,20 +169,16 @@ var IMDBSystem = (function(THREE){
                     //system.name = "dash-demo";
                     //scene.add(system);
 		    console.log('system',system,scene);
-		    var x = 0,
+		    /*var x = 0,
 			entries = context.entries,
-			xlen = entries.length,
+			xlen = context.entries.length,
 			xitem;
-		    console.log('logging',xlen);
 		    for ( x = 0; x < xlen; x += 1 ) {
-		        xitem = entries[ x ];
-		    	var particle = new THREE.Mesh( geometry, material ); 
-		    	particle.position = new THREE.Vector3(xitem.key % 20, xitem.key % 10, 1);
-		    	scene.add( particle );
-                    }
+		        xitem = context.entries[ x ];
+                    }*/
                 }, function(context) {
                     console.log('dash error',context);
-                }, null /*function(context) {
+                }, function(context) {
 
 
 		    //var particle = new THREE.Sprite( material );
@@ -192,7 +188,7 @@ var IMDBSystem = (function(THREE){
 		    particle.position = new THREE.Vector3(context.key * 5, 5, 1);
 		    scene.add( particle );
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
-                }*/);
+                });
 
             },
             /* When properties change we'll need a re-layout */
