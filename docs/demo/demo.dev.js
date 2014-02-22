@@ -188,7 +188,7 @@ var IMDBSystem = (function(THREE){
 		    var x, y, z, slop;
 		    x = context.key * 20;
 		    if ( ( x / 1000 ) > 1 ) {
-			y = Math.floor(x / 1000);
+			y = Math.floor(x / 1000) * 20;
 			x = x - (row * 1000);
 		    }
 		    particle.position = new THREE.Vector3(context.key * 20, context.key, 1);
