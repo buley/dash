@@ -82,6 +82,7 @@ var IMDBSystem = (function(THREE){
                 }
                 if (INTERSECTED && INTERSECTED.id !== last_intersected) {
                     last_intersected = INTERSECTED.id;
+		    INTERSECTED.scale = 1;
 		    console.log("INSERSECT",INTERSECTED);
                 }
                 /* WebGL render */
@@ -173,6 +174,7 @@ var IMDBSystem = (function(THREE){
 		    //var particle = new THREE.Sprite( material );
 		    var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
 		    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
+		    particle.scale = .5;
 		    scene.add( particle );
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
