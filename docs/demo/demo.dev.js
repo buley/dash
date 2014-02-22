@@ -57,8 +57,8 @@ var IMDBSystem = (function(THREE){
                 var step = .0005;
                 if(system) {
                     //system.rotation.y += step;
-                    system.rotation.x += step;
-                    system.rotation.z += step;
+                    //system.rotation.x += step;
+                    //system.rotation.z += step;
                 }
                 /* 60fps goodness */
                 requestAnimationFrame(render);
