@@ -172,10 +172,7 @@ var IMDBSystem = (function(THREE){
 
 		    //var particle = new THREE.Sprite( material );
 		    var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
-		    particle.position.x = Math.random() * 800 - 400;
-		    particle.position.y = Math.random() * 800 - 400;
-		    particle.position.z = Math.random() * 800 - 400;
-		    particle.scale.x = particle.scale.y = Math.random() * 20 + 20;
+		    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 		    scene.add( particle );
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
