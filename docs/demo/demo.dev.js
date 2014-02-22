@@ -39,7 +39,7 @@ var IMDBSystem = (function(THREE){
                     ctx.rotate(Math.PI / points);
                     ctx.lineTo(0, 0 - radius);
                 }
-                ctx.fillStyle = 'yellow';
+                ctx.fillStyle = 'transaprent';
                 ctx.fill();
                 ctx.stroke();
                 ctx.restore();
