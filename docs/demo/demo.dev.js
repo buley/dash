@@ -81,7 +81,7 @@ var IMDBSystem = (function(THREE){
                     if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
                     INTERSECTED = null;
                 }
-                if (INTERSECTED && INTERSECTED.id !== last_intersected.id) {
+                if (!last_intersected || ( INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
                     last_intersected = INTERSECTED;
                     INTERSECTED.material.color = 0x660000;
 		    console.log("INSERSECT",INTERSECTED);
