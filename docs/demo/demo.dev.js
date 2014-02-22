@@ -190,7 +190,7 @@ var IMDBSystem = (function(THREE){
 		    if ( ( x / 1000 ) > 1 ) {
 			var row = Math.floor(x / 1000);
 			x = x - (row * 1000);
-			y = row * 1000 * 20;
+			y = row * 20;
 		    }
 		    particle.position = new THREE.Vector3(context.key * 20, context.key, 1);
 		    var rand =  Math.random() * range - range / 2;
