@@ -175,8 +175,8 @@ var IMDBSystem = (function(THREE){
 
 
 		    //var particle = new THREE.Sprite( material );
-		    //var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
-		    var particle = new THREE.Mesh( geometry, material ); 
+		    var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
+		    //var particle = new THREE.Mesh( geometry, material ); 
 		    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 		    scene.add( particle );
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
