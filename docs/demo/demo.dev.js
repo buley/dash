@@ -118,14 +118,13 @@ var IMDBSystem = (function(THREE){
                             if (!ctx) {
                                 ctx = canvas.getContext('2d');
                             }
-                            //canvas.height = height;
-                            //canvas.width = width;
+                            canvas.height = height;
+                            canvas.width = width;
                         }
                         ctx.save();
                         ctx.beginPath();
                         ctx.translate(center_x, center_y);
                         ctx.moveTo(0, (0 - radius));
-                        points = Math.floor( Math.random() * 100 ) % 15;
                         // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
                         // m = "fraction of radius for inset" 
                         for ( x = 0; x < points; x += 1) {
