@@ -442,11 +442,8 @@ dashApp.directive('dashSplashOverlay', function() {
         controller: 'dashSplashOverlayController',
         compile: function() {
             console.log('dashSplash overlay setup');
-            var el = document.createElement('div');
-            el.setAttribute('id', 'dash-splash-overlay-container');
             return function link(scope, element, attrs, dashSplashOverlayController) {
                 console.log('dashSplashOverlayController',dashSplashOverlayController);
-		element.appendChild(el);
             };
         }
     };
