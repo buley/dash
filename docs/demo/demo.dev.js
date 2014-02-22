@@ -198,6 +198,7 @@ var IMDBSystem = (function(THREE){
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
 		    scene.add( particle );
+	      	    camera.lookAt(partile.position);
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
 
@@ -233,7 +234,6 @@ var IMDBSystem = (function(THREE){
             node_width = width;
             node_height = height;
             camera = new THREE.PerspectiveCamera(90, width / height, 1, 1000);
-	    camera.set(90,0,0);
 	    controls = new THREE.TrackballControls( camera );
 controls.rotateSpeed = 1.0;
 	    controls.zoomSpeed = 1.2;
