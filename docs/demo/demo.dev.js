@@ -197,8 +197,6 @@ var IMDBSystem = (function(THREE){
 			y = row * 20;
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
-		    var rand =  Math.random() * range - range / 2;
-		    rand = rand - ( rand % 20 )
 		    scene.add( particle );
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
