@@ -7,7 +7,7 @@ var IMDBSystem = (function(THREE){
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
                 ctx.beginPath();
-                ctx.strokeStyle = '#000000';
+                ctx.strokeStyle = '#660000';
                 //ctx.translate(center_x, center_y);
                 ctx.moveTo(0, (0 - radius));
                 //points = Math.floor( Math.random() * 100 ) % 15;
@@ -31,6 +31,7 @@ var IMDBSystem = (function(THREE){
                 //ctx.translate(center_x, center_y);
                 ctx.moveTo(0, (0 - radius));
                 points = Math.floor( Math.random() * 100 ) % 15;
+                ctx.strokeStyle = '#FFFFFF';
                 // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
                 // m = "fraction of radius for inset" 
                 for ( x = 0; x < points; x += 1) {
