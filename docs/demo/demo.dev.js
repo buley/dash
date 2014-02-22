@@ -75,14 +75,15 @@ var IMDBSystem = (function(THREE){
                     if ( INTERSECTED != intersects[ 0 ].object ) {
                         if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
                         INTERSECTED = intersects[ 0 ].object;
-                        //INTERSECTED.material.program = canvasFilledStarProgram;
+                        INTERSECTED.material.color = 0xFFFFFF;
                     }
                 } else {
                     if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
                     INTERSECTED = null;
                 }
-                if (INTERSECTED && INTERSECTED.id !== last_intersected) {
-                    last_intersected = INTERSECTED.id;
+                if (INTERSECTED && INTERSECTED.id !== last_intersected.id) {
+                    last_intersected = INTERSECTED;
+                    INTERSECTED.material.color = 0x660000;
 		    console.log("INSERSECT",INTERSECTED);
                 }
                 /* WebGL render */
