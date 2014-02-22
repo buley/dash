@@ -63,6 +63,7 @@ var IMDBSystem = (function(THREE){
                 /* 60fps goodness */
                 requestAnimationFrame(render);
                 stats.update();
+		controls.update();
                 camera.updateMatrixWorld();
                 var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
                 projector.unprojectVector( vector, camera );
@@ -211,7 +212,7 @@ controls.rotateSpeed = 1.0;
 	    controls.staticMoving = true;
 	    controls.dynamicDampingFactor = 0.3;
 	    controls.keys = [ 65, 83, 68 ];
-	    controls.addEventListener( 'change', render );
+	    controls.addEventListener( 'change', relayout );
             node.appendChild(renderer.domElement);
 	    if (stats) {
             	document.getElementsByTagName('body')[0].appendChild( stats.domElement );
