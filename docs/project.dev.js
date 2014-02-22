@@ -441,14 +441,12 @@ dashApp.directive('dashSplashOverlay', function() {
         restrict: 'AE',
         controller: 'dashSplashOverlayController',
         compile: function() {
-            console.log('dashSplash setup');
+            console.log('dashSplash overlay setup');
             var el = document.createElement('div'),
-                layout = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height());
-            el.setAttribute('id', 'dash-splash-container');
+            el.setAttribute('id', 'dash-splash-overlay-container');
             return function link(scope, element, attrs, dashSplashOverlayController) {
                 console.log('dashSplashOverlayController',dashSplashOverlayController);
-                element[0].appendChild(el);
-                layout();
+		element.appendChild(el);
             };
         }
     };
