@@ -89,6 +89,7 @@ var IMDBSystem = (function(THREE){
             },
             scene = new THREE.Scene(),
             camera,
+	    controls,
             /* What the viewer sees */
             scene,
             /* How the viewer sees it */
@@ -201,6 +202,7 @@ var IMDBSystem = (function(THREE){
             node_width = width;
             node_height = height;
             camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+	    controls = new THREE.TrackballControls( camera );
             node.appendChild(renderer.domElement);
 	    if (stats) {
             	document.getElementsByTagName('body')[0].appendChild( stats.domElement );
