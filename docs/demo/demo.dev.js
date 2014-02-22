@@ -88,6 +88,7 @@ var IMDBSystem = (function(THREE){
 			    console.log("INSERSECT",INTERSECTED);
 			}
 		}
+	      	camera.lookAt(scene.position);
                 /* WebGL render */
                 renderer.render(scene, camera);
 
@@ -198,7 +199,6 @@ var IMDBSystem = (function(THREE){
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
 		    scene.add( particle );
-	      	    camera.lookAt(particle.position);
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
 
@@ -235,7 +235,7 @@ var IMDBSystem = (function(THREE){
             node_height = height;
             //camera = new THREE.PerspectiveCamera(90, width / height, 1, 1000);
 	    camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, - 500, 1000 );
-	    controls = new THREE.TrackballControls( camera );
+	    /*controls = new THREE.TrackballControls( camera );
 	    controls.rotateSpeed = 1.0;
 	    controls.zoomSpeed = 1.2;
 	    controls.panSpeed = 0.8;
