@@ -234,7 +234,7 @@ var IMDBSystem = (function(THREE){
             renderer.setSize(width, height);
             node_width = width;
             node_height = height;
-            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
 	    controls = new THREE.TrackballControls( camera );
 controls.rotateSpeed = 1.0;
 	    controls.zoomSpeed = 1.2;
