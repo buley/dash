@@ -40,7 +40,7 @@ var IMDBSystem = (function(THREE){
                     ctx.rotate(Math.PI / points);
                     ctx.lineTo(0, 0 - radius);
                 }
-                ctx.fillStyle = 'transparent';
+                ctx.fillStyle = '#FFFFFF';
                 ctx.fill();
                 ctx.stroke();
                 ctx.restore();
