@@ -160,7 +160,7 @@ var IMDBSystem = (function(THREE){
                     return;
                 }
                 ran_once = true;
-		var last_z;
+		var last_z, particles = [];
                 dash.get.entries({
                     database: 'dash-demo',
                     store: 'imdb',
@@ -174,6 +174,7 @@ var IMDBSystem = (function(THREE){
                     //system.name = "dash-demo";
                     //scene.add(system);
 		    console.log('system',system,scene);
+		    scene.add( particles );
 		    hasFinished = true;
 		    /*var x = 0,
 			entries = context.entries,
@@ -202,7 +203,8 @@ var IMDBSystem = (function(THREE){
 			y = y % size;
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
-		    scene.add( particle );
+		    particles.push(particle);
+
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
 
