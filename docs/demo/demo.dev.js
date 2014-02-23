@@ -1,5 +1,6 @@
 var IMDBSystem = (function(THREE){        
         var last_intersected,
+	    last_chosen,
             ran_once = false,
 	    hasStarted = false,
 	    node_width = null,
@@ -72,7 +73,7 @@ var IMDBSystem = (function(THREE){
 			projector.unprojectVector( vector, camera );
 			var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 			var intersects = raycaster.intersectObjects( scene.children );
-			var INTERSECTED;
+			var INTERSECTED, CHOSEN;
 			if ( intersects.length > 0 ) {
 			    if ( INTERSECTED != intersects[ 0 ].object ) {
 				if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
@@ -86,16 +87,22 @@ var IMDBSystem = (function(THREE){
 			if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
 			    INTERSECTED.start = new Date().getTime();
 				if (!!last_intersected) {
-				    last_intersected.material.color = new THREE.Color( 0x333333 );
-				    last_intersected.material.needsUpdate = true;
+				    delete last_intersected.start;
 				}
 			    last_intersected = INTERSECTED;
-			    console.log("INTERSECT",INTERSECTED);
-			    INTERSECTED.material.color = new THREE.Color( 0x336699 );
-			    INTERSECTED.material.needsUpdate = true;
-
 			} else if (INTERSECTED) {
 				console.log('elapsed', new Date().getTime() - INTERSECTED.start);
+				if ((new Date().getTime() - INTERSECTED.start) > 2000) {
+					if (!!last_chosen) {
+					    last_chosen.material.color = new THREE.Color( 0x333333 );
+					    last_chosen.material.needsUpdate = true;
+					}
+					last_chosen = CHOSEN;
+				CHOSEN = INTERSECTED;
+				    console.log("CHOSEN", CHOSEN);
+				    INTERSECTED.material.color = new THREE.Color( 0x336699 );
+				    INTERSECTED.material.needsUpdate = true;
+				}
 			}
 		}
 	      	camera.lookAt(scene.position);
