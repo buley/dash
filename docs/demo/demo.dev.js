@@ -197,10 +197,10 @@ var IMDBSystem = (function(THREE){
 			var row = Math.floor(x / size);
 			x = x - (row * size);
 			y = row * 20;
-			var column = Math.floor(y / size) - 1;
+			var column = Math.floor(y / size);
 			z = column * 20;
-			x = x - ( ( column ) * size * 20 );
-			y = y - ( ( column  ) * size * 20 );
+			x = x - ( ( column ) * size );
+			y = y - ( ( column  ) * size );
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
 		    scene.add( particle );
