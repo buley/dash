@@ -471,7 +471,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
     return {
         scope: {},
         restrict: 'AE',
-	template: '/docs/templates/overlay.html',
+	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
             console.log('dashSplash overlay setup');
             return function link(scope, element, attrs) {
