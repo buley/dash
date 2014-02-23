@@ -73,7 +73,7 @@ var IMDBSystem = (function(THREE){
 			projector.unprojectVector( vector, camera );
 			var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 			var intersects = raycaster.intersectObjects( scene.children );
-			var INTERSECTED, CHOSEN;
+			var INTERSECTED = null, CHOSEN = null;
 			if ( intersects.length > 0 ) {
 			    if ( INTERSECTED != intersects[ 0 ].object ) {
 				if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
@@ -91,8 +91,8 @@ var IMDBSystem = (function(THREE){
 				}
 			    last_intersected = INTERSECTED;
 			} else if (INTERSECTED) {
-				if (!CHOSEN || INTERSECTED.id !== CHOSEN.id) {
-					console.log(undefined === CHOSEN, INTERSECTED.id,'elapsed', new Date().getTime() - INTERSECTED.start);
+				if (null === CHOSEN || INTERSECTED.id !== CHOSEN.id) {
+					console.log(nulll === CHOSEN, INTERSECTED.id,'elapsed', new Date().getTime() - INTERSECTED.start);
 					if ((new Date().getTime() - INTERSECTED.start) > 1000) {
 						if (!!last_chosen) {
 						    last_chosen.material.color = new THREE.Color( 0x333333 );
