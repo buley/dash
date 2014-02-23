@@ -92,14 +92,14 @@ var IMDBSystem = (function(THREE){
 			    last_intersected = INTERSECTED;
 			} else if (INTERSECTED) {
 				if (!CHOSEN || INTERSECTED.id !== CHOSEN.id) {
-					console.log('elapsed', new Date().getTime() - INTERSECTED.start);
+					console.log(!CHOSEN, INTERSECTED.id !== CHOSEN.id,'elapsed', new Date().getTime() - INTERSECTED.start);
 					if ((new Date().getTime() - INTERSECTED.start) > 1000) {
 						if (!!last_chosen) {
 						    last_chosen.material.color = new THREE.Color( 0x333333 );
 						    last_chosen.material.needsUpdate = true;
 						}
 						last_chosen = CHOSEN;
-					CHOSEN = INTERSECTED;
+					    CHOSEN = INTERSECTED;
 					    console.log("CHOSEN", CHOSEN);
 					    INTERSECTED.material.color = new THREE.Color( 0x336699 );
 					    INTERSECTED.material.needsUpdate = true;
