@@ -89,8 +89,8 @@ var IMDBSystem = (function(THREE){
 			    INTERSECTED.material.color = new THREE.Color( 0x336699 );
 			    INTERSECTED.material.needsUpdate = true;
 				if (!!last_intersected) {
-				    last_intersected.material.color = new THREE.Color( 0x333333 );
-				    last_intersected.material.needsUpdate = true;
+				    //last_intersected.material.color = new THREE.Color( 0x333333 );
+				    //last_intersected.material.needsUpdate = true;
 				}
 			}
 		}
