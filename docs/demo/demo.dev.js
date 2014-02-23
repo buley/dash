@@ -84,6 +84,7 @@ var IMDBSystem = (function(THREE){
 			    INTERSECTED = null;
 			}
 			if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
+			    INTERSECTED.start = new Date().getTime();
 				if (!!last_intersected) {
 				    last_intersected.material.color = new THREE.Color( 0x333333 );
 				    last_intersected.material.needsUpdate = true;
@@ -93,6 +94,8 @@ var IMDBSystem = (function(THREE){
 			    INTERSECTED.material.color = new THREE.Color( 0x336699 );
 			    INTERSECTED.material.needsUpdate = true;
 
+			} else if (INTERSECTED) {
+				console.log('elapsed', new Date().getTime() - INTERSECTED.start);
 			}
 		}
 	      	camera.lookAt(scene.position);
