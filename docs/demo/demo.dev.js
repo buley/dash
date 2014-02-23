@@ -1,6 +1,7 @@
 var IMDBSystem = (function(THREE){        
         var last_intersected,
 	    last_chosen,
+	    on_data,
             ran_once = false,
 	    hasStarted = false,
 	    node_width = null,
@@ -106,6 +107,9 @@ var IMDBSystem = (function(THREE){
 						last_chosen = CHOSEN;
 					    CHOSEN = INTERSECTED;
 					    console.log("CHOSEN", last_chosen, CHOSEN);
+					    if ( 'function' === typeof on_data ) {
+						on_data.apply(on_data, [ CHOSEN ] );
+					    }
 					    INTERSECTED.material.color = new THREE.Color( 0x336699 );
 					    INTERSECTED.material.needsUpdate = true;
 					}
@@ -190,12 +194,13 @@ var IMDBSystem = (function(THREE){
         document.addEventListener( 'mousemove', onMouseMove, false );
         document.addEventListener( 'resize', onResize, false );
 
-        return function(node, width, height) {
+        return function(node, width, height, cb) {
             range = ( ( width > height ) ? height : width ) * 10;
             renderer.setClearColor(0xFFFFFF, 1.0);
             renderer.setSize(width, height);
             node_width = width;
             node_height = height;
+            on_data = cb;
             camera = new THREE.PerspectiveCamera(45, width / height, 1, 500000);
 	    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 	    camera.position.set( 1, width/height, width/height );
