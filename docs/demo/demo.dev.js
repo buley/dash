@@ -56,7 +56,7 @@ var IMDBSystem = (function(THREE){
                 ctx.arc( 0, 0, 0.5, 0, Math.PI2, true );
                 ctx.stroke();
             }, render = function() {
-                var step = .0005;
+                var step = .05;
                 if(camera) {
                     camera.position.y += step;
                     camera.position.x += step;
