@@ -205,7 +205,7 @@ var IMDBSystem = (function(THREE){
 
 		}
 
-		var gmaterial = new THREE.LineBasicMaterial( { color: 0x000000, opacity: 0.2 } );
+		var gmaterial = new THREE.LineBasicMaterial( { color: 0xEEEEEE, opacity: 0.2 } );
 
 		var line = new THREE.Line( ggeometry, gmaterial );
 		line.type = THREE.LinePieces;
@@ -225,7 +225,7 @@ var IMDBSystem = (function(THREE){
 
 		}
 
-		var gmaterial = new THREE.LineBasicMaterial( { color: 0x000000, opacity: 0.2 } );
+		var gmaterial = new THREE.LineBasicMaterial( { color: 0xEEEEEE, opacity: 0.2 } );
 
 		var line = new THREE.Line( ggeometry, gmaterial );
 		line.type = THREE.LinePieces;
