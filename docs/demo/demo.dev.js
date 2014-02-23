@@ -203,10 +203,6 @@ var IMDBSystem = (function(THREE){
 			column = row - row_count;
 			row = row % row_count;
 		    }
-		    if ( column > column_count ) {
-			stack = column - column_count;
-			column = column % column_count;
-		    }
 		    xpos = ( row * tau ) - ( row * row_count );
 		    ypos = column * tau ;
 		    zpos = stack * tau;
