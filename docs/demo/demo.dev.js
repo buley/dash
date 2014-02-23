@@ -83,7 +83,7 @@ var IMDBSystem = (function(THREE){
 			    if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
 			    INTERSECTED = null;
 			}
-			if (!last_intersected || ( INTERSECTED && INTERSECTED.id !== last_intersected.id) && null !== INTERSECTED) {
+			if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
 			    last_intersected = INTERSECTED;
 			    console.log("INSERSECT",INTERSECTED);
 			}
