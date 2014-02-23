@@ -166,7 +166,7 @@ var IMDBSystem = (function(THREE){
         document.addEventListener( 'resize', onResize, false );
 
         return function(node, width, height) {
-            range = ( width > height ) ? height : width;
+            range = ( ( width > height ) ? height : width ) * 10;
             renderer.setClearColor(0x000000, 1.0);
             renderer.setSize(width, height);
             node_width = width;
