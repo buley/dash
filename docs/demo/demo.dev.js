@@ -195,9 +195,9 @@ var IMDBSystem = (function(THREE){
 			x = 1, xpos,
 			y = 1, ypos,
 			z = 1, zpos,
-			row_count = Math.floor( node_width / tau ),
-			column_count = Math.floor( node_height / tau ),
-			row, column, stack;
+			row_count = Math.floor( node_height / tau ),
+			column_count = Math.floor( node_width / tau ),
+			row = 1, column = 1, stack = 1;
 		    row = Math.floor(context.key / row_count);
 		    if ( row > row_count ) {
 			column = row - row_count;
