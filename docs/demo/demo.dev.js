@@ -91,7 +91,7 @@ var IMDBSystem = (function(THREE){
 				}
 			    last_intersected = INTERSECTED;
 			} else if (INTERSECTED) {
-				if (INTERSECTED.id !== CHOSEN.id) {
+				if (!CHOSEN || INTERSECTED.id !== CHOSEN.id) {
 					console.log('elapsed', new Date().getTime() - INTERSECTED.start);
 					if ((new Date().getTime() - INTERSECTED.start) > 1000) {
 						if (!!last_chosen) {
