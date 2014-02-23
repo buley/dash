@@ -108,7 +108,7 @@ var IMDBSystem = (function(THREE){
 					    CHOSEN = INTERSECTED;
 					    console.log("CHOSEN", last_chosen, CHOSEN);
 					    if ( 'function' === typeof on_data ) {
-						on_data.apply(on_data, [ CHOSEN ] );
+						on_data.apply(on_data, [ CHOSEN.name ] );
 					    }
 					    INTERSECTED.material.color = new THREE.Color( 0x336699 );
 					    INTERSECTED.material.needsUpdate = true;
