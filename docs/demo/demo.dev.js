@@ -41,7 +41,7 @@ var IMDBSystem = (function(THREE){
                     ctx.rotate(Math.PI / points);
                     ctx.lineTo(0, (0 - (radius * m)));
                     ctx.rotate(Math.PI / points);
-                    ctx.lineTo(0, 0 - radius),
+                    ctx.lineTo(0, 0 - radius);
                 }
                 ctx.fillStyle = '#FFFFFF';
                 ctx.fill();
