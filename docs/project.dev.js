@@ -479,9 +479,10 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			se: 'Season',
 			ep: 'Epsidode'
 		};
+		console.log('default data',scope.data);
 		dashAppSplashBroadcast.subscribe(function(data) {
-			console.log('el',data);
 			scope.$apply( function() {
+				console.log('updated data', data);
 				scope.data = data;
 			} );
 		});
