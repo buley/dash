@@ -373,7 +373,17 @@ dashApp.directive('dashSplash', function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
                 layout = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
-			console.log('DISPLAY',data);
+		    dash.add.entry({
+			database: 'dash-demo',
+			store: 'imdb',
+			key: data,
+			store_key_path: 'id'
+		    })
+		    (function(context) {
+			console.log('got entry', context);
+		    }, function(context) {
+			console.log('missing entry', context);
+		    });
 		});
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
