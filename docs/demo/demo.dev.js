@@ -81,7 +81,7 @@ var IMDBSystem = (function(THREE){
 				INTERSECTED.material.color = 0x660000;
 			    }
 			} else {
-			    if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
+			    if ( INTERSECTED ) INTERSECTED.material.color = 0x333333;
 			    INTERSECTED = null;
 			}
 			if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
