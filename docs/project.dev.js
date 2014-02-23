@@ -399,14 +399,12 @@ dashApp.factory( 'dashAppSplashBroadcast', function() {
 	stack = [];
 	return {
 		current: function(data) {
-			console.log('current',data);
 			var x = 0, xlen = stack.length;
 			for ( x = 0; x < xlen; x += 1 ) {
 				stack[ x ].apply( stack[ x ], [ data ] );
 			}
 		},
 		subscribe: function(cb) {
-			console.log('subscribe',cb);
 			stack.push(cb);
 		}
 	};
