@@ -367,6 +367,7 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
 
 dashApp.directive('dashSplash', function() { 
     return {
+	controller: 'dashAppDocsDemosController',
         scope: {},
         restrict: 'AE',
         compile: function() {
@@ -386,7 +387,8 @@ dashApp.directive('dashSplash', function() {
 		    });
 		});
             el.setAttribute('id', 'dash-splash-container');
-            return function link(scope, element, attrs) {
+            return function link(scope, element, attrs, dashAppDocsDemosController) {
+		console.log('xxx',dashAppDocsDemosController);
                 element[0].appendChild(el);
                 layout();
             };
