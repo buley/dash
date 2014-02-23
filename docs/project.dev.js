@@ -475,6 +475,10 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
         compile: function() {
             console.log('dashSplash overlay setup');
             return function link(scope, element, attrs) {
+		scope.data = {
+			se: 'Season',
+			ep: 'Epsidode'
+		};
 		dashAppSplashBroadcast.subscribe(function(data) {
 			console.log('el',data);
 			scope.$apply( function() {
