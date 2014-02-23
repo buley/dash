@@ -362,15 +362,12 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
     $scope.demoUrl = function(demo) {
         return $sce.trustAsResourceUrl('http://jsfiddle.net/' + demo.id + '/embedded');
     };
-    $scope.current = function(data) {
-	console.log('CURRENT',data);
-    };
 }]);
 
 
 dashApp.directive('dashSplash', function() { 
     return {
-	controller: 'dashAppDocsDemosController',
+	controller: 'dashAppSplashController',
         scope: {},
         restrict: 'AE',
         compile: function() {
@@ -401,7 +398,7 @@ dashApp.directive('dashSplash', function() {
     };
 } );
 
-dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
+dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $scope, $http ) {
     console.log('splash controller');
     var start = 2013,
         stack = [],
@@ -431,6 +428,9 @@ dashApp.controller('dashAppSplashController', [ '$http', function( $http ) {
         },
         key = 'dash-demo-installed-2',
         dashInstalled = localStorage.getItem(key);
+    $scope.current = function(data) {
+	console.log('CURRENT',data);
+    };
     if (!dashInstalled) {
         for (; start > 2000; start -= 1) {
             localStorage.setItem(key, 'YES');
