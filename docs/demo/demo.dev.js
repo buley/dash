@@ -136,7 +136,6 @@ var IMDBSystem = (function(THREE){
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
-		    hasStarted = true;
 		    var particle = new THREE.Mesh( geometry, material ); 
 		    particle.name = context.key;
                     particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
@@ -152,6 +151,7 @@ var IMDBSystem = (function(THREE){
                 layout();
             },
             onMouseMove = function(event) {
+		hasStarted = true;
                 event.preventDefault();
                 mouse.x = ( event.clientX / node_width ) * 2 - 1;
                 mouse.y = - ( event.clientY / node_height ) * 2 + 1;
