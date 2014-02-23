@@ -192,9 +192,9 @@ var IMDBSystem = (function(THREE){
 		    var particle = new THREE.Mesh( geometry, material ); 
 		    //particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 		    var tau = 10,
-			x, xpos,
-			y, ypos,
-			z, zpos,
+			x = 1, xpos,
+			y = 1, ypos,
+			z = 1, zpos,
 			x_count = Math.floor( node_width / tau ),
 			y_count = Math.floor( node_height / tau );
 		    x = Math.floor(context.key / x_count);
