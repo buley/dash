@@ -95,8 +95,12 @@ var IMDBSystem = (function(THREE){
 					console.log(null === CHOSEN, INTERSECTED.id,'elapsed', new Date().getTime() - INTERSECTED.start);
 					if ((new Date().getTime() - INTERSECTED.start) > 1000) {
 						if (!!last_chosen) {
+							if (last_chosen.id === INTERSECTED.id) {
+								return;
+							}
 						    last_chosen.material.color = new THREE.Color( 0x333333 );
 						    last_chosen.material.needsUpdate = true;
+
 						}
 						last_chosen = CHOSEN;
 					    CHOSEN = INTERSECTED;
