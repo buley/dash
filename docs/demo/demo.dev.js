@@ -95,6 +95,7 @@ var IMDBSystem = (function(THREE){
 					console.log(null === CHOSEN, INTERSECTED.id,'elapsed', new Date().getTime() - INTERSECTED.start);
 					if ((new Date().getTime() - INTERSECTED.start) > 1000) {
 						if (!!last_chosen) {
+							console.log('last',last_chosen.id, INTERSECTED.id);
 							if (last_chosen.id === INTERSECTED.id) {
 								return;
 							}
