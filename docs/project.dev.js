@@ -428,8 +428,13 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
         },
         key = 'dash-demo-installed-2',
         dashInstalled = localStorage.getItem(key);
+    var stack = [];
     $scope.current = function(data) {
 	console.log('CURRENT',data);
+    };
+    $scope.subscribe = function(cb) {
+	console.log('SUBSCRIBE',cb);
+	stack.push(cb);
     };
     if (!dashInstalled) {
         for (; start > 2000; start -= 1) {
@@ -450,19 +455,18 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
 }]);
 
 
-dashApp.controller('dashSplashOverlayController', [ '$scope', function($scope) {
-    console.log('dashSplashOverlayController');
-}]);
-
 dashApp.directive('dashSplashOverlay', function() { 
     return {
         scope: {},
         restrict: 'AE',
-        controller: 'dashSplashOverlayController',
+        controller: 'dashSplashAppController',
         compile: function() {
             console.log('dashSplash overlay setup');
-            return function link(scope, element, attrs, dashSplashOverlayController) {
+            return function link(scope, element, attrs, dashSplashAppController) {
                 console.log('dashSplashOverlayController',dashSplashOverlayController);
+		dashSplashAppController.subscribe(function(data) {
+			console.log('new el');
+		});
             };
         }
     };
