@@ -91,7 +91,7 @@ var IMDBSystem = (function(THREE){
 			}
 			if (last_intersected) {
 			    last_intersected.material.color = 0x333333;
-			    INTERSECTED.material.needsUpdate = true;
+			    last_intersected.material.needsUpdate = true;
 			}
 		}
 	      	camera.lookAt(scene.position);
