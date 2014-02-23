@@ -475,7 +475,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
             console.log('dashSplash overlay setup');
             return function link(scope, element, attrs) {
 		dashAppSplashBroadcast.subscribe(function(data) {
-			console.log('new el');
+			console.log('el',data);
 		});
             };
         }
