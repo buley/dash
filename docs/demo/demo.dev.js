@@ -91,8 +91,8 @@ var IMDBSystem = (function(THREE){
 				}
 			    last_intersected = INTERSECTED;
 			} else if (INTERSECTED) {
-				console.log('elapsed', new Date().getTime() - INTERSECTED.start);
 				if (INTERSECTED.id !== CHOSEN.id) {
+					console.log('elapsed', new Date().getTime() - INTERSECTED.start);
 					if ((new Date().getTime() - INTERSECTED.start) > 1000) {
 						if (!!last_chosen) {
 						    last_chosen.material.color = new THREE.Color( 0x333333 );
