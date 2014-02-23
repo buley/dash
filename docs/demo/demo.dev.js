@@ -173,7 +173,7 @@ var IMDBSystem = (function(THREE){
             node_height = height;
             camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
 	    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
-	    camera.position.set( 1, 1, 10000 );
+	    camera.position.set( 1, 1, 1000 );
 	    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 	    controls = new THREE.TrackballControls( camera );
 	    controls.rotateSpeed = 1.0;
