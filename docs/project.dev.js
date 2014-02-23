@@ -362,6 +362,9 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
     $scope.demoUrl = function(demo) {
         return $sce.trustAsResourceUrl('http://jsfiddle.net/' + demo.id + '/embedded');
     };
+    $scope.current = function(data) {
+	console.log('CURRENT',data);
+    };
 }]);
 
 
@@ -373,6 +376,7 @@ dashApp.directive('dashSplash', function() {
         compile: function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
+		controller,
                 layout = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
 		    dash.get.entry({
 			database: 'dash-demo',
@@ -382,13 +386,14 @@ dashApp.directive('dashSplash', function() {
 		    })
 		    (function(context) {
 			console.log('got entry', context);
+			controller.current(context.entry);
 		    }, function(context) {
 			console.log('missing entry', context);
 		    });
 		});
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs, dashAppDocsDemosController) {
-		console.log('xxx',dashAppDocsDemosController);
+		controller = dashAppDocsDemosController;
                 element[0].appendChild(el);
                 layout();
             };
