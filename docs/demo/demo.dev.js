@@ -5,6 +5,7 @@ var IMDBSystem = (function(THREE){
 	    hasStarted = false,
 	    node_width = null,
             node_height = null,
+	    INTERSECTED = null, CHOSEN = null,
             canvasStarProgram = function(ctx) {
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
@@ -73,7 +74,6 @@ var IMDBSystem = (function(THREE){
 			projector.unprojectVector( vector, camera );
 			var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 			var intersects = raycaster.intersectObjects( scene.children );
-			var INTERSECTED = null, CHOSEN = null;
 			if ( intersects.length > 0 ) {
 			    if ( INTERSECTED != intersects[ 0 ].object ) {
 				if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
