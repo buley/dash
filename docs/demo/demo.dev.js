@@ -195,20 +195,21 @@ var IMDBSystem = (function(THREE){
 			x = 1, xpos,
 			y = 1, ypos,
 			z = 1, zpos,
-			x_count = Math.floor( node_width / tau ),
-			y_count = Math.floor( node_height / tau );
-		    x = Math.floor(context.key / x_count);
-		    if ( x > x_count ) {
-			y = x - x_count;
-			x = x_count;
+			row_count = Math.floor( node_width / tau ),
+			column_count = Math.floor( node_height / tau ),
+			row, column, stack;
+		    row = Math.floor(context.key / x_count);
+		    if ( row > x_count ) {
+			column = row - row_count;
+			row = row % row_count;
 		    }
-		    if ( y > y_count ) {
-			z = y - y_count;
-			y = y_count;
+		    if ( column > column_count ) {
+			stack = column - column_count;
+			column = column % column_count;
 		    }
-			xpos = x * tau,
-			ypos = y * tau,
-			zpos = z * tau;
+		    xpos = row * tau;
+		    ypos = column * tau;
+		    zpos = stack * tau;
 		    console.log(x,y,z);
 		    particle.position = new THREE.Vector3(xpos, ypos, zpos);
 		    scene.add( particle );
