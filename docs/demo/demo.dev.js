@@ -265,7 +265,30 @@ var IMDBSystem = (function(THREE){
 	    controls.addEventListener( 'change', relayout );
 	    light = new THREE.DirectionalLight( 0xffffff );
 	    light.position.set( 1, 1, 1 );
-	    scene.add( light );/*
+	    scene.add( light );
+
+		// Grid
+
+		var size = 500, step = 50;
+
+		var ggeometry = new THREE.Geometry();
+
+		for ( var i = - size; i <= size; i += step ) {
+
+			ggeometry.vertices.push( new THREE.Vector3( - size, 0, i ) );
+			ggeometry.vertices.push( new THREE.Vector3(   size, 0, i ) );
+
+			ggeometry.vertices.push( new THREE.Vector3( i, 0, - size ) );
+			ggeometry.vertices.push( new THREE.Vector3( i, 0,   size ) );
+
+		}
+
+		var gmaterial = new THREE.LineBasicMaterial( { color: 0x000000, opacity: 0.2 } );
+
+		var line = new THREE.Line( ggeometry, gmaterial );
+		line.type = THREE.LinePieces;
+		scene.add( line );
+	    /*
 	    light = new THREE.DirectionalLight( 0x111111 );
 	    light.position.set( -1, -1, -1 );
 	    scene.add( light );
