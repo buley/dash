@@ -210,7 +210,7 @@ var IMDBSystem = (function(THREE){
 		    xpos = row * tau;
 		    ypos = column * tau;
 		    zpos = stack * tau;
-		    console.log(x,y,z);
+		    console.log(row,column,stack,row_count,column_count,x,y,z);
 		    particle.position = new THREE.Vector3(xpos, ypos, zpos);
 		    scene.add( particle );
 		    camera.lookAt( particle.position );
