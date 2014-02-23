@@ -238,8 +238,8 @@ var IMDBSystem = (function(THREE){
             renderer.setSize(width, height);
             node_width = width;
             node_height = height;
-            //camera = new THREE.PerspectiveCamera(90, width / height, 1, 1000);
-	    camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, - 500, 1000 );
+            camera = new THREE.PerspectiveCamera(90, width / height, 1, 1000);
+	    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 	    controls = new THREE.TrackballControls( camera );
 	    controls.rotateSpeed = 1.0;
 	    controls.zoomSpeed = 1.2;
