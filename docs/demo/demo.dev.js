@@ -84,14 +84,15 @@ var IMDBSystem = (function(THREE){
 			    INTERSECTED = null;
 			}
 			if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
+				if (!!last_intersected) {
+				    last_intersected.material.color = new THREE.Color( 0x333333 );
+				    last_intersected.material.needsUpdate = true;
+				}
 			    last_intersected = INTERSECTED;
 			    console.log("INSERSECT",INTERSECTED);
 			    INTERSECTED.material.color = new THREE.Color( 0x336699 );
 			    INTERSECTED.material.needsUpdate = true;
-				if (!!last_intersected) {
-				    //last_intersected.material.color = new THREE.Color( 0x333333 );
-				    //last_intersected.material.needsUpdate = true;
-				}
+
 			}
 		}
 	      	camera.lookAt(scene.position);
