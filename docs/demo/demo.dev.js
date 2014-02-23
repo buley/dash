@@ -198,14 +198,12 @@ var IMDBSystem = (function(THREE){
 			width_count = Math.floor( node_width / tau ),
 			height_count = Math.floor( node_height / tau );
 		    x = context.key * tau;
-		    if ( ( x / size ) > 1 ) {
-			var row = Math.floor(context.key / width_count);
-			x = x - (row * width_count);
-			y = row * tau;
-			var column = Math.floor(row / height_count);
-			z = column * tau;
-			y = y % height_count;
-		    }
+		    var row = Math.floor(context.key / width_count);
+		    x = x - (row * width_count);
+		    y = row * tau;
+		    var column = Math.floor(row / height_count);
+		    z = column * tau;
+		    y = y % height_count;
 		    particle.position = new THREE.Vector3(x, y, z);
 		    scene.add( particle );
 		    camera.lookAt( particle.position );
