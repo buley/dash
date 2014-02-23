@@ -383,7 +383,9 @@ dashApp.directive('dashSplash', function() {
 		    })
 		    (function(context) {
 			console.log('got entry', context);
-			controller.current(context.entry);
+			if (controller.current) {
+				controller.current(context.entry);
+			}
 		    }, function(context) {
 			console.log('missing entry', context);
 		    });
