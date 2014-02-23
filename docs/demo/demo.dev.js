@@ -196,9 +196,10 @@ var IMDBSystem = (function(THREE){
 		    if ( ( x / size ) > 1 ) {
 			var row = Math.floor(x / size);
 			x = x - (row * size);
-			y = row * 20;
+			y = row;
 			var column = Math.floor(y / size);
-			z = column * 20;
+			z = column;
+			y = x;
 			console.log(x,y,z);
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
