@@ -86,11 +86,11 @@ var IMDBSystem = (function(THREE){
 			if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
 			    last_intersected = INTERSECTED;
 			    console.log("INSERSECT",INTERSECTED);
-			    INTERSECTED.material.color.setHex( 0x336699);
+			    INTERSECTED.material.color = new THREE.Color( 0x336699 );
 			    INTERSECTED.material.needsUpdate = true;
 			}
 			if (!!last_intersected) {
-			    last_intersected.material.color.setHex( 0x333333 );
+			    last_intersected.material.color = new THREE.Color( 0x333333 );
 			    last_intersected.material.needsUpdate = true;
 			}
 		}
