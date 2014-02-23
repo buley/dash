@@ -207,7 +207,6 @@ var IMDBSystem = (function(THREE){
 		    xpos = ( row * tau ) - ( row * row_count );
 		    ypos = column * tau ;
 		    zpos = stack * tau;*/
-		    range = range * 100;
                     particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 		    //particle.position = new THREE.Vector3(xpos, ypos, zpos);
 		    scene.add( particle );
