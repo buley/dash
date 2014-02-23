@@ -189,55 +189,12 @@ var IMDBSystem = (function(THREE){
 	    light.position.set( 1, 1, 1 );
 	    scene.add( light );
 
-		// Grid
-
-		var size = 500, step = 50;
-
-		var ggeometry = new THREE.Geometry();
-
-		for ( var i = - size; i <= size; i += step ) {
-
-			ggeometry.vertices.push( new THREE.Vector3( - size, 0, i ) );
-			ggeometry.vertices.push( new THREE.Vector3(   size, 0, i ) );
-
-			ggeometry.vertices.push( new THREE.Vector3( i, 0, - size ) );
-			ggeometry.vertices.push( new THREE.Vector3( i, 0,   size ) );
-
-		}
-
-		var gmaterial = new THREE.LineBasicMaterial( { color: 0xEEEEEE, opacity: 0.2 } );
-
-		var line = new THREE.Line( ggeometry, gmaterial );
-		line.type = THREE.LinePieces;
-		scene.add( line );
-
-		var size = 500, step = 50;
-
-		var ggeometry = new THREE.Geometry();
-
-		for ( var i = - size; i <= size; i += step ) {
-
-			ggeometry.vertices.push( new THREE.Vector3( 0, - size, i ) );
-			ggeometry.vertices.push( new THREE.Vector3( 0, size, i ) );
-
-			ggeometry.vertices.push( new THREE.Vector3( 0, i, - size ) );
-			ggeometry.vertices.push( new THREE.Vector3( 0, i,  size ) );
-
-		}
-
-		var gmaterial = new THREE.LineBasicMaterial( { color: 0xEEEEEE, opacity: 0.2 } );
-
-		var line = new THREE.Line( ggeometry, gmaterial );
-		line.type = THREE.LinePieces;
-		scene.add( line );
-
-
-	    /*
 	    light = new THREE.DirectionalLight( 0x111111 );
 	    light.position.set( -1, -1, -1 );
 	    scene.add( light );
+
 	    light = new THREE.AmbientLight( 0x222222 );
-	    scene.add( light );*/
+	    scene.add( light );
             node.appendChild(renderer.domElement);
 	    if (stats) {
             	document.getElementsByTagName('body')[0].appendChild( stats.domElement );
