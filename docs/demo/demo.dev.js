@@ -41,7 +41,7 @@ var IMDBSystem = (function(THREE){
                     ctx.rotate(Math.PI / points);
                     ctx.lineTo(0, (0 - (radius * m)));
                     ctx.rotate(Math.PI / points);
-                    ctx.lineTo(0, 0 - radius);
+                    ctx.lineTo(0, 0 - radius),
                 }
                 ctx.fillStyle = '#FFFFFF';
                 ctx.fill();
@@ -76,9 +76,9 @@ var IMDBSystem = (function(THREE){
 			var intersects = raycaster.intersectObjects( scene.children );
 			if ( intersects.length > 0 ) {
 			    if ( INTERSECTED != intersects[ 0 ].object ) {
-				if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
+				//if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
 				INTERSECTED = intersects[ 0 ].object;
-				INTERSECTED.material.color = 0xFFFFFF;
+				INTERSECTED.material.color = 0x660000;
 			    }
 			} else {
 			    if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
