@@ -372,7 +372,6 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSpla
         compile: function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
-		controller,
                 layout = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
 		    dash.get.entry({
 			database: 'dash-demo',
@@ -389,7 +388,6 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSpla
 		});
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
-		controller = dashAppDocsDemosController;
                 element[0].appendChild(el);
                 layout();
             };
