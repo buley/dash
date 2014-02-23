@@ -196,10 +196,16 @@ var IMDBSystem = (function(THREE){
 			y, ypos,
 			z, zpos,
 			x_count = Math.floor( node_width / tau ),
-			y_count = Math.floor( node_height / tau ),
-		    	x = Math.floor(context.key / x_count),
-			y = x % x_count,
-		    	z = Math.floor(y / y_count),
+			y_count = Math.floor( node_height / tau );
+		    x = Math.floor(context.key / x_count);
+		    if ( x > x_count ) {
+			y = x - x_count;
+			x = x_count;
+		    }
+		    if ( y > y_count ) {
+			z = y - y_count;
+			y = y_count;
+		    }
 			xpos = x * tau,
 			ypos = y * tau,
 			zpos = z * tau;
