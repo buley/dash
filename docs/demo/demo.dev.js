@@ -89,7 +89,7 @@ var IMDBSystem = (function(THREE){
 				    last_intersected.material.needsUpdate = true;
 				}
 			    last_intersected = INTERSECTED;
-			    console.log("INSERSECT",INTERSECTED);
+			    console.log("INTERSECT",INTERSECTED);
 			    INTERSECTED.material.color = new THREE.Color( 0x336699 );
 			    INTERSECTED.material.needsUpdate = true;
 
