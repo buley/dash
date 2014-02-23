@@ -193,7 +193,7 @@ var IMDBSystem = (function(THREE){
 	    light.position.set( -1, -1, -1 );
 	    scene.add( light );
 
-	    light = new THREE.AmbientLight( 0xFFFFFF );
+	    light = new THREE.AmbientLight( 0x333333 );
 	    scene.add( light );
             node.appendChild(renderer.domElement);
 	    if (stats) {
