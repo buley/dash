@@ -191,6 +191,7 @@ var IMDBSystem = (function(THREE){
 		    //var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
 		    var particle = new THREE.Mesh( geometry, material ); 
 		    //particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
+			/*
 		    var tau = 10,
 			x = 1, xpos,
 			y = 1, ypos,
@@ -205,12 +206,12 @@ var IMDBSystem = (function(THREE){
 		    }
 		    xpos = ( row * tau ) - ( row * row_count );
 		    ypos = column * tau ;
-		    zpos = stack * tau;
-		    console.log(row,column,stack,row_count,column_count,x,y,z);
-		    particle.position = new THREE.Vector3(xpos, ypos, zpos);
+		    zpos = stack * tau;*/
+
+                    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
+		    //particle.position = new THREE.Vector3(xpos, ypos, zpos);
 		    scene.add( particle );
 		    camera.lookAt( particle.position );
-
                     //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
 
