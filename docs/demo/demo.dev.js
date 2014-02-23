@@ -118,8 +118,8 @@ var IMDBSystem = (function(THREE){
 	    geometry = new THREE.SphereGeometry(3, 32, 32), 
             //material = new THREE.MeshLambertMaterial({color: new THREE.Color( 0x333333 ), sizeAttenuation: true }),
 	    material = new THREE.ParticleBasicMaterial({
-                size: 8,
-                color: 0x000000,
+                size: 20,
+                color: 0x333333,
                 transparent: true,
                 opacity: .6,
                 sizeAttenuation: true,
@@ -154,7 +154,7 @@ var IMDBSystem = (function(THREE){
                         ctx.restore();
 			console.log('canvas',canvas,ctx);
                         return canvas;
-                    }(256, 256, 128, 128, 64, 7, .5)));
+                    }(32, 32, 16, 16, 8, 5, .5)));
                     texture.needsUpdate = true;
                     return texture;
                 }())
