@@ -116,7 +116,49 @@ var IMDBSystem = (function(THREE){
             range,
 	    stats,
 	    geometry = new THREE.SphereGeometry(3, 32, 32), 
-            material = new THREE.MeshLambertMaterial({color: new THREE.Color( 0x333333 ), sizeAttenuation: true }),
+            //material = new THREE.MeshLambertMaterial({color: new THREE.Color( 0x333333 ), sizeAttenuation: true }),
+	    material = new THREE.ParticleBasicMaterial({
+                size: 8,
+                color: 0x000000,
+                transparent: true,
+                opacity: .6,
+                sizeAttenuation: true,
+                map: (function () {
+                    var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
+                        var x;
+                        if (!canvas || !ctx) {
+                            if (!canvas) {
+                                canvas = document.createElement('canvas');
+                            }
+                            if (!ctx) {
+                                ctx = canvas.getContext('2d');
+                            }
+                            canvas.height = height;
+                            canvas.width = width;
+                        }
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.translate(center_x, center_y);
+                        ctx.moveTo(0, (0 - radius));
+                        // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
+                        // m = "fraction of radius for inset" 
+                        for ( x = 0; x < points; x += 1) {
+                            ctx.rotate(Math.PI / points);
+                            ctx.lineTo(0, (0 - (radius * m)));
+                            ctx.rotate(Math.PI / points);
+                            ctx.lineTo(0, 0 - radius);
+                        }
+                        ctx.fillStyle = '#C3CBC1';
+                        ctx.fill();
+                        ctx.stroke();
+                        ctx.restore();
+			console.log('canvas',canvas,ctx);
+                        return canvas;
+                    }(256, 256, 128, 128, 64, 7, .5)));
+                    texture.needsUpdate = true;
+                    return texture;
+                }())
+            }),
             mouse = { x: 0, y: 0 },
             layout = function() {
                 if (true === ran_once) {
