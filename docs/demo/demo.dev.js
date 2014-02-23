@@ -191,17 +191,17 @@ var IMDBSystem = (function(THREE){
 		    //var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
 		    var particle = new THREE.Mesh( geometry, material ); 
 		    //particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-		    var tau = 100, x, y, z = 1, width_count = Math.floor( 1000000 / tau ),
-			height_count = Math.floor( 1000000 / tau ), 
+		    var tau = 100, x, y, z = 1, width_count = Math.floor( node_width / tau ),
+			height_count = Math.floor( node_height / tau ), 
 			slop, size = 10000; //Math.floor( Math.sqrt( context.key ) );
 		    x = context.key * tau;
 		    if ( ( x / size ) > 1 ) {
-			var row = Math.floor(x / node_width);
-			x = x - (row * node_width);
+			var row = Math.floor(x / width_count);
+			x = x - (row * width_count);
 			y = row * tau;
-			var column = Math.floor(y / node_height);
+			var column = Math.floor(y / height_count);
 			z = column * tau;
-			y = y % node_height;
+			y = y % height_count;
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
 		    scene.add( particle );
