@@ -1,7 +1,7 @@
 var IMDBSystem = (function(THREE){        
         var last_intersected,
             ran_once = false,
-	    hasFinished = false,
+	    hasStarted = false,
 	    node_width = null,
             node_height = null,
             canvasStarProgram = function(ctx) {
@@ -66,7 +66,7 @@ var IMDBSystem = (function(THREE){
                 requestAnimationFrame(render);
                 stats.update();
 		controls.update();
-		if (hasFinished) {
+		if (hasStarted) {
 			camera.updateMatrixWorld();
 			var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
 			projector.unprojectVector( vector, camera );
@@ -125,7 +125,7 @@ var IMDBSystem = (function(THREE){
                 })
                 (function(context) {
 		    console.log('system',system,scene);
-		    hasFinished = true;
+		    hasStarted = true;
 		    /*var x = 0,
 			entries = context.entries,
 			xlen = context.entries.length,
@@ -136,6 +136,7 @@ var IMDBSystem = (function(THREE){
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
+		    hasStarted = true;
 		    var particle = new THREE.Mesh( geometry, material ); 
                     particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 		    scene.add( particle );
