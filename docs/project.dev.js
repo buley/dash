@@ -383,7 +383,7 @@ dashApp.directive('dashSplash', function() {
 		    })
 		    (function(context) {
 			console.log('got entry', context);
-			if (controller.current) {
+			if ('function'=== typeof controller.current) {
 				controller.current(context.entry);
 			}
 		    }, function(context) {
