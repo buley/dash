@@ -192,14 +192,15 @@ var IMDBSystem = (function(THREE){
 		    var particle = new THREE.Mesh( geometry, material ); 
 		    //particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 		    var x, y, z = 1, slop, size = 200; //Math.floor( Math.sqrt( context.key ) );
-		    x = context.key;
+		    x = context.key * 20;
 		    if ( ( x / size ) > 1 ) {
 			var row = Math.floor(x / size);
 			x = x - (row * size);
-			y = row;
+			y = row * 20;
 			var column = Math.floor(y / size);
-			z = column;
+			z = column * 20;
 			y = x;
+			console.log(x,y,z);
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
 		    scene.add( particle );
