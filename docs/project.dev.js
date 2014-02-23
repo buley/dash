@@ -471,11 +471,15 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
     return {
         scope: {},
         restrict: 'AE',
+	template: '/docs/templates/overlay.html',
         compile: function() {
             console.log('dashSplash overlay setup');
             return function link(scope, element, attrs) {
 		dashAppSplashBroadcast.subscribe(function(data) {
 			console.log('el',data);
+			scope.$apply( function() {
+				scope.data = data;
+			} );
 		});
             };
         }
