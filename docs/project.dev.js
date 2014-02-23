@@ -373,7 +373,7 @@ dashApp.directive('dashSplash', function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
                 layout = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
-		    dash.add.entry({
+		    dash.get.entry({
 			database: 'dash-demo',
 			store: 'imdb',
 			key: data,
