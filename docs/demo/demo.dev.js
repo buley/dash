@@ -109,7 +109,7 @@ var IMDBSystem = (function(THREE){
             range,
 	    stats,
             //geometry = new THREE.Geometry(),
-	    geometry = new THREE.SphereGeometry(1, 32, 32), 
+	    geometry = new THREE.SphereGeometry(10, 32, 32), 
             //material = new THREE.MeshBasicMaterial({color: 0xFFFFFF, sizeAttenuation: true }),
             material = new THREE.MeshLambertMaterial({color: 0xFFFFFF, sizeAttenuation: true }),
 	    /*
@@ -191,14 +191,14 @@ var IMDBSystem = (function(THREE){
 		    //var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
 		    var particle = new THREE.Mesh( geometry, material ); 
 		    //particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-		    var x, y, z = 1, slop, size = 1000; //Math.floor( Math.sqrt( context.key ) );
-		    x = context.key * 4;
+		    var x, y, z = 1, slop, size = 400; //Math.floor( Math.sqrt( context.key ) );
+		    x = context.key * 40;
 		    if ( ( x / size ) > 1 ) {
 			var row = Math.floor(x / size);
 			x = x - (row * size);
-			y = row * 4;
+			y = row * 40;
 			var column = Math.floor(y / size);
-			z = column * 4;
+			z = column * 40;
 			y = y % size;
 		    }
 		    particle.position = new THREE.Vector3(x, y, z);
