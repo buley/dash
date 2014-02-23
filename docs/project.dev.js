@@ -365,9 +365,8 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
 }]);
 
 
-dashApp.directive('dashSplash', function() { 
+dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSplashBroadcast) { 
     return {
-	controller: 'dashAppSplashController',
         scope: {},
         restrict: 'AE',
         compile: function() {
@@ -383,22 +382,31 @@ dashApp.directive('dashSplash', function() {
 		    })
 		    (function(context) {
 			console.log('got entry', context);
-			if ('function'=== typeof controller.current) {
-				controller.current(context.entry);
-			}
+			dashAppSplashBroadcast.current(context.entry);
 		    }, function(context) {
 			console.log('missing entry', context);
 		    });
 		});
             el.setAttribute('id', 'dash-splash-container');
-            return function link(scope, element, attrs, dashAppDocsDemosController) {
+            return function link(scope, element, attrs) {
 		controller = dashAppDocsDemosController;
                 element[0].appendChild(el);
                 layout();
             };
         }
     };
-} );
+} ] );
+
+dashApp.factory( 'dashAppSplashBroadcast', function() {
+	return {
+		current: function(data) {
+			console.log('current',data);
+		},
+		subscribe: function(cb) {
+			console.log('subscribe',cb);
+		}
+	};
+});
 
 dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $scope, $http ) {
     console.log('splash controller');
@@ -457,22 +465,20 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
 }]);
 
 
-dashApp.directive('dashSplashOverlay', function() { 
+dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( dashAppSplashBroadcast ) { 
     return {
         scope: {},
         restrict: 'AE',
-        controller: 'dashSplashAppController',
         compile: function() {
             console.log('dashSplash overlay setup');
-            return function link(scope, element, attrs, dashSplashAppController) {
-                console.log('dashSplashOverlayController',dashSplashOverlayController);
-		dashSplashAppController.subscribe(function(data) {
+            return function link(scope, element, attrs) {
+		dashAppSplashBroadcast.subscribe(function(data) {
 			console.log('new el');
 		});
             };
         }
     };
-} );
+} ]  );
 
 
 
