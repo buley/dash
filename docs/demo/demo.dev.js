@@ -108,53 +108,8 @@ var IMDBSystem = (function(THREE){
             system,
             range,
 	    stats,
-            //geometry = new THREE.Geometry(),
 	    geometry = new THREE.SphereGeometry(2, 32, 32), 
-            //material = new THREE.MeshBasicMaterial({color: 0xFFFFFF, sizeAttenuation: true }),
             material = new THREE.MeshLambertMaterial({color: 0xFFFFFF, sizeAttenuation: true }),
-	    /*
-            material = new THREE.ParticleBasicMaterial({
-                size: 8,
-                color: 0xFFFFFF,
-                transparent: true,
-                opacity: .6,
-                sizeAttenuation: true,
-                map: (function () {
-                    var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
-                        var x;
-                        if (!canvas || !ctx) {
-                            if (!canvas) {
-                                canvas = document.createElement('canvas');
-                            }
-                            if (!ctx) {
-                                ctx = canvas.getContext('2d');
-                            }
-                            canvas.height = height;
-                            canvas.width = width;
-                        }
-                        ctx.save();
-                        ctx.beginPath();
-                        ctx.translate(center_x, center_y);
-                        ctx.moveTo(0, (0 - radius));
-                        // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
-                        // m = "fraction of radius for inset" 
-                        for ( x = 0; x < points; x += 1) {
-                            ctx.rotate(Math.PI / points);
-                            ctx.lineTo(0, (0 - (radius * m)));
-                            ctx.rotate(Math.PI / points);
-                            ctx.lineTo(0, 0 - radius);
-                        }
-                        ctx.fillStyle = '#C3CBC1';
-                        ctx.fill();
-                        ctx.stroke();
-                        ctx.restore();
-			console.log('canvas',canvas,ctx);
-                        return canvas;
-                    }(256, 256, 128, 128, 64, 7, .5)));
-                    texture.needsUpdate = true;
-                    return texture;
-                }())
-            }),*/
             mouse = { x: 0, y: 0 },
             layout = function() {
                 if (true === ran_once) {
@@ -169,10 +124,6 @@ var IMDBSystem = (function(THREE){
                     auto_increment: true
                 })
                 (function(context) {
-                    //system = new THREE.ParticleSystem(geometry, material);
-                    //system.sortParticles = true;
-                    //system.name = "dash-demo";
-                    //scene.add(system);
 		    console.log('system',system,scene);
 		    hasFinished = true;
 		    /*var x = 0,
@@ -185,35 +136,10 @@ var IMDBSystem = (function(THREE){
                 }, function(context) {
                     console.log('dash error',context);
                 }, function(context) {
-
-
-		    //var particle = new THREE.Sprite( material );
-		    //var particle = new THREE.Sprite( new THREE.SpriteCanvasMaterial( { color: Math.random() * 0x808080 + 0x808080, program: programStroke } ) );
 		    var particle = new THREE.Mesh( geometry, material ); 
-		    //particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-			/*
-		    var tau = 10,
-			x = 1, xpos,
-			y = 1, ypos,
-			z = 1, zpos,
-			row_count = Math.floor( node_height / tau ),
-			column_count = Math.floor( node_width / tau ),
-			row = 1, column = 1, stack = 1;
-		    row = Math.floor(context.key / row_count);
-		    if ( row > row_count ) {
-			column = row - row_count;
-			row = row % row_count;
-		    }
-		    xpos = ( row * tau ) - ( row * row_count );
-		    ypos = column * tau ;
-		    zpos = stack * tau;*/
                     particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-		    //particle.position = new THREE.Vector3(xpos, ypos, zpos);
 		    scene.add( particle );
-		    //camera.lookAt( particle.position );
-                    //geometry.vertices.push(new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2));
                 });
-
             },
             /* When properties change we'll need a re-layout */
             relayout = function () {
@@ -284,6 +210,28 @@ var IMDBSystem = (function(THREE){
 		var line = new THREE.Line( ggeometry, gmaterial );
 		line.type = THREE.LinePieces;
 		scene.add( line );
+
+		var size = 500, step = 50;
+
+		var ggeometry = new THREE.Geometry();
+
+		for ( var i = - size; i <= size; i += step ) {
+
+			ggeometry.vertices.push( new THREE.Vector3( 0, - size, i ) );
+			ggeometry.vertices.push( new THREE.Vector3( 0, size, i ) );
+
+			ggeometry.vertices.push( new THREE.Vector3( 0, i, - size ) );
+			ggeometry.vertices.push( new THREE.Vector3( 0, i,  size ) );
+
+		}
+
+		var gmaterial = new THREE.LineBasicMaterial( { color: 0x000000, opacity: 0.2 } );
+
+		var line = new THREE.Line( ggeometry, gmaterial );
+		line.type = THREE.LinePieces;
+		scene.add( line );
+
+
 	    /*
 	    light = new THREE.DirectionalLight( 0x111111 );
 	    light.position.set( -1, -1, -1 );
