@@ -500,7 +500,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 					}
 				};
 				console.log('SUM',values);
-				var x = 0, xlen = values.length, xitem, total;
+				var x = 0, xlen = values.length, xitem, total = 0;
 				for ( x = 0; x < xlen; x += 1 ) {
 					xitem = values[ x ];
 					var cut = xitem.replace(/K$/, '');
