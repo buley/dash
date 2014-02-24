@@ -705,13 +705,17 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
 				if ( true === values[ x ][ 1 ] ) {
-					promise = promise.then( function() {
-						console.log('download');
-					} );
+					promise = promise.then( (function(attr) {
+						return function() {
+							console.log('download', attr);
+						}
+					}(values[x][0])) );
 				} else {
-					promise = promise.then( function() {
-						console.log('already downloaded');
-					} );
+					promise = promise.then( (function(attr) {
+						return function() {
+							console.log('already downloaded', attr);
+						}
+					}(values[x][0])) );
 				}
 			}
 			deferred.resolve();
