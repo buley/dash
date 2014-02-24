@@ -483,6 +483,9 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			selected: 'since' === scope.sort ? 'selected' : ''
 		} ];
 		scope.verb = 'explore';
+		scope.layout = function() {
+			console.log('layout');
+		};
 		console.log('default data',scope.data);
 		dashAppSplashBroadcast.subscribe(function(data) {
 			scope.$apply( function() {
