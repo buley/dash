@@ -98,6 +98,8 @@ ul.dash-document-navigation ul ul li {
 #dash-demo-overlay-marketing h2 {
   float: right;
   padding: 20px;
+  text-align: right;
+  font-size: 20px;
   color: #333;
   background: #fff;
 }
