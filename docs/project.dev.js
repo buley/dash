@@ -481,12 +481,14 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			};
 		};
 		scope.estimate = function() {
+			var values = [],
+			    start = false;
+
+
 			if ( 'from' === scope.sort ) {
-				return scope.files[ scope.range ];
+				values = scope.files[ scope.range ];
 			} else {
 				console.log('since');
-				var values = [],
-				    start = false;
 				for ( file in scope.files) {
 					if ( false === start && scope.files.hasOwnProperty( file ) ) {
 						if ( file === scope.range.toString() ) {
@@ -497,31 +499,31 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 						values.push( scope.files[ file ] );
 					}
 				}
-				var x = 0, xlen = values.length, xitem, total = 0;
-				for ( x = 0; x < xlen; x += 1 ) {
-					xitem = values[ x ];
-					var cut = xitem.replace(/K$/, '');
+			}
+			var x = 0, xlen = values.length, xitem, total = 0;
+			for ( x = 0; x < xlen; x += 1 ) {
+				xitem = values[ x ];
+				var cut = xitem.replace(/K$/, '');
+				if ( cut !== xitem ) {
+					cut = parseInt( cut, 10 );
+					total += cut * 1024;
+				} else {
+					cut = xitem.replace(/M$/, '');
 					if ( cut !== xitem ) {
 						cut = parseInt( cut, 10 );
-						total += cut * 1024;
+						total += cut * 1048576;
 					} else {
-						cut = xitem.replace(/M$/, '');
-						if ( cut !== xitem ) {
-							cut = parseInt( cut, 10 );
-							total += cut * 1048576;
-						} else {
-							cut = parseInt( cut, 10 );
-							total += cut;
-						}
+						cut = parseInt( cut, 10 );
+						total += cut;
 					}
 				}
-				if ( total < 1024 ) {
-					return total + 'B';
-				} else if ( total < 1048576 ) {	
-					return Math.floor( total / 1024 ) + 'KB';
-				} else {
-					return Math.round( total / 1048576 ) + 'MB';
-				}
+			}
+			if ( total < 1024 ) {
+				return ( total ).toString() + 'B';
+			} else if ( total < 1048576 ) {	
+				return Math.floor( total / 1024 ).toString() + 'KB';
+			} else {
+				return Math.round( total / 1048576 ).toString() + 'MB';
 			}
 		};
 		scope.files = { 
