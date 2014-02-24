@@ -489,7 +489,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 				    start = false;
 				for ( file in scope.files) {
 					if ( false === start && scope.files.hasOwnAttribute( file ) ) {
-						if ( file ==== scope.range.toString() ) {
+						if ( file === scope.range.toString() ) {
 							start = true;
 						}
 					}
