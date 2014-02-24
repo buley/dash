@@ -500,6 +500,15 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 					}
 				};
 				console.log('SUM',values);
+				var x = 0, xlen = values.length, xitem;
+				for ( x = 0; x < xlen; x += 1 ) {
+					xitem = values[ x ];
+					var cut = xitem.replace(/K$/, '');
+					if ( cut !== xitem ) {
+						cut = parseInt( cut, 10 );
+						console.log("KB", cut * 1024 );
+					}
+				}
 				return 'tricky';
 			}
 		};
