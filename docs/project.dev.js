@@ -484,7 +484,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			var values = [],
 			    start = false;
 			if ( 'from' === scope.sort ) {
-				values = scope.files[ scope.range ];
+				values = [ scope.files[ scope.range ] ];
 			} else {
 				console.log('since');
 				for ( file in scope.files) {
