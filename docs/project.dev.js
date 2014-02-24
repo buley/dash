@@ -689,13 +689,15 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 				values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
 			} else {
 				for ( file in scope.downloaded ) {
-					if ( false === start && scope.downloaded.hasOwnProperty( file ) ) {
-						if ( file === scope.range.toString() ) {
-							start = true;
+					if (scope.downloaded.hasOwnProperty( file ) ) {
+						if ( false === start )
+							if ( file === scope.range.toString() ) {
+								start = true;
+							}
 						}
-					}
-					if ( start ) {
-						values.push( [ file, !scope.downloaded[ file ] ] );
+						if ( start ) {
+							values.push( [ file, !scope.downloaded[ file ] ] );
+						}
 					}
 				}
 			}
