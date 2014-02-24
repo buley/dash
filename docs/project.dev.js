@@ -482,7 +482,8 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 		};
 		scope.estimate = function() {
 			var values = [],
-			    start = false;
+			    start = false,
+			    file;
 			if ( 'from' === scope.sort ) {
 				values = [ scope.files[ scope.range ] ];
 			} else {
@@ -664,6 +665,17 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 		};
 		scope.downloaded = localStorage.getItem('dash-demo-downloaded') || {};
 		console.log("DOWNLOADED",scope.downloaded);
+		var dirty = false, attr;
+		for ( attr in scope.files ) {
+			if ( scope.files.hasOwnProperty(attr) && undefined === scope.downloaded[ attr ] ) {
+				scope.downloaded[ attr ] = false;
+				dirty = true;
+			}
+		}
+		if ( dirty ) {
+			console.log('dirty deal', scope.downloaded);
+			localStorage.setItem('dash-demo-downloaded', scope.downloaded );
+		}
 		scope.sorts = [ {
 			name: 'from',
 			display: 'from',
