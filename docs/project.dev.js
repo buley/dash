@@ -704,7 +704,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 				ndeferred;
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
-				if ( true = values[ x ][ 1 ] ) {
+				if ( true === values[ x ][ 1 ] ) {
 					promise = promise.then( function() {
 						console.log('download');
 					} );
