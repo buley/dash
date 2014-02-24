@@ -94,6 +94,7 @@ ul.dash-document-navigation ul ul li {
   background: #333;
   color: #fff;
   padding: 20px;
+  margin: 0 0 10px 0;
 }
 #dash-demo-overlay-marketing h2 {
   float: right;
