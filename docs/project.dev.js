@@ -481,7 +481,12 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			};
 		};
 		scope.estimate = function() {
-			return scope.files[ scope.range ];
+			if ( 'from' === scope.sort ) {
+				return scope.files[ scope.range ];
+			} else {
+				console.log('since');
+				return 'tricky';
+			}
 		};
 		scope.files = { 
 			'1880': '79',
