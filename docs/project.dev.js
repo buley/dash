@@ -480,7 +480,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			name: 'since',
 			display: 'since',
 			selected: ''
-		} ]
+		} ];
 		scope.verb = 'explore';
 		console.log('default data',scope.data);
 		dashAppSplashBroadcast.subscribe(function(data) {
