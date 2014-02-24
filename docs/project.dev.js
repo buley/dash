@@ -483,8 +483,6 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 		scope.estimate = function() {
 			var values = [],
 			    start = false;
-
-
 			if ( 'from' === scope.sort ) {
 				values = scope.files[ scope.range ];
 			} else {
