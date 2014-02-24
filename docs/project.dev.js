@@ -459,7 +459,7 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
 }]);
 
 
-dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( dashAppSplashBroadcast ) { 
+dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', function( $q, dashAppSplashBroadcast ) { 
     return {
         scope: {},
         restrict: 'AE',
@@ -699,6 +699,22 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 					}
 				}
 			}
+			var deferred = $q.defer(),
+				promise = deferred.promise,
+				ndeferred;
+			var x = 0, xlen = values.length;
+			for ( x = 0; x < xlen; x += 1 ) {
+				if ( true = values[ x ][ 1 ] ) {
+					promise = promise.then( function() {
+						console.log('download');
+					} );
+				} else {
+					promise = promise.then( function() {
+						console.log('already downloaded');
+					} );
+				}
+			}
+			deferred.resolve();
 			console.log('layout', values);
 
 		};
