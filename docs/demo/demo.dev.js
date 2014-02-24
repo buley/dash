@@ -87,7 +87,7 @@ var IMDBSystem = (function(THREE){
             range,
 	    stats,
 	    geometry = new THREE.SphereGeometry(3, 32, 32), 
-            material = new THREE.MeshLambertMaterial({color: new THREE.Color( 0x333333 ), sizeAttenuation: true }),
+            material = new THREE.MeshLambertMaterial({color: new THREE.Color( 0xE5E5E5 ), sizeAttenuation: true }),
             mouse = { x: 0, y: 0 },
             layout = function() {
                 if (true === ran_once) {
@@ -146,7 +146,7 @@ var IMDBSystem = (function(THREE){
 
         return function(node, width, height, cb) {
             range = ( ( width > height ) ? height : width ) * 10;
-            renderer.setClearColor(0xFFFFFF, 1.0);
+            renderer.setClearColor(0x111111, 1.0);
             renderer.setSize(width, height);
             node_width = width;
             node_height = height;
