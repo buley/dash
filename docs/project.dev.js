@@ -688,8 +688,8 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			if ( 'from' === scope.sort ) {
 				values = [ scope.files[ scope.range ] ];
 			} else {
-				for ( file in scope.files) {
-					if ( false === start && scope.files.hasOwnProperty( file ) ) {
+				for ( file in scope.downloaded ) {
+					if ( false === start && scope.downloaded.hasOwnProperty( file ) ) {
 						if ( file === scope.range.toString() ) {
 							start = true;
 						}
