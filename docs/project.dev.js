@@ -488,6 +488,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 				var values = [],
 				    start = false;
 				for ( file in scope.files) {
+					console.log('cjecking',file);
 					if ( false === start && scope.files.hasOwnAttribute( file ) ) {
 						if ( file === scope.range.toString() ) {
 							start = true;
