@@ -3,17 +3,17 @@
 		<h1>dash is <em class='dumb-saying'>big data in the browser</em>.</h1>
 		<h2>
 			<span>For example, </span>
-			<select>
+			<select ng-model="verb">
 				<option selected>explore</option>
 				<option>remove</option>
 			</select>
 			<span> everything in IMDB </span>
-			<select>
+			<select ng-model="sort">
 				<option selected>from</option>
 				<option>since</option>
 			</select>
-			<input type="number" max="2016" min="1889" value="scope.sinceYear">
-			<input type="button" value="Go"></input>
+			<input type="number" max="2016" min="1889" ng-model="range">
+			<input type="button" value="Go" ng-click="layout()"></input>
 		</h2>
 	</section>
 	<section id="dash-demo-overlay-demo" class="large-6 left">
