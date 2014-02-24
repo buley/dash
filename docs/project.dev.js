@@ -476,11 +476,11 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 		scope.sorts = [ {
 			name: 'from',
 			display: 'from',
-			selected: 'selected'
+			selected: 'from' === scope.sort ? 'selected' : ''
 		}, {
 			name: 'since',
 			display: 'since',
-			selected: ''
+			selected: 'since' === scope.sort ? 'selected' : ''
 		} ];
 		scope.verb = 'explore';
 		console.log('default data',scope.data);
