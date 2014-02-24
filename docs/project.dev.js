@@ -473,6 +473,13 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 		};
 		scope.range = 2016;
 		scope.sort = 'from';
+		scope.stats = function() {
+			if ( scope.statsData ) {
+
+			} else {
+				return 'data';
+			};
+		};
 		scope.estimate = function() {
 			return scope.files[ scope.range ];
 		};
