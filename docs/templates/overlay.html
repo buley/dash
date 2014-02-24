@@ -8,8 +8,8 @@
 				<option>remove</option>
 			</select>
 			<span> everything in IMDB </span>
-			<select ng-model="sort" ng-repeat="option in sorts">
-				<option {{option.selected}} name="{{option.name}}" >{{option.display}}</option>
+			<select ng-model="sort">
+				<option ng-repeat="option in sorts" {{option.selected}} name="{{option.name}}" >{{option.display}}</option>
 			</select>
 			<input type="number" max="2016" min="1889" ng-model="range">
 			<input type="button" value="Go" ng-click="layout()" class="dash-demo-overlay-marketing-button small button"></input>
