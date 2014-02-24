@@ -1,18 +1,17 @@
 <section id="dash-demo-overlay-container" class="large-12 columns">
-<section id="dash-demo-overlay-marketing" class="large-12 right">
-	<h1>dash opens up a universe of indexed data.</h1>
-	<h1>Like this one, with every movie in IMDB since <input type="number" max="2016" min="1889" value="2016">.</h1>
+	<section id="dash-demo-overlay-marketing" class="large-6 right">
+		<h1>dash opens up a universe of indexed data.</h1>
+		<h2>Like this one, with every movie in IMDB since <input type="number" max="2016" min="1889" value="2016">.</h2>
+	</section>
+	<section id="dash-demo-overlay-demo" class="large-6 left">
+		<section id="dash-demo-overlay-panel-info" class="large-6 left">
+			<h1>{{data.se}}</h1>
+			<h2>{{data.ep}}</h2>
+			<div star-rating data-star-rating-value="data.data.rating" data-star-rating-max="5" data-star-rating-on-change="onItemRatingChange"></div>
+		</section>
+		<section id="dash-demo-overlay-panel-rating-filter">
+			<div star-rating data-star-rating-value="data.data.rating" data-star-rating-max="5" data-star-rating-on-change="onRatingFilterChange"></div>
+		</section>
+	</section>
 </section>
-
-
-<section id="dash-demo-overlay-panel-info">
-	<h1>{{data.se}}</h1>
-	<h2>{{data.ep}}</h2>
-	<div star-rating data-star-rating-value="data.data.rating" data-star-rating-max="5" data-star-rating-on-change="onItemRatingChange"></div>
-</section>
-
-<section id="dash-demo-overlay-panel-rating-filter">
-	<div star-rating data-star-rating-value="data.data.rating" data-star-rating-max="5" data-star-rating-on-change="onRatingFilterChange"></div>
-</section>
-
 
