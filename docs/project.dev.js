@@ -713,8 +713,51 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 						return function() {
 							console.log('download', attr);
 							setTimeout( function() {
-								deferred2.resolve({foo: 'processed'});
+
 							}, Math.random() * 10000 );
+							    var start = 2013,
+								stack = [],
+								stack_count = 0,
+								in_progress = false,
+								processNext = function() {
+								    if(!in_progress && stack.length > 0) {
+									in_progress = true;
+									doNext(stack.shift());
+									deferred2.notify({ count: stack_count });
+								    }
+								    if ( 0 === stack.length ) {
+									deferred2.resolve({ count: stack_count });
+								    }
+								},
+								doNext = function(next) {
+							 	    stack_count += 1;
+								    dash.add.entry({
+									database: 'dash-demo',
+									store: 'imdb',
+									auto_increment: true,
+									store_key_path: 'id',
+									data: next
+								    })
+								    (function(context) {
+									in_progress = false;
+									console.log(context.key);
+									processNext();
+								    }, function(context) {
+									in_progress = false;
+									processNext();
+								    });
+								};
+								    $http( {
+									method: 'GET',
+									url: '/docs/demo/data/' + attr + '.json'
+								    }).success(function(data, status, headers, config) {
+									stack.push.apply(stack, data);
+									console.log('stack length', stack.length);
+									processNext();
+								    }).error( function(data, status, headers, config) {
+									console.log('error',data, status, headers, config);
+								    });
+							    }
 							return deferred2.promise;
 						}
 					}(values[x][0])) );
