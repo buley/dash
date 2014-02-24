@@ -521,7 +521,14 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 						}
 					}
 				}
-				return total + 'B';
+				console.log('total',total);
+				if ( total < 1024 ) {
+					return total + 'B';
+				} else if ( total < 1048576 ) {	
+					return Math.floor( total / 1024 ) + 'KB';
+				} else {
+					return Math.round( total / 1048576 ) + 'MB';
+				}
 			}
 		};
 		scope.files = { 
