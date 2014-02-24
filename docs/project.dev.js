@@ -468,8 +468,8 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
             console.log('dashSplash overlay setup');
             return function link(scope, element, attrs) {
 		scope.data = {
-			se: 'Season',
-			ep: 'Epsidode'
+			se: '',
+			ep: ''
 		};
 		scope.range = 2016;
 		scope.sort = 'from';
