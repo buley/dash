@@ -494,7 +494,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 						}
 					}
 					if ( start ) {
-						values.push( scope.files[ file ];
+						values.push( scope.files[ file ] );
 					}
 				};
 				console.log('SUM',values);
