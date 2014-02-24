@@ -661,7 +661,9 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			'2019': '294',
 			'2020': '150',
 			'2021': '67'
-		} 
+		};
+		scope.downloaded = localStore.getItem('dash-demo-downloaded') || {};
+		console.log("DOWNLOADED",scope.downloaded);
 		scope.sorts = [ {
 			name: 'from',
 			display: 'from',
