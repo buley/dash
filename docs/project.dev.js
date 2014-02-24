@@ -663,7 +663,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			'2020': '150',
 			'2021': '67'
 		};
-		scope.downloaded = localStorage.getItem('dash-demo-downloaded') || {};
+		scope.downloaded = JSON.parse( localStorage.getItem('dash-demo-downloaded') ) || {};
 		console.log("DOWNLOADED",scope.downloaded);
 		var dirty = false, attr;
 		for ( attr in scope.files ) {
@@ -674,7 +674,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 		}
 		if ( dirty ) {
 			console.log('dirty deal', scope.downloaded);
-			localStorage.setItem('dash-demo-downloaded', scope.downloaded );
+			localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 		}
 		scope.sorts = [ {
 			name: 'from',
