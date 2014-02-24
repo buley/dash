@@ -721,6 +721,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    if ( 0 === stack.length ) {
 									deferred2.resolve({ count: stack_count });
 									console.log('done',stack_count, attr);
+									scope.downloaded[ attr ] = stack_count;
+									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 								    }
 								    if(!in_progress && stack.length > 0) {
 									in_progress = true;
