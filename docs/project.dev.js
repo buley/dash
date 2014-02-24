@@ -715,6 +715,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 							    var start = 2013,
 								stack = [],
 								stack_count = 0,
+								stack_length = 0,
 								in_progress = false,
 								processNext = function() {
 								    if(!in_progress && stack.length > 0) {
@@ -722,8 +723,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 									doNext(stack.shift());
 									deferred2.notify({ count: stack_count });
 								    }
+								    console.log("LEFT",stack.length);
 								    if ( 0 === stack.length ) {
 									deferred2.resolve({ count: stack_count });
+									console.log('done',stack_count);
 								    }
 								},
 								doNext = function(next) {
@@ -737,7 +740,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    })
 								    (function(context) {
 									in_progress = false;
-									console.log(context.key);
 									processNext();
 								    }, function(context) {
 									in_progress = false;
@@ -749,7 +751,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 									url: '/docs/demo/data/' + attr + '.json'
 								    }).success(function(data, status, headers, config) {
 									stack.push.apply(stack, data);
-									console.log('stack length', stack.length);
+									stack_length = stack.length;
 									processNext();
 								    }).error( function(data, status, headers, config) {
 									console.log('error',data, status, headers, config);
