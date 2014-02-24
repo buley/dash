@@ -440,14 +440,6 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
         },
         key = 'dash-demo-installed-2',
         dashInstalled = localStorage.getItem(key);
-    var stack = [];
-    $scope.current = function(data) {
-	console.log('CURRENT',data);
-    };
-    $scope.subscribe = function(cb) {
-	console.log('SUBSCRIBE',cb);
-	stack.push(cb);
-    };
     if (!dashInstalled) {
         for (; start > 2000; start -= 1) {
             localStorage.setItem(key, 'YES');
