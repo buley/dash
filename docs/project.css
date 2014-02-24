@@ -110,3 +110,6 @@ ul.dash-document-navigation ul ul li {
   line-height: inherit;
   height: inherit;
 }
+#dash-demo-overlay-marketing h2 .dash-demo-overlay-marketing-button {
+  margin-left: 20px;
+}
