@@ -690,7 +690,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 			} else {
 				for ( file in scope.downloaded ) {
 					if (scope.downloaded.hasOwnProperty( file ) ) {
-						if ( false === start )
+						if ( false === start ) {
 							if ( file === scope.range.toString() ) {
 								start = true;
 							}
@@ -731,6 +731,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 			}
 			deferred.resolve();
 			console.log('layout', values);
+
 		};
 		dashAppSplashBroadcast.subscribe(function(data) {
 			scope.$apply( function() {
@@ -738,6 +739,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 			} );
 		});
             };
+        }
     };
 } ]  );
 
