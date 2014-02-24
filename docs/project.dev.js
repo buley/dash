@@ -472,6 +472,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			ep: 'Epsidode'
 		};
 		scope.range = 2016;
+		scope.sort = 'from';
 		scope.sorts = [ {
 			name: 'from',
 			display: 'from',
