@@ -500,25 +500,28 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 					}
 				};
 				console.log('SUM',values);
-				var x = 0, xlen = values.length, xitem;
+				var x = 0, xlen = values.length, xitem, total;
 				for ( x = 0; x < xlen; x += 1 ) {
 					xitem = values[ x ];
 					var cut = xitem.replace(/K$/, '');
 					if ( cut !== xitem ) {
 						cut = parseInt( cut, 10 );
 						console.log("KB", cut * 1024 );
+						total += cut;
 					} else {
 						cut = xitem.replace(/M$/, '');
 						if ( cut !== xitem ) {
 							cut = parseInt( cut, 10 );
 							console.log("MB", cut * 1048576 );
+							total += cut;
 						} else {
 							cut = parseInt( cut, 10 );
 							console.log("B", cut );
+							total += cut;
 						}
 					}
 				}
-				return 'tricky';
+				return total + 'B';
 			}
 		};
 		scope.files = { 
