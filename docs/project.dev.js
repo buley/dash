@@ -471,6 +471,9 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			se: 'Season',
 			ep: 'Epsidode'
 		};
+		scope.range = '2016';
+		scope.sort = 'from';
+		scope.verb = 'explore';
 		console.log('default data',scope.data);
 		dashAppSplashBroadcast.subscribe(function(data) {
 			scope.$apply( function() {
