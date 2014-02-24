@@ -459,7 +459,7 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
 }]);
 
 
-dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', function( $q, dashAppSplashBroadcast ) { 
+dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast', function( $q, $http, dashAppSplashBroadcast ) { 
     return {
         scope: {},
         restrict: 'AE',
