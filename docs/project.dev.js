@@ -712,9 +712,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 						var deferred2 = $q.defer();
 						return function() {
 							console.log('download', attr);
-							setTimeout( function() {
-
-							}, Math.random() * 10000 );
 							    var start = 2013,
 								stack = [],
 								stack_count = 0,
@@ -757,7 +754,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 								    }).error( function(data, status, headers, config) {
 									console.log('error',data, status, headers, config);
 								    });
-							    }
 							return deferred2.promise;
 						}
 					}(values[x][0])) );
