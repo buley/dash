@@ -87,7 +87,7 @@ ul.dash-document-navigation ul ul li {
   height: 100%;
 }
 #dash-demo-overlay-marketing {
-  padding: 20px;
+  padding: 20px 0 20px 0;
 }
 #dash-demo-overlay-marketing h1 {
   float: right;
@@ -100,4 +100,11 @@ ul.dash-document-navigation ul ul li {
   padding: 20px;
   color: #333;
   background: #fff;
+}
+#dash-demo-overlay-marketing h2 select,
+#dash-demo-overlay-marketing h2 input {
+  width: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  height: inherit;
 }
