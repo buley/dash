@@ -731,7 +731,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 			}
 			deferred.resolve();
 			console.log('layout', values);
-
 		};
 		dashAppSplashBroadcast.subscribe(function(data) {
 			scope.$apply( function() {
@@ -739,7 +738,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 			} );
 		});
             };
-        }
     };
 } ]  );
 
