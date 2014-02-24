@@ -508,7 +508,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 						cut = parseInt( cut, 10 );
 						console.log("KB", cut * 1024 );
 					} else {
-						cut = xitem.replace(/MB$/, '');
+						cut = xitem.replace(/M$/, '');
 						if ( cut !== xitem ) {
 							cut = parseInt( cut, 10 );
 							console.log("MB", cut * 1048576 );
