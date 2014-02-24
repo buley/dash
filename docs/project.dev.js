@@ -487,9 +487,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 				console.log('since');
 				var values = [],
 				    start = false;
-				console.log('files',scope.files);
 				for ( file in scope.files) {
-					console.log('cjecking',file);
 					if ( false === start && scope.files.hasOwnProperty( file ) ) {
 						if ( file === scope.range.toString() ) {
 							start = true;
@@ -498,30 +496,25 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 					if ( start ) {
 						values.push( scope.files[ file ] );
 					}
-				};
-				console.log('SUM',values);
+				}
 				var x = 0, xlen = values.length, xitem, total = 0;
 				for ( x = 0; x < xlen; x += 1 ) {
 					xitem = values[ x ];
 					var cut = xitem.replace(/K$/, '');
 					if ( cut !== xitem ) {
 						cut = parseInt( cut, 10 );
-						console.log("KB", cut * 1024 );
 						total += cut * 1024;
 					} else {
 						cut = xitem.replace(/M$/, '');
 						if ( cut !== xitem ) {
 							cut = parseInt( cut, 10 );
-							console.log("MB", cut * 1048576 );
 							total += cut * 1048576;
 						} else {
 							cut = parseInt( cut, 10 );
-							console.log("B", cut );
 							total += cut;
 						}
 					}
 				}
-				console.log('total',total);
 				if ( total < 1024 ) {
 					return total + 'B';
 				} else if ( total < 1048576 ) {	
