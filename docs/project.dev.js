@@ -695,7 +695,7 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 						}
 					}
 					if ( start && false === scope.downloaded[ file ] ) {
-						values.push( scope.files[ file ] );
+						values.push( files );
 					}
 				}
 			}
