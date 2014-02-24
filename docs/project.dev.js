@@ -709,14 +709,22 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 				console.log("VAL",values[x]);
 				if ( true === values[ x ][ 1 ] ) {
 					promise = promise.then( (function(attr) {
+						var deferred2 = $q.defer();
 						return function() {
 							console.log('download', attr);
+							setTimeout( function() {
+								deferred2.resolve({foo: 'processed'});
+							}, Math.random() * 10000 );
+							return deferred2.promise;
 						}
 					}(values[x][0])) );
 				} else {
 					promise = promise.then( (function(attr) {
+						var deferred2 = $q.defer();
 						return function() {
 							console.log('already downloaded', attr);
+							deferred2.resolve({foo:'downloaded'});
+							return deferred2.promise;
 						}
 					}(values[x][0])) );
 				}
