@@ -11,7 +11,7 @@
 			<select ng-model="sort">
 				<option ng-repeat="option in sorts" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
-			<input type="number" max="2016" min="1889" ng-model="range">
+			<input type="number" max="2021" min="1889" ng-model="range">
 			<span></span>
 			<input type="button" value="GO ({{estimate()}}) " ng-click="layout()" class="dash-demo-overlay-marketing-button small button"></input>
 		</h2>
