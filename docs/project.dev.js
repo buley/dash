@@ -686,7 +686,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', 'dashAppSplashBroadcast', functio
 		scope.layout = function() {
 			var file, start = false, values = [];
 			if ( 'from' === scope.sort ) {
-				values.push( [ file, !scope.downloaded[ file ] ] );
+				values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
 			} else {
 				for ( file in scope.downloaded ) {
 					if ( false === start && scope.downloaded.hasOwnProperty( file ) ) {
