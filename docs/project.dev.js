@@ -473,6 +473,9 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 		};
 		scope.range = 2016;
 		scope.sort = 'from';
+		scope.estimate = function() {
+			return scope.files[ scope.range ];
+		};
 		scope.files = { 
 			'1880': '79',
 			'1887': '82',
