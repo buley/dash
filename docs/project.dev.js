@@ -487,7 +487,6 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			if ( 'from' === scope.sort ) {
 				values = [ scope.files[ scope.range ] ];
 			} else {
-				console.log('since');
 				for ( file in scope.files) {
 					if ( false === start && scope.files.hasOwnProperty( file ) ) {
 						if ( file === scope.range.toString() ) {
@@ -679,18 +678,32 @@ dashApp.directive('dashSplashOverlay', [ 'dashAppSplashBroadcast', function( das
 			display: 'from',
 			selected: 'from' === scope.sort ? 'selected' : ''
 		}, {
-			name: 'since',
-			display: 'since',
-			selected: 'since' === scope.sort ? 'selected' : ''
+			name: 'after',
+			display: 'after',
+			selected: 'after' === scope.sort ? 'selected' : ''
 		} ];
 		scope.verb = 'explore';
 		scope.layout = function() {
-			console.log('layout');
+			var file, start = false, values = [];
+			if ( 'from' === scope.sort ) {
+				values = [ scope.files[ scope.range ] ];
+			} else {
+				for ( file in scope.files) {
+					if ( false === start && scope.files.hasOwnProperty( file ) ) {
+						if ( file === scope.range.toString() ) {
+							start = true;
+						}
+					}
+					if ( start && false === scope.downloaded[ file ] ) {
+						values.push( scope.files[ file ] );
+					}
+				}
+			}
+			console.log('layout', values);
+
 		};
-		console.log('default data',scope.data);
 		dashAppSplashBroadcast.subscribe(function(data) {
 			scope.$apply( function() {
-				console.log('updated data', data);
 				scope.data = data;
 			} );
 		});
