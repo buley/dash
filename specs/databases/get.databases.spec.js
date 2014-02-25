@@ -12,6 +12,7 @@
 			ctx;	
 		it( 'should get all databases, when available', function() {
 			//TODO: DB's not always available on init
+			//TODO: Add database, get it ensure it's in .databases array
 			setTimeout(function() {
 				dash.get.databases()
 					(function(context) {
