@@ -16,6 +16,8 @@ self.addEventListener('message', function(e) {
         output.type = 'error';
  	end(null);
   } else { 
+    output.update = 1;
+    end(null);
     curr( input.context )(
 	function(context) {
 		output.type = 'success';
