@@ -15,6 +15,7 @@ self.addEventListener('message', function(e) {
         output.type = 'error';
  	end(null);
   } else { 
+    end({running: 'go for it', 'methiod':  method[ 0 ] '.' + method[ 1 ] });
     dash[ method[ 0 ] ][ method[ 1 ] ]( input.context )(
 	function(context) {
 		output.type = 'success';
