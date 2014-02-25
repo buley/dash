@@ -10,9 +10,11 @@ self.addEventListener('message', function(e) {
 		curr = curr[ method[ x ] ];
 	} else { 
 		error = true;
+                output.types = [ typeof dash.add, typeof dash.add.entry ];
                 output.missing = method;
 	}
   }
+
   var end = function(ctx) {
 	output.context = ctx;
 	output.end = new Date().getTime();
