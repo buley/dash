@@ -4,16 +4,8 @@ self.addEventListener('message', function(e) {
       output = { start: new Date().getTime(), context: input, dashq: typeof dash },
       method = input.method.split('.'),
       x = 0,
-      xlen = method.length, curr = dash, thou = self, error = false;
-  for ( x = 0; x < xlen; x += 1 ) {
-	if ( undefined !== dash[ method[ x ] ] ) {
-		curr = curr[ method[ x ] ];
-	} else { 
-		error = true;
-                output.types = [ typeof dash.add, typeof dash.add.entry ];
-                output.missing = method;
-	}
-  }
+      xlen = method.length, curr = dash, thou = self, error = false,
+      curr = dash[ method[ 0 ] ][ method[ 1 ] ];
 
   var end = function(ctx) {
 	output.context = ctx;
