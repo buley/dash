@@ -26,6 +26,6 @@ self.addEventListener('message', function(e) {
 	}, function(context) {
 		output.type = 'notify';
 		end(context);	
-	},
+	}
   );
 }, false);
