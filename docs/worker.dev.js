@@ -17,7 +17,7 @@ self.addEventListener('message', function(e) {
  	end(null);
   } else { 
     output.update = 1;
-    end(null);
+    end(input.context);
     curr( input.context )(
 	function(context) {
 		output.type = 'success';
