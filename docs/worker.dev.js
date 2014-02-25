@@ -4,8 +4,7 @@ self.addEventListener('message', function(e) {
       output = { start: new Date().getTime(), context: input, dashq: typeof dash },
       method = input.method.split('.'),
       x = 0,
-      xlen = method.length, curr = dash, thou = self, error = false,
-      curr = ;
+      xlen = method.length, curr = dash, thou = self, error = false;
   var end = function(ctx) {
 	output.context = ctx;
 	output.end = new Date().getTime();
