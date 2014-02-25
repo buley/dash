@@ -719,7 +719,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								in_progress = false,
 								processNext = function() {
 								    if ( 0 === stack.length ) {
-									deferred2.resolve({ count: stack_count });
+									deferred2.resolve({ range: attr, count: stack_count });
 									console.log('done',stack_count, attr);
 									scope.downloaded[ attr ] = stack_count;
 									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
@@ -727,7 +727,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    if(!in_progress && stack.length > 0) {
 									in_progress = true;
 									doNext(stack.shift());
-									deferred2.notify({ count: stack_count });
+									deferred2.notify({ range: attr, count: stack_count });
 								    }
 								},
 								doNext = function(next) {
@@ -765,7 +765,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 						var deferred2 = $q.defer();
 						return function() {
 							console.log('already downloaded', attr);
-							deferred2.resolve({foo:'downloaded'});
+							deferred2.notify({range: attr});
+							deferred2.resolve({range: attr});
 							return deferred2.promise;
 						}
 					}(values[x][0])) );
@@ -773,7 +774,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 			promise.then( function() {
 				console.log("FINSIHED");
-			} );
+			}, );
 			deferred.resolve();
 
 		};
