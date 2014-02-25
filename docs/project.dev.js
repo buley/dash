@@ -708,9 +708,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			worker.addEventListener('message', function(e) {
 			  console.log('Worker said: ', e.data);
 			}, false);
-			worker.postMessage({ method: 'add.entry', context: {
-				database: 'dash-worker-test',
-				store: 'yippee',
+			worker.postMessage({ method: 'get.entries', context: {
+				database: 'dash-demo',
+				store: 'imdb',
 				auto_increment: true,
 				store_key_path: 'id',
 				data: { foo: 'bar' }
