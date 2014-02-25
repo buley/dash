@@ -703,7 +703,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 			var deferred = $q.defer(),
 				promise = deferred.promise,
-				ndeferred;
+				ndeferred,
+				worker = new Worker( '/docs/worker.dev.js' );
+			worker.addEventListener('message', function(e) {
+			  console.log('Worker said: ', e.data);
+			}, false);
+			worker.postMessage({foo: 'bar'});
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
 				console.log("VAL",values[x]);
