@@ -708,7 +708,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			worker.addEventListener('message', function(e) {
 			  console.log('Worker said: ', e.data);
 			}, false);
-			worker.postMessage({foo: 'bar'});
+			worker.postMessage({ method: 'add.entry', context: {
+				database: 'dash-worker-test',
+				store: 'yippee',
+				auto_increment: true,
+				store_key_path: 'id',
+				data: { foo: 'bar' }
+			    }
+			});
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
 				console.log("VAL",values[x]);
