@@ -5,7 +5,7 @@ self.addEventListener('message', function(e) {
       method = input.method.split('.'),
       x = 0,
       xlen = method.length, curr = dash, thou = self, error = false,
-      curr = dash[ method[ 0 ] ][ method[ 1 ] ];
+      curr = ;
   var end = function(ctx) {
 	output.context = ctx;
 	output.end = new Date().getTime();
@@ -16,8 +16,7 @@ self.addEventListener('message', function(e) {
         output.type = 'error';
  	end(null);
   } else { 
-    end(input.context);
-    curr( input.context )(
+    dash[ method[ 0 ] ][ method[ 1 ] ]( input.context )(
 	function(context) {
 		output.type = 'success';
 		end(context);	
