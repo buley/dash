@@ -6,7 +6,7 @@ self.addEventListener('message', function(e) {
       x = 0,
       xlen = method.length, curr = dash, thou = self;
   for ( x = 0; x < xlen; x += 1 ) {
-	if ( undefined !== dash[ method[ x ] ) {
+	if ( undefined !== dash[ method[ x ] ] ) {
 		curr = curr[ method[ x ] ];
 	}
   }
