@@ -40,10 +40,16 @@
 						expect(this.error).toBe(false);
 						expect(this.notify).toBe(false);
 					});
-					it("get.stores return a DOMStringList with the right contents", function() {
-						expect(this.context.stores instanceof DOMStringList).toBe(true);
+					it("get.stores return an Array with the right contents", function() {
+						expect(this.context.stores instanceof Array).toBe(true);
 						expect(this.context.stores.length).toBe(1);
-						expect(this.context.stores.contains(this.context.store)).toBe(true);
+                                                var found = false, x = 0, xlen = this.context.stores.length;
+						for ( x = 0; x < xlen; x += 1 ) {
+							if ( this.context.store === this.context.stores[x] ) {
+								found = true;
+							}
+						}
+						expect(found).toBe(true);
 					});
 					it("get.stores should clean up after itself", function() {
 						//dash.remove.database(this.context);

@@ -44,10 +44,16 @@
 						expect(this.error).toBe(false);
 						expect(this.notify).toBe(false);
 					});
-					it("get.indexes return a DOMStringList with the right contents", function() {
-						expect(this.context.indexes instanceof DOMStringList).toBe(true);
+					it("get.indexes return an array with the right contents", function() {
+						expect(this.context.indexes instanceof Array).toBe(true);
 						expect(this.context.indexes.length).toBe(1);
-						expect(this.context.indexes.contains(this.context.index)).toBe(true);
+                                                var found = false, x = 0, xlen = this.context.indexes.length;
+                                                for ( x = 0; x < xlen; x += 1 ) {
+                                                        if ( this.context.index === this.context.indexes[x] ) {
+                                                                found = true;
+                                                        }
+                                                }
+                                                expect(found).toBe(true);
 					});
 					it("get.indexes should clean up after itself", function() {
 						dash.remove.database(this.context);
