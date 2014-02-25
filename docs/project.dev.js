@@ -732,7 +732,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								},
 								doNext = function(next) {
 							 	    stack_count += 1;
-
 								    dash.add.entry({
 									database: 'dash-demo',
 									store: 'imdb',
@@ -754,10 +753,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 									url: '/docs/demo/data/' + attr + '.json'
 								    }).success(function(data, status, headers, config) {
 									var x = 0, xlen = data.length;
-									for ( x = xlen; xlen != 0; x -= 1 ) {
-										stacklist.push( data[ x - 1 ] );
+									for ( x = 0; x < xlen; x += 1 ) {
+										stacklist.push( data[ x ] );
 									}
 									stack_length = stacklist.length;
+									console.log('stack_length',stack_length);
 									processNext();
 								    }).error( function(data, status, headers, config) {
 									console.log('error',data, status, headers, config);
