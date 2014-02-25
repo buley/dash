@@ -10,6 +10,7 @@ self.addEventListener('message', function(e) {
 		curr = curr[ method[ x ] ];
 	} else { 
 		error = true;
+                output.missing = method;
 	}
   }
   var end = function(ctx) {
