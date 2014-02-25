@@ -72,7 +72,7 @@
 						expect(this.finalcount).toBe(this.startcount);
 					});
 					it("remove.store should have the correct parent/child relationship", function() {
-						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(false);
+						expect(-1 === this.context.db.objectStoreNames.indexOf(this.context.store)).toBe(true);
 					});
 
 					it("remove.store references should be the db and store we asked for", function(){

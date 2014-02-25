@@ -48,7 +48,7 @@
 					});
 					
 					it("add.store should have the correct parent/child relationship", function() {
-						expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
+						expect(-1 !== this.context.db.objectStoreNames.indexOf(this.context.store)).toBe(true);
 					});
 
 					it("add.store references should be the db and store we asked for", function(){

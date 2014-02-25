@@ -1,0 +1,30 @@
+<section id="dash-demo-overlay-container" class="large-12 columns">
+	<section id="dash-demo-overlay-marketing" class="large-6 right">
+		<h1>dash is <em class='dumb-saying'>{{stats()}}</em>.</h1>
+		<h2>
+			<span>For example, </span>
+			<select ng-model="verb">
+				<option selected>explore</option>
+				<option>remove</option>
+			</select>
+			<span> everything in IMDB </span>
+			<select ng-model="sort">
+				<option ng-repeat="option in sorts" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
+			</select>
+			<input type="number" max="2021" min="1889" ng-model="range">
+			<span></span>
+			<input type="button" value="GO ({{estimate()}}) " ng-click="layout()" class="dash-demo-overlay-marketing-button small button"></input>
+		</h2>
+	</section>
+	<section id="dash-demo-overlay-demo" class="large-6 left">
+		<section id="dash-demo-overlay-panel-info" class="large-6 left">
+			<h1>{{data.se}}</h1>
+			<h2>{{data.ep}}</h2>
+			<div star-rating data-star-rating-value="data.data.rating" data-star-rating-max="5" data-star-rating-on-change="onItemRatingChange"></div>
+		</section>
+		<section id="dash-demo-overlay-panel-rating-filter">
+			<div star-rating data-star-rating-value="data.data.rating" data-star-rating-max="5" data-star-rating-on-change="onRatingFilterChange"></div>
+		</section>
+	</section>
+</section>
+

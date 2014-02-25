@@ -81,7 +81,7 @@
                     });
 
                     it("get.entries should have the correct parent/child relationships", function() {
-                        expect(this.context.db.objectStoreNames.contains(this.context.store)).toBe(true);
+                        expect(-1 !== this.context.db.objectStoreNames.indexOf(this.context.store)).toBe(true);
                     });
 
                     it("get.entries references should be the db, store and index we asked for", function(){
