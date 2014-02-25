@@ -6,7 +6,6 @@ self.addEventListener('message', function(e) {
       x = 0,
       xlen = method.length, curr = dash, thou = self, error = false,
       curr = dash[ method[ 0 ] ][ method[ 1 ] ];
-
   var end = function(ctx) {
 	output.context = ctx;
 	output.end = new Date().getTime();
@@ -17,17 +16,17 @@ self.addEventListener('message', function(e) {
         output.type = 'error';
  	end(null);
   } else { 
-	  curr( input.context )(
-		function(context) {
-			output.type = 'success';
-			end(context);	
-		}, function(context) {
-			output.type = 'error';
-			end(context);	
-		}, function(context) {
-			output.type = 'notify';
-			end(context);	
-		}
-	  );
+    curr( input.context )(
+	function(context) {
+		output.type = 'success';
+		end(context);	
+	}, function(context) {
+		output.type = 'error';
+		end(context);	
+	}, function(context) {
+		output.type = 'notify';
+		end(context);	
+	}
+    );
   } 
 }, false);
