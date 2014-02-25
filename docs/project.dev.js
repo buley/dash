@@ -753,8 +753,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    }).success(function(data, status, headers, config) {
 									stacklist.push.apply(stacklist, data);
 									var x = 0, xlen = data.length;
-									for ( x = xlen; 0 != xlen; x -= 1 ) {
-										stacklist.push( data[ x ] );
+									for ( x = xlen; xlen != 0; x -= 1 ) {
+										stacklist.push( data[ x - 1 ] );
 									}
 									stack_length = stacklist.length;
 									processNext();
