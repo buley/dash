@@ -772,9 +772,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					}(values[x][0])) );
 				}
 			}
-			promise.then( function() {
-				console.log("FINSIHED");
-			}, );
+			promise.then( function(args) {
+				console.log("FINSIHED",args);
+			}, null, function(args) {
+				console.log('notify',args);
+			} );
 			deferred.resolve();
 
 		};
