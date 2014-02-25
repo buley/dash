@@ -732,6 +732,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								},
 								doNext = function(next) {
 							 	    stack_count += 1;
+
 								    dash.add.entry({
 									database: 'dash-demo',
 									store: 'imdb',
@@ -742,6 +743,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    (function(context) {
 									in_progress = false;
 									processNext(context);
+								    	console.log('next!',stack_count, context.key);
 								    }, function(context) {
 									in_progress = false;
 									processNext(context);
