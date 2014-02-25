@@ -713,20 +713,20 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 						return function() {
 							console.log('download', attr);
 							    var start = 2013,
-								stack = [],
+								stacklist = [],
 								stack_count = 0,
 								stack_length = 0,
 								in_progress = false,
 								processNext = function(context) {
-								    if ( 0 === stack.length ) {
+								    if ( 0 === stacklist.length ) {
 									deferred2.resolve({ range: attr, count: stack_count });
 									console.log('done',stack_count, attr);
 									scope.downloaded[ attr ] = stack_count;
 									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 								    }
-								    if(!in_progress && stack.length > 0) {
+								    if(!in_progress && stacklist.length > 0) {
 									in_progress = true;
-									doNext(stack.shift());
+									doNext(stacklist.shift());
 									deferred2.notify({ range: attr, count: stack_count, context: context });
 								    }
 								},
@@ -751,8 +751,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 									method: 'GET',
 									url: '/docs/demo/data/' + attr + '.json'
 								    }).success(function(data, status, headers, config) {
-									stack.push.apply(stack, data);
-									stack_length = stack.length;
+									stacklist.push.apply(stack, data);
+									stack_length = stacklist.length;
 									processNext();
 								    }).error( function(data, status, headers, config) {
 									console.log('error',data, status, headers, config);
