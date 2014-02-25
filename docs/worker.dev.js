@@ -1,6 +1,7 @@
+importScripts('/lib/dash.dev.js');
 self.addEventListener('message', function(e) {
   var input = e.data,
-      output = { start: new Date().getTime(), data: input };
+      output = { start: new Date().getTime(), data: input, typeof dash };
   setTimeout(function() {
     output.end = new Date().getTime();
     output.lag = output.end - output.start;
