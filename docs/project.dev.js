@@ -459,13 +459,13 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
 }]);
 
 
-dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast', function( $q, $http, dashAppSplashBroadcast ) { 
+dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast', 'dashWorkerService', function( $q, $http, dashAppSplashBroadcast, dashWorkerService ) { 
     return {
         scope: {},
         restrict: 'AE',
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
-            console.log('dashSplash overlay setup');
+            console.log('dashSplash overlay setup', dashWorkerService);
             return function link(scope, element, attrs) {
 		scope.data = {
 			se: '',
@@ -818,7 +818,7 @@ dashApp.directive('markdown', function () {
     };
 });
 
-dashApp.factory( 'dashWorkerService', function() {
+dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 	var worker = new Worker( '/lib/dash.dev.js' ),
 	    methods = [
 	      'add.entry',
@@ -846,14 +846,33 @@ dashApp.factory( 'dashWorkerService', function() {
 		    xlength = 0,
 		    strlen = random.length,
                     str = [],
-		    id;
+		    id,
+		    deferred = new $q.defer();
 		for ( x = 0; x < count; x += 1 ) {
 			str.push( random[ Math.floor( Math.random() * 100 ) % strlen ] );
 		}
 		id = str.join('');
 		console.log("RANDOM", id);
 		worker.postMessage({ dash: message, context: context, uid: id });
-	    };
-});
+                return deferred.promise;
+	    },
+	    API = {},
+	    y = 0,
+	    ylen = methods.length,
+            method,
+	    commands;
+	for( y = 0; y < methods.length; x += 1 ) {
+		method = methods[ x ];
+	    	commands = method.split('.');
+		if ( undefined === API[ commands[ 0 ] ] ) {
+			API[ commands[ 0 ] ] = {};
+		}	
+		API[ commands[ 0 ] ][ commands[ 1 ]] = (function(signature) { return function(context) {
+			return send(signature, context);
+		}; }(method));
+
+	}
+	return API;
+} ]);
 
 
