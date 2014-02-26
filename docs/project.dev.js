@@ -902,14 +902,17 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 				if ( 'function' === typeof queued.success ) {
 					queued.success( data );
 				}
+				break;
 			case 'error':
 				if ( 'function' === typeof queued.error ) {
 					queued.error( data );
 				}
+				break;
 			case 'notify':
 				if ( 'function' === typeof queued.notify ) {
 					queued.notify( data );
 				}
+				break;
 			default:
 				break;
 		}
