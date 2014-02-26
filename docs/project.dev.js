@@ -875,14 +875,14 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 	    },
 	    send = function( message, context ) {
 		var deferred = $q.defer();
-		register( message, context, function(context) {
-			console.log('success',context);
-			deferred.resolve(context);
-		}, function(context) {
-			console.log('error',context);
+		register( message, context, function(data) {
+			console.log('success',data.context);
+			deferred.resolve(data.context);
+		}, function(data) {
+			console.log('error',data.context);
 			deferred.reject(context);
-		}, function(context) {
-			console.log('notify',context);
+		}, function(data) {
+			console.log('notify',data.context);
 			deferred.notify(context);
 		} );
                 return deferred.promise;
