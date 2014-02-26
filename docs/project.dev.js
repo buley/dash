@@ -862,7 +862,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
             method,
 	    commands;
 	for( y = 0; y < methods.length; x += 1 ) {
-		method = methods[ x ];
+		method = methods[ y ];
 	    	commands = method.split('.');
 		if ( undefined === API[ commands[ 0 ] ] ) {
 			API[ commands[ 0 ] ] = {};
