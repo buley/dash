@@ -861,8 +861,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 		    xlength = 0,
 		    strlen = random.length,
                     str = [],
-		    id,
-		    deferred = new $q.defer();
+		    id;
 		for ( x = 0; x < count; x += 1 ) {
 			str.push( random[ Math.floor( Math.random() * 100 ) % strlen ] );
 		}
@@ -875,6 +874,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 		worker.postMessage({ dash: message, context: context, uid: id });
 	    },
 	    send = function( message, context ) {
+		var deferred = $q.defer();
 		register( message, context, function(context) {
 			console.log('success',context);
 			deferred.resolve(context);
