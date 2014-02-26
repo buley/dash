@@ -703,19 +703,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 			var deferred = $q.defer(),
 				promise = deferred.promise,
-				ndeferred,
-				worker = new Worker( '/lib/dash.dev.js' );
-			worker.addEventListener('message', function(e) {
-			  console.log('Worker (dash)', e.data);
-			}, false);
-			worker.postMessage({ dash: 'get.stores', context: {
-				database: 'dash-demo',
-				store: 'imdb',
-				auto_increment: true,
-				store_key_path: 'id',
-				data: { foo: 'bar' }
-			    }
-			});
+				ndeferred;
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
 				if ( true === values[ x ][ 1 ] ) {
@@ -780,7 +768,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					promise = promise.then( (function(attr) {
 						var deferred2 = $q.defer();
 						return function() {
-							console.log('already downloaded', attr);
 							deferred2.notify({range: attr});
 							deferred2.resolve({range: attr});
 							return deferred2.promise;
@@ -830,3 +817,43 @@ dashApp.directive('markdown', function () {
         }
     };
 });
+
+dashApp.factory( 'dashWorkerService', function() {
+	var worker = new Worker( '/lib/dash.dev.js' ),
+	    methods = [
+	      'add.entry',
+	      'get.database',
+	      'get.databases',
+	      'get.store',
+	      'get.stores',
+	      'get.index',
+	      'get.indexes',
+	      'get.entry',
+	      'get.entries',
+	      'update.entries',
+	      'put.entry',
+	      'clear.store',
+	      'remove.database',
+	      'remove.store',
+	      'remove.index',
+	      'remove.entry',
+	      'remove.entries'
+	    ],
+	    send = function( message, context ) {
+                var random = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+		    count = 16,
+		    x = 0,
+		    xlength = 0,
+		    strlen = random.length,
+                    str = [],
+		    id;
+		for ( x = 0; x < count; x += 1 ) {
+			str.push( random[ Math.floor( Math.random() * 100 ) % strlen ] );
+		}
+		id = str.join('');
+		console.log("RANDOM", id);
+		worker.postMessage({ dash: message, context: context, uid: id });
+	    };
+});
+
+
