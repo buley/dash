@@ -893,7 +893,11 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
             method,
 	    commands;
         worker.addEventListener( 'message', function(e) {
-	   console.log("WORKER MESSAGE",e.data);
+	    var data = e.data;
+	    if ( undefined !== queue[ data.uid ] ) {
+	      console.log("WORKER MESSAGE",e.data);
+
+            }
 	} );
 	for( y = 0; y < methods.length; y += 1 ) {
 		method = methods[ y ];
