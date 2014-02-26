@@ -893,10 +893,11 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
             method,
 	    commands;
         worker.addEventListener( 'message', function(e) {
-	    var data = e.data, queued = queue[ data.uid ];
+	    var data = e.data,
+		queued = queue[ data.uid ];
 	    if ( undefined !== queued ) {
-	      console.log("WORKER MESSAGE",queued, e.data);
-	    	case( e.data.type ) {
+	      	console.log("WORKER MESSAGE",queued, e.data);
+	    	switch( e.data.type ) {
 			case 'success':
 				if ( 'function' === typeof queued.success ) {
 					queued.success( data );
