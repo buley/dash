@@ -466,7 +466,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
             console.log('dashSplash overlay setup', dashWorkerService);
-	    var dash_promise = dashWorkerService.get.databases({
+	    var dash_promise = dashWorkerService.get.entries({
 		database: 'dash-demo',
 		store: 'imdb',
 		store_key_path: 'id',
