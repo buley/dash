@@ -895,7 +895,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
         worker.addEventListener( 'message', function(e) {
 	    var data = e.data;
 	    if ( undefined !== queue[ data.uid ] ) {
-	      console.log("WORKER MESSAGE",e.data);
+	      console.log("WORKER MESSAGE",queue[ data.uid ], e.data);
 
             }
 	} );
