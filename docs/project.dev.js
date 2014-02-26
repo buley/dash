@@ -470,7 +470,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		database: 'dash-demo',
 		store: 'imdb',
 		store_key_path: 'id',
-		auto_increment: true
+		auto_increment: true,
+		key: null
 	    });
 	    console.log('dash promise');
             dash_promise.then( function(context) {
