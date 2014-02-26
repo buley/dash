@@ -704,9 +704,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			var deferred = $q.defer(),
 				promise = deferred.promise,
 				ndeferred,
-				worker = new Worker( '/lib/worker.dev.js' );
+				worker = new Worker( '/lib/dash.dev.js' );
 			worker.addEventListener('message', function(e) {
-			  console.log('Worker said: ', e.data);
+			  console.log('Worker (dash)', e.data);
 			}, false);
 			worker.postMessage({ dash: 'get.entries', context: {
 				database: 'dash-demo',
