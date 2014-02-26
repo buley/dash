@@ -834,6 +834,7 @@ dashApp.directive('markdown', function () {
 
 dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 	var worker = new Worker( '/lib/dash.dev.js' ),
+            queue = {},
 	    methods = [
 	      'add.entry',
 	      'get.database',
@@ -853,7 +854,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 	      'remove.entry',
 	      'remove.entries'
 	    ],
-	    send = function( message, context ) {
+	    register = function( message, context, success, error, notify) {
                 var random = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
 		    count = 16,
 		    x = 0,
@@ -866,8 +867,24 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 			str.push( random[ Math.floor( Math.random() * 100 ) % strlen ] );
 		}
 		id = str.join('');
-		console.log("RANDOM", id);
+		queue[ id ] = {
+			success: success,
+			error: error,
+			notify: notify
+		};
 		worker.postMessage({ dash: message, context: context, uid: id });
+	    },
+	    send = function( message, context ) {
+		register( message, context, function(context) {
+			console.log('success',context);
+			deferred.resolve(context);
+		}, function(context) {
+			console.log('error',context);
+			deferred.reject(context);
+		}, function(context) {
+			console.log('notify',context);
+			deferred.notify(context);
+		} );
                 return deferred.promise;
 	    },
 	    API = {},
@@ -875,6 +892,9 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 	    ylen = methods.length,
             method,
 	    commands;
+        worker.addEventListener( 'message', function(e) {
+	   console.log("WORKER MESSAGE",e.data);
+	} );
 	for( y = 0; y < methods.length; y += 1 ) {
 		method = methods[ y ];
 	    	commands = method.split('.');
