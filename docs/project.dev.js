@@ -466,6 +466,20 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
             console.log('dashSplash overlay setup', dashWorkerService);
+	    var dash_promise = dashWorkerService.get.databases({
+		database: 'dash-demo',
+		store: 'imdb',
+		key: data,
+		store_key_path: 'id'
+	    });
+	    console.log('dash promise');
+            dash_promise.then( function(context) {
+		console.log('dash promise fulfilled', context);
+            }, function(context) {
+		console.log('dash promise rejected', context);
+            }, function(context) {
+		console.log('dash promise notified', context);
+            });
             return function link(scope, element, attrs) {
 		scope.data = {
 			se: '',
