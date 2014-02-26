@@ -876,13 +876,10 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 	    send = function( message, context ) {
 		var deferred = $q.defer();
 		register( message, context, function(data) {
-			console.log('success',data.context);
 			deferred.resolve(data.context);
 		}, function(data) {
-			console.log('error',data.context);
 			deferred.reject(context);
 		}, function(data) {
-			console.log('notify',data.context);
 			deferred.notify(context);
 		} );
                 return deferred.promise;
@@ -896,7 +893,6 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 	    var data = e.data,
 		queued = queue[ data.uid ];
 	    if ( undefined !== queued ) {
-	      	console.log("WORKER MESSAGE",queued, e.data);
 	    	switch( e.data.type ) {
 			case 'success':
 				if ( 'function' === typeof queued.success ) {
@@ -916,7 +912,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 			default:
 				break;
 		}
-
+		delete queue[ data.uid ];
             }
 	} );
 	for( y = 0; y < methods.length; y += 1 ) {
