@@ -716,10 +716,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				data: { foo: 'bar' }
 			    }
 			});
-			console.log('started worer');
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
-				console.log("VAL",values[x]);
 				if ( true === values[ x ][ 1 ] ) {
 					promise = promise.then( (function(attr) {
 						var deferred2 = $q.defer();
