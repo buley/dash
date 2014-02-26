@@ -861,7 +861,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 	    ylen = methods.length,
             method,
 	    commands;
-	for( y = 0; y < methods.length; x += 1 ) {
+	for( y = 0; y < methods.length; y += 1 ) {
 		method = methods[ y ];
 	    	commands = method.split('.');
 		if ( undefined === API[ commands[ 0 ] ] ) {
