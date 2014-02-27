@@ -892,7 +892,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
         worker.addEventListener( 'message', function(e) {
 	    var data = e.data,
 		queued = queue[ data.uid ];
-	    console.log('boom',data);
+	    //console.log('boom',data);
 	    if ( undefined !== queued ) {
 	    	switch( e.data.type ) {
 			case 'success':
@@ -900,11 +900,13 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 					queued.success( data );
 				}
 				break;
+				delete queue[ data.uid ];
 			case 'error':
 				if ( 'function' === typeof queued.error ) {
 					queued.error( data );
 				}
 				break;
+				delete queue[ data.uid ];
 			case 'notify':
 				if ( 'function' === typeof queued.notify ) {
 					queued.notify( data );
@@ -913,7 +915,6 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 			default:
 				break;
 		}
-		delete queue[ data.uid ];
             }
 	} );
 	for( y = 0; y < methods.length; y += 1 ) {
