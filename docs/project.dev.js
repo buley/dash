@@ -892,7 +892,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
         worker.addEventListener( 'message', function(e) {
 	    var data = e.data,
 		queued = queue[ data.uid ];
-	    console.log('boom',data);
+	    console.log('boom',data.context);
 	    if ( undefined !== queued ) {
 	    	switch( e.data.type ) {
 			case 'success':
