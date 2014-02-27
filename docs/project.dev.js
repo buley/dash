@@ -459,13 +459,27 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
 }]);
 
 
-dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast', function( $q, $http, dashAppSplashBroadcast ) { 
+dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast', 'dashWorkerService', function( $q, $http, dashAppSplashBroadcast, dashWorkerService ) { 
     return {
         scope: {},
         restrict: 'AE',
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
-            console.log('dashSplash overlay setup');
+            console.log('dashSplash overlay setup', dashWorkerService);
+	    var ctx = {
+		  database: 'dash-demo',
+		  store: 'imdb',
+		  limit: 10
+	       },
+               dash_promise = dashWorkerService.get.entries(ctx);
+	    console.log('dash promise', ctx, dash_promise);
+            dash_promise.then( function(context) {
+		console.log('dash promise fulfilled', context);
+            }, function(context) {
+		console.log('dash promise rejected', context);
+            }, function(context) {
+		console.log('dash promise notified', context.key);
+            });
             return function link(scope, element, attrs) {
 		scope.data = {
 			se: '',
@@ -703,23 +717,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 			var deferred = $q.defer(),
 				promise = deferred.promise,
-				ndeferred,
-				worker = new Worker( '/docs/worker.dev.js' );
-			worker.addEventListener('message', function(e) {
-			  console.log('Worker said: ', e.data);
-			}, false);
-			worker.postMessage({ method: 'get.entries', context: {
-				database: 'dash-demo',
-				store: 'imdb',
-				auto_increment: true,
-				store_key_path: 'id',
-				data: { foo: 'bar' }
-			    }
-			});
-			console.log('started worer');
+				ndeferred;
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
-				console.log("VAL",values[x]);
 				if ( true === values[ x ][ 1 ] ) {
 					promise = promise.then( (function(attr) {
 						var deferred2 = $q.defer();
@@ -782,7 +782,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					promise = promise.then( (function(attr) {
 						var deferred2 = $q.defer();
 						return function() {
-							console.log('already downloaded', attr);
 							deferred2.notify({range: attr});
 							deferred2.resolve({range: attr});
 							return deferred2.promise;
@@ -832,3 +831,103 @@ dashApp.directive('markdown', function () {
         }
     };
 });
+
+dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
+	var worker = new Worker( '/lib/dash.dev.js' ),
+            queue = {},
+	    methods = [
+	      'add.entry',
+	      'get.database',
+	      'get.databases',
+	      'get.store',
+	      'get.stores',
+	      'get.index',
+	      'get.indexes',
+	      'get.entry',
+	      'get.entries',
+	      'update.entries',
+	      'put.entry',
+	      'clear.store',
+	      'remove.database',
+	      'remove.store',
+	      'remove.index',
+	      'remove.entry',
+	      'remove.entries'
+	    ],
+	    register = function( message, context, success, error, notify) {
+                var random = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+		    count = 16,
+		    x = 0,
+		    xlength = 0,
+		    strlen = random.length,
+                    str = [],
+		    id;
+		for ( x = 0; x < count; x += 1 ) {
+			str.push( random[ Math.floor( Math.random() * 100 ) % strlen ] );
+		}
+		id = str.join('');
+		queue[ id ] = {
+			success: success,
+			error: error,
+			notify: notify
+		};
+		worker.postMessage({ dash: message, context: context, uid: id });
+	    },
+	    send = function( message, context ) {
+		var deferred = $q.defer();
+		register( message, context, function(data) {
+			deferred.resolve(data);
+		}, function(data) {
+			deferred.reject(data);
+		}, function(data) {
+			deferred.notify(data);
+		} );
+                return deferred.promise;
+	    },
+	    API = {},
+	    y = 0,
+	    ylen = methods.length,
+            method,
+	    commands;
+        worker.addEventListener( 'message', function(e) {
+	    var data = e.data,
+		queued = queue[ data.uid ];
+	    if ( undefined !== queued ) {
+	    	switch( e.data.type ) {
+			case 'success':
+				if ( 'function' === typeof queued.success ) {
+					queued.success( data.context );
+				}
+				break;
+				delete queue[ data.uid ];
+			case 'error':
+				if ( 'function' === typeof queued.error ) {
+					queued.error( data.context );
+				}
+				break;
+				delete queue[ data.uid ];
+			case 'notify':
+				if ( 'function' === typeof queued.notify ) {
+					queued.notify( data.context );
+				}
+				break;
+			default:
+				break;
+		}
+            }
+	} );
+	for( y = 0; y < methods.length; y += 1 ) {
+		method = methods[ y ];
+	    	commands = method.split('.');
+		if ( undefined === API[ commands[ 0 ] ] ) {
+			API[ commands[ 0 ] ] = {};
+		}	
+		API[ commands[ 0 ] ][ commands[ 1 ]] = (function(signature) { return function(context) {
+			return send(signature, context);
+		}; }(method));
+
+	}
+	return API;
+} ]);
+
+

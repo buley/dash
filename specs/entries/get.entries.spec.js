@@ -29,7 +29,8 @@
                 store_key_path: key_path,
                 index_key_path: index_key_path,
                 index: index_name,
-                data: test_data
+                data: test_data,
+		collect: true
             })
             (function(context) {
                 dash.get.entries(context)
