@@ -469,7 +469,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 	    var ctx = {
 		  database: 'dash-demo',
 		  store: 'imdb',
-		  limit: 10
+		  limit: 15,
+		  skip: 20000
 	       },
                dash_promise = dashWorkerService.get.entries(ctx);
 	    console.log('dash promise', ctx, dash_promise);
@@ -478,7 +479,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
             }, function(context) {
 		console.log('dash promise rejected', context);
             }, function(context) {
-		console.log('dash promise notified', context.key);
+		console.log('dash promise notified', context);
             });
             return function link(scope, element, attrs) {
 		scope.data = {
