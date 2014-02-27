@@ -870,6 +870,7 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 			error: error,
 			notify: notify
 		};
+		console.log("POST", message, context );
 		worker.postMessage({ dash: message, context: context, uid: id });
 	    },
 	    send = function( message, context ) {
