@@ -479,7 +479,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
             }, function(context) {
 		//console.log('dash promise rejected', context);
             }, function(context) {
-		console.log('dash promise notified', context.key);
+		//console.log('dash promise notified', context.key);
             });
             return function link(scope, element, attrs) {
 		scope.data = {
