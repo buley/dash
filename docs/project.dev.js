@@ -467,11 +467,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
         compile: function() {
             console.log('dashSplash overlay setup', dashWorkerService);
 	    var ctx = {
-		database: 'dash-demo',
-		store: 'imdb',
-		auto_increment: true,
-		store_key_path: 'id',
-		data: { foo: 'bar' }
+		  database: 'dash-demo',
+		  store: 'imdb',
+		  index_key_path: 'id'
 	       },
                dash_promise = dashWorkerService.get.entries(ctx);
 	    console.log('dash promise', ctx);
