@@ -877,11 +877,11 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
 	    send = function( message, context ) {
 		var deferred = $q.defer();
 		register( message, context, function(data) {
-			deferred.resolve(data.context);
+			deferred.resolve(data);
 		}, function(data) {
-			deferred.reject(context);
+			deferred.reject(data);
 		}, function(data) {
-			deferred.notify(context);
+			deferred.notify(data);
 		} );
                 return deferred.promise;
 	    },
@@ -893,24 +893,23 @@ dashApp.factory( 'dashWorkerService', [ '$q', function( $q ) {
         worker.addEventListener( 'message', function(e) {
 	    var data = e.data,
 		queued = queue[ data.uid ];
-	    console.log('boom',data.context);
 	    if ( undefined !== queued ) {
 	    	switch( e.data.type ) {
 			case 'success':
 				if ( 'function' === typeof queued.success ) {
-					queued.success( data );
+					queued.success( data.context );
 				}
 				break;
 				delete queue[ data.uid ];
 			case 'error':
 				if ( 'function' === typeof queued.error ) {
-					queued.error( data );
+					queued.error( data.context );
 				}
 				break;
 				delete queue[ data.uid ];
 			case 'notify':
 				if ( 'function' === typeof queued.notify ) {
-					queued.notify( data );
+					queued.notify( data.context );
 				}
 				break;
 			default:
