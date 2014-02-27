@@ -475,11 +475,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
                dash_promise = dashWorkerService.get.entries(ctx);
 	    console.log('dash promise', ctx, dash_promise);
             dash_promise.then( function(context) {
-		console.log('dash promise fulfilled', context);
+		//console.log('dash promise fulfilled', context);
             }, function(context) {
-		console.log('dash promise rejected', context);
+		//console.log('dash promise rejected', context);
             }, function(context) {
-		console.log('dash promise notified', context);
+		console.log('dash promise notified', context.key);
             });
             return function link(scope, element, attrs) {
 		scope.data = {
