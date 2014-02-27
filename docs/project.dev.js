@@ -469,15 +469,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 	    var ctx = {
 		  database: 'dash-demo',
 		  store: 'imdb',
-	          key: 123,
 		  limit: 10
 	       },
                dash_promise = dashWorkerService.get.entries(ctx);
 	    console.log('dash promise', ctx, dash_promise);
             dash_promise.then( function(context) {
-		//console.log('dash promise fulfilled', context);
+		console.log('dash promise fulfilled', context);
             }, function(context) {
-		//console.log('dash promise rejected', context);
+		console.log('dash promise rejected', context);
             }, function(context) {
 		console.log('dash promise notified', context.key);
             });
