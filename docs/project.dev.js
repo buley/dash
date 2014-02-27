@@ -470,7 +470,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		  database: 'dash-demo',
 		  store: 'imdb',
 		  limit: 10,
-		  skip: 20
+		  skip: 20000
 	       },
                dash_promise = dashWorkerService.get.entries(ctx);
 	    console.log('dash promise', ctx, dash_promise);
