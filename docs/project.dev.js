@@ -48,7 +48,6 @@ dashApp.controller( 'dashAppController', [ '$location', '$scope', function( $loc
 }]);
 
 dashApp.controller('dashAppAboutController', [ function() {
-    console.log('about controller');
 }]);
 
 dashApp.controller('dashAppDocsController', [ '$scope', '$http', '$templateCache', '$routeParams', function( $scope, $http, $templateCache, $routeParams ) {
@@ -370,7 +369,6 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
         scope: {},
         restrict: 'AE',
         compile: function() {
-            console.log('dashSplash setup');
 	    var ctx = {
 		  database: 'dash-demo',
 		  store: 'imdb'
@@ -385,7 +383,6 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
 			store_key_path: 'id'
 		    })
 		    (function(context) {
-			console.log('got entry', context);
 			dashAppSplashBroadcast.current(context.entry);
 		    }, function(context) {
 			console.log('missing entry', context);
@@ -424,7 +421,6 @@ dashApp.factory( 'dashAppSplashBroadcast', function() {
 });
 
 dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $scope, $http ) {
-    console.log('splash controller');
     var start = 2013,
         stack = [],
         in_progress = false,
@@ -444,7 +440,6 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
             })
             (function(context) {
                 in_progress = false;
-                console.log(context.key);
                 processNext();
             }, function(context) {
                 in_progress = false;
@@ -461,7 +456,6 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
                 url: '/docs/demo/data/' + start + '.json'
             }).success(function(data, status, headers, config) {
                 stack.push.apply(stack, data);
-                console.log('stack length', stack.length);
                 processNext();
             }).error( function(data, status, headers, config) {
                 console.log('error',data, status, headers, config);
@@ -478,7 +472,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
         restrict: 'AE',
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
-            console.log('dashSplash overlay setup', dashWorkerService);
             return function link(scope, element, attrs) {
 		scope.data = {
 			se: '',
@@ -723,7 +716,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					promise = promise.then( (function(attr) {
 						var deferred2 = $q.defer();
 						return function() {
-							console.log('download', attr);
 							    var start = 2013,
 								stacklist = [],
 								stack_count = 0,
@@ -732,7 +724,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								processNext = function(context) {
 								    if ( 0 === stacklist.length ) {
 									deferred2.resolve({ range: attr, count: stack_count });
-									console.log('done',stack_count, attr);
 									scope.downloaded[ attr ] = stack_count;
 									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 								    }
@@ -769,7 +760,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 										stacklist.push( data[ x ] );
 									}
 									stack_length = stacklist.length;
-									console.log('stack_length',stack_length);
 									processNext();
 								    }).error( function(data, status, headers, config) {
 									console.log('error',data, status, headers, config);
@@ -789,7 +779,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				}
 			}
 			promise.then( function(args) {
-				console.log("FINSIHED",args);
+				console.log("FINISHED",args);
 			}, null, function(args) {
 				console.log('notify',args);
 			} );
