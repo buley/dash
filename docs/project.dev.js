@@ -373,9 +373,7 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
             console.log('dashSplash setup');
 	    var ctx = {
 		  database: 'dash-demo',
-		  store: 'imdb',
-		  limit: 100000,
-		  reverse: true
+		  store: 'imdb'
 	        },
                 dash_promise = dashWorkerService.get.entries(ctx),
 	     	el = document.createElement('div'),
