@@ -376,7 +376,6 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSpla
 		  store: 'imdb',
 		  limit: 15,
 		  advance: 20000,
-		  collect: true,
 		  reverse: true
 	        },
                 dash_promise = dashWorkerService.get.entries(ctx),
@@ -402,8 +401,8 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSpla
             }, function(context) {
 		console.log('dash promise rejected', context);
             }, function(context) {
-		console.log('dash promise notified', context);
 		system.add(context.key);
+		console.log('dash promise notified', context);
             });
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
