@@ -374,8 +374,7 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
 	    var ctx = {
 		  database: 'dash-demo',
 		  store: 'imdb',
-		  limit: 15,
-		  advance: 20000,
+		  limit: 100000,
 		  reverse: true
 	        },
                 dash_promise = dashWorkerService.get.entries(ctx),
