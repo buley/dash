@@ -471,6 +471,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		  store: 'imdb',
 		  limit: 15,
 		  skip: 20000,
+		  collect: true,
 		  direction: 'prev'
 	       },
                dash_promise = dashWorkerService.get.entries(ctx);
