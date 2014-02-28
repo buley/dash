@@ -107,19 +107,7 @@ var IMDBSystem = (function(THREE){
         document.addEventListener( 'mousemove', onMouseMove, false );
         document.addEventListener( 'resize', onResize, false );
 
-        return {
-		clear: function() {
-			if (scene.getObjectByName("particles")) {
-			    scene.remove(scene.getObjectByName("particles"));
-			}
-		},
-		add: function(id) {
-		    var particle = new THREE.Mesh( geometry, material ); 
-		    particle.name = context.key;
-                    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-		    scene.add( particle );
-		},
-		layout: function(node, width, height, cb) {
+	return function(node, width, height, cb) {
 		    range = ( ( width > height ) ? height : width ) * 10;
 		    renderer.setClearColor(0x111111, 1.0);
 		    renderer.setSize(width, height);
@@ -155,7 +143,21 @@ var IMDBSystem = (function(THREE){
 			document.getElementsByTagName('body')[0].appendChild( stats.domElement );
 		    }
 		    render();
-		    return relayout;
-		}
+		    return {
+			clear: function() {
+				if (scene.getObjectByName("particles")) {
+				    scene.remove(scene.getObjectByName("particles"));
+				}
+			},
+			add: function(id) {
+			    var particle = new THREE.Mesh( geometry, material ); 
+			    particle.name = context.key;
+			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
+			    scene.add( particle );
+			},
+			relayout: function() {
+				render();
+			}
+		    };
 	}
 }(window.THREE));
