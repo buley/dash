@@ -472,7 +472,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		  limit: 15,
 		  skip: 20000
 	       },
-               dash_promise = dashWorkerService.count.entries(ctx);
+               dash_promise = dashWorkerService.get.entries(ctx);
 	    console.log('dash promise', ctx, dash_promise);
             dash_promise.then( function(context) {
 		console.log('dash promise fulfilled', context);
