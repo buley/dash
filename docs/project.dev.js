@@ -401,7 +401,6 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
 		console.log('dash promise rejected', context);
             }, function(context) {
 		system.add(context.key);
-		console.log('dash promise notified', context);
             });
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
