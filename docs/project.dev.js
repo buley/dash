@@ -470,7 +470,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		  database: 'dash-demo',
 		  store: 'imdb',
 		  limit: 15,
-		  skip: 20000,
+		  advance: 20000,
 		  collect: true,
 		  reverse: true
 	       },
