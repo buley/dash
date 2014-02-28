@@ -365,7 +365,7 @@ dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $
 }]);
 
 
-dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSplashBroadcast) { 
+dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService', function(dashAppSplashBroadcast, dashWorkerService) { 
     return {
         scope: {},
         restrict: 'AE',
