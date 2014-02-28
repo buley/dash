@@ -372,7 +372,7 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSpla
         compile: function() {
             console.log('dashSplash setup');
             var el = document.createElement('div'),
-                layout/* = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
+                system = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
 		    dash.get.entry({
 			database: 'dash-demo',
 			store: 'imdb',
@@ -385,11 +385,12 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSpla
 		    }, function(context) {
 			console.log('missing entry', context);
 		    });
-		})*/;
+		}),
+		layout = system.layout;
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 element[0].appendChild(el);
-                //layout();
+                layout();
             };
         }
     };

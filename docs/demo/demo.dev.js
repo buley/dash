@@ -89,44 +89,7 @@ var IMDBSystem = (function(THREE){
 	    geometry = new THREE.SphereGeometry(3, 32, 32), 
             material = new THREE.MeshLambertMaterial({color: new THREE.Color( 0xE5E5E5 ), sizeAttenuation: true }),
             mouse = { x: 0, y: 0 },
-            layout = function() {
-                if (true === ran_once) {
-                    return;
-                }
-                ran_once = true;
-                dash.get.entries({
-                    database: 'dash-demo',
-                    store: 'imdb',
-                    key: null,
-                    store_key_path: null,
-                    auto_increment: true
-                })
-                (function(context) {
-		    console.log('system',system,scene);
-		    hasStarted = true;
-		    /*var x = 0,
-			entries = context.entries,
-			xlen = context.entries.length,
-			xitem;
-		    for ( x = 0; x < xlen; x += 1 ) {
-		        xitem = context.entries[ x ];
-                    }*/
-                }, function(context) {
-                    console.log('dash error',context);
-                }, function(context) {
-		    var particle = new THREE.Mesh( geometry, material ); 
-		    particle.name = context.key;
-                    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-		    scene.add( particle );
-                });
-            },
             /* When properties change we'll need a re-layout */
-            relayout = function () {
-                if (scene.getObjectByName("particles")) {
-                    scene.remove(scene.getObjectByName("particles"));
-                }
-                layout();
-            },
             onMouseMove = function(event) {
 		hasStarted = true;
                 //event.preventDefault();
@@ -144,42 +107,55 @@ var IMDBSystem = (function(THREE){
         document.addEventListener( 'mousemove', onMouseMove, false );
         document.addEventListener( 'resize', onResize, false );
 
-        return function(node, width, height, cb) {
-            range = ( ( width > height ) ? height : width ) * 10;
-            renderer.setClearColor(0x111111, 1.0);
-            renderer.setSize(width, height);
-            node_width = width;
-            node_height = height;
-            on_data = cb;
-            camera = new THREE.PerspectiveCamera(45, width / height, 1, 500000);
-	    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
-	    camera.position.set( 1, width/height, width/height );
-	    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
-	    controls = new THREE.TrackballControls( camera );
-	    controls.rotateSpeed = 1.0;
-	    controls.zoomSpeed = 1.2;
-	    controls.panSpeed = 0.8;
-	    controls.noZoom = false;
-	    controls.noPan = false;
-	    controls.staticMoving = true;
-	    controls.dynamicDampingFactor = 0.3;
-	    controls.keys = [ 65, 83, 68 ];
-	    controls.addEventListener( 'change', relayout );
-	    /*light = new THREE.DirectionalLight( 0x000000 );
-	    light.position.set( 1, 1, 1 );
-	    scene.add( light );*/
+        return {
+		clear: function() {
+			if (scene.getObjectByName("particles")) {
+			    scene.remove(scene.getObjectByName("particles"));
+			}
+		},
+		add: function(id) {
+		    var particle = new THREE.Mesh( geometry, material ); 
+		    particle.name = context.key;
+                    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
+		    scene.add( particle );
+		},
+		layout: function(node, width, height, cb) {
+		    range = ( ( width > height ) ? height : width ) * 10;
+		    renderer.setClearColor(0x111111, 1.0);
+		    renderer.setSize(width, height);
+		    node_width = width;
+		    node_height = height;
+		    on_data = cb;
+		    camera = new THREE.PerspectiveCamera(45, width / height, 1, 500000);
+		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
+		    camera.position.set( 1, width/height, width/height );
+		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
+		    controls = new THREE.TrackballControls( camera );
+		    controls.rotateSpeed = 1.0;
+		    controls.zoomSpeed = 1.2;
+		    controls.panSpeed = 0.8;
+		    controls.noZoom = false;
+		    controls.noPan = false;
+		    controls.staticMoving = true;
+		    controls.dynamicDampingFactor = 0.3;
+		    controls.keys = [ 65, 83, 68 ];
+		    //controls.addEventListener( 'change', relayout );
+		    /*light = new THREE.DirectionalLight( 0x000000 );
+		    light.position.set( 1, 1, 1 );
+		    scene.add( light );*/
 
-	    /*light = new THREE.DirectionalLight( 0x111111 );
-	    light.position.set( -1, -1, -1 );
-	    scene.add( light );*/
+		    /*light = new THREE.DirectionalLight( 0x111111 );
+		    light.position.set( -1, -1, -1 );
+		    scene.add( light );*/
 
-	    light = new THREE.AmbientLight( 0x333333 );
-	    scene.add( light );
-            node.appendChild(renderer.domElement);
-	    if (stats) {
-            	document.getElementsByTagName('body')[0].appendChild( stats.domElement );
-            }
-            render();
-            return relayout;
-        };
+		    light = new THREE.AmbientLight( 0x333333 );
+		    scene.add( light );
+		    node.appendChild(renderer.domElement);
+		    if (stats) {
+			document.getElementsByTagName('body')[0].appendChild( stats.domElement );
+		    }
+		    render();
+		    return relayout;
+		}
+	}
 }(window.THREE));
