@@ -371,7 +371,16 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSpla
         restrict: 'AE',
         compile: function() {
             console.log('dashSplash setup');
-            var el = document.createElement('div'),
+	    var ctx = {
+		  database: 'dash-demo',
+		  store: 'imdb',
+		  limit: 15,
+		  advance: 20000,
+		  collect: true,
+		  reverse: true
+	        },
+                dash_promise = dashWorkerService.get.entries(ctx),
+	     	el = document.createElement('div'),
                 system = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
 		    dash.get.entry({
 			database: 'dash-demo',
@@ -387,6 +396,15 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', function(dashAppSpla
 		    });
 		}),
 		layout = system.layout;
+	    console.log('dash promise', ctx, dash_promise);
+            dash_promise.then( function(context) {
+		console.log('dash promise fulfilled', context);
+            }, function(context) {
+		console.log('dash promise rejected', context);
+            }, function(context) {
+		console.log('dash promise notified', context);
+		system.add(context.key);
+            });
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 element[0].appendChild(el);
@@ -467,23 +485,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
             console.log('dashSplash overlay setup', dashWorkerService);
-	    var ctx = {
-		  database: 'dash-demo',
-		  store: 'imdb',
-		  limit: 15,
-		  advance: 20000,
-		  collect: true,
-		  reverse: true
-	       },
-               dash_promise = dashWorkerService.get.entries(ctx);
-	    console.log('dash promise', ctx, dash_promise);
-            dash_promise.then( function(context) {
-		console.log('dash promise fulfilled', context);
-            }, function(context) {
-		console.log('dash promise rejected', context);
-            }, function(context) {
-		console.log('dash promise notified', context);
-            });
             return function link(scope, element, attrs) {
 		scope.data = {
 			se: '',
