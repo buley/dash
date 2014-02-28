@@ -407,7 +407,6 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 element[0].appendChild(el);
-                layout();
             };
         }
     };
