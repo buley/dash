@@ -771,7 +771,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  database: 'dash-demo',
 				  store: 'imdb',
 				  index: 'sy',
-				  key: new Date('1/1/' + range).getTime()
+				  key: new Date('1/1/' + args.range).getTime()
 				},
 				dash_promise = dashWorkerService.get.entries(ctx);
 			    console.log('dash promise', ctx, dash_promise);
