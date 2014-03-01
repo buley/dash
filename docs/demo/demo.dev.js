@@ -33,6 +33,7 @@ var IMDBSystem = (function(THREE){
 			} else {
 			    INTERSECTED = null;
 			}
+			console.log(INTERSECTED);
 			if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
 			    INTERSECTED.start = new Date().getTime();
 				if (!!last_intersected) {
