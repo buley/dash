@@ -83,7 +83,8 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-splash-overlay #dash-splash-container canvas {
   position: absolute;
-  top: 35px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: inherit;
 }
