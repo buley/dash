@@ -103,7 +103,7 @@ var IMDBSystem = (function(THREE){
 
 	return function(node, width, height, cb) {
 		    range = ( ( width > height ) ? height : width ) * 10;
-		    renderer.setClearColor(0x555555, 1.0);
+		    renderer.setClearColor(0x111111, 1.0);
 		    renderer.setSize(width, height);
 		    node_width = width;
 		    node_height = height;
@@ -123,11 +123,11 @@ var IMDBSystem = (function(THREE){
 		    controls.dynamicDampingFactor = 0.3;
 		    controls.keys = [ 65, 83, 68 ];
 		    //controls.addEventListener( 'change', relayout );
-		    light = new THREE.DirectionalLight( 0xEEEEEE );
+		    light = new THREE.DirectionalLight( 0x333333 );
 		    light.position.set( 1, 1, 1 );
 		    scene.add( light );
 
-		    light = new THREE.DirectionalLight( 0xCCCCCC );
+		    light = new THREE.DirectionalLight( 0x555555 );
 		    light.position.set( -1, -1, -1 );
 		    scene.add( light );
 
