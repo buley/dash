@@ -769,7 +769,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				console.log("FINISHED",args);
 			    var ctx = {
 				  database: 'dash-demo',
-				  store: 'imdb'
+				  store: 'imdb',
 				  index: 'sy',
 				  key: new Date('1/1/' + range).getTime()
 				},
