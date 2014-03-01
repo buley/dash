@@ -133,6 +133,10 @@ var IMDBSystem = (function(THREE){
 
 		    light = new THREE.AmbientLight( 0xAAAAAA );
 		    scene.add( light );
+	            var bounding = new THREE.CubeGeometry( range, range, range ),
+			bounding_material = material = new THREE.MeshBasicMaterial( {color: 0x00ff00} ),
+			cube = new THREE.Mesh( geometry, material );
+		    scene.add(cube);
 		    node.appendChild(renderer.domElement);
 		    if (stats) {
 			document.getElementsByTagName('body')[0].appendChild( stats.domElement );
