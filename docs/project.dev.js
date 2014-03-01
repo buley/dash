@@ -725,6 +725,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    dash.add.entry({
 									database: 'dash-demo',
 									store: 'imdb',
+				  					index: 'season',
+									index_key_path: 'sy',
 									auto_increment: true,
 									store_key_path: 'id',
 									data: next
