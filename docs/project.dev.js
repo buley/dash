@@ -369,11 +369,7 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
         scope: {},
         restrict: 'AE',
         compile: function() {
-	    var el = document.createElement('div');
-            el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
-		scope.node = el;
-                element[0].appendChild(el);
             };
         }
     };
@@ -445,8 +441,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
         restrict: 'AE',
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
+	    var el = document.createElement('div');
+            el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
-                var system = IMDBSystem(scope.node, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
+                var system = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
 		    dash.get.entry({
 			database: 'dash-demo',
 			store: 'imdb',
@@ -460,6 +458,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    });
 		}),
 		layout = system.layout;
+
+                element[0].appendChild(el);
+
 		scope.data = {
 			se: '',
 			ep: ''
