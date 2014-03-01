@@ -22,8 +22,8 @@ var IMDBSystem = (function(THREE){
 		camera.updateMatrixWorld();
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
 		projector.unprojectVector( vector, camera );
-		var pointerDetectRay = projector.pickingRay(mouse2D.clone(), camera);
-		var intersects = pointerDetectRay.intersectObjects( scene.children );
+		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
@@ -39,7 +39,6 @@ var IMDBSystem = (function(THREE){
 			}
 		    last_intersected = INTERSECTED;
 		} else if (INTERSECTED) {
-			console.log('got one',INTERSECTED);
 			if (null === CHOSEN || INTERSECTED.id !== CHOSEN.id) {
 				if ((new Date().getTime() - INTERSECTED.start) > 100) {
 					if (!!last_chosen) {
@@ -63,6 +62,7 @@ var IMDBSystem = (function(THREE){
 				}
 			}
 		}
+		}
                 /* WebGL render */
                 renderer.render(scene, camera);
 
@@ -75,8 +75,6 @@ var IMDBSystem = (function(THREE){
             /* How the viewer sees it */
             camera,
             projector = new THREE.Projector(),
-	    raycaster = new THREE.Raycaster(),
-            mouse2D = new THREE.Vector3(0,0,0),
             /* WebGL vs. Canvas renderer */
             //renderer = new THREE.CanvasRenderer(),
             renderer = new THREE.WebGLRenderer(),
@@ -90,8 +88,8 @@ var IMDBSystem = (function(THREE){
             onMouseMove = function(event) {
 		hasStarted = true;
                 //event.preventDefault();
-                mouse2D.x = ( event.clientX / node_width ) * 2 - 1;
-                mouse2D.y = - ( event.clientY / node_height ) * 2 + 1;
+                mouse.x = ( event.clientX / node_width ) * 2 - 1;
+                mouse.y = - ( event.clientY / node_height ) * 2 + 1;
             },
             onResize = function(event) {
                 camera.aspect = node_width / node_height;
@@ -114,7 +112,6 @@ var IMDBSystem = (function(THREE){
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, 5000);
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 1, width/height, width/height );
-                    raycaster.ray.direction.set(0,-1,0);
  	      	    camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 		    controls = new THREE.TrackballControls( camera );
