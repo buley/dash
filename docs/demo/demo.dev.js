@@ -83,7 +83,7 @@ var IMDBSystem = (function(THREE){
             range,
 	    stats,
 	    geometry = new THREE.SphereGeometry(3, 32, 32), 
-            material = new THREE.MeshBasicMaterial({color: new THREE.Color( 0x111111 ), sizeAttenuation: true }),
+            material = new THREE.MeshBasicMaterial({wireframe: true, color: 'black', sizeAttenuation: true }),
             mouse = { x: 0, y: 0 },
             /* When properties change we'll need a re-layout */
             onMouseMove = function(event) {
