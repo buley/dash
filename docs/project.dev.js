@@ -772,6 +772,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    var ctx = {
 				  database: 'dash-demo',
 				  store: 'imdb',
+				  auto_increment: true,
+				  store_key_path: 'id',
 				  index: 'season',
 				  index_key_path: 'sy',
 				  key: new Date('1/1/' + args.range).getTime()
