@@ -464,7 +464,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			se: '',
 			ep: ''
 		};
-		scope.range = 2016;
+		scope.range = 2014;
 		scope.sort = 'from';
 		scope.stats = function() {
 			if ( scope.statsData ) {
