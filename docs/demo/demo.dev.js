@@ -129,10 +129,10 @@ var IMDBSystem = (function(THREE){
 
 		    /*light = new THREE.DirectionalLight( 0x111111 );
 		    light.position.set( -1, -1, -1 );
-		    scene.add( light );
-
-		    light = new THREE.AmbientLight( 0x333333 );
 		    scene.add( light );*/
+
+		    light = new THREE.AmbientLight( 0xFFFFFF );
+		    scene.add( light );
 		    node.appendChild(renderer.domElement);
 		    if (stats) {
 			document.getElementsByTagName('body')[0].appendChild( stats.domElement );
