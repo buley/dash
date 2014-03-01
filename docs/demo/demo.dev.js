@@ -9,7 +9,6 @@ var IMDBSystem = (function(THREE){
 	    INTERSECTED = null,
 	    CHOSEN = null,
             render = function() {
-		console.log('render');
                 var step = .05;
                 if(camera) {
                     camera.position.y += step;
@@ -146,9 +145,6 @@ var IMDBSystem = (function(THREE){
 		    render();
 		    return {
 			clear: function() {
-				if (scene.getObjectByName("particles")) {
-				    scene.remove(scene.getObjectByName("particles"));
-				}
 			},
 			add: function(id) {
 			    var particle = new THREE.Mesh( geometry, material ); 
@@ -156,7 +152,7 @@ var IMDBSystem = (function(THREE){
 			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 			    scene.add( particle );
 			},
-			relayout: function() {
+			layout: function() {
 				render();
 			}
 		    };
