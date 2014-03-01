@@ -784,7 +784,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
-				system.add(context.key);
+				//system.add(context.key);
 			    });
 
 			}, null, function(args) {
