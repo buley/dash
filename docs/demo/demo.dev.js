@@ -22,7 +22,7 @@ var IMDBSystem = (function(THREE){
 		camera.updateMatrixWorld();
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		projector.unprojectVector( vector, camera );
-		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+		raycaster.set( camera.position
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
@@ -66,6 +66,7 @@ var IMDBSystem = (function(THREE){
             },
             scene = new THREE.Scene(),
             camera,
+	    raycaster,
 	    controls,
             /* What the viewer sees */
             scene,
@@ -78,7 +79,7 @@ var IMDBSystem = (function(THREE){
             /* What we'll create: a particle system */
             range,
 	    stats,
-	    geometry = new THREE.SphereGeometry(16, 16, 16),
+	    geometry = new THREE.CubeGeometry(16, 16, 16),
             material = new THREE.MeshPhongMaterial({color: 'dark gray', sizeAttenuation: true }),
             mouse = { x: 0, y: 0 },
             /* When properties change we'll need a re-layout */
@@ -109,6 +110,7 @@ var IMDBSystem = (function(THREE){
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000000);
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 1, width/height, width/height );
+ 		    raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
  	      	    camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 		    controls = new THREE.TrackballControls( camera );
