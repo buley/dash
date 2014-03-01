@@ -372,6 +372,7 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
 	    var el = document.createElement('div');
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
+		scope.node = el;
                 element[0].appendChild(el);
             };
         }
@@ -391,8 +392,7 @@ dashApp.factory( 'dashAppSplashBroadcast', function() {
 			stack.push(cb);
 		}
 	};
-});
-
+});;
 dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $scope, $http ) {
     var start = 2013,
         stack = [],
@@ -446,7 +446,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
             return function link(scope, element, attrs) {
-                var system = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
+                var system = IMDBSystem(scope.node, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
 		    dash.get.entry({
 			database: 'dash-demo',
 			store: 'imdb',
