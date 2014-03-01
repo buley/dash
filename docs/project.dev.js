@@ -728,7 +728,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  					index: 'season',
 									index_key_path: 'sy',
 									auto_increment: true,
-									store_key_path: 'id',
+									store_key_path: null,
 									data: next
 								    })
 								    (function(context) {
