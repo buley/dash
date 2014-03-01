@@ -370,20 +370,6 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
         restrict: 'AE',
         compile: function() {
 	    var el = document.createElement('div'),
-                system = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
-		    dash.get.entry({
-			database: 'dash-demo',
-			store: 'imdb',
-			key: data,
-			store_key_path: 'id'
-		    })
-		    (function(context) {
-			dashAppSplashBroadcast.current(context.entry);
-		    }, function(context) {
-			console.log('missing entry', context);
-		    });
-		}),
-		layout = system.layout;
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 element[0].appendChild(el);
@@ -460,6 +446,20 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
             return function link(scope, element, attrs) {
+                var system = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
+		    dash.get.entry({
+			database: 'dash-demo',
+			store: 'imdb',
+			key: data,
+			store_key_path: 'id'
+		    })
+		    (function(context) {
+			dashAppSplashBroadcast.current(context.entry);
+		    }, function(context) {
+			console.log('missing entry', context);
+		    });
+		}),
+		layout = system.layout;
 		scope.data = {
 			se: '',
 			ep: ''
