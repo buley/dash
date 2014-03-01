@@ -9,10 +9,11 @@
 			error = false,
 			success = false,
 			notify = false,
-			ctx;	
+			ctx,
+			db_name = 'get-databases-db-' + new Date().getTime();
 		it( 'should get all databases, when available', function() {
 			//TODO: DB's not always available on init
-			dash.get.databases()
+			dash.get.databases({database: db_name})
 				(function(context) {
 					ctx = context;
 					isFinished = true;
@@ -41,9 +42,9 @@
 							expect(this.notify).toBe(false);
 						}
 					});
-					it("should return a DOMStringList when available", function() {
+					it("should return a Array when available", function() {
 						if (this.available) {
-							expect(this.context.databases instanceof DOMStringList || null === this.context.databases).toBe(true);
+							expect(this.context.databases instanceof Array || null === this.context.databases).toBe(true);
 						}
 					});
 					it("should be an error when unavailable", function() {
