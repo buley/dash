@@ -19,49 +19,46 @@ var IMDBSystem = (function(THREE){
                 requestAnimationFrame(render);
                 stats.update();
 		controls.update();
-		if (hasStarted) {
-			camera.updateMatrixWorld();
-			var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
-			projector.unprojectVector( vector, camera );
-			var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-			var intersects = raycaster.intersectObjects( scene.children );
-			if ( intersects.length > 0 ) {
-			    if ( INTERSECTED != intersects[ 0 ].object ) {
-				//if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
-				INTERSECTED = intersects[ 0 ].object;
-			    }
-			} else {
-			    INTERSECTED = null;
+		camera.updateMatrixWorld();
+		var vector = new THREE.Vector3( mouse.x, mouse.y, 0.5 );
+		projector.unprojectVector( vector, camera );
+		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+		var intersects = raycaster.intersectObjects( scene.children );
+		if ( intersects.length > 0 ) {
+		    if ( INTERSECTED != intersects[ 0 ].object ) {
+			//if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
+			INTERSECTED = intersects[ 0 ].object;
+		    }
+		} else {
+		    INTERSECTED = null;
+		}
+		if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
+		    INTERSECTED.start = new Date().getTime();
+			if (!!last_intersected) {
+			    delete last_intersected.start;
 			}
-			console.log(INTERSECTED);
-			if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
-			    INTERSECTED.start = new Date().getTime();
-				if (!!last_intersected) {
-				    delete last_intersected.start;
-				}
-			    last_intersected = INTERSECTED;
-			} else if (INTERSECTED) {
-				if (null === CHOSEN || INTERSECTED.id !== CHOSEN.id) {
-					if ((new Date().getTime() - INTERSECTED.start) > 100) {
-						if (!!last_chosen) {
-							if (last_chosen.id === INTERSECTED.id) {
-								return;
-							}
-						    //last_chosen.material.color = new THREE.Color( 0x333333 );
-						    last_chosen.geometry.scale = 1;
-						    //last_chosen.material.needsUpdate = true;
-
+		    last_intersected = INTERSECTED;
+		} else if (INTERSECTED) {
+			if (null === CHOSEN || INTERSECTED.id !== CHOSEN.id) {
+				if ((new Date().getTime() - INTERSECTED.start) > 100) {
+					if (!!last_chosen) {
+						if (last_chosen.id === INTERSECTED.id) {
+							return;
 						}
-						last_chosen = CHOSEN;
-					    CHOSEN = INTERSECTED;
-					    console.log("CHOSEN", last_chosen, CHOSEN);
-					    if ( 'function' === typeof on_data ) {
-						on_data.apply(on_data, [ CHOSEN.name ] );
-					    }
-					    INTERSECTED.scale = 2;
-					    //INTERSECTED.material.color = new THREE.Color( 0x336699 );
-					    //INTERSECTED.material.needsUpdate = true;
+					    //last_chosen.material.color = new THREE.Color( 0x333333 );
+					    last_chosen.geometry.scale = 1;
+					    //last_chosen.material.needsUpdate = true;
+
 					}
+					last_chosen = CHOSEN;
+				    CHOSEN = INTERSECTED;
+				    console.log("CHOSEN", last_chosen, CHOSEN);
+				    if ( 'function' === typeof on_data ) {
+					on_data.apply(on_data, [ CHOSEN.name ] );
+				    }
+				    INTERSECTED.scale = 2;
+				    //INTERSECTED.material.color = new THREE.Color( 0x336699 );
+				    //INTERSECTED.material.needsUpdate = true;
 				}
 			}
 		}
