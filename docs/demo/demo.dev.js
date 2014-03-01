@@ -151,7 +151,12 @@ var IMDBSystem = (function(THREE){
 			},
 			layout: function() {
 
-			}
+			},
+			camera: function(x,y,z) {
+				camera.position.x = x || camera.position.x;
+				camera.position.x = y || camera.position.y;
+				camera.position.x = z || camera.position.z;
+			},
 		    };
 	}
 }(window.THREE));
