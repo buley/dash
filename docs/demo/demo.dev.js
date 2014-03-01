@@ -135,6 +135,12 @@ var IMDBSystem = (function(THREE){
 			bounding_material = new THREE.MeshBasicMaterial( {color: 0x333333, wireframe: true, transparent: true, opacity: .1 } ),
 			cube = new THREE.Mesh( bounding, bounding_material );
 		    scene.add(cube);
+	            var bounding = new THREE.CubeGeometry( range, range, range, 1, 1, 1 ),
+			bounding_material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF, wireframe: true, transparent: true, opacity: .7 } ),
+			cube = new THREE.Mesh( bounding, bounding_material );
+		    scene.add(cube);
+
+
 		    node.appendChild(renderer.domElement);
 		    if (stats) {
 			document.getElementsByTagName('body')[0].appendChild( stats.domElement );
