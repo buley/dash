@@ -123,15 +123,15 @@ var IMDBSystem = (function(THREE){
 		    controls.dynamicDampingFactor = 0.3;
 		    controls.keys = [ 65, 83, 68 ];
 		    //controls.addEventListener( 'change', relayout );
-		    light = new THREE.DirectionalLight( 0xFFFFFF );
+		    light = new THREE.DirectionalLight( 0xEEEEEE );
 		    light.position.set( 1, 1, 1 );
 		    scene.add( light );
 
-		    light = new THREE.DirectionalLight( 0xFFFFFF );
+		    light = new THREE.DirectionalLight( 0xCCCCCC );
 		    light.position.set( -1, -1, -1 );
 		    scene.add( light );
 
-		    light = new THREE.AmbientLight( 0xCCCCCC );
+		    light = new THREE.AmbientLight( 0xAAAAAA );
 		    scene.add( light );
 		    node.appendChild(renderer.domElement);
 		    if (stats) {
