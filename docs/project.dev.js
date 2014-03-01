@@ -711,8 +711,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								processNext = function(context) {
 								    if ( 0 === stacklist.length ) {
 									deferred2.resolve({ range: attr, count: stack_count });
-									scope.downloaded[ attr ] = stack_count;
-									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
+									//scope.downloaded[ attr ] = stack_count;
+									//localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 								    }
 								    if(!in_progress && stacklist.length > 0) {
 									in_progress = true;
@@ -729,7 +729,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 									index_key_path: 'sy',
 									auto_increment: true,
 									store_key_path: null,
-									data: next
+									data: next,
+									throttle: 100
 								    })
 								    (function(context) {
 									in_progress = false;
@@ -775,6 +776,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  store_key_path: 'id',
 				  index: 'season',
 				  index_key_path: 'sy',
+				  limit: 100,
 				  key: new Date('1/1/' + args.range).getTime()
 				},
 				dash_promise = dashWorkerService.get.entries(ctx);
