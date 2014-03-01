@@ -39,6 +39,7 @@ var IMDBSystem = (function(THREE){
 			}
 		    last_intersected = INTERSECTED;
 		} else if (INTERSECTED) {
+			console.log('got one',INTERSECTED);
 			if (null === CHOSEN || INTERSECTED.id !== CHOSEN.id) {
 				if ((new Date().getTime() - INTERSECTED.start) > 100) {
 					if (!!last_chosen) {
