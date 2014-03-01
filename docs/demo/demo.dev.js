@@ -29,10 +29,8 @@ var IMDBSystem = (function(THREE){
 			    if ( INTERSECTED != intersects[ 0 ].object ) {
 				//if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
 				INTERSECTED = intersects[ 0 ].object;
-				INTERSECTED.material.color = 0x660000;
 			    }
 			} else {
-			    if ( INTERSECTED ) INTERSECTED.material.color = 0x333333;
 			    INTERSECTED = null;
 			}
 			if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
@@ -49,6 +47,7 @@ var IMDBSystem = (function(THREE){
 								return;
 							}
 						    //last_chosen.material.color = new THREE.Color( 0x333333 );
+						    last_chosen.geometry.scale = 1;
 						    //last_chosen.material.needsUpdate = true;
 
 						}
@@ -58,6 +57,7 @@ var IMDBSystem = (function(THREE){
 					    if ( 'function' === typeof on_data ) {
 						on_data.apply(on_data, [ CHOSEN.name ] );
 					    }
+					    INTERSECTED.scale = 2;
 					    //INTERSECTED.material.color = new THREE.Color( 0x336699 );
 					    //INTERSECTED.material.needsUpdate = true;
 					}
@@ -129,12 +129,12 @@ var IMDBSystem = (function(THREE){
 		    light.position.set( 1, 1, 1 );
 		    scene.add( light );*/
 
-		    light = new THREE.DirectionalLight( 0x111111 );
+		    /*light = new THREE.DirectionalLight( 0x111111 );
 		    light.position.set( -1, -1, -1 );
 		    scene.add( light );
 
 		    light = new THREE.AmbientLight( 0x333333 );
-		    scene.add( light );
+		    scene.add( light );*/
 		    node.appendChild(renderer.domElement);
 		    if (stats) {
 			document.getElementsByTagName('body')[0].appendChild( stats.domElement );
