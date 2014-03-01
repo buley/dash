@@ -4,7 +4,6 @@ body {
 }
 body > div {
   height: 100%;
-  margin-top: -45px;
 }
 .top-bar .name h1 {
   font-size: 32px !important;
