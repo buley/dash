@@ -132,9 +132,9 @@ var IMDBSystem = (function(THREE){
 		    light.position.set( 1, 1, 1 );
 		    scene.add( light );*/
 
-		    /*light = new THREE.DirectionalLight( 0x111111 );
+		    light = new THREE.DirectionalLight( 0x111111 );
 		    light.position.set( -1, -1, -1 );
-		    scene.add( light );*/
+		    scene.add( light );
 
 		    light = new THREE.AmbientLight( 0x333333 );
 		    scene.add( light );
@@ -147,6 +147,7 @@ var IMDBSystem = (function(THREE){
 			clear: function() {
 			},
 			add: function(id) {
+			    console.log('added',id);
 			    var particle = new THREE.Mesh( geometry, material ); 
 			    particle.name = id;
 			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
