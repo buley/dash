@@ -734,7 +734,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    (function(context) {
 									in_progress = false;
 									processNext(context);
-								    	console.log('next!',stack_count, context.key);
 								    }, function(context) {
 									in_progress = false;
 									processNext(context);
@@ -789,7 +788,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    });
 
 			}, null, function(args) {
-				console.log('notify',args);
+				//console.log('notify',args);
 			} );
 			deferred.resolve();
 		};
