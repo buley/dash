@@ -66,7 +66,6 @@ var IMDBSystem = (function(THREE){
 				}
 			}
 		}
-	      	camera.lookAt(scene.position);
                 /* WebGL render */
                 renderer.render(scene, camera);
 
@@ -83,7 +82,6 @@ var IMDBSystem = (function(THREE){
             //renderer = new THREE.CanvasRenderer(),
             renderer = new THREE.WebGLRenderer(),
             /* What we'll create: a particle system */
-            system,
             range,
 	    stats,
 	    geometry = new THREE.SphereGeometry(3, 32, 32), 
@@ -117,6 +115,7 @@ var IMDBSystem = (function(THREE){
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, 500);
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 1, width/height, width/height );
+ 	      	    camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 		    controls = new THREE.TrackballControls( camera );
 		    controls.rotateSpeed = 1.0;
@@ -152,9 +151,10 @@ var IMDBSystem = (function(THREE){
 			    particle.name = id;
 			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 			    scene.add( particle );
+	                    console.log('added',particle,scene);
 			},
 			layout: function() {
-				render();
+
 			}
 		    };
 	}
