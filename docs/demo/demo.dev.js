@@ -9,12 +9,12 @@ var IMDBSystem = (function(THREE){
 	    INTERSECTED = null,
 	    CHOSEN = null,
             render = function() {
-                /*var step = .05;
+                var step = .05;
                 if(camera) {
                     camera.position.y += step;
                     camera.position.x += step;
                     camera.position.z += step;
-                }*/
+                }
                 /* 60fps goodness */
                 requestAnimationFrame(render);
                 stats.update();
