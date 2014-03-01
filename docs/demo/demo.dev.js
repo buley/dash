@@ -62,7 +62,6 @@ var IMDBSystem = (function(THREE){
 				}
 			}
 		}
-		}
                 /* WebGL render */
                 renderer.render(scene, camera);
 
