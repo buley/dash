@@ -369,12 +369,7 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
         scope: {},
         restrict: 'AE',
         compile: function() {
-	    var ctx = {
-		  database: 'dash-demo',
-		  store: 'imdb'
-	        },
-                dash_promise = dashWorkerService.get.entries(ctx),
-	     	el = document.createElement('div'),
+	    var el = document.createElement('div'),
                 system = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
 		    dash.get.entry({
 			database: 'dash-demo',
@@ -389,14 +384,6 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
 		    });
 		}),
 		layout = system.layout;
-	    console.log('dash promise', ctx, dash_promise);
-            dash_promise.then( function(context) {
-		console.log('dash promise fulfilled', context);
-            }, function(context) {
-		console.log('dash promise rejected', context);
-            }, function(context) {
-		system.add(context.key);
-            });
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 element[0].appendChild(el);
@@ -780,11 +767,26 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 			promise.then( function(args) {
 				console.log("FINISHED",args);
+			    var ctx = {
+				  database: 'dash-demo',
+				  store: 'imdb'
+				  index: 'sy',
+				  key: new Date('1/1/' + range).getTime()
+				},
+				dash_promise = dashWorkerService.get.entries(ctx);
+			    console.log('dash promise', ctx, dash_promise);
+			    dash_promise.then( function(context) {
+				console.log('dash promise fulfilled', context);
+			    }, function(context) {
+				console.log('dash promise rejected', context);
+			    }, function(context) {
+				system.add(context.key);
+			    });
+
 			}, null, function(args) {
 				console.log('notify',args);
 			} );
 			deferred.resolve();
-
 		};
 		dashAppSplashBroadcast.subscribe(function(data) {
 			scope.$apply( function() {
