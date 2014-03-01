@@ -86,8 +86,11 @@ var IMDBSystem = (function(THREE){
             system,
             range,
 	    stats,
-	    geometry = new THREE.SphereGeometry(3, 32, 32), 
-            material = new THREE.MeshLambertMaterial({color: new THREE.Color( 0xFFFFFF ), sizeAttenuation: true }),
+	    //geometry = new THREE.SphereGeometry(3, 32, 32), 
+	    geometry = new THREE.Geometry(),
+            //material = new THREE.MeshLambertMaterial({color: new THREE.Color( 0xFFFFFF ), sizeAttenuation: true }),
+            material = new THREE.ParticleBasicMaterial({color: new THREE.Color( 0xFFFFFF ), sizeAttenuation: true }),
+		
             mouse = { x: 0, y: 0 },
             /* When properties change we'll need a re-layout */
             onMouseMove = function(event) {
@@ -135,7 +138,9 @@ var IMDBSystem = (function(THREE){
 		    /*light = new THREE.DirectionalLight( 0x111111 );
 		    light.position.set( -1, -1, -1 );
 		    scene.add( light );*/
-
+                    system = new THREE.ParticleSystem(geometry, material);
+		    system.sortParticles = true;
+		    scene.add(system);
 		    light = new THREE.AmbientLight( 0x333333 );
 		    scene.add( light );
 		    node.appendChild(renderer.domElement);
@@ -152,8 +157,10 @@ var IMDBSystem = (function(THREE){
 			add: function(id) {
 			    var particle = new THREE.Mesh( geometry, material ); 
 			    particle.name = id;
-			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, 1);
-			    scene.add( particle );
+			    //particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, 1);
+			    //scene.add( particle );
+			    geometry.vertices.push( new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, 1) );
+
 			},
 			relayout: function() {
 				render();
