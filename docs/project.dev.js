@@ -369,7 +369,7 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
         scope: {},
         restrict: 'AE',
         compile: function() {
-	    var el = document.createElement('div'),
+	    var el = document.createElement('div');
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 element[0].appendChild(el);
