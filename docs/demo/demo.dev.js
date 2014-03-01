@@ -103,7 +103,7 @@ var IMDBSystem = (function(THREE){
 
 	return function(node, width, height, cb) {
 		    range = ( ( width > height ) ? height : width ) * 10;
-		    renderer.setClearColor(0x1B202B, 1.0);
+		    renderer.setClearColor(0x555555, 1.0);
 		    renderer.setSize(width, height);
 		    node_width = width;
 		    node_height = height;
