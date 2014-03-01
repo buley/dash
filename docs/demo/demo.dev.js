@@ -9,6 +9,7 @@ var IMDBSystem = (function(THREE){
 	    INTERSECTED = null,
 	    CHOSEN = null,
             render = function() {
+		console.log('render');
                 var step = .05;
                 if(camera) {
                     camera.position.y += step;
@@ -152,7 +153,6 @@ var IMDBSystem = (function(THREE){
 			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 			    scene.add( particle );
 	                    console.log('added',particle,scene);
-                            render();
 			},
 			layout: function() {
 
