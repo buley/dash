@@ -153,8 +153,8 @@ var IMDBSystem = (function(THREE){
 
 			},
 			camera: function(x,y,z) {
-				camera.position.x = x || camera.position.x;
-				camera.position.y = y || camera.position.y;
+				//camera.position.x = x || camera.position.x;
+				//camera.position.y = y || camera.position.y;
 				camera.position.z = z || camera.position.z;
 			},
 		    };
