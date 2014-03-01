@@ -777,7 +777,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  store_key_path: 'id',
 				  index: 'season',
 				  index_key_path: 'sy',
-				  limit: 100000,
 				  key: new Date('1/1/' + args.range).getTime()
 				},
 				dash_promise = dashWorkerService.get.entries(ctx);
