@@ -117,8 +117,6 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-splash-overlay #dash-splash-container canvas {
   position: absolute;
-  padding-top: 45px;
-  box-sizing: border-box;
   top: 0;
   left: 0;
   width: 100%;
