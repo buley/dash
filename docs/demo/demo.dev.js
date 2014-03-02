@@ -31,7 +31,7 @@ var IMDBSystem = (function(THREE){
 	    INTERSECTED = null,
 	    CHOSEN = null,
             render = function() {
-                var step = 10;
+                var step = 100;
                 if(camera) {
                     camera.position.y += step;
                     camera.position.x += step;
