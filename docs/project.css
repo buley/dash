@@ -125,6 +125,7 @@ ul.dash-document-navigation ul ul li {
   height: inherit;
 }
 #dash-demo-overlay-marketing h2 {
+  position: relative;
   float: right;
   padding: 20px 20px 0px 20px;
   margin: 0;
