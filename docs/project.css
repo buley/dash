@@ -81,7 +81,7 @@ ul.dash-document-navigation ul ul li {
   padding: 20px;
   margin: 10px 0 10px 0;
   position: absolute;
-  top: 0px;
+  top: 50px;
   right: 0px;
   z-index: 3;
 }
