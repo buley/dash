@@ -105,13 +105,13 @@ var IMDBSystem = (function(THREE){
 	    stats,
 	    geometry = new THREE.PlaneGeometry(24, 24),
             //material = new THREE.MeshBasicMaterial({color: 'dark gray', sizeAttenuation: true, program: canvasStarProgram }),
-	    material = new THREE.MeshBasicMaterial({
+	    material = new THREE.MeshNormalMaterial({
                 size: 24,
                 color: 0xFFFFFF,
                 transparent: false,
                 opacity: .6,
                 sizeAttenuation: true,
-		side: THREE.FrontSide,
+		side: THREE.DoubleSide,
                 map: (function () {
                     var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
                         var x;
