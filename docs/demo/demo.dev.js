@@ -41,7 +41,7 @@ var IMDBSystem = (function(THREE){
 		    last_intersected = INTERSECTED;
 		} else if (INTERSECTED) {
 			if (null === CHOSEN || INTERSECTED.id !== CHOSEN.id) {
-				if ((new Date().getTime() - INTERSECTED.start) > 100) {
+				if ((new Date().getTime() - INTERSECTED.start) > 20) {
 					if (!!last_chosen) {
 						if (last_chosen.id === INTERSECTED.id) {
 							return;
@@ -110,7 +110,7 @@ var IMDBSystem = (function(THREE){
 		    on_data = cb;
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 10);
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
-		    camera.position.set( 21943, 13139, 8720 );
+		    camera.position.set( 21943, 13139, 0 );
  	      	    camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 		    controls = new THREE.TrackballControls( camera );
