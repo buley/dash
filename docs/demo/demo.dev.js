@@ -237,11 +237,13 @@ var IMDBSystem = (function(THREE){
 				camera.position.y = y || camera.position.y;
 				camera.position.z = z || camera.position.z;
 			},
-			cameraMod: function(type, val, max) {
+			cameraMod: function(type, val, max, min) {
 				camera.position[ type ] += val;
 				if ( camera.position[ type ] > max ) {
 					camera.position[ type ] = max;
-				
+				}
+				if ( camera.position[ type ] < min ) {
+					camera.position[ type ] = min;
 				}
 			},
 			zoom: function(val) {
