@@ -697,7 +697,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 			var deferred = $q.defer(),
 				promise = deferred.promise,
-				ndeferred;
+				ndeferred, count = 0;
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
 				if ( true === values[ x ][ 1 ] ) {
@@ -770,6 +770,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 			promise.then( function(args) {
 				console.log("FINISHED",args);
+		
 			    var ctx = {
 				  database: 'dash-demo',
 				  store: 'imdb',
@@ -789,6 +790,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    }, function(context) {
 				system.add(context.entry);
 				system.cameraMod( 'x', .2, 5000 );
+				system.zoom(count++ );
 			    });
 
 			}, null, function(args) {
