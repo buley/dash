@@ -106,9 +106,9 @@ var IMDBSystem = (function(THREE){
 	    geometry = new THREE.PlaneGeometry(24, 24),
             //material = new THREE.MeshBasicMaterial({color: 'dark gray', sizeAttenuation: true, program: canvasStarProgram }),
 	    material = new THREE.MeshBasicMaterial({
-                size: 8,
+                size: 24,
                 color: 0xFFFFFF,
-                transparent: true,
+                transparent: false,
 		doubleSided: true,
                 opacity: .6,
                 sizeAttenuation: true,
