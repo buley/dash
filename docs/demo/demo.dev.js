@@ -2,6 +2,28 @@ var IMDBSystem = (function(THREE){
         var last_intersected,
 	    last_chosen,
 	    on_data,
+	    canvasStarProgram = function(ctx) {
+                var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
+                ctx.save();
+                ctx.beginPath();
+                ctx.strokeStyle = '#ffffff';
+                //ctx.translate(center_x, center_y);
+                ctx.moveTo(0, (0 - radius));
+                //points = Math.floor( Math.random() * 100 ) % 15;
+                // super-clever algo via http://programmingthomas.wordpress.com/2012/05/16/drawing-stars-with-html5-canvas/ 
+                // m = "fraction of radius for inset" 
+                for ( x = 0; x < points; x += 1) {
+                    ctx.rotate(Math.PI / points);
+                    ctx.lineTo(0, (0 - (radius * m)));
+                    ctx.rotate(Math.PI / points);
+                    ctx.lineTo(0, 0 - radius);
+                }
+                ctx.fillStyle = 'transparent';
+                ctx.fill();
+                ctx.stroke();
+                ctx.restore();
+                return ctx;
+            },
             ran_once = false,
 	    hasStarted = false,
 	    node_width = null,
@@ -82,7 +104,7 @@ var IMDBSystem = (function(THREE){
             range,
 	    stats,
 	    geometry = new THREE.SphereGeometry(16, 24, 24),
-            material = new THREE.MeshLambertMaterial({color: 'dark gray', sizeAttenuation: true }),
+            material = new THREE.MeshLambertMaterial({color: 'dark gray', sizeAttenuation: true, program: canvasStarProgram }),
             mouse = { x: 0, y: 0 },
             /* When properties change we'll need a re-layout */
             onMouseMove = function(event) {
