@@ -108,8 +108,8 @@ var IMDBSystem = (function(THREE){
 	    material = new THREE.MeshBasicMaterial({
                 size: 24,
                 color: 0xFFFFFF,
-                transparent: false,
-                opacity: .6,
+                transparent: true,
+                opacity: 1,
                 sizeAttenuation: true,
 		side: THREE.DoubleSide,
                 map: (function () {
