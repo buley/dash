@@ -107,6 +107,7 @@ var IMDBSystem = (function(THREE){
             //material = new THREE.MeshBasicMaterial({color: 'dark gray', sizeAttenuation: true, program: canvasStarProgram }),
 	    material = new THREE.MeshBasicMaterial({
                 size: 128,
+		overdraw: true,
                 color: 0xFFFFFF,
                 transparent: true,
                 opacity: 1,
@@ -242,6 +243,9 @@ var IMDBSystem = (function(THREE){
 					camera.position[ type ] = max;
 				
 				}
+			},
+			zoomMod: function(val) {
+				camera.zoom = val;
 			},
 		    };
 	}
