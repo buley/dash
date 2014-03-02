@@ -109,10 +109,9 @@ var IMDBSystem = (function(THREE){
                 size: 24,
                 color: 0xFFFFFF,
                 transparent: false,
-		doubleSided: true,
                 opacity: .6,
                 sizeAttenuation: true,
-		side: THREE.DoubleSide,
+		side: THREE.FrontSide,
                 map: (function () {
                     var texture = new THREE.Texture( (function(height, width, center_x, center_y, radius, points, m, canvas, ctx ) {
                         var x;
