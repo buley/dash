@@ -25,6 +25,7 @@ var IMDBSystem = (function(THREE){
  		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
+		    console.log('count',intersects.length);
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
 			INTERSECTED = intersects[ 0 ].object;
