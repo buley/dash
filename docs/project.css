@@ -115,14 +115,18 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-splash-overlay #dash-splash-container {
   width: 100%;
+  position: aboslute;
+  top: 0;
+  bottom: 0;
   height: 100%;
 }
 #dash-splash-overlay #dash-splash-container canvas {
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: inherit;
+  height: 100%;
 }
 #dash-demo-overlay-marketing h2 {
   position: relative;
