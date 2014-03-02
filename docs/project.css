@@ -90,6 +90,12 @@ ul.dash-document-navigation ul ul li {
   bottom: 0px;
   z-index: 3;
 }
+#dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h1 {
+  left: 0px;
+}
+#dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h2 {
+  left: 0px;
+}
 #dash-splash-overlay #dash-splash-container {
   width: 100%;
   height: 100%;
