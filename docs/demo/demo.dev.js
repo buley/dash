@@ -107,7 +107,8 @@ var IMDBSystem = (function(THREE){
 		    node_width = width;
 		    node_height = height;
 		    on_data = cb;
-		    camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
+		    //camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
+		    camera = new THREE.Camera(45, width / height, 1, 1000);
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 1, width/3, 100000 );
  	      	    camera.lookAt(scene.position);
