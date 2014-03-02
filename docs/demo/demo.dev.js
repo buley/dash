@@ -41,7 +41,6 @@ var IMDBSystem = (function(THREE){
                     ctx.lineTo(0, 0 - radius);
                 }
                 ctx.fillStyle = '#00ff00';
-transparent';
                 ctx.fill();
                 ctx.stroke();
                 ctx.restore();
