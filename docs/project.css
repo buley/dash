@@ -3,7 +3,7 @@ body {
   width: 100%;
 }
 .top-bar {
-  z-index: 1;
+  z-index: 3;
 }
 .top-bar .name h1 {
   font-size: 32px !important;
