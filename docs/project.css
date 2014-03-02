@@ -119,10 +119,10 @@ ul.dash-document-navigation ul ul li {
   top: 0;
   bottom: 0;
   height: 100%;
-  z-index: 4;
+  z-index: 1;
 }
 #dash-splash-overlay #dash-splash-container canvas {
-  z-index: 5;
+  z-index: 2;
   position: absolute;
   top: 0;
   bottom: 0;
