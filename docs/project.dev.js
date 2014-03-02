@@ -789,7 +789,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				console.log('dash promise rejected', context);
 			    }, function(context) {
 				system.add(context.entry);
-				system.cameraMod( 'z', -1, 10000, 0000 );
+				system.cameraMod( 'z', -1, 10000, 500 );
 				//system.cameraMod( 'z', 1, 10000, 0 );
 			    });
 
