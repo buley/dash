@@ -223,6 +223,7 @@ var IMDBSystem = (function(THREE){
 			    var particle = new THREE.Mesh( geometry, material ); 
 			    particle.name = context.id;
 			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
+		            particle.rotation.z = Math.random();
 			    scene.add( particle );
 			},
 			layout: function() {
