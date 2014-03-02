@@ -104,7 +104,7 @@ var IMDBSystem = (function(THREE){
             range,
 	    stats,
 	    geometry = new THREE.SphereGeometry(16, 24, 24),
-            material = new THREE.MeshLambertMaterial({color: 'dark gray', sizeAttenuation: true, program: canvasStarProgram }),
+            material = new THREE.MeshBasicMaterial({color: 'dark gray', sizeAttenuation: true, program: canvasStarProgram }),
             mouse = { x: 0, y: 0 },
             /* When properties change we'll need a re-layout */
             onMouseMove = function(event) {
