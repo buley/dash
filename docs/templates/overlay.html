@@ -25,8 +25,8 @@
 	</section>
 	<section id="dash-demo-overlay-demo" class="large-6 left">
 		<section id="dash-demo-overlay-panel-info" class="large-6 left">
-			<h1 ng-show="{{data.se}}">{{data.se}}</h1>
-			<h2 ng-show="{{data.ep}}">{{data.ep}}</h2>
+			<h1 ng-if="data.se">{{data.se}}</h1>
+			<h2 ng-if="data.ep">{{data.ep}}</h2>
 			<div star-rating data-star-rating-value="data.data.rating" data-star-rating-max="5" data-star-rating-on-change="onItemRatingChange"></div>
 		</section>
 		<section id="dash-demo-overlay-panel-rating-filter">
