@@ -31,12 +31,6 @@ var IMDBSystem = (function(THREE){
 	    INTERSECTED = null,
 	    CHOSEN = null,
             render = function() {
-                var step = 100;
-                if(camera) {
-                    camera.rotation.y += step;
-                    camera.rotation.x += step;
-                    //camera.position.z += step;
-                }
 		//console.log(camera.position.x,camera.position.y,camera.position.z);
                 /* 60fps goodness */
                 requestAnimationFrame(render);
