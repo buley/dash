@@ -85,6 +85,17 @@ ul.dash-document-navigation ul ul li {
   right: 0px;
   z-index: 3;
 }
+#dash-splash-overlay h2 {
+  float: right;
+  background: #111;
+  color: #fff;
+  padding: 20px;
+  margin: 10px 0 10px 0;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 3;
+}
 #dash-splash-overlay #dash-demo-overlay-container {
   position: absolute;
   bottom: 0px;
