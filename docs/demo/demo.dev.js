@@ -25,7 +25,6 @@ var IMDBSystem = (function(THREE){
  		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
-	            console.log('is',intersects.length);
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasStarProgram;
 			INTERSECTED = intersects[ 0 ].object;
@@ -108,9 +107,9 @@ var IMDBSystem = (function(THREE){
 		    node_width = width;
 		    node_height = height;
 		    on_data = cb;
-		    camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
+		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range);
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
-		    camera.position.set( 1, width/3, 100000 );
+		    camera.position.set( width/2, width/3, range );
  	      	    camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 		    controls = new THREE.TrackballControls( camera );
