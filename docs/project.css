@@ -107,13 +107,13 @@ ul.dash-document-navigation ul ul li {
   position: absolute;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h1 {
-  position: relative;
   top: 0px;
+  margin: 0;
   width: 100%;
   float: left;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h2 {
-  position: relative;
+  margin: 0;
   width: 100%;
   float: left;
 }
