@@ -74,6 +74,17 @@ ul.dash-document-navigation ul ul li {
   left: 0px;
   right: 0px;
 }
+#dash-splash-overlay h1 {
+  float: right;
+  background: #333;
+  color: #fff;
+  padding: 20px;
+  margin: 10px 0 10px 0;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 3;
+}
 #dash-splash-overlay #dash-demo-overlay-container {
   position: absolute;
   bottom: 0px;
@@ -89,13 +100,6 @@ ul.dash-document-navigation ul ul li {
   left: 0;
   width: 100%;
   height: inherit;
-}
-#dash-demo-overlay-marketing h1 {
-  float: right;
-  background: #333;
-  color: #fff;
-  padding: 20px;
-  margin: 10px 0 10px 0;
 }
 #dash-demo-overlay-marketing h2 {
   float: right;
