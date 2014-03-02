@@ -9,7 +9,7 @@ var IMDBSystem = (function(THREE){
 	    INTERSECTED = null,
 	    CHOSEN = null,
             render = function() {
-                var step = .1;
+                var step = 1;
                 if(camera) {
                     camera.position.y += step;
                     camera.position.x += step;
