@@ -75,6 +75,8 @@ ul.dash-document-navigation ul ul li {
   right: 0px;
 }
 #dash-splash-overlay #dash-demo-overlay-container {
+  position: absolute;
+  bottom: 0px;
   z-index: 3;
 }
 #dash-splash-overlay #dash-splash-container {
