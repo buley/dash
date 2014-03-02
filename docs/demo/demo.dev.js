@@ -12,8 +12,8 @@ var IMDBSystem = (function(THREE){
                 var step = 10;
                 if(camera) {
                     camera.position.y += step;
-                    //camera.position.x += step;
-                    camera.position.z += step;
+                    camera.position.x += step;
+                    //camera.position.z += step;
                 }
 		//console.log(camera.position.x,camera.position.y,camera.position.z);
                 /* 60fps goodness */
