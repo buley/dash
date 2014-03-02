@@ -114,11 +114,6 @@ ul.dash-document-navigation ul ul li {
   float: left;
 }
 #dash-splash-overlay #dash-splash-container {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  height: 100%;
   z-index: 1;
 }
 #dash-splash-overlay #dash-splash-container canvas {
