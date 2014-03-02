@@ -444,7 +444,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 	    var el = document.createElement('div');
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
-                var system = IMDBSystem(el, $('#dash-splash').width(), $('#dash-splash').height(), function(data) {
+                var system = IMDBSystem(el, $('#dash-splash-container').width(), $('#dash-splash-container').height(), function(data) {
 		    dash.get.entry({
 			database: 'dash-demo',
 			store: 'imdb',
