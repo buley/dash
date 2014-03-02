@@ -790,7 +790,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    }, function(context) {
 				system.add(context.entry);
 				system.cameraMod( 'x', -1, 0 );
-				system.cameraMod( 'y', -1, 0 );
+				system.cameraMod( 'y', 1, 0 );
 			    });
 
 			}, null, function(args) {
