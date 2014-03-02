@@ -22,7 +22,7 @@ var IMDBSystem = (function(THREE){
 		controls.update();
 		camera.updateMatrixWorld();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-		var vector = new THREE.Vector3( mouse.x, mouse.y, .5 );
+		var vector = new THREE.Vector3( mouse.x, mouse.y, camera.position.z );
 		projector.unprojectVector( vector, camera );
  		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		var intersects = raycaster.intersectObjects( scene.children );
