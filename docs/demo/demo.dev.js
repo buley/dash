@@ -33,8 +33,8 @@ var IMDBSystem = (function(THREE){
             render = function() {
                 var step = 100;
                 if(camera) {
-                    camera.position.y += step;
-                    camera.position.x += step;
+                    camera.rotation.y += step;
+                    camera.rotation.x += step;
                     //camera.position.z += step;
                 }
 		//console.log(camera.position.x,camera.position.y,camera.position.z);
