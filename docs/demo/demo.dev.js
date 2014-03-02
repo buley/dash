@@ -244,8 +244,8 @@ var IMDBSystem = (function(THREE){
 				
 				}
 			},
-			zoomMod: function(val) {
-				camera.zoom = val;
+			zoom: function(val) {
+				camera.translateZ(val);
 			},
 		    };
 	}
