@@ -109,6 +109,7 @@ var IMDBSystem = (function(THREE){
                 size: 8,
                 color: 0xFFFFFF,
                 transparent: true,
+		doubleSided: true,
                 opacity: .6,
                 sizeAttenuation: true,
 		side: THREE.DoubleSide,
