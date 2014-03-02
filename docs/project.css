@@ -2,8 +2,8 @@ body {
   height: 100%;
   width: 100%;
 }
-body > div {
-  height: 100%;
+.top-bar {
+  z-index: 1;
 }
 .top-bar .name h1 {
   font-size: 32px !important;
