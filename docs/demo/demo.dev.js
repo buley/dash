@@ -224,6 +224,8 @@ var IMDBSystem = (function(THREE){
 			    particle.name = context.id;
 			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 		            particle.rotation.z = Math.random();
+		            particle.rotation.y = Math.random();
+		            particle.rotation.x = Math.random();
 			    scene.add( particle );
 			},
 			layout: function() {
