@@ -106,6 +106,7 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h1 {
   position: relative;
+  top: 0px;
   float: left;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h2 {
