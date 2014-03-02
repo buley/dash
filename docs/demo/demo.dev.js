@@ -41,6 +41,7 @@ var IMDBSystem = (function(THREE){
                     ctx.lineTo(0, 0 - radius);
                 }
                 ctx.fillStyle = '#00ff00';
+transparent';
                 ctx.fill();
                 ctx.stroke();
                 ctx.restore();
@@ -67,7 +68,7 @@ var IMDBSystem = (function(THREE){
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
-			if ( INTERSECTED ) INTERSECTED.material.map = canvasFilledStarProgram;
+			if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
 			INTERSECTED = intersects[ 0 ].object;
 		    }
 		} else {
