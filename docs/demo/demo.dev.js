@@ -21,9 +21,9 @@ var IMDBSystem = (function(THREE){
                 stats.update();
 		controls.update();
 		camera.updateMatrixWorld();
-		var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		projector.unprojectVector( vector, camera );
- 		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+ 		raycaster = new THREE.Raycaster( vector, vector.sub( camera.position ).normalize() );
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
