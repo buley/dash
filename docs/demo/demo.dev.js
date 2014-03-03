@@ -280,6 +280,7 @@ var IMDBSystem = (function(THREE){
 
 	                        starttime = new Date().getTime();
 				controls = new THREE.TrackballControls( camera );
+				controls.enabled = false;
 				scene.add( controls );
 
 
