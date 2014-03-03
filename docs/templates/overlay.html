@@ -12,16 +12,17 @@
 			<select ng-model="selectedsort">
 				<option ng-repeat="option in sorts" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
-			<input type="number" max="2021" min="1889" ng-model="range">
-			<input type="button" value="GO ({{estimate()}}) " ng-click="layout()" class="success dash-demo-overlay-marketing-button small button"></input>
-		</div>
-		<!--<div class="">
+			<input type="number" max="2021" min="1889" ng-model="range"><br>
+		<div class="">
 			<input type="text" ng-model="query">
 			<select ng-model="selectedfield">
 				<option ng-repeat="option in fields" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<input type="button" value="SEARCH" ng-click="search()" class="dash-demo-overlay-marketing-button small button"></input>
-		</div>-->
+		</div>
+			<input type="button" value="GO ({{estimate()}}) " ng-click="layout()" class="success dash-demo-overlay-marketing-button small button"></input>
+		</div>
+
 	</section>
 	<section id="dash-demo-overlay-demo" class="large-6 left">
 		<section id="dash-demo-overlay-panel-info" class="large-6 left">
