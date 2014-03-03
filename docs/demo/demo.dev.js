@@ -111,6 +111,7 @@ var IMDBSystem = (function(THREE){
 		}
                 /* WebGL render */
                 renderer.render(scene, camera);
+		starttime = new Date().getTime();
 
             },
             scene = new THREE.Scene(),
