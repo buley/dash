@@ -201,7 +201,7 @@ var IMDBSystem = (function(THREE){
 		    camera.position.set( 0, 0, range + 10000 );
  	      	    camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
-		    /*controls = new THREE.TrackballControls( camera );
+		    controls = new THREE.PointerLockControls( camera );
 		    controls.rotateSpeed = 1.0;
 		    controls.zoomSpeed = 1.2;
 		    controls.panSpeed = 0.8;
@@ -209,7 +209,7 @@ var IMDBSystem = (function(THREE){
 		    controls.noPan = false;
 		    controls.staticMoving = true;
 		    controls.dynamicDampingFactor = 0.3;
-		    controls.keys = [ 65, 83, 68 ];*/
+		    controls.keys = [ 65, 83, 68 ];
 		    //controls.addEventListener( 'change', relayout );
 		    light = new THREE.DirectionalLight( 0xD5D5D5 );
 		    light.position.set( 1, 1, 1 );
