@@ -8,16 +8,16 @@
 				<option selected>explore</option>
 				<option>remove</option>
 			</select>
-			<span> everything in IMDB </span>
+			<select ng-model="selectedfield">
+				<option ng-repeat="option in fields" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
+			</select>
+			<span> in IMDB </span>
 			<select ng-model="selectedsort">
 				<option ng-repeat="option in sorts" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<input type="number" max="2021" min="1889" ng-model="range">
 			<br>
 			<input type="text" ng-model="query">
-			<select ng-model="selectedfield">
-				<option ng-repeat="option in fields" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
-			</select>
 			<input type="button" value="GO ({{estimate()}}) " ng-click="layout()" class="success dash-demo-overlay-marketing-button small button"></input>
 		</div>
 
