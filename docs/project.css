@@ -111,7 +111,7 @@ ul.dash-document-navigation ul ul li {
   top: 0;
   float: left;
   width: 100%;
-  padding: 0 10px 0 10px;
+  padding: 0;
   background: transparent;
   font-size: 32px;
 }
@@ -121,7 +121,7 @@ ul.dash-document-navigation ul ul li {
   position: relative;
   float: left;
   clear: left;
-  padding: 0 10px 0 10px;
+  padding: 0;
   width: 100%;
   font-size: 24px;
   background: transparent;
