@@ -122,7 +122,8 @@ var IMDBSystem = (function(THREE){
             range,
 	    stats,
 	    geometry = new THREE.PlaneGeometry(64, 64),
-            //material = new THREE.MeshBasicMaterial({color: 'dark gray', sizeAttenuation: true, program: canvasStarProgram }),
+	    spheregeometry = new THREE.SphereGeometry(64, 64, 64),
+            spherematerial = new THREE.MeshBasicMaterial({color: 'dark gray', sizeAttenuation: true, program: canvasStarProgram }),
 	    material = new THREE.MeshBasicMaterial({
                 size: 128,
 		overdraw: true,
@@ -245,7 +246,10 @@ var IMDBSystem = (function(THREE){
 		            particle.rotation.z = Math.random();
 		            particle.rotation.y = Math.random();
 		            particle.rotation.x = Math.random();
+			    var sphere = new THREE.Mesh( spheregeometry, spherematerial ); 
+			    sphere.position = particle.position;
 			    scene.add( particle );
+			    scene.add( sphere );
 			},
 			layout: function() {
 
