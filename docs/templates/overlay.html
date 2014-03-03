@@ -2,7 +2,7 @@
 <section id="dash-demo-overlay-container" class="large-12">
 	<section id="dash-demo-overlay-marketing" class="large-6 right">
 
-		<h2 class="large-6 left">
+		<div class="large-6 left">
 			<span>For example, </span>
 			<select ng-model="verb">
 				<option selected>explore</option>
@@ -14,14 +14,14 @@
 			</select>
 			<input type="number" max="2021" min="1889" ng-model="range">
 			<input type="button" value="GO ({{estimate()}}) " ng-click="layout()" class="dash-demo-overlay-marketing-button small button"></input>
-		</h2>
-		<h2 class="large-6 left">
+		</div>
+		<div class="large-6 left">
 			<input type="text" ng-model="query">
 			<select ng-model="selectedfield">
 				<option ng-repeat="option in fields" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<input type="button" value="SEARCH" ng-click="search()" class="dash-demo-overlay-marketing-button small button"></input>
-		</h2>
+		</div>
 	</section>
 	<section id="dash-demo-overlay-demo" class="large-6 left">
 		<section id="dash-demo-overlay-panel-info" class="large-6 left">
