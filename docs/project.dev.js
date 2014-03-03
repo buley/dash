@@ -679,7 +679,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.field = 'everything';
 		scope.fields = [ {
 			name: 'everything',
-			display: 'everything',
+			display: 'all entries',
 			selected: 'everything' === scope.verb ? 'selected' : ''
 		}, {
 			name: 'million',
