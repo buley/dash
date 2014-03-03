@@ -98,6 +98,7 @@ ul.dash-document-navigation ul ul li {
 #dash-splash-overlay #dash-demo-overlay-container {
   position: absolute;
   bottom: 0;
+  padding: 10px 20px 10px 20px;
   background: rgba(0, 0, 0, 0.3);
   z-index: 3;
 }
