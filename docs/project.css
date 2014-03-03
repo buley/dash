@@ -109,20 +109,20 @@ ul.dash-document-navigation ul ul li {
   margin: 0;
   top: 0;
   float: left;
-  font-size: 18px;
   width: 100%;
   padding: 0 10px 0 10px;
   background: transparent;
+  font-size: 24px;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h2 {
   margin: 0;
-  font-size: 16px;
   top: 0;
   position: relative;
   float: left;
   clear: left;
   padding: 0 10px 0 10px;
   width: 100%;
+  font-size: 20px;
   background: transparent;
 }
 #dash-splash-overlay #dash-splash-container {
