@@ -187,15 +187,17 @@ var IMDBSystem = (function(THREE){
         stats = new Stats();
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
-        node.addEventListener( 'mousemove', onMouseMove, false );
-        node.addEventListener( 'resize', onResize, false );
-
 	return function(node, width, height, cb) {
 		    range = ( ( width > height ) ? height : width ) * 10;
 		    renderer.setClearColor(0x111111, 1.0);
 		    renderer.setSize(width, height);
 		    node_width = width;
 		    node_height = height;
+
+			node.addEventListener( 'mousemove', onMouseMove, false );
+			node.addEventListener( 'resize', onResize, false );
+
+
 		    on_data = cb;
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 10);
 		    geometry.doubleSided = true;
@@ -204,7 +206,7 @@ var IMDBSystem = (function(THREE){
  	      	    camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 			//Start pointer lock
-			/*
+
 			var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
 			if ( havePointerLock ) {
@@ -278,7 +280,6 @@ var IMDBSystem = (function(THREE){
 	                        starttime = new Date().getTime();
 				controls = new THREE.PointerLockControls( camera );
 				scene.add( controls.getObject() );
-			*/
 
 			//End pointer lock
 
