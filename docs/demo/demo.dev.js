@@ -2,6 +2,7 @@ var IMDBSystem = (function(THREE){
         var last_intersected,
 	    last_chosen,
 	    on_data,
+	    starttime,
 	    canvasStarProgram = function(ctx) {
                 var height = 20, width = 20, center_x = 10, center_y = 10, radius = 7, points = 5, m = .5;
                 ctx.save();
@@ -58,7 +59,7 @@ var IMDBSystem = (function(THREE){
                 /* 60fps goodness */
                 requestAnimationFrame(render);
                 stats.update();
-		//controls.update();
+		controls.update( new Date().getTime() - starttime );
 		camera.updateMatrixWorld();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
@@ -274,6 +275,8 @@ var IMDBSystem = (function(THREE){
 				node.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
 
 			}
+
+	                        starttime = new Date().getTime();
 				controls = new THREE.PointerLockControls( camera );
 				scene.add( controls.getObject() );
 
