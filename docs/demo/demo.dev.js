@@ -59,7 +59,7 @@ var IMDBSystem = (function(THREE){
                 /* 60fps goodness */
                 requestAnimationFrame(render);
                 stats.update();
-
+		camera.updateMatrixWorld();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
 			notime = true; //e.g. 20ms hover
@@ -67,7 +67,7 @@ var IMDBSystem = (function(THREE){
 		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		raycaster.ray.origin.copy( camera.position );
 
-		camera.updateMatrixWorld();
+		controls.update();
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
@@ -280,7 +280,7 @@ var IMDBSystem = (function(THREE){
 
 	                        starttime = new Date().getTime();
 				controls = new THREE.TrackballControls( camera );
-				scene.add( controls.getObject() );
+				scene.add( controls );
 
 
 			//End pointer lock
