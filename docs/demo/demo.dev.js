@@ -61,7 +61,7 @@ var IMDBSystem = (function(THREE){
 		controls.update();
 		camera.updateMatrixWorld();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-		var vector = new THREE.Vector3( mouse.x, mouse.y, 1 ),
+		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
 			notime = true; //e.g. 20ms hover
 		projector.unprojectVector( vector, camera );
  		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
