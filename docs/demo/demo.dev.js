@@ -59,22 +59,23 @@ var IMDBSystem = (function(THREE){
                 /* 60fps goodness */
                 requestAnimationFrame(render);
                 stats.update();
-		camera.updateMatrixWorld();
 
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
 			notime = true; //e.g. 20ms hover
 		projector.unprojectVector( vector, camera );
 
+		console.log('checking',mouse.x,mouse.y);
 		if ( !controls.enabled ) {
 	 		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+			raycaster.ray.origin.copy( camera.position );
  		} else {
 	 		raycaster = new THREE.Raycaster( controls.getObject().position, vector.sub( controls.getObject().position ).normalize() );
-			console.log('checking',mouse.x,mouse.y);
 			raycaster.ray.origin.copy( controls.getObject().position );
 			controls.update( new Date().getTime() - starttime );
 		}
 
+		camera.updateMatrixWorld();
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
