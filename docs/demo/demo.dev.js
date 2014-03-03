@@ -71,7 +71,6 @@ var IMDBSystem = (function(THREE){
  		} else {
 	 		raycaster = new THREE.Raycaster( controls.getObject().position, vector.sub( controls.getObject().position ).normalize() );
 			console.log('checking',mouse.x,mouse.y);
-			controls.isOnObject( false );
 			raycaster.ray.origin.copy( controls.getObject().position );
 			controls.update( new Date().getTime() - starttime );
 		}
@@ -81,7 +80,6 @@ var IMDBSystem = (function(THREE){
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
 			INTERSECTED = intersects[ 0 ].object;
-			controls.isOnObject( true );
 		    }
 		} else {
 		    INTERSECTED = null;
