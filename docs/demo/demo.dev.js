@@ -99,7 +99,6 @@ var IMDBSystem = (function(THREE){
 					}
 					last_chosen = CHOSEN;
 				    CHOSEN = INTERSECTED;
-				    console.log("CHOSEN", last_chosen, CHOSEN);
 				    if ( 'function' === typeof on_data ) {
 					on_data.apply(on_data, [ CHOSEN.name ] );
 				    }
