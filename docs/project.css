@@ -101,7 +101,7 @@ ul.dash-document-navigation ul ul li {
 #dash-splash-overlay #dash-demo-overlay-container {
   position: absolute;
   bottom: 0;
-  background: white;
+  z-index: 3;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info {
   position: absolute;
