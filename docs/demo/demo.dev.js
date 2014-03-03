@@ -64,16 +64,8 @@ var IMDBSystem = (function(THREE){
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
 			notime = true; //e.g. 20ms hover
 		projector.unprojectVector( vector, camera );
-
-		console.log('checking',mouse.x,mouse.y);
-		if ( !controls.enabled ) {
-	 		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-			raycaster.ray.origin.copy( camera.position );
- 		} else {
-	 		raycaster = new THREE.Raycaster( controls.getObject().position, vector.sub( controls.getObject().position ).normalize() );
-			raycaster.ray.origin.copy( controls.getObject().position );
-			controls.update( new Date().getTime() - starttime );
-		}
+		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+		raycaster.ray.origin.copy( camera.position );
 
 		camera.updateMatrixWorld();
 		var intersects = raycaster.intersectObjects( scene.children );
@@ -287,7 +279,7 @@ var IMDBSystem = (function(THREE){
 			}
 
 	                        starttime = new Date().getTime();
-				controls = new THREE.PointerLockControls( camera );
+				controls = new THREE.TrackballControls( camera );
 				scene.add( controls.getObject() );
 
 
