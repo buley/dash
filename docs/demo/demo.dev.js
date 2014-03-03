@@ -123,7 +123,7 @@ var IMDBSystem = (function(THREE){
 	    stats,
 	    geometry = new THREE.PlaneGeometry(64, 64),
 	    spheregeometry = new THREE.SphereGeometry(6, 6, 6),
-            spherematerial = new THREE.MeshLambertMaterial({color: '#C3CBC1', sizeAttenuation: true }),
+            spherematerial = new THREE.MeshLambertMaterial({color: '#FFF538', sizeAttenuation: true }),
 	    material = new THREE.MeshBasicMaterial({
                 size: 128,
 		overdraw: true,
