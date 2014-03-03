@@ -129,7 +129,7 @@ var IMDBSystem = (function(THREE){
 		overdraw: true,
                 color: 0xFFFFFF,
                 transparent: true,
-                opacity: .3,
+                opacity: .7,
                 sizeAttenuation: true,
 		side: THREE.DoubleSide,
                 map: (function () {
@@ -157,7 +157,7 @@ var IMDBSystem = (function(THREE){
                             ctx.rotate(Math.PI / points);
                             ctx.lineTo(0, 0 - radius);
                         }
-                        ctx.fillStyle = '#C3CBC1';
+                        ctx.fillStyle = '#FFF538';
                         ctx.fill();
                         ctx.stroke();
                         ctx.restore();
