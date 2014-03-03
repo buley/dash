@@ -59,7 +59,25 @@ var IMDBSystem = (function(THREE){
                 /* 60fps goodness */
                 requestAnimationFrame(render);
                 stats.update();
-		//controls.update( new Date().getTime() - starttime );
+controls.isOnObject( false );
+
+				ray.ray.origin.copy( controls.getObject().position );
+				ray.ray.origin.y -= 10;
+
+				var intersections = ray.intersectObjects( objects );
+
+				if ( intersections.length > 0 ) {
+
+					var distance = intersections[ 0 ].distance;
+
+					if ( distance > 0 && distance < 10 ) {
+
+						controls.isOnObject( true );
+
+					}
+
+				}
+		controls.update( new Date().getTime() - starttime );
 		camera.updateMatrixWorld();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
@@ -278,7 +296,7 @@ var IMDBSystem = (function(THREE){
 			}
 
 	                        starttime = new Date().getTime();
-				//controls = new THREE.PointerLockControls( camera );
+				controls = new THREE.PointerLockControls( camera );
 				scene.add( controls.getObject() );
 
 
