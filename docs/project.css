@@ -108,12 +108,16 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h1 {
   top: 0px;
-  margin: 0;
+  padding: 10px;
+  position: relative;
+  margin: 0 0 20px 0;
   width: 100%;
   float: left;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h2 {
   margin: 0;
+  padding: 10px;
+  position: relative;
   width: 100%;
   float: left;
 }
