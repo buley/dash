@@ -64,7 +64,7 @@ var IMDBSystem = (function(THREE){
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
 			notime = true; //e.g. 20ms hover
-		projector.unprojectVector( vector, camera );
+		projector.unprojectVector( vector, controls.getObject() );
  		raycaster = new THREE.Raycaster( controls.getObject().position, vector.sub( controls.getObject().position ).normalize() );
 		console.log('checking',mouse.x,mouse.y);
 		controls.isOnObject( false );
