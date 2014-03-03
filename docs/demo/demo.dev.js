@@ -209,6 +209,16 @@ var IMDBSystem = (function(THREE){
 
 				var pointerlockchange = function ( event ) {
 					console.log('lock change',event);
+
+					if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
+
+						controls.enabled = true;
+
+						blocker.style.display = 'none';
+
+					} else {
+
+						controls.enabled = false;
 				}
 
 				var pointerlockerror = function ( event ) {
