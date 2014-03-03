@@ -139,9 +139,6 @@ ul.dash-document-navigation ul ul li {
   height: 100%;
 }
 #dash-demo-overlay-marketing div {
-  position: relative;
-  float: right;
-  padding: 20px 20px 0px 20px;
   margin: 0;
   text-align: right;
   font-size: 24px;
@@ -157,5 +154,4 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-demo-overlay-marketing div .dash-demo-overlay-marketing-button {
   margin-left: 10px;
-  min-width: 200px;
 }
