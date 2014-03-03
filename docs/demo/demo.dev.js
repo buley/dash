@@ -208,31 +208,11 @@ var IMDBSystem = (function(THREE){
 			if ( havePointerLock ) {
 
 				var pointerlockchange = function ( event ) {
-
-					if ( document.pointerLockElement === node || document.mozPointerLockElement === node || document.webkitPointerLockElement === node ) {
-
-						controls.enabled = true;
-
-						blocker.style.display = 'none';
-
-					} else {
-
-						controls.enabled = false;
-
-						blocker.style.display = '-webkit-box';
-						blocker.style.display = '-moz-box';
-						blocker.style.display = 'box';
-
-						instructions.style.display = '';
-
-					}
-
+					console.log('lock change',event);
 				}
 
 				var pointerlockerror = function ( event ) {
-
-					instructions.style.display = '';
-
+					console.log('pointer error',event);
 				}
 
 				// Hook pointer lock state change events
@@ -244,9 +224,7 @@ var IMDBSystem = (function(THREE){
 				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
-				instructions.addEventListener( 'click', function ( event ) {
-
-					instructions.style.display = 'none';
+				node.addEventListener( 'click', function ( event ) {
 
 					// Ask the browser to lock the pointer
 					node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
@@ -282,7 +260,7 @@ var IMDBSystem = (function(THREE){
 
 			} else {
 
-				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
+				node.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
 
 			}
 
