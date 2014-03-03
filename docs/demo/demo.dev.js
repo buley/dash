@@ -279,7 +279,8 @@ var IMDBSystem = (function(THREE){
 
 	                        starttime = new Date().getTime();
 				controls = new THREE.PointerLockControls( camera );
-*/				scene.add( controls.getObject() );
+				scene.add( controls.getObject() );
+*/
 
 			//End pointer lock
 
