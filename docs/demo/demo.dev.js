@@ -201,15 +201,94 @@ var IMDBSystem = (function(THREE){
 		    camera.position.set( 0, 0, range + 10000 );
  	      	    camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
-		    controls = new THREE.PointerLockControls( camera );
-		    controls.rotateSpeed = 1.0;
-		    controls.zoomSpeed = 1.2;
-		    controls.panSpeed = 0.8;
-		    controls.noZoom = false;
-		    controls.noPan = false;
-		    controls.staticMoving = true;
-		    controls.dynamicDampingFactor = 0.3;
-		    controls.keys = [ 65, 83, 68 ];
+			//Start pointer lock
+
+			var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
+
+			if ( havePointerLock ) {
+
+				var pointerlockchange = function ( event ) {
+
+					if ( document.pointerLockElement === node || document.mozPointerLockElement === node || document.webkitPointerLockElement === node ) {
+
+						controls.enabled = true;
+
+						blocker.style.display = 'none';
+
+					} else {
+
+						controls.enabled = false;
+
+						blocker.style.display = '-webkit-box';
+						blocker.style.display = '-moz-box';
+						blocker.style.display = 'box';
+
+						instructions.style.display = '';
+
+					}
+
+				}
+
+				var pointerlockerror = function ( event ) {
+
+					instructions.style.display = '';
+
+				}
+
+				// Hook pointer lock state change events
+				document.addEventListener( 'pointerlockchange', pointerlockchange, false );
+				document.addEventListener( 'mozpointerlockchange', pointerlockchange, false );
+				document.addEventListener( 'webkitpointerlockchange', pointerlockchange, false );
+
+				document.addEventListener( 'pointerlockerror', pointerlockerror, false );
+				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
+				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
+
+				instructions.addEventListener( 'click', function ( event ) {
+
+					instructions.style.display = 'none';
+
+					// Ask the browser to lock the pointer
+					node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
+
+					if ( /Firefox/i.test( navigator.userAgent ) ) {
+
+						var fullscreenchange = function ( event ) {
+
+							if ( document.fullscreenElement === node || document.mozFullscreenElement === node || document.mozFullScreenElement === node ) {
+
+								document.removeEventListener( 'fullscreenchange', fullscreenchange );
+								document.removeEventListener( 'mozfullscreenchange', fullscreenchange );
+
+								node.requestPointerLock();
+							}
+
+						}
+
+						document.addEventListener( 'fullscreenchange', fullscreenchange, false );
+						document.addEventListener( 'mozfullscreenchange', fullscreenchange, false );
+
+						node.requestFullscreen = node.requestFullscreen || node.mozRequestFullscreen || node.mozRequestFullScreen || node.webkitRequestFullscreen;
+
+						node.requestFullscreen();
+
+					} else {
+
+						node.requestPointerLock();
+
+					}
+
+				}, false );
+
+			} else {
+
+				instructions.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
+
+			}
+
+
+			//End pointer lock
+
 		    //controls.addEventListener( 'change', relayout );
 		    light = new THREE.DirectionalLight( 0xD5D5D5 );
 		    light.position.set( 1, 1, 1 );
