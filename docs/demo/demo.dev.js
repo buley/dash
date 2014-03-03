@@ -206,7 +206,7 @@ var IMDBSystem = (function(THREE){
  	      	    camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 			//Start pointer lock
-
+/*
 			var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
 
 			if ( havePointerLock ) {
@@ -279,7 +279,7 @@ var IMDBSystem = (function(THREE){
 
 	                        starttime = new Date().getTime();
 				controls = new THREE.PointerLockControls( camera );
-				scene.add( controls.getObject() );
+*/				scene.add( controls.getObject() );
 
 			//End pointer lock
 
