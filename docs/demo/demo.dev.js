@@ -187,8 +187,8 @@ var IMDBSystem = (function(THREE){
         stats = new Stats();
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
-        document.addEventListener( 'mousemove', onMouseMove, false );
-        document.addEventListener( 'resize', onResize, false );
+        node.addEventListener( 'mousemove', onMouseMove, false );
+        node.addEventListener( 'resize', onResize, false );
 
 	return function(node, width, height, cb) {
 		    range = ( ( width > height ) ? height : width ) * 10;
