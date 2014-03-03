@@ -682,15 +682,15 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			selected: 'everything' === scope.verb ? 'selected' : ''
 		}, {
 			name: 'million',
-			display: 'a million entries',
+			display: '1 million entries',
 			selected: 'million' === scope.verb ? 'selected' : ''
 		}, {
 			name: 'hundredthousand',
-			display: 'a hundred thousand entries',
+			display: '100k entries',
 			selected: 'hundredthousand' === scope.verb ? 'selected' : ''
 		}, {
 			name: 'tenthousand',
-			display: 'ten thousand entries',
+			display: '10k entries',
 			selected: 'tenthousand' === scope.verb ? 'selected' : ''
 		} ];
 		scope.verbs = [ {
