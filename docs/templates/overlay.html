@@ -16,7 +16,7 @@
 			</select>
 			<input type="number" max="2021" min="1889" ng-model="range">
 			<br>
-			<input type="text" ng-model="query">
+			<input type="text" ng-model="query" ng-if="'search' == field">
 			<input type="button" value="GO ({{estimate()}}) " ng-click="layout()" class="success dash-demo-overlay-marketing-button small button"></input>
 		</div>
 
