@@ -211,11 +211,11 @@ var IMDBSystem = (function(THREE){
 		    controls.dynamicDampingFactor = 0.3;
 		    controls.keys = [ 65, 83, 68 ];
 		    //controls.addEventListener( 'change', relayout );
-		    light = new THREE.DirectionalLight( 0x333333 );
+		    light = new THREE.DirectionalLight( 0xD5D5D5 );
 		    light.position.set( 1, 1, 1 );
 		    scene.add( light );
 
-		    light = new THREE.DirectionalLight( 0x555555 );
+		    light = new THREE.DirectionalLight( 0xCCCCCC );
 		    light.position.set( -1, -1, -1 );
 		    scene.add( light );
 
