@@ -219,6 +219,7 @@ var IMDBSystem = (function(THREE){
 					} else {
 
 						controls.enabled = false;
+					}
 				}
 
 				var pointerlockerror = function ( event ) {
