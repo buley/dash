@@ -76,8 +76,6 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-splash-overlay h1 {
   float: right;
-  background: #333;
-  background: rgba(0, 0, 0, 0.3);
   color: #fff;
   padding: 20px;
   margin: 10px 0 10px 0;
@@ -88,8 +86,6 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-splash-overlay h2 {
   float: right;
-  background: #111;
-  background: rgba(0, 0, 0, 0.3);
   color: #fff;
   padding: 20px;
   margin: 10px 0 10px 0;
