@@ -215,8 +215,6 @@ var IMDBSystem = (function(THREE){
 
 						controls.enabled = true;
 
-						blocker.style.display = 'none';
-
 					} else {
 
 						controls.enabled = false;
