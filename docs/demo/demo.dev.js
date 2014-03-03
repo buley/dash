@@ -59,37 +59,28 @@ var IMDBSystem = (function(THREE){
                 /* 60fps goodness */
                 requestAnimationFrame(render);
                 stats.update();
-controls.isOnObject( false );
-
-				ray.ray.origin.copy( controls.getObject().position );
-				ray.ray.origin.y -= 10;
-
-				var intersections = ray.intersectObjects( objects );
-
-				if ( intersections.length > 0 ) {
-
-					var distance = intersections[ 0 ].distance;
-
-					if ( distance > 0 && distance < 10 ) {
-
-						controls.isOnObject( true );
-
-					}
-
-				}
-		controls.update( new Date().getTime() - starttime );
 		camera.updateMatrixWorld();
+
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
 			notime = true; //e.g. 20ms hover
 		projector.unprojectVector( vector, camera );
  		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		console.log('checking',mouse.x,mouse.y);
+		controls.isOnObject( false );
+
+				raycaster.ray.origin.copy( controls.getObject().position );
+				raycaster.ray.origin.y -= 10;
+
+		controls.update( new Date().getTime() - starttime );
+
+
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
 			INTERSECTED = intersects[ 0 ].object;
+			controls.isOnObject( true );
 		    }
 		} else {
 		    INTERSECTED = null;
