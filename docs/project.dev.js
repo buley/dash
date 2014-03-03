@@ -676,6 +676,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			display: 'after',
 			selected: 'after' === scope.sort ? 'selected' : ''
 		} ];
+		scope.field = 'everything';
 		scope.fields = [ {
 			name: 'everything',
 			display: 'everything',
