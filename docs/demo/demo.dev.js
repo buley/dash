@@ -248,8 +248,9 @@ var IMDBSystem = (function(THREE){
 		            particle.rotation.x = Math.random();
 			    var sphere = new THREE.Mesh( spheregeometry, spherematerial ); 
 			    sphere.position = particle.position;
-			    scene.add( particle );
 			    scene.add( sphere );
+			    scene.add( particle );
+
 			},
 			layout: function() {
 
