@@ -211,7 +211,7 @@ var IMDBSystem = (function(THREE){
 				var pointerlockchange = function ( event ) {
 					console.log('lock change',event);
 
-					if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
+					if ( document.pointerLockElement === node || document.mozPointerLockElement === node || document.webkitPointerLockElement === node ) {
 
 						controls.enabled = true;
 
