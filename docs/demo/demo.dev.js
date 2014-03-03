@@ -157,7 +157,7 @@ var IMDBSystem = (function(THREE){
                             ctx.rotate(Math.PI / points);
                             ctx.lineTo(0, 0 - radius);
                         }
-                        ctx.fillStyle = '#FFF538';
+                        ctx.fillStyle = '#d5d5d5';
                         ctx.fill();
                         ctx.stroke();
                         ctx.restore();
