@@ -133,7 +133,7 @@ ul.dash-document-navigation ul ul li {
   width: 100%;
   height: 100%;
 }
-#dash-demo-overlay-marketing h2 {
+#dash-demo-overlay-marketing div {
   position: relative;
   float: right;
   padding: 20px 20px 0px 20px;
@@ -143,15 +143,15 @@ ul.dash-document-navigation ul ul li {
   color: #333;
   background: #fff;
 }
-#dash-demo-overlay-marketing h2 select,
-#dash-demo-overlay-marketing h2 input {
+#dash-demo-overlay-marketing div select,
+#dash-demo-overlay-marketing div input {
   width: inherit;
   display: inline;
   font-size: inherit;
   line-height: inherit;
   height: inherit;
 }
-#dash-demo-overlay-marketing h2 .dash-demo-overlay-marketing-button {
+#dash-demo-overlay-marketing div .dash-demo-overlay-marketing-button {
   margin-left: 10px;
   min-width: 200px;
 }
