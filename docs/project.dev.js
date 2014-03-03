@@ -676,6 +676,23 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			display: 'after',
 			selected: 'after' === scope.sort ? 'selected' : ''
 		} ];
+		scope.fields = [ {
+			name: 'everything',
+			display: 'everything',
+			selected: 'everything' === scope.verb ? 'selected' : ''
+		}, {
+			name: 'million',
+			display: 'a million entries',
+			selected: 'million' === scope.verb ? 'selected' : ''
+		}, {
+			name: 'hundredthousand',
+			display: 'a hundred thousand entries',
+			selected: 'hundredthousand' === scope.verb ? 'selected' : ''
+		}, {
+			name: 'tenthousand',
+			display: 'ten thousand entries',
+			selected: 'tenthousand' === scope.verb ? 'selected' : ''
+		} ];
 		scope.verbs = [ {
 			name: 'download',
 			display: 'download',
