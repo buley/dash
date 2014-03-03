@@ -61,7 +61,8 @@ var IMDBSystem = (function(THREE){
 		controls.update();
 		camera.updateMatrixWorld();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-		var vector = new THREE.Vector3( mouse.x, mouse.y, .5 );
+		var vector = new THREE.Vector3( mouse.x, mouse.y, .5 ),
+			notime = true; //e.g. 20ms hover
 		projector.unprojectVector( vector, camera );
  		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		var intersects = raycaster.intersectObjects( scene.children );
@@ -81,7 +82,7 @@ var IMDBSystem = (function(THREE){
 		    last_intersected = INTERSECTED;
 		} else if (INTERSECTED) {
 			if (null === CHOSEN || INTERSECTED.id !== CHOSEN.id) {
-				if ((new Date().getTime() - INTERSECTED.start) > 20) {
+				if (notime || (new Date().getTime() - INTERSECTED.start) > 20) {
 					if (!!last_chosen) {
 						if (last_chosen.id === INTERSECTED.id) {
 							return;
