@@ -75,6 +75,9 @@ var IMDBSystem = (function(THREE){
 			INTERSECTED = intersects[ 0 ].object;
 		    }
 		} else {
+	            if (INTERSECTED) {
+		    	on_data.apply(on_data, [ null ] );
+		    }
 		    INTERSECTED = null;
 		}
 		if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
