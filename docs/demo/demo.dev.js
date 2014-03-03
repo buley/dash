@@ -263,7 +263,8 @@ var IMDBSystem = (function(THREE){
 				node.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
 
 			}
-
+				controls = new THREE.PointerLockControls( camera );
+				scene.add( controls.getObject() );
 
 			//End pointer lock
 
