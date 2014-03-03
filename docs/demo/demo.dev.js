@@ -64,10 +64,12 @@ var IMDBSystem = (function(THREE){
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
 			notime = true; //e.g. 20ms hover
-		projector.unprojectVector( vector, controls.getObject() );
- 		raycaster = new THREE.Raycaster( controls.getObject().position, vector.sub( controls.getObject().position ).normalize() );
+		projector.unprojectVector( vector, camera );
+ 		raycaster = new THREE.Raycaster( controls.getObject().position, vector.sub( camera.position ).normalize() );
 		console.log('checking',mouse.x,mouse.y);
 		controls.isOnObject( false );
+
+		raycaster.ray.origin.copy( camera.position );
 
 		controls.update( new Date().getTime() - starttime );
 
@@ -111,7 +113,6 @@ var IMDBSystem = (function(THREE){
 		}
                 /* WebGL render */
                 renderer.render(scene, camera);
-		starttime = new Date().getTime();
 
             },
             scene = new THREE.Scene(),
