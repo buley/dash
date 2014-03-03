@@ -213,11 +213,11 @@ var IMDBSystem = (function(THREE){
 		    //controls.addEventListener( 'change', relayout );
 		    light = new THREE.DirectionalLight( 0xD5D5D5 );
 		    light.position.set( 1, 1, 1 );
-		    scene.add( light );
+		    //scene.add( light );
 
 		    light = new THREE.DirectionalLight( 0xCCCCCC );
 		    light.position.set( -1, -1, -1 );
-		    scene.add( light );
+		    //scene.add( light );
 
 		    //light = new THREE.AmbientLight( 0x555555 );
 		    //scene.add( light );
