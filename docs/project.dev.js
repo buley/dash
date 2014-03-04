@@ -736,7 +736,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				limit = 100000;
 			} else if ( 'tenthousand' === field ) {
 				limit = 10000;
-			}	
+			} else if ( 'thousand' === field ) {
+				limit = 1000;
+			}
 			var ctx = {}, callLayout = function() {
 				doLayout({
 					range: scope.range,
