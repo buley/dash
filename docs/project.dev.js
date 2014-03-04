@@ -465,8 +465,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    }, function(context) {
 			console.log('missing entry', context);
 		    });
-		}),
-		go = function() {
+		});
+		scope.go = function() {
 			console.log("GO", scope.verb, scope.field, scope.sort, scope.range, scope.query);
 			system.layout();
 		};
