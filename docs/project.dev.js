@@ -480,7 +480,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			if ( scope.statsData ) {
 				if ( undefined !== scope.statsData.insert ) {
 					console.log('insert',scope.statsData.insert, scope.statsData.elapsed);
-					return 'inserting ' + Math.floor((parseInt(scope.statsData.insert,10)/scope.statsData.elapsed)) + ' entries/millisecond';
+					return 'inserting ' + Math.floor((scope.statsData.insert/(scope.statsData.elapsed/1000))) + ' entries/millisecond';
 				} else if ( undefined !== scope.statsData.read ) {
 					return 'readinging ' + Math.floor((scope.statsData.insert/scope.statsData.elapsed)) + ' entries/millisecond';
 				}
