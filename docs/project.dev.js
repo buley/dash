@@ -756,7 +756,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    statsTimeout = 5000;
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
-			last_time = statsObj.elapsed;
+			last_time = new Date().getTime();
 			scope.$apply( function() {
 				scope.statsData = statsObj;
 			} );
