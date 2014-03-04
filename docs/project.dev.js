@@ -755,11 +755,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    statsProc = null,
 		    statsTimeout = 5000;
 		    statsFunc = function() {
-
 			statsObj.elapsed = new Date().getTime() - last_time;
 			last_time = statsObj.elapsed;
-			scope.statsData = statsObj;
-			console.log('stats', statsObj);
+			scope.$apply( function() {
+				scope.statsData = statsObj;
+			} );
 			statsObj = {};
 			statsProc = null;
 		    },
