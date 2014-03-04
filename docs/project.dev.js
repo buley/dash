@@ -770,7 +770,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					statsProc = setTimeout(statsFunc,statsTimeout);
 				}
 		    },
-		    doLayout = function() {
+		    doLayout = function(cmdargs) {
 			var file, start = false, values = [];
 			if ( 'from' === scope.sort ) {
 				values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
@@ -800,6 +800,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 							    var start = 2013,
 								stacklist = [],
 								stack_count = 0,
+								addCount = 0,
+								addLimit = cmdargs.limit,
 								stack_length = 0,
 								in_progress = false,
 								processNext = function(context) {
@@ -830,7 +832,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 									in_progress = false;
 									system.add( { id: context.key } );
 									statsUpdate('insert');
-									processNext(context);
+									if ( !addLimit || ( addCount++ < addLimit ) ) {
+										processNext(context);
+									}
 								    }, function(context) {
 									in_progress = false;
 									processNext(context);
