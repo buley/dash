@@ -802,6 +802,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    })
 								    (function(context) {
 									in_progress = false;
+									console.log('added',context.key);
 									processNext(context);
 								    }, function(context) {
 									in_progress = false;
