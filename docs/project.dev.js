@@ -818,6 +818,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								},
 								doNext = function(next) {
 							 	    stack_count += 1;
+								    next.id = null;
 								    dash.add.entry({
 									database: 'dash-demo',
 									store: 'imdb',
