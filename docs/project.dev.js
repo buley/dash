@@ -479,6 +479,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.stats = function() {
 			if ( scope.statsData ) {
 				if ( undefined !== scope.statsData.insert ) {
+					console.log('insert',scope.statsData.insert);
 					return 'inserting ' + Math.floor((parseInt(scope.statsData.insert,10)/scope.statsData.elapsed)) + ' entries/millisecond';
 				} else if ( undefined !== scope.statsData.read ) {
 					return 'readinging ' + Math.floor((scope.statsData.insert/scope.statsData.elapsed)) + ' entries/millisecond';
