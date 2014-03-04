@@ -704,10 +704,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			selected: 'tenthousand' === scope.verb ? 'selected' : ''
 		} ];
 		scope.verbs = [ {
-			name: 'download',
-			display: 'download',
-			selected: 'download' === scope.verb ? 'selected' : ''
-		}, {
 			name: 'explore',
 			display: 'explore',
 			selected: 'explore' === scope.verb ? 'selected' : ''
@@ -723,7 +719,30 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.verb = 'explore';
 		scope.go = function() {	
 			console.log('GO',scope.field,scope.range,scope.query,scope.sort, scope.verb);
-			doLayout();
+			var limit = null, //default: everything
+			    field = scope.field;
+			if ( 'million' === field ) {
+				limit = 1000000;
+			} else if ( 'hundredthousand' === field ) {
+				limit = 100000;
+			} else if ( 'tenthousand' === field ) {
+				limit = 10000;
+			}	
+			var ctx = {}, callLayout = function() {
+				doLayout({
+					range: scope.range,
+					limit: limit,
+					query: scope.query,
+					sort: scope.sort,
+					verb: scope.verb
+				});
+			};
+			if ( 'download' !== scope.verb ) {
+				callLayout();
+			} else {
+
+			}
+
 		};
 		var doLayout = function() {
 			var file, start = false, values = [];
