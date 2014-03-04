@@ -802,8 +802,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    })
 								    (function(context) {
 									in_progress = false;
-									context.entry.id = context.entry.key; //fake it so we make it
-									system.add(context.entry);
+									system.add( { id: context.entry.key } );
 									processNext(context);
 								    }, function(context) {
 									in_progress = false;
