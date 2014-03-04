@@ -465,11 +465,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    }, function(context) {
 			console.log('missing entry', context);
 		    });
-		});
-		scope.go = function() {
-			console.log("GO", scope.verb, scope.field, scope.sort, scope.range, scope.query);
-			system.layout();
-		};
+		}),
+		layout = system.layout;
 
                 element[0].appendChild(el);
 
@@ -724,7 +721,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			selected: 'delete' === scope.verb ? 'selected' : ''
 		} ];
 		scope.verb = 'explore';
-		scope.layout = function() {
+		scope.go = function() {	
+			console.log('GO',scope.field,scope.range,scope.query,scope.sort, scope.verb);
 			var file, start = false, values = [];
 			if ( 'from' === scope.sort ) {
 				values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
