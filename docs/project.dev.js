@@ -478,7 +478,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.sort = 'from';
 		scope.stats = function() {
 			if ( scope.statsData ) {
-
+				return JSON.stringify( scope.statsData );
 			} else {
 				return 'fast, local data';
 			};
@@ -749,6 +749,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    statsTimeout = 5000;
 		    statsFunc = function() {
 			console.log('stats', statsObj);
+			scope.statsData = statsObj;
 			statsObj = {};
 			statsProc = null;
 		    },
