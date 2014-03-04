@@ -744,7 +744,23 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 
 		};
-		var doLayout = function() {
+		var statsObj = {},
+		    statsProc = null,
+		    statsTimeout = 5000;
+		    statsFunc = function() {
+			console.log('stats', statsObj);
+			statsObj = {};
+			statsProc = null;
+		    },
+		    statsUpdate = function() {
+				var tag = arguments[0];
+				statsObj[ tag ] = statsObj[ tag ] || 0;
+				statsObj[ tag ] += 1;
+				if ( !statsProc ) {
+					statsProc = setTimeout(statsFunc,statsTimeout);
+				}
+		    },
+		    doLayout = function() {
 			var file, start = false, values = [];
 			if ( 'from' === scope.sort ) {
 				values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
@@ -803,6 +819,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    (function(context) {
 									in_progress = false;
 									system.add( { id: context.key } );
+									statsUpdate('insert');
 									processNext(context);
 								    }, function(context) {
 									in_progress = false;
@@ -849,14 +866,17 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  limit: 10000,
 				  key: new Date('1/1/' + args.range).getTime()
 				},
-				dash_promise = dashWorkerService.get.entries(ctx);
+				dash_promise = dashWorkerService.get.entries(ctx),
+				start_promise = new Date().getTime();
 			    console.log('dash promise', ctx, dash_promise);
 			    dash_promise.then( function(context) {
 				console.log('dash promise fulfilled', context);
+				statsUpdate('complete', args.range, new Date().getTime() - start_promise);
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
 				system.add(context.entry);
+				statsUpdate('read');
 				system.cameraMod( 'z', -2, 50000, 10 );
 				//system.cameraMod( 'z', 1, 10000, 0 );
 			    });
