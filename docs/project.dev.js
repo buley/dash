@@ -723,6 +723,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.verb = 'explore';
 		scope.go = function() {	
 			console.log('GO',scope.field,scope.range,scope.query,scope.sort, scope.verb);
+			doLayout();
+		};
+		var doLayout = function() {
 			var file, start = false, values = [];
 			if ( 'from' === scope.sort ) {
 				values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
