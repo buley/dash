@@ -495,20 +495,20 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			if ( scope.statsData ) {
 				if ( true === scope.statsData.complete) { 
 					if ( 'adds' === scope.statsData.verb ) {
-						return 'added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+						return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'gets' === scope.statsData.verb ) {
-						return 'got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+						return 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
-						return 'adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
+						return 'dash is adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
 					} else if ( undefined !== scope.statsData.gets ) {
-						return 'getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
+						return 'dash is getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
 					}
 				}
 				return JSON.stringify( scope.statsData );
 			} else {
-				return 'ready';
+				return 'data is <em>ready</em>';
 			};
 		};
 		scope.estimate = function() {
