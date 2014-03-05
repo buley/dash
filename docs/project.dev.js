@@ -690,7 +690,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			display: 'after',
 			selected: 'after' === scope.sort ? 'selected' : ''
 		} ];
-		scope.field = null;
+		scope.field = 'thousand';
 		scope.fields = [ {
 			name: 'everything',
 			display: 'all entries',
