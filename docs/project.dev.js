@@ -710,7 +710,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		}, {
 			name: 'thousand',
 			display: '1k entries',
-			selected: ( !scope.field || 'thousand' === scope.field ) ? 'selected' : ''
+			selected: ( null === scope.field || 'thousand' === scope.field ) ? 'selected' : ''
 		} ];
 		scope.verbs = [ {
 			name: 'explore',
