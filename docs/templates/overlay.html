@@ -4,8 +4,8 @@
 
 		<div class="">
 			<span>For example, </span>
-			<span ng-if="1 === numFields()">explore</span>
-			<select ng-model="verb" ng-if="numFields() > 1">
+			<span ng-show="1 === numFields()">explore</span>
+			<select ng-model="verb" ng-show="numFields() > 1">
 				<option ng-repeat="option in verbs" ng-if="option.enabled" name="{{option.name}}" ng-selected="verb === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<select ng-model="field">
