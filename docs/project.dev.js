@@ -407,7 +407,7 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
                 doNext(stack.shift());
 		totalRun += 1;
             } else {
-	        statsUpdate('complete', 'add', totalRun, new Date().getTime() - start_promise);
+	        statsUpdate('complete', 'adds', totalRun, new Date().getTime() - start_promise);
 		fresh_start = true;
 	    }
         },
@@ -494,9 +494,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.stats = function() {
 			if ( scope.statsData ) {
 				if ( true === scope.statsData.complete) { 
-					if ( undefined !== scope.statsData.adds ) {
+					if ( 'adds' === scope.statsData.verb ) {
 						return 'added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-					} else if ( undefined !== scope.statsData.gets ) {
+					} else if ( 'gets' === scope.statsData.gets ) {
 						return 'got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
 				} else {
@@ -1005,7 +1005,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				dash_promise = dashWorkerService.get.entries(ctx),
 				start_promise = new Date().getTime();
 			    dash_promise.then( function(context) {
-				statsUpdate('complete', 'get', context.amount, new Date().getTime() - start_promise);
+				statsUpdate('complete', 'gets', context.amount, new Date().getTime() - start_promise);
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
