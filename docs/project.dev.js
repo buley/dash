@@ -872,7 +872,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		var statsObj = {},
 		    last_time = new Date().getTime(),
 		    statsProc = null,
-		    statsTimeout = 1000,
+		    statsTimeout = 100,
 		    wasCompleted = false,
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
@@ -896,7 +896,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					statsObj[ tag ] += 1;
 				}
 				if ( !statsProc ) {
-					statsProc = setTimeout(statsFunc,statsTimeout);
+					statsProc = setTimeout(statsFunc, statsTimeout);
 				}
 		    },
 		    doLayout = function(cmdargs) {
