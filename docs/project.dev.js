@@ -749,6 +749,25 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 			return true;
 		};
+		var totalDownloaded = function(range) {
+			var attr, total = 0;
+			for ( attr in scope.downloaded ) {
+				if ( scope.downloaded.hasOwnProperty( attr ) ) {
+					if ( parseInt( attr, 10 ) >= range ) {
+						console.log('comparing',attr,range,scope.downloaded[ attr ]);
+						if ( false === scope.downloaded[ attr ] ) {
+							continue;
+						}
+						if ( 'from' === scope.sort ) {
+							return downloaded[ attr ];
+						} else {
+							total += downloaded[ attr ];
+						}
+					}
+				}
+			}
+			return downloaded;
+		};
 		scope.$watch( 'range', function(newer, older) {
 			var is_installed, x, xlen = scope.verbs.length;
 			if ( true === hasDownloaded(newer) ) {
