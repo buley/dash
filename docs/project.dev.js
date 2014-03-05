@@ -494,10 +494,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.stats = function() {
 			if ( scope.statsData ) {
 				if ( true === scope.statsData.complete) { 
-					console.log('completed',scope.statsData.verb);
 					if ( 'adds' === scope.statsData.verb ) {
 						return 'added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-					} else if ( 'gets' === scope.statsData.gets ) {
+					} else if ( 'gets' === scope.statsData.verb ) {
 						return 'got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
 				} else {
@@ -882,7 +881,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    statsUpdate = function() {
 				var tag = arguments[0];
 				if ( 'complete' === tag ) {
-					console.log('COMPLETE',arguments);
 					scope.statsData = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3] };
 					clearTimeout( statsProc );
 					statsProc = null;
