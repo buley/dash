@@ -869,11 +869,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 
 		};
 		var statsObj = {},
-		    last_time = new Date().getTime(),
 		    statsProc = null,
 		    statsTimeout = 1000;
 		    statsFunc = function() {
-			statsObj.elapsed = new Date().getTime() - last_time;
+			statsObj.elapsed = new Date().getTime() - last_updated;
 			if ( statsObj.elapsed > 10000 ) {
 				statsObj = { clear: true };
 			}
