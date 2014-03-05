@@ -869,11 +869,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 
 		};
 		var statsObj = {},
+		    last_time = new Date().getTime(),
 		    statsProc = null,
 		    statsTimeout = 1000;
 		    statsFunc = function() {
-			statsObj.elapsed = new Date().getTime() - last_updated;
-			if ( statsObj.elapsed > 10000 ) {
+			statsObj.elapsed = new Date().getTime() - last_time;
+			console.log('checking last',last_updated);
+			if ( (new Date().getTime() - last_updated ) > 10000 ) {
 				statsObj = { clear: true };
 			}
 			scope.$apply( function() {
