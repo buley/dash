@@ -492,7 +492,17 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			};
 		};
 		scope.estimate = function() {
+			var field = scope.field;
 			if ( 'search' === scope.verb ) {
+				if ( 'million' === field ) {
+					return 1000000;
+				} else if ( 'hundredthousand' === field ) {
+					return 100000;
+				} else if ( 'tenthousand' === field ) {
+					return 10000;
+				} else if ( 'thousand' === field ) {
+					return 1000;
+				}
 				return totalDownloaded(scope.downloaded, scope.range, scope.sort ).toString() + ' entries';
 			}
 			var values = [],
