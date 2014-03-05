@@ -392,12 +392,21 @@ dashApp.factory( 'dashAppSplashBroadcast', function() {
 dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $scope, $http ) {
     var start = 2013,
         stack = [],
+	start_promise,
         in_progress = false,
+	fresh_start = true,
         processNext = function() {
             if(!in_progress && stack.length > 0) {
                 in_progress = true;
+		if ( true === fresh_start ) {
+			start_promise = new Date().getTime();
+			fresh_start = false;
+		}
                 doNext(stack.shift());
-            }
+            } else {
+	        statsUpdate('complete', 'add', args.range, new Date().getTime() - start_promise);
+		fresh_start = true;
+	    }
         },
         doNext = function(next) {
             dash.add.entry({
@@ -481,10 +490,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 
 		scope.stats = function() {
 			if ( scope.statsData ) {
-				if ( undefined !== scope.statsData.insert ) {
-					return 'inserting ' + Math.floor((scope.statsData.insert/(scope.statsData.elapsed/1000))) + ' entries/second';
-				} else if ( undefined !== scope.statsData.read ) {
-					return 'reading ' + Math.floor((scope.statsData.read/(scope.statsData.elapsed/1000))) + ' entries/second';
+				if ( undefined !== scope.statsData.adds ) {
+					return 'adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
+				} else if ( undefined !== scope.statsData.gets ) {
+					return 'reading ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
 				}
 				return JSON.stringify( scope.statsData );
 			} else {
@@ -927,7 +936,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 								    (function(context) {
 									in_progress = false;
 									system.add( { id: context.key } );
-									statsUpdate('insert');
+									statsUpdate('adds');
 									if ( !addLimit || ( addCount++ < addLimit ) ) {
 										processNext(context);
 									}
@@ -981,12 +990,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    console.log('dash promise', ctx, dash_promise);
 			    dash_promise.then( function(context) {
 				console.log('dash promise fulfilled', context);
-				statsUpdate('complete', args.range, new Date().getTime() - start_promise);
+				statsUpdate('complete', 'get', args.range, new Date().getTime() - start_promise);
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
 				system.add(context.entry);
-				statsUpdate('read');
+				statsUpdate('gets');
 				system.cameraMod( 'z', -2, 50000, 10 );
 				//system.cameraMod( 'z', 1, 10000, 0 );
 			    });
