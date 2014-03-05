@@ -493,10 +493,18 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 
 		scope.stats = function() {
 			if ( scope.statsData ) {
-				if ( undefined !== scope.statsData.adds ) {
-					return 'adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
-				} else if ( undefined !== scope.statsData.gets ) {
-					return 'getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
+				if ( true === scope.statsData.complete) { 
+					if ( undefined !== scope.statsData.adds ) {
+						return 'added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+					} else if ( undefined !== scope.statsData.gets ) {
+						return 'got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+					}
+				} else {
+					if ( undefined !== scope.statsData.adds ) {
+						return 'adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
+					} else if ( undefined !== scope.statsData.gets ) {
+						return 'getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
+					}
 				}
 				return JSON.stringify( scope.statsData );
 			} else {
@@ -874,7 +882,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				var tag = arguments[0];
 				if ( 'complete' === tag ) {
 					console.log('COMPLETE',arguments);
-					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], time: arguments[3] };
+					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3] };
 					statsProc = null;
 					return;
 				}
