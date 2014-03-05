@@ -740,11 +740,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			selected: 'everything' === scope.field ? 'selected' : '',
 			enabled: true
 		}, {
-			name: 'million',
-			display: '1 million entries',
-			selected: 'million' === scope.field ? 'selected' : '',
-			enabled: true
-		}, {
 			name: 'hundredthousand',
 			display: '100k entries',
 			selected: 'hundredthousand' === scope.field ? 'selected' : '',
@@ -828,6 +823,20 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			for ( x = 0; x < xlen; x += 1 ) {
 				if ( 'search' === scope.verbs[ x ].name || 'remove' === scope.verbs[ x ].name ) {
 					scope.verbs[ x ].enabled = is_installed;
+				}
+			}
+			if ( is_installed ) {
+				xlen = scope.fields.lenth, total = totalDownloaded(scope.downloaded, scope.range, scope.sort );
+				for ( x = 0; x < xlen; x += 1 ) {
+					if ( 'million' === field && total < 1000000) {
+						scope.fields[ x ].enabled = false;
+					} else if ( 'hundredthousand' === field && total < 100000 ) {
+						scope.fields[ x ].enabled = false;
+					} else if ( 'tenthousand' === field && total < 10000 ) {
+						scope.fields[ x ].enabled = false;
+					} else if ( 'thousand' === field && total < 1000 ) {
+						scope.fields[ x ].enabled = false;
+					}
 				}
 			}
 			console.log('range changed', newer, older);
