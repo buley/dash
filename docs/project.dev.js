@@ -686,9 +686,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			display: 'from',
 			selected: 'from' === scope.sort ? 'selected' : ''
 		}, {
-			name: 'after',
-			display: 'after',
-			selected: 'after' === scope.sort ? 'selected' : ''
+			name: 'since',
+			display: 'since',
+			selected: 'since' === scope.sort ? 'selected' : ''
 		} ];
 		scope.field = 'thousand';
 		scope.fields = [ {
@@ -728,7 +728,35 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			selected: 'delete' === scope.verb ? 'selected' : '',
 			enabled: true
 		} ];
+
+		var hasDownloaded  =  function(range) {
+			var attr;
+			for ( attr in scope.downloaded ) {
+				if ( scope.downloaded.hasOwnProperty( attr ) ) {
+					if ( parseInt( attr, 10 ) >= range ) {
+						if ( true !== scope.downloaded[ attr ] ) {
+							return false;
+						}
+						if ( 'from' === scope.sort ) {
+							return true;
+						}
+					}
+				}
+			}
+			return true;
+		};
 		scope.$watch( 'range', function(newer, older) {
+			var search_visible, x, xlen = scope.verbs.length;
+			if ( true === hasDownloaded(newer) ) {
+				search_visible = true;
+			} else {
+				search_visible = false;
+			}
+			for ( x = 0; x < xlen; x += 1 ) {
+				if ( 'search' === scope.verbs[ x ].name ) {
+					scope.verbs[ x ].enabled = search_visible;
+				}
+			}
 			console.log('range changed', newer, older);
 		});
 
@@ -736,8 +764,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			console.log('verb changed',newer, older);
 		});
 
-		scope.$watch( 'field', function(newer, older) {
-			console.log('field changed',newer, older);
+		scope.$watch( 'sort', function(newer, older) {
+			console.log('sort changed',newer, older);
 		});
 
 		scope.verb = 'explore';
