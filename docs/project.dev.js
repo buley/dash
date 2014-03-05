@@ -712,22 +712,22 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			display: '1k entries',
 			selected: ( null === scope.field || 'thousand' === scope.field ) ? 'selected' : ''
 		} ];
-		scope.verbs = function() {
-
-			return [ {
-				name: 'explore',
-				display: 'explore',
-				selected: 'explore' === scope.verb ? 'selected' : ''
-			}, {
-				name: 'search',
-				display: 'search',
-				selected: 'search' === scope.verb ? 'selected' : ''
-			}, {
-				name: 'delete',
-				display: 'delete',
-				selected: 'delete' === scope.verb ? 'selected' : ''
-			} ];
-		};
+		scope.verbs = [ {
+			name: 'explore',
+			display: 'explore',
+			selected: 'explore' === scope.verb ? 'selected' : '',
+			enabled: true
+		}, {
+			name: 'search',
+			display: 'search',
+			selected: 'search' === scope.verb ? 'selected' : '',
+			enabled: true
+		}, {
+			name: 'delete',
+			display: 'delete',
+			selected: 'delete' === scope.verb ? 'selected' : '',
+			enabled: true
+		} ];
 		scope.verb = 'explore';
 		scope.go = function() {	
 			console.log('GO',scope.field,scope.range,scope.query,scope.sort, scope.verb);
