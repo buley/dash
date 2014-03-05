@@ -872,7 +872,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		var statsObj = {},
 		    last_time = new Date().getTime(),
 		    statsProc = null,
-		    statsTimeout = 100,
+		    statsTimeout = 1000,
 		    wasCompleted = false,
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
@@ -887,10 +887,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				var tag = arguments[0];
 				if ( 'complete' === tag ) {
 					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3] };
-					statsFunc();
-					clearTimeout( statsProc );
-					statsProc = null;
-					return;
 				} else {
 					statsObj[ tag ] = statsObj[ tag ] || 0;
 					statsObj[ tag ] += 1;
