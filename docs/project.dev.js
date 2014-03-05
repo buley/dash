@@ -496,7 +496,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				if ( undefined !== scope.statsData.adds ) {
 					return 'adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
 				} else if ( undefined !== scope.statsData.gets ) {
-					return 'reading ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
+					return 'getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
 				}
 				return JSON.stringify( scope.statsData );
 			} else {
@@ -874,6 +874,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				var tag = arguments[0];
 				if ( 'complete' === tag ) {
 					console.log('COMPLETE',arguments);
+					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], time: arguments[3] };
+					statsProc = null;
+					return;
 				}
 				statsObj[ tag ] = statsObj[ tag ] || 0;
 				statsObj[ tag ] += 1;
