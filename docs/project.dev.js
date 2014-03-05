@@ -736,8 +736,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			var attr;
 			for ( attr in scope.downloaded ) {
 				if ( scope.downloaded.hasOwnProperty( attr ) ) {
-					console.log('comparing',attr,range);
 					if ( parseInt( attr, 10 ) >= range ) {
+						console.log('comparing',attr,range);
 						if ( true !== scope.downloaded[ attr ] ) {
 							return false;
 						}
