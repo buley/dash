@@ -5,7 +5,7 @@
 		<div class="">
 			<span>For example, </span>
 			<select ng-model="verb">
-				<option ng-repeat="option in verbs" name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
+				<option ng-repeat="option in verbs()" name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<select ng-model="field">
 				<option ng-repeat="option in fields" name="{{option.name}}" ng-selected="option.selected" value="{{option.name}}">{{option.display}}</option>
