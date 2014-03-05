@@ -723,9 +723,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			selected: 'search' === scope.verb ? 'selected' : '',
 			enabled: true
 		}, {
-			name: 'delete',
-			display: 'delete',
-			selected: 'delete' === scope.verb ? 'selected' : '',
+			name: 'remove',
+			display: 'remove',
+			selected: 'remove' === scope.verb ? 'selected' : '',
 			enabled: true
 		} ];
 
@@ -746,15 +746,15 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			return true;
 		};
 		scope.$watch( 'range', function(newer, older) {
-			var search_visible, x, xlen = scope.verbs.length;
+			var is_installed, x, xlen = scope.verbs.length;
 			if ( true === hasDownloaded(newer) ) {
-				search_visible = true;
+				is_installed = true;
 			} else {
-				search_visible = false;
+				is_installed = false;
 			}
 			for ( x = 0; x < xlen; x += 1 ) {
-				if ( 'search' === scope.verbs[ x ].name ) {
-					scope.verbs[ x ].enabled = search_visible;
+				if ( 'search' === scope.verbs[ x ].name || 'remove' === scope.verbs[ x ].name ) {
+					scope.verbs[ x ].enabled = is_installed;
 				}
 			}
 			console.log('range changed', newer, older);
