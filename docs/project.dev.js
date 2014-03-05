@@ -485,7 +485,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				}
 				return JSON.stringify( scope.statsData );
 			} else {
-				return 'fast, local data';
+				return 'ready';
 			};
 		};
 		scope.estimate = function() {
