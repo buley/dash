@@ -507,9 +507,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					}
 				}
 				last_updated = new Date().getTime();
-				return JSON.stringify( scope.statsData );
+				return '';
 			} else {
-				return 'data is ready';
+				return 'dash is ready';
 			};
 		};
 		scope.estimate = function() {
