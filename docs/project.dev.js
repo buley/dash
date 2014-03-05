@@ -489,6 +489,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			};
 		};
 		scope.estimate = function() {
+			console.log('estimte',scope.verb);
 			if ( 'search' === scope.verb ) {
 				return totalDownloaded(scope.downloaded, scope.range, scope.sort );
 			}
