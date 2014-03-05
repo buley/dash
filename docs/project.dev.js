@@ -735,6 +735,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.$watch( 'verb', function(newer, older) {
 			console.log('verb changed',newer, older);
 		});
+
+		scope.$watch( 'field', function(newer, older) {
+			console.log('field changed',newer, older);
+		});
+
 		scope.verb = 'explore';
 		scope.go = function() {	
 			console.log('GO',scope.field,scope.range,scope.query,scope.sort, scope.verb);
