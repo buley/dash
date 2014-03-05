@@ -876,13 +876,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    wasCompleted = false,
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
-			if ( true === wasCompleted ) {
-				return;
-			}
-			if (new Date().getTime() - last_updated ) > 10000 ) {
+			if ( wasCompleted && new Date().getTime() - last_updated ) > 10000 ) {
 				statsObj = { clear: true };
-				wasCompleted = true;
 			}
+			wasCompleted = true;
 			scope.statsData = statsObj;
 			statsObj = {};
 			statsProc = null;
