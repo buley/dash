@@ -543,11 +543,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				}
 			}
 			if ( total < 1024 ) {
-				return ( total ).toString() + 'B';
+				return ( total ).toString() + 'B download';
 			} else if ( total < 1048576 ) {	
-				return Math.floor( total / 1024 ).toString() + 'KB';
+				return Math.floor( total / 1024 ).toString() + 'KB download';
 			} else {
-				return Math.round( total / 1048576 ).toString() + 'MB';
+				return Math.round( total / 1048576 ).toString() + 'MB download';
 			}
 		};
 		scope.files = { 
