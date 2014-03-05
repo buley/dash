@@ -826,8 +826,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				}
 			}
 			if ( is_installed ) {
-				xlen = scope.fields.length, field = scope.field, total = totalDownloaded(scope.downloaded, scope.range, scope.sort );
+				xlen = scope.fields.length, field, total = totalDownloaded(scope.downloaded, scope.range, scope.sort );
 				for ( x = 0; x < xlen; x += 1 ) {
+					field = scope.fields[ x ].name;
 					if ( 'million' === field && total < 1000000) {
 						scope.fields[ x ].enabled = false;
 					} else if ( 'hundredthousand' === field && total < 100000 ) {
