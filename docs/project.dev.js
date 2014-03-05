@@ -886,6 +886,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3] };
 					clearTimeout( statsProc );
 					statsProc = null;
+					statsFunc();
 					return;
 				}
 				statsObj[ tag ] = statsObj[ tag ] || 0;
@@ -992,8 +993,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				}
 			}
 			promise.then( function(args) {
-				console.log("FINISHED",args);
-		
 			    var ctx = {
 				  database: 'dash-demo',
 				  store: 'imdb',
