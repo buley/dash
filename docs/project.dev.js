@@ -884,6 +884,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				if ( 'complete' === tag ) {
 					console.log('COMPLETE',arguments);
 					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3] };
+					clearTimeout( statsProc );
 					statsProc = null;
 					return;
 				}
