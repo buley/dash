@@ -495,15 +495,16 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			var field = scope.field;
 			if ( 'search' === scope.verb ) {
 				if ( 'million' === field ) {
-					return 1000000;
+					limit = 1000000;
 				} else if ( 'hundredthousand' === field ) {
-					return 100000;
+					limit = 100000;
 				} else if ( 'tenthousand' === field ) {
-					return 10000;
+					limit = 10000;
 				} else if ( 'thousand' === field ) {
-					return 1000;
+					limit = 1000;
 				}
-				return totalDownloaded(scope.downloaded, scope.range, scope.sort ).toString() + ' entries';
+				limit = totalDownloaded(scope.downloaded, scope.range, scope.sort );
+				return limit.toString() + ' entries';
 			}
 			var values = [],
 			    start = false,
