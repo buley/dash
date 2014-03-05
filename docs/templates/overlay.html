@@ -4,10 +4,11 @@
 
 		<div class="">
 			<span>For example, </span>
-			<select ng-model="verb">
+			<span ng-if="numFields() > 1">explore</span>
+			<select ng-model="verb" ng-if="numFields() > 1">
 				<option ng-repeat="option in verbs" ng-if="option.enabled" name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
-			<select ng-model="field" ng-if="numFields() > 1">
+			<select ng-model="field">
 				<option ng-repeat="option in fields" name="{{option.name}}" ng-selected="option.selected" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<span> in IMDB </span>
