@@ -876,7 +876,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    wasCompleted = false,
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
-			if ( true === wasCompleted || (new Date().getTime() - last_updated ) > 10000 ) {
+			if ( true === wasCompleted ) {
+				return;
+			}
+			if (new Date().getTime() - last_updated ) > 10000 ) {
 				statsObj = { clear: true };
 				wasCompleted = true;
 			}
