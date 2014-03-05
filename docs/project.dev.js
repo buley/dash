@@ -476,6 +476,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		};
 		scope.range = 2014;
 		scope.sort = 'from';
+		scope.field = 'thousand';
+		scope.verb = 'explore';
+
 		scope.stats = function() {
 			if ( scope.statsData ) {
 				if ( undefined !== scope.statsData.insert ) {
@@ -489,7 +492,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			};
 		};
 		scope.estimate = function() {
-			console.log('estimte',scope.verb);
 			if ( 'search' === scope.verb ) {
 				return totalDownloaded(scope.downloaded, scope.range, scope.sort );
 			}
@@ -694,7 +696,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			display: 'since',
 			selected: 'since' === scope.sort ? 'selected' : ''
 		} ];
-		scope.field = 'thousand';
 		scope.fields = [ {
 			name: 'everything',
 			display: 'all entries',
