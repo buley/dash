@@ -729,7 +729,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			enabled: true
 		} ];
 
-		var hasDownloaded  =  function(range) {
+		scope.numFields = function() {
+			return hasDownloaded(scope.range) ? 3 : 1;
+		};
+		var hasDownloaded = function(range) {
 			var attr;
 			for ( attr in scope.downloaded ) {
 				if ( scope.downloaded.hasOwnProperty( attr ) ) {

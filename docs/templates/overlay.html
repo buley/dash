@@ -7,7 +7,7 @@
 			<select ng-model="verb">
 				<option ng-repeat="option in verbs" ng-if="option.enabled" name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
-			<select ng-model="field">
+			<select ng-model="field" ng-if="numFields() > 1">
 				<option ng-repeat="option in fields" name="{{option.name}}" ng-selected="option.selected" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<span> in IMDB </span>
