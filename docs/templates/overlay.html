@@ -5,14 +5,14 @@
 		<div class="">
 			<span>For example, </span>
 			<select ng-model="verb">
-				<option ng-repeat="option in verbs" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
+				<option ng-repeat="option in verbs" name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<select ng-model="field">
-				<option ng-repeat="option in fields" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
+				<option ng-repeat="option in fields" name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<span> in IMDB </span>
 			<select ng-model="sort">
-				<option ng-repeat="option in sorts" {{option.selected}} name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
+				<option ng-repeat="option in sorts" name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<input type="number" max="2021" min="1889" ng-model="range">
 			<br>
