@@ -990,10 +990,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				},
 				dash_promise = dashWorkerService.get.entries(ctx),
 				start_promise = new Date().getTime();
-			    console.log('dash promise', ctx, dash_promise);
 			    dash_promise.then( function(context) {
-				console.log('dash promise fulfilled', context);
-				statsUpdate('complete', 'get', args.range, new Date().getTime() - start_promise);
+				statsUpdate('complete', 'get', context.amount, new Date().getTime() - start_promise);
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
