@@ -492,9 +492,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.verb = 'explore';
 		var last_updated = new Date().getTime();
 		scope.stats = function() {
-			if ( true === scope.statsData.clear ) {
-				return 'dash is ready';
-			} else if ( scope.statsData ) {
+			if ( scope.statsData ) {
+				if ( true === scope.statsData.clear ) {
+					return 'dash is ready';
+				}
 				if ( true === scope.statsData.complete) { 
 					if ( 'adds' === scope.statsData.verb ) {
 						return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
@@ -874,7 +875,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    statsTimeout = 1000;
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
-			console.log('checking last',last_updated);
 			if ( (new Date().getTime() - last_updated ) > 10000 ) {
 				statsObj = { clear: true };
 			}
