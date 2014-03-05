@@ -395,16 +395,19 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
 	start_promise,
         in_progress = false,
 	fresh_start = true,
+	totalRun = 0,
         processNext = function() {
             if(!in_progress && stack.length > 0) {
                 in_progress = true;
 		if ( true === fresh_start ) {
 			start_promise = new Date().getTime();
 			fresh_start = false;
+			totalRun = 0;
 		}
                 doNext(stack.shift());
+		totalRun += 1;
             } else {
-	        statsUpdate('complete', 'add', args.range, new Date().getTime() - start_promise);
+	        statsUpdate('complete', 'add', totalRun, new Date().getTime() - start_promise);
 		fresh_start = true;
 	    }
         },
