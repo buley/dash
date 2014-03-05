@@ -492,7 +492,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			};
 		};
 		scope.estimate = function() {
-			var field = scope.field;
+			var field = scope.field, limit = 0;
 			if ( 'search' === scope.verb ) {
 				if ( 'million' === field ) {
 					limit = 1000000;
@@ -502,8 +502,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					limit = 10000;
 				} else if ( 'thousand' === field ) {
 					limit = 1000;
+				} else {
+					limit = totalDownloaded(scope.downloaded, scope.range, scope.sort );
 				}
-				limit = totalDownloaded(scope.downloaded, scope.range, scope.sort );
 				return limit.toString() + ' entries';
 			}
 			var values = [],
