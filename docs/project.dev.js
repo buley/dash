@@ -728,12 +728,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			selected: 'delete' === scope.verb ? 'selected' : '',
 			enabled: true
 		} ];
-		scope.watch( 'range', function() {
-			console.log('range changed');
+		scope.watch( 'range', function(newer, older) {
+			console.log('range changed', newer, older);
 		});
 
-		scope.watch( 'verb', function() {
-			console.log('verb changed');
+		scope.watch( 'verb', function(newer, older) {
+			console.log('verb changed',newer, older);
 		});
 		scope.verb = 'explore';
 		scope.go = function() {	
