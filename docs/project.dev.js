@@ -869,6 +869,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    },
 		    statsUpdate = function() {
 				var tag = arguments[0];
+				if ( 'complete' === tag ) {
+					console.log('COMPLETE',arguments);
+				}
 				statsObj[ tag ] = statsObj[ tag ] || 0;
 				statsObj[ tag ] += 1;
 				if ( !statsProc ) {
