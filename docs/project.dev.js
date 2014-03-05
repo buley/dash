@@ -499,7 +499,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					limit = 1000000;
 				} else if ( 'hundredthousand' === field && limit > 100000 ) {
 					limit = 100000;
-				} else if ( 'tenthousand' === field && limit > 100000  ) {
+				} else if ( 'tenthousand' === field && limit > 10000  ) {
 					limit = 10000;
 				} else if ( 'thousand' === field && limit > 1000 ) {
 					limit = 1000;
