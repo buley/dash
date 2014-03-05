@@ -826,7 +826,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				}
 			}
 			if ( is_installed ) {
-				xlen = scope.fields.length, total = totalDownloaded(scope.downloaded, scope.range, scope.sort );
+				xlen = scope.fields.length, field = scope.field, total = totalDownloaded(scope.downloaded, scope.range, scope.sort );
 				for ( x = 0; x < xlen; x += 1 ) {
 					if ( 'million' === field && total < 1000000) {
 						scope.fields[ x ].enabled = false;
