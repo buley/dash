@@ -493,6 +493,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		var last_updated = new Date().getTime();
 		scope.stats = function() {
 			if ( scope.statsData ) {
+				last_updated = new Date().getTime();
 				if ( true === scope.statsData.clear ) {
 					return 'dash is ready';
 				}
@@ -509,7 +510,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 						return 'dash is getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
 					}
 				}
-				last_updated = new Date().getTime();
 				return '';
 			} else {
 				return 'dash is ready';
@@ -876,10 +876,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    wasCompleted = false,
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
-			if ( wasCompleted && new Date().getTime() - last_updated ) > 10000 ) {
+			if ( ( new Date().getTime() - last_updated ) > 10000 ) {
 				statsObj = { clear: true };
 			}
-			wasCompleted = true;
 			scope.statsData = statsObj;
 			statsObj = {};
 			statsProc = null;
