@@ -883,10 +883,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				var tag = arguments[0];
 				if ( 'complete' === tag ) {
 					console.log('COMPLETE',arguments);
-					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3] };
+					scope.statsData = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3] };
 					clearTimeout( statsProc );
 					statsProc = null;
-					statsFunc();
 					return;
 				}
 				statsObj[ tag ] = statsObj[ tag ] || 0;
