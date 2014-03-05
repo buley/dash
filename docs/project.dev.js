@@ -694,23 +694,23 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.fields = [ {
 			name: 'everything',
 			display: 'all entries',
-			selected: 'everything' === scope.verb ? 'selected' : ''
+			selected: 'everything' === scope.field ? 'selected' : ''
 		}, {
 			name: 'million',
 			display: '1 million entries',
-			selected: 'million' === scope.verb ? 'selected' : ''
+			selected: 'million' === scope.field ? 'selected' : ''
 		}, {
 			name: 'hundredthousand',
 			display: '100k entries',
-			selected: 'hundredthousand' === scope.verb ? 'selected' : ''
+			selected: 'hundredthousand' === scope.field ? 'selected' : ''
 		}, {
 			name: 'tenthousand',
 			display: '10k entries',
-			selected: 'tenthousand' === scope.verb ? 'selected' : ''
+			selected: 'tenthousand' === scope.field ? 'selected' : ''
 		}, {
 			name: 'thousand',
 			display: '1k entries',
-			selected: 'thousand' === scope.verb ? 'selected' : ''
+			selected: 'thousand' === scope.field ? 'selected' : ''
 		} ];
 		scope.verbs = [ {
 			name: 'explore',
