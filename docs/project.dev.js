@@ -494,16 +494,16 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.estimate = function() {
 			var field = scope.field, limit = 0;
 			if ( 'search' === scope.verb ) {
-				if ( 'million' === field ) {
+				limit = totalDownloaded(scope.downloaded, scope.range, scope.sort );
+				if ( 'million' === field && limit > 1000000 ) {
 					limit = 1000000;
-				} else if ( 'hundredthousand' === field ) {
+				} else if ( 'hundredthousand' === field && limit > 100000 ) {
 					limit = 100000;
-				} else if ( 'tenthousand' === field ) {
+				} else if ( 'tenthousand' === field && limit > 100000  ) {
 					limit = 10000;
-				} else if ( 'thousand' === field ) {
+				} else if ( 'thousand' === field && limit > 1000 ) {
 					limit = 1000;
-				} else {
-					limit = totalDownloaded(scope.downloaded, scope.range, scope.sort );
+
 				}
 				return limit.toString() + ' entries';
 			}
