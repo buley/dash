@@ -4,7 +4,7 @@
 
 		<div class="">
 			<span>For example, </span>
-			<span ng-if="numFields() > 1">explore</span>
+			<span ng-if="1 === numFields()">explore</span>
 			<select ng-model="verb" ng-if="numFields() > 1">
 				<option ng-repeat="option in verbs" ng-if="option.enabled" name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
