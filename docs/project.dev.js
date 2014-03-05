@@ -901,6 +901,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    },
 		    doLayout = function(cmdargs) {
 			var file, start = false, values = [];
+			last_time = new Date().getTime();
 			if ( 'from' === scope.sort ) {
 				values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
 			} else {
