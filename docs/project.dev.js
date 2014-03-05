@@ -732,12 +732,15 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.numFields = function() {
 			return hasDownloaded(scope.range) ? 3 : 1;
 		};
+
+		scope.numEntries = function() {
+			return totalDownloaded(scope.downloaded, scope.range, scope.sort);
+		};
 		var hasDownloaded = function(range) {
 			var attr;
 			for ( attr in scope.downloaded ) {
 				if ( scope.downloaded.hasOwnProperty( attr ) ) {
 					if ( parseInt( attr, 10 ) >= range ) {
-						console.log('comparing',attr,range,scope.downloaded[ attr ]);
 						if ( false === scope.downloaded[ attr ] ) {
 							return false;
 						}
@@ -749,16 +752,15 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			}
 			return true;
 		};
-		var totalDownloaded = function(range) {
+		var totalDownloaded = function(downloaded, range, sort) {
 			var attr, total = 0;
-			for ( attr in scope.downloaded ) {
-				if ( scope.downloaded.hasOwnProperty( attr ) ) {
+			for ( attr in downloaded ) {
+				if ( downloaded.hasOwnProperty( attr ) ) {
 					if ( parseInt( attr, 10 ) >= range ) {
-						console.log('comparing',attr,range,scope.downloaded[ attr ]);
-						if ( false === scope.downloaded[ attr ] ) {
+						if ( false === downloaded[ attr ] ) {
 							continue;
 						}
-						if ( 'from' === scope.sort ) {
+						if ( 'from' === sort ) {
 							return downloaded[ attr ];
 						} else {
 							total += downloaded[ attr ];
