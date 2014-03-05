@@ -880,9 +880,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				statsObj = { clear: true };
 				wasCompleted = true;
 			}
-			scope.$apply( function() {
-				scope.statsData = statsObj;
-			} );
+			scope.statsData = statsObj;
 			statsObj = {};
 			statsProc = null;
 		    },
