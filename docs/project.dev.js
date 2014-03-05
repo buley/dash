@@ -794,6 +794,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			console.log('verb changed',newer, older);
 		});
 
+		scope.$watch( 'field', function(newer, older) {
+			console.log('field changed',newer, older);
+		});
+
+
 		scope.$watch( 'sort', function(newer, older) {
 			console.log('sort changed',newer, older);
 		});
