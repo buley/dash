@@ -726,32 +726,39 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.sorts = [ {
 			name: 'from',
 			display: 'from',
-			selected: 'from' === scope.sort ? 'selected' : ''
+			selected: 'from' === scope.sort ? 'selected' : '',
+			enabled: true
 		}, {
 			name: 'since',
 			display: 'since',
-			selected: 'since' === scope.sort ? 'selected' : ''
+			selected: 'since' === scope.sort ? 'selected' : '',
+			enabled: true
 		} ];
 		scope.fields = [ {
 			name: 'everything',
 			display: 'all entries',
-			selected: 'everything' === scope.field ? 'selected' : ''
+			selected: 'everything' === scope.field ? 'selected' : '',
+			enabled: true
 		}, {
 			name: 'million',
 			display: '1 million entries',
-			selected: 'million' === scope.field ? 'selected' : ''
+			selected: 'million' === scope.field ? 'selected' : '',
+			enabled: true
 		}, {
 			name: 'hundredthousand',
 			display: '100k entries',
-			selected: 'hundredthousand' === scope.field ? 'selected' : ''
+			selected: 'hundredthousand' === scope.field ? 'selected' : '',
+			enabled: true
 		}, {
 			name: 'tenthousand',
 			display: '10k entries',
-			selected: 'tenthousand' === scope.field ? 'selected' : ''
+			selected: 'tenthousand' === scope.field ? 'selected' : '',
+			enabled: true
 		}, {
 			name: 'thousand',
 			display: '1k entries',
-			selected: ( null === scope.field || 'thousand' === scope.field ) ? 'selected' : ''
+			selected: ( null === scope.field || 'thousand' === scope.field ) ? 'selected' : '',
+			enabled: true
 		} ];
 		scope.verbs = [ {
 			name: 'explore',
