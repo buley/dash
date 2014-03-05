@@ -492,7 +492,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.verb = 'explore';
 		var last_updated = new Date().getTime();
 		scope.stats = function() {
-			if ( scope.statsData ) {
+			if ( true === scope.statsData.clear ) {
+				return 'dash is ready';
+			} else if ( scope.statsData ) {
 				if ( true === scope.statsData.complete) { 
 					if ( 'adds' === scope.statsData.verb ) {
 						return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
@@ -872,7 +874,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    statsTimeout = 1000;
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
-			last_time = new Date().getTime();
+			if ( statsObj.elapsed > 10000 ) {
+				statsObj = { clear: true };
+			}
 			scope.$apply( function() {
 				scope.statsData = statsObj;
 			} );
@@ -883,12 +887,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				var tag = arguments[0];
 				if ( 'complete' === tag ) {
 					scope.statsData = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3] };
-					clearTimeout( statsProc );
-					statsProc = null;
-					return;
+				} else {
+					statsObj[ tag ] = statsObj[ tag ] || 0;
+					statsObj[ tag ] += 1;
 				}
-				statsObj[ tag ] = statsObj[ tag ] || 0;
-				statsObj[ tag ] += 1;
 				if ( !statsProc ) {
 					statsProc = setTimeout(statsFunc,statsTimeout);
 				}
