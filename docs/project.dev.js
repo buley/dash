@@ -490,7 +490,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.sort = 'from';
 		scope.field = 'thousand';
 		scope.verb = 'explore';
-
+		var last_updated = new Date().getTime();
 		scope.stats = function() {
 			if ( scope.statsData ) {
 				if ( true === scope.statsData.complete) { 
@@ -506,9 +506,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 						return 'dash is getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
 					}
 				}
+				last_updated = new Date().getTime();
 				return JSON.stringify( scope.statsData );
 			} else {
-				return 'data is <em>ready</em>';
+				return 'data is ready';
 			};
 		};
 		scope.estimate = function() {
