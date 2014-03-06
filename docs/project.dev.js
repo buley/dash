@@ -931,7 +931,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  auto_increment: true,
 				  store_key_path: 'id',
 				  index: 'season',
-				  match: { sy: /test/ },
 				  index_key_path: 'sy',
 				  limit: limit,
 				  key: new Date('1/1/' + scope.range).getTime()
@@ -945,7 +944,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				console.log('dash promise rejected', context);
 			    }, function(context) {
 				system.remove(context);
-				console.log('searched one');
+				console.log('searched one',context.entry.sy);
 				statsUpdate('searches');
 				//system.cameraMod( 'z', 2, 50000, 10 );
 				//system.cameraMod( 'z', 1, 10000, 0 );
