@@ -348,8 +348,10 @@ var IMDBSystem = (function(THREE){
 			highlight: function(context) {
 			    var key = context.primary_key,
 				particle = scene.getObjectByName( key );
-				particle.material.color = '#00ff00';
-				highlighted.push(context);
+				if ( particle ) {
+					particle.material.color = '#00ff00';
+					highlighted.push(context);
+				}
 			},
 			camera: function(x,y,z) {
 				camera.position.x = x || camera.position.x;
