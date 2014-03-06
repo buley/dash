@@ -331,6 +331,13 @@ var IMDBSystem = (function(THREE){
 			    scene.add( particle );
 
 			},
+			remove: function(context) {
+			    var key = context.primary_key,
+				particle = scene.getObjectByName( key );
+			    console.log('removing', particle);
+			    scene.remove( particle );
+
+			},
 			layout: function() {
 
 			},

@@ -908,7 +908,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
-				//system.remove(context.entry);
+				system.remove(context);
 				console.log('removed',context);
 				statsUpdate('removes');
 				system.cameraMod( 'z', 2, 50000, 10 );
