@@ -345,7 +345,10 @@ var IMDBSystem = (function(THREE){
 			reset: function() {
 				var x = 0, xlen = scene.children.length, xitem;
 				for ( ; x < xlen; x += 1 ) {
-					console.log(scene.children[x]);
+					xitem = scene.children[x];
+					if ( xitem instanceof THREE.Mesh ) {
+						scene.remove(xitem);
+					}
 				}
 			},
 			highlight: function(context) {
