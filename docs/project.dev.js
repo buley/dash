@@ -499,7 +499,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				}
 				if ( true === scope.statsData.complete) { 
 					scope.verb = 'search';
-					scope.field = 'everything';
 					if ( 'adds' === scope.statsData.verb ) {
 						return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'gets' === scope.statsData.verb ) {
