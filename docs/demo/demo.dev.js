@@ -346,17 +346,19 @@ var IMDBSystem = (function(THREE){
 				var x = 0, xlen = scene.children.length, xitem;
 				for ( ; x < xlen; x += 1 ) {
 					xitem = scene.children[x];
-					scene.remove(xitem);
+					if(xitem.name > 0 ) {
+						scene.remove(xitem);
+					}
 				}
 
-				    /*var bounding = new THREE.CubeGeometry( range, range, range, 8,8,8 ),
+				    var bounding = new THREE.CubeGeometry( range, range, range, 8,8,8 ),
 					bounding_material = new THREE.MeshBasicMaterial( {color: 0x333333, wireframe: true, transparent: true, opacity: .1 } ),
 					cube = new THREE.Mesh( bounding, bounding_material );
 				    scene.add(cube);
-				    var bounding = new THREE.CubeGeometry( range + 100, range + 100, range + 100, 2, 2, 2 ),
-					bounding_material = new THREE.MeshBasicMaterial( {color: 0x222222, wireframe: true, transparent: true, opacity: .5 } );
-					cube = new THREE.Mesh( bounding, bounding_material );
-				    scene.add(cube);*/
+				    bounding = new THREE.CubeGeometry( range + 100, range + 100, range + 100, 2, 2, 2 );
+				    bounding_material = new THREE.MeshBasicMaterial( {color: 0x222222, wireframe: true, transparent: true, opacity: .5 } )
+				    cube = new THREE.Mesh( bounding, bounding_material );
+				    scene.add(cube);
 
 
 
