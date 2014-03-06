@@ -909,7 +909,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    }, function(context) {
 				system.remove(context);
 				statsUpdate('removes');
-				system.cameraMod( 'z', 2, 50000, 10 );
+				//system.cameraMod( 'z', 2, 50000, 10 );
 				//system.cameraMod( 'z', 1, 10000, 0 );
 			    });
 
@@ -1063,7 +1063,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    }, function(context) {
 				system.add(context.entry);
 				statsUpdate('gets');
-				system.cameraMod( 'z', -2, 50000, 10 );
+				//system.cameraMod( 'z', -2, 50000, 10 );
 				//system.cameraMod( 'z', 1, 10000, 0 );
 			    });
 
