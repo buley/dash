@@ -494,6 +494,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.stats = function() {
 			if ( scope.statsData ) {
 				last_updated = new Date().getTime();
+				var pretty = function(rate) {
+					return rate/(scope.statsData.elapsed/1000)
+				};
 				if ( true === scope.statsData.clear ) {
 					return 'dash is ready';
 				}
@@ -507,11 +510,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
-						return 'dash is adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
+						return 'dash is adding ' + pretty(scope.statsData.adds) + ' entries/second';
 					} else if ( undefined !== scope.statsData.gets ) {
-						return 'dash is getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
+						return 'dash is getting ' + pretty(scope.statsData.gets) + ' entries/second';
 					} else if ( undefined !== scope.statsData.removes ) {
-						return 'dash is removing ' + Math.floor((scope.statsData.removes/(scope.statsData.elapsed/1000))) + ' entries/second';
+						return 'dash is removing ' + pretty(scope.statsData.removes) + ' entries/second';
 					}
 
 				}
