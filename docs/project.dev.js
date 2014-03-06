@@ -937,14 +937,17 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				},
 				dash_promise = dashWorkerService.get.entries(ctx),
 				start_promise = new Date().getTime();
+			    system.reset();
 			    dash_promise.then( function(context) {
 				console.log('searched all',context.amount);
 				statsUpdate('complete', 'searches', context.amount, new Date().getTime() - start_promise);
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
-				system.remove(context);
-				console.log('searched one',context.entry.sy);
+				
+				system.highlight(context);
+				console.log('searched one',context.entry);
+				
 				statsUpdate('searches');
 				//system.cameraMod( 'z', 2, 50000, 10 );
 				//system.cameraMod( 'z', 1, 10000, 0 );

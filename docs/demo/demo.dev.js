@@ -314,6 +314,7 @@ var IMDBSystem = (function(THREE){
 			document.getElementsByTagName('body')[0].appendChild( stats.domElement );
 		    }
 		    render();
+			var highlighted = [];
 		    return {
 			clear: function() {
 			},
@@ -340,6 +341,15 @@ var IMDBSystem = (function(THREE){
 			},
 			layout: function() {
 
+			},
+			reset: function() {
+
+			},
+			highlight: function(context) {
+			    var key = context.primary_key,
+				particle = scene.getObjectByName( key );
+				particle.material.color = '#00ff00';
+				highlighted.push(context);
 			},
 			camera: function(x,y,z) {
 				camera.position.x = x || camera.position.x;
