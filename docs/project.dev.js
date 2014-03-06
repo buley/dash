@@ -497,9 +497,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				var pretty = function(rate) {
 					var quant = rate/(scope.statsData.elapsed/1000)
 					if ( quant < 1 ) {
-						quant = rate/(scope.statsData.elapsed/60000)
+						return Math.floor(rate/(scope.statsData.elapsed/60000)) + '/minute';
 					}
-					return quant;
+					return Math.floor(quant) + '/second';
 					
 				};
 				if ( true === scope.statsData.clear ) {
@@ -515,11 +515,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
-						return 'dash is adding ' + pretty(scope.statsData.adds) + ' entries/second';
+						return 'dash is adding ' + pretty(scope.statsData.adds);
 					} else if ( undefined !== scope.statsData.gets ) {
-						return 'dash is getting ' + pretty(scope.statsData.gets) + ' entries/second';
+						return 'dash is getting ' + pretty(scope.statsData.gets);
 					} else if ( undefined !== scope.statsData.removes ) {
-						return 'dash is removing ' + pretty(scope.statsData.removes) + ' entries/second';
+						return 'dash is removing ' + pretty(scope.statsData.removes);
 					}
 
 				}
