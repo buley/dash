@@ -2,7 +2,7 @@
 <section id="dash-demo-overlay-container" class="large-12">
 	<section id="dash-demo-overlay-marketing" class="large-8 right">
 
-		<div class="">
+		<div class="large-6">
 			<span>For example, </span>
 			<span ng-show="1 === numFields()">explore</span>
 			<select ng-model="verb" ng-show="numFields() > 1">
@@ -19,6 +19,8 @@
 			<span>({{estimate()}} in total).</span>
 			<br>
 			<input type="text" ng-model="query" ng-show="'search' == verb">
+		</div>
+		<div class="large-2">
 			<input type="button" value="GO" ng-click="go()" class="success dash-demo-overlay-marketing-button small button"></input>
 		</div>
 
