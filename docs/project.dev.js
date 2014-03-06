@@ -935,7 +935,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  limit: limit,
 				  key: new Date('1/1/' + scope.range).getTime()
 				},
-				q =  new RegExp( '/' + scope.query '/'),
+				q =  new RegExp( '/' + scope.query + '/'),
 				dash_promise = dashWorkerService.get.entries(ctx),
 				start_promise = new Date().getTime();
 			    system.reset();
