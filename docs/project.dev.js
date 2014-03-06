@@ -505,7 +505,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					} else if ( 'removes' === scope.statsData.verb ) {
 						return 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
-					scope.statsData.complete = false;
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
 						return 'dash is adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
