@@ -896,14 +896,15 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  limit: cmdargs.limit,
 				  key: new Date('1/1/' + args.range).getTime()
 				},
-				dash_promise = dashWorkerService.get.entries(ctx),
+				dash_promise = dashWorkerService.remove.entries(ctx),
 				start_promise = new Date().getTime();
 			    dash_promise.then( function(context) {
 				statsUpdate('complete', 'removes', context.amount, new Date().getTime() - start_promise);
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
-				system.add(context.entry);
+				//system.remove(context.entry);
+				console.log('removed',context.key);
 				statsUpdate('removes');
 				system.cameraMod( 'z', 2, 50000, 10 );
 				//system.cameraMod( 'z', 1, 10000, 0 );
