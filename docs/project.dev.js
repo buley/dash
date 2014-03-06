@@ -945,7 +945,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
-				if ( null !== context.se.match(q) || null !== context.ep.match(q) ) {
+				if ( null !== context.entry.se.match(q) || null !== context.entry.ep.match(q) ) {
 					system.highlight(context);
 					console.log('searched one',context.entry);
 				}
