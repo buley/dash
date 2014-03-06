@@ -510,7 +510,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 						return 'dash is adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
 					} else if ( undefined !== scope.statsData.gets ) {
 						return 'dash is getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
-					} else if ( undefined !== scope.statsData.removess ) {
+					} else if ( undefined !== scope.statsData.removes ) {
 						return 'dash is removing ' + Math.floor((scope.statsData.removes/(scope.statsData.elapsed/1000))) + ' entries/second';
 					}
 
