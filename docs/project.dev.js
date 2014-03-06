@@ -931,24 +931,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  auto_increment: true,
 				  store_key_path: 'id',
 				  index: 'season',
-				  match: function(whole) {
-					console.log('match whole',whole);
-					return {
-						'sy': function(val) {
-							console.log('val',val);
-							return val > 0 ? true : false;
-						},
-					}
-				  },
-				  map: function(whole) {
-					console.log('map whole',whole);
-					return {
-						'sy': function(val) {
-							console.log('map',val);
-							return val;
-						},
-					}
-				  },
+				  match: { sy: /test/ },
 				  index_key_path: 'sy',
 				  limit: limit,
 				  key: new Date('1/1/' + scope.range).getTime()
