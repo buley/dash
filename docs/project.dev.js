@@ -925,6 +925,50 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 
 			} else {
 				console.log("SEARCH", scope.query);
+			    var ctx = {
+				  database: 'dash-demo',
+				  store: 'imdb',
+				  auto_increment: true,
+				  store_key_path: 'id',
+				  index: 'season',
+				  match: function(whole) {
+					console.log('match whole',whole);
+					return {
+						'sy': function(val) {
+							console.log('val',val);
+							return val > 0 ? true : false;
+						},
+					}
+				  },
+				  map: function(whole) {
+					console.log('map whole',whole);
+					return {
+						'sy': function(val) {
+							console.log('map',val);
+							return val;
+						},
+					}
+				  },
+				  index_key_path: 'sy',
+				  limit: limit,
+				  key: new Date('1/1/' + scope.range).getTime()
+				},
+				dash_promise = dashWorkerService.get.entries(ctx),
+				start_promise = new Date().getTime();
+			    dash_promise.then( function(context) {
+				console.log('searched all',context.amount);
+				statsUpdate('complete', 'searches', context.amount, new Date().getTime() - start_promise);
+			    }, function(context) {
+				console.log('dash promise rejected', context);
+			    }, function(context) {
+				system.remove(context);
+				console.log('searched one');
+				statsUpdate('searches');
+				//system.cameraMod( 'z', 2, 50000, 10 );
+				//system.cameraMod( 'z', 1, 10000, 0 );
+			    });
+
+
 			}
 
 		};
