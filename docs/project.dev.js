@@ -497,9 +497,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				var pretty = function(rate) {
 					var quant = rate/(scope.statsData.elapsed/1000)
 					if ( quant < 1 ) {
-						return Math.floor(rate/(scope.statsData.elapsed/60000)) + '/minute';
+						return Math.floor(rate/(scope.statsData.elapsed/60000)) + ' per minute';
 					}
-					return Math.floor(quant) + '/second';
+					return Math.floor(quant) + ' per second';
 					
 				};
 				if ( true === scope.statsData.clear ) {
