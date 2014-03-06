@@ -894,7 +894,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  index: 'season',
 				  index_key_path: 'sy',
 				  limit: limit,
-				  key: new Date('1/1/' + args.range).getTime()
+				  key: new Date('1/1/' + scope.range).getTime()
 				},
 				dash_promise = dashWorkerService.remove.entries(ctx),
 				start_promise = new Date().getTime();
