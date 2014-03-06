@@ -146,7 +146,7 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-demo-overlay-marketing div select,
 #dash-demo-overlay-marketing div input {
-  width: inherit;
+  width: auto;
   display: inline;
   font-size: inherit;
   line-height: inherit;
