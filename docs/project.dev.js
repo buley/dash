@@ -882,10 +882,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					verb: scope.verb
 				});
 			};
-			if ( 'download' !== scope.verb ) {
+			if ( 'remove' !== scope.verb && 'search' !== scope.verb ) {
 				callLayout();
+			} else if ( 'remove' === scope.verb ) {
+				console.log('REMOVE');
 			} else {
-
+				console.log("SEARCH", scope.query);
 			}
 
 		};
