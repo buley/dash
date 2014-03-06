@@ -11,13 +11,12 @@
 			<select ng-model="field">
 				<option ng-repeat="option in fields" ng-if="option.enabled" name="{{option.name}}" ng-selected="field === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
+			<!--<span> ({{estimate()}} in total) </span>-->
 			<span> in IMDB </span>
 			<select ng-model="sort">
 				<option ng-repeat="option in sorts" name="{{option.name}}" ng-selected="sort === option.name" value="{{option.name}}">{{option.display}}</option>
 			</select>
 			<input type="number" max="2021" min="1889" ng-model="range">
-			<span>({{estimate()}} in total).</span>
-			<br>
 			<input type="text" ng-model="query" ng-show="'search' == verb">
 		</div>
 		<div class="large-2 left">
