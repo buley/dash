@@ -503,13 +503,18 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 						return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'gets' === scope.statsData.verb ) {
 						return 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+					} else if ( 'removes' === scope.statsData.verb ) {
+						return 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
 						return 'dash is adding ' + Math.floor((scope.statsData.adds/(scope.statsData.elapsed/1000))) + ' entries/second';
 					} else if ( undefined !== scope.statsData.gets ) {
 						return 'dash is getting ' + Math.floor((scope.statsData.gets/(scope.statsData.elapsed/1000))) + ' entries/second';
+					} else if ( undefined !== scope.statsData.removess ) {
+						return 'dash is removing ' + Math.floor((scope.statsData.removes/(scope.statsData.elapsed/1000))) + ' entries/second';
 					}
+
 				}
 				return '';
 			} else {
@@ -904,7 +909,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				console.log('dash promise rejected', context);
 			    }, function(context) {
 				//system.remove(context.entry);
-				console.log('removed',context.key);
+				console.log('removed',context);
 				statsUpdate('removes');
 				system.cameraMod( 'z', 2, 50000, 10 );
 				//system.cameraMod( 'z', 1, 10000, 0 );
