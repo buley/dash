@@ -279,7 +279,6 @@ var IMDBSystem = (function(THREE){
 				node.innerHTML = 'Your browser doesn\'t seem to support Pointer Lock API';
 
 			}
-
 	                        starttime = new Date().getTime();
 				controls = new THREE.TrackballControls( camera );
 				controls.enabled = false;
@@ -307,6 +306,7 @@ var IMDBSystem = (function(THREE){
 			bounding_material = new THREE.MeshBasicMaterial( {color: 0x222222, wireframe: true, transparent: true, opacity: .5 } );
 			cube = new THREE.Mesh( bounding, bounding_material );
 		    scene.add(cube);
+
 
 
 		    node.appendChild(renderer.domElement);
@@ -346,10 +346,32 @@ var IMDBSystem = (function(THREE){
 				var x = 0, xlen = scene.children.length, xitem;
 				for ( ; x < xlen; x += 1 ) {
 					xitem = scene.children[x];
-					if ( xitem instanceof THREE.Mesh ) {
 						scene.remove(xitem);
 					}
 				}
+
+				    //controls.addEventListener( 'change', relayout );
+				    light = new THREE.DirectionalLight( 0xD5D5D5 );
+				    light.position.set( 1, 1, 1 );
+				    //scene.add( light );
+
+				    light = new THREE.DirectionalLight( 0xCCCCCC );
+				    light.position.set( -1, -1, -1 );
+				    //scene.add( light );
+
+				    light = new THREE.AmbientLight( 0xD5D5D5 );
+				    scene.add( light );
+				    var bounding = new THREE.CubeGeometry( range, range, range, 8,8,8 ),
+					bounding_material = new THREE.MeshBasicMaterial( {color: 0x333333, wireframe: true, transparent: true, opacity: .1 } ),
+					cube = new THREE.Mesh( bounding, bounding_material );
+				    scene.add(cube);
+				    var bounding = new THREE.CubeGeometry( range + 100, range + 100, range + 100, 2, 2, 2 ),
+					bounding_material = new THREE.MeshBasicMaterial( {color: 0x222222, wireframe: true, transparent: true, opacity: .5 } );
+					cube = new THREE.Mesh( bounding, bounding_material );
+				    scene.add(cube);
+
+
+
 			},
 			highlight: function(context) {
 			    var key = context.primary_key,
