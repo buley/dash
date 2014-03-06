@@ -935,6 +935,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				  limit: limit,
 				  key: new Date('1/1/' + scope.range).getTime()
 				},
+				q =  new RegExp( '/' + scope.query '/'),
 				dash_promise = dashWorkerService.get.entries(ctx),
 				start_promise = new Date().getTime();
 			    system.reset();
@@ -944,9 +945,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			    }, function(context) {
 				console.log('dash promise rejected', context);
 			    }, function(context) {
-				
-				system.highlight(context);
-				console.log('searched one',context.entry);
+				if ( null !== context.se.match(q) || null !== context.ep.match(q) ) {
+					system.highlight(context);
+					console.log('searched one',context.entry);
+				}
 				
 				statsUpdate('searches');
 				//system.cameraMod( 'z', 2, 50000, 10 );
