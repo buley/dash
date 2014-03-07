@@ -68,7 +68,7 @@ var IMDBSystem = (function(THREE){
 		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		raycaster.ray.origin.copy( camera.position );
 
-		controls.update( new Date.getTime() - start_time );
+		controls.update( new Date().getTime() - start_time );
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
