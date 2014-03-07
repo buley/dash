@@ -250,6 +250,7 @@ var IMDBSystem = (function(THREE){
 					if ( true === is_locked ) {
 						document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
 						document.exitPointerLock();
+						controls.enabled = true;
 						return;
 					}
 					node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
