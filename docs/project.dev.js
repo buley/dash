@@ -501,7 +501,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					
 				};
 				if ( true === scope.statsData.clear ) {
-					return 'dash is ready';
+					return 'dash is ready to go';
 				}
 				if ( true === scope.statsData.complete) { 
 					if ( 'adds' === scope.statsData.verb ) {
@@ -527,7 +527,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 				}
 				return '';
 			} else {
-				return 'dash is ready';
+				return 'dash is ready to go';
 			};
 		};
 		scope.estimate = function() {
