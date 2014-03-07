@@ -248,42 +248,41 @@ var IMDBSystem = (function(THREE){
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
 				window.addEventListener( 'keyup', function ( event ) {
-					if ( 32 !== event.keyCode ) {
-						return;
-					}
-					if ( true === is_locked ) {
-						document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
-						document.exitPointerLock();
-						controls.enabled = true;
-						return;
-					}
-					node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
+					if ( 32 === event.keyCode ) {
+						if ( true === is_locked ) {
+							document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
+							document.exitPointerLock();
+							controls.enabled = true;
+							return;
+						}
+						node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
 
-					if ( /Firefox/i.test( navigator.userAgent ) ) {
+						if ( /Firefox/i.test( navigator.userAgent ) ) {
 
-						var fullscreenchange = function ( event ) {
+							var fullscreenchange = function ( event ) {
 
-							if ( document.fullscreenElement === node || document.mozFullscreenElement === node || document.mozFullScreenElement === node ) {
+								if ( document.fullscreenElement === node || document.mozFullscreenElement === node || document.mozFullScreenElement === node ) {
 
-								document.removeEventListener( 'fullscreenchange', fullscreenchange );
-								document.removeEventListener( 'mozfullscreenchange', fullscreenchange );
+									document.removeEventListener( 'fullscreenchange', fullscreenchange );
+									document.removeEventListener( 'mozfullscreenchange', fullscreenchange );
 
-								node.requestPointerLock();
+									node.requestPointerLock();
+								}
+
 							}
 
+							document.addEventListener( 'fullscreenchange', fullscreenchange, false );
+							document.addEventListener( 'mozfullscreenchange', fullscreenchange, false );
+
+							node.requestFullscreen = node.requestFullscreen || node.mozRequestFullscreen || node.mozRequestFullScreen || node.webkitRequestFullscreen;
+
+							node.requestFullscreen();
+
+						} else {
+
+							node.requestPointerLock();
+
 						}
-
-						document.addEventListener( 'fullscreenchange', fullscreenchange, false );
-						document.addEventListener( 'mozfullscreenchange', fullscreenchange, false );
-
-						node.requestFullscreen = node.requestFullscreen || node.mozRequestFullscreen || node.mozRequestFullScreen || node.webkitRequestFullscreen;
-
-						node.requestFullscreen();
-
-					} else {
-
-						node.requestPointerLock();
-
 					}
 
 				}, false );
