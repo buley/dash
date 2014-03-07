@@ -951,7 +951,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					context.id = context.primary_key;
 					system.add(context);
 					//system.highlight(context);
-					console.log('searched one',context.entry);
 				}
 				
 				statsUpdate('searches');
