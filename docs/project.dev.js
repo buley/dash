@@ -510,6 +510,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 						return 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'removes' === scope.statsData.verb ) {
 						return 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+					} else if ( 'searches' === scope.statsData.verb ) {
+						return 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
@@ -518,6 +520,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 						return 'dash is getting ' + pretty(scope.statsData.gets);
 					} else if ( undefined !== scope.statsData.removes ) {
 						return 'dash is removing ' + pretty(scope.statsData.removes);
+					} else if ( undefined !== scope.statsData.removes ) {
+						return 'dash is searching ' + pretty(scope.statsData.searches);
 					}
 
 				}
