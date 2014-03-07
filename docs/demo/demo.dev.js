@@ -210,7 +210,7 @@ var IMDBSystem = (function(THREE){
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 			//Start pointer lock
 
-			var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document;
+			var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement' in document || 'webkitPointerLockElement' in document, is_locked = false;
 
 			if ( havePointerLock ) {
 
@@ -221,10 +221,12 @@ var IMDBSystem = (function(THREE){
 					if ( document.pointerLockElement === node || document.mozPointerLockElement === node || document.webkitPointerLockElement === node ) {
 
 						controls.enabled = true;
+						is_locked = true;
 
 					} else {
 
 						controls.enabled = false;
+						is_locked = false;
 					}
 				}
 
@@ -242,6 +244,14 @@ var IMDBSystem = (function(THREE){
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
 				window.addEventListener( 'keyup', function ( event ) {
+					if ( 32 !== event.keyCode ) {
+						return;
+					}
+					if ( true === is_locked ) {
+						document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock;
+						document.exitPointerLock();
+						return;
+					}
 					node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
 
 					if ( /Firefox/i.test( navigator.userAgent ) ) {
