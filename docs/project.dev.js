@@ -490,19 +490,15 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.sort = 'from';
 		scope.field = 'thousand';
 		scope.verb = 'explore';
-		var last_updated = new Date().getTime(),
-		    prev_update;
 		scope.stats = function() {
 			if ( scope.statsData ) {
-				prev_update = last_updated;
-				last_updated = new Date().getTime();
 				var pretty = function(rate) {
-					return rate + ' entries in ' + (last_updated - prev_update) + ' ms';
-					var quant = (rate + 1)/(last_updated - prev_update) + 1;
+					return rate + ' entries';
+					var quant = rate/scope.statsData.elapsed;
 					/*if ( quant < 1 ) {
 						return Math.floor(rate/(scope.statsData.elapsed/60000)) + ' entries per minute';
 					}*/
-					return Math.floor(quant) + ' entries per second';
+					return quant + ' entries per second';
 					
 				};
 				if ( true === scope.statsData.clear ) {
