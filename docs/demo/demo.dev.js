@@ -116,6 +116,7 @@ var IMDBSystem = (function(THREE){
             camera,
 	    raycaster,
 	    controls,
+            pointerlockctls,
             /* What the viewer sees */
             scene,
             /* How the viewer sees it */
@@ -222,10 +223,12 @@ var IMDBSystem = (function(THREE){
 					if ( document.pointerLockElement === node || document.mozPointerLockElement === node || document.webkitPointerLockElement === node ) {
 
 						controls.enabled = false;
+						pointerlockctls.enabled = true;
 						is_locked = true;
 
 					} else {
 
+						pointerlockctls.enabled = false;
 						controls.enabled = true;
 						is_locked = false;
 					}
@@ -292,6 +295,7 @@ var IMDBSystem = (function(THREE){
 			}
 	                        starttime = new Date().getTime();
 				controls = new THREE.TrackballControls( camera );
+				pointerlockctls = new THREE.PointerLockControls( camera );
 				scene.add( controls );
 
 
