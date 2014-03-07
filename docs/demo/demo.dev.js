@@ -241,7 +241,7 @@ var IMDBSystem = (function(THREE){
 				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
-				node.addEventListener( 'mousedown', function ( event ) {
+				node.addEventListener( 'dblclick', function ( event ) {
 					console.log('mouse down');
 					node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
 
