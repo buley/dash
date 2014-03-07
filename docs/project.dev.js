@@ -490,9 +490,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.sort = 'from';
 		scope.field = 'thousand';
 		scope.verb = 'explore';
-		var last_updated = new Date().getTime();
+		var last_updated = new Date().getTime(),
+		    prev_update;
 		scope.stats = function() {
 			if ( scope.statsData ) {
+				prev_update = last_updated;
 				last_updated = new Date().getTime();
 				var pretty = function(rate) {
 					var quant = (rate + 1)/(new Date().getTime() - last_updated) + 1;
