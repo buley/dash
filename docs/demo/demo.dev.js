@@ -241,12 +241,7 @@ var IMDBSystem = (function(THREE){
 				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
-				window.addEventListener( 'onkeyup', function ( event ) {
-					console.log('key',event.keyCode);
-					if ( event.keyCode !== 32 ) {
-						return;
-					}
-					// Ask the browser to lock the pointer
+				node.addEventListener( 'onkeyup', function ( event ) {
 					node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
 
 					if ( /Firefox/i.test( navigator.userAgent ) ) {
@@ -275,6 +270,7 @@ var IMDBSystem = (function(THREE){
 						node.requestPointerLock();
 
 					}
+					event.preventDefault();
 
 				}, false );
 
