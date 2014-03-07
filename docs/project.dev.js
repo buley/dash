@@ -872,7 +872,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.$watch( 'sort', function(newer, older) {
 			console.log('sort changed',newer, older);
 		});
-		$('#dash-demo-overlay-marketing').hover(function(console.log('on');}, function(console.log('off');} );
+		$('#dash-demo-overlay-marketing').hover(function() {
+			console.log('on');
+			system.controls(false);
+		}, function() {
+			system.controls(true);
+			console.log('off');
+		});
 
 		scope.verb = 'explore';
 		scope.go = function() {	
