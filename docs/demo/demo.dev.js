@@ -353,7 +353,7 @@ var IMDBSystem = (function(THREE){
 
 			},
 			highlight: function(context) {
-			    var key = context.primary_key,
+			    var key = context.primary_key || context.key || context.entry.id,
 				particle = scene.getObjectByName( key );
 				if ( particle ) {
 					particle.material.color = '#00ff00';
