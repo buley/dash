@@ -967,7 +967,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    wasCompleted = false,
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
-			if ( ( new Date().getTime() - last_time ) > 10000 ) {
+			if ( ( new Date().getTime() - scope.statsData.update ) > 10000 ) {
 				statsObj = { clear: true };
 			}
 			scope.statsData = statsObj;
@@ -977,7 +977,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		    statsUpdate = function() {
 				var tag = arguments[0];
 				if ( 'complete' === tag ) {
-					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3] };
+					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3], updated: new Date().getTime() };
 					scope.statsData = statsObj;
 					return;
 				} else {
