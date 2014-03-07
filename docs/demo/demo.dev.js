@@ -297,6 +297,7 @@ var IMDBSystem = (function(THREE){
 				controls = new THREE.TrackballControls( camera );
 				pointerlockctls = new THREE.PointerLockControls( camera );
 				scene.add( controls );
+				scene.add( pointerlockctls );
 
 
 			//End pointer lock
