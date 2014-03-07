@@ -873,11 +873,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			console.log('sort changed',newer, older);
 		});
 		$('#dash-demo-overlay-marketing').hover(function() {
-			console.log('on');
 			system.controls(false);
 		}, function() {
 			system.controls(true);
-			console.log('off');
 		});
 
 		scope.verb = 'explore';
