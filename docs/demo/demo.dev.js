@@ -214,7 +214,7 @@ var IMDBSystem = (function(THREE){
 
 			if ( havePointerLock ) {
 
-						controls.enabled = true;
+
 				var pointerlockchange = function ( event ) {
 					console.log('lock change',event);
 
@@ -282,7 +282,6 @@ var IMDBSystem = (function(THREE){
 			}
 	                        starttime = new Date().getTime();
 				controls = new THREE.TrackballControls( camera );
-				controls.enabled = false;
 				scene.add( controls );
 
 
