@@ -214,6 +214,7 @@ var IMDBSystem = (function(THREE){
 
 			if ( havePointerLock ) {
 
+						controls.enabled = true;
 				var pointerlockchange = function ( event ) {
 					console.log('lock change',event);
 
