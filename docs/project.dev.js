@@ -964,7 +964,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		var statsObj = {},
 		    last_time = new Date().getTime(),
 		    statsProc = null,
-		    statsTimeout = 100,
+		    statsTimeout = 3000,
 		    wasCompleted = false,
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
