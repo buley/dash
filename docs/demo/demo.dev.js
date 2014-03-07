@@ -221,7 +221,7 @@ var IMDBSystem = (function(THREE){
 
 					if ( document.pointerLockElement === node || document.mozPointerLockElement === node || document.webkitPointerLockElement === node ) {
 
-						controls.enabled = true;
+						controls.enabled = false;
 						is_locked = true;
 
 					} else {
