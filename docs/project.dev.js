@@ -495,10 +495,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 			if ( scope.statsData ) {
 				last_updated = new Date().getTime();
 				var pretty = function(rate) {
-					var quant = rate/(new Date().getTime() - last_updated);
-					if ( quant < 1 ) {
+					var quant = (rate + 1)/(new Date().getTime() - last_updated) + 1;
+					/*if ( quant < 1 ) {
 						return Math.floor(rate/(scope.statsData.elapsed/60000)) + ' entries per minute';
-					}
+					}*/
 					return Math.floor(quant) + ' entries per second';
 					
 				};
