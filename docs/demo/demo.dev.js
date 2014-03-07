@@ -241,7 +241,8 @@ var IMDBSystem = (function(THREE){
 				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
-				document.addEventListener( 'onkeyup', function ( event ) {
+				window.addEventListener( 'onkeyup', function ( event ) {
+					console.log('key',event.keyCode);
 					if ( event.keyCode !== 32 ) {
 						return;
 					}
