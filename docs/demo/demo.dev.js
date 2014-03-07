@@ -241,8 +241,10 @@ var IMDBSystem = (function(THREE){
 				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
-				node.addEventListener( 'click', function ( event ) {
-
+				window.addEventListener( 'onkeyup', function ( event ) {
+					if ( event.keyCode !== 32 ) {
+						return;
+					}
 					// Ask the browser to lock the pointer
 					node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
 
