@@ -218,7 +218,6 @@ var IMDBSystem = (function(THREE){
 
 
 				var pointerlockchange = function ( event ) {
-					console.log('lock change',event);
 
 					if ( document.pointerLockElement === node || document.mozPointerLockElement === node || document.webkitPointerLockElement === node ) {
 
@@ -235,7 +234,9 @@ var IMDBSystem = (function(THREE){
 				}
 
 				var pointerlockerror = function ( event ) {
-					console.log('pointer error',event);
+					pointerlockctls.enabled = false;
+					controls.enabled = true;
+					is_locked = false;
 				}
 
 				// Hook pointer lock state change events
