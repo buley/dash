@@ -241,7 +241,7 @@ var IMDBSystem = (function(THREE){
 				document.addEventListener( 'mozpointerlockerror', pointerlockerror, false );
 				document.addEventListener( 'webkitpointerlockerror', pointerlockerror, false );
 
-				node.addEventListener( 'keyup', function ( event ) {
+				window.addEventListener( 'keyup', function ( event ) {
 					node.requestPointerLock = node.requestPointerLock || node.mozRequestPointerLock || node.webkitRequestPointerLock;
 
 					if ( /Firefox/i.test( navigator.userAgent ) ) {
