@@ -346,8 +346,7 @@ var IMDBSystem = (function(THREE){
 				var x = 0, xlen = scene.children.length, xitem;
 				for ( ; x < xlen; x += 1 ) {
 					xitem = scene.children[x];
-					console.log('xitem',xitem);
-					if(xitem.name > 0 ) {
+					if(!!xitem && xitem.name > 0 ) {
 						scene.remove(xitem);
 					}
 				}
