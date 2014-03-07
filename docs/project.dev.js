@@ -493,12 +493,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 		scope.stats = function() {
 			if ( scope.statsData ) {
 				var pretty = function(rate) {
-					return rate + ' entries';
 					var quant = rate/scope.statsData.elapsed;
 					/*if ( quant < 1 ) {
 						return Math.floor(rate/(scope.statsData.elapsed/60000)) + ' entries per minute';
 					}*/
-					return quant + ' entries per second';
+					return quant + ' entries per millisecond';
 					
 				};
 				if ( true === scope.statsData.clear ) {
