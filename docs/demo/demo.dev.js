@@ -344,6 +344,9 @@ var IMDBSystem = (function(THREE){
 			layout: function() {
 
 			},
+			controls: function(enabled) {
+				controls.enabled = enabled;
+			},
 			reset: function() {
 				var x = 0, xlen = scene.children.length, xitem;
 				for ( ; x < xlen; x += 1 ) {
