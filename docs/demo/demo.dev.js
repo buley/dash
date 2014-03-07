@@ -225,7 +225,7 @@ var IMDBSystem = (function(THREE){
 
 					} else {
 
-						controls.enabled = false;
+						controls.enabled = true;
 						is_locked = false;
 					}
 				}
