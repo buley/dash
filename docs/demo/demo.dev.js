@@ -223,7 +223,7 @@ var IMDBSystem = (function(THREE){
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 20);
 		    geometry.doubleSided = true;
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
-		    camera.position.set( 0, 0, range + 5000 );
+		    camera.position.set( 0, 0, range - 1  );
  	      	    //camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 			//Start pointer lock
