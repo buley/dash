@@ -79,7 +79,9 @@ var IMDBSystem = (function(THREE){
 				console.log("is",intersects.length, inc, !!obj.object, "" === obj.name);
 				//if ( intersects[inc] instanceof THREE.Mesh ) {
 					console.log("OLD OBJ",obj.object, "NEW", intersects[inc]);
-					obj = intersects[ inc ]; 
+					if ( !intersects[inc].object ) {
+						obj = intersects[ inc ]; 
+					}
 				//}
 			}
 			if ( "" === obj.name ) {
