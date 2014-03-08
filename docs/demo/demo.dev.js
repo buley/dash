@@ -60,6 +60,15 @@ var IMDBSystem = (function(THREE){
 		//console.log(camera.position.x,camera.position.y,camera.position.z);
                 /* 60fps goodness */
                 requestAnimationFrame(render);
+		if ( camera.position.z > ( range * 20 ) ) {
+			camera.position.z = range * 20;
+		}
+		if ( camera.position.x < 1 ) {
+			camera.position.x = 1;
+		}
+		if ( camera.position.y < 1 ) {
+			camera.position.y = 1;
+		}
 		controls.update( new Date().getTime() - start_time );
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		notime = true; //e.g. 20ms hover
@@ -87,7 +96,6 @@ var IMDBSystem = (function(THREE){
             //renderer = new THREE.WebGLRenderer(),
             /* What we'll create: a particle system */
             range,
-	    stats,
 	    geometry = new THREE.PlaneGeometry(16, 16),
 	    spheregeometry = new THREE.SphereGeometry(6, 6, 6),
             spherematerial = new THREE.MeshBasicMaterial({color: '#FFFFFF', sizeAttenuation: true }),
@@ -207,9 +215,6 @@ var IMDBSystem = (function(THREE){
                 camera.updateProjectionMatrix();
                 renderer.setSize( node_width, node_height );
             };
-        stats = new Stats();
-        stats.domElement.style.position = 'absolute';
-        stats.domElement.style.top = '0px';
 	return function(node, width, height, cb) {
 		    range = ( ( width > height ) ? height : width );
 		    renderer.setClearColor(0x111111, 1.0);
@@ -338,9 +343,6 @@ var IMDBSystem = (function(THREE){
 		    scene.add(cube2);
 
 		    node.appendChild(renderer.domElement);
-		    if (stats) {
-			document.getElementsByTagName('body')[0].appendChild( stats.domElement );
-		    }
 		    render();
 			var highlighted = [];
 		    return {
