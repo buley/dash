@@ -76,7 +76,6 @@ var IMDBSystem = (function(THREE){
 		if ( intersects.length > 0 ) {
 			var inc = 0, obj = intersects[ inc ];
                         while( ( !obj || !!obj.object || "" === obj.name ) && !!intersects[ ++inc ] ) {
-				console.log("is",intersects.length, inc, !!obj.object, "" === obj.name);
 				//if ( intersects[inc] instanceof THREE.Mesh ) {
 					if ( !intersects[inc].object ) {
 						console.log("OLD OBJ",obj.object, "NEW", intersects[inc]);
