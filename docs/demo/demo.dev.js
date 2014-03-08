@@ -155,7 +155,7 @@ var IMDBSystem = (function(THREE){
 		overdraw: true,
                 color: 0xFFFFFF,
                 transparent: true,
-                opacity: .7,
+                opacity: 1,
                 sizeAttenuation: true,
 		side: THREE.DoubleSide,
                 map: (function () {
