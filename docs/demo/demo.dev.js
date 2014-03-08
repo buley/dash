@@ -349,11 +349,14 @@ var IMDBSystem = (function(THREE){
 			},
 			add: function(context) {
 				var x = 0, xlen = 5, xitem;
+
+				var pos = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 				for ( x = 0; x < xlen; x += 1 ) {
 
 			    var particle = new THREE.Mesh( geometry, material ); 
 				    particle.name = context.id;
-				    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
+				    particle.position = pos;
+
 				    particle.rotation.z = Math.PI * x; //Math.random() % (Math.PI * 2);
 				    //particle.rotation.y = Math.random() % (Math.PI * 2);
 				    //particle.rotation.x = Math.random() % (Math.PI * 2);
