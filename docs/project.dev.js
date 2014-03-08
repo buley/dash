@@ -464,7 +464,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
 					ep: ''
 				};
 			});
-
+			return;
 		    }
 		    dash.get.entry({
 			database: 'dash-demo',
