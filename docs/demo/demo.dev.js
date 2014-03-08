@@ -212,7 +212,7 @@ var IMDBSystem = (function(THREE){
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
 	return function(node, width, height, cb) {
-		    range = ( ( width > height ) ? height : width ) * 10;
+		    range = ( ( width > height ) ? height : width ) * 2;
 		    renderer.setClearColor(0x111111, 1.0);
 		    renderer.setSize(width, height);
 		    node_width = width;
