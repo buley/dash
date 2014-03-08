@@ -97,7 +97,7 @@ var IMDBSystem = (function(THREE){
             /* What we'll create: a particle system */
             range,
 	    geometry = new THREE.PlaneGeometry(32, 32),
-	    spheregeometry = new THREE.SphereGeometry(1, 6, 6),
+	    spheregeometry = new THREE.SphereGeometry(4, 6, 6),
             spherematerial = new THREE.MeshBasicMaterial({color: '#FFFFFF', sizeAttenuation: true }),
 	    material = new THREE.MeshBasicMaterial({
                 size: 32,
