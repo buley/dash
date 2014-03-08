@@ -116,6 +116,11 @@ var IMDBSystem = (function(THREE){
 			    //INTERSECTED.material.color = new THREE.Color( 0x336699 );
 			    //INTERSECTED.material.needsUpdate = true;
 			}
+		} else if ( !!last_chosen ) {
+			    if ( 'function' === typeof on_data ) {
+				on_data.apply(on_data, [ null ] );
+			    }
+			last_chosen = null;
 		}
                 /* WebGL render */
 
