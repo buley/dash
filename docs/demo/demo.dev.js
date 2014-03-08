@@ -72,15 +72,20 @@ var IMDBSystem = (function(THREE){
                 directionVector.normalize();
 		raycaster.ray.origin.copy( camera.position );
                 raycaster.set(camera.position, directionVector);
-		var intersects = raycaster.intersectObjects( scene.children, true );
+		var intersects = raycaster.intersectObjects( scene.children, true ), obj;
 		if ( intersects.length > 0 ) {
-			var inc = 0, obj =  intersects[ inc ];
-                        while( ( !obj || !!obj.object || "" === obj.name ) && !!intersects[ inc + 1 ] ) {
-				inc += 1;
-				obj = intersects[ inc ]; 
-			}
-			if ( !obj || "" === obj.name || !!obj.object ) {
-				return;
+			if ( 1 === intersects.length ) {
+				obj = intersects[ 0 ]; 
+
+			} else {
+				var inc = 0, obj =  intersects[ inc ];
+				while( ( !obj || !!obj.object || "" === obj.name ) && !!intersects[ inc + 1 ] ) {
+					inc += 1;
+					obj = intersects[ inc ]; 
+				}
+				if ( !obj || "" === obj.name || !!obj.object ) {
+					return;
+				}
 			}
 			console.log("OBJ",obj);
 		    if ( INTERSECTED != obj ) {
