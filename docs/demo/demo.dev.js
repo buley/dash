@@ -355,11 +355,7 @@ var IMDBSystem = (function(THREE){
 		            particle.rotation.z = Math.random() % (Math.PI * 2);
 		            particle.rotation.y = 1; //Math.random() % (Math.PI * 2);
 		            particle.rotation.x = Math.random() % (Math.PI * 2);
-			    var sphere = new THREE.Mesh( spheregeometry, spherematerial ); 
-			    sphere.position = particle.position;
-			    sphere.name = 'sphere-' + context.id;
 			    scene.add( particle );
-			    scene.add( sphere );
 
 
 			},
