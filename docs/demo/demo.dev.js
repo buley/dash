@@ -75,7 +75,7 @@ var IMDBSystem = (function(THREE){
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
 			var inc = 0, obj =  intersects[ 0 ].object;
-                        while( !!obj.object && !!intersects[ ++inc ] ) {
+                        while( obj instanceof THREE.Mesh && !!intersects[ ++inc ] ) {
 				console.log("OLD OBJ",obj.object);
 				obj = intersects[ inc ]; 
 			}
