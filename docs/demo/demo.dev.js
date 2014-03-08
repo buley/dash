@@ -68,8 +68,9 @@ var IMDBSystem = (function(THREE){
                 camera.updateProjectionMatrix();
                 projector.unprojectVector( directionVector, camera);
 		directionVector.sub(camera.position);
+                directionVector.normalize();
+		raycaster.ray.origin.copy( camera.position );
                 raycaster.set(camera.position, directionVector);
-		//raycaster.ray.origin.copy( camera.position );
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
