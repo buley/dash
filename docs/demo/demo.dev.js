@@ -79,7 +79,7 @@ var IMDBSystem = (function(THREE){
 				console.log("OLD OBJ",obj.object);
 				obj = intersects[ inc ]; 
 			}
-			if ( "" === obj.name ) {
+			if ( "" === obj.object.name ) {
 				return;
 			}
 			console.log("OBJ",obj);
