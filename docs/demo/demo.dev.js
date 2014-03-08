@@ -74,11 +74,11 @@ var IMDBSystem = (function(THREE){
                 raycaster.set(camera.position, directionVector);
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
-			var inc = 1, obj =  intersects[ 0 ].object;
+			var inc = 0, obj =  intersects[ inc ].object;
                         while( ( !!obj.object || "" === obj.name ) && !!intersects[ ++inc ] ) {
 				console.log("is",intersects.length, inc, !!obj.object, "" === obj.name);
 				//if ( intersects[inc] instanceof THREE.Mesh ) {
-					console.log("OLD OBJ",obj.object);
+					console.log("OLD OBJ",obj.object, "NEW", intersects[inc]);
 					obj = intersects[ inc ]; 
 				//}
 			}
