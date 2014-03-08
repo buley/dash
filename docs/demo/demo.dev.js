@@ -84,12 +84,10 @@ var IMDBSystem = (function(THREE){
 			if ( "" === obj.name ) {
 				return;
 			}
-			console.log("OBJ",intersects.length, intersects[1], obj);
 		    if ( INTERSECTED != obj ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
 			INTERSECTED = obj;
 		    } else {
-			console.log("CONTINUE", INTERSECTED);
 			return;
 		    }
 		} else {
@@ -97,6 +95,7 @@ var IMDBSystem = (function(THREE){
 		    	on_data.apply(on_data, [ null ] );
 		    }
 		    INTERSECTED = null;
+			return;
 		}
 		if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
 		    INTERSECTED.start = new Date().getTime();
