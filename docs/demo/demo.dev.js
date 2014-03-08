@@ -358,6 +358,8 @@ var IMDBSystem = (function(THREE){
 				    particle.position = pos;
 
 				    particle.rotation.x = x * (1/x); //Math.random() % (Math.PI * 2);
+				    particle.rotation.y = x * (1/x); //Math.random() % (Math.PI * 2);
+				    particle.rotation.z = x * (1/x); //Math.random() % (Math.PI * 2);
 				    //particle.rotation.y = Math.random() % (Math.PI * 2);
 				    //particle.rotation.x = Math.random() % (Math.PI * 2);
 				    scene.add( particle );
