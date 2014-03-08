@@ -221,7 +221,7 @@ var IMDBSystem = (function(THREE){
 		    window.addEventListener( 'resize', onResize, false );
 
 		    on_data = cb;
-		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range);
+		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 2);
 		    geometry.doubleSided = true;
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 0, 0, range - 1  );
