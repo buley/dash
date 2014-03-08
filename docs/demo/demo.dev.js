@@ -97,7 +97,7 @@ var IMDBSystem = (function(THREE){
 			return;
 		    }
 		}
-		if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
+		if ( INTERSECTED ) { //&& (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
 		    INTERSECTED.start = new Date().getTime();
 			if (!!last_intersected) {
 			    delete last_intersected.start;
