@@ -75,12 +75,14 @@ var IMDBSystem = (function(THREE){
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
 			var inc = 0, obj = intersects[ inc ];
-                        while( ( !!obj.object || "" === obj.name ) && !!intersects[ ++inc ] ) {
+                        while( ( !obj || !!obj.object || "" === obj.name ) && !!intersects[ ++inc ] ) {
 				console.log("is",intersects.length, inc, !!obj.object, "" === obj.name);
 				//if ( intersects[inc] instanceof THREE.Mesh ) {
-					console.log("OLD OBJ",obj.object, "NEW", intersects[inc]);
 					if ( !intersects[inc].object ) {
+						console.log("OLD OBJ",obj.object, "NEW", intersects[inc]);
 						obj = intersects[ inc ]; 
+					} else {
+						obj = null;
 					}
 				//}
 			}
