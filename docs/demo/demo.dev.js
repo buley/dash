@@ -202,9 +202,8 @@ var IMDBSystem = (function(THREE){
 		    node_width = width;
 		    node_height = height;
 
-			node.addEventListener( 'mousemove', onMouseMove, false );
-			node.addEventListener( 'resize', onResize, false );
-
+		    window.addEventListener( 'mousemove', onMouseMove, false );
+		    window.addEventListener( 'resize', onResize, false );
 
 		    on_data = cb;
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 10);
@@ -324,8 +323,6 @@ var IMDBSystem = (function(THREE){
 		    bounding_material2 = new THREE.MeshBasicMaterial( {color: 0x222222, wireframe: true, transparent: true, opacity: .5 } );
 		    cube2 = new THREE.Mesh( bounding2, bounding_material2 );
 		    scene.add(cube2);
-
-
 
 		    node.appendChild(renderer.domElement);
 		    if (stats) {
