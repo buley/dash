@@ -49,7 +49,7 @@ var IMDBSystem = (function(THREE){
             },
 
             ran_once = false,
-	    hasStarted = false,
+	    hasStarted = false, 
 	    node_width = null,
             node_height = null,
 	    INTERSECTED = null,
@@ -63,9 +63,10 @@ var IMDBSystem = (function(THREE){
                 stats.update();
 		camera.updateMatrixWorld();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-		var vector = new THREE.Vector3( mouse.x, mouse.y, 0 ),
 			notime = true; //e.g. 20ms hover
-		projector.unprojectVector( vector, camera );
+                projector.unprojectVector( directionVector, camera);
+                directionVector.normalize();
+                raycaster.set(camera.position, directionVector);
 		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		//raycaster.ray.origin.copy( camera.position );
 
@@ -115,6 +116,7 @@ var IMDBSystem = (function(THREE){
             },
             scene = new THREE.Scene(),
             camera,
+            directionVector = THREE.Vector3(),
             direction1,
 	    direction2,
             mouse = { x: 0, y: 0 },
@@ -213,6 +215,7 @@ var IMDBSystem = (function(THREE){
 		    geometry.doubleSided = true;
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 0, 0, range + 5000 );
+		    camera.matrixAutoUpdate = false;
  	      	    //camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 			//Start pointer lock
