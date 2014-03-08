@@ -457,9 +457,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 var system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function(data) {
-			console.log('cb',data);
 		    if (!data) {
-			return;
 			scope.$apply(function() {
 				scope.data = {
 					se: '',
