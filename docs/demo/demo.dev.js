@@ -88,27 +88,20 @@ var IMDBSystem = (function(THREE){
 					return;
 				}
 			}
-			console.log("OBJ",obj);
+
 		    if ( INTERSECTED != obj ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
+			console.log("iNTERSECCTED",obj);
 			INTERSECTED = obj;
 		    } else {
-			console.log("CONTINUE", INTERSECTED);
 			return;
 		    }
-		} else {
-	            if (INTERSECTED) {
-		    	on_data.apply(on_data, [ null ] );
-		    }
-		    INTERSECTED = null;
 		}
 		if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
 		    INTERSECTED.start = new Date().getTime();
 			if (!!last_intersected) {
 			    delete last_intersected.start;
 			}
-		    last_intersected = INTERSECTED;
-		} else if (INTERSECTED) {
 			if (null === CHOSEN || INTERSECTED.id !== CHOSEN.id) {
 				if (notime || (new Date().getTime() - INTERSECTED.start) > 20) {
 					if (!!last_chosen) {
