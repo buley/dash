@@ -364,7 +364,7 @@ var IMDBSystem = (function(THREE){
 				var x = 0, xlen = scene.children.length, xitem;
 				for ( x = xlen; x >= 0; x -= 1 ) {
 					xitem = scene.children[x];
-					if(!!xitem && xitem !== camera && xitem !== controls && item !== pointerlockctls ) {
+					if(!!xitem && xitem !== camera && xitem !== controls && xitem !== pointerlockctls ) {
 						scene.remove(xitem);
 					}
 				}
