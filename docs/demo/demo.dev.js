@@ -361,8 +361,9 @@ var IMDBSystem = (function(THREE){
 		            sphere.position.y += 1;
 		            sphere.position.z += 1;
 			    sphere.name = 'sphere-' + context.id;
-			    scene.add( sphere );
 			    scene.add( particle );
+			    scene.add( sphere );
+
 
 			},
 			remove: function(context) {
