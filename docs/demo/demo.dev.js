@@ -68,7 +68,7 @@ var IMDBSystem = (function(THREE){
                 projector.unprojectVector( directionVector, camera);
                 directionVector.normalize();
 
-		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
                 raycaster.set(camera.position, directionVector);
 		//raycaster.ray.origin.copy( camera.position );
 		var intersects = raycaster.intersectObjects( scene.children );
@@ -117,10 +117,10 @@ var IMDBSystem = (function(THREE){
             },
             scene = new THREE.Scene(),
             camera,
+	    raycaster = new THREE.Raycaster(),
             direction1,
 	    direction2,
             mouse = { x: 0, y: 0 },
-	    raycaster,
 	    controls,
             pointerlockctls,
             ambient,
