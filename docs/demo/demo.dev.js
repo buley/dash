@@ -64,10 +64,6 @@ var IMDBSystem = (function(THREE){
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		notime = true; //e.g. 20ms hover
                 renderer.render(scene, camera);
-		if ( false === dirty ) {
-			return;
-		}
-		dirty = false,
 		camera.updateMatrixWorld();
                 camera.updateProjectionMatrix();
                 projector.unprojectVector( directionVector, camera);
@@ -130,8 +126,6 @@ var IMDBSystem = (function(THREE){
             },
             scene = new THREE.Scene(),
             camera,
-	    dirty = true,
-	    lastmouse = {},
 	    raycaster = new THREE.Raycaster(),
             direction1,
 	    direction2,
@@ -160,7 +154,7 @@ var IMDBSystem = (function(THREE){
 		overdraw: true,
                 color: 0xFFFFFF,
                 transparent: true,
-                opacity: .8,
+                opacity: 1,
                 sizeAttenuation: true,
 		side: THREE.DoubleSide,
                 map: (function () {
@@ -205,10 +199,6 @@ var IMDBSystem = (function(THREE){
                 //event.preventDefault();
                 mouse.x = ( event.clientX / node_width ) * 2 - 1;
                 mouse.y = - ( event.clientY / node_height ) * 2 + 1;
-		if ( lastmouse.x !== mouse.x || lastmouse.y !== mouse.y ) {
-			dirty = true;
-		}
-		lastmouse = mouse;
 		directionVector.set(mouse.x, mouse.y, 1);
             },
             onResize = function(event) {
