@@ -114,6 +114,8 @@ var IMDBSystem = (function(THREE){
             },
             scene = new THREE.Scene(),
             camera,
+            direction1,
+	    direction2,
             mouse = { x: 0, y: 0 },
 	    raycaster,
 	    controls,
