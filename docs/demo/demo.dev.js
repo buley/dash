@@ -195,6 +195,7 @@ var IMDBSystem = (function(THREE){
                     return texture;
                 }())
             }),
+	    material = THREE.BasicMaterial( { color: #fff } ),
             /* When properties change we'll need a re-layout */
             onMouseMove = function(event) {
 		hasStarted = true;
