@@ -75,16 +75,16 @@ var IMDBSystem = (function(THREE){
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
 			var inc = 1, obj =  intersects[ 0 ].object;
-                        while( !!obj.object && "" === obj.object.name && !!intersects[ ++inc ] ) {
+                        while( !!obj.object || "" === obj.name && !!intersects[ ++inc ] ) {
 				if ( interects[inc] instanceof THREE.Mesh ) {
 					console.log("OLD OBJ",obj.object);
 					obj = intersects[ inc ]; 
 				}
 			}
-			console.log("OBJ",intersects.length, intersects[1], obj);
-			if ( "" === obj.object.name ) {
+			if ( "" === obj.name ) {
 				return;
 			}
+			console.log("OBJ",intersects.length, intersects[1], obj);
 		    if ( INTERSECTED != obj ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
 			INTERSECTED = obj;
