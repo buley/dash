@@ -52,7 +52,6 @@ var IMDBSystem = (function(THREE){
 	    hasStarted = false, 
 	    node_width = null,
             node_height = null,
-            directionVector = new THREE.Vector3(),
 	    INTERSECTED = null,
 	    start_time = new Date().getTime(),
 	    CHOSEN = null,
@@ -67,10 +66,10 @@ var IMDBSystem = (function(THREE){
 			notime = true; //e.g. 20ms hover
                 projector.unprojectVector( directionVector, camera);
                 directionVector.normalize();
-
-		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
                 raycaster.set(camera.position, directionVector);
+		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
 		//raycaster.ray.origin.copy( camera.position );
+
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
@@ -117,6 +116,7 @@ var IMDBSystem = (function(THREE){
             },
             scene = new THREE.Scene(),
             camera,
+            directionVector = THREE.Vector3(),
             direction1,
 	    direction2,
             mouse = { x: 0, y: 0 },
@@ -215,7 +215,6 @@ var IMDBSystem = (function(THREE){
 		    geometry.doubleSided = true;
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 0, 0, range + 5000 );
-		    camera.matrixAutoUpdate = false;
  	      	    //camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 			//Start pointer lock
