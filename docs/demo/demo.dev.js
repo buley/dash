@@ -85,16 +85,15 @@ var IMDBSystem = (function(THREE){
 					obj = intersects[ inc ].object; 
 				}
 				if ( !obj || "" === obj.name || !!obj.object ) {
-					return;
+					obj = null;
 				}
 			}
 
-		    if ( INTERSECTED != obj && !obj.object) {
+		    if ( !!obj && INTERSECTED != obj && !obj.object) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
-			console.log("iNTERSECCTED",obj);
 			INTERSECTED = obj;
 		    } else {
-			return;
+			INTERSECTED = null;
 		    }
 		}
 		if ( INTERSECTED ) { //&& (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
@@ -105,7 +104,6 @@ var IMDBSystem = (function(THREE){
 			if (notime || (new Date().getTime() - INTERSECTED.start) > 20) {
 				if (!!last_chosen) {
 					if (last_chosen.id === INTERSECTED.id) {
-						console.log("INTERSECT ON");
 						return;
 					}
 				    //last_chosen.material.color = new THREE.Color( 0x333333 );
