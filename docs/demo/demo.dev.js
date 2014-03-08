@@ -117,6 +117,9 @@ var IMDBSystem = (function(THREE){
 	    raycaster,
 	    controls,
             pointerlockctls,
+            ambient,
+            cube1,
+            cube2,
             /* What the viewer sees */
             scene,
             /* How the viewer sees it */
@@ -303,23 +306,23 @@ var IMDBSystem = (function(THREE){
 			//End pointer lock
 
 		    //controls.addEventListener( 'change', relayout );
-		    light = new THREE.DirectionalLight( 0xD5D5D5 );
-		    light.position.set( 1, 1, 1 );
+		    direction1 = new THREE.DirectionalLight( 0xD5D5D5 );
+		    direction1.position.set( 1, 1, 1 );
 		    //scene.add( light );
 
-		    light = new THREE.DirectionalLight( 0xCCCCCC );
-		    light.position.set( -1, -1, -1 );
+		    direction2 = new THREE.DirectionalLight( 0xCCCCCC );
+		    direction2.position.set( -1, -1, -1 );
 		    //scene.add( light );
 
 		    light = new THREE.AmbientLight( 0xD5D5D5 );
 		    scene.add( light );
-	            var bounding = new THREE.CubeGeometry( range, range, range, 8,8,8 ),
-			bounding_material = new THREE.MeshBasicMaterial( {color: 0x333333, wireframe: true, transparent: true, opacity: .1 } ),
-			cube = new THREE.Mesh( bounding, bounding_material );
+	            bounding1 = new THREE.CubeGeometry( range, range, range, 8,8,8 );
+		    bounding_material1 = new THREE.MeshBasicMaterial( {color: 0x333333, wireframe: true, transparent: true, opacity: .1 } ),
+		    cube1 = new THREE.Mesh( bounding1, bounding_material1 );
 		    scene.add(cube);
-	            var bounding = new THREE.CubeGeometry( range + 100, range + 100, range + 100, 2, 2, 2 ),
-			bounding_material = new THREE.MeshBasicMaterial( {color: 0x222222, wireframe: true, transparent: true, opacity: .5 } );
-			cube = new THREE.Mesh( bounding, bounding_material );
+	            bounding2 = new THREE.CubeGeometry( range + 100, range + 100, range + 100, 2, 2, 2 );
+		    bounding_material2 = new THREE.MeshBasicMaterial( {color: 0x222222, wireframe: true, transparent: true, opacity: .5 } );
+		    cube2 = new THREE.Mesh( bounding2, bounding_material2 );
 		    scene.add(cube);
 
 
@@ -364,7 +367,7 @@ var IMDBSystem = (function(THREE){
 				var x = 0, xlen = scene.children.length, xitem;
 				for ( x = xlen; x >= 0; x -= 1 ) {
 					xitem = scene.children[x];
-					if(!!xitem && xitem !== camera && xitem !== controls && xitem !== pointerlockctls ) {
+					if(!!xitem && xitem !== camera && xitem !== controls && xitem !== pointerlockctls && xitem !== cube1 && xitem !== cube2) {
 						scene.remove(xitem);
 					}
 				}
