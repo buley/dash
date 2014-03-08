@@ -63,7 +63,7 @@ var IMDBSystem = (function(THREE){
 		controls.update( new Date().getTime() - start_time );
                 stats.update();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-			notime = true; //e.g. 20ms hover
+			notime = false; //e.g. 20ms hover
                 renderer.render(scene, camera);
 		camera.updateMatrixWorld();
                 camera.updateProjectionMatrix();
