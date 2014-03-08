@@ -102,7 +102,7 @@ var IMDBSystem = (function(THREE){
 			if (!!last_intersected) {
 			    delete last_intersected.start;
 			}
-			if (null === CHOSEN || INTERSECTED.id !== CHOSEN.id) {
+			if (INTERSECTED.id !== CHOSEN.id) {
 				if (notime || (new Date().getTime() - INTERSECTED.start) > 20) {
 					if (!!last_chosen) {
 						if (last_chosen.id === INTERSECTED.id) {
@@ -111,11 +111,8 @@ var IMDBSystem = (function(THREE){
 						}
 					    //last_chosen.material.color = new THREE.Color( 0x333333 );
 					    //last_chosen.material.needsUpdate = true;
-						console.log("INTERSECT OFF");
 					}
-					last_chosen = CHOSEN;
-				    CHOSEN = INTERSECTED;
-					console.log("INTERSECTED",CHOSEN);
+					last_chosen = INTERSECTED;
 				    if ( 'function' === typeof on_data ) {
 					on_data.apply(on_data, [ CHOSEN.name ] );
 				    }
