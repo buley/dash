@@ -151,11 +151,11 @@ var IMDBSystem = (function(THREE){
 	    spheregeometry = new THREE.SphereGeometry(6, 6, 6),
             spherematerial = new THREE.MeshBasicMaterial({color: '#FFFFFF', sizeAttenuation: true }),
 	    material = new THREE.MeshBasicMaterial({
-                size: 32,
-		/*overdraw: true,*/
+                size: 256,
+		overdraw: true,
                 color: 0xFFFFFF,
                 transparent: true,
-                opacity: 1,
+                opacity: .7,
                 sizeAttenuation: true,
 		side: THREE.DoubleSide,
                 map: (function () {
@@ -221,7 +221,7 @@ var IMDBSystem = (function(THREE){
 		    window.addEventListener( 'resize', onResize, false );
 
 		    on_data = cb;
-		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 10);
+		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 20);
 		    geometry.doubleSided = true;
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 0, 0, range - 1  );
