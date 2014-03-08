@@ -79,10 +79,10 @@ var IMDBSystem = (function(THREE){
 
 			} else {
 				var inc = 0;
-				obj =  intersects[ inc ];
+				obj =  intersects[ inc ].object;
 				while( ( !obj || !!obj.object || "" === obj.name ) && !!intersects[ inc + 1 ] ) {
 					inc += 1;
-					obj = intersects[ inc ]; 
+					obj = intersects[ inc ].object; 
 				}
 				if ( !obj || "" === obj.name || !!obj.object ) {
 					return;
