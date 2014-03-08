@@ -62,13 +62,14 @@ var IMDBSystem = (function(THREE){
                 requestAnimationFrame(render);
 		controls.update( new Date().getTime() - start_time );
                 stats.update();
-		camera.updateMatrixWorld();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 			notime = true; //e.g. 20ms hover
+		camera.updateMatrixWorld();
+                camera.updateProjectionMatrix();
+
+
                 projector.unprojectVector( directionVector, camera);
                 directionVector.normalize();
-
-
                 raycaster.set(camera.position, directionVector);
 		//raycaster.ray.origin.copy( camera.position );
 		var intersects = raycaster.intersectObjects( scene.children );
