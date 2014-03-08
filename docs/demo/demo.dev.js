@@ -348,7 +348,7 @@ var IMDBSystem = (function(THREE){
 			clear: function() {
 			},
 			add: function(context) {
-				var x = 0, xlen = 5, xitem;
+				var x = 0, xlen = 3, xitem;
 
 				var pos = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
 				for ( x = 0; x < xlen; x += 1 ) {
