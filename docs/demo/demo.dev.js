@@ -78,6 +78,7 @@ var IMDBSystem = (function(THREE){
 			INTERSECTED = intersects[ 0 ].object;
 		    } else {
 			console.log("CONTINUE", INTERSECTED);
+			return;
 		    }
 		} else {
 	            if (INTERSECTED) {
