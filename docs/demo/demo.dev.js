@@ -102,7 +102,7 @@ var IMDBSystem = (function(THREE){
 	    material = new THREE.MeshBasicMaterial({
                 size: 32,
 		overdraw: true,
-                color: 0x555555,
+                color: 0xFFFFFF,
                 transparent: true,
                 opacity: .8,
                 sizeAttenuation: true,
@@ -132,7 +132,7 @@ var IMDBSystem = (function(THREE){
                             ctx.rotate(Math.PI / points);
                             ctx.lineTo(0, 0 - radius);
                         }
-                        ctx.fillStyle = '#d5d5d5';
+                        ctx.fillStyle = '#ffffff';
                         ctx.fill();
                         ctx.restore();
                         return canvas;
