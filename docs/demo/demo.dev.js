@@ -153,6 +153,7 @@ var IMDBSystem = (function(THREE){
 	    material = new THREE.MeshBasicMaterial({
                 size: 256,
 		overdraw: true,
+                color: 0xFFFFFF,
                 transparent: true,
                 opacity: .7,
                 sizeAttenuation: true,
@@ -352,10 +353,10 @@ var IMDBSystem = (function(THREE){
 		            particle.rotation.z = Math.random() % (Math.PI * 2);
 		            particle.rotation.y = Math.random() % (Math.PI * 2);
 		            particle.rotation.x = Math.random() % (Math.PI * 2);
-			    //var sphere = new THREE.Mesh( spheregeometry, spherematerial ); 
-			    //sphere.position = particle.position;
-			    //sphere.name = context.id;
-			    //scene.add( sphere );
+			    var sphere = new THREE.Mesh( spheregeometry, spherematerial ); 
+			    sphere.position = particle.position;
+			    sphere.name = context.id;
+			    scene.add( sphere );
 			    scene.add( particle );
 
 			},
