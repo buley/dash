@@ -184,7 +184,6 @@ var IMDBSystem = (function(THREE){
             onMouseMove = function(event) {
 		hasStarted = true;
                 //event.preventDefault();
-		console.log('mousemove');
                 mouse.x = ( event.clientX / node_width ) * 2 - 1;
                 mouse.y = - ( event.clientY / node_height ) * 2 + 1;
             },
@@ -207,7 +206,7 @@ var IMDBSystem = (function(THREE){
 		    window.addEventListener( 'resize', onResize, false );
 
 		    on_data = cb;
-		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 10);
+		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 20);
 		    geometry.doubleSided = true;
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 0, 0, range + 10000 );
