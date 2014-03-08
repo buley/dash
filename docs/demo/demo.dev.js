@@ -137,7 +137,7 @@ var IMDBSystem = (function(THREE){
                         ctx.restore();
                         return canvas;
                     }(256, 256, 128, 128, 64, 8, .5)));
-		    //texture.side = THREE.DoubleSide;
+		    texture.side = THREE.DoubleSide;
                     texture.needsUpdate = true;
                     return texture;
                 }())
@@ -348,13 +348,17 @@ var IMDBSystem = (function(THREE){
 			clear: function() {
 			},
 			add: function(context) {
+				var x = 0, xlen = 5, xitem;
+				for ( x = 0; x < xlen; x += 1 ) {
+
 			    var particle = new THREE.Mesh( geometry, material ); 
-			    particle.name = context.id;
-			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-		            particle.rotation.z = 1; //Math.random() % (Math.PI * 2);
-		            particle.rotation.y = Math.random() % (Math.PI * 2);
-		            particle.rotation.x = Math.random() % (Math.PI * 2);
-			    scene.add( particle );
+				    particle.name = context.id;
+				    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
+				    particle.rotation.z = Math.PI * x; //Math.random() % (Math.PI * 2);
+				    //particle.rotation.y = Math.random() % (Math.PI * 2);
+				    //particle.rotation.x = Math.random() % (Math.PI * 2);
+				    scene.add( particle );
+				}
 
 
 			},
