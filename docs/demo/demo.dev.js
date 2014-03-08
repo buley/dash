@@ -67,6 +67,8 @@ var IMDBSystem = (function(THREE){
 			notime = true; //e.g. 20ms hover
                 projector.unprojectVector( directionVector, camera);
                 directionVector.normalize();
+
+		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
                 raycaster.set(camera.position, directionVector);
 		//raycaster.ray.origin.copy( camera.position );
 		var intersects = raycaster.intersectObjects( scene.children );
@@ -210,7 +212,6 @@ var IMDBSystem = (function(THREE){
 
 		    on_data = cb;
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 20);
-		    raycaster = new THREE.Raycaster();
 		    geometry.doubleSided = true;
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 0, 0, range + 5000 );
