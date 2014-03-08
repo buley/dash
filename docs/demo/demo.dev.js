@@ -203,7 +203,7 @@ var IMDBSystem = (function(THREE){
 		    node_height = height;
 
 		    node.addEventListener( 'mousemove', onMouseMove, false );
-		    node.addEventListener( 'resize', onResize, false );
+		    window.addEventListener( 'resize', onResize, false );
 
 		    on_data = cb;
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 10);
