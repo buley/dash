@@ -360,7 +360,7 @@ var IMDBSystem = (function(THREE){
 		            sphere.position.x += 1;
 		            sphere.position.y += 1;
 		            sphere.position.z += 1;
-			    sphere.name = context.id;
+			    sphere.name = 'sphere-' + context.id;
 			    scene.add( sphere );
 			    scene.add( particle );
 
