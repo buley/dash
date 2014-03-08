@@ -79,7 +79,7 @@ var IMDBSystem = (function(THREE){
 				console.log("OLD OBJ",obj.object);
 				obj = intersects[ inc ]; 
 			}
-			console.log("OBJ",obj);
+			console.log("OBJ",intersects.length, obj);
 		    if ( INTERSECTED != obj ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
 			INTERSECTED = obj;
