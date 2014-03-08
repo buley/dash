@@ -75,11 +75,11 @@ var IMDBSystem = (function(THREE){
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
 			var inc = 0, obj =  intersects[ inc ];
-                        while( ( !obj || 11 == obj.id || !!obj.object || "" === obj.name ) && !!intersects[ inc + 1 ] ) {
+                        while( ( !obj || !!obj.object || "" === obj.name ) && !!intersects[ inc + 1 ] ) {
 				inc += 1;
 				obj = intersects[ inc ]; 
 			}
-			if ( "" === obj.name ) {
+			if ( !obj || "" === obj.name || !!obj.object ) {
 				return;
 			}
 			console.log("OBJ",obj);
