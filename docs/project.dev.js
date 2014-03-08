@@ -447,23 +447,28 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
 }]);
 
 
-dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast', 'dashWorkerService', function( $q, $http, dashAppSplashBroadcast, dashWorkerService ) { 
+dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSplashBroadcast', 'dashWorkerService', function( $q, $http, $timeout, dashAppSplashBroadcast, dashWorkerService ) { 
     return {
         scope: {},
         restrict: 'AE',
 	templateUrl: '/docs/templates/overlay.html',
         compile: function() {
-	    var el = document.createElement('div');
+	    var el = document.createElement('div'), pid;
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 var system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function(data) {
 		    if (!data) {
+			if (pid) {
+				clearTimeout(pid);
+			}
+			pid = setTimeout( function() {
 			scope.$apply(function() {
 				scope.data = {
 					se: '',
 					ep: ''
 				};
 			});
+			}, 3000);
 			return;
 		    }
 		    dash.get.entry({
