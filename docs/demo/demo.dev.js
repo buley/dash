@@ -72,7 +72,7 @@ var IMDBSystem = (function(THREE){
                 directionVector.normalize();
                 raycaster.set(camera.position, directionVector);
 		//raycaster.ray.origin.copy( camera.position );
-		var intersects = raycaster.intersectObjects( scene.children );
+		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
 		    if ( INTERSECTED != intersects[ 0 ].object ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
