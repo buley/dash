@@ -82,6 +82,9 @@ var IMDBSystem = (function(THREE){
 				}
 			}
 			console.log("OBJ",intersects.length, intersects[1], obj);
+			if ( "" === obj.object.name ) {
+				return;
+			}
 		    if ( INTERSECTED != obj ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
 			INTERSECTED = obj;
