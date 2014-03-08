@@ -134,7 +134,6 @@ var IMDBSystem = (function(THREE){
                         }
                         ctx.fillStyle = '#d5d5d5';
                         ctx.fill();
-                        ctx.stroke();
                         ctx.restore();
                         return canvas;
                     }(256, 256, 128, 128, 64, 7, .5)));
