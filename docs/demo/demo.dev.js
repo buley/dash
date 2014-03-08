@@ -86,7 +86,7 @@ var IMDBSystem = (function(THREE){
 					}
 				//}
 			}
-			if ( "" === obj.name ) {
+			if ( !obj || "" === obj.name ) {
 				return;
 			}
 		    if ( INTERSECTED != obj ) {
