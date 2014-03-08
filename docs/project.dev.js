@@ -886,6 +886,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		scope.verb = 'explore';
 		scope.go = function() {	
 			console.log('GO',scope.field,scope.range,scope.query,scope.sort, scope.verb);
+			system.reset();
 			$('.dash-demo-overlay-marketing-button').blur();
 			var limit = null, //default: everything
 			    field = scope.field;
@@ -951,7 +952,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				q =  new RegExp( scope.query ),
 				dash_promise = dashWorkerService.get.entries(ctx),
 				start_promise = new Date().getTime();
-			    system.reset();
+
 			    dash_promise.then( function(context) {
 				console.log('searched all',context.amount);
 				statsUpdate('complete', 'searches', context.amount, new Date().getTime() - start_promise);
