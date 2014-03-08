@@ -64,6 +64,7 @@ var IMDBSystem = (function(THREE){
                 stats.update();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 			notime = true; //e.g. 20ms hover
+                renderer.render(scene, camera);
 		camera.updateMatrixWorld();
                 camera.updateProjectionMatrix();
                 projector.unprojectVector( directionVector, camera);
@@ -74,9 +75,12 @@ var IMDBSystem = (function(THREE){
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
 			var inc = 1, obj =  intersects[ 0 ].object;
-                        while( 11  === obj.id && !!intersects[ ++inc ] ) {
+                        while( ""  === obj.name && !!intersects[ ++inc ] ) {
 				console.log("OLD OBJ",obj);
 				obj = intersects[ inc ]; 
+			}
+			if ( "" === obj.name ) {
+				return;
 			}
 			console.log("OBJ",obj);
 		    if ( INTERSECTED != obj ) {
@@ -122,7 +126,6 @@ var IMDBSystem = (function(THREE){
 			}
 		}
                 /* WebGL render */
-                renderer.render(scene, camera);
 
             },
             scene = new THREE.Scene(),
