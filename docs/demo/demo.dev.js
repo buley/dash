@@ -191,7 +191,7 @@ var IMDBSystem = (function(THREE){
                 //event.preventDefault();
                 mouse.x = ( event.clientX / node_width ) * 2 - 1;
                 mouse.y = - ( event.clientY / node_height ) * 2 + 1;
-		directionVector.set(mouse.x, mouse.y, 1);
+		directionVector.set(mouse.x, mouse.y, camera.position.z);
             },
             onResize = function(event) {
                 camera.aspect = node_width / node_height;
