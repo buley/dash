@@ -66,9 +66,8 @@ var IMDBSystem = (function(THREE){
 			notime = true; //e.g. 20ms hover
 		camera.updateMatrixWorld();
                 camera.updateProjectionMatrix();
-
-
                 projector.unprojectVector( directionVector, camera);
+		directionVector.sub(camera.position);
                 directionVector.normalize();
                 raycaster.set(camera.position, directionVector);
 		//raycaster.ray.origin.copy( camera.position );
@@ -192,6 +191,7 @@ var IMDBSystem = (function(THREE){
                 //event.preventDefault();
                 mouse.x = ( event.clientX / node_width ) * 2 - 1;
                 mouse.y = - ( event.clientY / node_height ) * 2 + 1;
+		directionVector.set(mouse.x, mouse.y, 1);
             },
             onResize = function(event) {
                 camera.aspect = node_width / node_height;
