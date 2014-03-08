@@ -184,6 +184,7 @@ var IMDBSystem = (function(THREE){
             onMouseMove = function(event) {
 		hasStarted = true;
                 //event.preventDefault();
+		console.log('mousemove');
                 mouse.x = ( event.clientX / node_width ) * 2 - 1;
                 mouse.y = - ( event.clientY / node_height ) * 2 + 1;
             },
