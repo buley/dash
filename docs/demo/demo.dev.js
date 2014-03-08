@@ -67,7 +67,7 @@ var IMDBSystem = (function(THREE){
 			notime = true; //e.g. 20ms hover
 		projector.unprojectVector( vector, camera );
 		raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-		raycaster.ray.origin.copy( camera.position );
+		//raycaster.ray.origin.copy( camera.position );
 
 		var intersects = raycaster.intersectObjects( scene.children );
 		if ( intersects.length > 0 ) {
