@@ -63,7 +63,7 @@ var IMDBSystem = (function(THREE){
 		controls.update( new Date().getTime() - start_time );
                 stats.update();
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-			notime = false; //e.g. 20ms hover
+			notime = true; //e.g. 20ms hover
                 renderer.render(scene, camera);
 		camera.updateMatrixWorld();
                 camera.updateProjectionMatrix();
@@ -74,24 +74,20 @@ var IMDBSystem = (function(THREE){
                 raycaster.set(camera.position, directionVector);
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
-			var inc = 0, obj =  intersects[ inc ];
-                        while( ( !!obj.object || "" === obj.name ) ) {
-				inc += 1;
-				if ( !intersects[inc] ) {
-					break;
-				}
-				console.log("is",intersects.length, inc, !!obj.object, "" === obj.name);
-				//if ( intersects[inc] instanceof THREE.Mesh ) {
-					obj = intersects[ inc ]; 
-				//}
+			var inc = 1, obj =  intersects[ 0 ].object;
+                        while( ""  === obj.name && !!intersects[ ++inc ] ) {
+				console.log("OLD OBJ",obj);
+				obj = intersects[ inc ]; 
 			}
 			if ( "" === obj.name ) {
 				return;
 			}
+			console.log("OBJ",obj);
 		    if ( INTERSECTED != obj ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
 			INTERSECTED = obj;
 		    } else {
+			console.log("CONTINUE", INTERSECTED);
 			return;
 		    }
 		} else {
@@ -99,7 +95,6 @@ var IMDBSystem = (function(THREE){
 		    	on_data.apply(on_data, [ null ] );
 		    }
 		    INTERSECTED = null;
-			return;
 		}
 		if ( INTERSECTED && (!last_intersected || INTERSECTED && INTERSECTED.id !== last_intersected.id)) {
 		    INTERSECTED.start = new Date().getTime();
