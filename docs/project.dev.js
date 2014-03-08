@@ -459,13 +459,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', 'dashAppSplashBroadcast'
                 var system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function(data) {
 			console.log('cb',data);
 		    if (!data) {
+			return;
 			scope.$apply(function() {
 				scope.data = {
 					se: '',
 					ep: ''
 				};
 			});
-			return;
+
 		    }
 		    dash.get.entry({
 			database: 'dash-demo',
