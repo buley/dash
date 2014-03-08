@@ -100,6 +100,7 @@ var IMDBSystem = (function(THREE){
 					}
 					last_chosen = CHOSEN;
 				    CHOSEN = INTERSECTED;
+					console.log("INTERSECTED",CHOSEN);
 				    if ( 'function' === typeof on_data ) {
 					on_data.apply(on_data, [ CHOSEN.name ] );
 				    }
@@ -188,7 +189,6 @@ var IMDBSystem = (function(THREE){
                 //event.preventDefault();
                 mouse.x = ( event.clientX / node_width ) * 2 - 1;
                 mouse.y = - ( event.clientY / node_height ) * 2 + 1;
-		console.log(mouse);
             },
             onResize = function(event) {
                 camera.aspect = node_width / node_height;
