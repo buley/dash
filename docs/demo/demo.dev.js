@@ -114,6 +114,7 @@ var IMDBSystem = (function(THREE){
             },
             scene = new THREE.Scene(),
             camera,
+            mouse = { x: 0, y: 0 },
 	    raycaster,
 	    controls,
             pointerlockctls,
@@ -179,7 +180,6 @@ var IMDBSystem = (function(THREE){
                     return texture;
                 }())
             }),
-            mouse = { x: 0, y: 0 },
             /* When properties change we'll need a re-layout */
             onMouseMove = function(event) {
 		hasStarted = true;
@@ -202,8 +202,8 @@ var IMDBSystem = (function(THREE){
 		    node_width = width;
 		    node_height = height;
 
-		    window.addEventListener( 'mousemove', onMouseMove, false );
-		    window.addEventListener( 'resize', onResize, false );
+		    node.addEventListener( 'mousemove', onMouseMove, false );
+		    node.addEventListener( 'resize', onResize, false );
 
 		    on_data = cb;
 		    camera = new THREE.PerspectiveCamera(45, width / height, 1, range * 10);
