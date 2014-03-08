@@ -136,7 +136,7 @@ var IMDBSystem = (function(THREE){
                         ctx.fill();
                         ctx.restore();
                         return canvas;
-                    }(256, 256, 128, 128, 64, 7, .5)));
+                    }(256, 256, 128, 128, 64, 8, .5)));
 		    //texture.side = THREE.DoubleSide;
                     texture.needsUpdate = true;
                     return texture;
