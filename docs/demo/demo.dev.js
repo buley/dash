@@ -151,8 +151,8 @@ var IMDBSystem = (function(THREE){
 	    spheregeometry = new THREE.SphereGeometry(6, 6, 6),
             spherematerial = new THREE.MeshBasicMaterial({color: '#FFFFFF', sizeAttenuation: true }),
 	    material = new THREE.MeshBasicMaterial({
-                size: 256,
-		overdraw: true,
+                size: 32,
+		/*overdraw: true,*/
                 color: 0xFFFFFF,
                 transparent: true,
                 opacity: .7,
@@ -187,7 +187,6 @@ var IMDBSystem = (function(THREE){
                         ctx.fill();
                         ctx.stroke();
                         ctx.restore();
-			console.log('canvas',canvas,ctx);
                         return canvas;
                     }(256, 256, 128, 128, 64, 7, .5)));
 		    texture.side = THREE.DoubleSide;
