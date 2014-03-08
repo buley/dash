@@ -67,7 +67,7 @@ var IMDBSystem = (function(THREE){
 		if ( false === dirty ) {
 			return;
 		}
-		dirty = false;
+		dirty = false,
 		camera.updateMatrixWorld();
                 camera.updateProjectionMatrix();
                 projector.unprojectVector( directionVector, camera);
@@ -130,7 +130,7 @@ var IMDBSystem = (function(THREE){
             },
             scene = new THREE.Scene(),
             camera,
-	    dirty = false,
+	    dirty = true,
 	    lastmouse = {},
 	    raycaster = new THREE.Raycaster(),
             direction1,
