@@ -104,7 +104,7 @@ var IMDBSystem = (function(THREE){
 		overdraw: true,
                 color: 0x555555,
                 transparent: true,
-                opacity: .95,
+                opacity: .8,
                 sizeAttenuation: true,
 		side: THREE.DoubleSide,
                 map: (function () {
@@ -136,7 +136,7 @@ var IMDBSystem = (function(THREE){
                         ctx.fill();
                         ctx.restore();
                         return canvas;
-                    }(256, 256, 128, 128, 64, 8, .5)));
+                    }(256, 256, 128, 128, 64, 7, .5)));
 		    texture.side = THREE.DoubleSide;
                     texture.needsUpdate = true;
                     return texture;
@@ -348,22 +348,13 @@ var IMDBSystem = (function(THREE){
 			clear: function() {
 			},
 			add: function(context) {
-				var x = 0, xlen = 3, xitem;
-
-				var pos = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
-				for ( x = 0; x < xlen; x += 1 ) {
-
 			    var particle = new THREE.Mesh( geometry, material ); 
-				    particle.name = context.id;
-				    particle.position = pos;
-
-				    //particle.rotation.x = x * (Math.PI/xlen); //Math.random() % (Math.PI * 2);
-				    //particle.rotation.y = x * (Math.PI/xlen); //Math.random() % (Math.PI * 2);
-				    particle.rotation.z = x * (Math.PI/xlen); //Math.random() % (Math.PI * 2);
-				    //particle.rotation.y = Math.random() % (Math.PI * 2);
-				    //particle.rotation.x = Math.random() % (Math.PI * 2);
-				    scene.add( particle );
-				}
+			    particle.name = context.id;
+			    particle.position = new THREE.Vector3(Math.random() * range - range / 2, Math.random() * range - range / 2, Math.random() * range - range / 2);
+		            particle.rotation.z = 1; //Math.random() % (Math.PI * 2);
+		            particle.rotation.y = Math.random() % (Math.PI * 2);
+		            particle.rotation.x = Math.random() % (Math.PI * 2);
+			    scene.add( particle );
 
 
 			},
