@@ -74,7 +74,7 @@ var IMDBSystem = (function(THREE){
                 raycaster.set(camera.position, directionVector);
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
-			var inc = 1, obj =  intersects[ 0 ];
+			var inc = 0, obj =  intersects[ inc ];
                         while( ( !obj || 11 == obj.id || !!obj.object || "" === obj.name ) && !!intersects[ inc + 1 ] ) {
 				inc += 1;
 				obj = intersects[ inc ]; 
