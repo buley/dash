@@ -73,9 +73,13 @@ var IMDBSystem = (function(THREE){
                 raycaster.set(camera.position, directionVector);
 		var intersects = raycaster.intersectObjects( scene.children, true );
 		if ( intersects.length > 0 ) {
-		    if ( INTERSECTED != intersects[ 0 ].object ) {
+			var inc = 1, obj =  intersects[ 0 ].object;
+                        while( obj === cube1 || obj === cube2 ) {
+				obj = intersects[ ++inc ];
+			}
+		    if ( INTERSECTED != obj ) {
 			//if ( INTERSECTED ) INTERSECTED.material.program = canvasFilledStarProgram;
-			INTERSECTED = intersects[ 0 ].object;
+			INTERSECTED = obj;
 		    } else {
 			console.log("CONTINUE", INTERSECTED);
 			return;
