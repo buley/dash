@@ -1084,11 +1084,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		};
 		var statsObj = {},
 		    last_time = new Date().getTime(),
-		    first_time = last_time,
+		    first_time = null,
 		    statsProc = null,
 		    statsTimeout = 1000,
 		    wasCompleted = false,
 		    statsFunc = function() {
+			if ( null === first_time ) {
+				first_time = new Date().getTime();
+			}
 			statsObj.elapsed = new Date().getTime() - last_time;
 			statsObj.started = new Date().getTime() - first_time;
 			last_time = new Date().getTime();
