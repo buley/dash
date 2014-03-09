@@ -8,7 +8,7 @@
 <div><strong>Current</strong>: {{statsDisplay.prettyRate}}</div>
 </nav>
 <section id="dash-demo-overlay-container" class="large-12">
-	<section id="dash-demo-overlay-marketing" class="large-8 left">
+	<section id="dash-demo-overlay-marketing" class="large-7 left">
 		<div class="large-10 left dash-demo-overlay-marketing-filter">
 			<span ng-show="1 === numFields()">explore</span>
 			<select ng-model="verb" ng-show="numFields() > 1">
@@ -25,7 +25,7 @@
 			<input type="number" max="2021" min="1889" ng-model="range">
 			<input type="text" ng-model="query" ng-show="'search' == verb">
 		</div>
-		<div class="large-2 right">
+		<div class="large-5 right">
 			<input type="button" value="GO" ng-click="go()" class="success dash-demo-overlay-marketing-button small button"></input>
 		</div>
 
