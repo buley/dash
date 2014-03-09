@@ -95,6 +95,13 @@ ul.dash-document-navigation ul ul li {
   right: 0px;
   z-index: 3;
 }
+#dash-splash-overlay #dash-demo-stats {
+  color: #ffffff;
+  top: 320px;
+  right: 0;
+  position: absolute;
+  z-index: 11;
+}
 #dash-splash-overlay #dash-demo-overlay-container {
   position: absolute;
   bottom: 0;
@@ -156,11 +163,4 @@ ul.dash-document-navigation ul ul li {
 #dash-demo-overlay-marketing div .dash-demo-overlay-marketing-button {
   min-height: 84px;
   margin: 10px 0 10px 0;
-}
-#dash-demo-stats {
-  color: #ffffff;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  z-index: 11;
 }
