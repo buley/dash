@@ -1051,8 +1051,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 							}
 						}
 						if ( start ) {
-							console.log('progress?', scope.progress[ file ] );
-							values.push( [ file, !scope.downloaded[ file ] ] );
+							console.log('progress?', file );
+							if ( false !== scope.progress[ file ] ) {
+								console.log("PROGRESS", scope.progress[ file ] );
+							} else {
+								values.push( [ file, !scope.downloaded[ file ] ] );
+							}
 						}
 					}
 				}
