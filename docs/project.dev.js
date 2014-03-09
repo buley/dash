@@ -1146,14 +1146,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 												sofar += 1;
 											}
 										} else {
-											if ( true === placemark ) {
+											if ( true === placemark || false !== scope.downloaded[ attr ] ) {
 												if ( sofar < scope.limit ) {
 													stacklist.push( data[ x ] );
 													sofar += 1;	
 												}
 											} else {
 												if ( data[ x ].ep === last_add.data.ep && data[ x ].ey === last_add.data.ey && data[ x ].se === last_add.data.se && data[ x ].sy === last_add.data.sy ) { 
-													console.log('FOUND PLACEMARK', data[ x ] );
 													placemark = true;
 												}
 											}
