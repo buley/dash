@@ -494,6 +494,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		scope.sort = 'from';
 		scope.field = 'thousand';
 		scope.verb = 'explore';
+		scope.statsDisplay = {
+			prettyRate: 'n/a',
+			prettyAvg: 'n/a',
+			prettyElapsed: '00:00',
+			prettyRemain: '00:00',
+			complete: 0,
+			total: 0
+		};
 		var historicals = [];
 		scope.stats = function() {
 			return 'dash is ready';
