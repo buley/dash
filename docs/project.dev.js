@@ -743,6 +743,19 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		if ( dirty ) {
 			localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 		}
+		dirty = false;
+		scope.progress = JSON.parse( localStorage.getItem('dash-demo-progress') ) || {};
+		for ( attr in scope.files ) {
+			if ( scope.files.hasOwnProperty(attr) && undefined === scope.progress[ attr ] ) {
+				scope.progress[ attr ] = false;
+				dirty = true;
+			}
+		}
+		if ( dirty ) {
+			localStorage.setItem('dash-demo-progress', JSON.stringify( scope.progress ) );
+		}
+
+
 		scope.sorts = [ {
 			name: 'from',
 			display: 'from',
