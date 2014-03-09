@@ -520,7 +520,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
-						console.log('stack',scope.stackData.stack);
+						console.log('stack',!scope.stackData||scope.stackData.stack);
 						return 'dash is adding ' + pretty(scope.statsData.adds);
 					} else if ( undefined !== scope.statsData.gets ) {
 						return 'dash is getting ' + pretty(scope.statsData.gets);
