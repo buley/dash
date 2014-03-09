@@ -548,6 +548,20 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						scope.statsDisplay.text = 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
 				} else {
+					var rate;
+					if ( undefined !== scope.statsData.adds ) {
+						scope.statsDisplay.text = 'dash is adding ' + pretty(scope.statsData.adds);
+						rate = scope.statsData.adds;
+					} else if ( undefined !== scope.statsData.gets ) {
+						scope.statsDisplay.text = 'dash is getting ' + pretty(scope.statsData.gets);
+						rate = scope.statsData.gets;
+					} else if ( undefined !== scope.statsData.removes ) {
+						scope.statsDisplay.text = 'dash is removing ' + pretty(scope.statsData.removes);
+						rate = scope.statsData.removes;
+					} else if ( undefined !== scope.statsData.searches ) {
+						scope.statsDisplay.text = 'dash is searching ' + pretty(scope.statsData.searches);
+						rate = scope.statsData.searches;
+					}
 					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';
 					scope.statsDisplay.rate = quant;
 					historicals.unshift(quant);
@@ -577,15 +591,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						scope.statsDisplay.avgRate = avg /(x + 1);
 						scope.statsDisplay.secondsRemain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
 						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
-					}
-					if ( undefined !== scope.statsData.adds ) {
-						scope.statsDisplay.text = 'dash is adding ' + pretty(scope.statsData.adds);
-					} else if ( undefined !== scope.statsData.gets ) {
-						scope.statsDisplay.text = 'dash is getting ' + pretty(scope.statsData.gets);
-					} else if ( undefined !== scope.statsData.removes ) {
-						scope.statsDisplay.text = 'dash is removing ' + pretty(scope.statsData.removes);
-					} else if ( undefined !== scope.statsData.searches ) {
-						scope.statsDisplay.text = 'dash is searching ' + pretty(scope.statsData.searches);
 					}
 				}
 			};
