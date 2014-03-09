@@ -1137,7 +1137,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 								    }
 								    if(!in_progress && stacklist.length > 0) {
 									in_progress = true;
-									console.log(stack_count/total_count, '%');
 									scope.statsData = scope.statsData || {};
 									scope.statsData.stack = { progress: stack_count, total: total_count, complete: stack_count/total_count, current: attr };
 									doNext(stacklist.shift());
