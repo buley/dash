@@ -500,14 +500,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			if ( scope.statsData ) {
 				var pretty = function(rate) {
 					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2;
-					historicals.unshift(rate);
+					historicals.unshift(quant);
 					if ( historicals.length > 20 ) {
 						historicals.slice(0, 20);
 					}
 					if ( quant < 1 ) {
 						rate = Math.floor(quant * 60);
 						label = ' entries per minute with an estimated ';
-						label2 = ' minutes remaining';
+						label2 = ' seconds remaining';
 
 					} else {
 						rate = Math.floor(quant);
