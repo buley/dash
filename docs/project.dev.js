@@ -506,12 +506,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					}
 					if ( quant < 1 ) {
 						rate = Math.floor(quant * 60);
-						label = ' entries per minute with an estimated ';
+						label = ' entries per minute from ' + scope.statsData.stack.current + ' with an estimated ';
 						label2 = ' seconds remaining';
 
 					} else {
 						rate = Math.floor(quant);
-						label = ' entries per second with an estimated ';
+						label = ' entries per second from ' + scope.statsData.stack.current + ' with an estimated ';
 						label2 = ' seconds remaining';
 					}
 					var  x = 0, xlen = historicals.length, avg = 1;
@@ -1131,7 +1131,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									in_progress = true;
 									console.log(stack_count/total_count, '%');
 									scope.statsData = scope.statsData || {};
-									scope.statsData.stack = { progress: stack_count, total: total_count, complete: stack_count/total_count };
+									scope.statsData.stack = { progress: stack_count, total: total_count, complete: stack_count/total_count, current: attr };
 									doNext(stacklist.shift());
 									scope.downloaded[ attr ] = scope.downloaded[ attr ] || 0;
 									scope.downloaded[ attr ] += 1;
