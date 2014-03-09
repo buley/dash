@@ -113,7 +113,8 @@ ul.dash-document-navigation ul ul li {
   z-index: 3;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo {
-  margin: 90px 0 0 0;
+  margin: 15px 0 0 0;
+  clear: left;
   padding: 20px;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info {
