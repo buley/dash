@@ -500,7 +500,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		};
 		var statsInt = setInterval( function() {
 			scope.$apply( function() {
-				console.log('stats calc');
 				statsCalc();
 			} );
 		}, 3000 );
@@ -590,12 +589,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						}
 						scope.statsDisplay.avgRate = avg /(x + 1);
 						scope.statsDisplay.secondsRemain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
-						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
+						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.elapsed/1000);
+						scope.statsDisplay.prettyRemain = prettyTime( scope.statsDisplay.secondsRemain );
+						scope.statsDisplay.prettyElapsed = prettyTime( scope.statsDisplay.secondsElapsed );
 					}
 				}
 			};
 
-			console.log('calced', scope.statsDisplay);
+			console.log(scope.statsDisplay);
 		};
 		scope.estimate = function() {
 			var field = scope.field, limit = 0;
