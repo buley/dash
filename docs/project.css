@@ -173,5 +173,5 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-demo-overlay-marketing div .dash-demo-overlay-marketing-button {
   min-height: 84px;
-  margin: 10px 0 10px 0;
+  float: right;
 }
