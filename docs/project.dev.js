@@ -1059,9 +1059,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 							}
 						}
 						if ( start ) {
-							console.log('progress?', file );
 							if ( false !== scope.progress[ file ] ) {
-								console.log("PROGRESS", scope.progress[ file ] );
 								values.push(  [ file, !scope.downloaded[ file ], scope.progress[ file ] ] );
 							} else {
 								values.push(  [ file, !scope.downloaded[ file ], null ] );
@@ -1089,8 +1087,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 								processNext = function(context) {
 								    if ( 0 === stacklist.length ) {
 									deferred2.resolve({ range: attr, count: stack_count });
-									//scope.downloaded[ attr ] = stack_count;
-									//localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
+									scope.downloaded[ attr ] = stack_count;
+									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 								    }
 								    if(!in_progress && stacklist.length > 0) {
 									in_progress = true;
