@@ -154,6 +154,7 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-demo-overlay-marketing {
   background: rgba(0, 0, 0, 0.3);
+  pading: 20px;
 }
 #dash-demo-overlay-marketing div {
   margin: 0;
