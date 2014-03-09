@@ -1124,7 +1124,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									processNext(context);
 								    });
 								};
-									console.log('GET',attr);
+									console.log('GET',scope.progress[attr]);
 								    $http( {
 									method: 'GET',
 									url: '/docs/demo/data/' + attr + '.json'
