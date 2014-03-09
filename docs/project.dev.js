@@ -1087,7 +1087,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 								in_progress = false,
 								processNext = function(context) {
 								    if ( 0 === stacklist.length ) {
-									deferred2.resolve({ range: attr, count: stack_count });
+									deferred2.resolve({ range: attr, count: stack_count, skip: true });
 									scope.downloaded[ attr ] = stack_count;
 									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 									console.log("FINISHED YEP");
@@ -1190,8 +1190,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				}
 			}
 			promise.then( function(args) {
+	 		    if ( true === args.skip ) {
 				console.log("FINISHED skipped get",cmdargs, args);
-				/*
+				return;
+			    }
+					
 			    var ctx = {
 				  database: 'dash-demo',
 				  store: 'imdb',
