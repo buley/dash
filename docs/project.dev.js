@@ -604,7 +604,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
 						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed);
 
-						console.log('total',((scope.statsData.stack.total-scope.statsData.stack.progress)/ (scope.statsData.stack.total/(scope.statsData.secondsElapsed));
+						console.log('total',((scope.statsData.stack.total-scope.statsData.stack.progress)/ (scope.statsData.stack.total/(scope.statsData.secondsElapsed)));
 					}
 				}
 			};
