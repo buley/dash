@@ -1100,6 +1100,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									in_progress = false;
 									system.add( { id: context.key } );
 									statsUpdate('adds');
+									scope.progress[ attr ] = context;
+
 									if ( !addLimit || ( addCount++ < addLimit ) ) {
 										processNext(context);
 									}
