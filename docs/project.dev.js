@@ -1079,6 +1079,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						return function() {
 							    var start = scope.range,
 								stacklist = [],
+								start_promise = new Date().getTime(),
 								stack_count = 0,
 								addCount = 0,
 								addLimit = cmdargs.limit,
