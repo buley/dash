@@ -153,9 +153,9 @@ ul.dash-document-navigation ul ul li {
   height: 100%;
 }
 #dash-demo-overlay-marketing {
-  margin: 10px 0 0 0;
+  margin: 15px 0 0 0;
   background: rgba(0, 0, 0, 0.3);
-  pading: 20px;
+  padding: 20px;
 }
 #dash-demo-overlay-marketing div {
   margin: 0;
