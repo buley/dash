@@ -563,7 +563,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					}
 					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';
 					scope.statsDisplay.rate = quant;
-					historicals.unshift(quant);
+					console.log('quant',quant);
+					if(quant) {
+						historicals.unshift(quant);
+					}
 					if ( historicals.length > 20 ) {
 						historicals.slice(0, 20);
 					}
