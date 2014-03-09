@@ -568,8 +568,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					if(quant) {
 						historicals.unshift(quant);
 					}
-					if ( historicals.length > 3 ) {
-						historicals.slice(0, 3);
+					if ( historicals.length > 5 ) {
+						historicals.slice(0, 5);
 					}
 					if ( quant < 1 ) {
 						rate = Math.floor(quant * 60);
