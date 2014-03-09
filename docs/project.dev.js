@@ -500,9 +500,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				var pretty = function(rate) {
 					var quant = (rate/scope.statsData.elapsed) * 1000;
 					if ( quant < 1 ) {
-						return Math.floor(quant * 60) + ' entries per minute';
+						rate = Math.floor(quant * 60);
+						console.log('stack1',!scope.statsData||scope.statsData.stack);
+						return rate + ' entries per minute';
 					}
-					return Math.floor(quant) + ' entries per second';
+					rate = Math.floor(quant);
+					console.log('stack2',!scope.statsData||scope.statsData.stack);
+					return rate + ' entries per second';
 					
 				};
 				if ( true === scope.statsData.clear ) {
@@ -520,7 +524,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
-						console.log('stack',!scope.statsData||scope.statsData.stack);
 						return 'dash is adding ' + pretty(scope.statsData.adds);
 					} else if ( undefined !== scope.statsData.gets ) {
 						return 'dash is getting ' + pretty(scope.statsData.gets);
