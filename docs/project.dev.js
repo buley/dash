@@ -515,7 +515,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					var hours = Math.floor((seconds - ( seconds % 86400 )) / 86400),
 					    minutes = Math.floor((seconds - ( seconds % 3600 )) / 3600),
                                             secs = Math.floor(seconds % 60 );
-					console.log('pre',seconds,hours,minutes,secs);
 					if ( true === isNaN( hours ) && true === isNaN( minutes ) && true === isNaN( secs ) ) {
 						return;
 					}
