@@ -499,7 +499,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		scope.stats = function() {
 			if ( scope.statsData ) {
 				var pretty = function(rate) {
-					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2;
+					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';
 					historicals.unshift(quant);
 					if ( historicals.length > 20 ) {
 						historicals.slice(0, 20);
@@ -519,12 +519,15 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						}
 						label2 = ' seconds remaining';
 					}
-					var  x = 0, xlen = historicals.length, avg = 1;
-					for ( x = 0; x < xlen; x += 1 ) {
-						avg += historicals[ x ];
+					if ( scope.statsData.stack ) {
+						var  x = 0, xlen = historicals.length, avg = 1;
+						for ( x = 0; x < xlen; x += 1 ) {
+							avg += historicals[ x ];
+						}
+						avg = avg /(x + 1);
+						remain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
 					}
-					avg = avg /(x + 1);
-					return rate + label + Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg) + label2;
+					return rate + label + remain + label2;
 					
 				};
 				if ( true === scope.statsData.clear ) {
