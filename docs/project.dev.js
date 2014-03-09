@@ -457,17 +457,17 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
             el.setAttribute('id', 'dash-splash-container');
             return function link(scope, element, attrs) {
                 var system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function(data) {
-		    if (pid) {
-			clearTimeout(pid);
-		    }
 		    if (!data) {
+			if (pid) {
+			    clearTimeout(pid);
+			}
 			pid = setTimeout( function() {
-			scope.$apply(function() {
-				scope.data = {
+				scope.$apply(function() {
+				    scope.data = {
 					se: '',
 					ep: ''
-				};
-			});
+				    };
+				});
 			}, 3000);
 			return;
 		    }
