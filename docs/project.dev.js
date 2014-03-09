@@ -533,7 +533,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					} else {
 						secs = secs.toString();
 					}
-					console.log(hours + minutes + ':' + secs);
+					console.log(seconds, hours + minutes + ':' + secs);
 					return hours + minutes + ':' + secs;
 				};
 				if ( true === scope.statsDisplay.clear ) {
@@ -562,7 +562,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						scope.statsDisplay.text = 'dash is searching ' + pretty(scope.statsData.searches);
 						rate = scope.statsData.searches;
 					}
-					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';1111111
+					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';
 					scope.statsDisplay.rate = quant;
 					historicals.unshift(quant);
 					if ( historicals.length > 20 ) {
