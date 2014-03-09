@@ -496,6 +496,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		scope.verb = 'explore';
 		var historicals = [];
 		scope.stats = function() {
+			return 'dash is ready';
+		};
+		var statsCalc = function() {
 			if ( scope.statsData ) {
 				var pretty = function(rate) {
 					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';
