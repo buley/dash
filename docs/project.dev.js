@@ -1084,6 +1084,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									deferred2.notify({ range: attr, count: stack_count, context: context });
 								    }
 								},
+								progressTimeout,
+								progressFunction = function() {
+									localStorage.setItem('dash-demo-progress', JSON.stringify( scope.progress ) );
+								},
 								doNext = function(next) {
 							 	    stack_count += 1;
 								    dash.add.entry({
@@ -1101,6 +1105,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									system.add( { id: context.key } );
 									statsUpdate('adds');
 									scope.progress[ attr ] = context;
+									if ( progressTimeout ) {
+										clearTimeout( progressTimeout );
+									}
+									progressTimeout = setTimeout( progressFunction, 1000 );
 
 									if ( !addLimit || ( addCount++ < addLimit ) ) {
 										processNext(context);
