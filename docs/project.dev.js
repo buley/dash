@@ -506,7 +506,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		}, 3000 );
 		var statsCalc = function() {
 			if ( scope.statsData ) {
-				console.log('calcing');
+				scope.statsDisplay = scope.statsDisplay || {};
 				var pretty = function(rate) {
 					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';
 					historicals.unshift(quant);
@@ -539,36 +539,32 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					return rate + label + remain + label2;
 					
 				};
-				if ( true === scope.statsData.clear ) {
-					return 'dash is ready to go';
+				if ( true === scope.statsDisplay.clear ) {
+					scope.statsDisplay.text = 'dash is ready to go';
 				} else if ( true === scope.statsData.complete) { 
 					if ( 'adds' === scope.statsData.verb ) {
-						return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+						scope.statsDisplay.text = 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'gets' === scope.statsData.verb ) {
-						return 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+						scope.statsDisplay.text = 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'removes' === scope.statsData.verb ) {
-						return 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+						scope.statsDisplay.text = 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'searches' === scope.statsData.verb ) {
-						return 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-					} else {
-						return 'dash is ready to go';
+						scope.statsDisplay.text = 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
-						return 'dash is adding ' + pretty(scope.statsData.adds);
+						scope.statsDisplay.text = 'dash is adding ' + pretty(scope.statsData.adds);
 					} else if ( undefined !== scope.statsData.gets ) {
-						return 'dash is getting ' + pretty(scope.statsData.gets);
+						scope.statsDisplay.text = 'dash is getting ' + pretty(scope.statsData.gets);
 					} else if ( undefined !== scope.statsData.removes ) {
-						return 'dash is removing ' + pretty(scope.statsData.removes);
+						scope.statsDisplay.text = 'dash is removing ' + pretty(scope.statsData.removes);
 					} else if ( undefined !== scope.statsData.searches ) {
-						return 'dash is searching ' + pretty(scope.statsData.searches);
-					} else {
-						return 'dash is ready to go';
+						scope.statsDisplay.text = 'dash is searching ' + pretty(scope.statsData.searches);
 					}
 				}
-			} else {
-				return 'dash is ready to go';
 			};
+
+			console.log('calced', scope.statsDisplay);
 		};
 		scope.estimate = function() {
 			var field = scope.field, limit = 0;
