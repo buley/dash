@@ -553,13 +553,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					scope.statsData.stack = scope.statsData.stack || {};
 					scope.statsDisplay.complete = scope.statsData.stack.progress || 0;
 					if ( 'adds' === scope.statsData.verb ) {
-						scope.statsDisplay.text = 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+						return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'gets' === scope.statsData.verb ) {
-						scope.statsDisplay.text = 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+						return 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'removes' === scope.statsData.verb ) {
-						scope.statsDisplay.text = 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+						return 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'searches' === scope.statsData.verb ) {
-						scope.statsDisplay.text = 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+						return 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
