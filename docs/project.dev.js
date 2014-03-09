@@ -1150,13 +1150,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									var x = 0, xlen = data.length, placemark = false, sofar = 0;
 									for ( x = 0; x < xlen; x += 1 ) {
 										if ( null === last_add ) {
-											if ( sofar < limit ) {
+											if ( !limit || sofar < limit ) {
 												stacklist.push( data[ x ] );
 												sofar += 1;
 											}
 										} else {
 											if ( true === placemark || false !== scope.downloaded[ attr ] ) {
-												if ( sofar < limit ) {
+												if ( !limit || sofar < limit ) {
 													stacklist.push( data[ x ] );
 													sofar += 1;	
 												}
