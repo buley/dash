@@ -431,7 +431,6 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
         dashInstalled = localStorage.getItem(key);
     if (!dashInstalled) {
         for (; start > 2000; start -= 1) {
-            localStorage.setItem(key, 'YES');
             $http( {
                 method: 'GET',
                 url: '/docs/demo/data/' + start + '.json'
@@ -1194,8 +1193,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									url: '/docs/demo/data/' + attr + '.json'
 								    }).success(function(data, status, headers, config) {
 									var x = 0, xlen = data.length, placemark = false, sofar = 0;
-									scope.filecount[ attr ] = xlen;
-									localStorage.setItem('dash-demo-filecount', JSON.stringify( scope.filecount ) );
 									for ( x = 0; x < xlen; x += 1 ) {
 										if ( null === last_add && ( false === scope.downloaded[ attr ] || x > scope.downloaded[ attr ] )  ) {
 											if ( !limit || sofar < limit ) {
