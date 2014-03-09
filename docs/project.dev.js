@@ -1112,9 +1112,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 								processNext = function(context) {
 								    if ( 0 === stacklist.length ) {
 									deferred2.resolve({ range: attr, count: stack_count, skip: true });
-									scope.downloaded[ attr ] = scope.downloaded[ attr ] || 0;
-									scope.downloaded[ attr ] += stack_count;
-									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 									console.log("FINISHED YEP");
 									statsUpdate('complete', 'adds', stack_count, new Date().getTime() - start_promise);
 								    }
@@ -1124,6 +1121,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									scope.statsData = scope.statsData || {};
 									scope.statsData.stack = { total: stack_count, progress: total_count, complete: stack_count/total_count };
 									doNext(stacklist.shift());
+									scope.downloaded[ attr ] = scope.downloaded[ attr ] || 0;
+									scope.downloaded[ attr ] += 1;
+									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
+
 									deferred2.notify({ range: attr, count: stack_count, context: context });
 								    }
 								},
