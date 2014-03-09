@@ -799,6 +799,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			enabled: true
 		} ];
 		scope.verbs = [ {
+			name: 'download',
+			display: 'download',
+			selected: 'download' === scope.verb ? 'selected' : '',
+			enabled: true
+		}, {
 			name: 'explore',
 			display: 'explore',
 			selected: 'explore' === scope.verb ? 'selected' : '',
