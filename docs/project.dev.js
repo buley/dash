@@ -532,8 +532,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					} else {
 						secs = secs.toString();
 					}
-					console.log(hours + minutes + ':' + seconds);
-					return hours + minutes + ':' + seconds;
+					console.log(hours + minutes + ':' + secs);
+					return hours + minutes + ':' + secs;
 				};
 				if ( true === scope.statsDisplay.clear ) {
 					scope.statsDisplay.text = 'dash is ready to go';
