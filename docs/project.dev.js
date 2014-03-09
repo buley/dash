@@ -596,13 +596,15 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 							avg += historicals[ x ];
 						}
 						scope.statsDisplay.avgRate = avg/x;
-						console.log('total',(scope.statsData.stack.total-scope.statsData.stack.progress)/ (scope.statsData.stack.total/(scope.statsData.elapsed)));
+						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started/1000);
+
+						console.log(scope.statsData.stack.total, scope.statsData.stack.progress, avg, scope.statsDisplay.secondsRemain);
 
 						scope.statsDisplay.secondsRemain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
-						console.log(scope.statsData.stack.total, scope.statsData.stack.progress, avg, scope.statsDisplay.secondsRemain);
-						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started/1000);
 						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
 						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed);
+
+						console.log('total',(scope.statsData.stack.total-scope.statsData.stack.progress)/ (scope.statsData.stack.total/(scope.statsData.secondsElapsed));
 					}
 				}
 			};
