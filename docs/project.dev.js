@@ -506,12 +506,17 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					}
 					if ( quant < 1 ) {
 						rate = Math.floor(quant * 60);
-						label = ' entries per minute from ' + scope.statsData.stack.current + ' with an estimated ';
+						label = '';
+						if ( scope/statsData.stack ) {
+							label = ' entries per minute from ' + scope.statsData.stack.current + ' with an estimated ';
+						}
 						label2 = ' seconds remaining';
-
 					} else {
 						rate = Math.floor(quant);
-						label = ' entries per second from ' + scope.statsData.stack.current + ' with an estimated ';
+						label = '';
+						if ( scope/statsData.stack ) {
+							label = ' entries per second from ' + scope.statsData.stack.current + ' with an estimated ';
+						}
 						label2 = ' seconds remaining';
 					}
 					var  x = 0, xlen = historicals.length, avg = 1;
