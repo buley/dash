@@ -754,7 +754,17 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		if ( dirty ) {
 			localStorage.setItem('dash-demo-progress', JSON.stringify( scope.progress ) );
 		}
-
+		dirty = false;
+		scope.filecount = JSON.parse( localStorage.getItem('dash-demo-filecount') ) || {};
+		for ( attr in scope.files ) {
+			if ( scope.files.hasOwnProperty(attr) && undefined === scope.filecount[ attr ] ) {
+				scope.filecount[ attr ] = false;
+				dirty = true;
+			}
+		}
+		if ( dirty ) {
+			localStorage.setItem('dash-demo-filecount', JSON.stringify( scope.filecount ) );
+		}
 
 		scope.sorts = [ {
 			name: 'from',
@@ -1158,6 +1168,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									url: '/docs/demo/data/' + attr + '.json'
 								    }).success(function(data, status, headers, config) {
 									var x = 0, xlen = data.length, placemark = false, sofar = 0;
+									scope.filecount[ attr ] = xlen;
+									localStorage.setItem('dash-demo-filecount', JSON.stringify( scope.filecount ) );
 									for ( x = 0; x < xlen; x += 1 ) {
 										if ( null === last_add ) {
 											if ( !limit || sofar < limit ) {
