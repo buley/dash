@@ -587,13 +587,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 
 						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started/1000);
 						scope.statsDisplay.avgRate = scope.statsData.stack.total/scope.statsDisplay.secondsElapsed;
-						console.log('run rate', avg, x, scope.statsDisplay.runRate);
 						var remainder = (scope.statsData.stack.total - scope.statsData.stack.progress);
 						scope.statsDisplay.secondsRemain = Math.floor(remainder/scope.statsDisplay.runRate);
 						scope.statsDisplay.prettyRemain = prettyTime( scope.statsDisplay.secondsRemain );
 						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed);
 						scope.statsDisplay.prettyRate = Math.floor( scope.statsDisplay.runRate ) + '/' + unit;
 						scope.statsDisplay.prettyAvg = Math.floor( scope.statsDisplay.avgRate ) + '/' + unit;
+						scope.statsDisplay.total = scope.statsData.stack.total;
+						scope.statsDisplay.complete = scope.statsData.stack.progress;
 
 
 					}
