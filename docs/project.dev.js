@@ -504,7 +504,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				statsCalc();
 			} );
 		}, 3000 );
-		var statsCalc = function() {
+		var 1tatsCalc = function() {
 			if ( scope.statsData ) {
 				scope.statsDisplay = scope.statsDisplay || {};
 				var rate, avg = 1;
