@@ -508,7 +508,48 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			if ( scope.statsData ) {
 				scope.statsDisplay = scope.statsDisplay || {};
 				var pretty = function(rate) {
+
+					
+				};
+				var prettyTime = function(seconds) {
+					var hours = (seconds - ( seconds % 86400 ) / 86400),
+					    minutes = (seconds - ( seconds % 3600 ) / 3600),
+                                            seconds = (seconds - ( seconds % 60 ) / 60);
+					if ( hours < 10 && hours > 0 ) {
+						hours = '0' + hours.toString();
+					} else if ( hours < 1 ) {
+						hours = '' ; 
+					} else {
+						hours  = hours.toString() + ':';
+					}
+					if ( minutes < 10 ) {
+						minutes = '0' + minutes.toString();
+					} else {
+						minutes = minutes.toString();
+					}
+					if ( seconds < 10 ) {
+						seconds = '0' + seconds.toString();
+					} else {
+						seconds = seconds.toString();
+					}
+					console.log(hours + minutes + ':' + seconds);
+					return hours + minutes + ':' + seconds;
+				};
+				if ( true === scope.statsDisplay.clear ) {
+					scope.statsDisplay.text = 'dash is ready to go';
+				} else if ( true === scope.statsData.complete) { 
+					if ( 'adds' === scope.statsData.verb ) {
+						scope.statsDisplay.text = 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+					} else if ( 'gets' === scope.statsData.verb ) {
+						scope.statsDisplay.text = 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+					} else if ( 'removes' === scope.statsData.verb ) {
+						scope.statsDisplay.text = 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+					} else if ( 'searches' === scope.statsData.verb ) {
+						scope.statsDisplay.text = 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+					}
+				} else {
 					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';
+					scope.statsDisplay.rate = quant;
 					historicals.unshift(quant);
 					if ( historicals.length > 20 ) {
 						historicals.slice(0, 20);
@@ -533,25 +574,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						for ( x = 0; x < xlen; x += 1 ) {
 							avg += historicals[ x ];
 						}
-						avg = avg /(x + 1);
-						remain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
+						scope.statsDisplay.avgRate = avg /(x + 1);
+						scope.statsDisplay.secondsRemain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
+						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
 					}
-					return rate + label + remain + label2;
-					
-				};
-				if ( true === scope.statsDisplay.clear ) {
-					scope.statsDisplay.text = 'dash is ready to go';
-				} else if ( true === scope.statsData.complete) { 
-					if ( 'adds' === scope.statsData.verb ) {
-						scope.statsDisplay.text = 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-					} else if ( 'gets' === scope.statsData.verb ) {
-						scope.statsDisplay.text = 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-					} else if ( 'removes' === scope.statsData.verb ) {
-						scope.statsDisplay.text = 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-					} else if ( 'searches' === scope.statsData.verb ) {
-						scope.statsDisplay.text = 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-					}
-				} else {
 					if ( undefined !== scope.statsData.adds ) {
 						scope.statsDisplay.text = 'dash is adding ' + pretty(scope.statsData.adds);
 					} else if ( undefined !== scope.statsData.gets ) {
