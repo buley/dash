@@ -407,7 +407,7 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
                 doNext(stackx.shift());
 		totalRun += 1;
             } else {
-	        statsUpdate('complete', 'adds', totalRun, new Date().getTime() - start_promise);
+		console.log('ADDS COMPLETE');
 		fresh_start = true;
 	    }
         },
