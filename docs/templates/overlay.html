@@ -9,8 +9,7 @@
 </nav>
 <section id="dash-demo-overlay-container" class="large-12">
 	<section id="dash-demo-overlay-marketing" class="large-8 left">
-		<div class="large-10 left">
-			<span>For example, </span>
+		<div class="large-10 left dash-demo-overlay-marketing-filter">
 			<span ng-show="1 === numFields()">explore</span>
 			<select ng-model="verb" ng-show="numFields() > 1">
 				<option ng-repeat="option in verbs" ng-if="option.enabled" name="{{option.name}}" ng-selected="verb === option.name" value="{{option.name}}">{{option.display}}</option>
