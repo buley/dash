@@ -551,7 +551,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					rate = 0;
 					scope.statsDisplay.prettyRate = '0/second';
 					scope.statsData.stack = scope.statsData.stack || {};
-					scope.statsDisplay.complete = scope.statsData.stack.progress;
+					scope.statsDisplay.complete = scope.statsData.stack.progress || 0;
 					if ( 'adds' === scope.statsData.verb ) {
 						scope.statsDisplay.text = 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'gets' === scope.statsData.verb ) {
