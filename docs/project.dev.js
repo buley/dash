@@ -495,16 +495,31 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		scope.sort = 'from';
 		scope.field = 'thousand';
 		scope.verb = 'explore';
+		var historicals = [];
 		scope.stats = function() {
 			if ( scope.statsData ) {
 				var pretty = function(rate) {
-					var quant = (rate/scope.statsData.elapsed) * 1000;
+					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2;
+					historicals.unshift(rate);
+					if ( historicals.length > 20 ) {
+						historicals.slice(0, 20);
+					}
 					if ( quant < 1 ) {
 						rate = Math.floor(quant * 60);
-						return rate + ' entries per minute with an estimated ' + Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) /rate) + ' minutes remaining';
+						label = ' entries per minute with an estimated ';
+						label2 = ' minutes remaining';
+
+					} else {
+						rate = Math.floor(quant);
+						label = ' entries per second with an estimated ';
+						label2 = ' seconds remaining';
 					}
-					rate = Math.floor(quant);
-					return rate + ' entries per second with an estimated ' + Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) /rate) + ' seconds remaining';
+					var  x = 0, xlen = historicals.length, avg;
+					for ( x = 0; x < xlen; x += 1 ) {
+						avg += historicals[ x ];
+					}
+					avg = avg /(x + 1);
+					return rate + label + Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg) + label2;
 					
 				};
 				if ( true === scope.statsData.clear ) {
