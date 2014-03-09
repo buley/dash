@@ -1187,7 +1187,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				}
 			}
 			promise.then( function(args) {
-				console.log("FINISHED",cmdargs);
+				console.log("FINISHED",cmdargs, args);
 			    var ctx = {
 				  database: 'dash-demo',
 				  store: 'imdb',
