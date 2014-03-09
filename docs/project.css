@@ -159,7 +159,7 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-demo-overlay-marketing div {
   margin: 0;
-  font-size: 24px;
+  font-size: 22px;
   color: #d5d5d5;
 }
 #dash-demo-overlay-marketing div select,
@@ -174,4 +174,5 @@ ul.dash-document-navigation ul ul li {
 #dash-demo-overlay-marketing div .dash-demo-overlay-marketing-button {
   min-height: 84px;
   float: right;
+  margin: 0;
 }
