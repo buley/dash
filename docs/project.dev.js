@@ -500,10 +500,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		};
 		var statsInt = setInterval( function() {
 			scope.$apply( function() {
-				console.log('stats calc');
 				statsCalc();
 			} );
-		}, 3000 );
+		}, 1000 );
 		var statsCalc = function() {
 			if ( scope.statsData ) {
 				scope.statsDisplay = scope.statsDisplay || {};
