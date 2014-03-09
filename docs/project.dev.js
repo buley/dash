@@ -1045,8 +1045,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				console.log('progress?', scope.range );
 				if ( false !== scope.progress[ scope.range ] ) {
 					console.log("PROGRESS", scope.progress[ scope.range ] );
+					values.push( [ scope.range, !scope.downloaded[ scope.range ], scope.progress[ scope.range ] ] );
 				} else {
-					values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
+					values.push( [ scope.range, !scope.downloaded[ scope.range ], null ] );
 				}
 
 			} else {
@@ -1061,8 +1062,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 							console.log('progress?', file );
 							if ( false !== scope.progress[ file ] ) {
 								console.log("PROGRESS", scope.progress[ file ] );
+								values.push(  [ file, !scope.downloaded[ file ], scope.progress[ file ] ] );
 							} else {
-								values.push( [ file, !scope.downloaded[ file ] ] );
+								values.push(  [ file, !scope.downloaded[ file ], null ] );
 							}
 						}
 					}
@@ -1074,7 +1076,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
 				if ( true === values[ x ][ 1 ] ) {
-					promise = promise.then( (function(attr) {
+					promise = promise.then( (function(attr, last_add) {
 						var deferred2 = $q.defer();
 						return function() {
 							    var start = scope.range,
@@ -1136,9 +1138,19 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									method: 'GET',
 									url: '/docs/demo/data/' + attr + '.json'
 								    }).success(function(data, status, headers, config) {
-									var x = 0, xlen = data.length;
+									var x = 0, xlen = data.length, placemark = false;
 									for ( x = 0; x < xlen; x += 1 ) {
-										stacklist.push( data[ x ] );
+										if ( null === last_add ) {
+											stacklist.push( data[ x ] );
+										} else {
+											if ( true === placemark ) {
+												stacklist.push( data[ x ] );
+											} else {
+												if ( data[ x ].ep === last_add.data.ep && data[ x ].ey === last_add.data.ey && data[ x ].se === last_add.data.se && data[ x ].sy === last_add.data.sy ) { 
+													placemark = true;
+												}
+											}
+										}
 									}
 									stack_length = stacklist.length;
 									processNext();
@@ -1147,7 +1159,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 								    });
 							return deferred2.promise;
 						}
-					}(values[x][0])) );
+					}(values[x][0], values[x][2])) );
 				} else {
 					promise = promise.then( (function(attr) {
 						var deferred2 = $q.defer();
