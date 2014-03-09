@@ -590,8 +590,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						}
 						scope.statsDisplay.avgRate = avg /(x + 1);
 						scope.statsDisplay.secondsRemain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
+						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.elapsed/1000);;
 						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
-						scope.statsDisplay.prettyElapsed = prettyTime( Math.floor(scope.statsDisplay.elapsed/1000) );
+						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed);
 					}
 				}
 			};
