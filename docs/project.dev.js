@@ -531,8 +531,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				};
 				if ( true === scope.statsData.clear ) {
 					return 'dash is ready to go';
-				}
-				if ( true === scope.statsData.complete) { 
+				} else if ( true === scope.statsData.complete) { 
 					if ( 'adds' === scope.statsData.verb ) {
 						return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'gets' === scope.statsData.verb ) {
@@ -541,6 +540,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						return 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'searches' === scope.statsData.verb ) {
 						return 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+					} else {
+						return 'dash is ready to go';
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
@@ -551,10 +552,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						return 'dash is removing ' + pretty(scope.statsData.removes);
 					} else if ( undefined !== scope.statsData.searches ) {
 						return 'dash is searching ' + pretty(scope.statsData.searches);
+					} else {
+						return 'dash is ready to go';
 					}
-
 				}
-				return '';
 			} else {
 				return 'dash is ready to go';
 			};
