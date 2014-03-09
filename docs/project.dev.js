@@ -1147,6 +1147,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 												stacklist.push( data[ x ] );
 											} else {
 												if ( data[ x ].ep === last_add.data.ep && data[ x ].ey === last_add.data.ey && data[ x ].se === last_add.data.se && data[ x ].sy === last_add.data.sy ) { 
+													console.log('FOUND PLACEMARK', data[ x ] );
 													placemark = true;
 												}
 											}
