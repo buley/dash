@@ -1101,12 +1101,16 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			statsObj = {};
 			statsProc = null;
 		    },
+                    statsUIProc,
 		    statsUpdate = function() {
 				var tag = arguments[0];
 				if ( 'complete' === tag ) {
 					statsObj = { verb: arguments[1], complete: true, amount: arguments[2], elapsed: arguments[3], updated: new Date().getTime() };
 					scope.statsData = statsObj;
-					setTimeout( function() {
+                                        if ( statsUIProc ) {
+						clearTimeout( statsUIProc );
+					}
+					statsUIProc = setTimeout( function() {
 						statsObj = { clear: true };
 						scope.statsData = statsObj;
 						statsObj = {};
