@@ -499,6 +499,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			return 'dash is ready';
 		};
 		var statsInt = setInterval( function() {
+			console.log('stats calc');
 			statsCalc();
 		}, 3000 );
 		var statsCalc = function() {
