@@ -157,3 +157,10 @@ ul.dash-document-navigation ul ul li {
   min-height: 84px;
   margin: 10px 0 10px 0;
 }
+#dash-demo-stats {
+  color: #ffffff;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: 11;
+}
