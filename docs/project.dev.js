@@ -785,17 +785,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		if ( dirty ) {
 			localStorage.setItem('dash-demo-progress', JSON.stringify( scope.progress ) );
 		}
-		dirty = false;
-		scope.filecount = JSON.parse( localStorage.getItem('dash-demo-filecount') ) || {};
-		for ( attr in scope.files ) {
-			if ( scope.files.hasOwnProperty(attr) && undefined === scope.filecount[ attr ] ) {
-				scope.filecount[ attr ] = false;
-				dirty = true;
-			}
-		}
-		if ( dirty ) {
-			localStorage.setItem('dash-demo-filecount', JSON.stringify( scope.filecount ) );
-		}
 
 		scope.sorts = [ {
 			name: 'from',
@@ -1097,9 +1086,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				console.log('progress?', scope.range );
 				if ( false !== scope.progress[ scope.range ] ) {
 					console.log("PROGRESS", scope.progress[ scope.range ] );
-					values.push( [ scope.range, ( !scope.downloaded[ scope.range ] || scope.downloaded[ scope.range ] < scope.filecount[ scope.range ] ) , scope.progress[ scope.range ] ] );
+					values.push( [ scope.range, ( !scope.downloaded[ scope.range ] || scope.downloaded[ scope.range ] < scope.files[ scope.range ].filecount ) , scope.progress[ scope.range ] ] );
 				} else {
-					values.push( [ scope.range, (!scope.downloaded[ scope.range ] || scope.downloaded[ scope.range ] < scope.filecount[ scope.range ] ), null ] );
+					values.push( [ scope.range, (!scope.downloaded[ scope.range ] || scope.downloaded[ scope.range ] < scope.files[ scope.range ].filecount ), null ] );
 				}
 			} else {
 				for ( file in scope.downloaded ) {
@@ -1111,9 +1100,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						}
 						if ( start ) {
 							if ( false !== scope.progress[ file ] ) {
-								values.push(  [ file, ( !scope.downloaded[ file ] || scope.downloaded[ file ] < scope.filecount[ file ] ), scope.progress[ file ] ] );
+								values.push(  [ file, ( !scope.downloaded[ file ] || scope.downloaded[ file ] < scope.files[ file ].filecount ), scope.progress[ file ] ] );
 							} else {
-								values.push(  [ file, ( !scope.downloaded[ file ] || scope.downloaded[ file ] < scope.filecount[ file ] ), null ] );
+								values.push(  [ file, ( !scope.downloaded[ file ] || scope.downloaded[ file ] < scope.files[ file ].filecount ), null ] );
 							}
 						}
 					}
