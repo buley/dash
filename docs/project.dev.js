@@ -1132,7 +1132,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 								    });
 								};
 									//xxx
-									var field = scope.field;
+									var field = scope.field, limit = null;
 									if ( 'million' === field ) {
 										limit = 1000000;
 									} else if ( 'hundredthousand' === field) {
