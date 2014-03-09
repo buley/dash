@@ -501,11 +501,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					var quant = (rate/scope.statsData.elapsed) * 1000;
 					if ( quant < 1 ) {
 						rate = Math.floor(quant * 60);
-						console.log('stack1',!scope.statsData||scope.statsData.stack);
+						console.log('stack1',((scope.statsData.stack.total - scope.statsData.stack.progress) /rate));
 						return rate + ' entries per minute';
 					}
 					rate = Math.floor(quant);
-					console.log('stack2',((scope.statsData.stack.total - scope.statsData.stack.progress) /rate) * 1000);
+					console.log('stack2',((scope.statsData.stack.total - scope.statsData.stack.progress) /rate));
 					return rate + ' entries per second';
 					
 				};
