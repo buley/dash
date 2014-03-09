@@ -535,7 +535,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					} else {
 						secs = secs.toString();
 					}
-					console.log(seconds, hours + minutes + ':' + secs);
 					return hours + minutes + ':' + secs;
 				};
 				if ( true === scope.statsDisplay.clear ) {
@@ -597,7 +596,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 							avg += historicals[ x ];
 						}
 						scope.statsDisplay.avgRate = avg /(x + 1);
+
 						scope.statsDisplay.secondsRemain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
+						console.log(scope.statsData.stack.total, scope.statsData.stack.progress, avg, scope.statsDisplay.secondsRemain);
 						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started/1000);
 						console.log('start',scope.statsData.started);
 						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
