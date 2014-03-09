@@ -569,9 +569,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						historicals.unshift(quant);
 					}
 					if ( historicals.length > 3 ) {
-						historicals.slice(0, 2);
+						historicals = historicals.slice(0, 2);
 					}
-					console.log('historicals',historicals);
 					if ( quant < 1 ) {
 						rate = Math.floor(quant * 60);
 						label = '';
