@@ -953,7 +953,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						}
 						if ( start ) {
 							scope.progress[ file ] = false;
-							if ( 'from' === scope.field ) {
+							if ( 'from' === scope.sort ) {
 								return;
 							}
 						}
@@ -1131,7 +1131,17 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									processNext(context);
 								    });
 								};
-									console.log('GET',scope.progress[attr]);
+									//xxx
+									if ( 'million' === field && limit > 1000000 ) {
+										limit = 1000000;
+									} else if ( 'hundredthousand' === field && limit > 100000 ) {
+										limit = 100000;
+									} else if ( 'tenthousand' === field && limit > 10000  ) {
+										limit = 10000;
+									} else if ( 'thousand' === field && limit > 1000 ) {
+										limit = 1000;
+
+									}
 								    $http( {
 									method: 'GET',
 									url: '/docs/demo/data/' + attr + '.json'
@@ -1139,13 +1149,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									var x = 0, xlen = data.length, placemark = false, sofar = 0;
 									for ( x = 0; x < xlen; x += 1 ) {
 										if ( null === last_add ) {
-											if ( sofar < scope.limit ) {
+											if ( sofar < limit ) {
 												stacklist.push( data[ x ] );
 												sofar += 1;
 											}
 										} else {
 											if ( true === placemark || false !== scope.downloaded[ attr ] ) {
-												if ( sofar < scope.limit ) {
+												if ( sofar < limit ) {
 													stacklist.push( data[ x ] );
 													sofar += 1;	
 												}
