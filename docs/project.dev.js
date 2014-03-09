@@ -504,7 +504,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						return rate + ' entries per minute with an estimated ' + Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) /rate) + ' minutes remaining';
 					}
 					rate = Math.floor(quant);
-					return rate + ' entries per second with an estimated ' + Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) /rate) + ' seconds remaining')
+					return rate + ' entries per second with an estimated ' + Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) /rate) + ' seconds remaining';
 					
 				};
 				if ( true === scope.statsData.clear ) {
