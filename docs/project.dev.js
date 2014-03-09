@@ -514,7 +514,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				var prettyTime = function(seconds) {
 					var hours = Math.floor((seconds - ( seconds % 86400 )) / 86400),
 					    minutes = Math.floor((seconds - ( seconds % 3600 )) / 3600),
-                                            seconds = Math.floor((seconds - ( seconds % 60 )) / 60);
+                                            secs = Math.floor((seconds - ( seconds % 60 )) / 60);
 					if ( hours < 10 && hours > 0 ) {
 						hours = '0' + hours.toString() + ':';
 					} else if ( hours < 1 ) {
@@ -527,10 +527,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					} else {
 						minutes = minutes.toString();
 					}
-					if ( seconds < 10 ) {
-						seconds = '0' + seconds.toString();
+					if ( secs < 10 ) {
+						secs = '0' + secs.toString();
 					} else {
-						seconds = seconds.toString();
+						secs = secs.toString();
 					}
 					console.log(hours + minutes + ':' + seconds);
 					return hours + minutes + ':' + seconds;
