@@ -107,11 +107,15 @@ ul.dash-document-navigation ul ul li {
   z-index: 11;
 }
 #dash-splash-overlay #dash-demo-overlay-container {
-  position: absolute;
-  bottom: 0;
-  padding: 20px 20px 0 20px;
+  position: relative;
+  padding: 45px 0 0 0;
   background: rgba(0, 0, 0, 0.3);
   z-index: 3;
+}
+#dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo {
+  margin: 90px 0 0 0;
+  background: #000;
+  padding: 20px;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info {
   position: absolute;
