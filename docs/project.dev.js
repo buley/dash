@@ -590,7 +590,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						}
 						scope.statsDisplay.avgRate = avg /(x + 1);
 						scope.statsDisplay.secondsRemain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
-						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.elapsed/1000);;
+						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started/1000);;
 						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
 						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed);
 					}
@@ -1083,6 +1083,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		};
 		var statsObj = {},
 		    last_time = new Date().getTime(),
+		    first_time = last_time,
 		    statsProc = null,
 		    statsTimeout = 1000,
 		    wasCompleted = false,
@@ -1090,6 +1091,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			statsObj.elapsed = new Date().getTime() - last_time;
 			last_time = new Date().getTime();
 			scope.statsData = scope.statsData || {};
+			scope.statsData.started = first_time;
 			if ( ( new Date().getTime() - scope.statsData.updated ) > 10000 ) {
 				statsObj = { clear: true };
 			}
