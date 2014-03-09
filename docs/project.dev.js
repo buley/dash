@@ -1112,7 +1112,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 								processNext = function(context) {
 								    if ( 0 === stacklist.length ) {
 									deferred2.resolve({ range: attr, count: stack_count, skip: true });
-									scope.downloaded[ attr ] = stack_count;
+									scope.downloaded[ attr ] = scope.downloaded[ attr ] || 0;
+									scope.downloaded[ attr ] += stack_count;
 									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 									console.log("FINISHED YEP");
 									statsUpdate('complete', 'adds', stack_count, new Date().getTime() - start_promise);
