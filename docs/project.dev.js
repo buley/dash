@@ -498,6 +498,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		scope.stats = function() {
 			return 'dash is ready';
 		};
+		var statsInt = setInterval( function() {
+			statsCalc();
+		}, 3000 );
 		var statsCalc = function() {
 			if ( scope.statsData ) {
 				var pretty = function(rate) {
