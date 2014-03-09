@@ -541,6 +541,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					scope.statsDisplay.text = 'dash is ready to go';
 				} else if ( true === scope.statsData.complete) { 
 					rate = 0;
+					scope.statsDisplay.prettyRate = '0/second';
 					if ( 'adds' === scope.statsData.verb ) {
 						scope.statsDisplay.text = 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'gets' === scope.statsData.verb ) {
