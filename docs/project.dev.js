@@ -1189,7 +1189,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				}
 			}
 			promise.then( function(args) {
-				console.log("FINISHED",cmdargs, args);
+				console.log("FINISHED skipped get",cmdargs, args);
+				/*
 			    var ctx = {
 				  database: 'dash-demo',
 				  store: 'imdb',
@@ -1211,7 +1212,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				statsUpdate('gets');
 				//system.cameraMod( 'z', -2, 50000, 10 );
 				//system.cameraMod( 'z', 1, 10000, 0 );
-			    });
+			    });*/
 
 			}, null, function(args) {
 				//console.log('notify',args);
