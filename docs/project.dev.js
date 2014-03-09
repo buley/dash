@@ -540,6 +540,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				if ( true === scope.statsDisplay.clear ) {
 					scope.statsDisplay.text = 'dash is ready to go';
 				} else if ( true === scope.statsData.complete) { 
+					rate = 0;
 					if ( 'adds' === scope.statsData.verb ) {
 						scope.statsDisplay.text = 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					} else if ( 'gets' === scope.statsData.verb ) {
@@ -551,16 +552,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					}
 				} else {
 					if ( undefined !== scope.statsData.adds ) {
-						scope.statsDisplay.text = 'dash is adding ' + pretty(scope.statsData.adds);
 						rate = scope.statsData.adds;
 					} else if ( undefined !== scope.statsData.gets ) {
-						scope.statsDisplay.text = 'dash is getting ' + pretty(scope.statsData.gets);
 						rate = scope.statsData.gets;
 					} else if ( undefined !== scope.statsData.removes ) {
-						scope.statsDisplay.text = 'dash is removing ' + pretty(scope.statsData.removes);
 						rate = scope.statsData.removes;
 					} else if ( undefined !== scope.statsData.searches ) {
-						scope.statsDisplay.text = 'dash is searching ' + pretty(scope.statsData.searches);
 						rate = scope.statsData.searches;
 					}
 					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '', unit;
@@ -574,19 +571,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					if ( quant < 1 ) {
 						rate = Math.floor(quant * 60);
 						unit = 'minute';
-						label = '';
-						if ( scope.statsData.stack ) {
-							label = ' entries per minute from ' + scope.statsData.stack.current + ' with an estimated ';
-						}
-						label2 = ' seconds remaining';
 					} else {
 						unit = 'second';
 						rate = Math.floor(quant);
-						label = '';
-						if ( scope.statsData.stack ) {
-							label = ' entries per second from ' + scope.statsData.stack.current + ' with an estimated ';
-						}
-						label2 = ' seconds remaining';
 					}
 					if ( scope.statsData.stack ) {
 						var  x = 0, xlen = historicals.length;
@@ -600,11 +587,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 
 						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started/1000);
 						scope.statsDisplay.avgRate = scope.statsData.stack.total/scope.statsDisplay.secondsElapsed;
+						console.log('run rate', avg, x, scope.statsDisplay.runRate);
 						var remainder = (scope.statsData.stack.total - scope.statsData.stack.progress);
 						scope.statsDisplay.secondsRemain = Math.floor(remainder/scope.statsDisplay.runRate);
 						scope.statsDisplay.prettyRemain = prettyTime( scope.statsDisplay.secondsRemain );
 						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed);
-						scope.statsDisplay.prettyRate = Math.floor( scope.statsDisplay.rate ) + '/' + unit;
+						scope.statsDisplay.prettyRate = Math.floor( scope.statsDisplay.runRate ) + '/' + unit;
 						scope.statsDisplay.prettyAvg = Math.floor( scope.statsDisplay.avgRate ) + '/' + unit;
 
 
