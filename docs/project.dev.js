@@ -1095,6 +1095,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 								    }
 								    if(!in_progress && stacklist.length > 0) {
 									in_progress = true;
+									console.log(stack_count/total_count, '%');
 									doNext(stacklist.shift());
 									deferred2.notify({ range: attr, count: stack_count, context: context });
 								    }
@@ -1154,13 +1155,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									for ( x = 0; x < xlen; x += 1 ) {
 										if ( null === last_add ) {
 											if ( !limit || sofar < limit ) {
-												stacklist.push( data[ x ] );
+												total_count = stacklist.push( data[ x ] );
 												sofar += 1;
 											}
 										} else {
 											if ( true === placemark || false !== scope.downloaded[ attr ] ) {
 												if ( !limit || sofar < limit ) {
-													stacklist.push( data[ x ] );
+													total_count = stacklist.push( data[ x ] );
 													sofar += 1;	
 												}
 											} else {
