@@ -352,11 +352,11 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
 dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $scope, $sce ) {
     $scope.demos = function() {
         var current = $scope.currentDocument(),
-            stack = current.demos || [];
+            stackx = current.demos || [];
         _.map(current.children || [], function(child) {
-            stack.push.apply(stack, child.demos || []);
+            stackx.push.apply(stack, child.demos || []);
         });
-        return stack;
+        return stackx;
     };
     $scope.demoUrl = function(demo) {
         return $sce.trustAsResourceUrl('http://jsfiddle.net/' + demo.id + '/embedded');
@@ -376,35 +376,35 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
 } ] );
 
 dashApp.factory( 'dashAppSplashBroadcast', function() {
-	stack = [];
+	stackx = [];
 	return {
 		current: function(data) {
-			var x = 0, xlen = stack.length;
+			var x = 0, xlen = stackx.length;
 			for ( x = 0; x < xlen; x += 1 ) {
-				stack[ x ].apply( stack[ x ], [ data ] );
+				stackx[ x ].apply( stackx[ x ], [ data ] );
 			}
 		},
 		subscribe: function(cb) {
-			stack.push(cb);
+			stackx.push(cb);
 		}
 	};
-});;
+});
 dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $scope, $http ) {
     var start = 2013,
-        stack = [],
+        stackx = [],
 	start_promise,
         in_progress = false,
 	fresh_start = true,
 	totalRun = 0,
         processNext = function() {
-            if(!in_progress && stack.length > 0) {
+            if(!in_progress && stackx.length > 0) {
                 in_progress = true;
 		if ( true === fresh_start ) {
 			start_promise = new Date().getTime();
 			fresh_start = false;
 			totalRun = 0;
 		}
-                doNext(stack.shift());
+                doNext(stackx.shift());
 		totalRun += 1;
             } else {
 	        statsUpdate('complete', 'adds', totalRun, new Date().getTime() - start_promise);
@@ -436,7 +436,7 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
                 method: 'GET',
                 url: '/docs/demo/data/' + start + '.json'
             }).success(function(data, status, headers, config) {
-                stack.push.apply(stack, data);
+                stackx.push.apply(stackx, data);
                 processNext();
             }).error( function(data, status, headers, config) {
                 console.log('error',data, status, headers, config);
