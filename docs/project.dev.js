@@ -1138,13 +1138,19 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									method: 'GET',
 									url: '/docs/demo/data/' + attr + '.json'
 								    }).success(function(data, status, headers, config) {
-									var x = 0, xlen = data.length, placemark = false;
+									var x = 0, xlen = data.length, placemark = false, sofar = 0;
 									for ( x = 0; x < xlen; x += 1 ) {
 										if ( null === last_add ) {
-											stacklist.push( data[ x ] );
+											if ( sofar < scope.limit ) {
+												stacklist.push( data[ x ] );
+												sofar += 1;
+											}
 										} else {
 											if ( true === placemark ) {
-												stacklist.push( data[ x ] );
+												if ( sofar < scope.limit ) {
+													stacklist.push( data[ x ] );
+													sofar += 1;	
+												}
 											} else {
 												if ( data[ x ].ep === last_add.data.ep && data[ x ].ey === last_add.data.ey && data[ x ].se === last_add.data.se && data[ x ].sy === last_add.data.sy ) { 
 													console.log('FOUND PLACEMARK', data[ x ] );
