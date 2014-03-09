@@ -600,8 +600,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						scope.statsDisplay.avgRate = (scope.statsData.stack.total/scope.statsDisplay.secondsElapsed) || 0;
 						var remainder = (scope.statsData.stack.total - scope.statsData.stack.progress);
 						scope.statsDisplay.secondsRemain = Math.floor(remainder/scope.statsDisplay.runRate);
-						scope.statsDisplay.prettyRemain = prettyTime( scope.statsDisplay.secondsRemain );
-						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed);
+						scope.statsDisplay.prettyRemain = prettyTime( scope.statsDisplay.secondsRemain ) || '00:00';
+						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed) || '00:00';
 						scope.statsDisplay.prettyRate = Math.floor( scope.statsDisplay.runRate ) + '/' + unit;
 						scope.statsDisplay.prettyAvg = Math.floor( scope.statsDisplay.avgRate ) + '/' + unit;
 						scope.statsDisplay.total = scope.statsData.stack.total;
