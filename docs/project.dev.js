@@ -594,12 +594,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						for ( x = 0; x < xlen; x += 1 ) {
 							avg += historicals[ x ];
 						}
-						scope.statsDisplay.avgRate = avg/x;
+						scope.statsDisplay.avgRate = avg/(x + 1);
 						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started/1000);
-
-						console.log('x',scope.statsData.stack.total, scope.statsData.stack.progress, avg, scope.statsDisplay.secondsRemain);
-
-						scope.statsDisplay.secondsRemain = Math.floor(((scope.statsData.stack.total-scope.statsData.stack.progress)/avg)*10);
+						var remainder = (scope.statsData.stack.total - scope.statsData.stack.progress);
+						scope.statsDisplay.secondsRemain = Math.floor((remainder/avg)*10);
 						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
 						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed);
 
