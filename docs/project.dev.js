@@ -599,11 +599,11 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 
 						console.log('x',scope.statsData.stack.total, scope.statsData.stack.progress, avg, scope.statsDisplay.secondsRemain);
 
-						scope.statsDisplay.secondsRemain = Math.floor((scope.statsData.stack.total - scope.statsData.stack.progress) / avg);
+						scope.statsDisplay.secondsRemain = Math.floor((scope.statsData.stack.total-scope.statsData.stack.progress)/avg)*10);
 						scope.statsDisplay.prettyTime = prettyTime( scope.statsDisplay.secondsRemain );
 						scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed);
 
-						console.log('total',((scope.statsData.stack.total-scope.statsData.stack.progress)/avg)*100);
+
 					}
 				}
 			};
