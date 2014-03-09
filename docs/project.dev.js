@@ -505,7 +505,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						return rate + ' entries per minute';
 					}
 					rate = Math.floor(quant);
-					console.log('stack2',!scope.statsData||scope.statsData.stack);
+					console.log('stack2',scope.statsData.stack);
 					return rate + ' entries per second';
 					
 				};
@@ -1112,14 +1112,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 								processNext = function(context) {
 								    if ( 0 === stacklist.length ) {
 									deferred2.resolve({ range: attr, count: stack_count, skip: true });
-									console.log("FINISHED YEP");
 									statsUpdate('complete', 'adds', stack_count, new Date().getTime() - start_promise);
 								    }
 								    if(!in_progress && stacklist.length > 0) {
 									in_progress = true;
 									console.log(stack_count/total_count, '%');
 									scope.statsData = scope.statsData || {};
-									scope.statsData.stack = { total: stack_count, progress: total_count, complete: stack_count/total_count };
+									scope.statsData.stack = { progress: stack_count, total: total_count, complete: stack_count/total_count };
 									doNext(stacklist.shift());
 									scope.downloaded[ attr ] = scope.downloaded[ attr ] || 0;
 									scope.downloaded[ attr ] += 1;
