@@ -565,6 +565,13 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					}
 					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';
 					scope.statsDisplay.rate = quant;
+					if(quant) {
+						historicals.unshift(quant);
+					}
+					if ( historicals.length > 3 ) {
+						historicals.slice(0, 2);
+					}
+					console.log('historicals',historicals);
 					if ( quant < 1 ) {
 						rate = Math.floor(quant * 60);
 						label = '';
@@ -580,13 +587,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						}
 						label2 = ' seconds remaining';
 					}
-					if(rate) {
-						historicals.unshift(rate);
-					}
-					if ( historicals.length > 3 ) {
-						historicals.slice(0, 2);
-					}
-
 					if ( scope.statsData.stack ) {
 						var  x = 0, xlen = historicals.length;
 						if ( false === isNaN( avg ) ) {
