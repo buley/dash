@@ -938,7 +938,27 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				dash_promise = dashWorkerService.remove.entries(ctx),
 				start_promise = new Date().getTime();
 			    dash_promise.then( function(context) {
-				console.log('removed all',context.amount);
+				//xxx
+				var values = [],
+				    start = false,
+				    file;
+				if ( 'from' === scope.sort ) {
+					values = [ scope.files[ scope.range ] ];
+				} else {
+					for ( file in scope.files) {
+						if ( false === start && scope.files.hasOwnProperty( file ) ) {
+							if ( file === scope.range.toString() ) {
+								start = true;
+							}
+						}
+						if ( start ) {
+							scope.progress[ file ] = false;
+							if ( 'from' === scope.field ) {
+								return;
+							}
+						}
+					}
+				}
 				statsUpdate('complete', 'removes', context.amount, new Date().getTime() - start_promise);
 			    }, function(context) {
 				console.log('dash promise rejected', context);
