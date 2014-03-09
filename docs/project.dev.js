@@ -585,6 +585,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					}
 					if ( scope.statsData.stack ) {
 						var  x = 0, xlen = historicals.length;
+						avg = avg || 1;
 						for ( x = 0; x < xlen; x += 1 ) {
 							avg += historicals[ x ];
 						}
