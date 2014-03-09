@@ -333,7 +333,7 @@ var IMDBSystem = (function(THREE){
 		    light = new THREE.AmbientLight( 0xD5D5D5 );
 		    scene.add( light );
 	            bounding1 = new THREE.CubeGeometry( range, range, range, 8,8,8 );
-		    bounding_material1 = new THREE.MeshBasicMaterial( {color: 0x333333, wireframe: true, transparent: true, opacity: .1 } ),
+		    bounding_material1 = new THREE.MeshBasicMaterial( {color: 0x333333, wireframe: false, transparent: true, opacity: .2 } ),
 		    cube1 = new THREE.Mesh( bounding1, bounding_material1 );
 		    scene.add(cube1);
 	            bounding2 = new THREE.CubeGeometry( range + 100, range + 100, range + 100, 2, 2, 2 );

@@ -603,7 +603,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			};
 		};
 		scope.estimate = function() {
-			var field = scope.field, limit = 0;
 			if ( 'search' === scope.verb || 'remove' === scope.verb || hasDownloaded(scope.downloaded, scope.range, scope.sort ) ) {
 				limit = totalDownloaded(scope.downloaded, scope.range, scope.sort );
 				if ( 'million' === field && limit > 1000000 ) {
