@@ -1181,7 +1181,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									scope.filecount[ attr ] = xlen;
 									localStorage.setItem('dash-demo-filecount', JSON.stringify( scope.filecount ) );
 									for ( x = 0; x < xlen; x += 1 ) {
-										if ( null === last_add ) {
+										if ( null === last_add && ( false === scope.downloaded[ attr ] || x > scope.downloaded[ attr ] )  ) {
 											if ( !limit || sofar < limit ) {
 												total_count = stacklist.push( data[ x ] );
 												sofar += 1;
