@@ -1090,9 +1090,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		    wasCompleted = false,
 		    statsFunc = function() {
 			statsObj.elapsed = new Date().getTime() - last_time;
+			statsObj.started = first_time - new Date().getTime();
 			last_time = new Date().getTime();
 			scope.statsData = scope.statsData || {};
-			scope.statsData.started = first_time - new Date().getTime();
+
 			if ( ( new Date().getTime() - scope.statsData.updated ) > 10000 ) {
 				statsObj = { clear: true };
 			}
