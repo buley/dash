@@ -507,6 +507,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		var statsCalc = function() {
 			if ( scope.statsData ) {
 				scope.statsDisplay = scope.statsDisplay || {};
+				var rate, avg = 1;
 				var pretty = function(rate) {
 
 					
@@ -548,7 +549,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						scope.statsDisplay.text = 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
 					}
 				} else {
-					var rate, avg = 0;
 					if ( undefined !== scope.statsData.adds ) {
 						scope.statsDisplay.text = 'dash is adding ' + pretty(scope.statsData.adds);
 						rate = scope.statsData.adds;
@@ -584,7 +584,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						label2 = ' seconds remaining';
 					}
 					if ( scope.statsData.stack ) {
-						var  x = 0, xlen = historicals.length, avg = 1;
+						var  x = 0, xlen = historicals.length;
 						for ( x = 0; x < xlen; x += 1 ) {
 							avg += historicals[ x ];
 						}
