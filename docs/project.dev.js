@@ -499,13 +499,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			return 'dash is ready';
 		};
 		var statsInt = setInterval( function() {
-			console.log('stats calc');
 			scope.$apply( function() {
+				console.log('stats calc');
 				statsCalc();
 			} );
 		}, 3000 );
 		var statsCalc = function() {
 			if ( scope.statsData ) {
+				console.log('calcing');
 				var pretty = function(rate) {
 					var quant = (rate/scope.statsData.elapsed) * 1000, label, progress, label2, remain = '';
 					historicals.unshift(quant);
