@@ -1110,6 +1110,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 										clearTimeout( progressTimeout );
 									}
 									progressTimeout = setTimeout( progressFunction, 1000 );
+									localStorage.setItem('dash-demo-progress', JSON.stringify( scope.progress ) );
 
 									if ( !addLimit || ( addCount++ < addLimit ) ) {
 										processNext(context);
