@@ -1070,7 +1070,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					promise = promise.then( (function(attr) {
 						var deferred2 = $q.defer();
 						return function() {
-							    var start = 2013,
+							    var start = scope.range,
 								stacklist = [],
 								stack_count = 0,
 								addCount = 0,
@@ -1124,6 +1124,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									processNext(context);
 								    });
 								};
+									console.log('GET',attr);
 								    $http( {
 									method: 'GET',
 									url: '/docs/demo/data/' + attr + '.json'
