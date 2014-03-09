@@ -1033,7 +1033,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						scope.statsData = statsObj;
 						statsObj = {};
 						statsProc = null;
-					}, 3000 );{
+					}, 3000 );
 					return;
 				} else {
 					statsObj[ tag ] = statsObj[ tag ] || 0;
