@@ -514,7 +514,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						label = ' entries per second with an estimated ';
 						label2 = ' seconds remaining';
 					}
-					var  x = 0, xlen = historicals.length, avg;
+					var  x = 0, xlen = historicals.length, avg = 1;
 					for ( x = 0; x < xlen; x += 1 ) {
 						avg += historicals[ x ];
 					}
