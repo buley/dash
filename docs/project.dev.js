@@ -605,8 +605,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					}
 				}
 			};
-
-			console.log('calced', scope.statsDisplay);
 		};
 		scope.estimate = function() {
 			var field = scope.field, limit = 0;
