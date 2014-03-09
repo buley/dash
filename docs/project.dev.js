@@ -1041,7 +1041,14 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			var file, start = false, values = [];
 			last_time = new Date().getTime();
 			if ( 'from' === scope.sort ) {
-				values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
+
+				console.log('progress?', file );
+				if ( false !== scope.progress[ file ] ) {
+					console.log("PROGRESS", scope.progress[ file ] );
+				} else {
+					values.push( [ scope.range, !scope.downloaded[ scope.range ] ] );
+				}
+
 			} else {
 				for ( file in scope.downloaded ) {
 					if (scope.downloaded.hasOwnProperty( file ) ) {
