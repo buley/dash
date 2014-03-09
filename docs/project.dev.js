@@ -1091,7 +1091,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									scope.downloaded[ attr ] = stack_count;
 									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
 									console.log("FINISHED YEP");
-									statsUpdate('complete', 'addss', stack_count, new Date().getTime() - start_promise);
+									statsUpdate('complete', 'adds', stack_count, new Date().getTime() - start_promise);
 								    }
 								    if(!in_progress && stacklist.length > 0) {
 									in_progress = true;
