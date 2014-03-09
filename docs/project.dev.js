@@ -1061,11 +1061,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				console.log('progress?', scope.range );
 				if ( false !== scope.progress[ scope.range ] ) {
 					console.log("PROGRESS", scope.progress[ scope.range ] );
-					values.push( [ scope.range, !scope.downloaded[ scope.range ], scope.progress[ scope.range ] ] );
+					values.push( [ scope.range, ( !scope.downloaded[ scope.range ] || scope.downloaded[ scope.range ] < scope.filecount[ scope.range ] ) , scope.progress[ scope.range ] ] );
 				} else {
-					values.push( [ scope.range, !scope.downloaded[ scope.range ], null ] );
+					values.push( [ scope.range, (!scope.downloaded[ scope.range ] || scope.downloaded[ scope.range ] < scope.filecount[ scope.range ] ), null ] );
 				}
-
 			} else {
 				for ( file in scope.downloaded ) {
 					if (scope.downloaded.hasOwnProperty( file ) ) {
@@ -1076,9 +1075,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						}
 						if ( start ) {
 							if ( false !== scope.progress[ file ] ) {
-								values.push(  [ file, !scope.downloaded[ file ], scope.progress[ file ] ] );
+								values.push(  [ file, ( !scope.downloaded[ file ] || scope.downloaded[ file ] < scope.filecount[ file ] ), scope.progress[ file ] ] );
 							} else {
-								values.push(  [ file, !scope.downloaded[ file ], null ] );
+								values.push(  [ file, ( !scope.downloaded[ file ] || scope.downloaded[ file ] < scope.filecount[ file ] ), null ] );
 							}
 						}
 					}
