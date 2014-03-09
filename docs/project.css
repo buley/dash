@@ -99,7 +99,9 @@ ul.dash-document-navigation ul ul li {
   color: #ffffff;
   top: 189px;
   padding: 20px;
+  line-height: 24px;
   right: 0;
+  background: rgba(0, 0, 0, 0.3);
   position: absolute;
   z-index: 11;
 }
