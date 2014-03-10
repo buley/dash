@@ -118,6 +118,7 @@ ul.dash-document-navigation ul ul li {
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info {
   background: rgba(0, 0, 0, 0.5);
   padding: 20px;
+  width: 100%;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h1 {
   position: relative;
