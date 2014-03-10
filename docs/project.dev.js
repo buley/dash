@@ -932,9 +932,8 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			}
 			return downloaded;
 		};
-		scope.$watch( 'visualization', function(newer, older) {
+		scope.$watch( 'visuals', function(newer, older) {
 			if ( false === newer ) {
-				console.log('resetting');
 				system.reset();
 			}
 		} );
