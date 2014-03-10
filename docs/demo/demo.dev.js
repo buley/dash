@@ -69,7 +69,6 @@ var IMDBSystem = (function(THREE){
 		if ( camera.position.y < 1 ) {
 			camera.position.y = 1;
 		}
-		camera.rotation.z += 1;
 		controls.update( new Date().getTime() - start_time );
 		//var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
 		notime = true; //e.g. 20ms hover
