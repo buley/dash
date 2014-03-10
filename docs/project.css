@@ -155,9 +155,14 @@ ul.dash-document-navigation ul ul li {
   width: 100%;
   height: 100%;
 }
+#dash-demo-overlay-marketing-filter-visualization {
+  padding: 0 0 0 20px;
+}
 #dash-demo-overlay-marketing-filter-visualization small {
   text-transform: uppercase;
   font-size: 16px;
+  margin: 0 0 0 15px;
+  vertical-align: middle;
 }
 #dash-demo-overlay-marketing {
   margin: 15px 0 0 0;
