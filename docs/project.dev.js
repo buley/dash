@@ -352,11 +352,11 @@ dashApp.controller('dashAppDocsSidebarController', [ '$routeParams', '$scope', f
 dashApp.controller('dashAppDocsDemosController', [ '$scope', '$sce', function( $scope, $sce ) {
     $scope.demos = function() {
         var current = $scope.currentDocument(),
-            stackx = current.demos || [];
+            queue = current.demos || [];
         _.map(current.children || [], function(child) {
-            stackx.push.apply(stack, child.demos || []);
+            queue.push.apply(queue, child.demos || []);
         });
-        return stackx;
+        return queue;
     };
     $scope.demoUrl = function(demo) {
         return $sce.trustAsResourceUrl('http://jsfiddle.net/' + demo.id + '/embedded');
@@ -376,35 +376,35 @@ dashApp.directive('dashSplash', [ 'dashAppSplashBroadcast', 'dashWorkerService',
 } ] );
 
 dashApp.factory( 'dashAppSplashBroadcast', function() {
-	stackx = [];
+	queue = [];
 	return {
 		current: function(data) {
-			var x = 0, xlen = stackx.length;
+			var x = 0, xlen = queue.length;
 			for ( x = 0; x < xlen; x += 1 ) {
-				stackx[ x ].apply( stackx[ x ], [ data ] );
+				queue[ x ].apply( queue[ x ], [ data ] );
 			}
 		},
 		subscribe: function(cb) {
-			stackx.push(cb);
+			queue.push(cb);
 		}
 	};
 });
 dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $scope, $http ) {
     var start = 2013,
-        stackx = [],
+        queue = [],
 	start_promise,
         in_progress = false,
 	fresh_start = true,
 	totalRun = 0,
         processNext = function() {
-            if(!in_progress && stackx.length > 0) {
+            if(!in_progress && queue.length > 0) {
                 in_progress = true;
 		if ( true === fresh_start ) {
 			start_promise = new Date().getTime();
 			fresh_start = false;
 			totalRun = 0;
 		}
-                doNext(stackx.shift());
+                doNext(queue.shift());
 		totalRun += 1;
             } else {
 		console.log('ADDS COMPLETE');
@@ -435,7 +435,7 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
                 method: 'GET',
                 url: '/docs/demo/data/' + start + '.json'
             }).success(function(data, status, headers, config) {
-                stackx.push.apply(stackx, data);
+                queue.push.apply(queue, data);
                 processNext();
             }).error( function(data, status, headers, config) {
                 console.log('error',data, status, headers, config);
