@@ -116,7 +116,7 @@ ul.dash-document-navigation ul ul li {
   clear: left;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.5);
   padding: 20px;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h1 {
