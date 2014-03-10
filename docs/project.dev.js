@@ -516,10 +516,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			if ( scope.statsData ) {
 				scope.statsDisplay = scope.statsDisplay || {};
 				var rate, avg = 1;
-				var pretty = function(rate) {
-
-					
-				};
 				var prettyTime = function(seconds) {
 					var hours = Math.floor((seconds - ( seconds % 86400 )) / 86400),
 					    minutes = Math.floor((seconds - ( seconds % 3600 )) / 3600),
@@ -595,6 +591,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 						for ( x = 0; x < xlen; x += 1 ) {
 							avg += historicals[ x ];
 						}
+						historicals = [];
 						scope.statsDisplay.runRate = (avg/x) || 0;
 
 						scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started/1000);
