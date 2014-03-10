@@ -127,7 +127,6 @@ ul.dash-document-navigation ul ul li {
   float: left;
   width: 100%;
   padding: 0;
-  background: transparent;
   font-size: 32px;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h2 {
@@ -140,7 +139,6 @@ ul.dash-document-navigation ul ul li {
   padding: 0;
   width: 100%;
   font-size: 24px;
-  background: transparent;
 }
 #dash-splash-overlay #dash-splash-container {
   z-index: 1;
