@@ -163,6 +163,10 @@ ul.dash-document-navigation ul ul li {
 #dash-demo-overlay-marketing #dash-demo-overlay-marketing-filter {
   padding: 20px 0 20px 0;
 }
+#dash-demo-overlay-marketing #dash-demo-overlay-marketing-filter #dash-demo-overlay-marketing-filter-visualization {
+  text-transform: uppercase;
+  font-size: 16px;
+}
 #dash-demo-overlay-marketing div {
   margin: 0;
   font-size: 22px;
