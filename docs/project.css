@@ -113,14 +113,11 @@ ul.dash-document-navigation ul ul li {
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo {
   margin: 15px 0 0 0;
-  background: rgba(0, 0, 0, 0.3);
   clear: left;
   padding: 20px;
 }
-#dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info {
-  position: absolute;
-}
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h1 {
+  background: rgba(0, 0, 0, 0.3);
   position: relative;
   margin: 0;
   top: 0;
@@ -131,6 +128,7 @@ ul.dash-document-navigation ul ul li {
   font-size: 32px;
 }
 #dash-splash-overlay #dash-demo-overlay-container #dash-demo-overlay-demo #dash-demo-overlay-panel-info h2 {
+  background: rgba(0, 0, 0, 0.3);
   margin: 0;
   top: 0;
   position: relative;
