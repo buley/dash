@@ -492,6 +492,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		};
 		scope.range = 2014;
 		scope.sort = 'from';
+		scope.visuals = true;
 		scope.field = 'thousand';
 		scope.verb = 'explore';
 		scope.statsDisplay = {
@@ -1080,7 +1081,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			    }, function(context) {
 				if ( !!context.entry.se && null !== context.entry.se.match(q) || !!context.entry.ep && null !== context.entry.ep.match(q) ) {
 					context.id = context.primary_key;
-					system.add(context);
+					if ( true === scope.visuals ) {
+						system.add(context);
+					}
 					//system.highlight(context);
 				}
 				
