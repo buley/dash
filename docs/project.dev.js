@@ -933,7 +933,10 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			return downloaded;
 		};
 		scope.$watch( 'visualization', function(newer, older) {
-			system.reset();
+			if ( false === newer ) {
+				console.log('resetting');
+				system.reset();
+			}
 		} );
 		scope.$watch( 'range', function(newer, older) {
 			var is_installed, x, xlen = scope.verbs.length;
