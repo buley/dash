@@ -61,7 +61,7 @@ var IMDBSystem = (function(THREE){
                 /* 60fps goodness */
                 requestAnimationFrame(render);
 		if ( camera.position.z > ( range * 20 ) ) {
-			camera.rotation.z = range * 20;
+			camera.position.z = range * 20;
 		}
 		if ( camera.position.x < 1 ) {
 			camera.position.x = 1;
@@ -230,6 +230,11 @@ var IMDBSystem = (function(THREE){
 		    geometry.doubleSided = true;
 		    //camera.position.set( new THREE.Vector3(100000, 0, 0) );
 		    camera.position.set( 1, 1, range * 2.2 );
+		    camera.rotation.x = (Math.PI/180) * 45;
+		    camera.rotation.z = (Math.PI/180) * 90;
+		    camera.rotation.y = (Math.PI/180) * 90;
+
+
  	      	    //camera.lookAt(scene.position);
 		    //camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 500, 1000 );
 			//Start pointer lock
@@ -336,16 +341,10 @@ var IMDBSystem = (function(THREE){
 	            bounding1 = new THREE.CubeGeometry( range, range, range, 8,8,8 );
 		    bounding_material1 = new THREE.MeshBasicMaterial( {color: 0x333333, wireframe: false, transparent: true, opacity: .2 } ),
 		    cube1 = new THREE.Mesh( bounding1, bounding_material1 );
-		    cube1.rotation.x = (Math.PI/180) * 45;
-		    cube1.rotation.z = (Math.PI/180) * 90;
-		    cube1.rotation.y = (Math.PI/180) * 90;
 		    scene.add(cube1);
 	            bounding2 = new THREE.CubeGeometry( range + 100, range + 100, range + 100, 2, 2, 2 );
 		    bounding_material2 = new THREE.MeshBasicMaterial( {color: 0x222222, wireframe: true, transparent: true, opacity: .5 } );
 		    cube2 = new THREE.Mesh( bounding2, bounding_material2 );
-		    cube2.rotation.x = (Math.PI/180) * 45;
-		    cube2.rotation.y = (Math.PI/180) * 90;
-		    cube2.rotation.z = (Math.PI/180) * 90;
 		    scene.add(cube2);
 
 		    node.appendChild(renderer.domElement);
