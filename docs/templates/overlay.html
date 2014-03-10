@@ -24,10 +24,6 @@
 			</select>
 			<input type="number" max="2021" min="1889" ng-model="range">
 			<input type="text" ng-model="query" ng-disabled="'search' !== verb" ng-placeholder="Episode or Season">
-			<span id="dash-demo-overlay-marketing-filter-visualization">
-				<input type="checkbox" ng-model="visuals">
-				<small>Visualization</small>
-			</span>
 		</div>
 		<div class="large-2 right">
 			<input type="button" value="GO" ng-click="go()" class="success dash-demo-overlay-marketing-button small button"></input>
@@ -43,4 +39,7 @@
 		<br style="clear:both;">
 	</section>
 </section>
-
+<span id="dash-demo-overlay-marketing-filter-visualization">
+	<input type="checkbox" ng-model="visuals">
+	<small>Visualization</small>
+</span>
