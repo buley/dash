@@ -336,13 +336,13 @@ var IMDBSystem = (function(THREE){
 		    bounding_material1 = new THREE.MeshBasicMaterial( {color: 0x333333, wireframe: false, transparent: true, opacity: .2 } ),
 		    cube1 = new THREE.Mesh( bounding1, bounding_material1 );
 		    cube1.rotation.x = (Math.PI/180) * 45;
-		    cube1.rotation.y = (Math.PI/180) * 45;
+		    cube1.rotation.y = (Math.PI/180) * 90;
 		    scene.add(cube1);
 	            bounding2 = new THREE.CubeGeometry( range + 100, range + 100, range + 100, 2, 2, 2 );
 		    bounding_material2 = new THREE.MeshBasicMaterial( {color: 0x222222, wireframe: true, transparent: true, opacity: .5 } );
 		    cube2 = new THREE.Mesh( bounding2, bounding_material2 );
 		    cube2.rotation.x = (Math.PI/180) * 45;
-		    cube2.rotation.y = (Math.PI/180) * 45;
+		    cube2.rotation.y = (Math.PI/180) * 90;
 		    scene.add(cube2);
 
 		    node.appendChild(renderer.domElement);
