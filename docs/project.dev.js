@@ -1180,7 +1180,19 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			}
 			var deferred = $q.defer(),
 				promise = deferred.promise,
-				ndeferred, count = 0;
+				ndeferred, count = 0,
+				queuedSave = null;
+				queueSave = function() {
+					if ( !queuedSave ) {
+						queuedSave = setTimeout( function() { 
+							localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
+
+							localStorage.setItem('dash-demo-progress', JSON.stringify( scope.progress ) );
+
+							localStorage.setItem('dash-demo-progress', JSON.stringify( scope.progress ) );
+						}, 1000 );
+					}
+				};
 			var x = 0, xlen = values.length;
 			for ( x = 0; x < xlen; x += 1 ) {
 				if ( true === values[ x ][ 1 ] ) {
@@ -1207,14 +1219,9 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									doNext(stacklist.shift());
 									scope.downloaded[ attr ] = scope.downloaded[ attr ] || 0;
 									scope.downloaded[ attr ] += 1;
-									localStorage.setItem('dash-demo-downloaded', JSON.stringify( scope.downloaded ) );
-
+									queueSave();
 									deferred2.notify({ range: attr, count: stack_count, context: context });
 								    }
-								},
-								progressTimeout,
-								progressFunction = function() {
-									localStorage.setItem('dash-demo-progress', JSON.stringify( scope.progress ) );
 								},
 								doNext = function(next) {
 							 	    stack_count += 1;
@@ -1235,12 +1242,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 									}
 									statsUpdate('adds');
 									scope.progress[ attr ] = context;
-									if ( progressTimeout ) {
-										clearTimeout( progressTimeout );
-									}
-									progressTimeout = setTimeout( progressFunction, 1000 );
-									localStorage.setItem('dash-demo-progress', JSON.stringify( scope.progress ) );
-
+									queueSave();
 									if ( !addLimit || ( addCount++ < addLimit ) ) {
 										processNext(context);
 									}
