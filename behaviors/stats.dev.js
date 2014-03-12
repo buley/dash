@@ -3,7 +3,7 @@ window.dashStats = window.dashStats || (function(w) {
 	return function(ctx) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
-		if ( null !== promise ) {
+		if ( null !== deferred ) {
 		deferred( function( state ) {
 			setTimeout( function() {
 				console.log('module before and after callback', state);
