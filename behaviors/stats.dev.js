@@ -5,6 +5,7 @@ window.dashStats = window.dashStats || (function(w) {
 		    deferred = ctx.promise;
 		if ( null !== deferred ) {
 		deferred( function( state ) {
+			console.log('theirs resolved', state);
 			setTimeout( function() {
 				console.log('module before and after callback', state);
 				promise.resolve(state);
