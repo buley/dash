@@ -4,7 +4,7 @@ window.dashStats = window.dashStats || (function(w) {
 		var promise = ctx.promise,
 		    deferred = this.promise();
 		promise( function( state ) {
-			setTimeout( function() 
+			setTimeout( function() {
 				console.log('module before and after callback', state);
 				deferred.resolve(state);
 			}, 0 );
