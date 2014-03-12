@@ -1,7 +1,7 @@
 window.dashStats = window.dashStats || (function(w) {
 	"use strict";
 	return function(ctx) {
-		console.log('module before and after callback');
+		console.log('module before and after callback', ctx);
 		return ctx;
 	};
 	return [ function(ctx) {
