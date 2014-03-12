@@ -1,6 +1,10 @@
 var dashApp = angular.module('dashApp', [ 'ngRoute' ]);
 
 dashApp.config(['$routeProvider', function($routeProvider) {
+
+    /* Behaviors */
+    dash.add.behavior(dashStats);
+
     $routeProvider
         .when('/about', {
             templateUrl: '/docs/templates/about.html',

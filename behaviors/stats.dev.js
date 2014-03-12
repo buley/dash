@@ -11,9 +11,4 @@ window.dashStats = window.dashStats || (function(w) {
 		console.log('module after callback');
 		return ctx;
 	} ];
-
-
-
-
-
 }(window));
