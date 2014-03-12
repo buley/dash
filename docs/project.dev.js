@@ -430,26 +430,7 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
                 in_progress = false;
                 processNext();
             });
-        },
-        key = 'dash-demo-installed-2',
-        dashInstalled = localStorage.getItem(key);
-    if (!dashInstalled) {
-        for (; start > 2000; start -= 1) {
-            $http( {
-                method: 'GET',
-                url: '/docs/demo/data/' + start + '.json'
-            }).success(function(data, status, headers, config) {
-		var x,
-                    xlen = data.length;
-		for ( x = 0; x < xlen; x += 1 ) {
-                  queue.push( data[ x ] );
-		}
-                processNext();
-            }).error( function(data, status, headers, config) {
-                console.log('error',data, status, headers, config);
-            });
-        }
-    }
+        };
 
 }]);
 
