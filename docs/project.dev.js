@@ -494,7 +494,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 		};
 		var historicals = [];
 		scope.stats = function() {
-			return 'dash is ready';
+			return 'dash is under development';
 		};
 		var statsInt = setInterval( function() {
 			scope.$apply( function() {
@@ -534,7 +534,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 					return hours + minutes + ':' + secs;
 				};
 				if ( true === scope.statsDisplay.clear ) {
-					scope.statsDisplay.text = 'dash is ready to go';
+					scope.statsDisplay.text = 'dash is under development';
 				} else if ( true === scope.statsData.complete) { 
 					rate = 0;
 					scope.statsDisplay.prettyRate = '0/second';
