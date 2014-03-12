@@ -439,7 +439,11 @@ dashApp.controller('dashAppSplashController', [ '$scope', '$http', function( $sc
                 method: 'GET',
                 url: '/docs/demo/data/' + start + '.json'
             }).success(function(data, status, headers, config) {
-                queue.push.apply(queue, data);
+		var x,
+                    xlen = data.length;
+		for ( x = 0; x < xlen; x += 1 ) {
+                  queue.push( data[ x ] );
+		}
                 processNext();
             }).error( function(data, status, headers, config) {
                 console.log('error',data, status, headers, config);
