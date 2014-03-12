@@ -1,15 +1,15 @@
 window.dashStats = window.dashStats || (function(w) {
 	"use strict";
 	return function(ctx) {
-		var promise = ctx.promise,
+		var promise = this.deferred(),
 		    deferred = ctx.deferred;
 		deferred( function( state ) {
 			setTimeout( function() {
 				console.log('module before and after callback', state);
-				deferred.resolve(state);
+				promise.resolve(state);
 			}, 0 );
 		} );
-		ctx.promise = deferred;
+		ctx.deferred = promise;
 		return ctx;
 	};
 	return [ function(ctx) {
