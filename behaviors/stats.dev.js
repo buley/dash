@@ -3,6 +3,7 @@ window.dashStats = window.dashStats || (function(w) {
 	return function(ctx) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
+		if ( null !== promise ) {
 		deferred( function( state ) {
 			setTimeout( function() {
 				console.log('module before and after callback', state);
@@ -10,6 +11,7 @@ window.dashStats = window.dashStats || (function(w) {
 			}, 0 );
 		} );
 		ctx.deferred = promise;
+		}
 		return ctx;
 	};
 	return [ function(ctx) {
