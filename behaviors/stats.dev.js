@@ -16,6 +16,7 @@ window.dashStats = window.dashStats || (function(w) {
 		}, function(ctx) {
 			console.log('notify',ctx);
 		} );
+		promise.resolve({foo:'bar'});
 		ctx.deferred = promise;
 		}
 		return ctx;
