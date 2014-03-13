@@ -1,10 +1,10 @@
 window.dashStats = window.dashStats || (function(w) {
 	"use strict";
 	return function(ctx) {
-		var promise = null,
+		var promise = this.deferred(),
 		    deferred = ctx.promise;
 		if ( null !== deferred ) {
-		promise = deferred( function( state ) {
+		deferred( function( state ) {
 			console.log('theirs resolved', state);
 			setTimeout( function() {
 				console.log('module before and after callback', state);
