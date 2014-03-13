@@ -4,6 +4,7 @@ window.dashStats = window.dashStats || (function(w) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
 		if ( null !== deferred ) {
+		console.log('deferred');
 		deferred( function( state ) {
 			console.log('theirs resolved', state);
 			setTimeout( function() {
