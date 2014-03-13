@@ -1,11 +1,10 @@
 window.dashStats = window.dashStats || (function(w) {
 	"use strict";
 	return function(ctx) {
-		var promise = this.deferred(),
+		var promise = null,
 		    deferred = ctx.promise;
 		if ( null !== deferred ) {
-		console.log('attaching');
-		deferred( function( state ) {
+		promise = deferred( function( state ) {
 			console.log('theirs resolved', state);
 			setTimeout( function() {
 				console.log('module before and after callback', state);
@@ -16,7 +15,7 @@ window.dashStats = window.dashStats || (function(w) {
 		}, function(ctx) {
 			console.log('notify',ctx);
 		} );
-		promise.resolve({foo:'bar'});
+		console.log('attaching', promise);
 		ctx.deferred = promise;
 		}
 		return ctx;
