@@ -1,16 +1,19 @@
 window.dashStats = window.dashStats || (function(w) {
 	"use strict";
 	return function(ctx) {
-		var promise,
+		var promise = this.deferred(),
 		    deferred = ctx.promise;
 		if ( null !== deferred ) { //filter (before)
 			deferred( function( state ) {
-
- 				promise = this.deferred();
+				console.log('theirs resolved', state);
 				setTimeout( function() {
-					console.log('filter', state);
+					console.log('module before and after callback', state);
 					promise.resolve(state);
 				}, 20 );
+			}, function(context) {
+				throw new Error(context);
+			}, function(ctx) {
+				console.log('notify',ctx);
 			} );
 			ctx.deferred = promise.promise;
 		} else {
