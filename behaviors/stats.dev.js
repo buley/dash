@@ -5,16 +5,11 @@ window.dashStats = window.dashStats || (function(w) {
 		    deferred = ctx.promise;
 		if ( null !== deferred ) { //filter (before)
 			deferred( function( state ) {
-				console.log('theirs resolved', state);
 				setTimeout( function() {
-					console.log('module before and after callback', state);
+					console.log('filter',state);
 					promise.resolve(state);
 				}, 20 );
-			}, function(context) {
-				throw new Error(context);
-			}, function(ctx) {
-				console.log('notify',ctx);
-			} );
+			});
 			ctx.deferred = promise.promise;
 		} else {
 			//action (after)
