@@ -1,6 +1,6 @@
 window.dashStats = window.dashStats || (function(w) {
 	"use strict";
-	return [ function(ctx) {
+	return function(ctx) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
 		deferred( function( state ) {
@@ -11,8 +11,5 @@ window.dashStats = window.dashStats || (function(w) {
 		});
 		ctx.deferred = promise.promise;
 		return ctx;
-	}, function(ctx) {
-		console.log('module after callback', ctx.type);
-		return ctx;
-	} ];
+	};
 }(window));
