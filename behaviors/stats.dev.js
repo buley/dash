@@ -16,7 +16,7 @@ window.dashStats = window.dashStats || (function(w) {
 			console.log('notify',ctx);
 		} );
 		console.log('attaching', promise);
-		ctx.deferred = promise;
+		ctx.deferred = promise.promise;
 		}
 		return ctx;
 	};
