@@ -3,15 +3,17 @@ window.dashStats = window.dashStats || (function(w) {
 	return function(ctx) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
-		console.log('running plugin',promise,deferred);
 		if ( null !== deferred ) {
-		console.log('deferred');
 		deferred( function( state ) {
 			console.log('theirs resolved', state);
 			setTimeout( function() {
 				console.log('module before and after callback', state);
 				promise.resolve(state);
 			}, 0 );
+		}, function(context) {
+			throw new Error(context);
+		}, function(ctx) {
+			console.log('notify',ctx);
 		} );
 		ctx.deferred = promise;
 		}
