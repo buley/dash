@@ -13,8 +13,8 @@ window.dashStats = window.dashStats || (function(w) {
 			ctx.deferred = promise.promise;
 		} else {
 			//action (after)
-			console.log('action',ctx);
-	
+			console.log('action',ctx.entry.se);
+			ctx.entry.se = 'Rick Roll';
 		}
 		return ctx;
 	};
