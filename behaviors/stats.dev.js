@@ -4,12 +4,13 @@ window.dashStats = window.dashStats || (function(w) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
 		if ( null !== deferred ) {
+		console.log('attaching');
 		deferred( function( state ) {
 			console.log('theirs resolved', state);
 			setTimeout( function() {
 				console.log('module before and after callback', state);
 				promise.resolve(state);
-			}, 0 );
+			}, 20 );
 		}, function(context) {
 			throw new Error(context);
 		}, function(ctx) {
