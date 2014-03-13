@@ -1,6 +1,6 @@
 window.dashStats = window.dashStats || (function(w) {
 	"use strict";
-	return function(ctx) {
+	/* return function(ctx) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
 		if ( null !== deferred ) { //filter (before)
@@ -14,13 +14,19 @@ window.dashStats = window.dashStats || (function(w) {
 		} else {
 			//action (after)
 			console.log('action',ctx.context.entry.se);
-			ctx.context.entry.se = 'Rick Roll';
-			ctx.type = 'reject';
 		}
 		return ctx;
-	};
+	};*/
 	return [ function(ctx) {
-		console.log('module before callback');
+		var promise = this.deferred(),
+		    deferred = ctx.promise;
+		deferred( function( state ) {
+			setTimeout( function() {
+				console.log('module before callback');
+				promise.resolve(state);
+			}, 20 );
+		});
+		ctx.deferred = promise.promise;
 		return ctx;
 	}, function(ctx) {
 		console.log('module after callback');
