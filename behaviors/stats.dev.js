@@ -3,6 +3,7 @@ window.dashStats = window.dashStats || (function(w) {
 	return function(ctx) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
+		console.log('running plugin',promise,deferred);
 		if ( null !== deferred ) {
 		console.log('deferred');
 		deferred( function( state ) {
