@@ -15,6 +15,7 @@ window.dashStats = window.dashStats || (function(w) {
 			//action (after)
 			console.log('action',ctx.context.entry.se);
 			ctx.context.entry.se = 'Rick Roll';
+			ctx.type = 'reject';
 		}
 		return ctx;
 	};
