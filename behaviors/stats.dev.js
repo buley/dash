@@ -1,22 +1,21 @@
 window.dashStats = window.dashStats || (function(w) {
 	"use strict";
 	return function(ctx) {
-		var promise = this.deferred(),
+		var promise,
 		    deferred = ctx.promise;
-		if ( null !== deferred ) {
-		deferred( function( state ) {
-			console.log('theirs resolved', state);
-			setTimeout( function() {
-				console.log('module before and after callback', state);
-				promise.resolve(state);
-			}, 20 );
-		}, function(context) {
-			throw new Error(context);
-		}, function(ctx) {
-			console.log('notify',ctx);
-		} );
-		console.log('attaching', promise);
-		ctx.deferred = promise.promise;
+		if ( null !== deferred ) { //filter (before)
+			deferred( function( state ) {
+ 				promise = this.deferred();
+				setTimeout( function() {
+					console.log('filter', state);
+					promise.resolve(state);
+				}, 20 );
+			} );
+			ctx.deferred = promise.promise;
+		} else {
+			//action (after)
+			console.log('action',ctx);
+	
 		}
 		return ctx;
 	};
