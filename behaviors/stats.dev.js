@@ -5,6 +5,7 @@ window.dashStats = window.dashStats || (function(w) {
 		    deferred = ctx.promise;
 		if ( null !== deferred ) { //filter (before)
 			deferred( function( state ) {
+
  				promise = this.deferred();
 				setTimeout( function() {
 					console.log('filter', state);
