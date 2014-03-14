@@ -1,24 +1,23 @@
 window.dashStats = window.dashStats || (function(environment) {
 	"use strict";
-	return function(ctx) {
+	return function(state) {
 		/*
 		var promise = this.deferred(),
-		    deferred = ctx.promise;
+		    deferred = state.promise;
 		deferred( function( state ) {
 			setTimeout( function() {
-				console.log('module before callback', ctx.type);
+				console.log('module before callback', state.type);
 				promise.resolve(state);
 			}, 20 );
 		});
-		ctx.deferred = promise.promise;
+		state.deferred = promise.promise;
 		*/
-		var context = ctx.context;
+		var context = state.context;
 		if ( !context.stats_start ) {
-			ctx.context.stats_start = new Date().getTime();
-			console.log('started');
+			state.context.stats_start = new Date().getTime();
 		} else {
 			console.log('finished', new Date().getTime() - context.stats_start );
 		}
-		return ctx;
+		return state;
 	};
 }(self));
