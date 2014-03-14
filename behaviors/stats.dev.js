@@ -3,6 +3,7 @@ window.dashStats = window.dashStats || (function(environment) {
 	console.log('dashStats setup',environment.dash);
 	environment.dash.add.attribute( [ 'stats_id', 'stats_start' ] );
 	return function(ctx) {
+		/*
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
 		deferred( function( state ) {
@@ -12,6 +13,13 @@ window.dashStats = window.dashStats || (function(environment) {
 			}, 20 );
 		});
 		ctx.deferred = promise.promise;
+		*/
+		var context = ctx.context;
+		if ( context.stats_start ) {
+			context.stats_start = new Date().getTime();
+		} else {
+			console.log('finished', new Date().getTime() - context.stats_start );
+		}
 		return ctx;
 	};
 }(self));
