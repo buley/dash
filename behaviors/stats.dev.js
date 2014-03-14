@@ -17,6 +17,7 @@ window.dashStats = window.dashStats || (function(environment) {
 		var context = ctx.context;
 		if ( !context.stats_start ) {
 			ctx.context.stats_start = new Date().getTime();
+			console.log('started');
 		} else {
 			console.log('finished', new Date().getTime() - context.stats_start );
 		}
