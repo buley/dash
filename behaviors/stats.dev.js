@@ -1,11 +1,10 @@
 window.dashStats = window.dashStats || (function(environment) {
 	"use strict";
 	console.log('dashStats setup',environment.dash);
-	environment.dash.attributes.add( [ 'stats_id', 'stats_start' ] );
+	environment.dash.add.attribute( [ 'stats_id', 'stats_start' ] );
 	return function(ctx) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
-
 		deferred( function( state ) {
 			setTimeout( function() {
 				console.log('module before callback', ctx.type);
