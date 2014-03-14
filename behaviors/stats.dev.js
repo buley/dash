@@ -15,7 +15,7 @@ window.dashStats = window.dashStats || (function(environment) {
 		ctx.deferred = promise.promise;
 		*/
 		var context = ctx.context;
-		if ( context.stats_start ) {
+		if ( !context.stats_start ) {
 			context.stats_start = new Date().getTime();
 		} else {
 			console.log('finished', new Date().getTime() - context.stats_start );
