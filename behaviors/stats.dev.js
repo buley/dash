@@ -1,7 +1,7 @@
 window.dashStats = window.dashStats || (function(environment) {
 	"use strict";
 	console.log('dashStats setup',environment.dash);
-	environment.dash.add.attribute( [ 'stats_id', 'stats_start' ] );
+	environment.dash.add.attribute( { data: [ 'stats_id', 'stats_start' ] } );
 	return function(ctx) {
 		/*
 		var promise = this.deferred(),
