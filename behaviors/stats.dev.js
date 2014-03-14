@@ -1,8 +1,11 @@
-window.dashStats = window.dashStats || (function(w) {
+window.dashStats = window.dashStats || (function(environment) {
 	"use strict";
+	console.log('dashStats setup',environment.dash);
+	environment.dash.attributes.add( [ 'stats_id', 'stats_start' ] );
 	return function(ctx) {
 		var promise = this.deferred(),
 		    deferred = ctx.promise;
+
 		deferred( function( state ) {
 			setTimeout( function() {
 				console.log('module before callback', ctx.type);
@@ -12,4 +15,4 @@ window.dashStats = window.dashStats || (function(w) {
 		ctx.deferred = promise.promise;
 		return ctx;
 	};
-}(window));
+}(self));
