@@ -144,8 +144,9 @@ window.dashStats = window.dashStats || (function(environment) {
 	total = model();
 	return function(state) {
 		var context = state.context;
-		console.log('z');
-		if ( !context.statistics ) {
+		console.log('checking', state.type);
+		if ( !API.contains([ 'resolve', 'notify', 'error' ], state.type) ) {
+			console.log('starting', state.type);
 			state.context.statistics = { total: total, request: model() };
 			state.context.statistics.request.milliseconds.started = new Date().getTime();
 			state.context.statistics.request.type = state.type;
@@ -153,12 +154,14 @@ window.dashStats = window.dashStats || (function(environment) {
 			if ( null !== state.type.match(/\.entries$/) ) {
 				console.log('countable', state.type);
 				var promise = this.deferred(),
-				    deferred = state.promise;
+				    deferred = state.promise,
+				    that = this;
 				deferred( function( state ) {
-					setTimeout( function() {
+					console.log('counting',that.api);
+					/*that.api.count.entries( state )( function() {
 						console.log('count the request', state.type);
-						promise.resolve(state);
-					}, 20 );
+						//promise.resolve(state);
+					} );*/
 				});
 				state.deferred = promise.promise;
 			}
@@ -192,7 +195,6 @@ window.dashStats = window.dashStats || (function(environment) {
 				state.context.statistics.total.metrics[ verb ].recent = state.context.statistics.total.metrics[ verb ].recent.slice(0, recents);
 				
 			}
-			console.log('stats', state.context.statistics);
 		}
 		return state;
 	};
