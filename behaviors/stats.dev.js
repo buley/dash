@@ -144,6 +144,7 @@ window.dashStats = window.dashStats || (function(environment) {
 	total = model();
 	return function(state) {
 		var context = state.context;
+		console.log('checking', state.type);
 		if ( !API.contains([ 'resolve', 'notify', 'error' ], state.type) ) {
 			console.log('starting', state.type);
 			state.context.statistics = { total: total, request: model() };
