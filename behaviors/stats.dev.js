@@ -175,6 +175,8 @@ window.dashStats = window.dashStats || (function (environment) {
       if (this.exists(state.context.limit)) {
         state.context.statistics.request.expected[verb] += state.context.limit;
         state.context.statistics.request.expected[noun] += state.context.limit;
+        state.context.statistics.total.expected[verb] += state.context.limit;
+        state.context.statistics.total.expected[noun] += state.context.limit;
       } else if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
         promise( function() {
