@@ -149,6 +149,7 @@ window.dashStats = window.dashStats || (function(environment) {
 			state.context.statistics.request.milliseconds.started = new Date().getTime();
 			state.context.statistics.request.type = state.type;
 			if ( null !== state.type.match(/\.entries$/) ) {
+				console.log('countable', state.type);
 				var promise = this.deferred(),
 				    deferred = state.promise;
 				deferred( function( state ) {
