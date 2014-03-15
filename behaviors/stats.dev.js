@@ -166,11 +166,13 @@ window.dashStats = window.dashStats || (function (environment) {
 			limit: state.context.limit,
 			store: state.context.store,
 			store_key_path: state.context.store_key_path,
-          })(function (ctx) {
-            console.log('counted the request', ctx, state.type);
-            state.context.statistics.request.
-            defd.resolve(state);
-          });
+          })((function(defrd) {
+          	return function (ctx) {
+	            console.log('counted the request', ctx, state.type);
+	            state.context.statistics.request.
+	            defrd.resolve(state);
+	        }
+          }(defd)));
         state.deferred = defd.promise;
       }
 
