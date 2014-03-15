@@ -182,6 +182,7 @@ window.dashStats = window.dashStats || (function (environment) {
       request: model()
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
+      
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
       if (this.exists(state.context.limit)) {
@@ -215,7 +216,9 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.expected[verb] += 1;
         state.context.statistics.total.expected[noun] += 1;
       }
+
     } else {
+
       pieces = state.context.statistics.request.type.split('.');
       verb = pieces[0];
       noun = pieces[1];
@@ -244,13 +247,13 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.requests.total += 1;
 
     }
-    console.log('stats', state.context.statistics);
     state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
     state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
     state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
     state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
     state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
     state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
+    console.log('stats', state.context.statistics);
     return state;
   };
 }(self));
