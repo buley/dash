@@ -160,7 +160,7 @@ window.dashStats = window.dashStats || (function (environment) {
           deferred = state.promise,
           theirs = this;
         deferred(function (state) {
-          console.log('counting', that.api);
+          console.log('counting', theirs.api);
           theirs.api.count.entries(state)(function () {
             console.log('count the request', state.type);
             promise.resolve(state);
