@@ -190,6 +190,8 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.expected[noun] += state.context.limit;
         state.context.statistics.total.expected[verb] += state.context.limit;
         state.context.statistics.total.expected[noun] += state.context.limit;
+        state.context.statistics.total.expected.total += state.context.limit;
+        state.context.statistics.total.expected.total += state.context.limit;
       } else if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
         promise( function() {
@@ -206,6 +208,8 @@ window.dashStats = window.dashStats || (function (environment) {
 	          state.context.statistics.request.expected[noun] += ctx.total;
 	          state.context.statistics.total.expected[verb] += ctx.total;
 	          state.context.statistics.total.expected[noun] += ctx.total;
+	          state.context.statistics.total.expected.total += ctx.total;
+	          state.context.statistics.total.expected.total += ctx.total;
 	          deferred.resolve(state);
 	        });
         });
