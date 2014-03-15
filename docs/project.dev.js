@@ -1313,10 +1313,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				  index_key: new Date('1/1/' + args.range).getTime(),
 				  limit: cmdargs.limit
 				},
-				dash_promise = dashWorkerService.get.entries(ctx),
+				//dash_promise = dashWorkerService.get.entries(ctx),
+				dash_promise = dash.get.entries(ctx),
 				start_promise = new Date().getTime();
 			    console.log('doing index get',ctx);
-			    dash_promise.then( function(context) {
+			    //dash_promise.then( function(context) {
+			    dash_promise( function(context) {
 				statsUpdate('complete', 'gets', context.amount, new Date().getTime() - start_promise);
 			    }, function(context) {
 				console.log('dash promise rejected', context);
