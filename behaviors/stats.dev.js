@@ -182,7 +182,6 @@ window.dashStats = window.dashStats || (function (environment) {
       request: model()
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
@@ -197,7 +196,7 @@ window.dashStats = window.dashStats || (function (environment) {
 	          store: state.context.store,
 	          store_key_path: state.context.store_key_path,
 	        })(function (ctx) {
-	          if (this.exists(state.context.limit) && state.context.limit < ctx.total) {
+	          if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
 		        state.context.statistics.request.expected[verb] += state.context.limit;
 		        state.context.statistics.request.expected[noun] += state.context.limit;
 		        state.context.statistics.total.expected[verb] += state.context.limit;
