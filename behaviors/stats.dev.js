@@ -155,10 +155,9 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
-        console.log('countable', state.type);
         var promise = this.deferred(),
           deferred = state.promise
-          console.log('counting', theirs.api);
+          console.log('counting', theirs.api, state);
           /*theirs.api.count.entries(state)(function (ctx) {
             console.log('counted the request', ctx, state.type);
             promise.resolve(state);
