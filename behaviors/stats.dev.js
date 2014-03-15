@@ -144,6 +144,7 @@ window.dashStats = window.dashStats || (function(environment) {
 	total = model();
 	return function(state) {
 		var context = state.context;
+		console.log('z');
 		if ( !context.statistics ) {
 			state.context.statistics = { total: total, request: model() };
 			state.context.statistics.request.milliseconds.started = new Date().getTime();
