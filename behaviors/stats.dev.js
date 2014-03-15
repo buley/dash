@@ -152,11 +152,13 @@ window.dashStats = window.dashStats || (function(environment) {
 			if ( null !== state.type.match(/\.entries$/) ) {
 				console.log('countable', state.type);
 				var promise = this.deferred(),
-				    deferred = state.promise;
+				    deferred = state.promise,
+				    that = this;
 				deferred( function( state ) {
-					setTimeout( function() {
+					console.log('counting',that.api);
+					that.api.count.entries( state )( ( function() {
 						console.log('count the request', state.type);
-						promise.resolve(state);
+						//promise.resolve(state);
 					}, 20 );
 				});
 				state.deferred = promise.promise;
