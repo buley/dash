@@ -111,6 +111,7 @@ window.dashStats = window.dashStats || (function(environment) {
 		} else {
 			state.context.statistics.request.milliseconds.finished = new Date().getTime();
 			state.context.statistics.request.milliseconds.elapsed = state.context.statistics.milliseconds.finished - state.context.statistics.milliseconds.started;
+
 			var pieces = state.context.statistics.request.type.split('.'),
 			    verb = pieces[ 0 ],
 			    noun = pieces[ 1 ];
