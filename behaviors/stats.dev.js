@@ -209,8 +209,8 @@ window.dashStats = window.dashStats || (function (environment) {
       if (state.context.statistics.total.metrics[verb].recent.length > recents) {
         state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, recents);
       }
-      console.log('stats',state.context.statistics);
     }
+    console.log('stats',state.context.statistics);
     return state;
   };
 }(self));
