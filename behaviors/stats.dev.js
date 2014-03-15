@@ -193,7 +193,6 @@ window.dashStats = window.dashStats || (function(environment) {
 				state.context.statistics.total.metrics[ verb ].recent = state.context.statistics.total.metrics[ verb ].recent.slice(0, recents);
 				
 			}
-			console.log('stats', state.context.statistics);
 		}
 		return state;
 	};
