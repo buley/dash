@@ -154,7 +154,7 @@ window.dashStats = window.dashStats || (function (environment) {
       };
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
-      if (API.exists(state.context.limit) || ('count.entries' !== state.type && null !== state.type.match(/\.entries$/))) {
+      if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         var promise = this.deferred(),
           deferred = state.promise
           console.log('counting', state.context);
