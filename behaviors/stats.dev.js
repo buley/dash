@@ -186,12 +186,16 @@ window.dashStats = window.dashStats || (function (environment) {
           })(function(ctx) {
 	        state.context.statistics.request.expected[verb] += ctx.total;
 	        state.context.statistics.request.expected[noun] += ctx.total;
+	        state.context.statistics.total.expected[verb] += ctx.total;
+	        state.context.statistics.total.expected[noun] += ctx.total;
             deferred.resolve(state);
           });
         state.deferred = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
         state.context.statistics.request.expected[noun] += 1; 	
+        state.context.statistics.total.expected[verb] += 1;
+        state.context.statistics.total.expected[noun] += 1; 
       }
 
     } else {
