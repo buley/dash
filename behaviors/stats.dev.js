@@ -169,7 +169,7 @@ window.dashStats = window.dashStats || (function (environment) {
           })((function(defrd) {
           	return function (ctx) {
 	            console.log('counted the request', ctx, state.type);
-	            state.context.statistics.request.
+	            //state.context.statistics.request.
 	            defrd.resolve(state);
 	        }
           }(defd)));
