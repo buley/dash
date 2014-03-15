@@ -157,7 +157,7 @@ window.dashStats = window.dashStats || (function (environment) {
       };
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
-      if (API.exists(state.context.limit)) {
+      if (this.exists(state.context.limit)) {
         state.context.statistics.request.expected[verb] += state.context.limit;
         state.context.statistics.request.expected[noun] += state.context.limit;
       } else if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
@@ -166,7 +166,7 @@ window.dashStats = window.dashStats || (function (environment) {
           pieces = state.type.split('.');
           verb = pieces[0];
           noun = pieces[1];
-          theirs.api.count.entries({
+          this.api.count.entries({
 			database: state.context.database,
 			index: state.context.index,
 			index_key: state.context.index_key,
@@ -178,9 +178,9 @@ window.dashStats = window.dashStats || (function (environment) {
             console.log('counted the request', ctx.total, state.type);
 	        state.context.statistics.request.expected[verb] += ctx.total;
 	        state.context.statistics.request.expected[noun] += ctx.total;
-            defrd.resolve(state);
+            deferred.resolve(state);
           });
-        state.deferred = defd.promise;
+        state.deferred = deferred.promise;
       }
 
     } else {
