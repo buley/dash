@@ -216,7 +216,9 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.expected[noun] += 1;
       }
     } else {
-      
+      pieces = state.context.statistics.request.type.split('.');
+      verb = pieces[0];
+      noun = pieces[1];
       state.context.statistics.request.milliseconds.finished = new Date().getTime();
       state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
       
