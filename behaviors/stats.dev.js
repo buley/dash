@@ -158,8 +158,9 @@ window.dashStats = window.dashStats || (function(environment) {
 						promise.resolve(state);
 					}, 20 );
 				});
+				state.deferred = promise.promise;
 			}
-		state.deferred = promise.promise;
+
 		} else {
 			state.context.statistics.request.milliseconds.finished = new Date().getTime();
 			state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
