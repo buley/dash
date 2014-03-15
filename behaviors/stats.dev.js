@@ -263,7 +263,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
       state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
       state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
-      console.log('stats', state.context.statistics, state.context.statistics.request.expected[noun], JSON.stringify(state.context.statistics.request.remaining));
+      console.log('stats', noun, state.context.statistics.request.expected, JSON.stringify(state.context.statistics.request.remaining));
 
     }
     return state;
