@@ -79,7 +79,7 @@
 					});
 
 					it("get.index should clean up after itself", function() {
-						//dash.remove.database(this.context);
+						dash.remove.database(this.context);
 					});
 
 				});

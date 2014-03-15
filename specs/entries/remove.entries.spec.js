@@ -97,6 +97,8 @@
             expect(this.context.idx.name).toBe(this.indexname);
           });
 
+	  //TODO: Test collect behavior
+	  /*
           it("remove.entries should have an entries property", function(){
             expect(undefined !== this.entries).toBe(true);
           });
@@ -106,9 +108,10 @@
           it("remove.entries should return one deleted entry", function(){
             expect(this.entries.length).toBe(1);
           });
+          */
 
           it("remove.entries should clean up after itself", function() {
-            //dash.remove.database(this.context);
+            dash.remove.database(this.context);
           });
 
         });

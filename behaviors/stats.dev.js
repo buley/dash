@@ -4,10 +4,12 @@ window.dashStats = window.dashStats || (function(environment) {
 		total: {
 			requests: {
 				add: 0,
+				clears: 0,
+				counts: 0,
 				get: 0,
+				put: 0,
 				remove: 0,
-				update: 0,
-				put: 0
+				update: 0
 			},
 			resolves: 0,
 			notifies: 0,

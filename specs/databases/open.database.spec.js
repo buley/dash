@@ -163,7 +163,7 @@
 								});
 
 								it("get.database secondary test should clenup after itself", function(){
-									//dash.remove.database(this.context);
+									dash.remove.database(this.context);
 								});
 							});
 						});
