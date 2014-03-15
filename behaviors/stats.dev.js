@@ -144,13 +144,11 @@ window.dashStats = window.dashStats || (function (environment) {
     total = model();
   return function (state) {
     var context = state.context,
-    	pieces,
-    	verb,
-    	noun,
+    	pieces = state.type.split('.'),
+    	verb = pieces[0],
+    	noun = pieces[1],
         theirs = this;
-    console.log('checking', state.type);
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      console.log('starting', state.type);
       state.context.statistics = {
         total: total,
         request: model()
@@ -162,9 +160,6 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.expected[noun] += state.context.limit;
       } else if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         var deferred = this.deferred();
-          pieces = state.type.split('.');
-          verb = pieces[0];
-          noun = pieces[1];
           this.api.count.entries({
 			database: state.context.database,
 			index: state.context.index,
@@ -179,15 +174,18 @@ window.dashStats = window.dashStats || (function (environment) {
             deferred.resolve(state);
           });
         state.deferred = deferred.promise;
+      } else {
+        state.context.statistics.request.expected[verb] += 1;
+        state.context.statistics.request.expected[noun] += 1; 	
       }
 
     } else {
       state.context.statistics.request.milliseconds.finished = new Date().getTime();
       state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
 
-      var pieces = state.context.statistics.request.type.split('.'),
-        verb = pieces[0],
-        noun = pieces[1];
+      pieces = state.context.statistics.request.type.split('.');
+      verb = pieces[0];
+      noun = pieces[1];
 
       state.context.statistics.total.time[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time[verb] += state.context.statistics.request.milliseconds.elapsed;
