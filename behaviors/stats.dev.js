@@ -144,19 +144,28 @@ window.dashStats = window.dashStats || (function(environment) {
 	total = model();
 	return function(state) {
 		var context = state.context;
-		if ( !context.statistics ) {
+		console.log('checking', state.type);
+		if ( !API.contains([ 'resolve', 'notify', 'error' ], state.type) ) {
+			console.log('starting', state.type);
 			state.context.statistics = { total: total, request: model() };
 			state.context.statistics.request.milliseconds.started = new Date().getTime();
 			state.context.statistics.request.type = state.type;
-			var promise = this.deferred(),
-			    deferred = state.promise;
-			deferred( function( state ) {
-				setTimeout( function() {
-					console.log('module before callback', state.type);
-					promise.resolve(state);
-				}, 20 );
-			});
-		state.deferred = promise.promise;
+			console.log('x',state.type);
+			if ( null !== state.type.match(/\.entries$/) ) {
+				console.log('countable', state.type);
+				var promise = this.deferred(),
+				    deferred = state.promise,
+				    theirs = this;
+				deferred( function( state ) {
+					console.log('counting',that.api);
+					theirs.api.count.entries( state )( function() {
+						console.log('count the request', state.type);
+						promise.resolve(state);
+					} );
+				});
+				state.deferred = promise.promise;
+			}
+
 		} else {
 			state.context.statistics.request.milliseconds.finished = new Date().getTime();
 			state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
@@ -186,7 +195,6 @@ window.dashStats = window.dashStats || (function(environment) {
 				state.context.statistics.total.metrics[ verb ].recent = state.context.statistics.total.metrics[ verb ].recent.slice(0, recents);
 				
 			}
-			console.log('stats', state.context.statistics);
 		}
 		return state;
 	};
