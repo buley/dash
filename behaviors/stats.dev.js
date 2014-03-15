@@ -157,7 +157,7 @@ window.dashStats = window.dashStats || (function (environment) {
       };
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
-      if (false && this.exists(state.context.limit)) {
+      if (this.exists(state.context.limit)) {
         state.context.statistics.request.expected[verb] += state.context.limit;
         state.context.statistics.request.expected[noun] += state.context.limit;
       } else if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
