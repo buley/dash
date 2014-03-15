@@ -155,8 +155,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
-        var defd = this.deferred(),
-          deferred = state.promise
+        var deferred = this.deferred(),
           console.log('counting', state.context);
           theirs.api.count.entries({
 			database: state.context.database,
@@ -166,13 +165,11 @@ window.dashStats = window.dashStats || (function (environment) {
 			limit: state.context.limit,
 			store: state.context.store,
 			store_key_path: state.context.store_key_path,
-          })((function(defrd) {
-          	return function (ctx) {
-	            console.log('counted the request', ctx, state.type);
-	            //state.context.statistics.request.
-	            defrd.resolve(state);
-	        }
-          }(defd)));
+          })(function(ctx) {
+            console.log('counted the request', ctx, state.type);
+            //state.context.statistics.request.expected[]
+            defrd.resolve(state);
+          });
         state.deferred = defd.promise;
       }
 
