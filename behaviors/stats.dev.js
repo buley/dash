@@ -158,8 +158,8 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
       if (API.exists(state.context.limit)) {
-        state.context.statistics.request.expected[]
-
+        state.context.statistics.request.expected[verb] += state.context.limit;
+        state.context.statistics.request.expected[noun] += state.context.limit;
       } else if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         var deferred = this.deferred();
           console.log('counting', state.context);
@@ -175,8 +175,9 @@ window.dashStats = window.dashStats || (function (environment) {
 			store: state.context.store,
 			store_key_path: state.context.store_key_path,
           })(function(ctx) {
-            console.log('counted the request', ctx, state.type);
-            //state.context.statistics.request.expected[]
+            console.log('counted the request', ctx.total, state.type);
+	        state.context.statistics.request.expected[verb] += ctx.total;
+	        state.context.statistics.request.expected[noun] += ctx.total;
             defrd.resolve(state);
           });
         state.deferred = defd.promise;
