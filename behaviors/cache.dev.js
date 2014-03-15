@@ -1,4 +1,4 @@
-window.dashStats = window.dashStats || (function(environment) {
+window.dashCache = window.dashStats || (function(environment) {
 	"use strict";
 	return function(state) {
 		/*

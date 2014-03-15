@@ -1,7 +1,6 @@
-window.dashStats = window.dashStats || (function(environment) {
+/*window.dashStats = window.dashStats || (function(environment) {
 	"use strict";
 	return function(state) {
-		/*
 		var promise = this.deferred(),
 		    deferred = state.promise;
 		deferred( function( state ) {
@@ -10,7 +9,5 @@ window.dashStats = window.dashStats || (function(environment) {
 				promise.resolve(state);
 			}, 20 );
 		});
-		state.deferred = promise.promise;
-		*/
 	}
-}
+}*/
