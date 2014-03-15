@@ -105,7 +105,7 @@ window.dashStats = window.dashStats || (function(environment) {
 	return function(state) {
 		var context = state.context;
 		if ( !context.statistics ) {
-			stats.context.statistics = { total: total, request: model() };
+			state.context.statistics = { total: total, request: model() };
 			state.context.statistics.request.milliseconds.start = new Date().getTime();
 			state.context.statistics.request.type = state.type;
 		} else {
