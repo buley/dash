@@ -104,9 +104,7 @@ window.dashStats = window.dashStats || (function(environment) {
 	total = model();
 	return function(state) {
 		var context = state.context;
-		if ( !context.stats_start ) {
-			console.log('starting',state.type);
-
+		if ( !context.statistics ) {
 			stats.context.statistics = { total: total, request: model() };
 			state.context.statistics.request.milliseconds.start = new Date().getTime();
 			state.context.statistics.request.type = state.type;
