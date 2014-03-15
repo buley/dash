@@ -182,11 +182,6 @@ window.dashStats = window.dashStats || (function (environment) {
     } else {
       state.context.statistics.request.milliseconds.finished = new Date().getTime();
       state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
-
-      pieces = state.context.statistics.request.type.split('.');
-      verb = pieces[0];
-      noun = pieces[1];
-
       state.context.statistics.total.time[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
@@ -202,7 +197,6 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
       if (state.context.statistics.request.metrics[verb].recent.length > recents) {
         state.context.statistics.request.metrics[verb].recent = state.context.statistics.request.metrics[verb].recent.slice(0, recents);
-
       }
       if (state.context.statistics.total.metrics[verb].recent.length > recents) {
         state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, recents);
