@@ -42,6 +42,46 @@ window.dashStats = window.dashStats || (function(environment) {
 			databases: 0,
 			total: 0
 		},
+		expected: {
+			add: 0,
+			clears: 0,
+			counts: 0,
+			get: 0,
+			put: 0,
+			remove: 0,
+			update: 0,
+			attribute: 0,
+			behavior: 0,
+			store: 0,
+			stores: 0,
+			entry: 0,
+			entries: 0,
+			index: 0,
+			indexes: 0,
+			database: 0,
+			databases: 0,
+			total: 0
+		},
+		remaining: {
+			add: 0,
+			clears: 0,
+			counts: 0,
+			get: 0,
+			put: 0,
+			remove: 0,
+			update: 0,
+			attribute: 0,
+			behavior: 0,
+			store: 0,
+			stores: 0,
+			entry: 0,
+			entries: 0,
+			index: 0,
+			indexes: 0,
+			database: 0,
+			databases: 0,
+			total: 0
+		},
 		outcomes: {
 			resolve: 0,
 			notify: 0,
@@ -108,6 +148,17 @@ window.dashStats = window.dashStats || (function(environment) {
 			state.context.statistics = { total: total, request: model() };
 			state.context.statistics.request.milliseconds.started = new Date().getTime();
 			state.context.statistics.request.type = state.type;
+			if ( null !== state.type.match(/\.entries$/) ) {
+				var promise = this.deferred(),
+				    deferred = state.promise;
+				deferred( function( state ) {
+					setTimeout( function() {
+						console.log('count the request', state.type);
+						promise.resolve(state);
+					}, 20 );
+				});
+			}
+		state.deferred = promise.promise;
 		} else {
 			state.context.statistics.request.milliseconds.finished = new Date().getTime();
 			state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
