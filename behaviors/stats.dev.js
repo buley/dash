@@ -258,7 +258,7 @@ window.dashStats = window.dashStats || (function (environment) {
     state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
     state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
     state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
-    console.log('stats', state.context.statistics);
+    console.log('stats', state.context.statistics, JSON.stringify(state.context.statistics.total.remaining));
     return state;
   };
 }(self));
