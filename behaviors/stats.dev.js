@@ -132,6 +132,21 @@ window.dashStats = window.dashStats || (function (environment) {
           average: NaN,
           rate: NaN,
           recent: []
+        },
+        resolve: {
+          average: NaN,
+          rate: NaN,
+          recent: []
+        },
+        notify: {
+          average: NaN,
+          rate: NaN,
+          recent: []
+        },
+        error: {
+          average: NaN,
+          rate: NaN,
+          recent: []
         }
       },
       type: null,
