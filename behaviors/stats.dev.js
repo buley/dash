@@ -162,7 +162,6 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.expected[noun] += state.context.limit;
       } else if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         var deferred = this.deferred();
-          console.log('counting', state.context);
           pieces = state.type.split('.');
           verb = pieces[0];
           noun = pieces[1];
@@ -175,7 +174,6 @@ window.dashStats = window.dashStats || (function (environment) {
 			store: state.context.store,
 			store_key_path: state.context.store_key_path,
           })(function(ctx) {
-            console.log('counted the request', ctx.total, state.type);
 	        state.context.statistics.request.expected[verb] += ctx.total;
 	        state.context.statistics.request.expected[noun] += ctx.total;
             deferred.resolve(state);
@@ -210,8 +208,8 @@ window.dashStats = window.dashStats || (function (environment) {
       }
       if (state.context.statistics.total.metrics[verb].recent.length > recents) {
         state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, recents);
-
       }
+      console.log('stats',state.context.statistics);
     }
     return state;
   };
