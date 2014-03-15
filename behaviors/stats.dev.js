@@ -157,7 +157,7 @@ window.dashStats = window.dashStats || (function (environment) {
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         var promise = this.deferred(),
           deferred = state.promise
-          console.log('counting', theirs.api, state);
+          console.log('counting', state);
           /*theirs.api.count.entries(state)(function (ctx) {
             console.log('counted the request', ctx, state.type);
             promise.resolve(state);
