@@ -127,8 +127,8 @@ window.dashStats = window.dashStats || (function(environment) {
 			state.context.statistics.total.requests[ noun ] += 1;
 			state.context.statistics.request.requests.total += 1;
 			state.context.statistics.total.requests.total += 1;
-			state.context.statistics.request.metrics[ verb ].recent.unshift(state.contex.statistics.milliseconds.elapsed);
-			state.context.statistics.total.metrics[ verb ].recent.unshift(state.contex.statistics.milliseconds.elapsed);
+			state.context.statistics.request.metrics[ verb ].recent.unshift(state.context.statistics.milliseconds.elapsed);
+			state.context.statistics.total.metrics[ verb ].recent.unshift(state.context.statistics.milliseconds.elapsed);
 			if ( state.context.statistics.request.metrics[ verb ].recent.length > recents ) {
 				state.context.statistics.request.metrics[ verb ].recent = state.context.statistics.request.metrics[ verb ].recent.slice(0, recents);
 				
