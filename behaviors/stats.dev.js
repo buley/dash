@@ -20,7 +20,10 @@ window.dashStats = window.dashStats || (function (environment) {
         indexes: 0,
         database: 0,
         databases: 0,
-        total: 0
+        total: 0,
+        resolve: 0,
+        notify: 0,
+        error: 0
       },
       time: {
         add: 0,
@@ -40,7 +43,10 @@ window.dashStats = window.dashStats || (function (environment) {
         indexes: 0,
         database: 0,
         databases: 0,
-        total: 0
+        total: 0,
+        resolve: 0,
+        notify: 0,
+        error: 0
       },
       expected: {
         add: 0,
@@ -60,7 +66,10 @@ window.dashStats = window.dashStats || (function (environment) {
         indexes: 0,
         database: 0,
         databases: 0,
-        total: 0
+        total: 0,
+        resolve: 0,
+        notify: 0,
+        error: 0
       },
       remaining: {
         add: 0,
@@ -80,7 +89,10 @@ window.dashStats = window.dashStats || (function (environment) {
         indexes: 0,
         database: 0,
         databases: 0,
-        total: 0
+        total: 0,
+        resolve: 0,
+        notify: 0,
+        error: 0
       },
       outcomes: {
         resolve: 0,
