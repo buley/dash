@@ -149,7 +149,7 @@ window.dashStats = window.dashStats || (function (environment) {
     	noun = pieces[1],
         theirs = this;
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      state.context.statistics = {
+      state.context.statistics = state.context.statistics || {
         total: total,
         request: model()
       };
