@@ -144,7 +144,7 @@ window.dashStats = window.dashStats || (function(environment) {
 	total = model();
 	return function(state) {
 		var context = state.context;
-		if ( !context.statistics ) {
+		if ( !API.contains([ 'resolve', 'notify', 'error' ], state.type) ) {
 			state.context.statistics = { total: total, request: model() };
 			state.context.statistics.request.milliseconds.started = new Date().getTime();
 			state.context.statistics.request.type = state.type;
