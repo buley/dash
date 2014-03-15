@@ -158,7 +158,15 @@ window.dashStats = window.dashStats || (function (environment) {
         var promise = this.deferred(),
           deferred = state.promise
           console.log('counting', state.context);
-          theirs.api.count.entries(state.context)(function (ctx) {
+          theirs.api.count.entries({
+			database: state.context.database,
+			index: state.context.index,
+			index_key: state.context.index_key,
+			index_key_path: state.context.index_key_path,
+			limit: state.context.limit,
+			store: state.context.store,
+			store_key_path: state.context.store_key_path,
+          })(function (ctx) {
             console.log('counted the request', ctx, state.type);
             promise.resolve(state);
           });
