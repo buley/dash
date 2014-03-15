@@ -5,7 +5,7 @@ window.dashStats = window.dashStats || (function (environment) {
       requests: {
         add: 0,
         clears: 0,
-        counts: 0,
+        count: 0,
         get: 0,
         put: 0,
         remove: 0,
@@ -27,8 +27,8 @@ window.dashStats = window.dashStats || (function (environment) {
       },
       time: {
         add: 0,
-        clears: 0,
-        counts: 0,
+        clear: 0,
+        count: 0,
         get: 0,
         put: 0,
         remove: 0,
@@ -50,8 +50,8 @@ window.dashStats = window.dashStats || (function (environment) {
       },
       expected: {
         add: 0,
-        clears: 0,
-        counts: 0,
+        clear: 0,
+        count: 0,
         get: 0,
         put: 0,
         remove: 0,
@@ -73,8 +73,8 @@ window.dashStats = window.dashStats || (function (environment) {
       },
       remaining: {
         add: 0,
-        clears: 0,
-        counts: 0,
+        clear: 0,
+        count: 0,
         get: 0,
         put: 0,
         remove: 0,
