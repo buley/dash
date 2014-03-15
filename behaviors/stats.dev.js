@@ -216,27 +216,31 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.expected[noun] += 1;
       }
     } else {
+      
       state.context.statistics.request.milliseconds.finished = new Date().getTime();
       state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
+      
       state.context.statistics.total.time[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
-      state.context.statistics.request.outcomes[state.type] += 1;
-      state.context.statistics.total.outcomes[state.type] += 1;
-      state.context.statistics.request.requests[verb] += 1;
-      state.context.statistics.total.requests[verb] += 1;
-      state.context.statistics.request.requests[noun] += 1;
-      state.context.statistics.total.requests[noun] += 1;
-      state.context.statistics.request.requests.total += 1;
-      state.context.statistics.total.requests.total += 1;
+      
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
+
       if (state.context.statistics.request.metrics[verb].recent.length > recents) {
         state.context.statistics.request.metrics[verb].recent = state.context.statistics.request.metrics[verb].recent.slice(0, recents);
       }
       if (state.context.statistics.total.metrics[verb].recent.length > recents) {
         state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, recents);
       }
+      
+      state.context.statistics.request.requests[verb] += 1;
+      state.context.statistics.total.requests[verb] += 1;
+      state.context.statistics.request.requests[noun] += 1;
+      state.context.statistics.total.requests[noun] += 1;
+      state.context.statistics.request.requests.total += 1;
+      state.context.statistics.total.requests.total += 1;
+
     }
     console.log('stats', state.context.statistics);
     return state;
