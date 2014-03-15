@@ -1,7 +1,6 @@
-window.dashCache = window.dashStats || (function(environment) {
+/*window.dashCache = window.dashStats || (function(environment) {
 	"use strict";
 	return function(state) {
-		/*
 		var promise = this.deferred(),
 		    deferred = state.promise;
 		deferred( function( state ) {
@@ -11,6 +10,5 @@ window.dashCache = window.dashStats || (function(environment) {
 			}, 20 );
 		});
 		state.deferred = promise.promise;
-		*/
 	};
-}());
+}());*/
