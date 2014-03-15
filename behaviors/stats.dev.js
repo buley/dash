@@ -156,10 +156,10 @@ window.dashStats = window.dashStats || (function(environment) {
 				    that = this;
 				deferred( function( state ) {
 					console.log('counting',that.api);
-					that.api.count.entries( state )( ( function() {
+					that.api.count.entries( state )( function() {
 						console.log('count the request', state.type);
 						//promise.resolve(state);
-					}, 20 );
+					} );
 				});
 				state.deferred = promise.promise;
 			}
