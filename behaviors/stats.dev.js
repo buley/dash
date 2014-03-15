@@ -87,23 +87,31 @@ window.dashStats = window.dashStats || (function(environment) {
 		if ( !context.stats_start ) {
 			console.log('starting',state.type);
 
-			stats.context.statistics = model();
-			state.context.statistics.milliseconds.start = new Date().getTime();
-			state.context.statistics.type = state.type;
+			stats.context.statistics = { total: total, request: model() };
+			state.context.statistics.request.milliseconds.start = new Date().getTime();
+			state.context.statistics.request.type = state.type;
 		} else {
-			state.context.statistics.milliseconds.finished = new Date().getTime();
-			state.context.statistics.milliseconds.elapsed = state.context.statistics.milliseconds.finished - state.context.statistics.milliseconds.started;
-			var pieces = state.context.statistics.type.split('.'),
+			state.context.statistics.request.milliseconds.finished = new Date().getTime();
+			state.context.statistics.request.milliseconds.elapsed = state.context.statistics.milliseconds.finished - state.context.statistics.milliseconds.started;
+			var pieces = state.context.statistics.request.type.split('.'),
 			    verb = pieces[ 0 ],
 			    noun = pieces[ 1 ];
-			state.context.statistics.outcomes[ state.type ] += 1;
-			state.context.statistics.requests[ verb ] += 1;
-			state.context.statistics.targets[ noun ] += 1;
-			state.context.statistics.metrics[ verb ].recent.unshift(state.contex.statistics.milliseconds.elapsed);
-			if ( state.context.statistics.metrics[ verb ].recent.length > recents ) {
-				state.context.statistics.metrics[ verb ].recent = state.context.statistics.metrics[ verb ].recent.slice(0, 5);
+			state.context.statistics.request.outcomes[ state.type ] += 1;
+			state.context.statistics.total.outcomes[ state.type ] += 1;
+			state.context.statistics.request.requests[ verb ] += 1;
+			state.context.statistics.total.requests[ verb ] += 1;
+			state.context.statistics.request.targets[ noun ] += 1;
+			state.context.statistics.total.targets[ noun ] += 1;
+			state.context.statistics.request.metrics[ verb ].recent.unshift(state.contex.statistics.milliseconds.elapsed);
+			state.context.statistics.total.metrics[ verb ].recent.unshift(state.contex.statistics.milliseconds.elapsed);
+			if ( state.context.statistics.request.metrics[ verb ].recent.length > recents ) {
+				state.context.statistics.request.metrics[ verb ].recent = state.context.statistics.request.metrics[ verb ].recent.slice(0, 5);
 				
-			}	
+			}
+			if ( state.context.statistics.total.metrics[ verb ].recent.length > recents ) {
+				state.context.statistics.total.metrics[ verb ].recent = state.context.statistics.total.metrics[ verb ].recent.slice(0, 5);
+				
+			}
 			console.log('stats', state.contet.statistics);
 		}
 		return state;
