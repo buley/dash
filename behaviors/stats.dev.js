@@ -9,9 +9,7 @@ window.dashStats = window.dashStats || (function(environment) {
 			get: 0,
 			put: 0,
 			remove: 0,
-			update: 0
-		},
-		targets: {
+			update: 0,
 			attribute: 0,
 			behavior: 0,
 			store: 0,
@@ -21,7 +19,28 @@ window.dashStats = window.dashStats || (function(environment) {
 			index: 0,
 			indexes: 0,
 			database: 0,
-			databases: 0
+			databases: 0,
+			total: 0
+		},
+		time: {
+			add: 0,
+			clears: 0,
+			counts: 0,
+			get: 0,
+			put: 0,
+			remove: 0,
+			update: 0,
+			attribute: 0,
+			behavior: 0,
+			store: 0,
+			stores: 0,
+			entry: 0,
+			entries: 0,
+			index: 0,
+			indexes: 0,
+			database: 0,
+			databases: 0,
+			total: 0
 		},
 		outcomes: {
 			resolve: 0,
@@ -29,6 +48,7 @@ window.dashStats = window.dashStats || (function(environment) {
 			error: 0
 		},
 		milliseconds: {
+			total: NaN,
 			start: NaN,
 			elapsed: NaN,
 			remaining: NaN
@@ -96,20 +116,26 @@ window.dashStats = window.dashStats || (function(environment) {
 			var pieces = state.context.statistics.request.type.split('.'),
 			    verb = pieces[ 0 ],
 			    noun = pieces[ 1 ];
+
+			state.context.statistics.total.time[ noun ] += state.context.statistics.request.milliseconds.elapsed;
+			state.context.statistics.total.time[ verb ] += state.context.statistics.request.milliseconds.elapsed;
+			state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
 			state.context.statistics.request.outcomes[ state.type ] += 1;
 			state.context.statistics.total.outcomes[ state.type ] += 1;
 			state.context.statistics.request.requests[ verb ] += 1;
 			state.context.statistics.total.requests[ verb ] += 1;
-			state.context.statistics.request.targets[ noun ] += 1;
-			state.context.statistics.total.targets[ noun ] += 1;
+			state.context.statistics.request.requests[ noun ] += 1;
+			state.context.statistics.total.requests[ noun ] += 1;
+			state.context.statistics.request.requests.total += 1;
+			state.context.statistics.total.requests.total += 1;
 			state.context.statistics.request.metrics[ verb ].recent.unshift(state.contex.statistics.milliseconds.elapsed);
 			state.context.statistics.total.metrics[ verb ].recent.unshift(state.contex.statistics.milliseconds.elapsed);
 			if ( state.context.statistics.request.metrics[ verb ].recent.length > recents ) {
-				state.context.statistics.request.metrics[ verb ].recent = state.context.statistics.request.metrics[ verb ].recent.slice(0, 5);
+				state.context.statistics.request.metrics[ verb ].recent = state.context.statistics.request.metrics[ verb ].recent.slice(0, recents);
 				
 			}
 			if ( state.context.statistics.total.metrics[ verb ].recent.length > recents ) {
-				state.context.statistics.total.metrics[ verb ].recent = state.context.statistics.total.metrics[ verb ].recent.slice(0, 5);
+				state.context.statistics.total.metrics[ verb ].recent = state.context.statistics.total.metrics[ verb ].recent.slice(0, recents);
 				
 			}
 			console.log('stats', state.contet.statistics);
