@@ -3,6 +3,7 @@ window.dashStats = window.dashStats || (function(environment) {
 	return function(state) {
 		var context = state.context;
 		if ( !context.stats_start ) {
+			console.log('starting',state.type);
 			state.context.stats_start = new Date().getTime();
 			stats.context.stats_operation = state.type;
 		} else {
