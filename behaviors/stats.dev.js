@@ -159,45 +159,48 @@ window.dashStats = window.dashStats || (function (environment) {
     total = model();
   return function (state) {
     var context = state.context,
-    	pieces = state.type.split('.'),
-    	verb = pieces[0],
-    	noun = pieces[1],
-        theirs = this;
+      pieces = state.type.split('.'),
+      verb = pieces[0],
+      noun = pieces[1],
+      deferred,
+      promise = state.promise,
+      theirs = this;
+    state.context.statistics = state.context.statistics || {
+      total: total,
+      request: model()
+    };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      state.context.statistics = state.context.statistics || {
-        total: total,
-        request: model()
-      };
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
       if (this.exists(state.context.limit)) {
         state.context.statistics.request.expected[verb] += state.context.limit;
         state.context.statistics.request.expected[noun] += state.context.limit;
       } else if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
-        var deferred = this.deferred();
-          this.api.count.entries({
-			database: state.context.database,
-			index: state.context.index,
-			index_key: state.context.index_key,
-			index_key_path: state.context.index_key_path,
-			limit: state.context.limit,
-			store: state.context.store,
-			store_key_path: state.context.store_key_path,
-          })(function(ctx) {
-	        state.context.statistics.request.expected[verb] += ctx.total;
-	        state.context.statistics.request.expected[noun] += ctx.total;
-	        state.context.statistics.total.expected[verb] += ctx.total;
-	        state.context.statistics.total.expected[noun] += ctx.total;
-            deferred.resolve(state);
-          });
+        deferred = this.deferred();
+        promise( function() {
+	        theirs.api.count.entries({
+	          database: state.context.database,
+	          index: state.context.index,
+	          index_key: state.context.index_key,
+	          index_key_path: state.context.index_key_path,
+	          limit: state.context.limit,
+	          store: state.context.store,
+	          store_key_path: state.context.store_key_path,
+	        })(function (ctx) {
+	          state.context.statistics.request.expected[verb] += ctx.total;
+	          state.context.statistics.request.expected[noun] += ctx.total;
+	          state.context.statistics.total.expected[verb] += ctx.total;
+	          state.context.statistics.total.expected[noun] += ctx.total;
+	          deferred.resolve(state);
+	        });
+        });
         state.deferred = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
-        state.context.statistics.request.expected[noun] += 1; 	
+        state.context.statistics.request.expected[noun] += 1;
         state.context.statistics.total.expected[verb] += 1;
-        state.context.statistics.total.expected[noun] += 1; 
+        state.context.statistics.total.expected[noun] += 1;
       }
-
     } else {
       state.context.statistics.request.milliseconds.finished = new Date().getTime();
       state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
@@ -221,7 +224,7 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, recents);
       }
     }
-    console.log('stats',state.context.statistics);
+    console.log('stats', state.context.statistics);
     return state;
   };
 }(self));
