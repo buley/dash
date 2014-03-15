@@ -110,7 +110,7 @@ window.dashStats = window.dashStats || (function(environment) {
 			state.context.statistics.request.type = state.type;
 		} else {
 			state.context.statistics.request.milliseconds.finished = new Date().getTime();
-			state.context.statistics.request.milliseconds.elapsed = state.context.statistics.milliseconds.finished - state.context.statistics.milliseconds.started;
+			state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
 
 			var pieces = state.context.statistics.request.type.split('.'),
 			    verb = pieces[ 0 ],
