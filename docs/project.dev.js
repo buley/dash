@@ -1063,10 +1063,12 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				  key: new Date('1/1/' + scope.range).getTime()
 				},
 				q =  new RegExp( scope.query ),
-				dash_promise = dashWorkerService.get.entries(ctx),
+				//dash_promise = dashWorkerService.get.entries(ctx),
+				dash_promise = dash.get.entries(ctx),
 				start_promise = new Date().getTime();
 
-			    dash_promise.then( function(context) {
+			    //dash_promise.then( function(context) {
+			    dash_promise( function(context) {
 				console.log('searched all',context.amount);
 				statsUpdate('complete', 'searches', context.amount, new Date().getTime() - start_promise);
 			    }, function(context) {
