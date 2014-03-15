@@ -144,7 +144,10 @@ window.dashStats = window.dashStats || (function (environment) {
     total = model();
   return function (state) {
     var context = state.context,
-          theirs = this;
+    	pieces,
+    	verb,
+    	noun,
+        theirs = this;
     console.log('checking', state.type);
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
       console.log('starting', state.type);
@@ -154,9 +157,15 @@ window.dashStats = window.dashStats || (function (environment) {
       };
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
-      if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
-        var deferred = this.deferred(),
+      if (API.exists(state.context.limit)) {
+        state.context.statistics.request.expected[]
+
+      } else if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
+        var deferred = this.deferred();
           console.log('counting', state.context);
+          pieces = state.type.split('.');
+          verb = pieces[0];
+          noun = pieces[1];
           theirs.api.count.entries({
 			database: state.context.database,
 			index: state.context.index,
