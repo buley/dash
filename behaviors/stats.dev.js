@@ -143,7 +143,8 @@ window.dashStats = window.dashStats || (function (environment) {
     recents = 5,
     total = model();
   return function (state) {
-    var context = state.context;
+    var context = state.context,
+          theirs = this;
     console.log('checking', state.type);
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
       console.log('starting', state.type);
@@ -153,15 +154,13 @@ window.dashStats = window.dashStats || (function (environment) {
       };
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.request.type = state.type;
-      console.log('x', state.type);
       if (null !== state.type.match(/\.entries$/)) {
         console.log('countable', state.type);
         var promise = this.deferred(),
-          deferred = state.promise,
-          theirs = this;
+          deferred = state.promise
           console.log('counting', theirs.api);
           theirs.api.count.entries(state)(function (ctx) {
-            console.log('count the request', ctx, state.type);
+            console.log('counted the request', ctx, state.type);
             promise.resolve(state);
           });
         state.deferred = promise.promise;
