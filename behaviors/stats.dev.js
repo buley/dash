@@ -286,8 +286,14 @@ window.dashStats = window.dashStats || (function (environment) {
       if (state.context.statistics.request.metrics[verb].recent.length > state.context.statistics.request.recents) {
         state.context.statistics.request.metrics[verb].recent = state.context.statistics.request.metrics[verb].recent.slice(0, state.context.statistics.request.recents);
       }
-      if (state.context.statistics.total.metrics[verb].recent.length > state.context.statistics.total.recents) {
-        state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, state.context.statistics.total.recents);
+      if (state.context.statistics.total.metrics[noun].recent.length > state.context.statistics.total.recents) {
+        state.context.statistics.total.metrics[noun].recent = state.context.statistics.total.metrics[noun].recent.slice(0, state.context.statistics.total.recents);
+      }
+      if (state.context.statistics.request.metrics[noun].recent.length > state.context.statistics.request.recents) {
+        state.context.statistics.request.metrics[noun].recent = state.context.statistics.request.metrics[noun].recent.slice(0, state.context.statistics.request.recents);
+      }
+      if (state.context.statistics.total.metrics[noun].recent.length > state.context.statistics.total.recents) {
+        state.context.statistics.total.metrics[noun].recent = state.context.statistics.total.metrics[noun].recent.slice(0, state.context.statistics.total.recents);
       }
       if (state.context.statistics.total.metrics.total.recent.length > state.context.statistics.total.recents) {
         state.context.statistics.total.metrics.total.recent = state.context.statistics.total.metrics.total.recent.slice(0, state.context.statistics.total.recents);
