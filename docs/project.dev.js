@@ -1607,8 +1607,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 console.log('STATS',statsObj);
                 scope.statsDisplay.total = statsObj.request.expected.total;
                 scope.statsDisplay.complete = statsObj.request.requests.total;
-                scope.statsDisplay.prettyElapsed = statsObj.request.prettyElapsed;
-                scope.statsDisplay.prettyRemain = statsObj.request.prettyRemain;
+                scope.statsDisplay.prettyElapsed = statsObj.request.prettyElapsed.total;
+                scope.statsDisplay.prettyRemain = statsObj.request.prettyRemain.total;
                 scope.statsDisplay.prettyAvg = statsObj.request.metrics.total.average + '/ms';
                 scope.statsDisplay.prettyRate = statsObj.request.metrics.total.rate + '/ms';        
               }
