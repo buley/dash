@@ -269,6 +269,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.requests[noun] += 1;
       state.context.statistics.request.requests.total += 1;
       state.context.statistics.total.requests.total += 1;
+      console.log('stats', noun, verb, state.context.statistics.total.expected[verb], state.context.statistics.total.remaining[verb], state.context.statistics.total.expected[noun], state.context.statistics.total.remaining[noun] );
       state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
       state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
       state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
