@@ -407,6 +407,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
+      console.log('CHECKING type',state.type);
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
         promise( function(context) {
