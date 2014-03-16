@@ -227,18 +227,21 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun];
             state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total;
             state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total;
-        state.deferred = deferred.promise;
+        state.promise = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
         state.context.statistics.request.expected[noun] += 1;
         state.context.statistics.total.expected[verb] += 1;
         state.context.statistics.total.expected[noun] += 1;
-            state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
-            state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
-            state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
-            state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
-            state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
-            state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
+        state.context.statistics.total.expected.total += 1;
+        state.context.statistics.total.expected.total += 1;
+
+        state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
+        state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
+        state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
+        state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
+        state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
+        state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
 
       }
 
