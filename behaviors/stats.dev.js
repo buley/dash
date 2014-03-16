@@ -313,6 +313,7 @@ window.dashStats = window.dashStats || (function (environment) {
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
       state.context.statistics.request.milliseconds.started = new Date().getTime();
+      state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
@@ -373,17 +374,15 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || datetime;
       state.context.statistics.request.milliseconds.started = state.context.statistics.request.milliseconds.started || datetime;
 
-      diff = datetime - state.context.statistics.total.milliseconds.started;
-      state.context.statistics.total.milliseconds.elapsed = diff;
-      state.context.statistics.total.actual[noun] = diff;
-      state.context.statistics.total.actual[verb] = diff;
-      state.context.statistics.total.actual.total = diff;
+      state.context.statistics.total.milliseconds.elapsed = datetime - state.context.statistics.total.milliseconds.started;
+      state.context.statistics.total.actual[noun] = state.context.statistics.total.milliseconds.elapsed;
+      state.context.statistics.total.actual[verb] = state.context.statistics.total.milliseconds.elapsed;
+      state.context.statistics.total.actual.total = state.context.statistics.total.milliseconds.elapsed;
 
-      diff = datetime - state.context.statistics.request.milliseconds.started;
-      state.context.statistics.request.milliseconds.elapsed = datetime - (state.context.statistics.request.milliseconds.started || datetime);
-      state.context.statistics.request.actual[noun] = diff;
-      state.context.statistics.request.actual[verb] = diff;
-      state.context.statistics.request.actual.total = diff;
+      state.context.statistics.request.milliseconds.elapsed = datetime - state.context.statistics.request.milliseconds.started;
+      state.context.statistics.request.actual[noun] = state.context.statistics.request.milliseconds.elapsed;
+      state.context.statistics.request.actual[verb] = state.context.statistics.request.milliseconds.elapsed;
+      state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
 
       state.context.statistics.request.elapsed[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.elapsed[verb] += state.context.statistics.request.milliseconds.elapsed;
@@ -392,8 +391,6 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.elapsed[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.elapsed[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.elapsed.total += state.context.statistics.request.milliseconds.elapsed;
-
-
 
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
