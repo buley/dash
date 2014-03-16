@@ -1076,6 +1076,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			    }, function(context) {
 				if ( !!context.entry.se && null !== context.entry.se.match(q) || !!context.entry.ep && null !== context.entry.ep.match(q) ) {
 					context.id = context.primary_key;
+                    console.log('latest stats',context.statistics);
 					if ( true === scope.visuals ) {
 						system.add(context);
 					}
