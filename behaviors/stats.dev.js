@@ -407,6 +407,9 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
+        promise( function() {
+          console.log('theirs fulfilled');
+        });
         theirs.api.count.entries({
           database: state.context.database,
           index: state.context.index,
