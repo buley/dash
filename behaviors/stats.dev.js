@@ -291,6 +291,7 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.prettyRemaining.total = prettyTime(state.context.statistics.total.remaining.total);
         
         console.log('elapsed',state.context.statistics.total.prettyElapsed.total);
+        console.log('requestelapsed',state.context.statistics.request.prettyElapsed.total);
         //console.log('duration',state.context.statistics.total.prettyDuration, state.context.statistics.total.prettyRemaining);
       };
     state.context.statistics = state.context.statistics || {
