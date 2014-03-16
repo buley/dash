@@ -396,7 +396,6 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.prettyActual.total = prettyTime(state.context.statistics.request.actual.total);
         state.context.statistics.total.prettyActual.total = prettyTime(state.context.statistics.total.actual.total);
        
-        console.log('stats',state.context.statistics.request.actual.total);
       };
     state.context.statistics = state.context.statistics || {
       total: total,
