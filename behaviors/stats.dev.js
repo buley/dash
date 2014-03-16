@@ -221,7 +221,8 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.metrics[n].rate = average(state.context.statistics.total.metrics[n].recent); 
         state.context.statistics.total.metrics.total.rate = average(state.context.statistics.total.metrics.total.recent); 
 
-        console.log(state.context.statistics.total.metrics[v].rate, state.context.statistics.total.metrics[n].rate, state.context.statistics.total.metrics.total.rate);
+        console.log('request',state.context.statistics.request.metrics[v].rate, state.context.statistics.request.metrics[n].rate, state.context.statistics.request.metrics.total.rate);
+        console.log('total',state.context.statistics.total.metrics[v].rate, state.context.statistics.total.metrics[n].rate, state.context.statistics.total.metrics.total.rate);
       };
     state.context.statistics = state.context.statistics || {
       total: total,
