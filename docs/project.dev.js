@@ -1599,15 +1599,14 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               if (!statsObj) {
                 statsObj = { clear: true };
               }
-              scope.$apply( function() {
-                scope.statsDisplay.total = 0;
-                scope.statsDisplay.complete = 0;
-                scope.statsDisplay.prettyElapsed = 'w';
-                scope.statsDisplay.prettyRemain = 'x';
-                scope.statsDisplay.prettyAvg = 'y';
-                scope.statsDisplay.prettyRate = 'z';
-              })
-              statsUIProc = null;
+              console.log('VISUAL');
+              scope.statsDisplay.total = 0;
+              scope.statsDisplay.complete = 0;
+              scope.statsDisplay.prettyElapsed = 'w';
+              scope.statsDisplay.prettyRemain = 'x';
+              scope.statsDisplay.prettyAvg = 'y';
+              scope.statsDisplay.prettyRate = 'z';
+              statsUIProc = setTimeout(statsFunc, 1000);
             },
             statsUIProc,
             statsUpdate = function (stats) {
