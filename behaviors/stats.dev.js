@@ -403,7 +403,7 @@ window.dashStats = window.dashStats || (function (environment) {
       request: model()
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      state.context.statistics.request = model();
+      //state.context.statistics.request = model();
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
