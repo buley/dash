@@ -422,7 +422,7 @@ window.dashStats = window.dashStats || (function (environment) {
             store_key_path: context.store_key_path,
           })(function (context) {
             state.context = context;
-            console.log('got total',context.total);
+            console.log('got total',context.total, state.context.limit);
             if (theirs.exists(state.context.limit) && state.context.limit < context.total ) {
               state.context.statistics.request.expected[verb] += state.context.limit;
               state.context.statistics.request.expected[noun] += state.context.limit;
