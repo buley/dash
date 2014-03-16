@@ -376,6 +376,7 @@ window.dashStats = window.dashStats || (function (environment) {
       datetime = new Date().getTime();
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || datetime;
       state.context.statistics.request.milliseconds.started = state.context.statistics.request.milliseconds.started || datetime;
+      state.context.statistics.request.milliseconds.last = state.context.statistics.request.milliseconds.last || state.context.statistics.request.milliseconds.started || datetime;
 
       state.context.statistics.total.milliseconds.elapsed = datetime - state.context.statistics.total.milliseconds.started;
       state.context.statistics.total.actual[noun] = state.context.statistics.total.milliseconds.elapsed;
@@ -387,7 +388,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.actual[verb] = state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
 
-      diff = datetime - (state.context.statistics.request.milliseconds.last || state.context.statistics.request.milliseconds.started );
+      diff = datetime - state.context.statistics.request.milliseconds.last;
       state.context.statistics.request.elapsed[noun] += diff;
       state.context.statistics.request.elapsed[verb] += diff;
       state.context.statistics.request.elapsed.total += diff;
@@ -395,7 +396,6 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.elapsed[noun] += diff;
       state.context.statistics.total.elapsed[verb] += diff;
       state.context.statistics.total.elapsed.total += diff;
-      console.log("REQ", diff );
 
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
@@ -429,6 +429,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.requests.total += 1;
       state.context.statistics.total.requests.total += 1;
       calculate(verb, noun);
+      state.context.statistics.request.milliseconds.last = datetime;
     }
     return state;
   };
