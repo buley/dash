@@ -409,41 +409,42 @@ window.dashStats = window.dashStats || (function (environment) {
         deferred = this.deferred();
         promise( function() {
           console.log('theirs fulfilled');
+          theirs.api.count.entries({
+            database: state.context.database,
+            index: state.context.index,
+            index_key: state.context.index_key,
+            index_key_path: state.context.index_key_path,
+            limit: state.context.limit,
+            store: state.context.store,
+            store_key_path: state.context.store_key_path,
+          })(function (ctx) {
+            if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
+              state.context.statistics.request.expected[verb] += state.context.limit;
+              state.context.statistics.request.expected[noun] += state.context.limit;
+              state.context.statistics.total.expected[verb] += state.context.limit;
+              state.context.statistics.total.expected[noun] += state.context.limit;
+              state.context.statistics.request.expected.total += state.context.limit;
+              state.context.statistics.total.expected.total += state.context.limit;
+            } else {
+              state.context.statistics.request.expected[verb] += ctx.total;
+              state.context.statistics.request.expected[noun] += ctx.total;
+              state.context.statistics.total.expected[verb] += ctx.total;
+              state.context.statistics.total.expected[noun] += ctx.total;
+              state.context.statistics.request.expected.total += ctx.total;
+              state.context.statistics.total.expected.total += ctx.total;
+            }
+            state.context.statistics.request.expected[verb] += 1;
+            state.context.statistics.request.expected[noun] += 1;
+            state.context.statistics.total.expected[verb] += 1;
+            state.context.statistics.total.expected[noun] += 1;
+            state.context.statistics.request.expected.total += 1;
+            state.context.statistics.total.expected.total += 1;
+            calculate(verb, noun);
+            console.log('counted, resolving');
+            deferred.resolve(state);
+          });
         });
-        theirs.api.count.entries({
-          database: state.context.database,
-          index: state.context.index,
-          index_key: state.context.index_key,
-          index_key_path: state.context.index_key_path,
-          limit: state.context.limit,
-          store: state.context.store,
-          store_key_path: state.context.store_key_path,
-        })(function (ctx) {
-          if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
-            state.context.statistics.request.expected[verb] += state.context.limit;
-            state.context.statistics.request.expected[noun] += state.context.limit;
-            state.context.statistics.total.expected[verb] += state.context.limit;
-            state.context.statistics.total.expected[noun] += state.context.limit;
-            state.context.statistics.request.expected.total += state.context.limit;
-            state.context.statistics.total.expected.total += state.context.limit;
-          } else {
-            state.context.statistics.request.expected[verb] += ctx.total;
-            state.context.statistics.request.expected[noun] += ctx.total;
-            state.context.statistics.total.expected[verb] += ctx.total;
-            state.context.statistics.total.expected[noun] += ctx.total;
-            state.context.statistics.request.expected.total += ctx.total;
-            state.context.statistics.total.expected.total += ctx.total;
-          }
-          state.context.statistics.request.expected[verb] += 1;
-          state.context.statistics.request.expected[noun] += 1;
-          state.context.statistics.total.expected[verb] += 1;
-          state.context.statistics.total.expected[noun] += 1;
-          state.context.statistics.request.expected.total += 1;
-          state.context.statistics.total.expected.total += 1;
-          calculate(verb, noun);
-          console.log('counted, resolving');
-          deferred.resolve(state);
-        });
+        
         state.promise = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
