@@ -213,8 +213,7 @@ window.dashStats = window.dashStats || (function (environment) {
       prettyTime = function(seconds) {
         var hours = Math.floor((seconds - ( seconds % 86400 )) / 86400),
             minutes = Math.floor((seconds - ( seconds % 3600 )) / 3600),
-            secs = Math.floor(seconds % 60 ),
-            msecs = Math.floor(((seconds/1000) % 1000));
+            secs = Math.floor(seconds % 60 )
         if ( true === isNaN( hours ) && true === isNaN( minutes ) && true === isNaN( secs ) ) {
           return;
         }
@@ -235,12 +234,7 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           secs = secs.toString();
         }
-        if ( msecs < 10 ) {
-          msecs = '0' + msecs.toString();
-        } else {
-          msecs = msecs.toString();
-        }
-        return hours + minutes + ':' + secs + ':' + msecs;
+        return hours + minutes + ':' + secs;
       },
       calculate = function(v, n) {
         
