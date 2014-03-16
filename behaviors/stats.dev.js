@@ -403,7 +403,14 @@ window.dashStats = window.dashStats || (function (environment) {
       request: model()
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      state.context.statistics.request = model();
+      state.context.statistics.request.prettyElapsed = {};
+      state.context.statistics.request.expecting = {};
+      state.context.statistics.request.remaining = {};
+      state.context.statistics.request.prettyRemaining = {};
+      state.context.statistics.request.duration = {};
+      state.context.statistics.request.prettyDuration = {};
+      state.context.statistics.request.milliseconds = {};
+      state.context.statistics.request.prettyActual = {};
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
