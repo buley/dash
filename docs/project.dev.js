@@ -1596,32 +1596,14 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             statsTimeout = 1000,
             wasCompleted = false,
             statsFunc = function () {
-              if (null === first_time) {
-                first_time = new Date().getTime();
-              }
-              statsObj.elapsed = new Date().getTime() - last_time;
-              statsObj.started = new Date().getTime() - first_time;
-              last_time = new Date().getTime();
-              scope.statsData = scope.statsData || {};
-
-              if ((new Date().getTime() - scope.statsData.updated) > 10000) {
-                statsObj = {
-                  clear: true
-                };
-                first_time = null;
-              }
-              scope.statsData = statsObj;
-              statsObj = {};
-              statsProc = null;
+              console.log("VISUAL",statsObj);
             },
             statsUIProc,
             statsUpdate = function (stats) {
-              console.log('UPDATE',stats);
-              if (statsUIProc) {
-                clearTimeout(statsUIProc);
-                statsUIProc = null;
+              statsObj = stats;
+              if (!statsUIProc) {
+                statsUIProc = setTimeout(statsFunc, 1000);
               }
-              statsUIProc = setTimeout(statsUpdate, 1000);
             },
             doLayout = function (cmdargs) {
               var file, start = false,
