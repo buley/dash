@@ -1596,7 +1596,15 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             statsTimeout = 1000,
             wasCompleted = false,
             statsFunc = function () {
-              console.log("VISUAL",statsObj);
+              if (!statsObj) {
+                statsObj = { clear: true };
+              }
+              scope.statsDisplay.total = 0;
+              scope.statsDisplay.complete = 0;
+              scope.statsDispaly.prettyElapsed = 'w';
+              scope.statsDispaly.prettyRemain = 'x';
+              scope.statsDispaly.prettyAvg = 'y';
+              scope.statsDispaly.prettyRate = 'z';
               statsUIProc = null;
             },
             statsUIProc,
