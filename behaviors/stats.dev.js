@@ -374,6 +374,7 @@ window.dashStats = window.dashStats || (function (environment) {
       verb = pieces[0];
       noun = pieces[1];
       datetime = new Date().getTime();
+      diff = datetime - (state.context.statistics.request.milliseconds.last || datetime);
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || datetime;
       state.context.statistics.request.milliseconds.started = state.context.statistics.request.milliseconds.started || datetime;
 
@@ -388,13 +389,13 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.actual[verb] = state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
 
-      state.context.statistics.request.elapsed[noun] += state.context.statistics.request.milliseconds.elapsed;
-      state.context.statistics.request.elapsed[verb] += state.context.statistics.request.milliseconds.elapsed;
-      state.context.statistics.request.elapsed.total += state.context.statistics.request.milliseconds.elapsed;
+      state.context.statistics.request.elapsed[noun] += diff;
+      state.context.statistics.request.elapsed[verb] += diff;
+      state.context.statistics.request.elapsed.total += diff;
 
-      state.context.statistics.total.elapsed[noun] += state.context.statistics.request.milliseconds.elapsed;
-      state.context.statistics.total.elapsed[verb] += state.context.statistics.request.milliseconds.elapsed;
-      state.context.statistics.total.elapsed.total += state.context.statistics.request.milliseconds.elapsed;
+      state.context.statistics.total.elapsed[noun] += diff;
+      state.context.statistics.total.elapsed[verb] += diff;
+      state.context.statistics.total.elapsed.total += diff;
 
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
