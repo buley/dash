@@ -217,16 +217,15 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
             state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
             state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
-
             deferred.resolve(state);
           });
         });
-            state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb];
-            state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb];
-            state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun];
-            state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun];
-            state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total;
-            state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total;
+        state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb];
+        state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb];
+        state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun];
+        state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun];
+        state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total;
+        state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total;
         state.promise = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
@@ -235,31 +234,24 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.expected[noun] += 1;
         state.context.statistics.total.expected.total += 1;
         state.context.statistics.total.expected.total += 1;
-
         state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
         state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
         state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
         state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
         state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
         state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
-
       }
-
     } else {
-
       pieces = state.context.statistics.request.type.split('.');
       verb = pieces[0];
       noun = pieces[1];
       state.context.statistics.request.milliseconds.finished = new Date().getTime();
       state.context.statistics.request.milliseconds.elapsed = state.context.statistics.request.milliseconds.finished - state.context.statistics.request.milliseconds.started;
-
       state.context.statistics.total.time[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
-
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
-
       if (state.context.statistics.request.metrics[verb].recent.length > recents) {
         state.context.statistics.request.metrics[verb].recent = state.context.statistics.request.metrics[verb].recent.slice(0, recents);
       }
@@ -280,7 +272,6 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
       state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
       console.log('stats', noun, verb, state.context.statistics.total.expected[verb], state.context.statistics.total.remaining[verb], state.context.statistics.total.expected[noun], state.context.statistics.total.remaining[noun] );
-
     }
     return state;
   };
