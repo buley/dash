@@ -337,7 +337,9 @@ window.dashStats = window.dashStats || (function (environment) {
       request: model()
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      state.context.statistics.request.milliseconds.started = new Date().getTime();
+      if (this.isnt('notify', state.type)) {
+        state.context.statistics.request.milliseconds.started = new Date().getTime();
+      }
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
@@ -375,12 +377,6 @@ window.dashStats = window.dashStats || (function (environment) {
           calculate(verb, noun);
           deferred.resolve(state);
         });
-        state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb];
-        state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb];
-        state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun];
-        state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun];
-        state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total;
-        state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total;
         state.promise = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
