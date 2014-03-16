@@ -422,7 +422,6 @@ window.dashStats = window.dashStats || (function (environment) {
             store_key_path: context.store_key_path,
           })(function (context) {
             state.context = context;
-            console.log('got total',context.total, state.context.limit);
             if (theirs.exists(state.context.limit) && state.context.limit < context.total ) {
 
               state.context.statistics.request.expected[verb] = state.context.limit;
@@ -432,6 +431,8 @@ window.dashStats = window.dashStats || (function (environment) {
               state.context.statistics.total.expected[verb] += state.context.limit;
               state.context.statistics.total.expected[noun] += state.context.limit;
               state.context.statistics.total.expected.total += state.context.limit;
+
+              console.log('got total limited',state.context.statistics.request.expected.total);
 
             } else {
 
@@ -443,6 +444,7 @@ window.dashStats = window.dashStats || (function (environment) {
               state.context.statistics.total.expected[noun] += context.total;
               state.context.statistics.total.expected.total += context.total;
 
+              console.log('got total unlimited', state.context.statistics.request.expected.total);
             } 
 
             state.context.statistics.request.expected[verb] += 1;
