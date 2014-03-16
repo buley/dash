@@ -177,10 +177,7 @@ window.dashStats = window.dashStats || (function (environment) {
           }
         },
         type: null,
-        recents: 5,
-        dom: {
-          node: null
-        }
+        memory: 5
       };
     },
     total = model();
@@ -270,20 +267,20 @@ window.dashStats = window.dashStats || (function (environment) {
         if (state.context.statistics.request.metrics[v].recent.length > state.context.statistics.request.recents) {
           state.context.statistics.request.metrics[v].recent = state.context.statistics.request.metrics[v].recent.slice(0, state.context.statistics.request.recents);
         }
-        if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.recents) {
-          state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.recents);
+        if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.memory) {
+          state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.memory);
         }
         if (state.context.statistics.request.metrics[n].recent.length > state.context.statistics.request.recents) {
           state.context.statistics.request.metrics[n].recent = state.context.statistics.request.metrics[n].recent.slice(0, state.context.statistics.request.recents);
         }
-        if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.recents) {
-          state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.recents);
+        if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.memory) {
+          state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.memory);
         }
         if (state.context.statistics.request.metrics.total.recent.length > state.context.statistics.request.recents) {
-          state.context.statistics.request.metrics.total.recent = state.context.statistics.request.metrics.total.recent.slice(0, state.context.statistics.total.recents);
+          state.context.statistics.request.metrics.total.recent = state.context.statistics.request.metrics.total.recent.slice(0, state.context.statistics.total.memory);
         }
-        if (state.context.statistics.total.metrics.total.recent.length > state.context.statistics.total.recents) {
-          state.context.statistics.total.metrics.total.recent = state.context.statistics.total.metrics.total.recent.slice(0, state.context.statistics.total.recents);
+        if (state.context.statistics.total.metrics.total.recent.length > state.context.statistics.total.memory) {
+          state.context.statistics.total.metrics.total.recent = state.context.statistics.total.metrics.total.recent.slice(0, state.context.statistics.total.memory);
         }
 
         /* Other */
