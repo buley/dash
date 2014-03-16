@@ -370,16 +370,17 @@ window.dashStats = window.dashStats || (function (environment) {
       verb = pieces[0];
       noun = pieces[1];
       datetime = new Date().getTime();
-      state.context.statistics.request.milliseconds.last = datetime;
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || datetime;
+      state.context.statistics.request.milliseconds.started = state.context.statistics.request.milliseconds.started || datetime;
 
       diff = datetime - state.context.statistics.total.milliseconds.started;
       state.context.statistics.total.milliseconds.elapsed = diff;
-      state.context.statistics.request.milliseconds.elapsed = datetime - (state.context.statistics.request.milliseconds.last || datetime);
       state.context.statistics.total.actual[noun] = diff;
       state.context.statistics.total.actual[verb] = diff;
       state.context.statistics.total.actual.total = diff;
+
       diff = datetime - state.context.statistics.request.milliseconds.started;
+      state.context.statistics.request.milliseconds.elapsed = datetime - (state.context.statistics.request.milliseconds.started || datetime);
       state.context.statistics.request.actual[noun] = diff;
       state.context.statistics.request.actual[verb] = diff;
       state.context.statistics.request.actual.total = diff;
@@ -387,6 +388,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.elapsed[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.elapsed[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.elapsed.total += state.context.statistics.request.milliseconds.elapsed;
+
       state.context.statistics.total.elapsed[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.elapsed[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.elapsed.total += state.context.statistics.request.milliseconds.elapsed;
