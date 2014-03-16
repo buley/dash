@@ -443,11 +443,10 @@ window.dashStats = window.dashStats || (function (environment) {
             deferred.resolve(state);
           });
         }, function(context) {
-          state.context = context;
+          deferred.error(context);
         }, function(context) {
-          state.context = context;
+          deferred.notify(context);
         });
-        
         state.promise = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
