@@ -259,21 +259,29 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.metrics[n].average = state.context.statistics.total.elapsed[n] / state.context.statistics.total.requests[n];
         state.context.statistics.total.metrics.total.average = state.context.statistics.total.elapsed.total / state.context.statistics.total.requests.total;
 
-        state.context.statistics.total.prettyElapsed[v] = prettyTime(state.context.statistics.total.elapsed[v]);
-        state.context.statistics.total.prettyElapsed[n] = prettyTime(state.context.statistics.total.elapsed[n]);
-        state.context.statistics.total.prettyElapsed.total = prettyTime(state.context.statistics.total.elapsed.total);
-
         state.context.statistics.total.duration[v] = state.context.statistics.total.metrics[v].average * state.context.statistics.total.expected[v]; 
         state.context.statistics.total.duration[n] = state.context.statistics.total.metrics[n].average * state.context.statistics.total.expected[n];
         state.context.statistics.total.duration.total = state.context.statistics.total.metrics.total.average * state.context.statistics.total.expected.total;
-
-        state.context.statistics.total.prettyDuration[v] = prettyTime(state.context.statistics.total.duration[v]);
-        state.context.statistics.total.prettyDuration[n] = prettyTime(state.context.statistics.total.duration[n]);
-        state.context.statistics.total.prettyDuration.total = prettyTime(state.context.statistics.total.duration.total);
         
         state.context.statistics.total.remaining[v] = (state.context.statistics.total.duration[v] - state.context.statistics.total.elapsed[v]) * state.context.statistics.total.metrics[v].rate;
         state.context.statistics.total.remaining[n] = (state.context.statistics.total.duration[n] - state.context.statistics.total.elapsed[n]) * state.context.statistics.total.metrics[n].rate;
         state.context.statistics.total.remaining.total = (state.context.statistics.total.duration.total - state.context.statistics.total.elapsed.total) * state.context.statistics.total.metrics.total.rate;
+
+        state.context.statistics.total.duration[v] = state.context.statistics.total.elapsed[v] + state.context.statistics.total.remaining[v];
+        state.context.statistics.total.duration[n] = state.context.statistics.total.elapsed[n] + state.context.statistics.total.remaining[n];
+        state.context.statistics.total.duration.total = state.context.statistics.total.elapsed.total + state.context.statistics.total.remaining.total;
+
+        state.context.statistics.total.remaining[v] = (state.context.statistics.total.duration[v] - state.context.statistics.total.elapsed[v]) * state.context.statistics.total.metrics[v].rate;
+        state.context.statistics.total.remaining[n] = (state.context.statistics.total.duration[n] - state.context.statistics.total.elapsed[n]) * state.context.statistics.total.metrics[n].rate;
+        state.context.statistics.total.remaining.total = (state.context.statistics.total.duration.total - state.context.statistics.total.elapsed.total) * state.context.statistics.total.metrics.total.rate;
+
+        state.context.statistics.total.prettyElapsed[v] = prettyTime(state.context.statistics.total.elapsed[v]);
+        state.context.statistics.total.prettyElapsed[n] = prettyTime(state.context.statistics.total.elapsed[n]);
+        state.context.statistics.total.prettyElapsed.total = prettyTime(state.context.statistics.total.elapsed.total);
+
+        state.context.statistics.total.prettyDuration[v] = prettyTime(state.context.statistics.total.duration[v]);
+        state.context.statistics.total.prettyDuration[n] = prettyTime(state.context.statistics.total.duration[n]);
+        state.context.statistics.total.prettyDuration.total = prettyTime(state.context.statistics.total.duration.total);
 
         state.context.statistics.total.prettyRemaining[v] = prettyTime(state.context.statistics.total.remaining[v]);
         state.context.statistics.total.prettyRemaining[n] = prettyTime(state.context.statistics.total.remaining[n]);
