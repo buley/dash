@@ -259,23 +259,7 @@ window.dashStats = window.dashStats || (function (environment) {
       },
       doCalc = function(ctx) {
         state.context = ctx;
-        if (theirs.exists(state.context.limit) && ( !!ctx.total && state.context.limit < ctx.total ) ) {
-          state.context.statistics.request.expected[verb] += state.context.limit;
-          state.context.statistics.request.expected[noun] += state.context.limit;
-          state.context.statistics.total.expected[verb] += state.context.limit;
-          state.context.statistics.total.expected[noun] += state.context.limit;
-          state.context.statistics.request.expected.total += state.context.limit;
-          state.context.statistics.total.expected.total += state.context.limit;
-        } else if ( !!ctx.total ) {
-          state.context.statistics.request.expected[verb] += ctx.total;
-          state.context.statistics.request.expected[noun] += ctx.total;
-          state.context.statistics.total.expected[verb] += ctx.total;
-          state.context.statistics.total.expected[noun] += ctx.total;
-          state.context.statistics.request.expected.total += ctx.total;
-          state.context.statistics.total.expected.total += ctx.total;
-        } else {
-          console.log('unknown',ctx.total);
-        }
+
         state.context.statistics.request.expected[verb] += 1;
         state.context.statistics.request.expected[noun] += 1;
         state.context.statistics.total.expected[verb] += 1;
@@ -444,6 +428,22 @@ window.dashStats = window.dashStats || (function (environment) {
             store: context.store,
             store_key_path: context.store_key_path,
           })(function (context) {
+            state.context = context;
+            if (theirs.exists(state.context.limit) && state.context.limit < ctx.total ) {
+              state.context.statistics.request.expected[verb] += state.context.limit;
+              state.context.statistics.request.expected[noun] += state.context.limit;
+              state.context.statistics.total.expected[verb] += state.context.limit;
+              state.context.statistics.total.expected[noun] += state.context.limit;
+              state.context.statistics.request.expected.total += state.context.limit;
+              state.context.statistics.total.expected.total += state.context.limit;
+            } else {
+              state.context.statistics.request.expected[verb] += ctx.total;
+              state.context.statistics.request.expected[noun] += ctx.total;
+              state.context.statistics.total.expected[verb] += ctx.total;
+              state.context.statistics.total.expected[noun] += ctx.total;
+              state.context.statistics.request.expected.total += ctx.total;
+              state.context.statistics.total.expected.total += ctx.total;
+            } 
             doCalc(context);
             deferred.resolve(state);
           });
