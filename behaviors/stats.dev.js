@@ -48,6 +48,29 @@ window.dashStats = window.dashStats || (function (environment) {
           notify: 0,
           error: 0
         },
+        between: {
+          add: 0,
+          clear: 0,
+          count: 0,
+          get: 0,
+          put: 0,
+          remove: 0,
+          update: 0,
+          attribute: 0,
+          behavior: 0,
+          store: 0,
+          stores: 0,
+          entry: 0,
+          entries: 0,
+          index: 0,
+          indexes: 0,
+          database: 0,
+          databases: 0,
+          total: 0,
+          resolve: 0,
+          notify: 0,
+          error: 0
+        },
         actual: {},
         expected: {
           add: 0,
@@ -249,14 +272,23 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.milliseconds.elapsed = datetime - state.context.statistics.request.milliseconds.started;
         state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
 
-        diff = datetime - state.context.statistics.request.milliseconds.last;
-        state.context.statistics.request.elapsed[n] = diff;
-        state.context.statistics.request.elapsed[v] = diff;
-        state.context.statistics.request.elapsed.total = diff;
+        state.context.statistics.request.elapsed[n] = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.request.elapsed[v] = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.request.elapsed.total = state.context.statistics.request.milliseconds.elapsed;
 
-        state.context.statistics.total.elapsed[n] = diff;
-        state.context.statistics.total.elapsed[v] = diff;
-        state.context.statistics.total.elapsed.total = diff;
+        state.context.statistics.total.elapsed[n] = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.total.elapsed[v] = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.total.elapsed.total = state.context.statistics.request.milliseconds.elapsed;
+
+        diff = datetime - state.context.statistics.request.milliseconds.last;
+        state.context.statistics.request.between[n] = diff;
+        state.context.statistics.request.between[v] = diff;
+        state.context.statistics.request.between.total = diff;
+
+        state.context.statistics.total.between[n] = diff;
+        state.context.statistics.total.between[v] = diff;
+        state.context.statistics.total.between.total = diff;
+
 
         state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
         state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
