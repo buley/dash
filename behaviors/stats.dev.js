@@ -410,7 +410,9 @@ window.dashStats = window.dashStats || (function (environment) {
       console.log('CHECKING type',state.type);
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
+        console.log('waiting for promise');
         promise( function(context) {
+          console.log('they resolved');
           theirs.api.count.entries({
             database: context.database,
             index: context.index,
