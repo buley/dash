@@ -197,6 +197,7 @@ window.dashStats = window.dashStats || (function (environment) {
       verb = pieces[0],
       noun = pieces[1],
       deferred,
+      datetime,
       promise = state.promise,
       theirs = this,
       average = function(stack) {
@@ -279,7 +280,7 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.prettyRemaining[n] = prettyTime(state.context.statistics.total.remaining[n]);
         state.context.statistics.total.prettyRemaining.total = prettyTime(state.context.statistics.total.remaining.total);
         console.log('elapsed',state.context.statistics.total.prettyElapsed);
-        console.log('duration',state.context.statistics.total.prettyDuration, state.context.statistics.total.prettyRemaining);
+        //console.log('duration',state.context.statistics.total.prettyDuration, state.context.statistics.total.prettyRemaining);
       };
     state.context.statistics = state.context.statistics || {
       total: total,
@@ -343,10 +344,11 @@ window.dashStats = window.dashStats || (function (environment) {
       pieces = state.context.statistics.request.type.split('.');
       verb = pieces[0];
       noun = pieces[1];
-      state.context.statistics.total.milliseconds.first = state.context.statistics.total.milliseconds.first || new Date().getTime();
-      state.context.statistics.total.milliseconds.elapsed = new Date().getTime() - state.context.statistics.total.milliseconds.first;
-      state.context.statistics.request.milliseconds.elapsed = new Date().getTime() - (state.context.statistics.request.milliseconds.last || new Date().getTime());
-      state.context.statistics.request.milliseconds.last = new Date().getTime();
+      datetime = new Date().getTime();
+      state.context.statistics.total.milliseconds.first = state.context.statistics.total.milliseconds.first || datetime;
+      state.context.statistics.total.milliseconds.elapsed = datetime - state.context.statistics.total.milliseconds.first;
+      state.context.statistics.request.milliseconds.elapsed = datetime - (state.context.statistics.request.milliseconds.last || datetime);
+      state.context.statistics.request.milliseconds.last = datetime;
 
       state.context.statistics.request.elapsed[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.elapsed[verb] += state.context.statistics.request.milliseconds.elapsed;
