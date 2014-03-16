@@ -1316,19 +1316,18 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 				//dash_promise = dashWorkerService.get.entries(ctx),
 				dash_promise = dash.get.entries(ctx),
 				start_promise = new Date().getTime();
-			    console.log('doing index get',ctx);
 			    //dash_promise.then( function(context) {
 			    dash_promise( function(context) {
-				statsUpdate('complete', 'gets', context.amount, new Date().getTime() - start_promise);
+				    statsUpdate('complete', 'gets', context.amount, new Date().getTime() - start_promise);
 			    }, function(context) {
-				console.log('dash promise rejected', context);
+				    console.log('dash promise rejected', context);
 			    }, function(context) {
-				if ( true === scope.visuals ) {
-					system.add(context.entry);
-				}
-				statsUpdate('gets');
-				//system.cameraMod( 'z', -2, 50000, 10 );
-				//system.cameraMod( 'z', 1, 10000, 0 );
+    				if ( true === scope.visuals ) {
+    					system.add(context.entry);
+    				}
+    				statsUpdate('gets');
+    				//system.cameraMod( 'z', -2, 50000, 10 );
+    				//system.cameraMod( 'z', 1, 10000, 0 );
 			    });
 
 			}, null, function(args) {
