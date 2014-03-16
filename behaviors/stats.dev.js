@@ -229,8 +229,9 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.metrics[n].average = state.context.statistics.total.time[n] / state.context.statistics.total.requests[n];
         state.context.statistics.total.metrics.total.average = state.context.statistics.total.time.total / state.context.statistics.total.requests.total;
 
-        console.log('request',state.context.statistics.request.metrics[v].average, state.context.statistics.request.metrics[n].average, state.context.statistics.request.metrics.total.average);
-        console.log('total',state.context.statistics.total.metrics[v].average, state.context.statistics.total.metrics[n].average, state.context.statistics.total.metrics.total.average);
+        console.log('request avg',state.context.statistics.request.metrics[v].average, state.context.statistics.request.metrics[n].average, state.context.statistics.request.metrics.total.average);
+        console.log('request rate',state.context.statistics.request.metrics[v].rate, state.context.statistics.request.metrics[n].rate, state.context.statistics.request.metrics.total.rate);
+        //console.log('total',state.context.statistics.total.metrics[v].average, state.context.statistics.total.metrics[n].average, state.context.statistics.total.metrics.total.average);
       };
     state.context.statistics = state.context.statistics || {
       total: total,
