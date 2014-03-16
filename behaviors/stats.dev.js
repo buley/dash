@@ -411,8 +411,7 @@ window.dashStats = window.dashStats || (function (environment) {
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
         console.log('waiting for promise');
-        promise( function(context) {
-          console.log('they resolved');
+        
           theirs.api.count.entries({
             database: context.database,
             index: context.index,
@@ -448,11 +447,6 @@ window.dashStats = window.dashStats || (function (environment) {
             calculate(verb, noun);
             deferred.resolve(state);
           });
-        }, function(context) {
-          deferred.error(context);
-        }, function(context) {
-          deferred.notify(context);
-        });
         state.promise = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
