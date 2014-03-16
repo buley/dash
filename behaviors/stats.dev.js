@@ -247,55 +247,58 @@ window.dashStats = window.dashStats || (function (environment) {
       },
       calculate = function(v, n) {
         /* Time */
-              datetime = new Date().getTime();
-      state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || datetime;
-      state.context.statistics.request.milliseconds.started = state.context.statistics.request.milliseconds.started || datetime;
-      state.context.statistics.request.milliseconds.last = state.context.statistics.request.milliseconds.last || state.context.statistics.request.milliseconds.started || datetime;
+        datetime = new Date().getTime();
+        state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || datetime;
+        state.context.statistics.request.milliseconds.started = state.context.statistics.request.milliseconds.started || datetime;
+        state.context.statistics.request.milliseconds.last = state.context.statistics.request.milliseconds.last || state.context.statistics.request.milliseconds.started || datetime;
 
-      state.context.statistics.total.milliseconds.elapsed = datetime - state.context.statistics.total.milliseconds.started;
-      state.context.statistics.total.actual[n] = state.context.statistics.total.milliseconds.elapsed;
-      state.context.statistics.total.actual[v] = state.context.statistics.total.milliseconds.elapsed;
-      state.context.statistics.total.actual.total = state.context.statistics.total.milliseconds.elapsed;
+        state.context.statistics.total.milliseconds.elapsed = datetime - state.context.statistics.total.milliseconds.started;
+        state.context.statistics.total.actual[n] = state.context.statistics.total.milliseconds.elapsed;
+        state.context.statistics.total.actual[v] = state.context.statistics.total.milliseconds.elapsed;
+        state.context.statistics.total.actual.total = state.context.statistics.total.milliseconds.elapsed;
 
-      state.context.statistics.request.milliseconds.elapsed = datetime - state.context.statistics.request.milliseconds.started;
-      state.context.statistics.request.actual[n] = state.context.statistics.request.milliseconds.elapsed;
-      state.context.statistics.request.actual[v] = state.context.statistics.request.milliseconds.elapsed;
-      state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.request.milliseconds.elapsed = datetime - state.context.statistics.request.milliseconds.started;
+        state.context.statistics.request.actual[n] = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.request.actual[v] = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
 
-      diff = datetime - state.context.statistics.request.milliseconds.last;
-      state.context.statistics.request.elapsed[n] += diff;
-      state.context.statistics.request.elapsed[v] += diff;
-      state.context.statistics.request.elapsed.total += diff;
+        diff = datetime - state.context.statistics.request.milliseconds.last;
+        state.context.statistics.request.elapsed[n] += diff;
+        state.context.statistics.request.elapsed[v] += diff;
+        state.context.statistics.request.elapsed.total += diff;
 
-      state.context.statistics.total.elapsed[n] += diff;
-      state.context.statistics.total.elapsed[v] += diff;
-      state.context.statistics.total.elapsed.total += diff;
+        state.context.statistics.total.elapsed[n] += diff;
+        state.context.statistics.total.elapsed[v] += diff;
+        state.context.statistics.total.elapsed.total += diff;
 
-      state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-      state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-      state.context.statistics.request.metrics[n].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-      state.context.statistics.total.metrics[n].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-      state.context.statistics.request.metrics.total.recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-      state.context.statistics.total.metrics.total.recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+        state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+        state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+        
+        state.context.statistics.request.metrics[n].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+        state.context.statistics.total.metrics[n].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+        
+        state.context.statistics.request.metrics.total.recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+        state.context.statistics.total.metrics.total.recent.unshift(state.context.statistics.request.milliseconds.elapsed);
 
-      if (state.context.statistics.request.metrics[v].recent.length > state.context.statistics.request.recents) {
-        state.context.statistics.request.metrics[v].recent = state.context.statistics.request.metrics[v].recent.slice(0, state.context.statistics.request.recents);
-      }
-      if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.recents) {
-        state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.recents);
-      }
-      if (state.context.statistics.request.metrics[n].recent.length > state.context.statistics.request.recents) {
-        state.context.statistics.request.metrics[n].recent = state.context.statistics.request.metrics[n].recent.slice(0, state.context.statistics.request.recents);
-      }
-      if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.recents) {
-        state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.recents);
-      }
-      if (state.context.statistics.request.metrics.total.recent.length > state.context.statistics.request.recents) {
-        state.context.statistics.request.metrics.total.recent = state.context.statistics.request.metrics.total.recent.slice(0, state.context.statistics.total.recents);
-      }
-      if (state.context.statistics.total.metrics.total.recent.length > state.context.statistics.total.recents) {
-        state.context.statistics.total.metrics.total.recent = state.context.statistics.total.metrics.total.recent.slice(0, state.context.statistics.total.recents);
-      }
+        if (state.context.statistics.request.metrics[v].recent.length > state.context.statistics.request.recents) {
+          state.context.statistics.request.metrics[v].recent = state.context.statistics.request.metrics[v].recent.slice(0, state.context.statistics.request.recents);
+        }
+        if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.recents) {
+          state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.recents);
+        }
+        if (state.context.statistics.request.metrics[n].recent.length > state.context.statistics.request.recents) {
+          state.context.statistics.request.metrics[n].recent = state.context.statistics.request.metrics[n].recent.slice(0, state.context.statistics.request.recents);
+        }
+        if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.recents) {
+          state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.recents);
+        }
+        if (state.context.statistics.request.metrics.total.recent.length > state.context.statistics.request.recents) {
+          state.context.statistics.request.metrics.total.recent = state.context.statistics.request.metrics.total.recent.slice(0, state.context.statistics.total.recents);
+        }
+        if (state.context.statistics.total.metrics.total.recent.length > state.context.statistics.total.recents) {
+          state.context.statistics.total.metrics.total.recent = state.context.statistics.total.metrics.total.recent.slice(0, state.context.statistics.total.recents);
+        }
+
         /* Other */
         state.context.statistics.request.remaining[v] = state.context.statistics.request.expected[v] - state.context.statistics.request.requests[v];
         state.context.statistics.total.remaining[v] = state.context.statistics.total.expected[v] - state.context.statistics.total.requests[v];
