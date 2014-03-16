@@ -1051,7 +1051,6 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			    });
 
 			} else {
-				console.log("SEARCH", scope.query);
 			    var ctx = {
 				  database: 'dash-demo',
 				  store: 'imdb',
@@ -1300,8 +1299,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			}
 			promise.then( function(args) {
 	 		    if ( true === args.skip ) {
-				console.log("FINISHED skipped get",cmdargs, args);
-				return;
+				    return;
 			    }
 					
 			    var ctx = {
@@ -1323,6 +1321,7 @@ dashApp.directive('dashSplashOverlay', [ '$q', '$http', '$timeout', 'dashAppSpla
 			    }, function(context) {
 				    console.log('dash promise rejected', context);
 			    }, function(context) {
+                    console.log('stats',context.statistics);
     				if ( true === scope.visuals ) {
     					system.add(context.entry);
     				}
