@@ -187,7 +187,7 @@ window.dashStats = window.dashStats || (function (environment) {
         for ( x = 0; x < xlen; x += 1 ) {
           total += stack[ x ];
         }
-        return (total + 1)/(x + 1);
+        return total/(x;
       }
       calculate = function(v, n) {
         state.context.statistics.request.remaining[v] = state.context.statistics.request.expected[v] - state.context.statistics.request.requests[v];
