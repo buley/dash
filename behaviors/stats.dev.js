@@ -137,6 +137,46 @@ window.dashStats = window.dashStats || (function (environment) {
             average: NaN,
             rate: NaN,
             recent: []
+          },
+          store: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          stores: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          entry: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          entries: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          database: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          databases: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          index: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          indexes: {
+            average: NaN,
+            rate: NaN,
+            recent: []
           }
         },
         type: null,
