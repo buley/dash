@@ -71,6 +71,8 @@ window.dashStats = window.dashStats || (function (environment) {
           notify: 0,
           error: 0
         },
+        actual: {},
+        prettyActual: {},
         prettyElapsed: {},
         remaining: {},
         prettyRemaining: {},
@@ -198,6 +200,7 @@ window.dashStats = window.dashStats || (function (environment) {
       noun = pieces[1],
       deferred,
       datetime,
+      diff,
       promise = state.promise,
       theirs = this,
       average = function(stack) {
@@ -290,6 +293,10 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.prettyRemaining[n] = prettyTime(state.context.statistics.total.remaining[n]);
         state.context.statistics.total.prettyRemaining.total = prettyTime(state.context.statistics.total.remaining.total);
         
+        state.context.statistics.total.prettyActual[v] = prettyTime(state.context.statistics.total.actual[v]);
+        state.context.statistics.total.prettyActual[n] = prettyTime(state.context.statistics.total.actual[n]);
+        state.context.statistics.total.prettyActual.total = prettyTime(state.context.statistics.total.actual.total);
+       
         console.log('elapsed',state.context.statistics.total.elapsed.total,state.context.statistics.total.prettyElapsed.total);
         console.log('requestelapsed',state.context.statistics.request.elapsed.total,state.context.statistics.request.prettyElapsed.total);
         //console.log('duration',state.context.statistics.total.prettyDuration, state.context.statistics.total.prettyRemaining);
@@ -357,10 +364,19 @@ window.dashStats = window.dashStats || (function (environment) {
       verb = pieces[0];
       noun = pieces[1];
       datetime = new Date().getTime();
-      state.context.statistics.total.milliseconds.first = state.context.statistics.total.milliseconds.first || datetime;
-      state.context.statistics.total.milliseconds.elapsed = datetime - state.context.statistics.total.milliseconds.first;
-      state.context.statistics.request.milliseconds.elapsed = datetime - (state.context.statistics.request.milliseconds.last || datetime);
       state.context.statistics.request.milliseconds.last = datetime;
+      state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || datetime;
+
+      diff = datetime - state.context.statistics.total.milliseconds.started;
+      state.context.statistics.total.milliseconds.elapsed = diff;
+      state.context.statistics.request.milliseconds.elapsed = datetime - (state.context.statistics.request.milliseconds.last || datetime);
+      state.context.statistics.total.actual[noun] = diff;
+      state.context.statistics.total.actual[verb] = diff;
+      state.context.statistics.total.actual.total = diff;
+      diff = datetime - state.context.statistics.request.milliseconds.started;
+      state.context.statistics.request.actual[noun] = diff;
+      state.context.statistics.request.actual[verb] = diff;
+      state.context.statistics.request.actual.total = diff;
 
       state.context.statistics.request.elapsed[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.elapsed[verb] += state.context.statistics.request.milliseconds.elapsed;
@@ -368,6 +384,8 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.elapsed[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.elapsed[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.elapsed.total += state.context.statistics.request.milliseconds.elapsed;
+
+
 
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
