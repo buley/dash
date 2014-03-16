@@ -236,12 +236,12 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           secs = secs.toString();
         }
-        if ( secs < 10 ) {
-          secs = '00' + secs.toString();
-        } else if ( secs < 100 ) {
-          secs = '0' + secs.toString();
+        if ( msecs < 10 ) {
+          msecs = '00' + msecs.toString();
+        } else if ( msecs < 100 ) {
+          msecs = '0' + msecs.toString();
         } else {
-          secs = secs.toString();
+          msecs = msecs.toString();
         }
         return hours + minutes + ':' + secs + '.' + msecs;
       },
