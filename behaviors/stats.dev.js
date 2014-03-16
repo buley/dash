@@ -94,7 +94,6 @@ window.dashStats = window.dashStats || (function (environment) {
           notify: 0,
           error: 0
         },
-        actual: {},
         prettyActual: {},
         prettyElapsed: {},
         remaining: {},
