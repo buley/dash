@@ -257,16 +257,6 @@ window.dashStats = window.dashStats || (function (environment) {
         }
         return hours + minutes + ':' + secs + '.' + msecs;
       },
-      doCalc = function(ctx) {
-        state.context = ctx;
-        state.context.statistics.request.expected[verb] += 1;
-        state.context.statistics.request.expected[noun] += 1;
-        state.context.statistics.total.expected[verb] += 1;
-        state.context.statistics.total.expected[noun] += 1;
-        state.context.statistics.request.expected.total += 1;
-        state.context.statistics.total.expected.total += 1;
-        calculate(verb, noun);
-      },
       calculate = function(v, n) {
         
         /* Time */
@@ -444,21 +434,20 @@ window.dashStats = window.dashStats || (function (environment) {
               state.context.statistics.request.expected.total += context.total;
               state.context.statistics.total.expected.total += context.total;
             } 
-            doCalc(context);
+            state.context.statistics.request.expected[verb] += 1;
+            state.context.statistics.request.expected[noun] += 1;
+            state.context.statistics.total.expected[verb] += 1;
+            state.context.statistics.total.expected[noun] += 1;
+            state.context.statistics.request.expected.total += 1;
+            state.context.statistics.total.expected.total += 1;
+            calculate(verb, noun);
             deferred.resolve(state);
           });
         }, function(context) {
-          doCalc(context);
           deferred.error(context);
         }, function(context) {
           deferred.notify(context);
         });
-        state.context.statistics.request.expected[verb] += 1;
-        state.context.statistics.request.expected[noun] += 1;
-        state.context.statistics.total.expected[verb] += 1;
-        state.context.statistics.total.expected[noun] += 1;
-        state.context.statistics.request.expected.total += 1;
-        state.context.statistics.total.expected.total += 1;
         state.promise = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
@@ -473,7 +462,6 @@ window.dashStats = window.dashStats || (function (environment) {
       pieces = state.context.statistics.request.type.split('.');
       verb = pieces[0];
       noun = pieces[1];
-
       state.context.statistics.request.requests[verb] += 1;
       state.context.statistics.total.requests[verb] += 1;
       state.context.statistics.request.requests[noun] += 1;
