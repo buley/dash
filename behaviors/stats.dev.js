@@ -407,16 +407,16 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
-        promise( function() {
-          console.log('theirs fulfilled');
+        promise( function(context) {
+          console.log('theirs fulfilled', context);
           theirs.api.count.entries({
-            database: state.context.database,
-            index: state.context.index,
-            index_key: state.context.index_key,
-            index_key_path: state.context.index_key_path,
-            limit: state.context.limit,
-            store: state.context.store,
-            store_key_path: state.context.store_key_path,
+            database: context.database,
+            index: context.index,
+            index_key: context.index_key,
+            index_key_path: context.index_key_path,
+            limit: context.limit,
+            store: context.store,
+            store_key_path: context.store_key_path,
           })(function (ctx) {
             if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
               state.context.statistics.request.expected[verb] += state.context.limit;
