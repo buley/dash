@@ -314,9 +314,11 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.prettyActual.total = prettyTime(state.context.statistics.total.actual.total);
        
         //console.log('request time (total)',state.context.statistics.total.elapsed.total,state.context.statistics.total.prettyElapsed.total);
-        console.log('request time (request)',state.context.statistics.request.elapsed.total,state.context.statistics.request.prettyElapsed.total);
+        console.log('request time (request)',state.context.statistics.request.prettyElapsed.total);
         //console.log('actual time (total)',state.context.statistics.total.actual.total,state.context.statistics.total.prettyActual.total);
-        console.log('actual time (request)',state.context.statistics.request.actual.total,state.context.statistics.request.prettyActual.total);
+        console.log('actual time (request)',state.context.statistics.request.prettyActual.total);
+        //console.log('remaining time (total)',state.context.statistics.total.remaining.total,state.context.statistics.total.prettyRemaining.total);
+        console.log('remaining time (request)',state.context.statistics.request.prettyRemaining.total);
 
         //console.log('duration',state.context.statistics.total.prettyDuration, state.context.statistics.total.prettyRemaining);
       };
