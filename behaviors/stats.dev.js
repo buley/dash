@@ -48,29 +48,7 @@ window.dashStats = window.dashStats || (function (environment) {
           notify: 0,
           error: 0
         },
-        actual: {
-          add: 0,
-          clear: 0,
-          count: 0,
-          get: 0,
-          put: 0,
-          remove: 0,
-          update: 0,
-          attribute: 0,
-          behavior: 0,
-          store: 0,
-          stores: 0,
-          entry: 0,
-          entries: 0,
-          index: 0,
-          indexes: 0,
-          database: 0,
-          databases: 0,
-          total: 0,
-          resolve: 0,
-          notify: 0,
-          error: 0
-        },
+        actual: {},
         expected: {
           add: 0,
           clear: 0,
@@ -376,12 +354,7 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.prettyRemaining[n] = prettyTime(state.context.statistics.total.remaining[n]);
         state.context.statistics.total.prettyRemaining.total = prettyTime(state.context.statistics.total.remaining.total);
 
-        state.context.statistics.request.prettyActual[v] = prettyTime(state.context.statistics.request.actual[v]);
-        state.context.statistics.request.prettyActual[n] = prettyTime(state.context.statistics.request.actual[n]);
         state.context.statistics.request.prettyActual.total = prettyTime(state.context.statistics.request.actual.total);
-               
-        state.context.statistics.total.prettyActual[v] = prettyTime(state.context.statistics.total.actual[v]);
-        state.context.statistics.total.prettyActual[n] = prettyTime(state.context.statistics.total.actual[n]);
         state.context.statistics.total.prettyActual.total = prettyTime(state.context.statistics.total.actual.total);
        
         console.log('stats',state.context.statistics);
