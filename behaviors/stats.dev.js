@@ -1,172 +1,172 @@
 window.dashStats = window.dashStats || (function (environment) {
   "use strict";
   var model = function () {
-    return {
-      requests: {
-        add: 0,
-        clears: 0,
-        count: 0,
-        get: 0,
-        put: 0,
-        remove: 0,
-        update: 0,
-        attribute: 0,
-        behavior: 0,
-        store: 0,
-        stores: 0,
-        entry: 0,
-        entries: 0,
-        index: 0,
-        indexes: 0,
-        database: 0,
-        databases: 0,
-        total: 0,
-        resolve: 0,
-        notify: 0,
-        error: 0
-      },
-      time: {
-        add: 0,
-        clear: 0,
-        count: 0,
-        get: 0,
-        put: 0,
-        remove: 0,
-        update: 0,
-        attribute: 0,
-        behavior: 0,
-        store: 0,
-        stores: 0,
-        entry: 0,
-        entries: 0,
-        index: 0,
-        indexes: 0,
-        database: 0,
-        databases: 0,
-        total: 0,
-        resolve: 0,
-        notify: 0,
-        error: 0
-      },
-      expected: {
-        add: 0,
-        clear: 0,
-        count: 0,
-        get: 0,
-        put: 0,
-        remove: 0,
-        update: 0,
-        attribute: 0,
-        behavior: 0,
-        store: 0,
-        stores: 0,
-        entry: 0,
-        entries: 0,
-        index: 0,
-        indexes: 0,
-        database: 0,
-        databases: 0,
-        total: 0,
-        resolve: 0,
-        notify: 0,
-        error: 0
-      },
-      remaining: {
-        add: 0,
-        clear: 0,
-        count: 0,
-        get: 0,
-        put: 0,
-        remove: 0,
-        update: 0,
-        attribute: 0,
-        behavior: 0,
-        store: 0,
-        stores: 0,
-        entry: 0,
-        entries: 0,
-        index: 0,
-        indexes: 0,
-        database: 0,
-        databases: 0,
-        total: 0,
-        resolve: 0,
-        notify: 0,
-        error: 0
-      },
-      outcomes: {
-        resolve: 0,
-        notify: 0,
-        error: 0
-      },
-      milliseconds: {
-        total: NaN,
-        start: NaN,
-        elapsed: NaN,
-        remaining: NaN
-      },
-      display: {
-        elapsed: '',
-        remaining: ''
-      },
-      metrics: {
-        add: {
-          average: NaN,
-          rate: NaN,
-          recent: []
+      return {
+        requests: {
+          add: 0,
+          clears: 0,
+          count: 0,
+          get: 0,
+          put: 0,
+          remove: 0,
+          update: 0,
+          attribute: 0,
+          behavior: 0,
+          store: 0,
+          stores: 0,
+          entry: 0,
+          entries: 0,
+          index: 0,
+          indexes: 0,
+          database: 0,
+          databases: 0,
+          total: 0,
+          resolve: 0,
+          notify: 0,
+          error: 0
         },
-        clear: {
-          average: NaN,
-          rate: NaN,
-          recent: []
+        time: {
+          add: 0,
+          clear: 0,
+          count: 0,
+          get: 0,
+          put: 0,
+          remove: 0,
+          update: 0,
+          attribute: 0,
+          behavior: 0,
+          store: 0,
+          stores: 0,
+          entry: 0,
+          entries: 0,
+          index: 0,
+          indexes: 0,
+          database: 0,
+          databases: 0,
+          total: 0,
+          resolve: 0,
+          notify: 0,
+          error: 0
         },
-        count: {
-          average: NaN,
-          rate: NaN,
-          recent: []
+        expected: {
+          add: 0,
+          clear: 0,
+          count: 0,
+          get: 0,
+          put: 0,
+          remove: 0,
+          update: 0,
+          attribute: 0,
+          behavior: 0,
+          store: 0,
+          stores: 0,
+          entry: 0,
+          entries: 0,
+          index: 0,
+          indexes: 0,
+          database: 0,
+          databases: 0,
+          total: 0,
+          resolve: 0,
+          notify: 0,
+          error: 0
         },
-        get: {
-          average: NaN,
-          rate: NaN,
-          recent: []
+        remaining: {
+          add: 0,
+          clear: 0,
+          count: 0,
+          get: 0,
+          put: 0,
+          remove: 0,
+          update: 0,
+          attribute: 0,
+          behavior: 0,
+          store: 0,
+          stores: 0,
+          entry: 0,
+          entries: 0,
+          index: 0,
+          indexes: 0,
+          database: 0,
+          databases: 0,
+          total: 0,
+          resolve: 0,
+          notify: 0,
+          error: 0
         },
-        put: {
-          average: NaN,
-          rate: NaN,
-          recent: []
+        outcomes: {
+          resolve: 0,
+          notify: 0,
+          error: 0
         },
-        remove: {
-          average: NaN,
-          rate: NaN,
-          recent: []
+        milliseconds: {
+          total: NaN,
+          start: NaN,
+          elapsed: NaN,
+          remaining: NaN
         },
-        update: {
-          average: NaN,
-          rate: NaN,
-          recent: []
+        display: {
+          elapsed: '',
+          remaining: ''
         },
-        resolve: {
-          average: NaN,
-          rate: NaN,
-          recent: []
+        metrics: {
+          add: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          clear: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          count: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          get: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          put: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          remove: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          update: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          resolve: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          notify: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          },
+          error: {
+            average: NaN,
+            rate: NaN,
+            recent: []
+          }
         },
-        notify: {
-          average: NaN,
-          rate: NaN,
-          recent: []
-        },
-        error: {
-          average: NaN,
-          rate: NaN,
-          recent: []
+        type: null,
+        dom: {
+          node: null
         }
-      },
-      type: null,
-      dom: {
-        node: null
-      }
-    };
-  },
+      };
+    },
     recents = 5,
     total = model();
   return function (state) {
