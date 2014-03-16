@@ -444,10 +444,8 @@ window.dashStats = window.dashStats || (function (environment) {
           });
         }, function(context) {
           state.context = context;
-          deferred.error(state);
         }, function(context) {
           state.context = context;
-          deferred.notify(state);
         });
         
         state.promise = deferred.promise;
