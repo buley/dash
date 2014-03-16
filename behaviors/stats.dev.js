@@ -273,6 +273,8 @@ window.dashStats = window.dashStats || (function (environment) {
           state.context.statistics.total.expected[noun] += ctx.total;
           state.context.statistics.request.expected.total += ctx.total;
           state.context.statistics.total.expected.total += ctx.total;
+        } else {
+          console.log('unknown',ctx.total);
         }
         state.context.statistics.request.expected[verb] += 1;
         state.context.statistics.request.expected[noun] += 1;
