@@ -176,7 +176,16 @@ window.dashStats = window.dashStats || (function (environment) {
       noun = pieces[1],
       deferred,
       promise = state.promise,
-      theirs = this;
+      theirs = this,
+      calculate = function() {
+        state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
+        state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
+        state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
+        state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
+        state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
+        state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
+
+      };
     state.context.statistics = state.context.statistics || {
       total: total,
       request: model()
@@ -214,16 +223,10 @@ window.dashStats = window.dashStats || (function (environment) {
           state.context.statistics.request.expected[noun] += 1;
           state.context.statistics.total.expected[verb] += 1;
           state.context.statistics.total.expected[noun] += 1;
+          state.context.statistics.request.expected.total += 1;
           state.context.statistics.total.expected.total += 1;
-          state.context.statistics.total.expected.total += 1;
-          state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
-          state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
-          state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
-          state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
-          state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
-          state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
+          calculate();
           deferred.resolve(state);
-          console.log('Rstats', noun, verb, state.context.statistics.total.expected[verb], state.context.statistics.total.remaining[verb], state.context.statistics.total.expected[noun], state.context.statistics.total.remaining[noun] );
         });
         state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb];
         state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb];
@@ -237,14 +240,9 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.expected[noun] += 1;
         state.context.statistics.total.expected[verb] += 1;
         state.context.statistics.total.expected[noun] += 1;
+        state.context.statistics.request.expected.total += 1;
         state.context.statistics.total.expected.total += 1;
-        state.context.statistics.total.expected.total += 1;
-        state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
-        state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
-        state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
-        state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
-        state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
-        state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
+        calculate();
       }
     } else {
       pieces = state.context.statistics.request.type.split('.');
@@ -271,12 +269,8 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.requests[noun] += 1;
       state.context.statistics.request.requests.total += 1;
       state.context.statistics.total.requests.total += 1;
-      state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
-      state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
-      state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
-      state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
-      state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
-      state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
+      calculate();
+ 
     }
     console.log('stats', state.type, noun, verb, state.context.statistics.total.expected[verb], state.context.statistics.total.remaining[verb], state.context.statistics.total.expected[noun], state.context.statistics.total.remaining[noun] );
     return state;
