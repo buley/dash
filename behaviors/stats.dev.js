@@ -294,9 +294,9 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.time[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-      state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
+      state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.request.metrics[noun].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-      state.context.statistics.total.metrics[noun].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
+      state.context.statistics.total.metrics[noun].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.request.metrics.total.recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics.total.recent.unshift(state.context.statistics.request.milliseconds.elapsed);
 
