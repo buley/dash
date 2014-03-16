@@ -259,7 +259,7 @@ window.dashStats = window.dashStats || (function (environment) {
       },
       doCalc = function(ctx) {
         state.context = ctx;
-        if (theirs.exists(state.context.limit) && ( !ctx.total || state.context.limit < ctx.total ) ) {
+        if (theirs.exists(state.context.limit) && ( !!ctx.total && state.context.limit < ctx.total ) ) {
           state.context.statistics.request.expected[verb] += state.context.limit;
           state.context.statistics.request.expected[noun] += state.context.limit;
           state.context.statistics.total.expected[verb] += state.context.limit;
