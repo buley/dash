@@ -162,12 +162,12 @@ window.dashStats = window.dashStats || (function (environment) {
           }
         },
         type: null,
+        recents: 5,
         dom: {
           node: null
         }
       };
     },
-    recents = 5,
     total = model();
   return function (state) {
     var context = state.context,
@@ -177,14 +177,14 @@ window.dashStats = window.dashStats || (function (environment) {
       deferred,
       promise = state.promise,
       theirs = this,
-      calculate = function() {
-        state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
-        state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
-        state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
-        state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
+      calculate = function(v, n) {
+        state.context.statistics.request.remaining[v] = state.context.statistics.request.expected[v] - state.context.statistics.request.requests[v];
+        state.context.statistics.total.remaining[v] = state.context.statistics.total.expected[v] - state.context.statistics.total.requests[v];
+        state.context.statistics.request.remaining[n] = state.context.statistics.request.expected[n] - state.context.statistics.request.requests[n];
+        state.context.statistics.total.remaining[n] = state.context.statistics.total.expected[n] - state.context.statistics.total.requests[n];
         state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
         state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
-
+        console.log(state.context.statistics.request.metrics[v].recent);
       };
     state.context.statistics = state.context.statistics || {
       total: total,
@@ -225,7 +225,7 @@ window.dashStats = window.dashStats || (function (environment) {
           state.context.statistics.total.expected[noun] += 1;
           state.context.statistics.request.expected.total += 1;
           state.context.statistics.total.expected.total += 1;
-          calculate();
+          calculate(verb, noun);
           deferred.resolve(state);
         });
         state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb];
@@ -242,7 +242,7 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.expected[noun] += 1;
         state.context.statistics.request.expected.total += 1;
         state.context.statistics.total.expected.total += 1;
-        calculate();
+        calculate(verb, noun);
       }
     } else {
       pieces = state.context.statistics.request.type.split('.');
@@ -253,14 +253,12 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.time[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
-
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
-
-      if (state.context.statistics.request.metrics[verb].recent.length > recents) {
+      if (state.context.statistics.request.metrics[verb].recent.length > state.context.statistics.recents) {
         state.context.statistics.request.metrics[verb].recent = state.context.statistics.request.metrics[verb].recent.slice(0, recents);
       }
-      if (state.context.statistics.total.metrics[verb].recent.length > recents) {
+      if (state.context.statistics.total.metrics[verb].recent.length > state.context.statistics.recents) {
         state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, recents);
       }
       state.context.statistics.request.requests[verb] += 1;
@@ -269,10 +267,8 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.requests[noun] += 1;
       state.context.statistics.request.requests.total += 1;
       state.context.statistics.total.requests.total += 1;
-      calculate();
- 
+      calculate(verb, noun);
     }
-    console.log('stats', state.type, noun, verb, state.context.statistics.total.expected[verb], state.context.statistics.total.remaining[verb], state.context.statistics.total.expected[noun], state.context.statistics.total.remaining[noun] );
     return state;
   };
 }(self));
