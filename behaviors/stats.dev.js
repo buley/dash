@@ -445,11 +445,11 @@ window.dashStats = window.dashStats || (function (environment) {
         }, function(context) {
           console.log('plugine rror');
           state.context = context;
-          deferred.error(state);
+          deferred.error(context);
         }, function(context) {
           state.context = context;
           console.log('plugin notify');
-          deferred.notify(state);
+          deferred.notify(context);
         });
         
         state.promise = deferred.promise;
