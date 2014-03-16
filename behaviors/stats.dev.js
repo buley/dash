@@ -442,6 +442,14 @@ window.dashStats = window.dashStats || (function (environment) {
             calculate(verb, noun);
             deferred.resolve(state);
           });
+        }, function(context) {
+          console.log('plugine rror');
+          state.context = context;
+          deferred.error(state);
+        }, function(context) {
+          state.context = context;
+          console.log('plugin notify');
+          deferred.notify(state);
         });
         
         state.promise = deferred.promise;
