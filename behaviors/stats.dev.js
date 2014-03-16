@@ -266,14 +266,10 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.milliseconds.last = state.context.statistics.request.milliseconds.last || state.context.statistics.request.milliseconds.started || datetime;
 
         state.context.statistics.total.milliseconds.elapsed = datetime - state.context.statistics.total.milliseconds.started;
-        state.context.statistics.total.actual[n] += state.context.statistics.total.milliseconds.elapsed;
-        state.context.statistics.total.actual[v] += state.context.statistics.total.milliseconds.elapsed;
-        state.context.statistics.total.actual.total += state.context.statistics.total.milliseconds.elapsed;
+        state.context.statistics.total.actual.total = state.context.statistics.total.milliseconds.elapsed;
 
         state.context.statistics.request.milliseconds.elapsed = datetime - state.context.statistics.request.milliseconds.started;
-        state.context.statistics.request.actual[n] += state.context.statistics.request.milliseconds.elapsed;
-        state.context.statistics.request.actual[v] += state.context.statistics.request.milliseconds.elapsed;
-        state.context.statistics.request.actual.total += state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
 
         diff = datetime - state.context.statistics.request.milliseconds.last;
         state.context.statistics.request.elapsed[n] += diff;
