@@ -440,7 +440,7 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.request.expected.total += 1;
             state.context.statistics.total.expected.total += 1;
             calculate(verb, noun);
-            deferred.resolve(state);
+            deferred.resolve(context);
           });
         }, function(context) {
           console.log('plugine rror');
