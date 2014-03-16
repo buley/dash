@@ -358,7 +358,7 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.remaining[v] = state.context.statistics.request.expecting[v] * state.context.statistics.request.metrics[v].rate
         state.context.statistics.request.remaining[n] = state.context.statistics.request.expecting[n] * state.context.statistics.request.metrics[n].rate;
         state.context.statistics.request.remaining.total = state.context.statistics.request.expecting.total * state.context.statistics.request.metrics.total.rate;
-        console.log('reamaing',JSON.stringify(state.context.statistics.request.remaining));
+        console.log('expecting',JSON.stringify(state.context.statistics.request.expecting));
         if (0 > state.context.statistics.total.remaining[v]) {
           state.context.statistics.total.remaining[v] = 0;
         } 
