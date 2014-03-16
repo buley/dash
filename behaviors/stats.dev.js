@@ -242,7 +242,7 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.remaining[n] = (state.context.statistics.total.duration[n] - state.context.statistics.total.time[n]) * state.context.statistics.total.metrics[n].rate;
         state.context.statistics.total.remaining.total = (state.context.statistics.total.duration.total - state.context.statistics.total.time.total) * state.context.statistics.total.metrics.total.rate;
 
-        console.log('duration',state.context.statistics.total.duration,state.context.statistics.total.elapsed,state.context.statistics.total.remaining);
+        console.log('duration',state.context.statistics.total.duration,state.context.statistics.total.time.total,state.context.statistics.total.remaining);
       };
     state.context.statistics = state.context.statistics || {
       total: total,
