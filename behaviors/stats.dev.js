@@ -258,6 +258,7 @@ window.dashStats = window.dashStats || (function (environment) {
         return hours + minutes + ':' + secs + '.' + msecs;
       },
       doCalc = function(ctx) {
+        state.context = ctx;
         if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
           state.context.statistics.request.expected[verb] += state.context.limit;
           state.context.statistics.request.expected[noun] += state.context.limit;
