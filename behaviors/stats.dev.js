@@ -221,8 +221,16 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.metrics[n].rate = average(state.context.statistics.total.metrics[n].recent); 
         state.context.statistics.total.metrics.total.rate = average(state.context.statistics.total.metrics.total.recent); 
 
-        console.log('request',state.context.statistics.request.metrics[v].rate, state.context.statistics.request.metrics[n].rate, state.context.statistics.request.metrics.total.rate);
-        console.log('total',state.context.statistics.total.metrics[v].rate, state.context.statistics.total.metrics[n].rate, state.context.statistics.total.metrics.total.rate);
+        state.context.statistics.request.metrics[v].average = state.context.statistics.request.time[v] / state.context.statistics.request.requests[v]; 
+        state.context.statistics.request.metrics[n].average = state.context.statistics.request.time[n] / state.context.statistics.request.requests[n];
+        state.context.statistics.request.metrics.total.average = state.context.statistics.request.time.total / state.context.statistics.request.requests.total;
+
+        state.context.statistics.total.metrics[v].average = state.context.statistics.total.time[v] / state.context.statistics.total.requests[v]; 
+        state.context.statistics.total.metrics[n].average = state.context.statistics.total.time[n] / state.context.statistics.total.requests[n];
+        state.context.statistics.total.metrics.total.average = state.context.statistics.total.time.total / state.context.statistics.total.requests.total;
+
+        console.log('request',state.context.statistics.request.metrics[v].average, state.context.statistics.request.metrics[n].average, state.context.statistics.request.metrics.total.average);
+        console.log('total',state.context.statistics.total.metrics[v].average, state.context.statistics.total.metrics[n].average, state.context.statistics.total.metrics.total.average);
       };
     state.context.statistics = state.context.statistics || {
       total: total,
@@ -290,9 +298,14 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.milliseconds.elapsed = new Date().getTime() - state.context.statistics.total.milliseconds.first;
       state.context.statistics.request.milliseconds.elapsed = new Date().getTime() - (state.context.statistics.request.milliseconds.last || new Date().getTime());
       state.context.statistics.request.milliseconds.last = new Date().getTime();
+
+      state.context.statistics.request.time[noun] += state.context.statistics.request.milliseconds.elapsed;
+      state.context.statistics.request.time[verb] += state.context.statistics.request.milliseconds.elapsed;
+      state.context.statistics.request.time.total += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
+
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.request.metrics[noun].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
