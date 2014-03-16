@@ -203,15 +203,24 @@ window.dashStats = window.dashStats || (function (environment) {
         return total/x;
       },
       calculate = function(v, n) {
+        
         state.context.statistics.request.remaining[v] = state.context.statistics.request.expected[v] - state.context.statistics.request.requests[v];
         state.context.statistics.total.remaining[v] = state.context.statistics.total.expected[v] - state.context.statistics.total.requests[v];
+        
         state.context.statistics.request.remaining[n] = state.context.statistics.request.expected[n] - state.context.statistics.request.requests[n];
         state.context.statistics.total.remaining[n] = state.context.statistics.total.expected[n] - state.context.statistics.total.requests[n];
+        
         state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
         state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
+        
         state.context.statistics.request.metrics[v].rate = average(state.context.statistics.request.metrics[v].recent); 
         state.context.statistics.request.metrics[n].rate = average(state.context.statistics.request.metrics[n].recent); 
         state.context.statistics.request.metrics.total.rate = average(state.context.statistics.request.metrics.total.recent); 
+
+        state.context.statistics.total.metrics[v].rate = average(state.context.statistics.total.metrics[v].recent); 
+        state.context.statistics.total.metrics[n].rate = average(state.context.statistics.total.metrics[n].recent); 
+        state.context.statistics.total.metrics.total.rate = average(state.context.statistics.total.metrics.total.recent); 
+
         console.log(state.context.statistics.total.metrics[v].rate, state.context.statistics.total.metrics[n].rate, state.context.statistics.total.metrics.total.rate);
       };
     state.context.statistics = state.context.statistics || {
