@@ -377,7 +377,6 @@ window.dashStats = window.dashStats || (function (environment) {
         });
         state.promise = deferred.promise;
       } else {
-        consol.log("WAS A COUNT",ctx);
         state.context.statistics.request.expected[verb] += 1;
         state.context.statistics.request.expected[noun] += 1;
         state.context.statistics.total.expected[verb] += 1;
