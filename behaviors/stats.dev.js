@@ -259,7 +259,6 @@ window.dashStats = window.dashStats || (function (environment) {
       },
       doCalc = function(ctx) {
         state.context = ctx;
-
         state.context.statistics.request.expected[verb] += 1;
         state.context.statistics.request.expected[noun] += 1;
         state.context.statistics.total.expected[verb] += 1;
@@ -452,7 +451,6 @@ window.dashStats = window.dashStats || (function (environment) {
           doCalc(context);
           deferred.error(context);
         }, function(context) {
-          doCalc(context);
           deferred.notify(context);
         });
         state.context.statistics.request.expected[verb] += 1;
