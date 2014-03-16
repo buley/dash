@@ -1601,10 +1601,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               }
               scope.statsDisplay.total = 0;
               scope.statsDisplay.complete = 0;
-              scope.statsDispaly.prettyElapsed = 'w';
-              scope.statsDispaly.prettyRemain = 'x';
-              scope.statsDispaly.prettyAvg = 'y';
-              scope.statsDispaly.prettyRate = 'z';
+              scope.statsDisplay.prettyElapsed = 'w
+              ';
+              scope.statsDisplay.prettyRemain = 'x';
+              scope.statsDisplay.prettyAvg = 'y';
+              scope.statsDisplay.prettyRate = 'z';
               statsUIProc = null;
             },
             statsUIProc,
