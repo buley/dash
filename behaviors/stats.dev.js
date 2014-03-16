@@ -285,14 +285,30 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.prettyElapsed[n] = prettyTime(state.context.statistics.total.elapsed[n]);
         state.context.statistics.total.prettyElapsed.total = prettyTime(state.context.statistics.total.elapsed.total);
 
+        state.context.statistics.request.prettyElapsed[v] = prettyTime(state.context.statistics.request.elapsed[v]);
+        state.context.statistics.request.prettyElapsed[n] = prettyTime(state.context.statistics.request.elapsed[n]);
+        state.context.statistics.request.prettyElapsed.total = prettyTime(state.context.statistics.request.elapsed.total);
+
+        state.context.statistics.request.prettyDuration[v] = prettyTime(state.context.statistics.request.duration[v]);
+        state.context.statistics.request.prettyDuration[n] = prettyTime(state.context.statistics.request.duration[n]);
+        state.context.statistics.request.prettyDuration.total = prettyTime(state.context.statistics.request.duration.total);
+
         state.context.statistics.total.prettyDuration[v] = prettyTime(state.context.statistics.total.duration[v]);
         state.context.statistics.total.prettyDuration[n] = prettyTime(state.context.statistics.total.duration[n]);
         state.context.statistics.total.prettyDuration.total = prettyTime(state.context.statistics.total.duration.total);
 
+        state.context.statistics.request.prettyRemaining[v] = prettyTime(state.context.statistics.request.remaining[v]);
+        state.context.statistics.request.prettyRemaining[n] = prettyTime(state.context.statistics.request.remaining[n]);
+        state.context.statistics.request.prettyRemaining.total = prettyTime(state.context.statistics.request.remaining.total);
+
         state.context.statistics.total.prettyRemaining[v] = prettyTime(state.context.statistics.total.remaining[v]);
         state.context.statistics.total.prettyRemaining[n] = prettyTime(state.context.statistics.total.remaining[n]);
         state.context.statistics.total.prettyRemaining.total = prettyTime(state.context.statistics.total.remaining.total);
-        
+
+        state.context.statistics.request.prettyActual[v] = prettyTime(state.context.statistics.request.actual[v]);
+        state.context.statistics.request.prettyActual[n] = prettyTime(state.context.statistics.request.actual[n]);
+        state.context.statistics.request.prettyActual.total = prettyTime(state.context.statistics.request.actual.total);
+               
         state.context.statistics.total.prettyActual[v] = prettyTime(state.context.statistics.total.actual[v]);
         state.context.statistics.total.prettyActual[n] = prettyTime(state.context.statistics.total.actual[n]);
         state.context.statistics.total.prettyActual.total = prettyTime(state.context.statistics.total.actual.total);
