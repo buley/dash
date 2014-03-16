@@ -396,7 +396,6 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.prettyActual.total = prettyTime(state.context.statistics.request.actual.total);
         state.context.statistics.total.prettyActual.total = prettyTime(state.context.statistics.total.actual.total);
        
-        console.log('stats',state.context.statistics.request.actua);
       };
     state.context.statistics = state.context.statistics || {
       total: total,
@@ -439,6 +438,7 @@ window.dashStats = window.dashStats || (function (environment) {
           state.context.statistics.request.expected.total += 1;
           state.context.statistics.total.expected.total += 1;
           calculate(verb, noun);
+          console.log('counted, resolving');
           deferred.resolve(state);
         });
         state.promise = deferred.promise;
