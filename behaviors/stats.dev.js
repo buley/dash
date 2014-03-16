@@ -418,6 +418,7 @@ window.dashStats = window.dashStats || (function (environment) {
             store: context.store,
             store_key_path: context.store_key_path,
           })(function (ctx) {
+            state.context = ctx;
             if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
               state.context.statistics.request.expected[verb] += state.context.limit;
               state.context.statistics.request.expected[noun] += state.context.limit;
@@ -440,7 +441,6 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.request.expected.total += 1;
             state.context.statistics.total.expected.total += 1;
             calculate(verb, noun);
-            console.log('counted, resolving');
             deferred.resolve(state);
           });
         });
