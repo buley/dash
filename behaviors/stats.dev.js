@@ -440,16 +440,14 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.request.expected.total += 1;
             state.context.statistics.total.expected.total += 1;
             calculate(verb, noun);
-            deferred.resolve(context);
+            deferred.resolve(state);
           });
         }, function(context) {
-          console.log('plugine rror');
           state.context = context;
-          deferred.error(context);
+          deferred.error(state);
         }, function(context) {
           state.context = context;
-          console.log('plugin notify');
-          deferred.notify(context);
+          deferred.notify(state);
         });
         
         state.promise = deferred.promise;
