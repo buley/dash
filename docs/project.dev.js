@@ -1596,17 +1596,13 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             statsTimeout = 1000,
             wasCompleted = false,
             statsFunc = function () {
-              if (!statsObj) {
-                statsObj = { clear: true };
-              }
-              console.log('VISUAL');
               scope.statsDisplay.total = 1;
               scope.statsDisplay.complete = 1;
               scope.statsDisplay.prettyElapsed = 'w';
               scope.statsDisplay.prettyRemain = 'x';
               scope.statsDisplay.prettyAvg = 'y';
               scope.statsDisplay.prettyRate = 'z';
-              statsUIProc = setTimeout(statsFunc, 1000);
+              statsObj = { clear: true };
             },
             statsUIProc,
             statsUpdate = function (stats) {
