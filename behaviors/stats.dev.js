@@ -355,9 +355,9 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.remaining[n] = state.context.statistics.total.expecting[n] * state.context.statistics.total.rate[n];
         state.context.statistics.total.remaining.total = state.context.statistics.total.expecting.total * state.context.statistics.total.rate.total;
 
-        state.context.statistics.request.remaining[v] = state.context.statistics.request.expecting[v] * state.context.statistics.request.rate[v];
-        state.context.statistics.request.remaining[n] = state.context.statistics.request.expecting[n] * state.context.statistics.request.rate[n];
-        state.context.statistics.request.remaining.total = state.context.statistics.request.expecting.total * state.context.statistics.request.rate.total;
+        state.context.statistics.request.remaining[v] = state.context.statistics.request.expecting[v] * state.context.statistics.request.metrics[v].rate
+        state.context.statistics.request.remaining[n] = state.context.statistics.request.expecting[n] * state.context.statistics.request.metrics[n].rate;
+        state.context.statistics.request.remaining.total = state.context.statistics.request.expecting.total * state.context.statistics.request.metrics.total.rate;
 
         if (0 > state.context.statistics.total.remaining[v]) {
           state.context.statistics.total.remaining[v] = 0;
