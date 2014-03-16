@@ -383,6 +383,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.actual.total = state.context.statistics.total.milliseconds.elapsed;
 
       state.context.statistics.request.milliseconds.elapsed = datetime - state.context.statistics.request.milliseconds.started;
+      console.log("REQ", datetime, state.context.statistics.request.milliseconds.started, state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.request.actual[noun] = state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.actual[verb] = state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
