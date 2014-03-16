@@ -255,11 +255,14 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
-      if (state.context.statistics.request.metrics[verb].recent.length > state.context.statistics.recents) {
-        state.context.statistics.request.metrics[verb].recent = state.context.statistics.request.metrics[verb].recent.slice(0, recents);
+      if (state.context.statistics.request.metrics[verb].recent.length > state.context.statistics.request.recents) {
+        state.context.statistics.request.metrics[verb].recent = state.context.statistics.request.metrics[verb].recent.slice(0, state.context.statistics.request.recents);
       }
-      if (state.context.statistics.total.metrics[verb].recent.length > state.context.statistics.recents) {
-        state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, recents);
+      if (state.context.statistics.total.metrics[verb].recent.length > state.context.statistics.total.recents) {
+        state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, state.context.statistics.total.recents);
+      }
+      if (state.context.statistics.total.total.recent.length > state.context.statistics.total.recents) {
+        state.context.statistics.total.total.recent = state.context.statistics.total.total.recent.slice(0, state.context.statistics.total.recents);
       }
       state.context.statistics.request.requests[verb] += 1;
       state.context.statistics.total.requests[verb] += 1;
