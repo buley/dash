@@ -328,7 +328,7 @@ window.dashStats = window.dashStats || (function (environment) {
         //console.log('actual time (request)',state.context.statistics.request.prettyActual.total);
         //console.log('remaining time (total)',state.context.statistics.total.remaining.total,state.context.statistics.total.prettyRemaining.total);
         //console.log('remaining time (request)',state.context.statistics.request.prettyRemaining.total);
-        console.log('stats',state.context.statistics.request.prettyElapsed.total, state.context.statistics.request.prettyRemaining.total);
+        console.log('stats',state.context.statistics.request.prettyElapsed.total, state.context.statistics.total.prettyRemaining.total);
 
         //console.log('duration',state.context.statistics.total.prettyDuration, state.context.statistics.total.prettyRemaining);
       };
