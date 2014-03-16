@@ -445,6 +445,7 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.request.expected.total += 1;
             state.context.statistics.total.expected.total += 1;
             calculate(verb, noun);
+            state.promise = promise;
             deferred.resolve(state);
           });
         state.promise = deferred.promise;
