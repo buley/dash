@@ -1810,7 +1810,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 }, function (context) {
                   console.log('dash promise rejected', context);
                 }, function (context) {
-                  console.log('stats', context.statistics);
                   if (true === scope.visuals) {
                     system.add(context.entry);
                   }
