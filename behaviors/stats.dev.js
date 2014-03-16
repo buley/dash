@@ -250,8 +250,10 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.time[noun] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time[verb] += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
+
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
+
       if (state.context.statistics.request.metrics[verb].recent.length > recents) {
         state.context.statistics.request.metrics[verb].recent = state.context.statistics.request.metrics[verb].recent.slice(0, recents);
       }
@@ -264,13 +266,15 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.requests[noun] += 1;
       state.context.statistics.request.requests.total += 1;
       state.context.statistics.total.requests.total += 1;
-      console.log('stats1', noun, verb, state.context.statistics.total.expected[verb], state.context.statistics.total.remaining[verb], state.context.statistics.total.expected[noun], state.context.statistics.total.remaining[noun] );
+      console.log('stats', noun, verb, state.context.statistics.total.expected[verb], state.context.statistics.total.remaining[verb], state.context.statistics.total.expected[noun], state.context.statistics.total.remaining[noun] );
       state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
       state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
       state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
       state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
       state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
       state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
+      console.log('stats', noun, verb, state.context.statistics.total.expected[verb], state.context.statistics.total.remaining[verb], state.context.statistics.total.expected[noun], state.context.statistics.total.remaining[noun] );
+
     }
     return state;
   };
