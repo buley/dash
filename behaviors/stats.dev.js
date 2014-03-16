@@ -263,6 +263,7 @@ window.dashStats = window.dashStats || (function (environment) {
       if (state.context.statistics.total.metrics[verb].recent.length > recents) {
         state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, recents);
       }
+      console.log('stats', noun, verb);
 
       state.context.statistics.request.requests[verb] += 1;
       state.context.statistics.total.requests[verb] += 1;
@@ -276,7 +277,6 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.remaining[noun] = state.context.statistics.total.expected[noun] - state.context.statistics.total.requests[noun];
       state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
       state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
-      console.log('stats', noun, state.context.statistics.total.expected, JSON.stringify(state.context.statistics.total.remaining));
 
     }
     return state;
