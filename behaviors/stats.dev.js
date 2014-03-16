@@ -195,7 +195,6 @@ window.dashStats = window.dashStats || (function (environment) {
           store: state.context.store,
           store_key_path: state.context.store_key_path,
         })(function (ctx) {
-          console.log('yre finished',state.context.limit, ctx.total, theirs.exists(state.context.limit) && state.context.limit < ctx.total);
           if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
             state.context.statistics.request.expected[verb] += state.context.limit;
             state.context.statistics.request.expected[noun] += state.context.limit;
@@ -211,6 +210,12 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.request.expected.total += ctx.total;
             state.context.statistics.total.expected.total += ctx.total;
           }
+          state.context.statistics.request.expected[verb] += 1;
+          state.context.statistics.request.expected[noun] += 1;
+          state.context.statistics.total.expected[verb] += 1;
+          state.context.statistics.total.expected[noun] += 1;
+          state.context.statistics.total.expected.total += 1;
+          state.context.statistics.total.expected.total += 1;
           state.context.statistics.request.remaining[verb] = state.context.statistics.request.expected[verb] - state.context.statistics.request.requests[verb];
           state.context.statistics.total.remaining[verb] = state.context.statistics.total.expected[verb] - state.context.statistics.total.requests[verb];
           state.context.statistics.request.remaining[noun] = state.context.statistics.request.expected[noun] - state.context.statistics.request.requests[noun];
