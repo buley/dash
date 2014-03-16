@@ -283,6 +283,11 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.time.total += state.context.statistics.request.milliseconds.elapsed;
       state.context.statistics.request.metrics[verb].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
       state.context.statistics.total.metrics[verb].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
+      state.context.statistics.request.metrics[noun].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+      state.context.statistics.total.metrics[noun].recent.unshift(state.context.statistics.total.milliseconds.elapsed);
+      state.context.statistics.request.metrics.total.recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+      state.context.statistics.total.metrics.total.recent.unshift(state.context.statistics.total.milliseconds.elapsed);
+
       if (state.context.statistics.request.metrics[verb].recent.length > state.context.statistics.request.recents) {
         state.context.statistics.request.metrics[verb].recent = state.context.statistics.request.metrics[verb].recent.slice(0, state.context.statistics.request.recents);
       }
@@ -294,6 +299,9 @@ window.dashStats = window.dashStats || (function (environment) {
       }
       if (state.context.statistics.total.metrics[noun].recent.length > state.context.statistics.total.recents) {
         state.context.statistics.total.metrics[noun].recent = state.context.statistics.total.metrics[noun].recent.slice(0, state.context.statistics.total.recents);
+      }
+      if (state.context.statistics.request.metrics.total.recent.length > state.context.statistics.request.recents) {
+        state.context.statistics.request.metrics.total.recent = state.context.statistics.request.metrics.total.recent.slice(0, state.context.statistics.total.recents);
       }
       if (state.context.statistics.total.metrics.total.recent.length > state.context.statistics.total.recents) {
         state.context.statistics.total.metrics.total.recent = state.context.statistics.total.metrics.total.recent.slice(0, state.context.statistics.total.recents);
