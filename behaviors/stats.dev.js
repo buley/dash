@@ -362,13 +362,13 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.duration[n] = state.context.statistics.total.metrics[n].average * state.context.statistics.total.expected[n];
         state.context.statistics.total.duration.total = state.context.statistics.total.metrics.total.average * state.context.statistics.total.expected.total;
         
-        state.context.statistics.total.remaining[v] = (state.context.statistics.total.duration[v] - state.context.statistics.total.elapsed[v]) * state.context.statistics.total.metrics[v].rate;
-        state.context.statistics.total.remaining[n] = (state.context.statistics.total.duration[n] - state.context.statistics.total.elapsed[n]) * state.context.statistics.total.metrics[n].rate;
-        state.context.statistics.total.remaining.total = (state.context.statistics.total.duration.total - state.context.statistics.total.elapsed.total) * state.context.statistics.total.metrics.total.rate;
-        
-        state.context.statistics.request.remaining[v] = (state.context.statistics.request.duration[v] - state.context.statistics.request.elapsed[v]) * state.context.statistics.total.metrics[v].rate;
-        state.context.statistics.request.remaining[n] = (state.context.statistics.request.duration[n] - state.context.statistics.request.elapsed[n]) * state.context.statistics.total.metrics[n].rate;
-        state.context.statistics.request.remaining.total = (state.context.statistics.request.duration.total - state.context.statistics.request.elapsed.total) * state.context.statistics.total.metrics.total.rate;
+        state.context.statistics.total.remaining[v] = (state.context.statistics.total.duration[v] - state.context.statistics.total.actual[v]);
+        state.context.statistics.total.remaining[n] = (state.context.statistics.total.duration[n] - state.context.statistics.total.actual[n]);
+        state.context.statistics.total.remaining.total = (state.context.statistics.total.duration.total - state.context.statistics.total.actual.total);
+
+        state.context.statistics.request.remaining[v] = (state.context.statistics.request.duration[v] - state.context.statistics.request.elapsed[v]);
+        state.context.statistics.request.remaining[n] = (state.context.statistics.request.duration[n] - state.context.statistics.request.elapsed[n]);
+        state.context.statistics.request.remaining.total = (state.context.statistics.request.duration.total - state.context.statistics.request.elapsed.total);
 
         if (0 > state.context.statistics.total.remaining[v]) {
           state.context.statistics.total.remaining[v] = 0;
