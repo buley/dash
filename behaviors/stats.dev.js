@@ -257,7 +257,7 @@ window.dashStats = window.dashStats || (function (environment) {
         }
         return hours + minutes + ':' + secs + '.' + msecs;
       },
-      doCalc = function() {
+      doCalc = function(ctx) {
         if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
           state.context.statistics.request.expected[verb] += state.context.limit;
           state.context.statistics.request.expected[noun] += state.context.limit;
@@ -440,15 +440,15 @@ window.dashStats = window.dashStats || (function (environment) {
             limit: context.limit,
             store: context.store,
             store_key_path: context.store_key_path,
-          })(function (ctx) {
-            doCalc();
+          })(function (context) {
+            doCalc(context);
             deferred.resolve(state);
           });
         }, function(context) {
-          doCalc();
+          doCalc(context);
           deferred.error(context);
         }, function(context) {
-          doCalc();
+          doCalc(context);
           deferred.notify(context);
         });
         state.promise = deferred.promise;
