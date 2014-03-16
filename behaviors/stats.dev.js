@@ -308,7 +308,11 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.metrics[v].average = state.context.statistics.total.elapsed[v]/ state.context.statistics.total.requests[v]; 
         state.context.statistics.total.metrics[n].average = state.context.statistics.total.elapsed[n] / state.context.statistics.total.requests[n];
         state.context.statistics.total.metrics.total.average = state.context.statistics.total.elapsed.total / state.context.statistics.total.requests.total;
-
+        
+        state.context.statistics.request.duration[v] = state.context.statistics.request.metrics[v].average * state.context.statistics.request.expected[v]; 
+        state.context.statistics.request.duration[n] = state.context.statistics.request.metrics[n].average * state.context.statistics.request.expected[n];
+        state.context.statistics.request.duration.total = state.context.statistics.request.metrics.total.average * state.context.statistics.request.expected.total;
+        
         state.context.statistics.total.duration[v] = state.context.statistics.total.metrics[v].average * state.context.statistics.total.expected[v]; 
         state.context.statistics.total.duration[n] = state.context.statistics.total.metrics[n].average * state.context.statistics.total.expected[n];
         state.context.statistics.total.duration.total = state.context.statistics.total.metrics.total.average * state.context.statistics.total.expected.total;
