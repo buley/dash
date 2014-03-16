@@ -337,9 +337,7 @@ window.dashStats = window.dashStats || (function (environment) {
       request: model()
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      if (this.isnt('notify', state.type)) {
-        state.context.statistics.request.milliseconds.started = new Date().getTime();
-      }
+      state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
@@ -379,6 +377,7 @@ window.dashStats = window.dashStats || (function (environment) {
         });
         state.promise = deferred.promise;
       } else {
+        consol.log("WAS A COUNT",ctx);
         state.context.statistics.request.expected[verb] += 1;
         state.context.statistics.request.expected[noun] += 1;
         state.context.statistics.total.expected[verb] += 1;
