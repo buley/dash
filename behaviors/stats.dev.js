@@ -74,6 +74,7 @@ window.dashStats = window.dashStats || (function (environment) {
         },
         prettyActual: {},
         prettyElapsed: {},
+        expecting: {},
         remaining: {},
         prettyRemaining: {},
         duration: {},
@@ -284,14 +285,13 @@ window.dashStats = window.dashStats || (function (environment) {
         }
 
         /* Other */
-        state.context.statistics.request.remaining[v] = state.context.statistics.request.expected[v] - state.context.statistics.request.requests[v];
-        state.context.statistics.total.remaining[v] = state.context.statistics.total.expected[v] - state.context.statistics.total.requests[v];
+        state.context.statistics.request.expecting[v] = state.context.statistics.request.expected[v] - state.context.statistics.request.requests[v];
+        state.context.statistics.request.expecting[n] = state.context.statistics.request.expected[n] - state.context.statistics.request.requests[n];
+        state.context.statistics.request.expecting.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
         
-        state.context.statistics.request.remaining[n] = state.context.statistics.request.expected[n] - state.context.statistics.request.requests[n];
-        state.context.statistics.total.remaining[n] = state.context.statistics.total.expected[n] - state.context.statistics.total.requests[n];
-        
-        state.context.statistics.request.remaining.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
-        state.context.statistics.total.remaining.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
+        state.context.statistics.total.expecting[v] = state.context.statistics.total.expected[v] - state.context.statistics.total.requests[v];
+        state.context.statistics.total.expecting[n] = state.context.statistics.total.expected[n] - state.context.statistics.total.requests[n];
+        state.context.statistics.total.expecting.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
         
         state.context.statistics.request.metrics[v].rate = average(state.context.statistics.request.metrics[v].recent); 
         state.context.statistics.request.metrics[n].rate = average(state.context.statistics.request.metrics[n].recent); 
