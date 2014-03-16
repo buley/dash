@@ -238,9 +238,9 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.duration[n] = state.context.statistics.total.metrics[n].average * state.context.statistics.total.expected[n];
         state.context.statistics.total.duration.total = state.context.statistics.total.metrics.total.average * state.context.statistics.total.expected.total;
         
-        state.context.statistics.total.remaining[v] = state.context.statistics.total.duration[v] - state.context.statistics.total.time[v];
-        state.context.statistics.total.remaining[n] = state.context.statistics.total.duration[n] - state.context.statistics.total.time[n];
-        state.context.statistics.total.remaining.total = state.context.statistics.total.duration.total - state.context.statistics.total.time.total;
+        state.context.statistics.total.remaining[v] = (state.context.statistics.total.duration[v] - state.context.statistics.total.time[v]) * state.context.statistics.total.metrics[v].rate;
+        state.context.statistics.total.remaining[n] = (state.context.statistics.total.duration[n] - state.context.statistics.total.time[n]) * state.context.statistics.total.metrics[n].rate;
+        state.context.statistics.total.remaining.total = (state.context.statistics.total.duration.total - state.context.statistics.total.time.total) * state.context.statistics.total.metrics.total.rate;
 
         console.log('duration',state.context.statistics.total.duration,state.context.statistics.total.remaining);
       };
