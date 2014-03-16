@@ -78,16 +78,7 @@ window.dashStats = window.dashStats || (function (environment) {
         prettyRemaining: {},
         duration: {},
         prettyDuration: {},
-        milliseconds: {
-          total: NaN,
-          start: NaN,
-          elapsed: NaN,
-          remaining: NaN
-        },
-        display: {
-          elapsed: '',
-          remaining: ''
-        },
+        milliseconds: {},
         metrics: {
           add: {
             average: NaN,
