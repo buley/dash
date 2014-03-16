@@ -322,7 +322,9 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.expecting[v] = state.context.statistics.request.expected[v] - state.context.statistics.request.requests[v];
         state.context.statistics.request.expecting[n] = state.context.statistics.request.expected[n] - state.context.statistics.request.requests[n];
         state.context.statistics.request.expecting.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
-        
+
+        console.log('expecting',JSON.stringify(state.context.statistics.request.expecting));
+
         state.context.statistics.total.expecting[v] = state.context.statistics.total.expected[v] - state.context.statistics.total.requests[v];
         state.context.statistics.total.expecting[n] = state.context.statistics.total.expected[n] - state.context.statistics.total.requests[n];
         state.context.statistics.total.expecting.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;
@@ -358,7 +360,6 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.remaining[v] = state.context.statistics.request.expecting[v] * state.context.statistics.request.metrics[v].rate
         state.context.statistics.request.remaining[n] = state.context.statistics.request.expecting[n] * state.context.statistics.request.metrics[n].rate;
         state.context.statistics.request.remaining.total = state.context.statistics.request.expecting.total * state.context.statistics.request.metrics.total.rate;
-        console.log('expecting',JSON.stringify(state.context.statistics.request.expecting));
         if (0 > state.context.statistics.total.remaining[v]) {
           state.context.statistics.total.remaining[v] = 0;
         } 
@@ -419,6 +420,7 @@ window.dashStats = window.dashStats || (function (environment) {
             store_key_path: context.store_key_path,
           })(function (context) {
             state.context = context;
+            console.log('got total',context.total);
             if (theirs.exists(state.context.limit) && state.context.limit < context.total ) {
               state.context.statistics.request.expected[verb] += state.context.limit;
               state.context.statistics.request.expected[noun] += state.context.limit;
