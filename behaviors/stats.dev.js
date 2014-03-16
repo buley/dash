@@ -212,7 +212,7 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.metrics[v].rate = average(state.context.statistics.request.metrics[v].recent); 
         state.context.statistics.request.metrics[n].rate = average(state.context.statistics.request.metrics[n].recent); 
         state.context.statistics.request.metrics.total.rate = average(state.context.statistics.request.metrics.total.recent); 
-        console.log(state.context.statistics.request.metrics[v].rate, state.context.statistics.request.metrics[n].rate, state.context.statistics.request.metrics.total.rate);
+        console.log(state.context.statistics.total.metrics[v].rate, state.context.statistics.total.metrics[n].rate, state.context.statistics.total.metrics.total.rate);
       };
     state.context.statistics = state.context.statistics || {
       total: total,
