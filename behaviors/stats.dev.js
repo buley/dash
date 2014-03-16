@@ -182,6 +182,13 @@ window.dashStats = window.dashStats || (function (environment) {
       deferred,
       promise = state.promise,
       theirs = this,
+      average = function(stack) {
+        var x = 0, xlen = stack.length, xitem, total = 0;
+        for ( x = 0; x < xlen; x += 1 ) {
+          total += stack[ x ];
+        }
+        return (total + 1)/(x + 1);
+      }
       calculate = function(v, n) {
         state.context.statistics.request.remaining[v] = state.context.statistics.request.expected[v] - state.context.statistics.request.requests[v];
         state.context.statistics.total.remaining[v] = state.context.statistics.total.expected[v] - state.context.statistics.total.requests[v];
