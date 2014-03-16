@@ -159,6 +159,11 @@ window.dashStats = window.dashStats || (function (environment) {
             average: NaN,
             rate: NaN,
             recent: []
+          },
+          total: {
+            average: NaN,
+            rate: NaN,
+            recent: []
           }
         },
         type: null,
@@ -261,8 +266,8 @@ window.dashStats = window.dashStats || (function (environment) {
       if (state.context.statistics.total.metrics[verb].recent.length > state.context.statistics.total.recents) {
         state.context.statistics.total.metrics[verb].recent = state.context.statistics.total.metrics[verb].recent.slice(0, state.context.statistics.total.recents);
       }
-      if (state.context.statistics.total.total.recent.length > state.context.statistics.total.recents) {
-        state.context.statistics.total.total.recent = state.context.statistics.total.total.recent.slice(0, state.context.statistics.total.recents);
+      if (state.context.statistics.total.metrics.total.recent.length > state.context.statistics.total.recents) {
+        state.context.statistics.total.metrics.total.recent = state.context.statistics.total.metrics.total.recent.slice(0, state.context.statistics.total.recents);
       }
       state.context.statistics.request.requests[verb] += 1;
       state.context.statistics.total.requests[verb] += 1;
