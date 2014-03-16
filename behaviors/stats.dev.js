@@ -257,6 +257,30 @@ window.dashStats = window.dashStats || (function (environment) {
         }
         return hours + minutes + ':' + secs + '.' + msecs;
       },
+      doCalc = function() {
+        if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
+          state.context.statistics.request.expected[verb] += state.context.limit;
+          state.context.statistics.request.expected[noun] += state.context.limit;
+          state.context.statistics.total.expected[verb] += state.context.limit;
+          state.context.statistics.total.expected[noun] += state.context.limit;
+          state.context.statistics.request.expected.total += state.context.limit;
+          state.context.statistics.total.expected.total += state.context.limit;
+        } else {
+          state.context.statistics.request.expected[verb] += ctx.total;
+          state.context.statistics.request.expected[noun] += ctx.total;
+          state.context.statistics.total.expected[verb] += ctx.total;
+          state.context.statistics.total.expected[noun] += ctx.total;
+          state.context.statistics.request.expected.total += ctx.total;
+          state.context.statistics.total.expected.total += ctx.total;
+        }
+        state.context.statistics.request.expected[verb] += 1;
+        state.context.statistics.request.expected[noun] += 1;
+        state.context.statistics.total.expected[verb] += 1;
+        state.context.statistics.total.expected[noun] += 1;
+        state.context.statistics.request.expected.total += 1;
+        state.context.statistics.total.expected.total += 1;
+        calculate(verb, noun);
+      },
       calculate = function(v, n) {
         
         /* Time */
@@ -417,34 +441,14 @@ window.dashStats = window.dashStats || (function (environment) {
             store: context.store,
             store_key_path: context.store_key_path,
           })(function (ctx) {
-            state.context = ctx;
-            if (theirs.exists(state.context.limit) && state.context.limit < ctx.total) {
-              state.context.statistics.request.expected[verb] += state.context.limit;
-              state.context.statistics.request.expected[noun] += state.context.limit;
-              state.context.statistics.total.expected[verb] += state.context.limit;
-              state.context.statistics.total.expected[noun] += state.context.limit;
-              state.context.statistics.request.expected.total += state.context.limit;
-              state.context.statistics.total.expected.total += state.context.limit;
-            } else {
-              state.context.statistics.request.expected[verb] += ctx.total;
-              state.context.statistics.request.expected[noun] += ctx.total;
-              state.context.statistics.total.expected[verb] += ctx.total;
-              state.context.statistics.total.expected[noun] += ctx.total;
-              state.context.statistics.request.expected.total += ctx.total;
-              state.context.statistics.total.expected.total += ctx.total;
-            }
-            state.context.statistics.request.expected[verb] += 1;
-            state.context.statistics.request.expected[noun] += 1;
-            state.context.statistics.total.expected[verb] += 1;
-            state.context.statistics.total.expected[noun] += 1;
-            state.context.statistics.request.expected.total += 1;
-            state.context.statistics.total.expected.total += 1;
-            calculate(verb, noun);
+            doCalc();
             deferred.resolve(state);
           });
         }, function(context) {
+          doCalc();
           deferred.error(context);
         }, function(context) {
+          doCalc();
           deferred.notify(context);
         });
         state.promise = deferred.promise;
