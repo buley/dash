@@ -235,7 +235,9 @@ window.dashStats = window.dashStats || (function (environment) {
         return hours + minutes + ':' + secs + '.' + msecs;
       },
       calculate = function(v, n) {
+        
         /* Time */
+        
         datetime = new Date().getTime();
         state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || datetime;
         state.context.statistics.request.milliseconds.started = state.context.statistics.request.milliseconds.started || datetime;
@@ -248,13 +250,13 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
 
         diff = datetime - state.context.statistics.request.milliseconds.last;
-        state.context.statistics.request.elapsed[n] += diff;
-        state.context.statistics.request.elapsed[v] += diff;
-        state.context.statistics.request.elapsed.total += diff;
+        state.context.statistics.request.elapsed[n] = diff;
+        state.context.statistics.request.elapsed[v] = diff;
+        state.context.statistics.request.elapsed.total = diff;
 
-        state.context.statistics.total.elapsed[n] += diff;
-        state.context.statistics.total.elapsed[v] += diff;
-        state.context.statistics.total.elapsed.total += diff;
+        state.context.statistics.total.elapsed[n] = diff;
+        state.context.statistics.total.elapsed[v] = diff;
+        state.context.statistics.total.elapsed.total = diff;
 
         state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
         state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
