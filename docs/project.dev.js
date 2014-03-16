@@ -1596,13 +1596,22 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             statsTimeout = 1000,
             wasCompleted = false,
             statsFunc = function () {
-              scope.statsDisplay.total = 1;
-              scope.statsDisplay.complete = 1;
-              scope.statsDisplay.prettyElapsed = 'w';
-              scope.statsDisplay.prettyRemain = 'x';
-              scope.statsDisplay.prettyAvg = 'y';
-              scope.statsDisplay.prettyRate = 'z';
-              statsObj = { clear: true };
+              if ( true === statsObj.clear ) {
+                scope.statsDisplay.total = 0;
+                scope.statsDisplay.complete = 0;
+                scope.statsDisplay.prettyElapsed = '';
+                scope.statsDisplay.prettyRemain = '';
+                scope.statsDisplay.prettyAvg = '';
+                scope.statsDisplay.prettyRate = '';
+              } else {
+                console.log('STATS',statsObj);
+                scope.statsDisplay.total = 0;
+                scope.statsDisplay.complete = 0;
+                scope.statsDisplay.prettyElapsed = '';
+                scope.statsDisplay.prettyRemain = '';
+                scope.statsDisplay.prettyAvg = '';
+                scope.statsDisplay.prettyRate = '';        
+              }
             },
             statsUIProc,
             statsUpdate = function (stats) {
