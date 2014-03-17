@@ -510,7 +510,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
           pid;
         el.setAttribute('id', 'dash-splash-container');
         return function link(scope, element, attrs) {
-          var system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function (data) {
+          var statsObj = {},
+              system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function (data) {
             if (pid) {
               clearTimeout(pid);
             }
@@ -532,7 +533,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               store_key_path: 'id'
             })
             (function (context) {
-              statsObj = context.statistics;
               dashAppSplashBroadcast.current(context.entry);
             }, function (context) {
               console.log('missing entry', context);
@@ -1588,8 +1588,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             }
 
           };
-          var statsObj = {},
-            last_time = new Date().getTime(),
+          var last_time = new Date().getTime(),
             first_time = null,
             statsProc = null,
             statsTimeout = 1000,
