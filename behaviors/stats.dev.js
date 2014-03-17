@@ -471,6 +471,83 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           state.context.statistics.request.prettyThoroughputAverage.total += ' entries/sec';
         } 
+
+
+        state.context.statistics.total.prettySpeedRate[v] = Math.floor(state.context.statistics.total.metrics[v].rate);
+        state.context.statistics.total.prettySpeedRate[n] = Math.floor(state.context.statistics.total.metrics[n].rate);
+        state.context.statistics.total.prettySpeedRate.total = Math.floor(state.context.statistics.total.metrics.total.rate);
+        if ( state.context.statistics.total.prettySpeedRate[v] < 1 ) {
+          state.context.statistics.total.prettySpeedRate[v] = Math.floor(60/state.context.statistics.total.prettySpeedRate[v]) + ' ms/entry';
+        } else {
+          state.context.statistics.total.prettySpeedRate[v] += ' entries/sec';
+        }
+        if ( state.context.statistics.total.prettySpeedRate[n] < 1 ) {
+          state.context.statistics.total.prettySpeedRate[n] = Math.floor(60/state.context.statistics.total.prettySpeedRate[n]) + ' ms/entry';
+        } else {
+          state.context.statistics.total.prettySpeedRate[n] += ' entries/sec';
+        } 
+        if ( state.context.statistics.total.prettySpeedRate.total < 1 ) {
+          state.context.statistics.total.prettySpeedRate.total = Math.floor(60/state.context.statistics.total.prettySpeedRate.total) + ' ms/entry';
+        } else {
+          state.context.statistics.total.prettySpeedRate.total += ' entries/sec';
+        } 
+        state.context.statistics.total.prettySpeedAverage[v] = Math.floor(state.context.statistics.total.metrics[v].average);
+        state.context.statistics.total.prettySpeedAverage[n] = Math.floor(state.context.statistics.total.metrics[n].average);
+        state.context.statistics.total.prettySpeedAverage.total = Math.floor(state.context.statistics.total.metrics.total.average);
+        if ( state.context.statistics.total.prettySpeedAverage[v] < 1 ) {
+          state.context.statistics.total.prettySpeedAverage[v] = Math.floor(60/state.context.statistics.total.prettySpeedAverage[v]) + ' ms/entry';
+        } else {
+          state.context.statistics.total.prettySpeedAverage[v] += ' entries/sec';
+        }       
+        if ( state.context.statistics.total.prettySpeedAverage[n] < 1 ) {
+          state.context.statistics.total.prettySpeedAverage[n] = Math.floor(60/state.context.statistics.total.prettySpeedAverage[n]) + ' ms/entry';
+        } else {
+          state.context.statistics.total.prettySpeedAverage[n] += ' entries/sec';
+        } 
+        if ( state.context.statistics.total.prettySpeedAverage.total < 1 ) {
+          state.context.statistics.total.prettySpeedAverage.total = Math.floor(60/state.context.statistics.total.prettySpeedAverage.total) + ' ms/entry';
+        } else {
+          state.context.statistics.total.prettySpeedAverage.total += ' entries/sec';
+        } 
+
+        state.context.statistics.request.prettySpeedRate[v] = Math.floor(state.context.statistics.request.metrics[v].rate);
+        state.context.statistics.request.prettySpeedRate[n] = Math.floor(state.context.statistics.request.metrics[n].rate);
+        state.context.statistics.request.prettySpeedRate.total = Math.floor(state.context.statistics.request.metrics.total.rate);
+        if ( state.context.statistics.request.prettySpeedRate[v] < 1 ) {
+          state.context.statistics.request.prettySpeedRate[v] = Math.floor(60/state.context.statistics.request.prettySpeedRate[v]) + ' ms/entry';
+        } else {
+          state.context.statistics.request.prettySpeedRate[v] += ' entries/sec';
+        }
+        if ( state.context.statistics.request.prettySpeedRate[n] < 1 ) {
+          state.context.statistics.request.prettySpeedRate[n] = Math.floor(60/state.context.statistics.request.prettySpeedRate[n]) + ' ms/entry';
+        } else {
+          state.context.statistics.request.prettySpeedRate[n] += ' entries/sec';
+        } 
+        if ( state.context.statistics.request.prettySpeedRate.total < 1 ) {
+          state.context.statistics.request.prettySpeedRate.total = Math.floor(60/state.context.statistics.request.prettySpeedRate.total) + ' ms/entry';
+        } else {
+          state.context.statistics.request.prettySpeedRate.total += ' entries/sec';
+        } 
+        state.context.statistics.request.prettySpeedAverage[v] = Math.floor(state.context.statistics.request.metrics[v].average);
+        state.context.statistics.request.prettySpeedAverage[n] = Math.floor(state.context.statistics.request.metrics[n].average);
+        state.context.statistics.request.prettySpeedAverage.total = Math.floor(state.context.statistics.request.metrics.total.average);
+        if ( state.context.statistics.request.prettySpeedAverage[v] < 1 ) {
+          state.context.statistics.request.prettySpeedAverage[v] = Math.floor(60/state.context.statistics.request.prettySpeedAverage[v]) + ' ms/entry';
+        } else {
+          state.context.statistics.request.prettySpeedAverage[v] += ' entries/sec';
+        }       
+        if ( state.context.statistics.request.prettySpeedAverage[n] < 1 ) {
+          state.context.statistics.request.prettySpeedAverage[n] = Math.floor(60/state.context.statistics.request.prettySpeedAverage[n]) + ' ms/entry';
+        } else {
+          state.context.statistics.request.prettySpeedAverage[n] += ' entries/sec';
+        } 
+        if ( state.context.statistics.request.prettySpeedAverage.total < 1 ) {
+          state.context.statistics.request.prettySpeedAverage.total = Math.floor(60/state.context.statistics.request.prettySpeedAverage.total) + ' ms/entry';
+        } else {
+          state.context.statistics.request.prettySpeedAverage.total += ' entries/sec';
+        } 
+
+
       };
     state.context.statistics = state.context.statistics || {
       total: total,
