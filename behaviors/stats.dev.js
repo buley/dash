@@ -452,11 +452,13 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.total.expected.total += 1;
             calculate(verb, noun);
             state.promise = promise;
+            console.log('xresolve0');
             deferred.resolve(state.context);
           }, function(context) {
             state.context = context;
             deferred.error(state.context);
           }, function(context) {
+            console.log('xnotify0')
             state.context = context;
             deferred.notify(state.context);
           });
