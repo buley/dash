@@ -407,10 +407,8 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
-      console.log('CHECKING type',state.type);
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
-        console.log('waiting for promise');
         promise(function(context) {
           theirs.api.count.entries({
             database: context.database,
@@ -423,27 +421,20 @@ window.dashStats = window.dashStats || (function (environment) {
           })(function (context) {
             state.context.total = context.total;
             if (theirs.exists(state.context.limit) && state.context.limit < context.total ) {
-
               state.context.statistics.request.expected[verb] = state.context.limit;
               state.context.statistics.request.expected.total = state.context.limit;
               state.context.statistics.request.expected[noun] = state.context.limit;
-
               state.context.statistics.total.expected[verb] += state.context.limit;
               state.context.statistics.total.expected[noun] += state.context.limit;
               state.context.statistics.total.expected.total += state.context.limit;
-
             } else {
-
               state.context.statistics.request.expected[verb] = context.total;
               state.context.statistics.request.expected[noun] = context.total;
               state.context.statistics.request.expected.total = context.total;
-
               state.context.statistics.total.expected[verb] += context.total;
               state.context.statistics.total.expected[noun] += context.total;
               state.context.statistics.total.expected.total += context.total;
-
             } 
-
             state.context.statistics.request.expected[verb] += 1;
             state.context.statistics.request.expected[noun] += 1;
             state.context.statistics.total.expected[verb] += 1;
@@ -452,12 +443,10 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.total.expected.total += 1;
             calculate(verb, noun);
             state.promise = promise;
-            console.log('xresolve0');
             deferred.resolve(state.context);
           }, function(context) {
             deferred.error(state.context);
           }, function(context) {
-            console.log('xnotify0')
             deferred.notify(state.context);
           });
         });
