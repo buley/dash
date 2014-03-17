@@ -1570,15 +1570,12 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               }, function (context) {
                 console.log('dash promise rejected', context);
               }, function (context) {
+                
                 if ( !! context.entry.se && null !== context.entry.se.match(q) || !! context.entry.ep && null !== context.entry.ep.match(q)) {
                   context.id = context.primary_key;
-                  console.log('latest stats', context.statistics);
                   statsObj = context.statistics;
                   if (true === scope.visuals) {
                     system.add(context);
-                  }
-                  //system.highlight(context);
-                }
 
                 statsUpdate('searches');
                 //system.cameraMod( 'z', 2, 50000, 10 );
@@ -1824,6 +1821,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 }, function (context) {
                   console.log('dash promise rejected', context);
                 }, function (context) {
+                  console.log('notify1',context);
                   if (true === scope.visuals) {
                     system.add(context.entry);
                   }
