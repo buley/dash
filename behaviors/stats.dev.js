@@ -323,8 +323,6 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.expecting[n] = state.context.statistics.request.expected[n] - state.context.statistics.request.requests[n];
         state.context.statistics.request.expecting.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
 
-        console.log('REQ',JSON.stringify(state.context.statistics.request.requests));
-
         state.context.statistics.total.expecting[v] = state.context.statistics.total.expected[v] - state.context.statistics.total.requests[v];
         state.context.statistics.total.expecting[n] = state.context.statistics.total.expected[n] - state.context.statistics.total.requests[n];
         state.context.statistics.total.expecting.total = state.context.statistics.total.expected.total - state.context.statistics.total.requests.total;

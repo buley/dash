@@ -1604,10 +1604,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               } else {
                 scope.statsDisplay.total = statsObj.request.expected.total;
                 scope.statsDisplay.complete = statsObj.request.requests.total;
-                scope.statsDisplay.prettyElapsed = statsObj.request.prettyActual.total;
+                scope.statsDisplay.prettyElapsed = statsObj.request.prettyActual.total
                 scope.statsDisplay.prettyRemain = statsObj.request.prettyRemaining.total;
-                scope.statsDisplay.prettyAvg = statsObj.request.metrics.total.average + '/ms';
-                scope.statsDisplay.prettyRate = statsObj.request.metrics.total.rate + '/ms';        
+                scope.statsDisplay.prettyAvg = statsObj.request.metrics.total.average.toFixed(2) + '/ms';
+                scope.statsDisplay.prettyRate = statsObj.request.metrics.total.rate.toFixed(2) + '/ms';        
               }
               statsUIProc = null;
             },
