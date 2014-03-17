@@ -323,7 +323,7 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.request.expecting[n] = state.context.statistics.request.expected[n] - state.context.statistics.request.requests[n];
         state.context.statistics.request.expecting.total = state.context.statistics.request.expected.total - state.context.statistics.request.requests.total;
 
-        console.log('expected',JSON.stringify(state.context.statistics.request.expected));
+        console.log('REQ',JSON.stringify(state.context.statistics.requests.expected));
 
         state.context.statistics.total.expecting[v] = state.context.statistics.total.expected[v] - state.context.statistics.total.requests[v];
         state.context.statistics.total.expecting[n] = state.context.statistics.total.expected[n] - state.context.statistics.total.requests[n];
@@ -435,12 +435,12 @@ window.dashStats = window.dashStats || (function (environment) {
               state.context.statistics.total.expected[noun] += context.total;
               state.context.statistics.total.expected.total += context.total;
             } 
-            state.context.statistics.request.expected[verb] += 1;
-            state.context.statistics.request.expected[noun] += 1;
-            state.context.statistics.total.expected[verb] += 1;
-            state.context.statistics.total.expected[noun] += 1;
-            state.context.statistics.request.expected.total += 1;
-            state.context.statistics.total.expected.total += 1;
+            state.context.statistics.request.expected[verb] += 2;
+            state.context.statistics.request.expected[noun] += 2;
+            state.context.statistics.total.expected[verb] += 2;
+            state.context.statistics.total.expected[noun] += 2;
+            state.context.statistics.request.expected.total += 2;
+            state.context.statistics.total.expected.total += 2;
             calculate(verb, noun);
             state.promise = promise;
             deferred.resolve(state.context);
