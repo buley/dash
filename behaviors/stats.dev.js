@@ -403,7 +403,7 @@ window.dashStats = window.dashStats || (function (environment) {
       request: model()
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      //state.context.statistics.request = model();
+      state.context.statistics.request = model();
       state.context.statistics.request.milliseconds.started = new Date().getTime();
       state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
@@ -432,8 +432,6 @@ window.dashStats = window.dashStats || (function (environment) {
               state.context.statistics.total.expected[noun] += state.context.limit;
               state.context.statistics.total.expected.total += state.context.limit;
 
-              console.log('got total limited',state.context.statistics.request.expected.total);
-
             } else {
 
               state.context.statistics.request.expected[verb] = context.total;
@@ -444,7 +442,6 @@ window.dashStats = window.dashStats || (function (environment) {
               state.context.statistics.total.expected[noun] += context.total;
               state.context.statistics.total.expected.total += context.total;
 
-              console.log('got total unlimited', state.context.statistics.request.expected.total);
             } 
 
             state.context.statistics.request.expected[verb] += 1;
