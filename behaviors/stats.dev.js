@@ -421,7 +421,7 @@ window.dashStats = window.dashStats || (function (environment) {
             store: context.store,
             store_key_path: context.store_key_path,
           })(function (context) {
-            state.context = context;
+            state.context.total = context.total;
             if (theirs.exists(state.context.limit) && state.context.limit < context.total ) {
 
               state.context.statistics.request.expected[verb] = state.context.limit;
@@ -455,11 +455,9 @@ window.dashStats = window.dashStats || (function (environment) {
             console.log('xresolve0');
             deferred.resolve(state.context);
           }, function(context) {
-            state.context = context;
             deferred.error(state.context);
           }, function(context) {
             console.log('xnotify0')
-            state.context = context;
             deferred.notify(state.context);
           });
         });
