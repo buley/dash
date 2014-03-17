@@ -104,175 +104,179 @@ window.dashStats = window.dashStats || (function (environment) {
           elapsed: {},
           remaining: {},
           duration: {}
-        },
+        }
         milliseconds: {},
         metrics: {
           add: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           clear: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           count: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           get: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           put: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           remove: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           update: {
             average: NaN,
             rate: NaN,
-            recent: []
+            recent: [],
+            expecting: {},
+            remaining: {},
+            duration: {},
+            elapsed: {}
           },
           resolve: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           notify: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           error: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           total: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           store: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           stores: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           entry: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           entries: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           database: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           databases: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           index: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           },
           indexes: {
             average: NaN,
             rate: NaN,
             recent: [],
-            actual: {},
-            elapsed: {},
+            expecting: {},
             remaining: {},
-            duration: {}
+            duration: {},
+            elapsed: {}
           }
         },
         type: null,
