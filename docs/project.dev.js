@@ -537,6 +537,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             })
             (function (context) {
               statsObj = context.statistics;
+              console.log('yes we did',statsObj);
               dashAppSplashBroadcast.current(context.entry);
             }, function (context) {
               console.log('missing entry', context);
