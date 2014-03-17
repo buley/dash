@@ -96,6 +96,8 @@ window.dashStats = window.dashStats || (function (environment) {
           error: 0
         },
         prettyActual: {},
+        prettyThoroughputRate: {},
+        prettyThoroughputAverage: {},
         prettyElapsed: {},
         expecting: {},
         remaining: {},
@@ -395,7 +397,23 @@ window.dashStats = window.dashStats || (function (environment) {
 
         state.context.statistics.request.prettyActual.total = prettyTime(state.context.statistics.request.actual.total);
         state.context.statistics.total.prettyActual.total = prettyTime(state.context.statistics.total.actual.total);
-       
+
+        state.context.statistics.total.prettyThoroughputRate[v] = Math.floor(1000/state.context.statistics.total.metrics[v].rate);
+        state.context.statistics.total.prettyThoroughputRate[n] = Math.floor(1000/state.context.statistics.total.metrics[n].rate);
+        state.context.statistics.total.prettyThoroughputRate.total = Math.floor(1000/state.context.statistics.total.metrics.total.rate);
+        if ( state.context.statistics.total.prettyThoroughputRate[v] < 1 ) {
+          state.context.statistics.total.prettyThoroughputRate[v] = Math.floor(60/state.context.statistics.total.prettyThoroughputRate[v]) + ' entries/min';
+        } else {
+          state.context.statistics.total.prettyThoroughputRate[v] += ' entries/sec';
+        }
+        state.context.statistics.total.prettyThoroughputAverage[v] = Math.floor(1000/state.context.statistics.total.metrics[v].average);
+        state.context.statistics.total.prettyThoroughputAverage[n] = Math.floor(1000/state.context.statistics.total.metrics[n].average);
+        state.context.statistics.total.prettyThoroughputAverage.total = Math.floor(1000/state.context.statistics.total.metrics.total.average);
+        if ( state.context.statistics.total.prettyThoroughputAverage[v] < 1 ) {
+          state.context.statistics.total.prettyThoroughputAverage[v] = Math.floor(60/state.context.statistics.total.prettyThoroughputAverage[v]) + ' entries/min';
+        } else {
+          state.context.statistics.total.prettyThoroughputAverage[v] += ' entries/sec';
+        }       
       };
     state.context.statistics = state.context.statistics || {
       total: total,
