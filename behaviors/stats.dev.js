@@ -205,7 +205,7 @@ window.dashStats = window.dashStats || (function (environment) {
           }
         },
         type: null,
-        memory: 50
+        memory: 3
       };
     },
     total = model();
