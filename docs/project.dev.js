@@ -453,6 +453,9 @@ dashApp.factory('dashAppSplashBroadcast', function () {
     },
     subscribe: function (cb) {
       queue.push(cb);
+    }, 
+    statistics: function (stats) {
+      console.log('stats',stats);
     }
   };
 });
