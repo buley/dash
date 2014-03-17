@@ -290,14 +290,14 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.between.total = diff;
 
 
-        state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-        state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+        state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.total.between[v]);
+        state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.total.between[v]);
         
-        state.context.statistics.request.metrics[n].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-        state.context.statistics.total.metrics[n].recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+        state.context.statistics.request.metrics[n].recent.unshift(state.context.statistics.request.between[n]);
+        state.context.statistics.total.metrics[n].recent.unshift(state.context.statistics.request.between[n]);
         
-        state.context.statistics.request.metrics.total.recent.unshift(state.context.statistics.request.milliseconds.elapsed);
-        state.context.statistics.total.metrics.total.recent.unshift(state.context.statistics.request.milliseconds.elapsed);
+        state.context.statistics.request.metrics.total.recent.unshift(state.context.statistics.request.between.total);
+        state.context.statistics.total.metrics.total.recent.unshift(state.context.statistics.request.between.total);
 
         if (state.context.statistics.request.metrics[v].recent.length > state.context.statistics.request.memory) {
           state.context.statistics.request.metrics[v].recent = state.context.statistics.request.metrics[v].recent.slice(0, state.context.statistics.request.memory);
