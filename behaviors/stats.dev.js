@@ -257,7 +257,7 @@ window.dashStats = window.dashStats || (function (environment) {
           msecs = msecs.toString();
         }
         return hours + minutes + ':' + secs + '.' + msecs;
-}     },
+      },
       calculate = function(v, n) {
         
         /* Time */
