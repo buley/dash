@@ -1570,7 +1570,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               }, function (context) {
                 console.log('dash promise rejected', context);
               }, function (context) {
-                
                 if ( !! context.entry.se && null !== context.entry.se.match(q) || !! context.entry.ep && null !== context.entry.ep.match(q)) {
                   context.id = context.primary_key;
                   statsObj = context.statistics;
