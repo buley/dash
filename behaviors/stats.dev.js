@@ -226,7 +226,7 @@ window.dashStats = window.dashStats || (function (environment) {
         var seconds = Math.floor(milliseconds/1000),
             days = Math.floor((seconds - ( seconds % 86400 )) / 86400),
             hours = Math.floor((seconds - ( seconds % 3600 )) / 3600),
-            minutes = Math.floor(seconds % 60 ),
+            minutes = Math.floor(seconds % 3600 ),
             secs = seconds % 60,
             msecs = Math.floor(milliseconds  % 1000);
         if ( true === isNaN( hours ) && true === isNaN( minutes ) && true === isNaN( secs ) ) {
