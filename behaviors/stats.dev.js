@@ -105,9 +105,6 @@ window.dashStats = window.dashStats || (function (environment) {
           remaining: {},
           duration: {}
         },
-        expecting: {},
-        remaining: {},
-        duration: {},
         milliseconds: {},
         metrics: {
           add: {
