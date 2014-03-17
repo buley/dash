@@ -1845,6 +1845,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
           dashAppSplashBroadcast.subscribe(function (data) {
             scope.$apply(function () {
               scope.data = data;
+              console.log('updating',statsObj.request.actual.total);
               statsUpdate(statsObj);
             });
           });
