@@ -409,7 +409,6 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
-        promise(function(context) {
           theirs.api.count.entries({
             database: context.database,
             index: context.index,
@@ -449,7 +448,6 @@ window.dashStats = window.dashStats || (function (environment) {
           }, function(context) {
             deferred.notify(state.context);
           });
-        });
         state.context.statistics.request.expected[verb] += 1;
         state.context.statistics.request.expected[noun] += 1;
         state.context.statistics.total.expected[verb] += 1;
