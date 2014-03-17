@@ -455,7 +455,7 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.total.expected.total += 1;
             calculate(verb, noun);
             state.promise = promise;
-            deferred.resolve(state);
+            deferred.resolve(state.context);
           });
         state.promise = deferred.promise;
       } else {
