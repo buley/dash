@@ -453,6 +453,12 @@ window.dashStats = window.dashStats || (function (environment) {
             calculate(verb, noun);
             state.promise = promise;
             deferred.resolve(state.context);
+          }, function(context) {
+            state.context = context;
+            deferred.error(state.context);
+          }, function(context) {
+            state.context = context;
+            deferred.notify(state.context);
           });
         state.promise = deferred.promise;
       } else {
