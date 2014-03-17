@@ -461,6 +461,12 @@ window.dashStats = window.dashStats || (function (environment) {
             deferred.notify(state.context);
           });
         });
+        state.context.statistics.request.expected[verb] += 1;
+        state.context.statistics.request.expected[noun] += 1;
+        state.context.statistics.total.expected[verb] += 1;
+        state.context.statistics.total.expected[noun] += 1;
+        state.context.statistics.request.expected.total += 1;
+        state.context.statistics.total.expected.total += 1;
         state.promise = deferred.promise;
       } else {
         state.context.statistics.request.expected[verb] += 1;
