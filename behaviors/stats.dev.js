@@ -222,12 +222,13 @@ window.dashStats = window.dashStats || (function (environment) {
         }
         return total/x;
       },
-      prettyTime = function(milliseconds) {
+      prettyTime =  function(milliseconds) {
         var seconds = Math.floor(milliseconds/1000),
-            hours = Math.floor((seconds - ( seconds % 86400 )) / 86400),
-            minutes = Math.floor((seconds - ( seconds % 3600 )) / 3600),
-            secs = Math.floor(seconds % 60 ),
-            msecs = Math.floor(milliseconds - (seconds * 1000));
+            days = Math.floor((seconds - ( seconds % 86400 )) / 86400),
+            hours = Math.floor((seconds - ( seconds % 3600 )) / 3600),
+            minutes = Math.floor(seconds % 60 ),
+            secs = seconds % 60,
+            msecs = Math.floor(milliseconds  % 1000);
         if ( true === isNaN( hours ) && true === isNaN( minutes ) && true === isNaN( secs ) ) {
           return;
         }
@@ -255,9 +256,8 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           msecs = msecs.toString();
         }
-        console.log(seconds, hours + minutes + ':' + secs + '.' + msecs);
         return hours + minutes + ':' + secs + '.' + msecs;
-      },
+}     },
       calculate = function(v, n) {
         
         /* Time */
