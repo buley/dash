@@ -448,6 +448,7 @@ window.dashStats = window.dashStats || (function (environment) {
           }, function(context) {
             deferred.notify(state.context);
           });
+        });
         state.context.statistics.request.expected[verb] += 1;
         state.context.statistics.request.expected[noun] += 1;
         state.context.statistics.total.expected[verb] += 1;
@@ -474,6 +475,9 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.total.requests[noun] += 1;
       state.context.statistics.request.requests[state.type] += 1;
       state.context.statistics.total.requests[state.type] += 1;
+      if ('resolve' === state.type) {
+        console.trace();
+      }
       state.context.statistics.request.requests.total += 1;
       state.context.statistics.total.requests.total += 1;
       calculate(verb, noun);
