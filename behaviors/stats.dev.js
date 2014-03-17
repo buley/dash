@@ -2058,7 +2058,6 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.between[v] = diff;
         state.context.statistics.total.between.total = diff;
 
-
         state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.total.between[v]);
         state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.total.between[v]);
 
