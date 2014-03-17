@@ -406,6 +406,16 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           state.context.statistics.total.prettyThoroughputRate[v] += ' entries/sec';
         }
+        if ( state.context.statistics.total.prettyThoroughputRate[n] < 1 ) {
+          state.context.statistics.total.prettyThoroughputRate[n] = Math.floor(60/state.context.statistics.total.prettyThoroughputRate[n]) + ' entries/min';
+        } else {
+          state.context.statistics.total.prettyThoroughputRate[n] += ' entries/sec';
+        } 
+        if ( state.context.statistics.total.prettyThoroughputRate.total < 1 ) {
+          state.context.statistics.total.prettyThoroughputRate.total = Math.floor(60/state.context.statistics.total.prettyThoroughputRate.total) + ' entries/min';
+        } else {
+          state.context.statistics.total.prettyThoroughputRate.total += ' entries/sec';
+        } 
         state.context.statistics.total.prettyThoroughputAverage[v] = Math.floor(1000/state.context.statistics.total.metrics[v].average);
         state.context.statistics.total.prettyThoroughputAverage[n] = Math.floor(1000/state.context.statistics.total.metrics[n].average);
         state.context.statistics.total.prettyThoroughputAverage.total = Math.floor(1000/state.context.statistics.total.metrics.total.average);
@@ -414,6 +424,17 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           state.context.statistics.total.prettyThoroughputAverage[v] += ' entries/sec';
         }       
+        if ( state.context.statistics.total.prettyThoroughputAverage[n] < 1 ) {
+          state.context.statistics.total.prettyThoroughputAverage[n] = Math.floor(60/state.context.statistics.total.prettyThoroughputAverage[n]) + ' entries/min';
+        } else {
+          state.context.statistics.total.prettyThoroughputAverage[n] += ' entries/sec';
+        } 
+        if ( state.context.statistics.total.prettyThoroughputAverage.total < 1 ) {
+          state.context.statistics.total.prettyThoroughputAverage.total = Math.floor(60/state.context.statistics.total.prettyThoroughputAverage.total) + ' entries/min';
+        } else {
+          state.context.statistics.total.prettyThoroughputAverage.total += ' entries/sec';
+        } 
+
         state.context.statistics.request.prettyThoroughputRate[v] = Math.floor(1000/state.context.statistics.request.metrics[v].rate);
         state.context.statistics.request.prettyThoroughputRate[n] = Math.floor(1000/state.context.statistics.request.metrics[n].rate);
         state.context.statistics.request.prettyThoroughputRate.total = Math.floor(1000/state.context.statistics.request.metrics.total.rate);
@@ -422,6 +443,16 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           state.context.statistics.request.prettyThoroughputRate[v] += ' entries/sec';
         }
+        if ( state.context.statistics.request.prettyThoroughputRate[n] < 1 ) {
+          state.context.statistics.request.prettyThoroughputRate[n] = Math.floor(60/state.context.statistics.request.prettyThoroughputRate[n]) + ' entries/min';
+        } else {
+          state.context.statistics.request.prettyThoroughputRate[n] += ' entries/sec';
+        } 
+        if ( state.context.statistics.request.prettyThoroughputRate.total < 1 ) {
+          state.context.statistics.request.prettyThoroughputRate.total = Math.floor(60/state.context.statistics.request.prettyThoroughputRate.total) + ' entries/min';
+        } else {
+          state.context.statistics.request.prettyThoroughputRate.total += ' entries/sec';
+        } 
         state.context.statistics.request.prettyThoroughputAverage[v] = Math.floor(1000/state.context.statistics.request.metrics[v].average);
         state.context.statistics.request.prettyThoroughputAverage[n] = Math.floor(1000/state.context.statistics.request.metrics[n].average);
         state.context.statistics.request.prettyThoroughputAverage.total = Math.floor(1000/state.context.statistics.request.metrics.total.average);
@@ -429,7 +460,17 @@ window.dashStats = window.dashStats || (function (environment) {
           state.context.statistics.request.prettyThoroughputAverage[v] = Math.floor(60/state.context.statistics.request.prettyThoroughputAverage[v]) + ' entries/min';
         } else {
           state.context.statistics.request.prettyThoroughputAverage[v] += ' entries/sec';
-        }   
+        }       
+        if ( state.context.statistics.request.prettyThoroughputAverage[n] < 1 ) {
+          state.context.statistics.request.prettyThoroughputAverage[n] = Math.floor(60/state.context.statistics.request.prettyThoroughputAverage[n]) + ' entries/min';
+        } else {
+          state.context.statistics.request.prettyThoroughputAverage[n] += ' entries/sec';
+        } 
+        if ( state.context.statistics.request.prettyThoroughputAverage.total < 1 ) {
+          state.context.statistics.request.prettyThoroughputAverage.total = Math.floor(60/state.context.statistics.request.prettyThoroughputAverage.total) + ' entries/min';
+        } else {
+          state.context.statistics.request.prettyThoroughputAverage.total += ' entries/sec';
+        } 
       };
     state.context.statistics = state.context.statistics || {
       total: total,
