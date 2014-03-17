@@ -1576,6 +1576,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   statsObj = context.statistics;
                   if (true === scope.visuals) {
                     system.add(context);
+                  }
+                }
 
                 statsUpdate('searches');
                 //system.cameraMod( 'z', 2, 50000, 10 );
