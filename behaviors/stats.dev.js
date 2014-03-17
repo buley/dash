@@ -114,7 +114,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           clear: {
             average: NaN,
@@ -123,7 +124,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           count: {
             average: NaN,
@@ -132,7 +134,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           get: {
             average: NaN,
@@ -141,7 +144,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           put: {
             average: NaN,
@@ -150,7 +154,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           remove: {
             average: NaN,
@@ -159,7 +164,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           update: {
             average: NaN,
@@ -168,7 +174,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           resolve: {
             average: NaN,
@@ -177,7 +184,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           notify: {
             average: NaN,
@@ -186,7 +194,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           error: {
             average: NaN,
@@ -195,7 +204,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           total: {
             average: NaN,
@@ -204,7 +214,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           store: {
             average: NaN,
@@ -213,7 +224,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           stores: {
             average: NaN,
@@ -222,7 +234,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           entry: {
             average: NaN,
@@ -231,7 +244,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           entries: {
             average: NaN,
@@ -240,7 +254,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           database: {
             average: NaN,
@@ -249,7 +264,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           databases: {
             average: NaN,
@@ -258,7 +274,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           index: {
             average: NaN,
@@ -267,7 +284,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           },
           indexes: {
             average: NaN,
@@ -276,7 +294,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expecting: {},
             remaining: {},
             duration: {},
-            elapsed: {}
+            elapsed: {},
+            expected: {}
           }
         },
         type: null,
