@@ -619,8 +619,8 @@ window.dashStats = window.dashStats || (function (environment) {
             state.promise = promise;
             deferred.resolve(state.context);
           };
-          if (!!context.total) {
-            processTotal(context.total);
+          if (!!state.context.total) {
+            processTotal(state.context.total);
           } else {
             theirs.api.count.entries({
               database: context.database,
