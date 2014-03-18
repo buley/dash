@@ -609,7 +609,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 return hours + minutes + ':' + secs;
               };
               if (true === scope.statsDisplay.clear) {
-                scope.statsDisplay.text = 'dash is under development';
+                scope.statsDisplay.text = 'dash is in dev';
               } else if (true === scope.statsData.complete) {
                 rate = 0;
                 scope.statsDisplay.prettyRate = '0/second';
