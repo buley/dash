@@ -1700,17 +1700,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                               count: stack_count,
                               skip: true
                             });
-                            statsUpdate('complete', 'adds', stack_count, new Date().getTime() - start_promise);
                           }
                           if (!in_progress && stacklist.length > 0) {
                             in_progress = true;
                             scope.statsData = scope.statsData || {};
-                            scope.statsData.stack = {
-                              progress: stack_count,
-                              total: total_count,
-                              complete: stack_count / total_count,
-                              current: attr
-                            };
                             doNext(stacklist.shift());
                             scope.downloaded[attr] = scope.downloaded[attr] || 0;
                             scope.downloaded[attr] += 1;
@@ -1732,7 +1725,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                             auto_increment: true,
                             store_key_path: null,
                             data: next,
-                            throttle: 100
+                            statistics: true
                           })
                           (function (context) {
                             in_progress = false;
