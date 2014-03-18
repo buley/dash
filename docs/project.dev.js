@@ -533,6 +533,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               database: 'dash-demo',
               store: 'imdb',
               key: data,
+              stats: true,
+              forecast: true,
               store_key_path: 'id'
             })
             (function (context) {
@@ -1818,7 +1820,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   auto_increment: true,
                   store_key_path: 'id',
                   stats: true,
-                  forecast: true,
+                  forecast: false,
                   index: 'season',
                   index_key_path: 'sy',
                   index_key: new Date('1/1/' + args.range).getTime(),
