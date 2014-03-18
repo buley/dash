@@ -2,99 +2,7 @@ window.dashStats = window.dashStats || (function (environment) {
   "use strict";
   var model = function () {
       return {
-        requests: {
-          add: 0,
-          clears: 0,
-          count: 0,
-          get: 0,
-          put: 0,
-          remove: 0,
-          update: 0,
-          attribute: 0,
-          behavior: 0,
-          store: 0,
-          stores: 0,
-          entry: 0,
-          entries: 0,
-          index: 0,
-          indexes: 0,
-          database: 0,
-          databases: 0,
-          total: 0,
-          resolve: 0,
-          notify: 0,
-          error: 0
-        },
-        elapsed: {
-          add: 0,
-          clear: 0,
-          count: 0,
-          get: 0,
-          put: 0,
-          remove: 0,
-          update: 0,
-          attribute: 0,
-          behavior: 0,
-          store: 0,
-          stores: 0,
-          entry: 0,
-          entries: 0,
-          index: 0,
-          indexes: 0,
-          database: 0,
-          databases: 0,
-          total: 0,
-          resolve: 0,
-          notify: 0,
-          error: 0
-        },
-        between: {
-          add: 0,
-          clear: 0,
-          count: 0,
-          get: 0,
-          put: 0,
-          remove: 0,
-          update: 0,
-          attribute: 0,
-          behavior: 0,
-          store: 0,
-          stores: 0,
-          entry: 0,
-          entries: 0,
-          index: 0,
-          indexes: 0,
-          database: 0,
-          databases: 0,
-          total: 0,
-          resolve: 0,
-          notify: 0,
-          error: 0
-        },
         actual: {},
-        expected: {
-          add: 0,
-          clear: 0,
-          count: 0,
-          get: 0,
-          put: 0,
-          remove: 0,
-          update: 0,
-          attribute: 0,
-          behavior: 0,
-          store: 0,
-          stores: 0,
-          entry: 0,
-          entries: 0,
-          index: 0,
-          indexes: 0,
-          database: 0,
-          databases: 0,
-          total: 0,
-          resolve: 0,
-          notify: 0,
-          error: 0
-        },
         display: {
           actual: {},
           thoroughput_rate: {},
@@ -392,30 +300,28 @@ window.dashStats = window.dashStats || (function (environment) {
 
         state.context.statistics.request.metrics[n].elapsed = state.context.statistics.request.milliseconds.elapsed;
         state.context.statistics.request.metrics[v].elapsed = state.context.statistics.request.milliseconds.elapsed;
-        state.context.statistics.request.metrics.total.elapsed = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.request.metrics.elapsed.total = state.context.statistics.request.milliseconds.elapsed;
 
         state.context.statistics.total.metrics[n].elapsed = state.context.statistics.request.milliseconds.elapsed;
         state.context.statistics.total.metrics[v].elapsed = state.context.statistics.request.milliseconds.elapsed;
         state.context.statistics.total.metrics.total.elapsed = state.context.statistics.request.milliseconds.elapsed;
 
         diff = datetime - state.context.statistics.request.milliseconds.last;
-        state.context.statistics.request.between[n] = diff;
-        state.context.statistics.request.between[v] = diff;
-        state.context.statistics.request.between.total = diff;
+        state.context.statistics.request.metrics[n].between = diff;
+        state.context.statistics.request.metrics[v].between = diff;
+        state.context.statistics.request.metrics.total.between = diff;
+        state.context.statistics.total.metrics[n].between = diff;
+        state.context.statistics.total.metrics[v].between = diff;
+        state.context.statistics.total.metrics.total.between = diff;
 
-        state.context.statistics.total.between[n] = diff;
-        state.context.statistics.total.between[v] = diff;
-        state.context.statistics.total.between.total = diff;
-
-
-        state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.total.between[v]);
-        state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.total.between[v]);
+        state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.total.metrics[v].between);
+        state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.total.metrics[v].between);
         
-        state.context.statistics.request.metrics[n].recent.unshift(state.context.statistics.request.between[n]);
-        state.context.statistics.total.metrics[n].recent.unshift(state.context.statistics.request.between[n]);
+        state.context.statistics.request.metrics[n].recent.unshift(state.context.statistics.request.metrics[n].between);
+        state.context.statistics.total.metrics[n].recent.unshift(state.context.statistics.request.metrics[n].between);
         
-        state.context.statistics.request.metrics.total.recent.unshift(state.context.statistics.request.between.total);
-        state.context.statistics.total.metrics.total.recent.unshift(state.context.statistics.request.between.total);
+        state.context.statistics.request.metrics.total.recent.unshift(state.context.statistics.request.metrics.total.between);
+        state.context.statistics.total.metrics.total.recent.unshift(state.context.statistics.request.metrics.total.between);
 
         if (state.context.statistics.request.metrics[v].recent.length > state.context.statistics.request.memory) {
           state.context.statistics.request.metrics[v].recent = state.context.statistics.request.metrics[v].recent.slice(0, state.context.statistics.request.memory);
@@ -455,7 +361,7 @@ window.dashStats = window.dashStats || (function (environment) {
 
         state.context.statistics.request.metrics[v].average = state.context.statistics.request.metrics[v].elapsed / state.context.statistics.request.metrics[v].requests; 
         state.context.statistics.request.metrics[n].average = state.context.statistics.request.metrics[n].elapsed / state.context.statistics.request.metrics[n].requests;
-        state.context.statistics.request.metrics.total.average = state.context.statistics.request.metrics.total.elapsed / state.context.statistics.request.metrics.total.requests;
+        state.context.statistics.request.metrics.total.average = state.context.statistics.request.metrics.elapsed.total / state.context.statistics.request.metrics.total.requests;
 
         state.context.statistics.total.metrics[v].average = state.context.statistics.total.metrics[v].elapsed/ state.context.statistics.total.metrics[v].requests; 
         state.context.statistics.total.metrics[n].average = state.context.statistics.total.metrics[n].elapsed / state.context.statistics.total.metrics[n].requests;
@@ -492,7 +398,7 @@ window.dashStats = window.dashStats || (function (environment) {
 
         state.context.statistics.request.display.elapsed[v] = prettyTime(state.context.statistics.request.metrics[v].elapsed);
         state.context.statistics.request.display.elapsed[n] = prettyTime(state.context.statistics.request.metrics[n].elapsed);
-        state.context.statistics.request.display.elapsed.total = prettyTime(state.context.statistics.request.metrics.total.elapsed);
+        state.context.statistics.request.display.elapsed.total = prettyTime(state.context.statistics.request.metrics.elapsed.total);
 
         state.context.statistics.request.display.duration[v] = prettyTime(state.context.statistics.request.metrics[v].duration);
         state.context.statistics.request.display.duration[n] = prettyTime(state.context.statistics.request.metrics[n].duration);
