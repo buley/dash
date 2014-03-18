@@ -251,7 +251,7 @@ window.dashStats = window.dashStats || (function (environment) {
             hours = Math.floor(seconds/3600),
             minutes = Math.floor(seconds/60),
             secs = Math.floor(seconds - (days*86400) - (hours*3600) - (minutes*60)),
-            msecs = Math.floor((seconds - (days*86400) - (hours*3600) - (minutes*60) - secs)*1000);
+            msecs = Math.floor(milliseconds - ( secs * 1000) );
         if ( true === isNaN( hours ) && true === isNaN( minutes ) && true === isNaN( secs ) ) {
           return;
         }
