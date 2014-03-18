@@ -1623,6 +1623,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               statsUIProc = null;
             },
             statsUIProc,
+            statsClear = function() {
+              statsObj.clear = true;
+              statsFunc();
+            },
             statsUpdate = function (stats) {
               statsObj = stats;
               statsFunc();
