@@ -229,6 +229,9 @@ window.dashStats = window.dashStats || (function (environment) {
     },
     total = model();
   return function (state) {
+    if(this.isnt(state.context.stats,true)) {
+      return state;
+    }
     var context = state.context,
       pieces = state.type.split('.'),
       verb = pieces[0],
@@ -577,7 +580,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.started = new Date().getTime();
       state.context.statistics.total.started = state.context.statistics.total.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
-      if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
+      if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/) && this.is(state.context.forecast,true)) {
         deferred = this.deferred();
         promise(function(context) {
           theirs.api.count.entries({
