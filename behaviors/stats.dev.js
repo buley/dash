@@ -298,7 +298,7 @@ window.dashStats = window.dashStats || (function (environment) {
 
         state.context.statistics.request.metrics[n].elapsed = state.context.statistics.request.elapsed;
         state.context.statistics.request.metrics[v].elapsed = state.context.statistics.request.elapsed;
-        state.context.statistics.request.metrics.elapsed.total = state.context.statistics.request.elapsed;
+        state.context.statistics.request.metrics.total.elapsed = state.context.statistics.request.elapsed;
 
         state.context.statistics.total.metrics[n].elapsed = state.context.statistics.request.elapsed;
         state.context.statistics.total.metrics[v].elapsed = state.context.statistics.request.elapsed;
@@ -359,7 +359,7 @@ window.dashStats = window.dashStats || (function (environment) {
 
         state.context.statistics.request.metrics[v].average = state.context.statistics.request.metrics[v].elapsed / state.context.statistics.request.metrics[v].requests; 
         state.context.statistics.request.metrics[n].average = state.context.statistics.request.metrics[n].elapsed / state.context.statistics.request.metrics[n].requests;
-        state.context.statistics.request.metrics.total.average = state.context.statistics.request.metrics.elapsed.total / state.context.statistics.request.metrics.total.requests;
+        state.context.statistics.request.metrics.total.average = state.context.statistics.request.metrics.total.elapsed / state.context.statistics.request.metrics.total.requests;
 
         state.context.statistics.total.metrics[v].average = state.context.statistics.total.metrics[v].elapsed/ state.context.statistics.total.metrics[v].requests; 
         state.context.statistics.total.metrics[n].average = state.context.statistics.total.metrics[n].elapsed / state.context.statistics.total.metrics[n].requests;
@@ -396,7 +396,7 @@ window.dashStats = window.dashStats || (function (environment) {
 
         state.context.statistics.request.display.elapsed[v] = prettyTime(state.context.statistics.request.metrics[v].elapsed);
         state.context.statistics.request.display.elapsed[n] = prettyTime(state.context.statistics.request.metrics[n].elapsed);
-        state.context.statistics.request.display.elapsed.total = prettyTime(state.context.statistics.request.metrics.elapsed.total);
+        state.context.statistics.request.display.elapsed.total = prettyTime(state.context.statistics.request.metrics.total.elapsed);
 
         state.context.statistics.request.display.duration[v] = prettyTime(state.context.statistics.request.metrics[v].duration);
         state.context.statistics.request.display.duration[n] = prettyTime(state.context.statistics.request.metrics[n].duration);
