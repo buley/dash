@@ -640,20 +640,24 @@ window.dashStats = window.dashStats || (function (environment) {
             });
           }
         });
-        state.context.statistics.request.metrics[verb].expected += 1;
-        state.context.statistics.request.metrics[noun].expected += 1;
-        state.context.statistics.total.metrics[verb].expected += 1;
-        state.context.statistics.total.metrics[noun].expected += 1;
-        state.context.statistics.request.metrics.total.expected += 1;
-        state.context.statistics.total.metrics.total.expected += 1;
+        if ( theirs.is(state.context.forecast,true) ) {
+          state.context.statistics.request.metrics[verb].expected += 1;
+          state.context.statistics.request.metrics[noun].expected += 1;
+          state.context.statistics.total.metrics[verb].expected += 1;
+          state.context.statistics.total.metrics[noun].expected += 1;
+          state.context.statistics.request.metrics.total.expected += 1;
+          state.context.statistics.total.metrics.total.expected += 1;
+        }
         state.promise = deferred.promise;
       } else {
-        state.context.statistics.request.metrics[verb].expected += 1;
-        state.context.statistics.request.metrics[noun].expected += 1;
-        state.context.statistics.total.metrics[verb].expected += 1;
-        state.context.statistics.total.metrics[noun].expected += 1;
-        state.context.statistics.request.metrics.total.expected += 1;
-        state.context.statistics.total.metrics.total.expected += 1;
+        if ( theirs.is(state.context.forecast,true) ) {
+          state.context.statistics.request.metrics[verb].expected += 1;
+          state.context.statistics.request.metrics[noun].expected += 1;
+          state.context.statistics.total.metrics[verb].expected += 1;
+          state.context.statistics.total.metrics[noun].expected += 1;
+          state.context.statistics.request.metrics.total.expected += 1;
+          state.context.statistics.total.metrics.total.expected += 1;
+        }
         calculate(verb, noun);
       }
     } else {
