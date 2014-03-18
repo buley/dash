@@ -593,17 +593,8 @@ window.dashStats = window.dashStats || (function (environment) {
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/) && this.is(state.context.forecast,true)) {
         deferred = this.deferred();
         promise(function(context) {
-          theirs.api.count.entries({
-            database: context.database,
-            index: context.index,
-            index_key: context.index_key,
-            index_key_path: context.index_key_path,
-            limit: context.limit,
-            store: context.store,
-            store_key_path: context.store_key_path,
-          })(function (context) {
-            state.context.total = context.total;
-            if (theirs.exists(state.context.limit) && state.context.limit < context.total ) {
+          var processTotal = function(total) {
+            if (theirs.exists(state.context.limit) && state.context.limit < total ) {
               state.context.statistics.request.metrics[verb].expected = state.context.limit;
               state.context.statistics.request.metrics.total.expected = state.context.limit;
               state.context.statistics.request.metrics[noun].expected = state.context.limit;
@@ -611,12 +602,12 @@ window.dashStats = window.dashStats || (function (environment) {
               state.context.statistics.total.metrics[noun].expected += state.context.limit;
               state.context.statistics.total.metrics.total.expected += state.context.limit;
             } else {
-              state.context.statistics.request.metrics[verb].expected = context.total;
-              state.context.statistics.request.metrics[noun].expected = context.total;
-              state.context.statistics.request.metrics.total.expected = context.total;
-              state.context.statistics.total.metrics[verb].expected += context.total;
-              state.context.statistics.total.metrics[noun].expected += context.total;
-              state.context.statistics.total.metrics.total.expected += context.total;
+              state.context.statistics.request.metrics[verb].expected = total;
+              state.context.statistics.request.metrics[noun].expected = total;
+              state.context.statistics.request.metrics.total.expected = total;
+              state.context.statistics.total.metrics[verb].expected += total;
+              state.context.statistics.total.metrics[noun].expected += total;
+              state.context.statistics.total.metrics.total.expected += total;
             } 
             state.context.statistics.request.metrics[verb].expected += 1;
             state.context.statistics.request.metrics[noun].expected += 1;
@@ -627,11 +618,27 @@ window.dashStats = window.dashStats || (function (environment) {
             calculate(verb, noun);
             state.promise = promise;
             deferred.resolve(state.context);
-          }, function(context) {
-            deferred.error(state.context);
-          }, function(context) {
-            deferred.notify(state.context);
-          });
+          };
+          if (!!context.total) {
+            processTotal(context.total);
+          } else {
+            theirs.api.count.entries({
+              database: context.database,
+              index: context.index,
+              index_key: context.index_key,
+              index_key_path: context.index_key_path,
+              limit: context.limit,
+              store: context.store,
+              store_key_path: context.store_key_path,
+            })(function (context) {
+              state.context.total = context.total;
+              processTotal(context.total);
+            }, function(context) {
+              deferred.error(state.context);
+            }, function(context) {
+              deferred.notify(state.context);
+            });
+          }
         });
         state.context.statistics.request.metrics[verb].expected += 1;
         state.context.statistics.request.metrics[noun].expected += 1;
