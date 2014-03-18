@@ -1625,8 +1625,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             statsUIProc,
             statsUpdate = function (stats) {
               statsObj = stats;
-              if (!statsUIProc) {
-                statsUIProc = setTimeout(statsFunc, 1000);
+              statsFunc();
+              if (statsUIProc) {
+                clearTimeout(statsUIProc);
+                statsUIProc = setTimeout(statsClear, 3000);
               }
             },
             doLayout = function (cmdargs) {
