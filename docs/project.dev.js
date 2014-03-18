@@ -1599,6 +1599,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             statsTimeout = 1000,
             wasCompleted = false,
             statsFunc = function () {
+              scope.statsDisplay = scope.statsDisplay || {};
               if ( !statsObj || true === statsObj.clear ) {
                 scope.statsDisplay.total = 0;
                 scope.statsDisplay.complete = 0;
