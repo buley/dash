@@ -534,7 +534,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               store: 'imdb',
               key: data,
               stats: true,
-              forecast: true,
+              forecast: false,
               store_key_path: 'id'
             })
             (function (context) {
