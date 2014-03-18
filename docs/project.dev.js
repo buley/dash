@@ -54,6 +54,7 @@ dashApp.controller('dashAppController', ['$location', '$scope',
 }]);
 
 dashApp.controller('dashAppAboutController', [
+
   function () {}]);
 
 dashApp.controller('dashAppDocsController', ['$scope', '$http', '$templateCache', '$routeParams',
@@ -453,9 +454,9 @@ dashApp.factory('dashAppSplashBroadcast', function () {
     },
     subscribe: function (cb) {
       queue.push(cb);
-    }, 
+    },
     statistics: function (stats) {
-      console.log('stats',stats);
+      console.log('stats', stats);
     }
   };
 });
@@ -514,38 +515,38 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
         el.setAttribute('id', 'dash-splash-container');
         return function link(scope, element, attrs) {
           var statsObj = {},
-              system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function (data) {
-            if (pid) {
-              clearTimeout(pid);
-            }
-            if (!data) {
-              pid = setTimeout(function () {
-                scope.$apply(function () {
-                  scope.data = {
-                    se: '',
-                    ep: ''
-                  };
-                });
-              }, 3000);
-              return;
-            }
-            dash.get.entry({
-              database: 'dash-demo',
-              store: 'imdb',
-              key: data,
-              stats: true,
-              forecast: false,
-              store_key_path: 'id'
-            })
-            (function (context) {
-              if (context.statistics) {
-                statsObj = context.statistics;
+            system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function (data) {
+              if (pid) {
+                clearTimeout(pid);
               }
-              dashAppSplashBroadcast.current(context.entry);
-            }, function (context) {
-              console.log('missing entry', context);
-            });
-          }),
+              if (!data) {
+                pid = setTimeout(function () {
+                  scope.$apply(function () {
+                    scope.data = {
+                      se: '',
+                      ep: ''
+                    };
+                  });
+                }, 3000);
+                return;
+              }
+              dash.get.entry({
+                database: 'dash-demo',
+                store: 'imdb',
+                key: data,
+                stats: true,
+                forecast: false,
+                store_key_path: 'id'
+              })
+              (function (context) {
+                if (context.statistics) {
+                  statsObj = context.statistics;
+                }
+                dashAppSplashBroadcast.current(context.entry);
+              }, function (context) {
+                console.log('missing entry', context);
+              });
+            }),
             layout = system.layout;
 
           element[0].appendChild(el);
@@ -661,6 +662,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                     avg += historicals[x];
                   }
                   historicals = [];
+                  scope.statsDisplay = scope.statsDisplay || {};
                   scope.statsDisplay.runRate = (avg / x) || 0;
 
                   scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started / 1000);
@@ -1545,13 +1547,12 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                     }
                   }
                 }
-                statsUpdate('complete', 'removes', context.amount, new Date().getTime() - start_promise);
+                statsUpdate(context.statistics);
               }, function (context) {
                 console.log('dash promise rejected', context);
               }, function (context) {
                 system.remove(context);
-                console.log('removed one');
-                statsUpdate('removes');
+                statsUpdate(context.statistics);
                 //system.cameraMod( 'z', 2, 50000, 10 );
                 //system.cameraMod( 'z', 1, 10000, 0 );
               });
@@ -1603,7 +1604,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             wasCompleted = false,
             statsFunc = function () {
               scope.statsDisplay = scope.statsDisplay || {};
-              if ( !statsObj || true === statsObj.clear ) {
+              if (!statsObj || true === statsObj.clear || !statsObj.request || !statsObj.request.metrics ) {
                 scope.statsDisplay.total = 0;
                 scope.statsDisplay.complete = 0;
                 scope.statsDisplay.prettyElapsed = '';
@@ -1623,8 +1624,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               statsUIProc = null;
             },
             statsUIProc,
-            statsClear = function() {
-              statsObj = { clear:  true };
+            statsClear = function () {
+              statsObj = {
+                clear: true
+              };
               statsFunc();
             },
             statsUpdate = function (stats) {
