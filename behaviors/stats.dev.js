@@ -2,7 +2,6 @@ window.dashStats = window.dashStats || (function (environment) {
   "use strict";
   var model = function () {
       return {
-        actual: {},
         display: {
           actual: {},
           thoroughput_rate: {},
@@ -13,7 +12,6 @@ window.dashStats = window.dashStats || (function (environment) {
           remaining: {},
           duration: {}
         },
-        milliseconds: {},
         metrics: {
           add: {
             average: NaN,
@@ -288,25 +286,25 @@ window.dashStats = window.dashStats || (function (environment) {
         /* Time */
         
         datetime = new Date().getTime();
-        state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || datetime;
-        state.context.statistics.request.milliseconds.started = state.context.statistics.request.milliseconds.started || datetime;
-        state.context.statistics.request.milliseconds.last = state.context.statistics.request.milliseconds.last || state.context.statistics.request.milliseconds.started || datetime;
+        state.context.statistics.total.started = state.context.statistics.total.started || datetime;
+        state.context.statistics.request.started = state.context.statistics.request.started || datetime;
+        state.context.statistics.request.last = state.context.statistics.request.last || state.context.statistics.request.started || datetime;
 
-        state.context.statistics.total.milliseconds.elapsed = datetime - state.context.statistics.total.milliseconds.started;
-        state.context.statistics.total.actual.total = state.context.statistics.total.milliseconds.elapsed;
+        state.context.statistics.total.elapsed = datetime - state.context.statistics.total.started;
+        state.context.statistics.total.metrics.total.actual = state.context.statistics.total.elapsed;
 
-        state.context.statistics.request.milliseconds.elapsed = datetime - state.context.statistics.request.milliseconds.started;
-        state.context.statistics.request.actual.total = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.request.elapsed = datetime - state.context.statistics.request.started;
+        state.context.statistics.request.metrics.total.actual = state.context.statistics.request.elapsed;
 
-        state.context.statistics.request.metrics[n].elapsed = state.context.statistics.request.milliseconds.elapsed;
-        state.context.statistics.request.metrics[v].elapsed = state.context.statistics.request.milliseconds.elapsed;
-        state.context.statistics.request.metrics.elapsed.total = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.request.metrics[n].elapsed = state.context.statistics.request.elapsed;
+        state.context.statistics.request.metrics[v].elapsed = state.context.statistics.request.elapsed;
+        state.context.statistics.request.metrics.elapsed.total = state.context.statistics.request.elapsed;
 
-        state.context.statistics.total.metrics[n].elapsed = state.context.statistics.request.milliseconds.elapsed;
-        state.context.statistics.total.metrics[v].elapsed = state.context.statistics.request.milliseconds.elapsed;
-        state.context.statistics.total.metrics.total.elapsed = state.context.statistics.request.milliseconds.elapsed;
+        state.context.statistics.total.metrics[n].elapsed = state.context.statistics.request.elapsed;
+        state.context.statistics.total.metrics[v].elapsed = state.context.statistics.request.elapsed;
+        state.context.statistics.total.metrics.total.elapsed = state.context.statistics.request.elapsed;
 
-        diff = datetime - state.context.statistics.request.milliseconds.last;
+        diff = datetime - state.context.statistics.request.last;
         state.context.statistics.request.metrics[n].between = diff;
         state.context.statistics.request.metrics[v].between = diff;
         state.context.statistics.request.metrics.total.between = diff;
@@ -416,8 +414,8 @@ window.dashStats = window.dashStats || (function (environment) {
         state.context.statistics.total.display.remaining[n] = prettyTime(state.context.statistics.total.metrics[n].remaining);
         state.context.statistics.total.display.remaining.total = prettyTime(state.context.statistics.total.metrics.total.remaining);
 
-        state.context.statistics.request.display.actual.total = prettyTime(state.context.statistics.request.actual.total);
-        state.context.statistics.total.display.actual.total = prettyTime(state.context.statistics.total.actual.total);
+        state.context.statistics.request.display.actual.total = prettyTime(state.context.statistics.request.metrics.total.actual);
+        state.context.statistics.total.display.actual.total = prettyTime(state.context.statistics.total.metrics.total.actual);
 
         state.context.statistics.total.display.thoroughput_rate[v] = Math.floor(1000/state.context.statistics.total.metrics[v].rate);
         state.context.statistics.total.display.thoroughput_rate[n] = Math.floor(1000/state.context.statistics.total.metrics[n].rate);
@@ -576,8 +574,8 @@ window.dashStats = window.dashStats || (function (environment) {
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
       state.context.statistics.request = model();
-      state.context.statistics.request.milliseconds.started = new Date().getTime();
-      state.context.statistics.total.milliseconds.started = state.context.statistics.total.milliseconds.started || new Date().getTime();
+      state.context.statistics.request.started = new Date().getTime();
+      state.context.statistics.total.started = state.context.statistics.total.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
       if ('count.entries' !== state.type && null !== state.type.match(/\.entries$/)) {
         deferred = this.deferred();
@@ -651,7 +649,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.metrics.total.requests += 1;
       state.context.statistics.total.metrics.total.requests += 1;
       calculate(verb, noun);
-      state.context.statistics.request.milliseconds.last = datetime;
+      state.context.statistics.request.last = datetime;
     }
     return state;
   };
