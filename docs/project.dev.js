@@ -460,48 +460,10 @@ dashApp.factory('dashAppSplashBroadcast', function () {
     }
   };
 });
+
 dashApp.controller('dashAppSplashController', ['$scope', '$http',
   function ($scope, $http) {
-    var start = 2013,
-      queue = [],
-      start_promise,
-      in_progress = false,
-      fresh_start = true,
-      totalRun = 0,
-      processNext = function () {
-        if (!in_progress && queue.length > 0) {
-          in_progress = true;
-          if (true === fresh_start) {
-            start_promise = new Date().getTime();
-            fresh_start = false;
-            totalRun = 0;
-          }
-          doNext(queue.shift());
-          totalRun += 1;
-        } else {
-          fresh_start = true;
-        }
-      },
-      doNext = function (next) {
-        dash.add.entry({
-          database: 'dash-demo',
-          store: 'imdb',
-          auto_increment: true,
-          statistics: true,
-          forecast: false,
-          store_key_path: 'id',
-          data: next
-        })
-        (function (context) {
-          in_progress = false;
-          statsUpdate(context.statistics);
-          processNext();
-        }, function (context) {
-          in_progress = false;
-          processNext();
-        });
-      };
-
+    //does nothing
 }]);
 
 
