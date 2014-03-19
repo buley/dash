@@ -591,7 +591,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.started = new Date().getTime();
       state.context.statistics.total.started = state.context.statistics.total.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
-      if ('add.entry' === state.type || ( 'count.entries' !== state.type && null !== state.type.match(/\.entries$/) && this.is(state.context.forecast,true))) {
+      if ( ( 'count.entries' !== state.type && null !== state.type.match(/\.entries$/) && this.is(state.context.forecast,true))) {
         deferred = this.deferred();
         promise(function(context) {
           var processTotal = function(total) {
