@@ -488,6 +488,8 @@ dashApp.controller('dashAppSplashController', ['$scope', '$http',
           database: 'dash-demo',
           store: 'imdb',
           auto_increment: true,
+          statistics: true,
+          forecast: false,
           store_key_path: 'id',
           data: next
         })
@@ -1728,7 +1730,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                             auto_increment: true,
                             store_key_path: null,
                             data: next,
-                            statistics: true
+                            statistics: true,
+                            forecast: false
                           })
                           (function (context) {
                             in_progress = false;
