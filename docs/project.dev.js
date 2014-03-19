@@ -5,6 +5,7 @@ dashApp.config(['$routeProvider',
 
     /* Behaviors */
     dash.add.behavior(dashStats);
+    dash.add.behavior(dashMatch);
 
     $routeProvider
       .when('/about', {
