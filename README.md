@@ -32,7 +32,7 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 * [Task-based](http://gruntjs.com/) Development Workflow
 * [Automated](https://github.com/karma-runner/karma) [Jasmine](http://pivotal.github.io/jasmine/) [Testing](https://github.com/karma-runner/karma-jasmine) 
 * [Coverage](https://github.com/gotwarlost/istanbul) [Testing](https://github.com/karma-runner/karma-coverage)
-* Continuous [Integration](travis-ci.org/editor/dash) and [Coverage](https://github.com/cainus/node-coveralls) Reporting
+* Continuous [Integration](http://travis-ci.org/editor/dash) and [Coverage](https://github.com/cainus/node-coveralls) Reporting
 
 #### Documention
 
