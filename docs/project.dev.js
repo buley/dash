@@ -1702,7 +1702,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                                 id: context.key
                               });
                             }
-                            console.log('added',context.statistics.request.metrics);
+                            console.log('added',context.statistics.request);
                             statsUpdate(context.statistics);
                             scope.progress[attr] = context;
                             queueSave();
