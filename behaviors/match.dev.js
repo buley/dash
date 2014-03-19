@@ -6,9 +6,9 @@ window.dashMatch = window.dashMatch || (function (environment) {
     }
     var promise = state.promise,
         deferred = this.deferred();
-    console.log('wating in match',state.context,state.type);
     promise(function(context) {
-      console.log('killed');
+      console.log('killed',context.type, state.context.match);
+      context.type
       deferred.resolve(context);
     });
     state.promise = deferred.promise;
