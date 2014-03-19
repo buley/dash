@@ -592,7 +592,9 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.type = state.type;
       if ( ( 'count.entries' !== state.type && null !== state.type.match(/\.entries$/) && this.is(state.context.forecast,true))) {
         deferred = this.deferred();
+	console.log('waiting on them');
         promise(function(context) {
+	  console.log('done waiting on them');
           var processTotal = function(total) {
             if (theirs.exists(state.context.limit) && state.context.limit < total ) {
               state.context.statistics.request.metrics[verb].expected = state.context.limit;
@@ -619,6 +621,7 @@ window.dashStats = window.dashStats || (function (environment) {
             state.promise = promise;
             deferred.resolve(state.context);
           };
+	  console.log('waiting on dash');
           if (!!state.context.total) {
             processTotal(state.context.total);
           } else {
@@ -631,6 +634,8 @@ window.dashStats = window.dashStats || (function (environment) {
               store: context.store,
               store_key_path: context.store_key_path,
             })(function (context) {
+	
+	      console.log('done waiting on dash');
               state.context.total = context.total;
               processTotal(context.total);
             }, function(context) {
