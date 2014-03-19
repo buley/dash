@@ -7,7 +7,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
     var promise = state.promise,
         deferred = this.deferred();
     promise(function(context) {
-      if (Math.random() > .5) context.type = null;
+      //context.type = null;
       deferred.resolve(context);
     });
     state.promise = deferred.promise;
