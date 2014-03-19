@@ -8,9 +8,8 @@ window.dashMatch = window.dashMatch || (function (environment) {
         deferred = this.deferred();
     promise(function(context) {
       setTimeout( function() {
-        state.context = contex;
         state.promise = promise;
-        deferred.resolve(state.context);
+        deferred.resolve(context);
       }, 3000 );
     });
     state.promise = deferred.promise;
