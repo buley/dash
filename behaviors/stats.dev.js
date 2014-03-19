@@ -595,7 +595,8 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.type = state.type;
       if ( ( 'count.entries' !== state.type && null !== state.type.match(/\.entries$/) && this.is(state.context.forecast,true))) {
         deferred = this.deferred();
-        promise(function(context) {
+        promise(function(st) {
+	  var context = st.context;
           var processTotal = function(total) {
             if (theirs.exists(state.context.limit) && state.context.limit < total ) {
               state.context.statistics.request.metrics[verb].expected = state.context.limit;
