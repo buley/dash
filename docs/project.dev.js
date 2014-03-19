@@ -1692,7 +1692,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                             auto_increment: true,
                             store_key_path: null,
                             data: next,
-                            stats: false,
+                            stats: true,
                             forecast: false
                           })
                           (function (context) {
