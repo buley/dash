@@ -1564,6 +1564,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
           var last_time = new Date().getTime(),
             first_time = null,
             statsProc = null,
+	    statsObj = {},
             statsTimeout = 1000,
             wasCompleted = false,
             statsFunc = function () {
