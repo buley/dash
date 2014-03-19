@@ -479,7 +479,6 @@ dashApp.controller('dashAppSplashController', ['$scope', '$http',
           doNext(queue.shift());
           totalRun += 1;
         } else {
-          console.log('ADDS COMPLETE');
           fresh_start = true;
         }
       },
@@ -495,6 +494,7 @@ dashApp.controller('dashAppSplashController', ['$scope', '$http',
         })
         (function (context) {
           in_progress = false;
+          statsUpdate(context.statistics);
           processNext();
         }, function (context) {
           in_progress = false;
