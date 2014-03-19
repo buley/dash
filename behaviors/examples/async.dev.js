@@ -1,7 +1,7 @@
-window.dashMatch = window.dashMatch || (function (environment) {
+window.dashAsync = window.dashAsync || (function (environment) {
   "use strict";
   return [ null, function (state) {
-    if(this.isEmpty(state.context.match)) {
+    if(this.isnt(state.context.async, true)) {
       return state;
     }
     var promise = state.promise,
