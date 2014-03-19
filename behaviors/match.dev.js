@@ -4,7 +4,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
     if(this.isEmpty(state.context.match)) {
       return state;
     }
-    deferred = this.deferred();
+    var deferred = this.deferred();
     promise(function(context) {
       setTimeout( function() {
         state.context = contex;
