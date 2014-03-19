@@ -1,8 +1,8 @@
 language: node_js
-ndoe_js:
+node_js:
   - 0.8
 
-before_script:
+before_script
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - sleep 3
@@ -10,3 +10,9 @@ before_script:
 
 script:
   - grunt
+
+branches:
+  only:
+    - master
+    - stable
+    - development
