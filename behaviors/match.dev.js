@@ -6,10 +6,10 @@ window.dashMatch = window.dashMatch || (function (environment) {
     }
     var promise = state.promise,
         deferred = this.deferred();
+    console.log('wating in match',state.context,state.type);
     promise(function(context) {
-      setTimeout( function() {
-        deferred.resolve(context);
-      }, 3000 );
+      console.log('killed');
+      deferred.resolve(context);
     });
     state.promise = deferred.promise;
     return state;
