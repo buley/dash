@@ -1659,6 +1659,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                         addCount = 0,
                         addLimit = cmdargs.limit,
                         stack_length = 0,
+			statistics = null,
                         in_progress = false,
                         processNext = function (context) {
                           if (0 === stacklist.length) {
@@ -1693,7 +1694,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                             store_key_path: null,
                             data: next,
                             stats: true,
-                            forecast: false
+                            forecast: false,
+			    statistics: statistics
                           })
                           (function (context) {
                             in_progress = false;
@@ -1702,7 +1704,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                                 id: context.key
                               });
                             }
-                            statsUpdate(context.statistics);
+			    statistics = context.statistics;
+                            statsUpdate(statistics);
                             scope.progress[attr] = context;
                             queueSave();
                             if (!addLimit || (addCount++ < addLimit)) {
