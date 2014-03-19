@@ -1576,7 +1576,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 scope.statsDisplay.prettyAvg = '';
                 scope.statsDisplay.prettyRate = '';
               } else {
-                scope.statsDisplay.total = statsObj.request.metrics.total.expected;
+                scope.statsDisplay.total = statsObj.total.metrics.total.expected;
                 scope.statsDisplay.complete = statsObj.request.metrics.total.requests;
                 scope.statsDisplay.prettyElapsed = statsObj.request.display.actual.total;
                 scope.statsDisplay.prettyRemain = statsObj.request.display.remaining.total;
