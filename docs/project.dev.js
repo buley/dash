@@ -1564,7 +1564,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
           var last_time = new Date().getTime(),
             first_time = null,
             statsProc = null,
-	    statsObj = {},
             statsTimeout = 1000,
             wasCompleted = false,
             statsFunc = function () {
@@ -1597,9 +1596,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             },
             statsUpdate = function (stats) {
               statsObj = stats;
-              if (!statsUIProc) {
-              	statsUIProc = setTimeout(statsFunc, 100);
+              statsFunc();
+              if (statsUIProc) {
+                clearTimeout(statsUIProc);
               }
+              statsUIProc = setTimeout(statsClear, 10000);
             },
             doLayout = function (cmdargs) {
               var file, start = false,
