@@ -14,5 +14,5 @@ window.dashMatch = window.dashMatch || (function (environment) {
     });
     state.promise = deferred.promise;
     return state;
-  };
+  } ];
 }(self));
