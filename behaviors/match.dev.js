@@ -8,7 +8,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
         deferred = this.deferred();
     promise(function(context) {
       console.log('killed',context.type, state.context.match);
-      context.type
+      context.type = null;
       deferred.resolve(context);
     });
     state.promise = deferred.promise;
