@@ -282,6 +282,9 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           msecs = msecs.toString();
         }
+	if ( 2 === msecs.length ) {
+	  msecs += '0';
+	}
         return hours + minutes + ':' + secs + '.' + msecs;
       },
       calculate = function(v, n) {
