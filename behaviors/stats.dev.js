@@ -232,7 +232,6 @@ window.dashStats = window.dashStats || (function (environment) {
     if(this.isnt(state.context.stats,true)) {
       return state;
     }
-    consolr.loh('stats');
     var context = state.context,
       pieces = state.type.split('.'),
       verb = pieces[0],
