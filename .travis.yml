@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-  - 0.8
+  - "0.11"
+  - "0.10"
+  - "0.8"
+  - "0.6"
 
 before_script
   - export DISPLAY=:99.0
@@ -11,8 +14,5 @@ before_script
 script:
   - grunt
 
-branches:
-  only:
-    - master
-    - stable
-    - development
+addons:
+  firefox: "26.0"
