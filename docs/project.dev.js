@@ -1539,6 +1539,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
 				}
 			}
 		},
+		any: true,
                 key: new Date('1/1/' + scope.range).getTime()
               },
                 q = new RegExp(scope.query),
