@@ -599,7 +599,7 @@ window.dashStats = window.dashStats || (function (environment) {
 	  var context = st.context;
           var processTotal = function(total) {
 
-	    if (!!verb || !!noun) {
+	    if (!verb || !noun) {
             	state.promise = promise;
             	deferred.resolve(state.context);
 		return;
@@ -668,7 +668,11 @@ window.dashStats = window.dashStats || (function (environment) {
           state.context.statistics.request.metrics.total.expected += 1;
           state.context.statistics.total.metrics.total.expected += 1;
         }
-        calculate(verb, noun);
+
+	if (!!verb && !!noun) {
+           calculate(verb, noun);
+        }
+
       }
     } else {
       pieces = state.context.statistics.request.type.split('.');
