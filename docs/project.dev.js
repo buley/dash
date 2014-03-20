@@ -1529,6 +1529,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 auto_increment: true,
                 store_key_path: 'id',
                 index: 'season',
+		stats: true,
                 index_key_path: 'sy',
                 limit: limit,
 		match: function(obj) {
@@ -1554,15 +1555,14 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               }, function (context) {
                 console.log('dash promise rejected', context);
               }, function (context) {
-                if ( !! context.entry.se && null !== context.entry.se.match(q) || !! context.entry.ep && null !== context.entry.ep.match(q)) {
+		console.log('found item',context);
                   context.id = context.primary_key;
                   statsObj = context.statistics;
                   if (true === scope.visuals) {
                     system.add(context);
                   }
-                }
 
-                statsUpdate('searches');
+                statsUpdate(context.statistics);
                 //system.cameraMod( 'z', 2, 50000, 10 );
                 //system.cameraMod( 'z', 1, 10000, 0 );
               });
