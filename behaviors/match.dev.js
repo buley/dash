@@ -38,7 +38,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 					any = true;
 				}
 			} else if ( that.isRegEx(val) ) {
-				if ( that.isnt(data[key], val) && that.exists(data[key]) && null === data[ key ].match(val) ) {
+				if ( that.isnt(data[key], val) && !that.exists(data[key]) || null === data[ key ].match(val) ) {
 					ok = false;
 				} else {
 					any = true;
