@@ -32,7 +32,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 			}
 		} );
 		return matches;
-	}
+	},
 	reduced;
     promise(function(context) {
       //context.type = null;
