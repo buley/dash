@@ -55,10 +55,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 	reduced = reduce(st.context.match, st.context);
 	if ( 'notify' === st.type && !match(reduced, st.context.entry) ) {
 		st.type = null;
-	} else {
-		console.log('all good');
 	}
-	st.promise = promise;
         deferred.resolve(st);
     });
     state.promise = deferred.promise;
