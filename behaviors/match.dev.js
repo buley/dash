@@ -26,7 +26,6 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		if (that.isEmpty(data)) {
 			return false;
 		}
-		console.log('match?', data, expr);
 		that.iterate(expr, function(key, val) { 
 			var ok = true;
 			if ( !that.exists(data[key]) ) {
@@ -52,7 +51,9 @@ window.dashMatch = window.dashMatch || (function (environment) {
     promise(function(context) {
       //context.type = null;
 	reduced = reduce(state.context.match, context);
-	console.log('reduced', match(reduced, state.context.entry) );
+	if ( match(reduced, state.context.entry) ) {
+		console.log('matched', reduced, state.context.entry);
+	}
       deferred.resolve(context);
     });
     state.promise = deferred.promise;
