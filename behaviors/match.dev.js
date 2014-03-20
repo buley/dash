@@ -23,6 +23,9 @@ window.dashMatch = window.dashMatch || (function (environment) {
 	},
 	match = function(expr, data) {
 		var matches = true;
+		if (API.empty(data)) {
+			return false;
+		}
 		console.log('match?', data, expr);
 		that.iterate(expr, function(key, val) { 
 			var ok = true;
