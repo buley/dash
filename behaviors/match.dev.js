@@ -26,25 +26,23 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		if (that.isEmpty(data)) {
 			return false;
 		}
+		var ok = true;
 		that.iterate(expr, function(key, val) { 
-			var ok = true;
+
 			if ( !that.exists(data[key]) ) {
-				return false;
+				ok = false;
 			}
 			if ( that.isObject(val) ) {
 				ok = match(val, data[key]);
-				if ( !ok ) {
-					return false;
-				}
 			} else if ( that.isRegEx(val) ) {
 				if ( that.isnt(data[key], val) && null === data[ key ].match(val) ) {
-					return false;
+					ok = false;
 				}
 			} else if ( data[key] !== val) {
-				return false;
+				ok = false;
 			}
 		} );
-		return true;
+		return ok;
 	},
 	reduced;
     promise(function(context) {
