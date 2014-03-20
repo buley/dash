@@ -26,7 +26,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		if (that.isEmpty(data)) {
 			return false;
 		}
-		var ok = true;
+		var ok = true, any = false;
 		that.iterate(expr, function(key, val) { 
 
 			if ( !that.exists(data[key]) ) {
@@ -34,16 +34,22 @@ window.dashMatch = window.dashMatch || (function (environment) {
 			}
 			if ( that.isObject(val) ) {
 				ok = match(val, data[key]);
+				if ( ok ) {
+					any = true;
+				}
 			} else if ( that.isRegEx(val) ) {
-				console.log('x', data[key], val);
 				if ( that.isnt(data[key], val) && null === data[ key ].match(val) ) {
 					ok = false;
+				} else {
+					any = true;
 				}
 			} else if ( data[key] !== val) {
 				ok = false;
+			} else {
+				any = true;
 			}
 		} );
-		return ok;
+		return that.is(state.context.any, true ) ? any : ok;
 	},
 	reduced;
     promise(function(context) {
