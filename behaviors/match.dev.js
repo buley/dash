@@ -22,16 +22,28 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		return maybeReduce(expression);	
 	},
 	match = function(expr, data) {
-		var matches = false;
+		var matches = true;
 		console.log('match?', data, expr);
 		that.iterate(expr, function(key, val) { 
-			if ( that.isRegEx(val) ) {
-				console.log("REGEX",key,val);
-			} else {
-				console.log('normal',key,val);
+			var ok = true;
+			if ( !that.exists(data[key]) ) {
+				return false;
+			}
+			console.log('normal',data[key], val);
+			if ( that.isObject(val) ) {
+				ok = match(val, data[key]);
+				if ( !ok ) {
+					return false;
+				}
+			} else if ( that.isRegEx(val) ) {
+				if ( that.isnt(data[key], val) && null === data[ key ].match(val) ) {
+					return false;
+				}
+			} else if ( data[key] !== val) {
+				return false;
 			}
 		} );
-		return matches;
+		return true;
 	},
 	reduced;
     promise(function(context) {
