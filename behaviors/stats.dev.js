@@ -233,7 +233,7 @@ window.dashStats = window.dashStats || (function (environment) {
       return state;
     }
     var context = state.context,
-      pieces = state.type.split('.'),
+      pieces = !!state.type ? state.type.split('.') : [],
       verb = pieces[0],
       noun = pieces[1],
       deferred,
