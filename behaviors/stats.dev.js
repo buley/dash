@@ -598,6 +598,12 @@ window.dashStats = window.dashStats || (function (environment) {
         promise(function(st) {
 	  var context = st.context;
           var processTotal = function(total) {
+
+	    if (!!verb || !!noun) {
+            	state.promise = promise;
+            	deferred.resolve(state.context);
+		return;
+            }
             if (theirs.exists(state.context.limit) && state.context.limit < total ) {
               state.context.statistics.request.metrics[verb].expected = state.context.limit;
               state.context.statistics.request.metrics.total.expected = state.context.limit;
