@@ -49,12 +49,13 @@ window.dashMatch = window.dashMatch || (function (environment) {
 				any = true;
 			}
 		} );
-		return that.is(state.context.any, true ) ? any : ok;
+		return that.is(state.context.any, true) ? any : ok;
 	},
 	reduced;
     promise(function(context) {
       //context.type = null;
 	reduced = reduce(state.context.match, context);
+	console.log('matched?',state.context.entry);
 	if ( match(reduced, state.context.entry) ) {
 		console.log('matched', reduced, state.context.entry);
 	}
