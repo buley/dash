@@ -26,9 +26,9 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		console.log('match?', data, expr);
 		that.iterate(expr, function(key, val) { 
 			if ( that.isRegEx(val) ) {
-				console.log("REGEX",key,value);
+				console.log("REGEX",key,val);
 			} else {
-				console.log('normal',key,value);
+				console.log('normal',key,val);
 			}
 		} );
 		return matches;
