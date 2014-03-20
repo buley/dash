@@ -57,7 +57,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 	reduced = reduce(st.context.match, st.context);
 	if ( 'notify' === st.type && !match(reduced, st.context.entry) ) {
 		console.log('unmatched', reduced, st.context.entry);
-		context.type = null;
+		st.type = null;
 	}
       deferred.resolve(st);
     });
