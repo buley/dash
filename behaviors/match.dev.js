@@ -11,7 +11,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		var reducible = false,
 			maybeReduce = function(expr) {
 				if (that.isFunction(expr)) {
-					expr = that.safeApply(expr, [context], that);
+					expr = that.apply(expr, [context], that);
 				}
 				if (that.isObject(expr)) {
 					that.iterate(expr, function(key, value) {
