@@ -57,7 +57,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		st.type = null;
         	deferred.reject(st);
 	} else {
-        	deferred.resolve(st);
+        	deferred.resolve(st.context);
 	}
     });
     state.promise = deferred.promise;
