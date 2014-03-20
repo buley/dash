@@ -1532,11 +1532,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 index_key_path: 'sy',
                 limit: limit,
 		match: function(obj) {
-			console.log('match', obj);
 			return {
 				se: new RegExp( scope.query ),
 				ep: function(obj2) {
-					console.log('same?',obj2===obj);
 					return new RegExp( scope.query );
 				}
 			}
