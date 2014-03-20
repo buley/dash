@@ -35,6 +35,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 			if ( that.isObject(val) ) {
 				ok = match(val, data[key]);
 			} else if ( that.isRegEx(val) ) {
+				console.log('x', data[key], val);
 				if ( that.isnt(data[key], val) && null === data[ key ].match(val) ) {
 					ok = false;
 				}
