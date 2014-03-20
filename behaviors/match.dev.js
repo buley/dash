@@ -59,7 +59,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		console.log('unmatched', reduced, st.context.entry);
 		context.type = null;
 	}
-      deferred.resolve(context);
+      deferred.resolve(st);
     });
     state.promise = deferred.promise;
     return state;
