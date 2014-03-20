@@ -53,10 +53,12 @@ window.dashMatch = window.dashMatch || (function (environment) {
 	},
 	reduced;
     promise(function(context) {
+	console.log('promised',context);
       //context.type = null;
 	reduced = reduce(state.context.match, context);
-	if ( match(reduced, state.context.entry) ) {
-		console.log('matched', reduced, state.context.entry);
+	if ( 'notify' === context.type && !match(reduced, state.context.entry) ) {
+		console.log('unmatched', reduced, state.context.entry);
+		context.type = null;
 	}
       deferred.resolve(context);
     });
