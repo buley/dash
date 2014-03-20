@@ -675,19 +675,21 @@ window.dashStats = window.dashStats || (function (environment) {
 
       }
     } else {
-      pieces = state.context.statistics.request.type.split('.');
-      verb = pieces[0];
-      noun = pieces[1];
-      state.context.statistics.request.metrics[verb].requests += 1;
-      state.context.statistics.total.metrics[verb].requests += 1;
-      state.context.statistics.request.metrics[noun].requests += 1;
-      state.context.statistics.total.metrics[noun].requests += 1;
-      state.context.statistics.request.metrics[state.type].requests += 1;
-      state.context.statistics.total.metrics[state.type].requests += 1;
-      state.context.statistics.request.metrics.total.requests += 1;
-      state.context.statistics.total.metrics.total.requests += 1;
-      calculate(verb, noun);
-      state.context.statistics.request.last = datetime;
+	if ( !state.context.statistics.request.type ) {
+	      pieces = state.context.statistics.request.type.split('.');
+	      verb = pieces[0];
+	      noun = pieces[1];
+	      state.context.statistics.request.metrics[verb].requests += 1;
+	      state.context.statistics.total.metrics[verb].requests += 1;
+	      state.context.statistics.request.metrics[noun].requests += 1;
+	      state.context.statistics.total.metrics[noun].requests += 1;
+	      state.context.statistics.request.metrics[state.type].requests += 1;
+	      state.context.statistics.total.metrics[state.type].requests += 1;
+	      state.context.statistics.request.metrics.total.requests += 1;
+	      state.context.statistics.total.metrics.total.requests += 1;
+	      calculate(verb, noun);
+	      state.context.statistics.request.last = datetime;
+	}
     }
     return state;
   };
