@@ -52,12 +52,11 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		return that.is(state.context.any, true) ? any : ok;
 	},
 	reduced;
-    promise(function(context) {
-	console.log('promised',context);
+    promise(function(st) {
       //context.type = null;
-	reduced = reduce(state.context.match, context);
-	if ( 'notify' === context.type && !match(reduced, state.context.entry) ) {
-		console.log('unmatched', reduced, state.context.entry);
+	reduced = reduce(st.context.match, st.context);
+	if ( 'notify' === st.context.type && !match(reduced, st.context.entry) ) {
+		console.log('unmatched', reduced, st.context.entry);
 		context.type = null;
 	}
       deferred.resolve(context);
