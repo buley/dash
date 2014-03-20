@@ -675,7 +675,7 @@ window.dashStats = window.dashStats || (function (environment) {
 
       }
     } else {
-	if ( !state.context.statistics.request.type ) {
+	if ( !!state.context.statistics.request.type ) {
 	      pieces = state.context.statistics.request.type.split('.');
 	      verb = pieces[0];
 	      noun = pieces[1];
