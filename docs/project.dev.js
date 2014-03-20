@@ -1535,8 +1535,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
 			console.log('match', obj);
 			return {
 				se: new RegExp( scope.query ),
-				ep: function(val) {
-					return null !== val.match( new RegExp( scope.query ) );
+				ep: function(obj2) {
+					console.log('same?',obj2===obj);
+					return new RegExp( scope.query );
 				}
 			}
 		},
