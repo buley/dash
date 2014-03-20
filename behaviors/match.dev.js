@@ -55,7 +55,6 @@ window.dashMatch = window.dashMatch || (function (environment) {
     promise(function(context) {
       //context.type = null;
 	reduced = reduce(state.context.match, context);
-	console.log('matched?',state.context.any);
 	if ( match(reduced, state.context.entry) ) {
 		console.log('matched', reduced, state.context.entry);
 	}
