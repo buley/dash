@@ -23,7 +23,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 	},
 	match = function(expr, data) {
 		var matches = true;
-		if (API.empty(data)) {
+		if (that.isEmpty(data)) {
 			return false;
 		}
 		console.log('match?', data, expr);
