@@ -21,9 +21,16 @@ window.dashMatch = window.dashMatch || (function (environment) {
 		}
 		return maybeReduce(expression);	
 	},
-	match = function(expression, data) {
+	match = function(expr, data) {
 		var matches = false;
-		console.log('match?', data, expression);
+		console.log('match?', data, expr);
+		that.iterate(expr, function() { 
+			if ( that.isRegEx(val) ) {
+				console.log("REGEX",key,value);
+			} else {
+				console.log('normal',key,value);
+			}
+		} );
 		return matches;
 	}
 	reduced;
