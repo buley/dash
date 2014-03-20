@@ -24,7 +24,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
 	match = function(expr, data) {
 		var matches = false;
 		console.log('match?', data, expr);
-		that.iterate(expr, function() { 
+		that.iterate(expr, function(key, val) { 
 			if ( that.isRegEx(val) ) {
 				console.log("REGEX",key,value);
 			} else {
