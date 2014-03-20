@@ -55,7 +55,7 @@ window.dashMatch = window.dashMatch || (function (environment) {
     promise(function(st) {
       //context.type = null;
 	reduced = reduce(st.context.match, st.context);
-	if ( 'notify' === st.context.type && !match(reduced, st.context.entry) ) {
+	if ( 'notify' === st.type && !match(reduced, st.context.entry) ) {
 		console.log('unmatched', reduced, st.context.entry);
 		context.type = null;
 	}
