@@ -593,7 +593,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.started = new Date().getTime();
       state.context.statistics.total.started = state.context.statistics.total.started || new Date().getTime();
       state.context.statistics.request.type = state.type;
-      if ( ( 'count.entries' !== state.type && null !== state.type.match(/\.entries$/) && this.is(state.context.forecast,true))) {
+      if ( !!state.method && ( 'count.entries' !== state.method && null !== state.method.match(/\.entries$/) && this.is(state.context.forecast,true))) {
         deferred = this.deferred();
         promise(function(st) {
 	  var context = st.context;
