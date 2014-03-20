@@ -56,10 +56,8 @@ window.dashMatch = window.dashMatch || (function (environment) {
 	reduced = reduce(st.context.match, st.context);
 	if ( 'notify' === st.type && !match(reduced, st.context.entry) ) {
 		st.type = null;
-	} else {
-		console.log('rare',st);
 	}
-      deferred.resolve(st);
+        deferred.resolve(st);
     });
     state.promise = deferred.promise;
     return state;
