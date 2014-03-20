@@ -1531,7 +1531,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 index: 'season',
                 index_key_path: 'sy',
                 limit: limit,
-		match: function(object) {
+		match: function(obj) {
 			console.log('match', obj);
 			return {
 				se: new RegExp( scope.query ),
