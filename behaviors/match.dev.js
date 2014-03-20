@@ -31,7 +31,6 @@ window.dashMatch = window.dashMatch || (function (environment) {
 			if ( !that.exists(data[key]) ) {
 				return false;
 			}
-			console.log('normal',data[key], val);
 			if ( that.isObject(val) ) {
 				ok = match(val, data[key]);
 				if ( !ok ) {
