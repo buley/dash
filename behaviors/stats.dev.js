@@ -401,7 +401,7 @@ window.dashStats = window.dashStats || (function (environment) {
           state.context.statistics.total.metrics.total.remaining = 0;
         } 
 
-        state.context.statistics.total.display.elapsed[v] = prettyTime(state.context.statistics.total.metrics[v].elapsedh);
+        state.context.statistics.total.display.elapsed[v] = prettyTime(state.context.statistics.total.metrics[v].elapsed);
         state.context.statistics.total.display.elapsed[n] = prettyTime(state.context.statistics.total.metrics[n].elapsed);
         state.context.statistics.total.display.elapsed.total = prettyTime(state.context.statistics.total.metrics.total.elapsed);
 
@@ -431,7 +431,6 @@ window.dashStats = window.dashStats || (function (environment) {
 
         state.context.statistics.request.display.actual.total = prettyTime(state.context.statistics.request.metrics.total.actual);
         state.context.statistics.total.display.actual.total = prettyTime(state.context.statistics.total.metrics.total.actual);
-
 
         state.context.statistics.total.display.thoroughput_rate[v] = Math.floor(1000/state.context.statistics.total.metrics[v].rate);
         state.context.statistics.total.display.thoroughput_rate[n] = Math.floor(1000/state.context.statistics.total.metrics[n].rate);
@@ -581,7 +580,7 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           state.context.statistics.request.display.speed_average.total += ' ms/entry';
         } 
-
+	console.log('display', state.context.statistics.request.display);
 
       };
     state.context.statistics = state.context.statistics || {
