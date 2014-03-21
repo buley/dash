@@ -1596,7 +1596,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 //scope.statsDisplay.prettyAvg = statsObj.request.prettySpeedAverage.total;
                 //scope.statsDisplay.prettyRate = statsObj.request.prettySpeedRate.total;
 
-		console.log('stats',scope.statsDisplay);
               }
               statsUIProc = null;
             },
