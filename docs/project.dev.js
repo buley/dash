@@ -500,17 +500,14 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
 		      if (pid) {
 			clearTimeout(pid);
 		      }
-		      if (!data) {
-			pid = setTimeout(function () {
-			  scope.$apply(function () {
-			    scope.data = {
-			      se: '',
-			      ep: ''
-			    };
-			  });
-			}, 3000);
-			return;
-		      }
+		pid = setTimeout(function () {
+		  scope.$apply(function () {
+		    scope.data = {
+		      se: '',
+		      ep: ''
+		    };
+		  });
+		}, 3000);
               }, function (context) {
                 console.log('missing entry', context);
               });
