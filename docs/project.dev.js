@@ -392,8 +392,7 @@ dashApp.controller('dashAppDocsController', ['$scope', '$http', '$templateCache'
       });
       if (!item.children) {
         return;
-      }
-      else {
+      } else {
         _.map(item.children, function (datum) {
           process(datum);
         });
@@ -550,14 +549,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               limit = totalDownloaded(scope.downloaded, scope.range, scope.sort);
               if ('million' === field && limit > 1000000) {
                 limit = 1000000;
-              }
-              else if ('hundredthousand' === field && limit > 100000) {
+              } else if ('hundredthousand' === field && limit > 100000) {
                 limit = 100000;
-              }
-              else if ('tenthousand' === field && limit > 10000) {
+              } else if ('tenthousand' === field && limit > 10000) {
                 limit = 10000;
-              }
-              else if ('thousand' === field && limit > 1000) {
+              } else if ('thousand' === field && limit > 1000) {
                 limit = 1000;
 
               }
@@ -568,8 +564,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               file;
             if ('from' === scope.sort) {
               values = [scope.files[scope.range]];
-            }
-            else {
+            } else {
               for (file in scope.files) {
                 if (false === start && scope.files.hasOwnProperty(file)) {
                   if (file === scope.range.toString()) {
@@ -590,14 +585,12 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               if (cut !== xitem) {
                 cut = parseInt(cut, 10);
                 total += cut * 1024;
-              }
-              else {
+              } else {
                 cut = xitem.replace(/M$/, '');
                 if (cut !== xitem) {
                   cut = parseInt(cut, 10);
                   total += cut * 1048576;
-                }
-                else {
+                } else {
                   cut = parseInt(cut, 10);
                   total += cut;
                 }
@@ -605,11 +598,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             }
             if (total < 1024) {
               return (total).toString() + 'B download';
-            }
-            else if (total < 1048576) {
+            } else if (total < 1048576) {
               return Math.floor(total / 1024).toString() + 'KB download';
-            }
-            else {
+            } else {
               return Math.round(total / 1048576).toString() + 'MB download';
             }
           };
@@ -1294,8 +1285,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   }
                   if ('from' === sort) {
                     return downloaded[attr];
-                  }
-                  else {
+                  } else {
                     total += downloaded[attr];
                   }
                 }
@@ -1312,8 +1302,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             var is_installed, x, xlen = scope.verbs.length;
             if (true === hasDownloaded(newer)) {
               is_installed = true;
-            }
-            else {
+            } else {
               is_installed = false;
             }
             for (x = 0; x < xlen; x += 1) {
@@ -1329,14 +1318,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 field = scope.fields[x].name;
                 if ('million' === field && total < 1000000) {
                   scope.fields[x].enabled = false;
-                }
-                else if ('hundredthousand' === field && total < 100000) {
+                } else if ('hundredthousand' === field && total < 100000) {
                   scope.fields[x].enabled = false;
-                }
-                else if ('tenthousand' === field && total < 10000) {
+                } else if ('tenthousand' === field && total < 10000) {
                   scope.fields[x].enabled = false;
-                }
-                else if ('thousand' === field && total < 1000) {
+                } else if ('thousand' === field && total < 1000) {
                   scope.fields[x].enabled = false;
                 }
               }
@@ -1371,14 +1357,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               field = scope.field;
             if ('million' === field) {
               limit = 1000000;
-            }
-            else if ('hundredthousand' === field) {
+            } else if ('hundredthousand' === field) {
               limit = 100000;
-            }
-            else if ('tenthousand' === field) {
+            } else if ('tenthousand' === field) {
               limit = 10000;
-            }
-            else if ('thousand' === field) {
+            } else if ('thousand' === field) {
               limit = 1000;
             }
             var ctx = {}, callLayout = function () {
@@ -1392,8 +1375,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               };
             if ('remove' !== scope.verb && 'search' !== scope.verb) {
               callLayout();
-            }
-            else if ('remove' === scope.verb) {
+            } else if ('remove' === scope.verb) {
               var ctx = {
                 database: 'dash-demo',
                 store: 'imdb',
@@ -1413,8 +1395,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   file;
                 if ('from' === scope.sort) {
                   values = [scope.files[scope.range]];
-                }
-                else {
+                } else {
                   for (file in scope.files) {
                     if (false === start && scope.files.hasOwnProperty(file)) {
                       if (file === scope.range.toString()) {
@@ -1439,8 +1420,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 //system.cameraMod( 'z', 1, 10000, 0 );
               });
 
-            }
-            else {
+            } else {
               var ctx = {
                 database: 'dash-demo',
                 store: 'imdb',
@@ -1470,6 +1450,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               }, function (context) {
                 console.log('dash promise rejected', context);
               }, function (context) {
+                console.log('found item', context);
                 context.id = context.primary_key;
                 statsObj = context.statistics;
                 if (true === scope.visuals) {
@@ -1500,8 +1481,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   scope.statsDisplay.prettyRemain = '';
                   scope.statsDisplay.prettyAvg = '';
                   scope.statsDisplay.prettyRate = '';
-                }
-                else {
+                } else {
                   scope.statsDisplay.total = statsObj.request.metrics.total.expected;
                   scope.statsDisplay.complete = statsObj.request.metrics.total.requests;
                   scope.statsDisplay.prettyElapsed = statsObj.request.display.actual.total;
@@ -1528,12 +1508,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               if ('from' === scope.sort) {
                 if (false !== scope.progress[scope.range]) {
                   values.push([scope.range, (!scope.downloaded[scope.range] || scope.downloaded[scope.range] < scope.files[scope.range].filecount), scope.progress[scope.range]]);
-                }
-                else {
+                } else {
                   values.push([scope.range, (!scope.downloaded[scope.range] || scope.downloaded[scope.range] < scope.files[scope.range].filecount), null]);
                 }
-              }
-              else {
+              } else {
                 for (file in scope.downloaded) {
                   if (scope.downloaded.hasOwnProperty(file)) {
                     if (false === start) {
@@ -1544,8 +1522,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                     if (start) {
                       if (false !== scope.progress[file]) {
                         values.push([file, (!scope.downloaded[file] || scope.downloaded[file] < scope.files[file].filecount), scope.progress[file]]);
-                      }
-                      else {
+                      } else {
                         values.push([file, (!scope.downloaded[file] || scope.downloaded[file] < scope.files[file].filecount), null]);
                       }
                     }
@@ -1643,14 +1620,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                         limit = null;
                       if ('million' === field) {
                         limit = 1000000;
-                      }
-                      else if ('hundredthousand' === field) {
+                      } else if ('hundredthousand' === field) {
                         limit = 100000;
-                      }
-                      else if ('tenthousand' === field) {
+                      } else if ('tenthousand' === field) {
                         limit = 10000;
-                      }
-                      else if ('thousand' === field) {
+                      } else if ('thousand' === field) {
                         limit = 1000;
 
                       }
@@ -1668,15 +1642,13 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                               total_count = stacklist.push(data[x]);
                               sofar += 1;
                             }
-                          }
-                          else {
+                          } else {
                             if (true === placemark || (false !== scope.downloaded[attr] && x > scope.downloaded[attr])) {
                               if (!limit || sofar < limit) {
                                 total_count = stacklist.push(data[x]);
                                 sofar += 1;
                               }
-                            }
-                            else {
+                            } else {
                               if (null !== last_add && data[x].ep === last_add.data.ep && data[x].ey === last_add.data.ey && data[x].se === last_add.data.se && data[x].sy === last_add.data.sy) {
                                 placemark = true;
                               }
@@ -1691,8 +1663,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                       return deferred2.promise;
                     }
                   }(values[x][0], values[x][2])));
-                }
-                else {
+                } else {
                   promise = promise.then((function (attr) {
                     var deferred2 = $q.defer();
                     return function () {
@@ -1752,7 +1723,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
           });
         };
       }
-      stats
     };
 }]);
 
@@ -1772,8 +1742,7 @@ dashApp.directive('markdown', function () {
           var html = converter.makeHtml(newVal);
           element.html(html);
         });
-      }
-      else {
+      } else {
         var text = element.text(),
           html = text ? converter.makeHtml(element.text()) : '';
         element.html(html);
