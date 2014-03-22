@@ -1721,10 +1721,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               deferred.resolve();
             };
           dashAppSplashBroadcast.subscribe(function (data) {
-            scope.$apply(function () {
               scope.data = data;
               statsUpdate(statsObj);
-            });
           });
         };
       }
