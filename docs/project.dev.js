@@ -1449,11 +1449,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               //dash_promise.then( function(context) {
               dash_promise(function (context) {
                 console.log('searched all', context.amount);
-                statsUpdate('complete', 'searches', context.amount, new Date().getTime() - start_promise);
+                statsObj = context.statistics;
+                statsUpdate(context.statistics);
               }, function (context) {
                 console.log('dash promise rejected', context);
               }, function (context) {
-		console.log('found item',context);
                   context.id = context.primary_key;
                   statsObj = context.statistics;
                   if (true === scope.visuals) {
