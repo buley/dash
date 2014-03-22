@@ -14,8 +14,8 @@ window.dashStats = window.dashStats || (function (environment) {
         },
         metrics: {
           add: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -25,8 +25,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           clear: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -36,8 +36,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           count: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -47,8 +47,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           get: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -58,8 +58,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           put: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -69,8 +69,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           remove: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -80,8 +80,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           update: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -91,8 +91,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           resolve: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -102,8 +102,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           notify: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -113,8 +113,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           error: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -124,8 +124,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           total: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -135,8 +135,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           store: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -146,8 +146,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           stores: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -157,8 +157,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           entry: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -168,8 +168,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           entries: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -179,8 +179,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           database: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -190,8 +190,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           databases: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -201,8 +201,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           index: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -212,8 +212,8 @@ window.dashStats = window.dashStats || (function (environment) {
             expected: 0
           },
           indexes: {
-            average: NaN,
-            rate: NaN,
+            average: 0,
+            rate: 0,
             recent: [],
             expecting: 0,
             remaining: 0,
@@ -593,7 +593,7 @@ window.dashStats = window.dashStats || (function (environment) {
       state.context.statistics.request.started = new Date().getTime();
       state.context.statistics.total.started = state.context.statistics.total.started || new Date().getTime();
       state.context.statistics.request.type = state.method;
-      console.log("PREVIOUSLY",state.context.statistics.total.metrics.total);
+      console.log("PREVIOUSLY",state.context.statistics.total.metrics.total.requests);
       if ( !!state.method && ( 'count.entries' !== state.method && null !== state.method.match(/\.entries$/) && this.is(state.context.forecast,true))) {
         deferred = this.deferred();
         promise(function(st) {
