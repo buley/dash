@@ -508,7 +508,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
 			      ep: ''
 			    };
 			  });
-			}, 10000);
+			}, 3000);
 			return;
 		      }
               }, function (context) {
