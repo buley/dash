@@ -534,7 +534,116 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             total: 0
           };
           scope.stats = function () {
-            return 'dash is ready';
+            return 'dash is under development';
+          };
+          var statsInt = setInterval(function () {
+            scope.$apply(function () {
+              statsCalc();
+            });
+          }, 1000);
+          var statsCalc = function () {
+            if (scope.statsData) {
+              scope.statsDisplay = scope.statsDisplay || {};
+              scope.statsDisplay.total = 0;
+              scope.statsDisplay.progress = 0;
+              var rate, avg = 1;
+              var prettyTime = function (seconds) {
+                var hours = Math.floor((seconds - (seconds % 86400)) / 86400),
+                  minutes = Math.floor((seconds - (seconds % 3600)) / 3600),
+                  secs = Math.floor(seconds % 60);
+                if (true === isNaN(hours) && true === isNaN(minutes) && true === isNaN(secs)) {
+                  return;
+                }
+                if (hours < 10 && hours > 0) {
+                  hours = '0' + hours.toString() + ':';
+                } else if (hours < 1) {
+                  hours = '';
+                } else {
+                  hours = hours.toString() + ':';
+                }
+                if (minutes < 10) {
+                  minutes = '0' + minutes.toString();
+                } else {
+                  minutes = minutes.toString();
+                }
+                if (secs < 10) {
+                  secs = '0' + secs.toString();
+                } else {
+                  secs = secs.toString();
+                }
+                return hours + minutes + ':' + secs;
+              };
+              if (true === scope.statsDisplay.clear) {
+                scope.statsDisplay.text = 'dash is in dev';
+              } else if (true === scope.statsData.complete) {
+                rate = 0;
+                scope.statsDisplay.prettyRate = '0/second';
+                scope.statsData.stack = scope.statsData.stack || {};
+                scope.statsDisplay.complete = scope.statsDisplay.total || 'N/A';
+                if ('adds' === scope.statsData.verb) {
+                  return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+                } else if ('gets' === scope.statsData.verb) {
+                  return 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+                } else if ('removes' === scope.statsData.verb) {
+                  return 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+                } else if ('searches' === scope.statsData.verb) {
+                  return 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
+                }
+              } else {
+                if (undefined !== scope.statsData.adds) {
+                  rate = scope.statsData.adds;
+                } else if (undefined !== scope.statsData.gets) {
+                  rate = scope.statsData.gets;
+                } else if (undefined !== scope.statsData.removes) {
+                  rate = scope.statsData.removes;
+                } else if (undefined !== scope.statsData.searches) {
+                  rate = scope.statsData.searches;
+                }
+                var quant = (rate / scope.statsData.elapsed) * 1000,
+                  label, progress, label2, remain = '',
+                  unit;
+                scope.statsDisplay.rate = quant;
+                if (quant) {
+                  historicals.unshift(quant);
+                }
+                if (historicals.length > 5) {
+                  historicals = historicals.slice(0, 5);
+                }
+                if (quant < 1) {
+                  rate = Math.floor(quant * 60);
+                  unit = 'minute';
+                } else {
+                  unit = 'second';
+                  rate = Math.floor(quant);
+                }
+                if (scope.statsData.stack) {
+                  var x = 0,
+                    xlen = historicals.length;
+                  if (false === isNaN(avg)) {
+                    avg = 0;
+                  }
+                  for (x = 0; x < xlen; x += 1) {
+                    avg += historicals[x];
+                  }
+                  historicals = [];
+                  scope.statsDisplay = scope.statsDisplay || {};
+                  scope.statsDisplay.runRate = (avg / x) || 0;
+
+                  scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started / 1000);
+                  scope.statsDisplay.avgRate = (scope.statsData.stack.total / scope.statsDisplay.secondsElapsed) || 0;
+                  var remainder = (scope.statsData.stack.total - scope.statsData.stack.progress);
+                  scope.statsDisplay.secondsRemain = Math.floor(remainder / scope.statsDisplay.runRate);
+                  scope.statsDisplay.prettyRemain = prettyTime(scope.statsDisplay.secondsRemain) || '00:00';
+                  scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed) || '00:00';
+                  scope.statsDisplay.prettyRate = Math.floor(scope.statsDisplay.runRate) + '/' + unit;
+                  scope.statsDisplay.prettyAvg = Math.floor(scope.statsDisplay.avgRate) + '/' + unit;
+                  scope.statsDisplay.total = scope.statsData.stack.total;
+                  scope.statsDisplay.complete = scope.statsData.stack.progress;
+
+
+                }
+              }
+            };
           };
           scope.estimate = function () {
             if ('search' === scope.verb || 'remove' === scope.verb || hasDownloaded(scope.downloaded, scope.range, scope.sort)) {
