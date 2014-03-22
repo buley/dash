@@ -1430,13 +1430,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
 		stats: true,
                 index_key_path: 'sy',
                 limit: limit,
-		match: function(obj) {
-			return {
-				se: new RegExp( scope.query ),
-				ep: function(obj2) {
-					return new RegExp( scope.query );
-				}
-			}
+		match: {
+			se: new RegExp( scope.query ),
+			ep: RegExp( scope.query )
 		},
 		any: true,
                 key: new Date('1/1/' + scope.range).getTime()
@@ -1454,6 +1450,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               }, function (context) {
                 console.log('dash promise rejected', context);
               }, function (context) {
+		console.log('found item',context);
                   context.id = context.primary_key;
                   statsObj = context.statistics;
                   if (true === scope.visuals) {
