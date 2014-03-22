@@ -1475,36 +1475,34 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             statsTimeout = 1000,
             wasCompleted = false,
             statsFunc = function () {
-              scope.statsDisplay = scope.statsDisplay || {};
-              if (!statsObj || true === statsObj.clear || !statsObj.request || !statsObj.request.metrics ) {
-                scope.statsDisplay.total = 0;
-                scope.statsDisplay.complete = 0;
-                scope.statsDisplay.prettyElapsed = '';
-                scope.statsDisplay.prettyRemain = '';
-                scope.statsDisplay.prettyAvg = '';
-                scope.statsDisplay.prettyRate = '';
-              } else {
-                scope.statsDisplay.total = statsObj.request.metrics.total.expected;
-                scope.statsDisplay.complete = statsObj.request.metrics.total.requests;
-                scope.statsDisplay.prettyElapsed = statsObj.request.display.actual.total;
-                scope.statsDisplay.prettyRemain = statsObj.request.display.remaining.total;
-                scope.statsDisplay.prettyAvg = statsObj.request.display.thoroughput_average.total;
-                scope.statsDisplay.prettyRate = statsObj.request.display.thoroughput_rate.total;
-                //scope.statsDisplay.prettyAvg = statsObj.request.prettySpeedAverage.total;
-                //scope.statsDisplay.prettyRate = statsObj.request.prettySpeedRate.total;
-              }
-              statsUIProc = null;
+		scope.$apply(function() {
+		      scope.statsDisplay = scope.statsDisplay || {};
+		      if (!statsObj || true === statsObj.clear || !statsObj.request || !statsObj.request.metrics ) {
+			scope.statsDisplay.total = 0;
+			scope.statsDisplay.complete = 0;
+			scope.statsDisplay.prettyElapsed = '';
+			scope.statsDisplay.prettyRemain = '';
+			scope.statsDisplay.prettyAvg = '';
+			scope.statsDisplay.prettyRate = '';
+		      } else {
+			scope.statsDisplay.total = statsObj.request.metrics.total.expected;
+			scope.statsDisplay.complete = statsObj.request.metrics.total.requests;
+			scope.statsDisplay.prettyElapsed = statsObj.request.display.actual.total;
+			scope.statsDisplay.prettyRemain = statsObj.request.display.remaining.total;
+			scope.statsDisplay.prettyAvg = statsObj.request.display.thoroughput_average.total;
+			scope.statsDisplay.prettyRate = statsObj.request.display.thoroughput_rate.total;
+			//scope.statsDisplay.prettyAvg = statsObj.request.prettySpeedAverage.total;
+			//scope.statsDisplay.prettyRate = statsObj.request.prettySpeedRate.total;
+		      }
+		      statsUIProc = null;
+		});
             },
             statsUIProc,
             statsUpdate = function (stats) {
               statsObj = stats;
-		console.log('STATS',statsObj);
-		scope.$apply(function() { 
-	      		statsFunc();
-		});
-              //if (!statsUIProc) {
-              //	statsUIProc = setTimeout(statsFunc, 1000);
-              //}
+              if (!statsUIProc) {
+              	statsUIProc = setTimeout(statsFunc, 1000);
+              }
             },
             doLayout = function (cmdargs) {
               var file, start = false,
