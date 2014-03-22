@@ -584,7 +584,6 @@ window.dashStats = window.dashStats || (function (environment) {
         } 
 
       };
-    console.log('setup total??',state.context.statistics.total.metrics);
     state.context.statistics = state.context.statistics || {
       total: state.context.statistics ? state.context.statistics.total : total,
       request: model()
