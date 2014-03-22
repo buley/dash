@@ -5,6 +5,7 @@ dashApp.config(['$routeProvider',
 
     /* Behaviors */
     dash.add.behavior(dashStats);
+    dash.add.behavior(dashMatch);
 
     $routeProvider
       .when('/about', {
@@ -460,46 +461,10 @@ dashApp.factory('dashAppSplashBroadcast', function () {
     }
   };
 });
+
 dashApp.controller('dashAppSplashController', ['$scope', '$http',
   function ($scope, $http) {
-    var start = 2013,
-      queue = [],
-      start_promise,
-      in_progress = false,
-      fresh_start = true,
-      totalRun = 0,
-      processNext = function () {
-        if (!in_progress && queue.length > 0) {
-          in_progress = true;
-          if (true === fresh_start) {
-            start_promise = new Date().getTime();
-            fresh_start = false;
-            totalRun = 0;
-          }
-          doNext(queue.shift());
-          totalRun += 1;
-        } else {
-          console.log('ADDS COMPLETE');
-          fresh_start = true;
-        }
-      },
-      doNext = function (next) {
-        dash.add.entry({
-          database: 'dash-demo',
-          store: 'imdb',
-          auto_increment: true,
-          store_key_path: 'id',
-          data: next
-        })
-        (function (context) {
-          in_progress = false;
-          processNext();
-        }, function (context) {
-          in_progress = false;
-          processNext();
-        });
-      };
-
+    //does nothing
 }]);
 
 
@@ -516,20 +481,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
         return function link(scope, element, attrs) {
           var statsObj = {},
             system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function (data) {
-              if (pid) {
-                clearTimeout(pid);
-              }
-              if (!data) {
-                pid = setTimeout(function () {
-                  scope.$apply(function () {
-                    scope.data = {
-                      se: '',
-                      ep: ''
-                    };
-                  });
-                }, 3000);
-                return;
-              }
+	      if (!data) {
+		return;
+	      }
               dash.get.entry({
                 database: 'dash-demo',
                 store: 'imdb',
@@ -543,6 +497,25 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   statsObj = context.statistics;
                 }
                 dashAppSplashBroadcast.current(context.entry);
+		      if (pid) {
+			clearTimeout(pid);
+		      }
+		pid = setTimeout(function () {
+		  scope.$apply(function () {
+		    scope.data = {
+		      se: '',
+		      ep: ''
+		    };
+		  scope.statsDisplay = {
+		    prettyRate: '0/second',
+		    prettyAvg: '0/second',
+		    prettyElapsed: '00:00',
+		    prettyRemain: '00:00',
+		    complete: 0,
+		    total: 0
+		  };
+		  });
+		}, 3000);
               }, function (context) {
                 console.log('missing entry', context);
               });
@@ -568,118 +541,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             complete: 0,
             total: 0
           };
-          var historicals = [];
           scope.stats = function () {
-            return 'dash is under development';
-          };
-          var statsInt = setInterval(function () {
-            scope.$apply(function () {
-              statsCalc();
-            });
-          }, 1000);
-          var statsCalc = function () {
-            if (scope.statsData) {
-              scope.statsDisplay = scope.statsDisplay || {};
-              scope.statsDisplay.total = 0;
-              scope.statsDisplay.progress = 0;
-              var rate, avg = 1;
-              var prettyTime = function (seconds) {
-                var hours = Math.floor((seconds - (seconds % 86400)) / 86400),
-                  minutes = Math.floor((seconds - (seconds % 3600)) / 3600),
-                  secs = Math.floor(seconds % 60);
-                if (true === isNaN(hours) && true === isNaN(minutes) && true === isNaN(secs)) {
-                  return;
-                }
-                if (hours < 10 && hours > 0) {
-                  hours = '0' + hours.toString() + ':';
-                } else if (hours < 1) {
-                  hours = '';
-                } else {
-                  hours = hours.toString() + ':';
-                }
-                if (minutes < 10) {
-                  minutes = '0' + minutes.toString();
-                } else {
-                  minutes = minutes.toString();
-                }
-                if (secs < 10) {
-                  secs = '0' + secs.toString();
-                } else {
-                  secs = secs.toString();
-                }
-                return hours + minutes + ':' + secs;
-              };
-              if (true === scope.statsDisplay.clear) {
-                scope.statsDisplay.text = 'dash is in dev';
-              } else if (true === scope.statsData.complete) {
-                rate = 0;
-                scope.statsDisplay.prettyRate = '0/second';
-                scope.statsData.stack = scope.statsData.stack || {};
-                scope.statsDisplay.complete = scope.statsDisplay.total || 'N/A';
-                if ('adds' === scope.statsData.verb) {
-                  return 'dash added ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-                } else if ('gets' === scope.statsData.verb) {
-                  return 'dash got ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-                } else if ('removes' === scope.statsData.verb) {
-                  return 'dash removed ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-                } else if ('searches' === scope.statsData.verb) {
-                  return 'dash searched ' + scope.statsData.amount + ' entries in ' + scope.statsData.elapsed + 'ms';
-                }
-              } else {
-                if (undefined !== scope.statsData.adds) {
-                  rate = scope.statsData.adds;
-                } else if (undefined !== scope.statsData.gets) {
-                  rate = scope.statsData.gets;
-                } else if (undefined !== scope.statsData.removes) {
-                  rate = scope.statsData.removes;
-                } else if (undefined !== scope.statsData.searches) {
-                  rate = scope.statsData.searches;
-                }
-                var quant = (rate / scope.statsData.elapsed) * 1000,
-                  label, progress, label2, remain = '',
-                  unit;
-                scope.statsDisplay.rate = quant;
-                if (quant) {
-                  historicals.unshift(quant);
-                }
-                if (historicals.length > 5) {
-                  historicals = historicals.slice(0, 5);
-                }
-                if (quant < 1) {
-                  rate = Math.floor(quant * 60);
-                  unit = 'minute';
-                } else {
-                  unit = 'second';
-                  rate = Math.floor(quant);
-                }
-                if (scope.statsData.stack) {
-                  var x = 0,
-                    xlen = historicals.length;
-                  if (false === isNaN(avg)) {
-                    avg = 0;
-                  }
-                  for (x = 0; x < xlen; x += 1) {
-                    avg += historicals[x];
-                  }
-                  historicals = [];
-                  scope.statsDisplay = scope.statsDisplay || {};
-                  scope.statsDisplay.runRate = (avg / x) || 0;
-
-                  scope.statsDisplay.secondsElapsed = Math.floor(scope.statsData.started / 1000);
-                  scope.statsDisplay.avgRate = (scope.statsData.stack.total / scope.statsDisplay.secondsElapsed) || 0;
-                  var remainder = (scope.statsData.stack.total - scope.statsData.stack.progress);
-                  scope.statsDisplay.secondsRemain = Math.floor(remainder / scope.statsDisplay.runRate);
-                  scope.statsDisplay.prettyRemain = prettyTime(scope.statsDisplay.secondsRemain) || '00:00';
-                  scope.statsDisplay.prettyElapsed = prettyTime(scope.statsDisplay.secondsElapsed) || '00:00';
-                  scope.statsDisplay.prettyRate = Math.floor(scope.statsDisplay.runRate) + '/' + unit;
-                  scope.statsDisplay.prettyAvg = Math.floor(scope.statsDisplay.avgRate) + '/' + unit;
-                  scope.statsDisplay.total = scope.statsData.stack.total;
-                  scope.statsDisplay.complete = scope.statsData.stack.progress;
-
-
-                }
-              }
-            };
+            return 'dash is ready';
           };
           scope.estimate = function () {
             if ('search' === scope.verb || 'remove' === scope.verb || hasDownloaded(scope.downloaded, scope.range, scope.sort)) {
@@ -1564,8 +1427,14 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 auto_increment: true,
                 store_key_path: 'id',
                 index: 'season',
+		stats: true,
                 index_key_path: 'sy',
                 limit: limit,
+		match: {
+			se: new RegExp( scope.query ),
+			ep: RegExp( scope.query )
+		},
+		any: true,
                 key: new Date('1/1/' + scope.range).getTime()
               },
                 q = new RegExp(scope.query),
@@ -1576,19 +1445,19 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               //dash_promise.then( function(context) {
               dash_promise(function (context) {
                 console.log('searched all', context.amount);
-                statsUpdate('complete', 'searches', context.amount, new Date().getTime() - start_promise);
+                statsObj = context.statistics;
+                statsUpdate(context.statistics);
               }, function (context) {
                 console.log('dash promise rejected', context);
               }, function (context) {
-                if ( !! context.entry.se && null !== context.entry.se.match(q) || !! context.entry.ep && null !== context.entry.ep.match(q)) {
+		console.log('found item',context);
                   context.id = context.primary_key;
                   statsObj = context.statistics;
                   if (true === scope.visuals) {
                     system.add(context);
                   }
-                }
 
-                statsUpdate('searches');
+                statsUpdate(context.statistics);
                 //system.cameraMod( 'z', 2, 50000, 10 );
                 //system.cameraMod( 'z', 1, 10000, 0 );
               });
@@ -1603,40 +1472,34 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             statsTimeout = 1000,
             wasCompleted = false,
             statsFunc = function () {
-              scope.statsDisplay = scope.statsDisplay || {};
-              if (!statsObj || true === statsObj.clear || !statsObj.request || !statsObj.request.metrics ) {
-                scope.statsDisplay.total = 0;
-                scope.statsDisplay.complete = 0;
-                scope.statsDisplay.prettyElapsed = '';
-                scope.statsDisplay.prettyRemain = '';
-                scope.statsDisplay.prettyAvg = '';
-                scope.statsDisplay.prettyRate = '';
-              } else {
-                scope.statsDisplay.total = statsObj.request.metrics.total.expected;
-                scope.statsDisplay.complete = statsObj.request.metrics.total.requests;
-                scope.statsDisplay.prettyElapsed = statsObj.request.display.actual.total;
-                scope.statsDisplay.prettyRemain = statsObj.request.display.remaining.total;
-                scope.statsDisplay.prettyAvg = statsObj.request.display.thoroughput_average.total;
-                scope.statsDisplay.prettyRate = statsObj.request.display.thoroughput_rate.total;
-                //scope.statsDisplay.prettyAvg = statsObj.request.prettySpeedAverage.total;
-                //scope.statsDisplay.prettyRate = statsObj.request.prettySpeedRate.total;
-              }
-              statsUIProc = null;
+		scope.$apply(function() {
+		      scope.statsDisplay = scope.statsDisplay || {};
+		      if (!statsObj || true === statsObj.clear || !statsObj.request || !statsObj.request.metrics ) {
+			scope.statsDisplay.total = 0;
+			scope.statsDisplay.complete = 0;
+			scope.statsDisplay.prettyElapsed = '';
+			scope.statsDisplay.prettyRemain = '';
+			scope.statsDisplay.prettyAvg = '';
+			scope.statsDisplay.prettyRate = '';
+		      } else {
+			scope.statsDisplay.total = statsObj.request.metrics.total.expected;
+			scope.statsDisplay.complete = statsObj.request.metrics.total.requests;
+			scope.statsDisplay.prettyElapsed = statsObj.request.display.actual.total;
+			scope.statsDisplay.prettyRemain = statsObj.request.display.remaining.total;
+			scope.statsDisplay.prettyAvg = statsObj.request.display.thoroughput_average.total;
+			scope.statsDisplay.prettyRate = statsObj.request.display.thoroughput_rate.total;
+			//scope.statsDisplay.prettyAvg = statsObj.request.prettySpeedAverage.total;
+			//scope.statsDisplay.prettyRate = statsObj.request.prettySpeedRate.total;
+		      }
+		      statsUIProc = null;
+		});
             },
             statsUIProc,
-            statsClear = function () {
-              statsObj = {
-                clear: true
-              };
-              statsFunc();
-            },
             statsUpdate = function (stats) {
               statsObj = stats;
-              statsFunc();
-              if (statsUIProc) {
-                clearTimeout(statsUIProc);
+              if (!statsUIProc) {
+              	statsUIProc = setTimeout(statsFunc, 100);
               }
-              statsUIProc = setTimeout(statsClear, 10000);
             },
             doLayout = function (cmdargs) {
               var file, start = false,
@@ -1695,6 +1558,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                         addCount = 0,
                         addLimit = cmdargs.limit,
                         stack_length = 0,
+			statistics = null,
                         in_progress = false,
                         processNext = function (context) {
                           if (0 === stacklist.length) {
@@ -1728,7 +1592,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                             auto_increment: true,
                             store_key_path: null,
                             data: next,
-                            statistics: true
+                            stats: true,
+                            forecast: false,
+			    statistics: statistics
                           })
                           (function (context) {
                             in_progress = false;
@@ -1737,7 +1603,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                                 id: context.key
                               });
                             }
-                            statsUpdate(context.statistics);
+			    statistics = context.statistics;
+                            statsUpdate(statistics);
                             scope.progress[attr] = context;
                             queueSave();
                             if (!addLimit || (addCount++ < addLimit)) {
@@ -1851,10 +1718,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               deferred.resolve();
             };
           dashAppSplashBroadcast.subscribe(function (data) {
-            scope.$apply(function () {
               scope.data = data;
               statsUpdate(statsObj);
-            });
           });
         };
       }
