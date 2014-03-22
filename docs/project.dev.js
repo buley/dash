@@ -1499,7 +1499,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             statsUpdate = function (stats) {
               statsObj = stats;
 		console.log('STATS',statsObj);
-	      statsFunc();
+		scope.$apply(function() { 
+	      		statsFunc();
+		});
               //if (!statsUIProc) {
               //	statsUIProc = setTimeout(statsFunc, 1000);
               //}
