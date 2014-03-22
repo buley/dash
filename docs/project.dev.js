@@ -533,6 +533,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             complete: 0,
             total: 0
           };
+          var historicals = [];
           scope.stats = function () {
             return 'dash is under development';
           };
