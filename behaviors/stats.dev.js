@@ -290,7 +290,6 @@ window.dashStats = window.dashStats || (function (environment) {
       calculate = function(v, n) {
         
         /* Time */
-	console.log("DOING CALC",v,n);
         
         datetime = new Date().getTime();
         state.context.statistics.total.started = state.context.statistics.total.started || datetime;
@@ -581,7 +580,6 @@ window.dashStats = window.dashStats || (function (environment) {
         } else {
           state.context.statistics.request.display.speed_average.total += ' ms/entry';
         } 
-	console.log('display', state.context.statistics.request.display);
 
       };
     state.context.statistics = state.context.statistics || {
