@@ -506,6 +506,14 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
 		      se: '',
 		      ep: ''
 		    };
+		  scope.statsDisplay = {
+		    prettyRate: '0/second',
+		    prettyAvg: '0/second',
+		    prettyElapsed: '00:00',
+		    prettyRemain: '00:00',
+		    complete: 0,
+		    total: 0
+		  };
 		  });
 		}, 3000);
               }, function (context) {
