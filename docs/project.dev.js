@@ -481,20 +481,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
         return function link(scope, element, attrs) {
           var statsObj = {},
             system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function (data) {
-              if (pid) {
-                clearTimeout(pid);
-              }
-              if (!data) {
-                pid = setTimeout(function () {
-                  scope.$apply(function () {
-                    scope.data = {
-                      se: '',
-                      ep: ''
-                    };
-                  });
-                }, 3000);
-                return;
-              }
               dash.get.entry({
                 database: 'dash-demo',
                 store: 'imdb',
@@ -508,6 +494,20 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   statsObj = context.statistics;
                 }
                 dashAppSplashBroadcast.current(context.entry);
+		      if (pid) {
+			clearTimeout(pid);
+		      }
+		      if (!data) {
+			pid = setTimeout(function () {
+			  scope.$apply(function () {
+			    scope.data = {
+			      se: '',
+			      ep: ''
+			    };
+			  });
+			}, 10000);
+			return;
+		      }
               }, function (context) {
                 console.log('missing entry', context);
               });
