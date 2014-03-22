@@ -230,10 +230,11 @@ window.dashStats = window.dashStats || (function (environment) {
     total = model();
   return function (state) {
     if(this.isnt(state.context.stats,true)) {
+      console.log('stats skipped', state.method);
       return state;
     }
     var context = state.context,
-      pieces = !!state.type ? state.type.split('.') : [],
+      pieces = !!state.method ? state.method.split('.') : [],
       verb = pieces[0],
       noun = pieces[1],
       deferred,
