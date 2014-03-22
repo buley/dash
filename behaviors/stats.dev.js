@@ -584,15 +584,16 @@ window.dashStats = window.dashStats || (function (environment) {
         } 
 
       };
-    console.log('setup total??',state.context.statistics);
+    console.log('setup total??',state.context.statistics.total.metrics);
     state.context.statistics = state.context.statistics || {
-      total: total,
+      total: state.context.statistics.total || total,
       request: model()
     };
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
       state.context.statistics.request = model();
       state.context.statistics.request.started = new Date().getTime();
       state.context.statistics.total.started = state.context.statistics.total.started || new Date().getTime();
+      console.log('setup total?!!!?',state.context.statistics.total.metrics);
       state.context.statistics.request.type = state.method;
       if ( !!state.method && ( 'count.entries' !== state.method && null !== state.method.match(/\.entries$/) && this.is(state.context.forecast,true))) {
         deferred = this.deferred();
