@@ -249,6 +249,7 @@ window.dashStats = window.dashStats || (function (environment) {
         return total/x;
       },
       prettyTime =  function(milliseconds) {
+        milliseconds = Math.floor(milliseconds);
         var seconds = Math.floor(milliseconds/1000),
             days = Math.floor(seconds/86400),
             hours = Math.floor(seconds/3600),
