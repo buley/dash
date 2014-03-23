@@ -1,7 +1,7 @@
 window.dashChanges = window.dashChanges || (function (environment) {
   "use strict";
   var changeMap = {},
-    that = this,
+    that,
     register = function(ctx) {
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
@@ -46,7 +46,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           indexes: {},
           callbacks: []
         };
-        if (is(type, 'store')) {
+        if (that.is(type, 'store')) {
           //store listeners
         }
         if (that.exists(ctx.index)) {
@@ -80,6 +80,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     if(!this.isFunction(state.context.changes)) {
       return state;
     }    
+    that = this;
     var id = randomId();
     changeMap[ id ] = state.context.changes;
     state.context.changes = id;
