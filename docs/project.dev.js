@@ -4,8 +4,8 @@ dashApp.config(['$routeProvider',
   function ($routeProvider) {
 
     /* Behaviors */
-    dash.add.behavior(dashStats);
-    dash.add.behavior(dashMatch);
+    //dash.add.behavior(dashStats);
+    //dash.add.behavior(dashMatch);
 
     $routeProvider
       .when('/about', {
@@ -1340,7 +1340,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
 
 
           scope.$watch('sort', function (newer, older) {
-            console.log('sort changed', newer, older);
+            console.log('sort changed', newe,r, older);
           });
           $('#dash-demo-overlay-marketing').hover(function () {
             system.controls(false);

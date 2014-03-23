@@ -30,7 +30,7 @@
                 index_key_path: index_key_path,
                 index: index_name,
                 data: test_data,
-		collect: true
+		        collect: true
             })
             (function(context) {
                 dash.get.entries(context)
@@ -41,6 +41,7 @@
                 }, function(context) {
                     ctx = context;
                     error = true;
+		              console.log('ERR',JSON.stringify(context));
                     isFinished = true;
                 }, function(context) {
                     notify = true;
