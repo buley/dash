@@ -59,37 +59,60 @@ window.dashChanges = window.dashChanges || (function (environment) {
               changeMap[ctx.database].stores[ctx.store].entries[key].callbacks.push(obj);
             }
         }        
-        console.log("REGISTERED CHANGE LISTENER", ctx.key, ctx.changes,changeMap);
       }
     },
     inquire = function(type, ctx) {
       var listeners = [];
+      var obj = ctx.changed;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
-        callbacks: []
+        callbacks: [],
       };
-      if (that.is(type, 'database')) {
-        //database listeners
-        console.log('databases?',changeMap[ctx.database].callbacks);
+      if (that.contains(['remove.database'], type)) {
+        changeMap[ctx.database].callbacks.push(obj);
+        listeners.push.apply(listeners, changeMap[ctx.database].callbacks);
       }
       if (that.exists(ctx.store)) {
         changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
-          indexes: {},
-          callbacks: []
+          callbacks: [],
+          indexes: {}
         };
-        if (that.is(type, 'store')) {
-          //store listeners
-          console.log('stores?',changeMap[ctx.database].stores[ctx.store].callbacks);
+        if (that.contains(['remove.database', 'remove.store', 'clear.store'], type)) {
+          listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].callbacks);
         }
         if (that.exists(ctx.index)) {
           changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
-            callbacks: []
+            callbacks: [],
+            entries: {}
           };
-          if (that.is(type, 'index')) {
-            //index listeners
-            console.log('indexes?', changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks)
+          if (that.contains(['remove.index', 'remove.store', 'remove.database', 'clear.store'], type)) {
+            listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks);
+          }
+          if (that.exists(ctx.key) && that.isnt(ctx.primary_key, ctx.key)) {
+            if (that.contains(['remove.store', 'clear.store', 'remove.database', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
+              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] || {
+                callbacks: []
+              };
+              if (that.exists(ctx.entry)) {
+                changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].data = ctx.entry;
+              }
+              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks.push(obj);
+            }
           }
         }
+        if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
+            if (that.contains(['update.entries', 'update.entry', 'remove.entries', 'remove.entry', 'remove.database', 'remove.store', 'clear.store'], type)) {
+              var key = ctx.primary_key || ctx.key;
+              changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
+              changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
+                callbacks: []
+              };
+              if (that.exists(ctx.entry)) {
+                changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
+              }
+              changeMap[ctx.database].stores[ctx.store].entries[key].callbacks.push(obj);
+            }
+        }        
       }
       return listeners;
     },
