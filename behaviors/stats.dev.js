@@ -229,20 +229,19 @@ window.dashStats = window.dashStats || (function (environment) {
   },
     allStats = {
       total: model()
-    };
-  return function (state) {
-    if (this.isnt(state.context.stats, true)) {
-      return state;
-    }
-    var context = state.context,
-      pieces = !! state.method ? state.method.split('.') : [],
-      verb = pieces[0],
-      noun = pieces[1],
-      deferred,
-      datetime,
-      diff,
-      promise = state.promise,
-      theirs = this,
+    },
+    randomId = function() {
+      var random = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+        count = 16,
+        x = 0,
+        xlength = 0,
+        strlen = random.length,
+        str = [];
+      for (x = 0; x < count; x += 1) {
+        str.push(random[Math.floor(Math.random() * 100) % strlen]);
+      }
+      return str.join('');
+    },
       average = function (stack) {
         var x = 0,
           xlen = stack.length,
@@ -291,7 +290,20 @@ window.dashStats = window.dashStats || (function (environment) {
           msecs += '0';
         }
         return hours + minutes + ':' + secs + '.' + msecs;
-      },
+      };
+  return function (state) {
+    if (this.isnt(state.context.stats, true)) {
+      return state;
+    }
+    var context = state.context,
+      pieces = !! state.method ? state.method.split('.') : [],
+      verb = pieces[0],
+      noun = pieces[1],
+      deferred,
+      datetime,
+      diff,
+      promise = state.promise,
+      theirs = this,
       calculate = function (v, n) {
         /* Time */
         datetime = new Date().getTime();
@@ -553,17 +565,7 @@ window.dashStats = window.dashStats || (function (environment) {
         }
       };
     if (!theirs.exists(state.context.statistics)) {
-      var random = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-        count = 16,
-        x = 0,
-        xlength = 0,
-        strlen = random.length,
-        str = [],
-        id;
-      for (x = 0; x < count; x += 1) {
-        str.push(random[Math.floor(Math.random() * 100) % strlen]);
-      }
-      id = str.join('');
+      var id = randomId();
       allStats[id] = model();
       state.context.statistics = {
         total: allStats['total'],
