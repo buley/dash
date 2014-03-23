@@ -111,11 +111,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
       }
       return listeners;
     },
-    notify = function(ctx, type) {
+    notify = function(ctx, method, type) {
       var inquiry = inquire(type, ctx);
       console.log('any listeners to notify?', inquiry);
       that.each(inquiry, function(id) {
-        that.apply(callbackMap[id], [ { context: ctx, method: type, type: null } ]);
+        that.apply(callbackMap[id], [ { context: ctx, method: method, type: type } ]);
       });
       return ctx;
     },
@@ -151,7 +151,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       var id = ste.context.changes;
       ste.context.changes = callbackMap[ id ]; 
       ste.context.changed = ste.context.changed || id;
-      notify(state.context, state.method)
+      notify(state.context, state.method, state.type);
       register(ste.method, ste.context);
       unregister(ste.method, ste.context);
       deferred.resolve(ste);
