@@ -607,7 +607,7 @@ window.dashStats = window.dashStats || (function (environment) {
         };
         console.log("CREATED NEW STATS", id);
       } else {
-        console.log("COPIED EXISTING",state.context.statistics.total.metrics.total.requests);
+        console.log("COPIED EXISTING",state.context.statistics.id);
         state.context.statistics = theirs.clone(state.context.statistics);
       }
        
