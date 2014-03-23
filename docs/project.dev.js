@@ -1340,7 +1340,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
 
 
           scope.$watch('sort', function (newer, older) {
-            console.log('sort changed', newe,r, older);
+            console.log('sort changed', newer, older);
           });
           $('#dash-demo-overlay-marketing').hover(function () {
             system.controls(false);
