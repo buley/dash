@@ -227,11 +227,13 @@ window.dashStats = window.dashStats || (function (environment) {
         memory: 3
       };
     },
-    total = model();
+    total = model(),
+    request;
   return function (state) {
     if(this.isnt(state.context.stats,true)) {
       return state;
     }
+    request = model();
     var context = state.context,
       pieces = !!state.method ? state.method.split('.') : [],
       verb = pieces[0],
@@ -294,6 +296,7 @@ window.dashStats = window.dashStats || (function (environment) {
         
         datetime = new Date().getTime();
         state.context.statistics.total = total;
+        state.context.statistics.request = request;
         state.context.statistics.total.started = state.context.statistics.total.started || datetime;
         state.context.statistics.request.started = state.context.statistics.request.started || datetime;
         state.context.statistics.request.last = state.context.statistics.request.last || state.context.statistics.request.started || datetime;
