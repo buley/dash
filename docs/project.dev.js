@@ -1428,6 +1428,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 store_key_path: 'id',
                 index: 'season',
                 stats: true,
+                progress: true,
                 index_key_path: 'sy',
                 limit: limit,
                 match: {
@@ -1689,6 +1690,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   auto_increment: true,
                   store_key_path: 'id',
                   stats: true,
+                  progress: true,
                   forecast: false,
                   index: 'season',
                   index_key_path: 'sy',
