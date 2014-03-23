@@ -1627,7 +1627,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                         limit = 10000;
                       } else if ('thousand' === field) {
                         limit = 1000;
-
                       }
                       $http({
                         method: 'GET',
@@ -1692,6 +1691,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   stats: true,
                   progress: true,
                   forecast: false,
+                  changes: function(ctx) {
+                    console.log('changed', ctx)
+                  },
                   index: 'season',
                   index_key_path: 'sy',
                   index_key: new Date('1/1/' + args.range).getTime(),
@@ -1854,7 +1856,6 @@ dashApp.factory('dashWorkerService', ['$q',
           return send(signature, context);
         };
       }(method));
-
     }
     return API;
 }]);
