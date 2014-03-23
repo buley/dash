@@ -135,7 +135,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           var diff = {};
           that.iterate(one, function(key, val) {
             if (that.isnt(JSON.stringify(val), JSON.stringify(previous[key]))) {
-              if ( ( that.is(deep, true) && that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val)) {
+              if ( that.is(deep, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
                 diff[ key ] = difference(val, two[key], deep);e
               } else {
                 diff[ key ] = [val, two[key]];
@@ -144,7 +144,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           });
           that.iterate(two, function(key, val) {
             if (that.isnt(JSON.stringify(val), JSON.stringify(current[key])) && that.isEmpty(diff[ key ])) {
-              if ( ( that.is(deep, true) && that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
+              if ( that.is(deep, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
                 diff[ key ] = difference(one[key], val, deep);
               } else {
                 diff[ key ] = [one[key], val];
@@ -153,7 +153,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           });
           return diff;
         },
-        diff = (that.is(ctx.difference, true)) ? difference(current, previous, ctx.deep || true) : false,
+        diff = (that.is(ctx.difference, true)) ? difference(current, previous, true) : false,
         args = { context: ctx, method: method, type: type, current: current, previous: previous, difference: diff };
       current.foo = { deep: true };
       previous.foo = { deep: false };
