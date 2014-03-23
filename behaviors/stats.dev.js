@@ -226,8 +226,7 @@ window.dashStats = window.dashStats || (function (environment) {
         type: null,
         memory: 3
       };
-    },
-    total = model();
+    };
   return function (state) {
     if(this.isnt(state.context.stats,true)) {
       return state;
@@ -583,10 +582,15 @@ window.dashStats = window.dashStats || (function (environment) {
         } 
 
       };
-    state.context.statistics = state.context.statistics || {
-      total: state.context.statistics ? state.context.statistics.total : total,
-      request: model()
-    };
+
+      if (!theirs.exists(state.context.statistics)) {
+        state.context.statistics = { 
+          total: model(),
+          request: model()
+        };
+        console.log("CREATED NEW STATS");
+      }
+      
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
       state.context.statistics.request = model();
       state.context.statistics.request.started = new Date().getTime();
