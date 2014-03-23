@@ -233,7 +233,6 @@ window.dashStats = window.dashStats || (function (environment) {
     if(this.isnt(state.context.stats,true)) {
       return state;
     }
-    request = model();
     var context = state.context,
       pieces = !!state.method ? state.method.split('.') : [],
       verb = pieces[0],
@@ -589,9 +588,10 @@ window.dashStats = window.dashStats || (function (environment) {
       };
 
       if (!theirs.exists(state.context.statistics)) {
+        request = model();
         state.context.statistics = { 
           total: total,
-          request: model()
+          request: request
         };
         console.log("CREATED NEW STATS");
       } else {
