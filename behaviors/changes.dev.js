@@ -1,29 +1,30 @@
 window.dashChanges = window.dashChanges || (function (environment) {
   "use strict";
   var changeMap = {},
+    that = this,
     register = function(ctx) {
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
         callbacks: []
       };
-      if (is(type, 'database')) {
+      if (that.is(type, 'database')) {
         changeMap[ctx.database].callbacks.push(obj);
         return obj;
       }
-      if (exists(ctx.store)) {
+      if (that.exists(ctx.store)) {
         changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
           indexes: {},
           callbacks: []
         };
-        if (is(type, 'store')) {
+        if (that.is(type, 'store')) {
           changeMap[ctx.database].stores[ctx.store].callbacks.push(obj);
           return obj;
         }
-        if (exists(ctx.index)) {
+        if (that.exists(ctx.index)) {
           changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
             data: null
           };
-          if (is(type, 'index')) {
+          if (that.is(type, 'index')) {
             changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data = obj;
             return obj;
           }
@@ -37,10 +38,10 @@ window.dashChanges = window.dashChanges || (function (environment) {
         stores: {},
         callbacks: []
       };
-      if (is(type, 'database')) {
+      if (that.is(type, 'database')) {
         //database listeners
       }
-      if (exists(ctx.store)) {
+      if (that.exists(ctx.store)) {
         changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
           indexes: {},
           callbacks: []
@@ -48,11 +49,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
         if (is(type, 'store')) {
           //store listeners
         }
-        if (exists(ctx.index)) {
+        if (that.exists(ctx.index)) {
           changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
             data: null
           };
-          if (is(type, 'index')) {
+          if (that.is(type, 'index')) {
             //index listeners
           }
         }
