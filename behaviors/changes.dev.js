@@ -138,16 +138,16 @@ window.dashChanges = window.dashChanges || (function (environment) {
               if ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val)) {
                 diff[ key ] = difference(val, two[key], deep);
               } else {
-                diff[ key ] = [val, one[key]];
+                diff[ key ] = [val, two[key]];
               }
             }
           });
           that.iterate(two, function(key, val) {
             if (that.isnt(val, current[key]) && that.isEmpty(diff[ key ])) {
               if ( ( that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
-                diff[ key ] = difference(val, one[key], deep);
+                diff[ key ] = difference(one[key], val, deep);
               } else {
-                diff[ key ] = [two[key], val];
+                diff[ key ] = [one[key], val];
               }
             }
           });
