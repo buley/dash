@@ -63,6 +63,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
     },
     inquire = function(type, ctx) {
       var listeners = [],
+          previous = null,
+          current = null,
           obj = ctx.changed,
           key;
       changeMap[ctx.database] = changeMap[ctx.database] || {
@@ -70,8 +72,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
         callbacks: [],
       };
       if (that.contains(['remove.database', 'add.index', 'add.store'], type)) {
-        changeMap[ctx.database].callbacks.push(obj);
         listeners.push.apply(listeners, changeMap[ctx.database].callbacks);
+        previous = changeMap[ctx.database].data;
+        current = ctx.db;
       }
       if (that.exists(ctx.store)) {
         changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
@@ -80,6 +83,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
         };
         if (that.contains(['remove.database', 'remove.store', 'clear.store', 'add.index'], type)) {
           listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].callbacks);
+          previous = changeMap[ctx.database].stores[ctx.store].data;
+          current = ctx.objectstore;
         }
         if (that.exists(ctx.index)) {
           changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
@@ -88,12 +93,16 @@ window.dashChanges = window.dashChanges || (function (environment) {
           };
           if (that.contains(['remove.index', 'remove.store', 'remove.database', 'clear.store'], type)) {
             listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks);
+            previous = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data;
+            current = ctx.idx;
           }
           if (that.exists(ctx.key) && that.isnt(ctx.primary_key, ctx.key)) {
             if (that.contains(['remove.store', 'clear.store', 'remove.database', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
               changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] || {
                 callbacks: []
               };
+              previous = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].data;
+              current = ctx.entry;
               listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks);
             }
           }
@@ -105,17 +114,28 @@ window.dashChanges = window.dashChanges || (function (environment) {
               changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
                 callbacks: []
               };
+              previous = changeMap[ctx.database].stores[ctx.store].entries[key].data;
+              current = ctx.entry;
               listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].entries[key].callbacks);
             }
         }        
       }
-      return listeners;
+      return {
+        listeners: listeners,
+        current: current,
+        previous: previous
+      };
     },
     notify = function(ctx, method, type) {
-      var inquiry = inquire(type, ctx);
+      var inquiry = inquire(type, ctx),
+        listeners = inquiry.listeners,
+        current = inquiry.current,
+        previous = inquiry.previous;
+        previous,
+        diff {};
       console.log('any listeners to notify?', inquiry);
       that.each(inquiry, function(id) {
-        that.apply(callbackMap[id], [ { context: ctx, method: method, type: type } ]);
+        that.apply(callbackMap[id], [ { context: ctx, method: method, type: type, current: current, previous: previous, diff: diff } ]);
       });
       return ctx;
     },
