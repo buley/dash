@@ -708,8 +708,8 @@ window.dashStats = window.dashStats || (function (environment) {
     	      allStats[ 'total' ].metrics.total.requests += 1;
     	      calculate(verb, noun);
     	      allStats[ state.context.statistics.id ].last = datetime;
-            state.context.statistics.total = theirs.clone(state.context.statistics.total);
-            state.context.statistics.request = theirs.clone(state.context.statistics.request);
+            state.context.statistics.total = theirs.clone(allStats[ 'total' ]);
+            state.context.statistics.request = theirs.clone(allStats[ state.context.statistics.id ]);
 
             if (this.contains(['resolve', 'error'], state.type)) {
               delete allStats[ state.context.statistics.id ];
