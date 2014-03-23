@@ -129,8 +129,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
     notify = function(ctx, method, type) {
       var inquiry = inquire(method, ctx),
         listeners = inquiry.listeners || [],
-        current = inquiry.current,
-        previous = inquiry.previous,
+        current = inquiry.current || {},
+        previous = inquiry.previous || {},
         diff = {};
       that.iterate(current, function(key, val) {
         if (that.isnt(val, previous[key])) {
