@@ -114,6 +114,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
     notify = function(ctx, type) {
       var inquiry = inquire(type, ctx);
       console.log('any listeners to notify?', inquiry);
+      that.each(inquiry, function(id) {
+        that.apply(callbackMap[id], [ { context: ctx, method: type, type: null } ]);
+      });
       return ctx;
     },
     randomId = function() {
