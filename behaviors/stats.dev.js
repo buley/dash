@@ -314,39 +314,44 @@ window.dashStats = window.dashStats || (function (environment) {
         allStats[ 'total' ].metrics.total.elapsed = allStats[ state.context.statistics.id ].elapsed;
 
         diff = datetime - allStats[ state.context.statistics.id ].last;
-        allStats[ state.context.statistics.id ].metrics[n].between = diff;
-        allStats[ state.context.statistics.id ].metrics[v].between = diff;
-        allStats[ state.context.statistics.id ].metrics.total.between = diff;
-        allStats[ 'total' ].metrics[n].between = diff;
-        allStats[ 'total' ].metrics[v].between = diff;
-        allStats[ 'total' ].metrics.total.between = diff;
-
-        allStats[ state.context.statistics.id ].metrics[v].recent.unshift(allStats[ 'total' ].metrics[v].between);
-        allStats[ 'total' ].metrics[v].recent.unshift(allStats[ 'total' ].metrics[v].between);
         
-        allStats[ state.context.statistics.id ].metrics[n].recent.unshift(allStats[ state.context.statistics.id ].metrics[n].between);
-        allStats[ 'total' ].metrics[n].recent.unshift(allStats[ state.context.statistics.id ].metrics[n].between);
-        
-        allStats[ state.context.statistics.id ].metrics.total.recent.unshift(allStats[ state.context.statistics.id ].metrics.total.between);
-        allStats[ 'total' ].metrics.total.recent.unshift(allStats[ state.context.statistics.id ].metrics.total.between);
+        if ( diff > 0 ) {
 
-        if (allStats[ state.context.statistics.id ].metrics[v].recent.length > allStats[ state.context.statistics.id ].memory) {
-          allStats[ state.context.statistics.id ].metrics[v].recent = allStats[ state.context.statistics.id ].metrics[v].recent.slice(0, allStats[ state.context.statistics.id ].memory);
-        }
-        if (allStats[ 'total' ].metrics[n].recent.length > allStats[ 'total' ].memory) {
-          allStats[ 'total' ].metrics[n].recent = allStats[ 'total' ].metrics[n].recent.slice(0, allStats[ 'total' ].memory);
-        }
-        if (allStats[ state.context.statistics.id ].metrics[n].recent.length > allStats[ state.context.statistics.id ].memory) {
-          allStats[ state.context.statistics.id ].metrics[n].recent = allStats[ state.context.statistics.id ].metrics[n].recent.slice(0, allStats[ state.context.statistics.id ].memory);
-        }
-        if (allStats[ 'total' ].metrics[n].recent.length > allStats[ 'total' ].memory) {
-          allStats[ 'total' ].metrics[n].recent = allStats[ 'total' ].metrics[n].recent.slice(0, allStats[ 'total' ].memory);
-        }
-        if (allStats[ state.context.statistics.id ].metrics.total.recent.length > allStats[ state.context.statistics.id ].memory) {
-          allStats[ state.context.statistics.id ].metrics.total.recent = allStats[ state.context.statistics.id ].metrics.total.recent.slice(0, allStats[ 'total' ].memory);
-        }
-        if (allStats[ 'total' ].metrics.total.recent.length > allStats[ 'total' ].memory) {
-          allStats[ 'total' ].metrics.total.recent = allStats[ 'total' ].metrics.total.recent.slice(0, allStats[ 'total' ].memory);
+          allStats[ state.context.statistics.id ].metrics[n].between = diff;
+          allStats[ state.context.statistics.id ].metrics[v].between = diff;
+          allStats[ state.context.statistics.id ].metrics.total.between = diff;
+          allStats[ 'total' ].metrics[n].between = diff;
+          allStats[ 'total' ].metrics[v].between = diff;
+          allStats[ 'total' ].metrics.total.between = diff;
+
+          allStats[ state.context.statistics.id ].metrics[v].recent.unshift(allStats[ 'total' ].metrics[v].between);
+          allStats[ 'total' ].metrics[v].recent.unshift(allStats[ 'total' ].metrics[v].between);
+          
+          allStats[ state.context.statistics.id ].metrics[n].recent.unshift(allStats[ state.context.statistics.id ].metrics[n].between);
+          allStats[ 'total' ].metrics[n].recent.unshift(allStats[ state.context.statistics.id ].metrics[n].between);
+          
+          allStats[ state.context.statistics.id ].metrics.total.recent.unshift(allStats[ state.context.statistics.id ].metrics.total.between);
+          allStats[ 'total' ].metrics.total.recent.unshift(allStats[ state.context.statistics.id ].metrics.total.between);
+
+          if (allStats[ state.context.statistics.id ].metrics[v].recent.length > allStats[ state.context.statistics.id ].memory) {
+            allStats[ state.context.statistics.id ].metrics[v].recent = allStats[ state.context.statistics.id ].metrics[v].recent.slice(0, allStats[ state.context.statistics.id ].memory);
+          }
+          if (allStats[ 'total' ].metrics[n].recent.length > allStats[ 'total' ].memory) {
+            allStats[ 'total' ].metrics[n].recent = allStats[ 'total' ].metrics[n].recent.slice(0, allStats[ 'total' ].memory);
+          }
+          if (allStats[ state.context.statistics.id ].metrics[n].recent.length > allStats[ state.context.statistics.id ].memory) {
+            allStats[ state.context.statistics.id ].metrics[n].recent = allStats[ state.context.statistics.id ].metrics[n].recent.slice(0, allStats[ state.context.statistics.id ].memory);
+          }
+          if (allStats[ 'total' ].metrics[n].recent.length > allStats[ 'total' ].memory) {
+            allStats[ 'total' ].metrics[n].recent = allStats[ 'total' ].metrics[n].recent.slice(0, allStats[ 'total' ].memory);
+          }
+          if (allStats[ state.context.statistics.id ].metrics.total.recent.length > allStats[ state.context.statistics.id ].memory) {
+            allStats[ state.context.statistics.id ].metrics.total.recent = allStats[ state.context.statistics.id ].metrics.total.recent.slice(0, allStats[ 'total' ].memory);
+          }
+          if (allStats[ 'total' ].metrics.total.recent.length > allStats[ 'total' ].memory) {
+            allStats[ 'total' ].metrics.total.recent = allStats[ 'total' ].metrics.total.recent.slice(0, allStats[ 'total' ].memory);
+          }
+        
         }
 
         /* Other */
