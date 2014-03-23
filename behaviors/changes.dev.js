@@ -2,7 +2,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
   "use strict";
   var changeMap = {},
     that,
-    register = function(ctx) {
+    register = function(type, ctx) {
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
         callbacks: []
@@ -93,7 +93,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
         deferred = this.deferred();
     promise(function(ste) {
       ste.context.changes = changeMap[ ste.context.changes ];
-      notify(ste.context)
+      notify(ste.type, ste.context)
       register(ste.type, ste.context);
       deferred.resolve(ste);
     });
