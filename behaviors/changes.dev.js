@@ -2,30 +2,55 @@ window.dashChanges = window.dashChanges || (function (environment) {
   "use strict";
   var changeMap = {},
     that,
+    unregister = function(type, ctx) {
+      
+    },
     register = function(type, ctx) {
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
-        callbacks: []
+        callbacks: [],
       };
-      if (that.is(type, 'database')) {
+      if (that.contains(['get.databases','get.database'], type)) {
         changeMap[ctx.database].callbacks.push(obj);
       }
       if (that.exists(ctx.store)) {
         changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
-          indexes: {},
-          callbacks: []
+          callbacks: [],
+          indexes: {}
         };
-        if (that.is(type, 'store')) {
+        if (that.contains(['get.stores','get.store'], type)) {
           changeMap[ctx.database].stores[ctx.store].callbacks.push(obj);
         }
         if (that.exists(ctx.index)) {
           changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
-            callbacks: []
+            callbacks: [],
+            entries: {}
           };
-          if (that.is(type, 'index')) {
+          if (that.contains(['get.index','get.indexes'], type)) {
+            if (that.exists(ctx.idx)) {
+              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data = ctx.idx;
+            }
             changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks.push(obj);
           }
+          if (that.exists(ctx.key) && that.isnt(ctx.primary_key, ctx.key)) {
+            if (that.contains(['get.entry','get.entries'], type)) {
+              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] || {
+                callbacks: []
+              };
+              if (that.exists(ctx.entry)) {
+                changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].data = ctx.entry;
+              }
+              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks.push(obj);
+            }
+          }
         }
+        if (that.exists(ctx.primary_key)) {
+          changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
+          changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key] = changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key] || [];
+          if (that.contains(['get.index','get.indexes'], type)) {
+            changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key].push(obj);
+          }
+        }        
         console.log("REGISTERED CHANGE LISTENER", ctx.key, ctx.changes,changeMap);
       }
     },
