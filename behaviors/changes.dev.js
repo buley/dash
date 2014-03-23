@@ -1,6 +1,69 @@
 window.dashChanges = window.dashChanges || (function (environment) {
   "use strict";
   var changeMap = {},
+    register = function(ctx) {
+        changeMap[ctx.database] = changeMap[ctx.database] || {
+          stores: {},
+          callbacks: []
+        };
+        if (is(type, 'database')) {
+          changeMap[ctx.database].callbacks.push(obj);
+          return obj;
+        }
+        if (exists(ctx.store)) {
+          changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
+            indexes: {},
+            callbacks: []
+          };
+          if (is(type, 'store')) {
+            changeMap[ctx.database].stores[ctx.store].callbacks.push(obj);
+            return obj;
+          }
+          if (exists(ctx.index)) {
+            changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
+              data: null
+            };
+            if (is(type, 'index')) {
+              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data = obj;
+              return obj;
+            }
+          }
+          console.log("REGISTERED CHANGE LISTENER", ctx.key, ctx.changes,changeMap);
+        }
+      }
+    },
+    inquire = function(ctx) {
+      var listeners = [];
+      changeMap[ctx.database] = changeMap[ctx.database] || {
+        stores: {},
+        callbacks: []
+      };
+      if (is(type, 'database')) {
+        //database listeners
+      }
+      if (exists(ctx.store)) {
+        changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
+          indexes: {},
+          callbacks: []
+        };
+        if (is(type, 'store')) {
+          //store listeners
+        }
+        if (exists(ctx.index)) {
+          changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
+            data: null
+          };
+          if (is(type, 'index')) {
+            //index listeners
+          }
+        }
+      }
+      return listeners;
+    },
+    notify = function(ctx) {
+      var inquiry = inquire();
+      console.log('any listeners to notify?', inquiry);
+    },
     randomId = function() {
       var random = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
         count = 16,
@@ -23,18 +86,17 @@ window.dashChanges = window.dashChanges || (function (environment) {
     return state;
   }, function (state) {
     if(!this.exists(state.context.changes)) {
-      return state;
+      return notify(state);
     }
     var promise = state.promise,
         deferred = this.deferred();
-    console.log('change request', state.context.changes);
     promise(function(ste) {
-      setTimeout( function() {
-	      console.log('state',ste);
-        deferred.resolve(ste);
-      }, 3000 );
+      ste.context.changes = changeMap[ ste.context.changes ];
+      notify(ste.context)
+      register(ste.context);
+      deferred.resolve(ste);
     });
     state.promise = deferred.promise;
-    return state;
+    return ;
   } ];
 }(self));
