@@ -1690,7 +1690,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   store_key_path: 'id',
                   stats: true,
                   progress: true,
-                  forecast: false
+                  forecast: false,
                   index: 'season',
                   index_key_path: 'sy',
                   index_key: new Date('1/1/' + args.range).getTime(),
