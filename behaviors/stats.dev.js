@@ -696,23 +696,31 @@ window.dashStats = window.dashStats || (function (environment) {
 
       }
     } else {
-	if ( !!allStats[ state.context.statistics.id ].type ) {
-        console.log('incoming?', allStats[ 'total' ].metrics.total.requests);
-	      pieces = allStats[ state.context.statistics.id ].type.split('.');
-	      verb = pieces[0];
-	      noun = pieces[1];
-	      allStats[ state.context.statistics.id ].metrics[verb].requests += 1;
-	      allStats[ 'total' ].metrics[verb].requests += 1;
-	      allStats[ state.context.statistics.id ].metrics[noun].requests += 1;
-	      allStats[ 'total' ].metrics[noun].requests += 1;
-	      allStats[ state.context.statistics.id ].metrics[state.type].requests += 1;
-	      allStats[ 'total' ].metrics[state.type].requests += 1;
-	      allStats[ state.context.statistics.id ].metrics.total.requests += 1;
-	      allStats[ 'total' ].metrics.total.requests += 1;
-	      calculate(verb, noun);
-	      allStats[ state.context.statistics.id ].last = datetime;
-        console.log('outgoing?', allStats[ 'total' ].metrics.total.requests);
-	}
+    	if ( !!allStats[ state.context.statistics.id ].type ) {
+            console.log('incoming?', allStats[ 'total' ].metrics.total.requests);
+    	      pieces = allStats[ state.context.statistics.id ].type.split('.');
+    	      verb = pieces[0];
+    	      noun = pieces[1];
+    	      allStats[ state.context.statistics.id ].metrics[verb].requests += 1;
+    	      allStats[ 'total' ].metrics[verb].requests += 1;
+    	      allStats[ state.context.statistics.id ].metrics[noun].requests += 1;
+    	      allStats[ 'total' ].metrics[noun].requests += 1;
+    	      allStats[ state.context.statistics.id ].metrics[state.type].requests += 1;
+    	      allStats[ 'total' ].metrics[state.type].requests += 1;
+    	      allStats[ state.context.statistics.id ].metrics.total.requests += 1;
+    	      allStats[ 'total' ].metrics.total.requests += 1;
+    	      calculate(verb, noun);
+    	      allStats[ state.context.statistics.id ].last = datetime;
+            console.log('outgoing?', allStats[ 'total' ].metrics.total.requests);
+            state.context.statistics.total = theirs.clone(state.context.statistics.total);
+            state.context.statistics.request = theirs.clone(state.context.statistics.request);
+
+            if (!this.contains(['resolve', 'error'], state.type)) {
+              delete allStats[ state.context.statistics.id ];
+            }
+
+
+    	}
     }
     return state;
   };
