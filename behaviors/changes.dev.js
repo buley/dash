@@ -32,7 +32,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
         console.log("REGISTERED CHANGE LISTENER", ctx.key, ctx.changes,changeMap);
       }
     },
-    inquire = function(ctx) {
+    inquire = function(type, ctx) {
       var listeners = [];
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
@@ -60,8 +60,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
       }
       return listeners;
     },
-    notify = function(ctx) {
-      var inquiry = inquire(ctx);
+    notify = function(type, ctx) {
+      var inquiry = inquire(type, ctx);
       console.log('any listeners to notify?', inquiry);
     },
     randomId = function() {
@@ -94,7 +94,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     promise(function(ste) {
       ste.context.changes = changeMap[ ste.context.changes ];
       notify(ste.context)
-      register(ste.context);
+      register(ste.type, ste.context);
       deferred.resolve(ste);
     });
     state.promise = deferred.promise;
