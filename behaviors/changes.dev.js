@@ -1,6 +1,7 @@
 window.dashChanges = window.dashAsync || (function (environment) {
   "use strict";
   return [ null, function (state) {
+    return state;
     if(!this.isFunction(state.context.changes)) {
       return state;
     }
