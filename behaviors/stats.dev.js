@@ -229,7 +229,7 @@ window.dashStats = window.dashStats || (function (environment) {
     },
     allStats = { total: model() };
   return function (state) {
-    if(this.isnt(state.context.stats,true) || ('notify' === state.type && this.isnt(state.context.progress,true))) {
+    if(this.isnt(state.context.stats,true)) {
       return state;
     }
     var context = state.context,
@@ -711,14 +711,17 @@ window.dashStats = window.dashStats || (function (environment) {
     	      allStats[ 'total' ].metrics[state.type].requests += 1;
     	      allStats[ state.context.statistics.id ].metrics.total.requests += 1;
     	      allStats[ 'total' ].metrics.total.requests += 1;
-    	      calculate(verb, noun);
-    	      allStats[ state.context.statistics.id ].last = datetime;
-            state.context.statistics.total = theirs.clone(allStats[ 'total' ]);
-            state.context.statistics.request = theirs.clone(allStats[ state.context.statistics.id ]);
+            allStats[ state.context.statistics.id ].last = datetime;
+             if ('notify' === state.type && this.is(state.context.progress,true)) {
+              calculate(verb, noun);
+              state.context.statistics.total = theirs.clone(allStats[ 'total' ]);
+              state.context.statistics.request = theirs.clone(allStats[ state.context.statistics.id ]);
 
-            if (this.contains(['resolve', 'error'], state.type)) {
+             } else if (this.contains(['resolve', 'error'], state.type)) {
               delete allStats[ state.context.statistics.id ];
             }
+
+            
 
 
     	}
