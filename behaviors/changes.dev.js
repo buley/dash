@@ -131,12 +131,12 @@ window.dashChanges = window.dashChanges || (function (environment) {
         listeners = inquiry.listeners || [],
         current = inquiry.current || {},
         previous = inquiry.previous || {},
-        difference = function(one, two, deep) {
+        difference = function(one, two, shallow) {
           var diff = {};
           that.iterate(one, function(key, val) {
             if (that.isnt(JSON.stringify(val), JSON.stringify(previous[key]))) {
-              if ( that.is(deep, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
-                diff[ key ] = difference(val, two[key], deep);
+              if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
+                diff[ key ] = difference(val, two[key], shallow);
               } else {
                 diff[ key ] = [val, two[key]];
               }
@@ -144,8 +144,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
           });
           that.iterate(two, function(key, val) {
             if (that.isnt(JSON.stringify(val), JSON.stringify(current[key])) && that.isEmpty(diff[ key ])) {
-              if ( that.is(deep, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
-                diff[ key ] = difference(one[key], val, deep);
+              if ( that.isnt(shallow, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
+                diff[ key ] = difference(one[key], val, shallow);
               } else {
                 diff[ key ] = [one[key], val];
               }
@@ -153,11 +153,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
           });
           return diff;
         },
-        diff = (that.is(ctx.difference, true)) ? difference(current, previous, true) : false,
+        diff = (that.is(ctx.difference, true)) ? difference(current, previous, ctx.shallow ? false : true) : false,
         args = { context: ctx, method: method, type: type, current: current, previous: previous, difference: diff };
-      current.foo = { deep: true };
-      previous.foo = { deep: false };
-      console.log( 'DIFF', (that.is(ctx.difference, true)) ? difference(current, previous, true) : false);
       that.each(listeners, function(id) {
         that.apply(callbackMap[id], [ args ]);
       });
