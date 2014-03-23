@@ -718,6 +718,7 @@ window.dashStats = window.dashStats || (function (environment) {
 
     	}
     }
+    console.log('outgoing?', state.context.statistics.total.metrics.requests, allStats[ 'total' ].metrics.total.requests);
     return state;
   };
 }(self));
