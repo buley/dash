@@ -153,7 +153,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           });
           return diff;
         },
-        diff = (that.is(ctx.difference, true)) ? difference(current, previous, ctx.deep || false) : false,
+        diff = (that.is(ctx.difference, true)) ? difference(current, previous, ctx.deep || true) : false,
         args = { context: ctx, method: method, type: type, current: current, previous: previous, difference: diff };
       current.foo = { deep: true };
       previous.foo = { deep: false };
