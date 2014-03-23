@@ -293,8 +293,8 @@ window.dashStats = window.dashStats || (function (environment) {
         /* Time */
         
         datetime = new Date().getTime();
-        state.context.statistics.total = total;
-        state.context.statistics.request = request;
+        state.context.statistics.total = allStats[ 'total' ];
+        state.context.statistics.request = allStats[ state.context.statistics.id ];
         state.context.statistics.total.started = state.context.statistics.total.started || datetime;
         state.context.statistics.request.started = state.context.statistics.request.started || datetime;
         state.context.statistics.request.last = state.context.statistics.request.last || state.context.statistics.request.started || datetime;
