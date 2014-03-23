@@ -124,7 +124,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       ste.context.changes = callbackMap[ id ]; 
       delete callbackMap[ id ];
       notify(state.context, state.type)
-      register(ste.type, ste.context);
+      register(ste.method, ste.context);
       deferred.resolve(ste);
     });
     state.promise = deferred.promise;
