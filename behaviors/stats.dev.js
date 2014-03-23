@@ -604,9 +604,6 @@ window.dashStats = window.dashStats || (function (environment) {
           request: allStats[ id ],
           id: id
         };
-        console.log("CREATED NEW STATS", id);
-      } else {
-        console.log("LEFT EXISTING",state.context.statistics.id);
       }
        
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
@@ -697,7 +694,7 @@ window.dashStats = window.dashStats || (function (environment) {
       }
     } else {
     	if ( !!allStats[ state.context.statistics.id ].type ) {
-            console.log('incoming?', allStats[ 'total' ].metrics.total.requests);
+
     	      pieces = allStats[ state.context.statistics.id ].type.split('.');
     	      verb = pieces[0];
     	      noun = pieces[1];
@@ -711,7 +708,6 @@ window.dashStats = window.dashStats || (function (environment) {
     	      allStats[ 'total' ].metrics.total.requests += 1;
     	      calculate(verb, noun);
     	      allStats[ state.context.statistics.id ].last = datetime;
-            console.log('outgoing?', allStats[ 'total' ].metrics.total.requests);
             state.context.statistics.total = theirs.clone(state.context.statistics.total);
             state.context.statistics.request = theirs.clone(state.context.statistics.request);
 
