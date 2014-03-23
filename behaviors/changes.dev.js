@@ -60,7 +60,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       return listeners;
     },
     notify = function(ctx) {
-      var inquiry = inquire();
+      var inquiry = inquire(ctx);
       console.log('any listeners to notify?', inquiry);
     },
     randomId = function() {
