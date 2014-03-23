@@ -41,7 +41,6 @@
                 }, function(context) {
                     ctx = context;
                     error = true;
-		              console.log('ERR',JSON.stringify(context));
                     isFinished = true;
                 }, function(context) {
                     notify = true;
