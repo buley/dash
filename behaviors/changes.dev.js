@@ -62,13 +62,13 @@ window.dashChanges = window.dashChanges || (function (environment) {
       }
     },
     inquire = function(type, ctx) {
-      var listeners = [];
-      var obj = ctx.changed;
+      var listeners = [],
+          obj = ctx.changed;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
         callbacks: [],
       };
-      if (that.contains(['remove.database'], type)) {
+      if (that.contains(['remove.database', 'add.index', 'add.store'], type)) {
         changeMap[ctx.database].callbacks.push(obj);
         listeners.push.apply(listeners, changeMap[ctx.database].callbacks);
       }
@@ -77,7 +77,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           callbacks: [],
           indexes: {}
         };
-        if (that.contains(['remove.database', 'remove.store', 'clear.store'], type)) {
+        if (that.contains(['remove.database', 'remove.store', 'clear.store', 'add.index'], type)) {
           listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].callbacks);
         }
         if (that.exists(ctx.index)) {
