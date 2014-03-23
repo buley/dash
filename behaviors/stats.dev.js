@@ -293,295 +293,295 @@ window.dashStats = window.dashStats || (function (environment) {
         /* Time */
         
         datetime = new Date().getTime();
-        state.context.statistics.total = allStats[ 'total' ];
-        state.context.statistics.request = allStats[ state.context.statistics.id ];
-        state.context.statistics.total.started = state.context.statistics.total.started || datetime;
-        state.context.statistics.request.started = state.context.statistics.request.started || datetime;
-        state.context.statistics.request.last = state.context.statistics.request.last || state.context.statistics.request.started || datetime;
+        allStats[ 'total' ] = allStats[ 'total' ];
+        allStats[ state.context.statistics.id ] = allStats[ state.context.statistics.id ];
+        allStats[ 'total' ].started = allStats[ 'total' ].started || datetime;
+        allStats[ state.context.statistics.id ].started = allStats[ state.context.statistics.id ].started || datetime;
+        allStats[ state.context.statistics.id ].last = allStats[ state.context.statistics.id ].last || allStats[ state.context.statistics.id ].started || datetime;
 
-        state.context.statistics.total.elapsed = datetime - state.context.statistics.total.started;
-        state.context.statistics.total.metrics.total.actual = state.context.statistics.total.elapsed;
+        allStats[ 'total' ].elapsed = datetime - allStats[ 'total' ].started;
+        allStats[ 'total' ].metrics.total.actual = allStats[ 'total' ].elapsed;
 
-        state.context.statistics.request.elapsed = datetime - state.context.statistics.request.started;
-        state.context.statistics.request.metrics.total.actual = state.context.statistics.request.elapsed;
+        allStats[ state.context.statistics.id ].elapsed = datetime - allStats[ state.context.statistics.id ].started;
+        allStats[ state.context.statistics.id ].metrics.total.actual = allStats[ state.context.statistics.id ].elapsed;
 
-        state.context.statistics.request.metrics[n].elapsed = state.context.statistics.request.elapsed;
-        state.context.statistics.request.metrics[v].elapsed = state.context.statistics.request.elapsed;
-        state.context.statistics.request.metrics.total.elapsed = state.context.statistics.request.elapsed;
+        allStats[ state.context.statistics.id ].metrics[n].elapsed = allStats[ state.context.statistics.id ].elapsed;
+        allStats[ state.context.statistics.id ].metrics[v].elapsed = allStats[ state.context.statistics.id ].elapsed;
+        allStats[ state.context.statistics.id ].metrics.total.elapsed = allStats[ state.context.statistics.id ].elapsed;
 
-        state.context.statistics.total.metrics[n].elapsed = state.context.statistics.request.elapsed;
-        state.context.statistics.total.metrics[v].elapsed = state.context.statistics.request.elapsed;
-        state.context.statistics.total.metrics.total.elapsed = state.context.statistics.request.elapsed;
+        allStats[ 'total' ].metrics[n].elapsed = allStats[ state.context.statistics.id ].elapsed;
+        allStats[ 'total' ].metrics[v].elapsed = allStats[ state.context.statistics.id ].elapsed;
+        allStats[ 'total' ].metrics.total.elapsed = allStats[ state.context.statistics.id ].elapsed;
 
-        diff = datetime - state.context.statistics.request.last;
-        state.context.statistics.request.metrics[n].between = diff;
-        state.context.statistics.request.metrics[v].between = diff;
-        state.context.statistics.request.metrics.total.between = diff;
-        state.context.statistics.total.metrics[n].between = diff;
-        state.context.statistics.total.metrics[v].between = diff;
-        state.context.statistics.total.metrics.total.between = diff;
+        diff = datetime - allStats[ state.context.statistics.id ].last;
+        allStats[ state.context.statistics.id ].metrics[n].between = diff;
+        allStats[ state.context.statistics.id ].metrics[v].between = diff;
+        allStats[ state.context.statistics.id ].metrics.total.between = diff;
+        allStats[ 'total' ].metrics[n].between = diff;
+        allStats[ 'total' ].metrics[v].between = diff;
+        allStats[ 'total' ].metrics.total.between = diff;
 
-        state.context.statistics.request.metrics[v].recent.unshift(state.context.statistics.total.metrics[v].between);
-        state.context.statistics.total.metrics[v].recent.unshift(state.context.statistics.total.metrics[v].between);
+        allStats[ state.context.statistics.id ].metrics[v].recent.unshift(allStats[ 'total' ].metrics[v].between);
+        allStats[ 'total' ].metrics[v].recent.unshift(allStats[ 'total' ].metrics[v].between);
         
-        state.context.statistics.request.metrics[n].recent.unshift(state.context.statistics.request.metrics[n].between);
-        state.context.statistics.total.metrics[n].recent.unshift(state.context.statistics.request.metrics[n].between);
+        allStats[ state.context.statistics.id ].metrics[n].recent.unshift(allStats[ state.context.statistics.id ].metrics[n].between);
+        allStats[ 'total' ].metrics[n].recent.unshift(allStats[ state.context.statistics.id ].metrics[n].between);
         
-        state.context.statistics.request.metrics.total.recent.unshift(state.context.statistics.request.metrics.total.between);
-        state.context.statistics.total.metrics.total.recent.unshift(state.context.statistics.request.metrics.total.between);
+        allStats[ state.context.statistics.id ].metrics.total.recent.unshift(allStats[ state.context.statistics.id ].metrics.total.between);
+        allStats[ 'total' ].metrics.total.recent.unshift(allStats[ state.context.statistics.id ].metrics.total.between);
 
-        if (state.context.statistics.request.metrics[v].recent.length > state.context.statistics.request.memory) {
-          state.context.statistics.request.metrics[v].recent = state.context.statistics.request.metrics[v].recent.slice(0, state.context.statistics.request.memory);
+        if (allStats[ state.context.statistics.id ].metrics[v].recent.length > allStats[ state.context.statistics.id ].memory) {
+          allStats[ state.context.statistics.id ].metrics[v].recent = allStats[ state.context.statistics.id ].metrics[v].recent.slice(0, allStats[ state.context.statistics.id ].memory);
         }
-        if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.memory) {
-          state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.memory);
+        if (allStats[ 'total' ].metrics[n].recent.length > allStats[ 'total' ].memory) {
+          allStats[ 'total' ].metrics[n].recent = allStats[ 'total' ].metrics[n].recent.slice(0, allStats[ 'total' ].memory);
         }
-        if (state.context.statistics.request.metrics[n].recent.length > state.context.statistics.request.memory) {
-          state.context.statistics.request.metrics[n].recent = state.context.statistics.request.metrics[n].recent.slice(0, state.context.statistics.request.memory);
+        if (allStats[ state.context.statistics.id ].metrics[n].recent.length > allStats[ state.context.statistics.id ].memory) {
+          allStats[ state.context.statistics.id ].metrics[n].recent = allStats[ state.context.statistics.id ].metrics[n].recent.slice(0, allStats[ state.context.statistics.id ].memory);
         }
-        if (state.context.statistics.total.metrics[n].recent.length > state.context.statistics.total.memory) {
-          state.context.statistics.total.metrics[n].recent = state.context.statistics.total.metrics[n].recent.slice(0, state.context.statistics.total.memory);
+        if (allStats[ 'total' ].metrics[n].recent.length > allStats[ 'total' ].memory) {
+          allStats[ 'total' ].metrics[n].recent = allStats[ 'total' ].metrics[n].recent.slice(0, allStats[ 'total' ].memory);
         }
-        if (state.context.statistics.request.metrics.total.recent.length > state.context.statistics.request.memory) {
-          state.context.statistics.request.metrics.total.recent = state.context.statistics.request.metrics.total.recent.slice(0, state.context.statistics.total.memory);
+        if (allStats[ state.context.statistics.id ].metrics.total.recent.length > allStats[ state.context.statistics.id ].memory) {
+          allStats[ state.context.statistics.id ].metrics.total.recent = allStats[ state.context.statistics.id ].metrics.total.recent.slice(0, allStats[ 'total' ].memory);
         }
-        if (state.context.statistics.total.metrics.total.recent.length > state.context.statistics.total.memory) {
-          state.context.statistics.total.metrics.total.recent = state.context.statistics.total.metrics.total.recent.slice(0, state.context.statistics.total.memory);
+        if (allStats[ 'total' ].metrics.total.recent.length > allStats[ 'total' ].memory) {
+          allStats[ 'total' ].metrics.total.recent = allStats[ 'total' ].metrics.total.recent.slice(0, allStats[ 'total' ].memory);
         }
 
         /* Other */
         
-        state.context.statistics.request.metrics[v].rate = average(state.context.statistics.request.metrics[v].recent); 
-        state.context.statistics.request.metrics[n].rate = average(state.context.statistics.request.metrics[n].recent); 
-        state.context.statistics.request.metrics.total.rate = average(state.context.statistics.request.metrics.total.recent); 
+        allStats[ state.context.statistics.id ].metrics[v].rate = average(allStats[ state.context.statistics.id ].metrics[v].recent); 
+        allStats[ state.context.statistics.id ].metrics[n].rate = average(allStats[ state.context.statistics.id ].metrics[n].recent); 
+        allStats[ state.context.statistics.id ].metrics.total.rate = average(allStats[ state.context.statistics.id ].metrics.total.recent); 
 
-        state.context.statistics.total.metrics[v].rate = average(state.context.statistics.total.metrics[v].recent); 
-        state.context.statistics.total.metrics[n].rate = average(state.context.statistics.total.metrics[n].recent); 
-        state.context.statistics.total.metrics.total.rate = average(state.context.statistics.total.metrics.total.recent); 
+        allStats[ 'total' ].metrics[v].rate = average(allStats[ 'total' ].metrics[v].recent); 
+        allStats[ 'total' ].metrics[n].rate = average(allStats[ 'total' ].metrics[n].recent); 
+        allStats[ 'total' ].metrics.total.rate = average(allStats[ 'total' ].metrics.total.recent); 
 
-        state.context.statistics.request.metrics[v].average = state.context.statistics.request.metrics[v].elapsed / state.context.statistics.request.metrics[v].requests; 
-        state.context.statistics.request.metrics[n].average = state.context.statistics.request.metrics[n].elapsed / state.context.statistics.request.metrics[n].requests;
-        state.context.statistics.request.metrics.total.average = state.context.statistics.request.metrics.total.elapsed / state.context.statistics.request.metrics.total.requests;
+        allStats[ state.context.statistics.id ].metrics[v].average = allStats[ state.context.statistics.id ].metrics[v].elapsed / allStats[ state.context.statistics.id ].metrics[v].requests; 
+        allStats[ state.context.statistics.id ].metrics[n].average = allStats[ state.context.statistics.id ].metrics[n].elapsed / allStats[ state.context.statistics.id ].metrics[n].requests;
+        allStats[ state.context.statistics.id ].metrics.total.average = allStats[ state.context.statistics.id ].metrics.total.elapsed / allStats[ state.context.statistics.id ].metrics.total.requests;
 
-        state.context.statistics.total.metrics[v].average = state.context.statistics.total.metrics[v].elapsed/ state.context.statistics.total.metrics[v].requests; 
-        state.context.statistics.total.metrics[n].average = state.context.statistics.total.metrics[n].elapsed / state.context.statistics.total.metrics[n].requests;
-        state.context.statistics.total.metrics.total.average = state.context.statistics.total.metrics.total.elapsed / state.context.statistics.total.metrics.total.requests;
-
-        if ( theirs.is(state.context.forecast,true) ) {
-
-          state.context.statistics.request.metrics[v].expecting = state.context.statistics.request.metrics[v].expected - state.context.statistics.request.metrics[v].requests;
-          state.context.statistics.request.metrics[n].expecting = state.context.statistics.request.metrics[n].expected - state.context.statistics.request.metrics[n].requests;
-          state.context.statistics.request.metrics.total.expecting = state.context.statistics.request.metrics.total.expected - state.context.statistics.request.metrics.total.requests;
-
-          state.context.statistics.total.metrics[v].expecting = state.context.statistics.total.metrics[v].expected - state.context.statistics.total.metrics[v].requests;
-          state.context.statistics.total.metrics[n].expecting = state.context.statistics.total.metrics[n].expected - state.context.statistics.total.metrics[n].requests;
-          state.context.statistics.total.metrics.total.expecting = state.context.statistics.total.metrics.total.expected - state.context.statistics.total.metrics.total.requests;
-
-          state.context.statistics.request.metrics[v].duration = state.context.statistics.request.metrics[v].average * state.context.statistics.request.metrics[v].expected; 
-          state.context.statistics.request.metrics[n].duration = state.context.statistics.request.metrics[n].average * state.context.statistics.request.metrics[n].expected;
-          state.context.statistics.request.metrics.total.duration = state.context.statistics.request.metrics.total.average * state.context.statistics.request.metrics.total.expected;
-          
-          state.context.statistics.total.metrics[v].duration = state.context.statistics.total.metrics[v].average * state.context.statistics.total.metrics[v].expected; 
-          state.context.statistics.total.metrics[n].duration = state.context.statistics.total.metrics[n].average * state.context.statistics.total.metrics[n].expected;
-          state.context.statistics.total.metrics.total.duration = state.context.statistics.total.metrics.total.average * state.context.statistics.total.metrics.total.expected;
-          
-          state.context.statistics.total.metrics[v].remaining = state.context.statistics.total.metrics[v].expecting * state.context.statistics.total.metrics[v].rate;
-          state.context.statistics.total.metrics[n].remaining = state.context.statistics.total.metrics[n].expecting * state.context.statistics.total.metrics[n].rate;
-          state.context.statistics.total.metrics.total.remaining = state.context.statistics.total.metrics.total.expecting * state.context.statistics.total.metrics.total.rate;
-
-          state.context.statistics.request.metrics[v].remaining = state.context.statistics.request.metrics[v].expecting * state.context.statistics.request.metrics[v].rate
-          state.context.statistics.request.metrics[n].remaining = state.context.statistics.request.metrics[n].expecting * state.context.statistics.request.metrics[n].rate;
-          state.context.statistics.request.metrics.total.remaining = state.context.statistics.request.metrics.total.expecting * state.context.statistics.request.metrics.total.rate;
-        }
-
-        if (0 > state.context.statistics.total.metrics[v].remaining) {
-          state.context.statistics.total.metrics[v].remaining = 0;
-        } 
-        if (0 > state.context.statistics.total.metrics[n].remaining) {
-          state.context.statistics.total.metrics[n].remaining = 0;
-        } 
-        if (0 > state.context.statistics.total.metrics.total.remaining) {
-          state.context.statistics.total.metrics.total.remaining = 0;
-        } 
-
-        state.context.statistics.total.display.elapsed[v] = prettyTime(state.context.statistics.total.metrics[v].elapsed);
-        state.context.statistics.total.display.elapsed[n] = prettyTime(state.context.statistics.total.metrics[n].elapsed);
-        state.context.statistics.total.display.elapsed.total = prettyTime(state.context.statistics.total.metrics.total.elapsed);
-
-        state.context.statistics.request.display.elapsed[v] = prettyTime(state.context.statistics.request.metrics[v].elapsed);
-        state.context.statistics.request.display.elapsed[n] = prettyTime(state.context.statistics.request.metrics[n].elapsed);
-        state.context.statistics.request.display.elapsed.total = prettyTime(state.context.statistics.request.metrics.total.elapsed);
+        allStats[ 'total' ].metrics[v].average = allStats[ 'total' ].metrics[v].elapsed/ allStats[ 'total' ].metrics[v].requests; 
+        allStats[ 'total' ].metrics[n].average = allStats[ 'total' ].metrics[n].elapsed / allStats[ 'total' ].metrics[n].requests;
+        allStats[ 'total' ].metrics.total.average = allStats[ 'total' ].metrics.total.elapsed / allStats[ 'total' ].metrics.total.requests;
 
         if ( theirs.is(state.context.forecast,true) ) {
 
-          state.context.statistics.request.display.duration[v] = prettyTime(state.context.statistics.request.metrics[v].duration);
-          state.context.statistics.request.display.duration[n] = prettyTime(state.context.statistics.request.metrics[n].duration);
-          state.context.statistics.request.display.duration.total = prettyTime(state.context.statistics.request.metrics.total.duration);
+          allStats[ state.context.statistics.id ].metrics[v].expecting = allStats[ state.context.statistics.id ].metrics[v].expected - allStats[ state.context.statistics.id ].metrics[v].requests;
+          allStats[ state.context.statistics.id ].metrics[n].expecting = allStats[ state.context.statistics.id ].metrics[n].expected - allStats[ state.context.statistics.id ].metrics[n].requests;
+          allStats[ state.context.statistics.id ].metrics.total.expecting = allStats[ state.context.statistics.id ].metrics.total.expected - allStats[ state.context.statistics.id ].metrics.total.requests;
 
-          state.context.statistics.total.display.duration[v] = prettyTime(state.context.statistics.total.metrics[v].duration);
-          state.context.statistics.total.display.duration[n] = prettyTime(state.context.statistics.total.metrics[n].duration);
-          state.context.statistics.total.display.duration.total = prettyTime(state.context.statistics.total.metrics.total.duration);
+          allStats[ 'total' ].metrics[v].expecting = allStats[ 'total' ].metrics[v].expected - allStats[ 'total' ].metrics[v].requests;
+          allStats[ 'total' ].metrics[n].expecting = allStats[ 'total' ].metrics[n].expected - allStats[ 'total' ].metrics[n].requests;
+          allStats[ 'total' ].metrics.total.expecting = allStats[ 'total' ].metrics.total.expected - allStats[ 'total' ].metrics.total.requests;
 
-          state.context.statistics.request.display.remaining[v] = prettyTime(state.context.statistics.request.metrics[v].remaining);
-          state.context.statistics.request.display.remaining[n] = prettyTime(state.context.statistics.request.metrics[n].remaining);
-          state.context.statistics.request.display.remaining.total = prettyTime(state.context.statistics.request.metrics.total.remaining);
+          allStats[ state.context.statistics.id ].metrics[v].duration = allStats[ state.context.statistics.id ].metrics[v].average * allStats[ state.context.statistics.id ].metrics[v].expected; 
+          allStats[ state.context.statistics.id ].metrics[n].duration = allStats[ state.context.statistics.id ].metrics[n].average * allStats[ state.context.statistics.id ].metrics[n].expected;
+          allStats[ state.context.statistics.id ].metrics.total.duration = allStats[ state.context.statistics.id ].metrics.total.average * allStats[ state.context.statistics.id ].metrics.total.expected;
+          
+          allStats[ 'total' ].metrics[v].duration = allStats[ 'total' ].metrics[v].average * allStats[ 'total' ].metrics[v].expected; 
+          allStats[ 'total' ].metrics[n].duration = allStats[ 'total' ].metrics[n].average * allStats[ 'total' ].metrics[n].expected;
+          allStats[ 'total' ].metrics.total.duration = allStats[ 'total' ].metrics.total.average * allStats[ 'total' ].metrics.total.expected;
+          
+          allStats[ 'total' ].metrics[v].remaining = allStats[ 'total' ].metrics[v].expecting * allStats[ 'total' ].metrics[v].rate;
+          allStats[ 'total' ].metrics[n].remaining = allStats[ 'total' ].metrics[n].expecting * allStats[ 'total' ].metrics[n].rate;
+          allStats[ 'total' ].metrics.total.remaining = allStats[ 'total' ].metrics.total.expecting * allStats[ 'total' ].metrics.total.rate;
 
-          state.context.statistics.total.display.remaining[v] = prettyTime(state.context.statistics.total.metrics[v].remaining);
-          state.context.statistics.total.display.remaining[n] = prettyTime(state.context.statistics.total.metrics[n].remaining);
-          state.context.statistics.total.display.remaining.total = prettyTime(state.context.statistics.total.metrics.total.remaining);
+          allStats[ state.context.statistics.id ].metrics[v].remaining = allStats[ state.context.statistics.id ].metrics[v].expecting * allStats[ state.context.statistics.id ].metrics[v].rate
+          allStats[ state.context.statistics.id ].metrics[n].remaining = allStats[ state.context.statistics.id ].metrics[n].expecting * allStats[ state.context.statistics.id ].metrics[n].rate;
+          allStats[ state.context.statistics.id ].metrics.total.remaining = allStats[ state.context.statistics.id ].metrics.total.expecting * allStats[ state.context.statistics.id ].metrics.total.rate;
+        }
+
+        if (0 > allStats[ 'total' ].metrics[v].remaining) {
+          allStats[ 'total' ].metrics[v].remaining = 0;
+        } 
+        if (0 > allStats[ 'total' ].metrics[n].remaining) {
+          allStats[ 'total' ].metrics[n].remaining = 0;
+        } 
+        if (0 > allStats[ 'total' ].metrics.total.remaining) {
+          allStats[ 'total' ].metrics.total.remaining = 0;
+        } 
+
+        allStats[ 'total' ].display.elapsed[v] = prettyTime(allStats[ 'total' ].metrics[v].elapsed);
+        allStats[ 'total' ].display.elapsed[n] = prettyTime(allStats[ 'total' ].metrics[n].elapsed);
+        allStats[ 'total' ].display.elapsed.total = prettyTime(allStats[ 'total' ].metrics.total.elapsed);
+
+        allStats[ state.context.statistics.id ].display.elapsed[v] = prettyTime(allStats[ state.context.statistics.id ].metrics[v].elapsed);
+        allStats[ state.context.statistics.id ].display.elapsed[n] = prettyTime(allStats[ state.context.statistics.id ].metrics[n].elapsed);
+        allStats[ state.context.statistics.id ].display.elapsed.total = prettyTime(allStats[ state.context.statistics.id ].metrics.total.elapsed);
+
+        if ( theirs.is(state.context.forecast,true) ) {
+
+          allStats[ state.context.statistics.id ].display.duration[v] = prettyTime(allStats[ state.context.statistics.id ].metrics[v].duration);
+          allStats[ state.context.statistics.id ].display.duration[n] = prettyTime(allStats[ state.context.statistics.id ].metrics[n].duration);
+          allStats[ state.context.statistics.id ].display.duration.total = prettyTime(allStats[ state.context.statistics.id ].metrics.total.duration);
+
+          allStats[ 'total' ].display.duration[v] = prettyTime(allStats[ 'total' ].metrics[v].duration);
+          allStats[ 'total' ].display.duration[n] = prettyTime(allStats[ 'total' ].metrics[n].duration);
+          allStats[ 'total' ].display.duration.total = prettyTime(allStats[ 'total' ].metrics.total.duration);
+
+          allStats[ state.context.statistics.id ].display.remaining[v] = prettyTime(allStats[ state.context.statistics.id ].metrics[v].remaining);
+          allStats[ state.context.statistics.id ].display.remaining[n] = prettyTime(allStats[ state.context.statistics.id ].metrics[n].remaining);
+          allStats[ state.context.statistics.id ].display.remaining.total = prettyTime(allStats[ state.context.statistics.id ].metrics.total.remaining);
+
+          allStats[ 'total' ].display.remaining[v] = prettyTime(allStats[ 'total' ].metrics[v].remaining);
+          allStats[ 'total' ].display.remaining[n] = prettyTime(allStats[ 'total' ].metrics[n].remaining);
+          allStats[ 'total' ].display.remaining.total = prettyTime(allStats[ 'total' ].metrics.total.remaining);
 
         }
 
-        state.context.statistics.request.display.actual.total = prettyTime(state.context.statistics.request.metrics.total.actual);
-        state.context.statistics.total.display.actual.total = prettyTime(state.context.statistics.total.metrics.total.actual);
+        allStats[ state.context.statistics.id ].display.actual.total = prettyTime(allStats[ state.context.statistics.id ].metrics.total.actual);
+        allStats[ 'total' ].display.actual.total = prettyTime(allStats[ 'total' ].metrics.total.actual);
 
-        state.context.statistics.total.display.thoroughput_rate[v] = Math.floor(1000/state.context.statistics.total.metrics[v].rate);
-        state.context.statistics.total.display.thoroughput_rate[n] = Math.floor(1000/state.context.statistics.total.metrics[n].rate);
-        state.context.statistics.total.display.thoroughput_rate.total = Math.floor(1000/state.context.statistics.total.metrics.total.rate);
-        if ( state.context.statistics.total.display.thoroughput_rate[v] < 1 ) {
-          state.context.statistics.total.display.thoroughput_rate[v] = Math.floor(60/state.context.statistics.total.display.thoroughput_rate[v]) + ' entries/min';
+        allStats[ 'total' ].display.thoroughput_rate[v] = Math.floor(1000/allStats[ 'total' ].metrics[v].rate);
+        allStats[ 'total' ].display.thoroughput_rate[n] = Math.floor(1000/allStats[ 'total' ].metrics[n].rate);
+        allStats[ 'total' ].display.thoroughput_rate.total = Math.floor(1000/allStats[ 'total' ].metrics.total.rate);
+        if ( allStats[ 'total' ].display.thoroughput_rate[v] < 1 ) {
+          allStats[ 'total' ].display.thoroughput_rate[v] = Math.floor(60/allStats[ 'total' ].display.thoroughput_rate[v]) + ' entries/min';
         } else {
-          state.context.statistics.total.display.thoroughput_rate[v] += ' entries/sec';
+          allStats[ 'total' ].display.thoroughput_rate[v] += ' entries/sec';
         }
-        if ( state.context.statistics.total.display.thoroughput_rate[n] < 1 ) {
-          state.context.statistics.total.display.thoroughput_rate[n] = Math.floor(60/state.context.statistics.total.display.thoroughput_rate[n]) + ' entries/min';
+        if ( allStats[ 'total' ].display.thoroughput_rate[n] < 1 ) {
+          allStats[ 'total' ].display.thoroughput_rate[n] = Math.floor(60/allStats[ 'total' ].display.thoroughput_rate[n]) + ' entries/min';
         } else {
-          state.context.statistics.total.display.thoroughput_rate[n] += ' entries/sec';
+          allStats[ 'total' ].display.thoroughput_rate[n] += ' entries/sec';
         } 
-        if ( state.context.statistics.total.display.thoroughput_rate.total < 1 ) {
-          state.context.statistics.total.display.thoroughput_rate.total = Math.floor(60/state.context.statistics.total.display.thoroughput_rate.total) + ' entries/min';
+        if ( allStats[ 'total' ].display.thoroughput_rate.total < 1 ) {
+          allStats[ 'total' ].display.thoroughput_rate.total = Math.floor(60/allStats[ 'total' ].display.thoroughput_rate.total) + ' entries/min';
         } else {
-          state.context.statistics.total.display.thoroughput_rate.total += ' entries/sec';
+          allStats[ 'total' ].display.thoroughput_rate.total += ' entries/sec';
         } 
-        state.context.statistics.total.display.thoroughput_average[v] = Math.floor(1000/state.context.statistics.total.metrics[v].average);
-        state.context.statistics.total.display.thoroughput_average[n] = Math.floor(1000/state.context.statistics.total.metrics[n].average);
-        state.context.statistics.total.display.thoroughput_average.total = Math.floor(1000/state.context.statistics.total.metrics.total.average);
-        if ( state.context.statistics.total.display.thoroughput_average[v] < 1 ) {
-          state.context.statistics.total.display.thoroughput_average[v] = Math.floor(60/state.context.statistics.total.display.thoroughput_average[v]) + ' entries/min';
+        allStats[ 'total' ].display.thoroughput_average[v] = Math.floor(1000/allStats[ 'total' ].metrics[v].average);
+        allStats[ 'total' ].display.thoroughput_average[n] = Math.floor(1000/allStats[ 'total' ].metrics[n].average);
+        allStats[ 'total' ].display.thoroughput_average.total = Math.floor(1000/allStats[ 'total' ].metrics.total.average);
+        if ( allStats[ 'total' ].display.thoroughput_average[v] < 1 ) {
+          allStats[ 'total' ].display.thoroughput_average[v] = Math.floor(60/allStats[ 'total' ].display.thoroughput_average[v]) + ' entries/min';
         } else {
-          state.context.statistics.total.display.thoroughput_average[v] += ' entries/sec';
+          allStats[ 'total' ].display.thoroughput_average[v] += ' entries/sec';
         }       
-        if ( state.context.statistics.total.display.thoroughput_average[n] < 1 ) {
-          state.context.statistics.total.display.thoroughput_average[n] = Math.floor(60/state.context.statistics.total.display.thoroughput_average[n]) + ' entries/min';
+        if ( allStats[ 'total' ].display.thoroughput_average[n] < 1 ) {
+          allStats[ 'total' ].display.thoroughput_average[n] = Math.floor(60/allStats[ 'total' ].display.thoroughput_average[n]) + ' entries/min';
         } else {
-          state.context.statistics.total.display.thoroughput_average[n] += ' entries/sec';
+          allStats[ 'total' ].display.thoroughput_average[n] += ' entries/sec';
         } 
-        if ( state.context.statistics.total.display.thoroughput_average.total < 1 ) {
-          state.context.statistics.total.display.thoroughput_average.total = Math.floor(60/state.context.statistics.total.display.thoroughput_average.total) + ' entries/min';
+        if ( allStats[ 'total' ].display.thoroughput_average.total < 1 ) {
+          allStats[ 'total' ].display.thoroughput_average.total = Math.floor(60/allStats[ 'total' ].display.thoroughput_average.total) + ' entries/min';
         } else {
-          state.context.statistics.total.display.thoroughput_average.total += ' entries/sec';
+          allStats[ 'total' ].display.thoroughput_average.total += ' entries/sec';
         } 
 
-        state.context.statistics.request.display.thoroughput_rate[v] = Math.floor(1000/state.context.statistics.request.metrics[v].rate);
-        state.context.statistics.request.display.thoroughput_rate[n] = Math.floor(1000/state.context.statistics.request.metrics[n].rate);
-        state.context.statistics.request.display.thoroughput_rate.total = Math.floor(1000/state.context.statistics.request.metrics.total.rate);
-        if ( state.context.statistics.request.display.thoroughput_rate[v] < 1 ) {
-          state.context.statistics.request.display.thoroughput_rate[v] = Math.floor(60/state.context.statistics.request.display.thoroughput_rate[v]) + ' entries/min';
+        allStats[ state.context.statistics.id ].display.thoroughput_rate[v] = Math.floor(1000/allStats[ state.context.statistics.id ].metrics[v].rate);
+        allStats[ state.context.statistics.id ].display.thoroughput_rate[n] = Math.floor(1000/allStats[ state.context.statistics.id ].metrics[n].rate);
+        allStats[ state.context.statistics.id ].display.thoroughput_rate.total = Math.floor(1000/allStats[ state.context.statistics.id ].metrics.total.rate);
+        if ( allStats[ state.context.statistics.id ].display.thoroughput_rate[v] < 1 ) {
+          allStats[ state.context.statistics.id ].display.thoroughput_rate[v] = Math.floor(60/allStats[ state.context.statistics.id ].display.thoroughput_rate[v]) + ' entries/min';
         } else {
-          state.context.statistics.request.display.thoroughput_rate[v] += ' entries/sec';
+          allStats[ state.context.statistics.id ].display.thoroughput_rate[v] += ' entries/sec';
         }
-        if ( state.context.statistics.request.display.thoroughput_rate[n] < 1 ) {
-          state.context.statistics.request.display.thoroughput_rate[n] = Math.floor(60/state.context.statistics.request.display.thoroughput_rate[n]) + ' entries/min';
+        if ( allStats[ state.context.statistics.id ].display.thoroughput_rate[n] < 1 ) {
+          allStats[ state.context.statistics.id ].display.thoroughput_rate[n] = Math.floor(60/allStats[ state.context.statistics.id ].display.thoroughput_rate[n]) + ' entries/min';
         } else {
-          state.context.statistics.request.display.thoroughput_rate[n] += ' entries/sec';
+          allStats[ state.context.statistics.id ].display.thoroughput_rate[n] += ' entries/sec';
         } 
-        if ( state.context.statistics.request.display.thoroughput_rate.total < 1 ) {
-          state.context.statistics.request.display.thoroughput_rate.total = Math.floor(60/state.context.statistics.request.display.thoroughput_rate.total) + ' entries/min';
+        if ( allStats[ state.context.statistics.id ].display.thoroughput_rate.total < 1 ) {
+          allStats[ state.context.statistics.id ].display.thoroughput_rate.total = Math.floor(60/allStats[ state.context.statistics.id ].display.thoroughput_rate.total) + ' entries/min';
         } else {
-          state.context.statistics.request.display.thoroughput_rate.total += ' entries/sec';
+          allStats[ state.context.statistics.id ].display.thoroughput_rate.total += ' entries/sec';
         } 
-        state.context.statistics.request.display.thoroughput_average[v] = Math.floor(1000/state.context.statistics.request.metrics[v].average);
-        state.context.statistics.request.display.thoroughput_average[n] = Math.floor(1000/state.context.statistics.request.metrics[n].average);
-        state.context.statistics.request.display.thoroughput_average.total = Math.floor(1000/state.context.statistics.request.metrics.total.average);
-        if ( state.context.statistics.request.display.thoroughput_average[v] < 1 ) {
-          state.context.statistics.request.display.thoroughput_average[v] = Math.floor(60/state.context.statistics.request.display.thoroughput_average[v]) + ' entries/min';
+        allStats[ state.context.statistics.id ].display.thoroughput_average[v] = Math.floor(1000/allStats[ state.context.statistics.id ].metrics[v].average);
+        allStats[ state.context.statistics.id ].display.thoroughput_average[n] = Math.floor(1000/allStats[ state.context.statistics.id ].metrics[n].average);
+        allStats[ state.context.statistics.id ].display.thoroughput_average.total = Math.floor(1000/allStats[ state.context.statistics.id ].metrics.total.average);
+        if ( allStats[ state.context.statistics.id ].display.thoroughput_average[v] < 1 ) {
+          allStats[ state.context.statistics.id ].display.thoroughput_average[v] = Math.floor(60/allStats[ state.context.statistics.id ].display.thoroughput_average[v]) + ' entries/min';
         } else {
-          state.context.statistics.request.display.thoroughput_average[v] += ' entries/sec';
+          allStats[ state.context.statistics.id ].display.thoroughput_average[v] += ' entries/sec';
         }       
-        if ( state.context.statistics.request.display.thoroughput_average[n] < 1 ) {
-          state.context.statistics.request.display.thoroughput_average[n] = Math.floor(60/state.context.statistics.request.display.thoroughput_average[n]) + ' entries/min';
+        if ( allStats[ state.context.statistics.id ].display.thoroughput_average[n] < 1 ) {
+          allStats[ state.context.statistics.id ].display.thoroughput_average[n] = Math.floor(60/allStats[ state.context.statistics.id ].display.thoroughput_average[n]) + ' entries/min';
         } else {
-          state.context.statistics.request.display.thoroughput_average[n] += ' entries/sec';
+          allStats[ state.context.statistics.id ].display.thoroughput_average[n] += ' entries/sec';
         } 
-        if ( state.context.statistics.request.display.thoroughput_average.total < 1 ) {
-          state.context.statistics.request.display.thoroughput_average.total = Math.floor(60/state.context.statistics.request.display.thoroughput_average.total) + ' entries/min';
+        if ( allStats[ state.context.statistics.id ].display.thoroughput_average.total < 1 ) {
+          allStats[ state.context.statistics.id ].display.thoroughput_average.total = Math.floor(60/allStats[ state.context.statistics.id ].display.thoroughput_average.total) + ' entries/min';
         } else {
-          state.context.statistics.request.display.thoroughput_average.total += ' entries/sec';
+          allStats[ state.context.statistics.id ].display.thoroughput_average.total += ' entries/sec';
         } 
 
 
-        state.context.statistics.total.display.speed_rate[v] = Math.floor(state.context.statistics.total.metrics[v].rate);
-        state.context.statistics.total.display.speed_rate[n] = Math.floor(state.context.statistics.total.metrics[n].rate);
-        state.context.statistics.total.display.speed_rate.total = Math.floor(state.context.statistics.total.metrics.total.rate);
-        if ( state.context.statistics.total.display.speed_rate[v] < 1 ) {
-          state.context.statistics.total.display.speed_rate[v] = Math.floor(60/state.context.statistics.total.display.speed_rate[v]) + ' ms/entry';
+        allStats[ 'total' ].display.speed_rate[v] = Math.floor(allStats[ 'total' ].metrics[v].rate);
+        allStats[ 'total' ].display.speed_rate[n] = Math.floor(allStats[ 'total' ].metrics[n].rate);
+        allStats[ 'total' ].display.speed_rate.total = Math.floor(allStats[ 'total' ].metrics.total.rate);
+        if ( allStats[ 'total' ].display.speed_rate[v] < 1 ) {
+          allStats[ 'total' ].display.speed_rate[v] = Math.floor(60/allStats[ 'total' ].display.speed_rate[v]) + ' ms/entry';
         } else {
-          state.context.statistics.total.display.speed_rate[v] += ' ms/entry';
+          allStats[ 'total' ].display.speed_rate[v] += ' ms/entry';
         }
-        if ( state.context.statistics.total.display.speed_rate[n] < 1 ) {
-          state.context.statistics.total.display.speed_rate[n] = Math.floor(60/state.context.statistics.total.display.speed_rate[n]) + ' ms/entry';
+        if ( allStats[ 'total' ].display.speed_rate[n] < 1 ) {
+          allStats[ 'total' ].display.speed_rate[n] = Math.floor(60/allStats[ 'total' ].display.speed_rate[n]) + ' ms/entry';
         } else {
-          state.context.statistics.total.display.speed_rate[n] += ' ms/entry';
+          allStats[ 'total' ].display.speed_rate[n] += ' ms/entry';
         } 
-        if ( state.context.statistics.total.display.speed_rate.total < 1 ) {
-          state.context.statistics.total.display.speed_rate.total = Math.floor(60/state.context.statistics.total.display.speed_rate.total) + ' ms/entry';
+        if ( allStats[ 'total' ].display.speed_rate.total < 1 ) {
+          allStats[ 'total' ].display.speed_rate.total = Math.floor(60/allStats[ 'total' ].display.speed_rate.total) + ' ms/entry';
         } else {
-          state.context.statistics.total.display.speed_rate.total += ' ms/entry';
+          allStats[ 'total' ].display.speed_rate.total += ' ms/entry';
         } 
-        state.context.statistics.total.display.speed_average[v] = Math.floor(state.context.statistics.total.metrics[v].average);
-        state.context.statistics.total.display.speed_average[n] = Math.floor(state.context.statistics.total.metrics[n].average);
-        state.context.statistics.total.display.speed_average.total = Math.floor(state.context.statistics.total.metrics.total.average);
-        if ( state.context.statistics.total.display.speed_average[v] < 1 ) {
-          state.context.statistics.total.display.speed_average[v] = Math.floor(60/state.context.statistics.total.display.speed_average[v]) + ' ms/entry';
+        allStats[ 'total' ].display.speed_average[v] = Math.floor(allStats[ 'total' ].metrics[v].average);
+        allStats[ 'total' ].display.speed_average[n] = Math.floor(allStats[ 'total' ].metrics[n].average);
+        allStats[ 'total' ].display.speed_average.total = Math.floor(allStats[ 'total' ].metrics.total.average);
+        if ( allStats[ 'total' ].display.speed_average[v] < 1 ) {
+          allStats[ 'total' ].display.speed_average[v] = Math.floor(60/allStats[ 'total' ].display.speed_average[v]) + ' ms/entry';
         } else {
-          state.context.statistics.total.display.speed_average[v] += ' ms/entry';
+          allStats[ 'total' ].display.speed_average[v] += ' ms/entry';
         }       
-        if ( state.context.statistics.total.display.speed_average[n] < 1 ) {
-          state.context.statistics.total.display.speed_average[n] = Math.floor(60/state.context.statistics.total.display.speed_average[n]) + ' ms/entry';
+        if ( allStats[ 'total' ].display.speed_average[n] < 1 ) {
+          allStats[ 'total' ].display.speed_average[n] = Math.floor(60/allStats[ 'total' ].display.speed_average[n]) + ' ms/entry';
         } else {
-          state.context.statistics.total.display.speed_average[n] += ' ms/entry';
+          allStats[ 'total' ].display.speed_average[n] += ' ms/entry';
         } 
-        if ( state.context.statistics.total.display.speed_average.total < 1 ) {
-          state.context.statistics.total.display.speed_average.total = Math.floor(60/state.context.statistics.total.display.speed_average.total) + ' ms/entry';
+        if ( allStats[ 'total' ].display.speed_average.total < 1 ) {
+          allStats[ 'total' ].display.speed_average.total = Math.floor(60/allStats[ 'total' ].display.speed_average.total) + ' ms/entry';
         } else {
-          state.context.statistics.total.display.speed_average.total += ' ms/entry';
+          allStats[ 'total' ].display.speed_average.total += ' ms/entry';
         } 
 
-        state.context.statistics.request.display.speed_rate[v] = Math.floor(state.context.statistics.request.metrics[v].rate);
-        state.context.statistics.request.display.speed_rate[n] = Math.floor(state.context.statistics.request.metrics[n].rate);
-        state.context.statistics.request.display.speed_rate.total = Math.floor(state.context.statistics.request.metrics.total.rate);
-        if ( state.context.statistics.request.display.speed_rate[v] < 1 ) {
-          state.context.statistics.request.display.speed_rate[v] = Math.floor(60/state.context.statistics.request.display.speed_rate[v]) + ' ms/entry';
+        allStats[ state.context.statistics.id ].display.speed_rate[v] = Math.floor(allStats[ state.context.statistics.id ].metrics[v].rate);
+        allStats[ state.context.statistics.id ].display.speed_rate[n] = Math.floor(allStats[ state.context.statistics.id ].metrics[n].rate);
+        allStats[ state.context.statistics.id ].display.speed_rate.total = Math.floor(allStats[ state.context.statistics.id ].metrics.total.rate);
+        if ( allStats[ state.context.statistics.id ].display.speed_rate[v] < 1 ) {
+          allStats[ state.context.statistics.id ].display.speed_rate[v] = Math.floor(60/allStats[ state.context.statistics.id ].display.speed_rate[v]) + ' ms/entry';
         } else {
-          state.context.statistics.request.display.speed_rate[v] += ' ms/entry';
+          allStats[ state.context.statistics.id ].display.speed_rate[v] += ' ms/entry';
         }
-        if ( state.context.statistics.request.display.speed_rate[n] < 1 ) {
-          state.context.statistics.request.display.speed_rate[n] = Math.floor(60/state.context.statistics.request.display.speed_rate[n]) + ' ms/entry';
+        if ( allStats[ state.context.statistics.id ].display.speed_rate[n] < 1 ) {
+          allStats[ state.context.statistics.id ].display.speed_rate[n] = Math.floor(60/allStats[ state.context.statistics.id ].display.speed_rate[n]) + ' ms/entry';
         } else {
-          state.context.statistics.request.display.speed_rate[n] += ' ms/entry';
+          allStats[ state.context.statistics.id ].display.speed_rate[n] += ' ms/entry';
         } 
-        if ( state.context.statistics.request.display.speed_rate.total < 1 ) {
-          state.context.statistics.request.display.speed_rate.total = Math.floor(60/state.context.statistics.request.display.speed_rate.total) + ' ms/entry';
+        if ( allStats[ state.context.statistics.id ].display.speed_rate.total < 1 ) {
+          allStats[ state.context.statistics.id ].display.speed_rate.total = Math.floor(60/allStats[ state.context.statistics.id ].display.speed_rate.total) + ' ms/entry';
         } else {
-          state.context.statistics.request.display.speed_rate.total += ' ms/entry';
+          allStats[ state.context.statistics.id ].display.speed_rate.total += ' ms/entry';
         } 
-        state.context.statistics.request.display.speed_average[v] = Math.floor(state.context.statistics.request.metrics[v].average);
-        state.context.statistics.request.display.speed_average[n] = Math.floor(state.context.statistics.request.metrics[n].average);
-        state.context.statistics.request.display.speed_average.total = Math.floor(state.context.statistics.request.metrics.total.average);
-        if ( state.context.statistics.request.display.speed_average[v] < 1 ) {
-          state.context.statistics.request.display.speed_average[v] = Math.floor(60/state.context.statistics.request.display.speed_average[v]) + ' ms/entry';
+        allStats[ state.context.statistics.id ].display.speed_average[v] = Math.floor(allStats[ state.context.statistics.id ].metrics[v].average);
+        allStats[ state.context.statistics.id ].display.speed_average[n] = Math.floor(allStats[ state.context.statistics.id ].metrics[n].average);
+        allStats[ state.context.statistics.id ].display.speed_average.total = Math.floor(allStats[ state.context.statistics.id ].metrics.total.average);
+        if ( allStats[ state.context.statistics.id ].display.speed_average[v] < 1 ) {
+          allStats[ state.context.statistics.id ].display.speed_average[v] = Math.floor(60/allStats[ state.context.statistics.id ].display.speed_average[v]) + ' ms/entry';
         } else {
-          state.context.statistics.request.display.speed_average[v] += ' ms/entry';
+          allStats[ state.context.statistics.id ].display.speed_average[v] += ' ms/entry';
         }       
-        if ( state.context.statistics.request.display.speed_average[n] < 1 ) {
-          state.context.statistics.request.display.speed_average[n] = Math.floor(60/state.context.statistics.request.display.speed_average[n]) + ' ms/entry';
+        if ( allStats[ state.context.statistics.id ].display.speed_average[n] < 1 ) {
+          allStats[ state.context.statistics.id ].display.speed_average[n] = Math.floor(60/allStats[ state.context.statistics.id ].display.speed_average[n]) + ' ms/entry';
         } else {
-          state.context.statistics.request.display.speed_average[n] += ' ms/entry';
+          allStats[ state.context.statistics.id ].display.speed_average[n] += ' ms/entry';
         } 
-        if ( state.context.statistics.request.display.speed_average.total < 1 ) {
-          state.context.statistics.request.display.speed_average.total = Math.floor(60/state.context.statistics.request.display.speed_average.total) + ' ms/entry';
+        if ( allStats[ state.context.statistics.id ].display.speed_average.total < 1 ) {
+          allStats[ state.context.statistics.id ].display.speed_average.total = Math.floor(60/allStats[ state.context.statistics.id ].display.speed_average.total) + ' ms/entry';
         } else {
-          state.context.statistics.request.display.speed_average.total += ' ms/entry';
+          allStats[ state.context.statistics.id ].display.speed_average.total += ' ms/entry';
         } 
 
       };
@@ -606,15 +606,14 @@ window.dashStats = window.dashStats || (function (environment) {
         };
         console.log("CREATED NEW STATS", id);
       } else {
-        console.log("COPIED EXISTING",state.context.statistics.id);
-        state.context.statistics = theirs.clone(state.context.statistics);
+        console.log("LEFT EXISTING",state.context.statistics.id);
       }
        
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
-      state.context.statistics.request = model();
-      state.context.statistics.request.started = new Date().getTime();
-      state.context.statistics.total.started = state.context.statistics.total.started || new Date().getTime();
-      state.context.statistics.request.type = state.method;
+      allStats[ state.context.statistics.id ] = model();
+      allStats[ state.context.statistics.id ].started = new Date().getTime();
+      allStats[ 'total' ].started = allStats[ 'total' ].started || new Date().getTime();
+      allStats[ state.context.statistics.id ].type = state.method;
       if ( !!state.method && ( 'count.entries' !== state.method && null !== state.method.match(/\.entries$/) && this.is(state.context.forecast,true))) {
         deferred = this.deferred();
         promise(function(st) {
@@ -627,26 +626,26 @@ window.dashStats = window.dashStats || (function (environment) {
 		return;
             }
             if (theirs.exists(state.context.limit) && state.context.limit < total ) {
-              state.context.statistics.request.metrics[verb].expected = state.context.limit;
-              state.context.statistics.request.metrics.total.expected = state.context.limit;
-              state.context.statistics.request.metrics[noun].expected = state.context.limit;
-              state.context.statistics.total.metrics[verb].expected += state.context.limit;
-              state.context.statistics.total.metrics[noun].expected += state.context.limit;
-              state.context.statistics.total.metrics.total.expected += state.context.limit;
+              allStats[ state.context.statistics.id ].metrics[verb].expected = state.context.limit;
+              allStats[ state.context.statistics.id ].metrics.total.expected = state.context.limit;
+              allStats[ state.context.statistics.id ].metrics[noun].expected = state.context.limit;
+              allStats[ 'total' ].metrics[verb].expected += state.context.limit;
+              allStats[ 'total' ].metrics[noun].expected += state.context.limit;
+              allStats[ 'total' ].metrics.total.expected += state.context.limit;
             } else {
-              state.context.statistics.request.metrics[verb].expected = total;
-              state.context.statistics.request.metrics[noun].expected = total;
-              state.context.statistics.request.metrics.total.expected = total;
-              state.context.statistics.total.metrics[verb].expected += total;
-              state.context.statistics.total.metrics[noun].expected += total;
-              state.context.statistics.total.metrics.total.expected += total;
+              allStats[ state.context.statistics.id ].metrics[verb].expected = total;
+              allStats[ state.context.statistics.id ].metrics[noun].expected = total;
+              allStats[ state.context.statistics.id ].metrics.total.expected = total;
+              allStats[ 'total' ].metrics[verb].expected += total;
+              allStats[ 'total' ].metrics[noun].expected += total;
+              allStats[ 'total' ].metrics.total.expected += total;
             } 
-            state.context.statistics.request.metrics[verb].expected += 1;
-            state.context.statistics.request.metrics[noun].expected += 1;
-            state.context.statistics.total.metrics[verb].expected += 1;
-            state.context.statistics.total.metrics[noun].expected += 1;
-            state.context.statistics.request.metrics.total.expected += 1;
-            state.context.statistics.total.metrics.total.expected += 1;
+            allStats[ state.context.statistics.id ].metrics[verb].expected += 1;
+            allStats[ state.context.statistics.id ].metrics[noun].expected += 1;
+            allStats[ 'total' ].metrics[verb].expected += 1;
+            allStats[ 'total' ].metrics[noun].expected += 1;
+            allStats[ state.context.statistics.id ].metrics.total.expected += 1;
+            allStats[ 'total' ].metrics.total.expected += 1;
             calculate(verb, noun);
             state.promise = promise;
             deferred.resolve(state.context);
@@ -673,22 +672,22 @@ window.dashStats = window.dashStats || (function (environment) {
           }
         });
         if ( theirs.is(state.context.forecast,true) ) {
-          state.context.statistics.request.metrics[verb].expected += 1;
-          state.context.statistics.request.metrics[noun].expected += 1;
-          state.context.statistics.total.metrics[verb].expected += 1;
-          state.context.statistics.total.metrics[noun].expected += 1;
-          state.context.statistics.request.metrics.total.expected += 1;
-          state.context.statistics.total.metrics.total.expected += 1;
+          allStats[ state.context.statistics.id ].metrics[verb].expected += 1;
+          allStats[ state.context.statistics.id ].metrics[noun].expected += 1;
+          allStats[ 'total' ].metrics[verb].expected += 1;
+          allStats[ 'total' ].metrics[noun].expected += 1;
+          allStats[ state.context.statistics.id ].metrics.total.expected += 1;
+          allStats[ 'total' ].metrics.total.expected += 1;
         }
         state.promise = deferred.promise;
       } else {
         if ( theirs.is(state.context.forecast,true) ) {
-          state.context.statistics.request.metrics[verb].expected += 1;
-          state.context.statistics.request.metrics[noun].expected += 1;
-          state.context.statistics.total.metrics[verb].expected += 1;
-          state.context.statistics.total.metrics[noun].expected += 1;
-          state.context.statistics.request.metrics.total.expected += 1;
-          state.context.statistics.total.metrics.total.expected += 1;
+          allStats[ state.context.statistics.id ].metrics[verb].expected += 1;
+          allStats[ state.context.statistics.id ].metrics[noun].expected += 1;
+          allStats[ 'total' ].metrics[verb].expected += 1;
+          allStats[ 'total' ].metrics[noun].expected += 1;
+          allStats[ state.context.statistics.id ].metrics.total.expected += 1;
+          allStats[ 'total' ].metrics.total.expected += 1;
         }
 
 	      if (!!verb && !!noun) {
@@ -697,22 +696,22 @@ window.dashStats = window.dashStats || (function (environment) {
 
       }
     } else {
-	if ( !!state.context.statistics.request.type ) {
-        console.log('incoming?', state.context.statistics.total.metrics.total.requests);
-	      pieces = state.context.statistics.request.type.split('.');
+	if ( !!allStats[ state.context.statistics.id ].type ) {
+        console.log('incoming?', allStats[ 'total' ].metrics.total.requests);
+	      pieces = allStats[ state.context.statistics.id ].type.split('.');
 	      verb = pieces[0];
 	      noun = pieces[1];
-	      state.context.statistics.request.metrics[verb].requests += 1;
-	      state.context.statistics.total.metrics[verb].requests += 1;
-	      state.context.statistics.request.metrics[noun].requests += 1;
-	      state.context.statistics.total.metrics[noun].requests += 1;
-	      state.context.statistics.request.metrics[state.type].requests += 1;
-	      state.context.statistics.total.metrics[state.type].requests += 1;
-	      state.context.statistics.request.metrics.total.requests += 1;
-	      state.context.statistics.total.metrics.total.requests += 1;
+	      allStats[ state.context.statistics.id ].metrics[verb].requests += 1;
+	      allStats[ 'total' ].metrics[verb].requests += 1;
+	      allStats[ state.context.statistics.id ].metrics[noun].requests += 1;
+	      allStats[ 'total' ].metrics[noun].requests += 1;
+	      allStats[ state.context.statistics.id ].metrics[state.type].requests += 1;
+	      allStats[ 'total' ].metrics[state.type].requests += 1;
+	      allStats[ state.context.statistics.id ].metrics.total.requests += 1;
+	      allStats[ 'total' ].metrics.total.requests += 1;
 	      calculate(verb, noun);
-	      state.context.statistics.request.last = datetime;
-        console.log('outgoing?', state.context.statistics.total.metrics.total.requests);
+	      allStats[ state.context.statistics.id ].last = datetime;
+        console.log('outgoing?', allStats[ 'total' ].metrics.total.requests);
 	}
     }
     return state;
