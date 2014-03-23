@@ -1,7 +1,6 @@
-window.dashChanges = window.dashAsync || (function (environment) {
+window.dashChanges = window.dashChanges || (function (environment) {
   "use strict";
   return [ null, function (state) {
-    console.log('callbacked');
     if(!this.isFunction(state.context.changes)) {
       return state;
     }
