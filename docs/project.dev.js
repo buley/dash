@@ -492,8 +492,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 stats: true,
                 forecast: false,
                 store_key_path: 'id',
-                changes: function() {
-                  console.log('CHANGED',arguments);
+                changes: function(state) {
+                  console.log('CHANGED',state);
                 }
               })
               (function (context) {
