@@ -136,7 +136,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           that.iterate(one, function(key, val) {
             if (that.isnt(JSON.stringify(val), JSON.stringify(previous[key]))) {
               if ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val)) {
-                diff[ key ] = difference(val, two[key], deep);
+                diff[ key ] = difference(val, two[key], deep);e
               } else {
                 diff[ key ] = [val, two[key]];
               }
@@ -152,14 +152,13 @@ window.dashChanges = window.dashChanges || (function (environment) {
             }
           });
           return diff;
-        };
-      previous.test = { foo: { bar: [ 3, 1 ] } };
-      current.test = { foo: { bar: [ 1, 3 ] } };
-      
-      //DEEP vs. non-deep listening
-      //change to hash with true === deeply listening for chnges (recursive)
+        },
+        diff = (that.is(ctx.difference, true)) ? difference(current, previous, ctx.deep || false) : false,
+        args = { context: ctx, method: method, type: type, current: current, previous: previous, difference: diff };
+      current.foo = { deep: true };
+      previous.foo = { deep: false };
       that.each(listeners, function(id) {
-        that.apply(callbackMap[id], [ { context: ctx, method: method, type: type, current: current, previous: previous, difference: difference(current, previous, true) } ]);
+        that.apply(callbackMap[id], [ args ]);
       });
       return ctx;
     },
