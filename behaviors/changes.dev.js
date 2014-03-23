@@ -120,8 +120,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
     var promise = state.promise,
         deferred = this.deferred();
     promise(function(ste) {
-      ste.context.changes = callbackMap[ ste.context.changes ]; 
-      delete callbackMap[ ste.context.changes ];
+      var id = ste.context.changes;
+      ste.context.changes = callbackMap[ id ]; 
+      delete callbackMap[ id ];
       notify(state.context, state.type)
       register(ste.type, ste.context);
       deferred.resolve(ste);
