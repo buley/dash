@@ -674,12 +674,11 @@ window.dashStats = window.dashStats || (function (environment) {
 
       }
     } else {
-      console.log('reqyest?', state.context.statistics.request.type);
 	if ( !!state.context.statistics.request.type ) {
+      console.log('reqyest?', state.context.statistics.total.metrics.total.requests);
 	      pieces = state.context.statistics.request.type.split('.');
 	      verb = pieces[0];
 	      noun = pieces[1];
-      console.log('reqyest', noun, verb);
 	      state.context.statistics.request.metrics[verb].requests += 1;
 	      state.context.statistics.total.metrics[verb].requests += 1;
 	      state.context.statistics.request.metrics[noun].requests += 1;
