@@ -60,9 +60,10 @@ window.dashChanges = window.dashChanges || (function (environment) {
       }
       return listeners;
     },
-    notify = function(type, ctx) {
+    notify = function(ctx, type) {
       var inquiry = inquire(type, ctx);
       console.log('any listeners to notify?', inquiry);
+      return ctx;
     },
     randomId = function() {
       var random = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
@@ -88,13 +89,13 @@ window.dashChanges = window.dashChanges || (function (environment) {
   }, function (state) {
     that = this;
     if(!this.exists(state.context.changes)) {
-      return notify(state.type, state.context);
+      return notify(state.context, state.type);
     }
     var promise = state.promise,
         deferred = this.deferred();
     promise(function(ste) {
       ste.context.changes = changeMap[ ste.context.changes ];
-      notify(ste.type, ste.context)
+      notify(state.context, state.type)
       register(ste.type, ste.context);
       deferred.resolve(ste);
     });
