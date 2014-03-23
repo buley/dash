@@ -132,12 +132,12 @@ window.dashChanges = window.dashChanges || (function (environment) {
         current = inquiry.current,
         previous = inquiry.previous,
         diff = {};
-      that.each(current, function(key, val) {
+      that.iterate(current, function(key, val) {
         if (that.isnt(val, previous[key])) {
           diff[ key ] = [val, previous[key]];
         }
       });
-      that.each(previous, function(key, val) {
+      that.iterate(previous, function(key, val) {
         if (that.isnt(val, current[key]) && that.isEmpty(diff[ key ])) {
           diff[ key ] = [current[key], val];
         }
