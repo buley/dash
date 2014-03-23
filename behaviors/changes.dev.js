@@ -153,8 +153,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
           });
           return diff;
         },
-        diff = (that.is(ctx.difference, true)) ? difference(current, previous, ctx.shallow ? true : false) : false,
-        args = { context: ctx, method: method, type: type, current: current, previous: previous, difference: diff };
+        diff = (that.is(ctx.diff, true)) ? difference(current, previous, ctx.shallow ? true : false) : null,
+        args = { context: ctx, method: method, type: type, current: current, previous: previous };
+      if (that.exists(diff)) {
+        args.difference = diff;
+      }
       that.each(listeners, function(id) {
         that.apply(callbackMap[id], [ args ]);
       });
