@@ -9,7 +9,6 @@ window.dashChanges = window.dashChanges || (function (environment) {
       };
       if (that.is(type, 'database')) {
         changeMap[ctx.database].callbacks.push(obj);
-        return obj;
       }
       if (that.exists(ctx.store)) {
         changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
@@ -18,15 +17,13 @@ window.dashChanges = window.dashChanges || (function (environment) {
         };
         if (that.is(type, 'store')) {
           changeMap[ctx.database].stores[ctx.store].callbacks.push(obj);
-          return obj;
         }
         if (that.exists(ctx.index)) {
           changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
-            data: null
+            callbacks: []
           };
           if (that.is(type, 'index')) {
-            changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data = obj;
-            return obj;
+            changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks.push(obj);
           }
         }
         console.log("REGISTERED CHANGE LISTENER", ctx.key, ctx.changes,changeMap);
@@ -40,6 +37,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       };
       if (that.is(type, 'database')) {
         //database listeners
+        console.log('databases?',changeMap[ctx.database].callbacks);
       }
       if (that.exists(ctx.store)) {
         changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
@@ -48,13 +46,15 @@ window.dashChanges = window.dashChanges || (function (environment) {
         };
         if (that.is(type, 'store')) {
           //store listeners
+          console.log('stores?',changeMap[ctx.database].stores[ctx.store].callbacks);
         }
         if (that.exists(ctx.index)) {
           changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
-            data: null
+            callbacks: []
           };
           if (that.is(type, 'index')) {
             //index listeners
+            console.log('indexes?', changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks)
           }
         }
       }
