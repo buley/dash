@@ -1,7 +1,6 @@
 window.dashChanges = window.dashAsync || (function (environment) {
   "use strict";
-  return [ null, function (state) {
-    return state;
+  return function (state) {
     if(!this.isFunction(state.context.changes)) {
       return state;
     }
@@ -15,5 +14,5 @@ window.dashChanges = window.dashAsync || (function (environment) {
     });
     state.promise = deferred.promise;
     return state;
-  } ];
+  };
 }(self));
