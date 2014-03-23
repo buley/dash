@@ -136,7 +136,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           that.iterate(one, function(key, val) {
             if (that.isnt(JSON.stringify(val), JSON.stringify(previous[key]))) {
               if ( that.is(deep, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
-                diff[ key ] = difference(val, two[key], deep);e
+                diff[ key ] = difference(val, two[key], deep);
               } else {
                 diff[ key ] = [val, two[key]];
               }
