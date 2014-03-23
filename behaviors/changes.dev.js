@@ -130,9 +130,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
       var inquiry = inquire(type, ctx),
         listeners = inquiry.listeners,
         current = inquiry.current,
-        previous = inquiry.previous;
-        previous,
-        diff {};
+        previous = inquiry.previous,
+        diff = {};
       console.log('any listeners to notify?', inquiry);
       that.each(inquiry, function(id) {
         that.apply(callbackMap[id], [ { context: ctx, method: method, type: type, current: current, previous: previous, diff: diff } ]);
