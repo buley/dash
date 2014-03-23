@@ -229,7 +229,7 @@ window.dashStats = window.dashStats || (function (environment) {
     },
     allStats = { total: model() };
   return function (state) {
-    if(this.isnt(state.context.stats,true)) {
+    if(this.isnt(state.context.stats,true) || ('notify' === state.type && this.isnt(state.context.progress,true))) {
       return state;
     }
     var context = state.context,
