@@ -712,13 +712,13 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.request = theirs.clone(state.context.statistics.request);
 
             if (this.contains(['resolve', 'error'], state.type)) {
-              //delete allStats[ state.context.statistics.id ];
+              delete allStats[ state.context.statistics.id ];
             }
 
 
     	}
     }
-    console.log('outgoing?', state.context.statistics.total.metrics.requests, allStats[ 'total' ].metrics.total.requests);
+    console.log('outgoing?', state.context.statistics.total.metrics.total.requests, allStats[ 'total' ].metrics.total.requests);
     return state;
   };
 }(self));
