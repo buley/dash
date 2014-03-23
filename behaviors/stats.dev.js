@@ -679,7 +679,7 @@ window.dashStats = window.dashStats || (function (environment) {
       }
     } else {
 	if ( !!state.context.statistics.request.type ) {
-      console.log('reqyest?', state.context.statistics.total.metrics.total.requests);
+        console.log('incoming?', state.context.statistics.total.metrics.total.requests);
 	      pieces = state.context.statistics.request.type.split('.');
 	      verb = pieces[0];
 	      noun = pieces[1];
@@ -693,6 +693,7 @@ window.dashStats = window.dashStats || (function (environment) {
 	      state.context.statistics.total.metrics.total.requests += 1;
 	      calculate(verb, noun);
 	      state.context.statistics.request.last = datetime;
+        console.log('outgoing?', state.context.statistics.total.metrics.total.requests);
 	}
     }
     return state;
