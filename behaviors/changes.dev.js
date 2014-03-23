@@ -1,9 +1,10 @@
 window.dashChanges = window.dashChanges || (function (environment) {
   "use strict";
-  var changeMap = {},
+  var callbackMap = {},
+    changeMap = {},
     that,
     unregister = function(type, ctx) {
-      
+
     },
     register = function(type, ctx) {
       changeMap[ctx.database] = changeMap[ctx.database] || {
@@ -108,7 +109,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     }    
     that = this;
     var id = randomId();
-    changeMap[ id ] = state.context.changes;
+    callbackMap[ id ] = state.context.changes;
     state.context.changes = id;
     return state;
   }, function (state) {
@@ -119,7 +120,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
     var promise = state.promise,
         deferred = this.deferred();
     promise(function(ste) {
-      ste.context.changes = changeMap[ ste.context.changes ];
+      ste.context.changes = callbackMap[ ste.context.changes ]; 
+      delete callbackMap[ ste.context.changes ];
       notify(state.context, state.type)
       register(ste.type, ste.context);
       deferred.resolve(ste);
