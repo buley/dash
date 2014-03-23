@@ -99,6 +99,6 @@ window.dashChanges = window.dashChanges || (function (environment) {
       deferred.resolve(ste);
     });
     state.promise = deferred.promise;
-    return ;
+    return state;
   } ];
 }(self));
