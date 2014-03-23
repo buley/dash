@@ -131,21 +131,33 @@ window.dashChanges = window.dashChanges || (function (environment) {
         listeners = inquiry.listeners || [],
         current = inquiry.current || {},
         previous = inquiry.previous || {},
-        diff = {};
-      current.se = 'TEST';
-      that.iterate(current, function(key, val) {
-        if (that.isnt(val, previous[key])) {
-          diff[ key ] = [val, previous[key]];
-        }
-      });
-      that.iterate(previous, function(key, val) {
-        if (that.isnt(val, current[key]) && that.isEmpty(diff[ key ])) {
-          diff[ key ] = [current[key], val];
-        }
-      });
-      console.log('any listeners to notify?', listeners, inquiry);
+        difference = function(one, two, deep) {
+          var diff = {};
+          that.iterate(one, function(key, val) {
+            if (that.isnt(val, previous[key])) {
+              if ( ( that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val)) {
+                diff[ key ] = difference(val, one[key], deep);
+              } else {
+                diff[ key ] = [val, one[key]];
+              }
+            }
+          });
+          that.iterate(two, function(key, val) {
+            if (that.isnt(val, current[key]) && that.isEmpty(diff[ key ])) {
+              if ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val) ) {
+                diff[ key ] = difference(val, two[key], deep);
+              } else {
+                diff[ key ] = [two[key], val];
+              }
+            }
+          });
+          return diff;
+        };
+
+      //DEEP vs. non-deep listening
+      //change to hash with true === deeply listening for chnges (recursive)
       that.each(listeners, function(id) {
-        that.apply(callbackMap[id], [ { context: ctx, method: method, type: type, current: current, previous: previous, diff: diff } ]);
+        that.apply(callbackMap[id], [ { context: ctx, method: method, type: type, current: current, previous: previous, difference: difference(current, previous, true) } ]);
       });
       return ctx;
     },
