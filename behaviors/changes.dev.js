@@ -127,13 +127,13 @@ window.dashChanges = window.dashChanges || (function (environment) {
       };
     },
     notify = function(ctx, method, type) {
-      var inquiry = inquire(type, ctx),
-        listeners = inquiry.listeners,
+      var inquiry = inquire(method, ctx),
+        listeners = inquiry.listeners || [],
         current = inquiry.current,
         previous = inquiry.previous,
         diff = {};
-      console.log('any listeners to notify?', inquiry);
-      that.each(inquiry, function(id) {
+      console.log('any listeners to notify?', listeners, inquiry);
+      that.each(listeners, function(id) {
         that.apply(callbackMap[id], [ { context: ctx, method: method, type: type, current: current, previous: previous, diff: diff } ]);
       });
       return ctx;
