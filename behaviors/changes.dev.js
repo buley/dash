@@ -6,7 +6,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
     unregister = function(type, ctx) {
 
     },
-    register = function(type, ctx, obj) {
+    register = function(type, ctx) {
+      var obj = ctx.changed;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
         callbacks: [],
@@ -130,7 +131,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     promise(function(ste) {
       var id = ste.context.changes;
       ste.context.changes = callbackMap[ id ]; 
-      ste.context.changed = id;
+      ste.context.changed = ste.context.changed || id;
       notify(state.context, state.method)
       register(ste.method, ste.context);
       unregister(ste.method, ste.context);
