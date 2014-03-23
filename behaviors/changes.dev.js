@@ -87,8 +87,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
     return state;
   }, function (state) {
     if(!this.exists(state.context.changes)) {
-      return notify(state);
+      return notify(state.type, state.context);
     }
+    that = this;
     var promise = state.promise,
         deferred = this.deferred();
     promise(function(ste) {
