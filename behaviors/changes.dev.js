@@ -132,6 +132,16 @@ window.dashChanges = window.dashChanges || (function (environment) {
         current = inquiry.current,
         previous = inquiry.previous,
         diff = {};
+      that.each(current, function(key, val) {
+        if (that.isnt(val, previous[key])) {
+          diff[ key ] = [val, previous[key]];
+        }
+      });
+      that.each(previous, function(key, val) {
+        if (that.isnt(val, current[key]) && that.isEmpty(diff[ key ])) {
+          diff[ key ] = [current[key], val];
+        }
+      });
       console.log('any listeners to notify?', listeners, inquiry);
       that.each(listeners, function(id) {
         that.apply(callbackMap[id], [ { context: ctx, method: method, type: type, current: current, previous: previous, diff: diff } ]);
