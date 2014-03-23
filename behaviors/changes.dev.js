@@ -34,7 +34,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
             changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks.push(obj);
           }
           if (that.exists(ctx.key) && that.isnt(ctx.primary_key, ctx.key)) {
-            if (that.contains(['get.entry','get.entries'], type)) {
+            if (that.contains(['get.entry','get.entries', 'update.entry', 'remove.entry'], type)) {
               changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] || {
                 callbacks: []
               };
@@ -45,12 +45,15 @@ window.dashChanges = window.dashChanges || (function (environment) {
             }
           }
         }
-        if (that.exists(ctx.primary_key)) {
-          changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
-          changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key] = changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key] || [];
-          if (that.contains(['get.index','get.indexes'], type)) {
-            changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key].push(obj);
-          }
+        if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
+            if (that.contains(['get.entry','get.entries', 'update.entry', 'remove.entry'], type)) {
+              var key = ctx.primary_key || ctx.key;
+              changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
+              changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || [];
+              if (that.contains(['get.index','get.indexes'], type)) {
+                changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key].push(obj);
+              }
+            }
         }        
         console.log("REGISTERED CHANGE LISTENER", ctx.key, ctx.changes,changeMap);
       }
