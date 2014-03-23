@@ -4,8 +4,8 @@ dashApp.config(['$routeProvider',
   function ($routeProvider) {
 
     /* Behaviors */
-    //dash.add.behavior(dashStats);
-    //dash.add.behavior(dashMatch);
+    dash.add.behavior(dashStats);
+    dash.add.behavior(dashMatch);
 
     $routeProvider
       .when('/about', {
