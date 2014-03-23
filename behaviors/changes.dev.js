@@ -153,8 +153,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
           });
           return diff;
         };
-      previous.test = { foo: { bar: 'baz' } };
-      current.test = { foo: { bar: 'blam' } };
+      previous.test = { foo: { bar: [ 1, 2 ] } };
+      current.test = { foo: { bar: [ 1, 3 ] } };
       
       //DEEP vs. non-deep listening
       //change to hash with true === deeply listening for chnges (recursive)
