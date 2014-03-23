@@ -590,6 +590,7 @@ window.dashStats = window.dashStats || (function (environment) {
         };
         console.log("CREATED NEW STATS");
       } else {
+        console.log("COPIED EXISTING",state.context.statistics.total.metrics.total.requests);
         state.context.statistics = theirs.clone(state.context.statistics);
       }
        
