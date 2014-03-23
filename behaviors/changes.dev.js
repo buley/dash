@@ -157,6 +157,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
         args = { context: ctx, method: method, type: type, current: current, previous: previous, difference: diff };
       current.foo = { deep: true };
       previous.foo = { deep: false };
+      console.log( 'DIFF', (that.is(ctx.difference, true)) ? difference(current, previous, true) : false);
       that.each(listeners, function(id) {
         that.apply(callbackMap[id], [ args ]);
       });
