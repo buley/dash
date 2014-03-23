@@ -491,7 +491,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 key: data,
                 stats: true,
                 forecast: false,
-                store_key_path: 'id'
+                store_key_path: 'id',
+                changes: true
               })
               (function (context) {
                 if (context.statistics) {
@@ -1692,9 +1693,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   stats: true,
                   progress: true,
                   forecast: false,
-                  testing: function(ctx) {
-                    console.log('changed', ctx);
-                  },
                   index: 'season',
                   index_key_path: 'sy',
                   index_key: new Date('1/1/' + args.range).getTime(),
