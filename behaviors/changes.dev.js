@@ -94,10 +94,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
               changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] || {
                 callbacks: []
               };
-              if (that.exists(ctx.entry)) {
-                changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].data = ctx.entry;
-              }
-              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks.push(obj);
+              listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks);
             }
           }
         }
@@ -108,10 +105,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
               changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
                 callbacks: []
               };
-              if (that.exists(ctx.entry)) {
-                changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
-              }
-              changeMap[ctx.database].stores[ctx.store].entries[key].callbacks.push(obj);
+              listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].entries[key].callbacks);
             }
         }        
       }
