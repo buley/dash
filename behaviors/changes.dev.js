@@ -8,7 +8,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
         deferred = this.deferred();
     promise(function(ste) {
       setTimeout( function() {
-	console.log('state',ste);
+	      console.log('state',ste);
         deferred.resolve(ste);
       }, 3000 );
     });
