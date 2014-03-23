@@ -2,6 +2,7 @@ window.dashChanges = window.dashAsync || (function (environment) {
   "use strict";
   return [ null, function (state) {
     if(!this.isFunction(state.context.changes)) {
+      console.log('skipping',state.context.changes);
       return state;
     }
     console.log('getting changes', state.type);
