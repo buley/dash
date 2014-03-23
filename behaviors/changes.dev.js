@@ -54,11 +54,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
                 callbacks: []
               };
               if (that.exists(ctx.entry)) {
-                changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ key ].data = ctx.entry;
+                changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
               }
-              if (that.contains(['get.index','get.indexes'], type)) {
-                changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key].callbacks.push(obj);
-              }
+              changeMap[ctx.database].stores[ctx.store].entries[key].callbacks.push(obj);
             }
         }        
         console.log("REGISTERED CHANGE LISTENER", ctx.key, ctx.changes,changeMap);
