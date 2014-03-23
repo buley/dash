@@ -711,11 +711,11 @@ window.dashStats = window.dashStats || (function (environment) {
     	      allStats[ 'total' ].metrics[state.type].requests += 1;
     	      allStats[ state.context.statistics.id ].metrics.total.requests += 1;
     	      allStats[ 'total' ].metrics.total.requests += 1;
-            allStats[ state.context.statistics.id ].last = datetime;
              if ('notify' !== state.type || this.is(state.context.progress,true)) {
               calculate(verb, noun);
               state.context.statistics.total = theirs.clone(allStats[ 'total' ]);
               state.context.statistics.request = theirs.clone(allStats[ state.context.statistics.id ]);
+              allStats[ state.context.statistics.id ].last = datetime;
 
              } else if (this.contains(['resolve', 'error'], state.type)) {
               delete allStats[ state.context.statistics.id ];
