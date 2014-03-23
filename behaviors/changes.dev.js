@@ -63,7 +63,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
     },
     inquire = function(type, ctx) {
       var listeners = [],
-          obj = ctx.changed;
+          obj = ctx.changed,
+          key;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
         callbacks: [],
@@ -102,7 +103,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
         }
         if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
             if (that.contains(['update.entries', 'update.entry', 'remove.entries', 'remove.entry', 'remove.database', 'remove.store', 'clear.store'], type)) {
-              var key = ctx.primary_key || ctx.key;
+              key = ctx.primary_key || ctx.key;
               changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
               changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
                 callbacks: []
