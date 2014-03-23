@@ -715,7 +715,7 @@ window.dashStats = window.dashStats || (function (environment) {
             state.context.statistics.total = theirs.clone(state.context.statistics.total);
             state.context.statistics.request = theirs.clone(state.context.statistics.request);
 
-            if (!this.contains(['resolve', 'error'], state.type)) {
+            if (this.contains(['resolve', 'error'], state.type)) {
               delete allStats[ state.context.statistics.id ];
             }
 
