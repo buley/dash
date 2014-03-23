@@ -1,6 +1,7 @@
 window.dashChanges = window.dashAsync || (function (environment) {
   "use strict";
-  return function (state) {
+  return [ null, function (state) {
+    console.log('callbacked');
     if(!this.isFunction(state.context.changes)) {
       return state;
     }
@@ -14,5 +15,5 @@ window.dashChanges = window.dashAsync || (function (environment) {
     });
     state.promise = deferred.promise;
     return state;
-  };
+  } ];
 }(self));
