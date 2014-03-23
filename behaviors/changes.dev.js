@@ -6,7 +6,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     unregister = function(type, ctx) {
 
     },
-    register = function(type, ctx) {
+    register = function(type, ctx, obj) {
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
         callbacks: [],
@@ -49,9 +49,14 @@ window.dashChanges = window.dashChanges || (function (environment) {
             if (that.contains(['get.entry','get.entries', 'update.entry', 'remove.entry'], type)) {
               var key = ctx.primary_key || ctx.key;
               changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
-              changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || [];
+              changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
+                callbacks: []
+              };
+              if (that.exists(ctx.entry)) {
+                changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ key ].data = ctx.entry;
+              }
               if (that.contains(['get.index','get.indexes'], type)) {
-                changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key].push(obj);
+                changeMap[ctx.database].stores[ctx.store].entries[ctx.primary_key].callbacks.push(obj);
               }
             }
         }        
@@ -125,7 +130,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     promise(function(ste) {
       var id = ste.context.changes;
       ste.context.changes = callbackMap[ id ]; 
-      delete callbackMap[ id ];
+      ste.context.changed = id;
       notify(state.context, state.method)
       register(ste.method, ste.context);
       unregister(ste.method, ste.context);
@@ -135,3 +140,4 @@ window.dashChanges = window.dashChanges || (function (environment) {
     return state;
   } ];
 }(self));
+d
