@@ -589,8 +589,10 @@ window.dashStats = window.dashStats || (function (environment) {
           request: model()
         };
         console.log("CREATED NEW STATS");
+      } else {
+        state.context.statistics = theirs.clone(state.context.statistics);
       }
-      
+       
     if (!this.contains(['resolve', 'notify', 'error'], state.type)) {
       state.context.statistics.request = model();
       state.context.statistics.request.started = new Date().getTime();
