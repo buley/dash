@@ -86,10 +86,10 @@ window.dashChanges = window.dashChanges || (function (environment) {
     state.context.changes = id;
     return state;
   }, function (state) {
+    that = this;
     if(!this.exists(state.context.changes)) {
       return notify(state.type, state.context);
     }
-    that = this;
     var promise = state.promise,
         deferred = this.deferred();
     promise(function(ste) {
