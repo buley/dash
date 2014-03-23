@@ -2,34 +2,33 @@ window.dashChanges = window.dashChanges || (function (environment) {
   "use strict";
   var changeMap = {},
     register = function(ctx) {
-        changeMap[ctx.database] = changeMap[ctx.database] || {
-          stores: {},
+      changeMap[ctx.database] = changeMap[ctx.database] || {
+        stores: {},
+        callbacks: []
+      };
+      if (is(type, 'database')) {
+        changeMap[ctx.database].callbacks.push(obj);
+        return obj;
+      }
+      if (exists(ctx.store)) {
+        changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
+          indexes: {},
           callbacks: []
         };
-        if (is(type, 'database')) {
-          changeMap[ctx.database].callbacks.push(obj);
+        if (is(type, 'store')) {
+          changeMap[ctx.database].stores[ctx.store].callbacks.push(obj);
           return obj;
         }
-        if (exists(ctx.store)) {
-          changeMap[ctx.database].stores[ctx.store] = changeMap[ctx.database].stores[ctx.store] || {
-            indexes: {},
-            callbacks: []
+        if (exists(ctx.index)) {
+          changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
+            data: null
           };
-          if (is(type, 'store')) {
-            changeMap[ctx.database].stores[ctx.store].callbacks.push(obj);
+          if (is(type, 'index')) {
+            changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data = obj;
             return obj;
           }
-          if (exists(ctx.index)) {
-            changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index] || {
-              data: null
-            };
-            if (is(type, 'index')) {
-              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data = obj;
-              return obj;
-            }
-          }
-          console.log("REGISTERED CHANGE LISTENER", ctx.key, ctx.changes,changeMap);
         }
+        console.log("REGISTERED CHANGE LISTENER", ctx.key, ctx.changes,changeMap);
       }
     },
     inquire = function(ctx) {
