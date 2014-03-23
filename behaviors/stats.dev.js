@@ -226,7 +226,8 @@ window.dashStats = window.dashStats || (function (environment) {
         type: null,
         memory: 3
       };
-    };
+    },
+    total = model();
   return function (state) {
     if(this.isnt(state.context.stats,true)) {
       return state;
@@ -292,6 +293,7 @@ window.dashStats = window.dashStats || (function (environment) {
         /* Time */
         
         datetime = new Date().getTime();
+        state.context.statistics.total = total;
         state.context.statistics.total.started = state.context.statistics.total.started || datetime;
         state.context.statistics.request.started = state.context.statistics.request.started || datetime;
         state.context.statistics.request.last = state.context.statistics.request.last || state.context.statistics.request.started || datetime;
@@ -585,7 +587,7 @@ window.dashStats = window.dashStats || (function (environment) {
 
       if (!theirs.exists(state.context.statistics)) {
         state.context.statistics = { 
-          total: model(),
+          total: total,
           request: model()
         };
         console.log("CREATED NEW STATS");
