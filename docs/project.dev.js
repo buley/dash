@@ -1691,6 +1691,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   stats: true,
                   progress: true,
                   forecast: false,
+                  changes: function(ctx) {
+                    console.log('changed', ctx);
+                  },
                   index: 'season',
                   index_key_path: 'sy',
                   index_key: new Date('1/1/' + args.range).getTime(),
