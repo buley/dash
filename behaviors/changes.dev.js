@@ -153,7 +153,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           });
           return diff;
         };
-      previous.test = { foo: { bar: [ 1, 2 ] } };
+      previous.test = { foo: { bar: [ 1, 3 ] } };
       current.test = { foo: { bar: [ 1, 3 ] } };
       
       //DEEP vs. non-deep listening
