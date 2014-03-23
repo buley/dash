@@ -227,8 +227,7 @@ window.dashStats = window.dashStats || (function (environment) {
         memory: 3
       };
     },
-    total = model(),
-    request;
+    allStats = { total: model() };
   return function (state) {
     if(this.isnt(state.context.stats,true)) {
       return state;
@@ -599,10 +598,10 @@ window.dashStats = window.dashStats || (function (environment) {
           str.push(random[Math.floor(Math.random() * 100) % strlen]);
         }
         id = str.join('');
-        request = model();
+        allStats[ id ] = model();
         state.context.statistics = { 
-          total: total,
-          request: request,
+          total: allStats[ 'total' ],
+          request: allStats[ id ],
           id: id
         };
         console.log("CREATED NEW STATS", id);
