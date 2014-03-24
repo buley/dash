@@ -17,7 +17,7 @@ window.dashLive = window.dashLive || (function (environment) {
     state.promise = deferred.promise;
     changes = change(this.clone(state.context), deferred);
     if (this.isArray(state.context.changes)) {
-      state.context.changes.push( changes );
+      state.context.changes = [ changes ];
     } else {
       state.context.changes = [ changes ];
     }
