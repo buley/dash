@@ -7,8 +7,7 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
-            ste.type = 'notify';
-            changeMap[ ctx.changed ].notify(ste);
+            changeMap[ ctx.changed ].notify(st2);
           };
         fn.ready = false;
         return fn;
