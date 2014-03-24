@@ -1,6 +1,7 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
-  var changeMap = {},
+  var that,
+      changeMap = {},
       change = function(ste) {
         var ctx = ste.context,
           fn = function(st2) {
@@ -8,7 +9,8 @@ window.dashLive = window.dashLive || (function (environment) {
               return;
             }
             st2.method = ste.method;
-            changeMap[ ctx.changed ].notify(st2);
+            ste.type = 'notify'
+            changeMap[ ctx.changed ][st2.type].apply(that, [st2]);
           };
         fn.ready = false;
         return fn;
@@ -18,6 +20,7 @@ window.dashLive = window.dashLive || (function (environment) {
       return state;
     }
     var changes;
+    that = this;
     state.context.changed = this.random();
     changes = change(this.clone(state));
     if (this.isArray(state.context.changes)) {
@@ -42,7 +45,7 @@ window.dashLive = window.dashLive || (function (environment) {
     }, function(ste) {
       deferred.error(ste);
     }, function(ste) {
-      deferred.notify(stes);
+      deferred.notify(ste);
     });
     return state;
   } ];
