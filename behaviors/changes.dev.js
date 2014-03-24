@@ -218,7 +218,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       return ctx;
     };
   return [ function(state) {
-    if(this.isEmpty(state.context.changes)) {
+    if(!this.isFunction(state.context.changes) && !this.isArray(state.context.changes)) {
       return state;
     }    
     that = this;
