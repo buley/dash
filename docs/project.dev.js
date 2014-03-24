@@ -6,6 +6,7 @@ dashApp.config(['$routeProvider',
     /* Behaviors */
     dash.add.behavior(dashStats);
     dash.add.behavior(dashMatch);
+    dash.add.behavior(dashLive);
     dash.add.behavior(dashChanges);
     dash.add.behavior(dashCollect);
 
