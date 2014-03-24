@@ -222,7 +222,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       return state;
     }    
     that = this;
-    var id = ste.context.changed || this.random();
+    var id = state.context.changed || this.random();
     callbackMap[ id ] = state.context.changes;
     state.context.changed = id;
     return state;
