@@ -1,6 +1,7 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
-  var changeMap = {},
+  var that,
+      changeMap = {},
       change = function(ste) {
         var ctx = ste.context,
           fn = function(st2) {
@@ -18,6 +19,7 @@ window.dashLive = window.dashLive || (function (environment) {
       return state;
     }
     var changes;
+    that = this;
     state.context.changed = this.random();
     changes = change(this.clone(state));
     if (this.isArray(state.context.changes)) {
