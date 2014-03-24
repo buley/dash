@@ -8,7 +8,7 @@ window.dashLive = window.dashLive || (function (environment) {
               return;
             }
             console.log('CALL LIVING', changeMap[ ctx.changed ]);
-            defd.resolve(changeMap[ ctx.changed ]);
+            defd.resolve(ste);
           };
         fn.ready = false;
         return fn;
@@ -23,7 +23,7 @@ window.dashLive = window.dashLive || (function (environment) {
         changes;
     state.promise = deferred.promise;
     state.context.changed = that.random();
-    changes = change(this.clone(state), deferred);
+    changes = change(state, deferred);
     if (this.isArray(state.context.changes)) {
       state.context.changes.push(changes);
     } else {
@@ -44,7 +44,7 @@ window.dashLive = window.dashLive || (function (environment) {
       return state;
     }
     if (this.contains(['resolve', 'error'], state.type)) {
-      changeMap[ state.context.changed ] = state;
+      changeMap[ state.context.changed ] = true;
     }
     return state;
   } ];
