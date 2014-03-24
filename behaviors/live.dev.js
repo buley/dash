@@ -7,9 +7,9 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
-            st2.context = changeMap[ ctx.changed ];
-            console.log('CALL LIVING', st2, ctx.key);
-            defd.resolve(st2);
+            ste.context = changeMap[ ctx.changed ];
+            console.log('CALL LIVING', changeMap[ ctx.changed ], ctx.key);
+            defd.resolve(changeMap[ ctx.changed ]);
           };
         fn.ready = false;
         return fn;
