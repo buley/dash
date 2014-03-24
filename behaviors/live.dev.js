@@ -1,13 +1,13 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var changeMap = {},
-      change = function(ste, defd) {
-        console.log('yeah?',ste.on_success);
+      change = function(ste) {
         var ctx = ste.context,
           fn = function(st2) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
+            console.log('yeah?');
             changeMap[ ctx.changed ].resolve(ste);
             changeMap[ ctx.changed ].notify(ste);
           };
@@ -20,7 +20,7 @@ window.dashLive = window.dashLive || (function (environment) {
     }
     var changes;
     state.context.changed = this.random();
-    changes = change(this.clone(state), deferred);
+    changes = change(this.clone(state));
     if (this.isArray(state.context.changes)) {
       state.context.changes.push(changes);
     } else {
