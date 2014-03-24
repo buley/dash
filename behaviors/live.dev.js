@@ -22,8 +22,12 @@ window.dashLive = window.dashLive || (function (environment) {
     } else {
       state.context.changes = [ changes ];
     }
-    setTimeout(function() {
-       deferred.resolve(state);
+    promise(function() {
+      deferred.resolve(state);
+    }, function() {
+      deferred.error(state);
+    }, function() {
+      deferred.notify(state);
     });
     return state;
   } ];
