@@ -9,7 +9,7 @@ window.dashLive = window.dashLive || (function (environment) {
               return;
             }
             st2.method = ste.method;
-            st2.type = 'notify';
+            st2.type = 'resolve';
             changeMap[ ctx.changed ][st2.type](st2);
           };
         fn.ready = false;
