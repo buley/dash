@@ -1712,7 +1712,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 }, function (context) {
                   console.log('dash promise rejected', context);
                 }, function (context) {
-                  console.log('added',context.key);
+                  console.log('added',context.primary_key, context.key);
                   if (true === scope.visuals) {
                     system.add(context.entry);
                   }
