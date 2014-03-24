@@ -9,7 +9,7 @@ window.dashLive = window.dashLive || (function (environment) {
               return;
             }
             st2.method = ste.method;
-            that.apply(changeMap[ ctx.changed ][st2.type], [st2]);
+            that.apply(changeMap[ ctx.changed ][st2.type], [st2], that);
             return false;
           };
         fn.ready = false;
