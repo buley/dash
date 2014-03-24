@@ -35,7 +35,6 @@ window.dashLive = window.dashLive || (function (environment) {
     var promise = state.promise,
         deferred = this.deferred();
     state.promise = deferred.promise;
-    state.context.changed = this.random();
     if (this.contains(['resolve', 'error'], state.type)) {
       changeMap[ state.context.changed ] = deferred;
     }
