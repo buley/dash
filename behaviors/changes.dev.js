@@ -210,8 +210,10 @@ window.dashChanges = window.dashChanges || (function (environment) {
           ste.context.changes = callback; 
           ste.context.changed = ste.context.changed || id;
           notify(state.context, state.method, state.type);
-          register(ste.method, ste.context);
-          unregister(ste.method, ste.context);
+          if (exists(state.context.changes)) {
+            register(ste.method, ste.context);
+            unregister(ste.method, ste.context);            
+          }
           deferred.resolve(ste);
         });
       }
