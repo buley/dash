@@ -8,7 +8,8 @@ window.dashLive = window.dashLive || (function (environment) {
               return;
             }
             console.log('CALL LIVING', st2, ctx.key);
-            defd.notify(ste);
+            st2.context = changeMap[ ctx.changed ];
+            defd.notify(st2);
           };
         fn.ready = false;
         return fn;
