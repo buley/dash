@@ -180,16 +180,17 @@ window.dashChanges = window.dashChanges || (function (environment) {
         args.difference = diff;
       }
       that.each(listeners, function(id, i) {
-        if(that.isArray(id)) {
-          that.each(id, function(el, z) {
-            if ( false === that.apply(callbackMap[id], [ args ]) ) {
+        var listens = listeners[i];
+        if(that.isArray(listens)) {
+          that.each(listens, function(listen, z) {
+            if ( false === that.apply(listen, [ args ]) ) {
               delete listeners[i][z];
               delete callbackMap[id][z];
             }
           });
         } else {
           if ( false === that.apply(callbackMap[id], [ args ]) ) {
-            delete listeners[i];
+            delete listens;
             delete callbackMap[id];
           }
         }
