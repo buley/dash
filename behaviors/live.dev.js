@@ -1,9 +1,8 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var change = function(ctx) {
-        delete ctx.live;
         return function() {
-          console.log('CALL LIVING',ctx);
+          console.log('CALL LIVING', ctx.key);
         }
       }
   return [ function (state) {
@@ -16,7 +15,6 @@ window.dashLive = window.dashLive || (function (environment) {
         changes;
     state.promise = deferred.promise;
     changes = change(this.clone(state.context), deferred);
-    delete state.context.living;
     if (this.isArray(state.context.changes)) {
       state.context.changes.push( changes );
     } else {
@@ -30,5 +28,5 @@ window.dashLive = window.dashLive || (function (environment) {
       deferred.notify(state);
     });
     return state;
-  } ];
+  }, null ];
 }(self));
