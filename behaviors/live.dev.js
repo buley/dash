@@ -9,7 +9,6 @@ window.dashLive = window.dashLive || (function (environment) {
             return;
           }
           console.log('CALL LIVING', ctx.key);
-          defd.resolve(ste);
           defd.notify(ste);
         };
         fn.ready = false;
