@@ -3,7 +3,6 @@ window.dashLive = window.dashLive || (function (environment) {
   var changeMap = {},
       change = function(ste, defd) {
         console.log('yeah?',ste.on_success);
-        var their_on_success = ste.context.on_success;
         var ctx = ste.context,
           fn = function(st2) {
             if (!changeMap[ ctx.changed ]) {
@@ -46,6 +45,7 @@ window.dashLive = window.dashLive || (function (environment) {
       changeMap[ state.context.changed ] = deferred;
     }
     promise(function() {
+      console.log('ya');
       deferred.resolve(state);
     }, function() {
       deferred.error(state);
