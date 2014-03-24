@@ -1,9 +1,14 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var change = function(ctx) {
-        return function() {
+        var fn = function() {
+          if (true !== fn.ready) {
+            return
+          }
           console.log('CALL LIVING', ctx.key);
-        }
+        };
+        fn.ready = false;
+        return fn;
       }
   return [ function (state) {
     if(this.isnt(state.context.live, true)) {
@@ -22,6 +27,7 @@ window.dashLive = window.dashLive || (function (environment) {
       state.context.changes = [ changes ];
     }
     promise(function() {
+      changes.ready = true;
       deferred.resolve(state);
     }, function() {
       deferred.error(state);
