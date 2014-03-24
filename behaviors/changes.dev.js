@@ -178,8 +178,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
       if (that.exists(diff)) {
         args.difference = diff;
       }
-      that.each(listeners, function(id) {
-        that.apply(callbackMap[id], [ args ]);
+      that.each(listeners, function(id, i) {
+        if ( false === that.apply(callbackMap[id], [ args ]) ) {
+          delete listeners[i];
+          delete callbackMap[id]];
+        }
       });
       return ctx;
     },
