@@ -2,7 +2,7 @@ window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var change = function(ctx) {
         return function() {
-          //console.log('CALL LIVING', ctx.key);
+          console.log('CALL LIVING', ctx.key);
         }
       }
   return [ function (state) {
