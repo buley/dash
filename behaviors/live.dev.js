@@ -8,7 +8,8 @@ window.dashLive = window.dashLive || (function (environment) {
               return;
             }
             st2.method = ste.method;
-            changeMap[ ctx.changed ].notify(st2);
+            st2.type = 'resolve';
+            changeMap[ ctx.changed ].resolve(st2);
           };
         fn.ready = false;
         return fn;
@@ -37,12 +38,12 @@ window.dashLive = window.dashLive || (function (environment) {
     if (this.contains(['resolve', 'error'], state.type)) {
       changeMap[ state.context.changed ] = deferred;
     }
-    promise(function() {
-      deferred.resolve(state);
-    }, function() {
-      deferred.error(state);
-    }, function() {
-      deferred.notify(state);
+    promise(function(ste) {
+      deferred.resolve(ste);
+    }, function(ste) {
+      deferred.error(ste);
+    }, function(ste) {
+      deferred.notify(stes);
     });
     return state;
   } ];
