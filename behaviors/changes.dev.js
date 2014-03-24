@@ -203,13 +203,16 @@ window.dashChanges = window.dashChanges || (function (environment) {
     var promise = state.promise,
         deferred = this.deferred();
     promise(function(ste) {
-      var id = ste.context.changes;
-      ste.context.changes = callbackMap[ id ]; 
-      ste.context.changed = ste.context.changed || id;
-      notify(state.context, state.method, state.type);
-      register(ste.method, ste.context);
-      unregister(ste.method, ste.context);
-      deferred.resolve(ste);
+      var id = ste.context.changes,
+          changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ];
+      that.each(changeset, function(callback) {
+        ste.context.changes = callback; 
+        ste.context.changed = ste.context.changed || id;
+        notify(state.context, state.method, state.type);
+        register(ste.method, ste.context);
+        unregister(ste.method, ste.context);
+        deferred.resolve(ste);
+      });
     });
     state.promise = deferred.promise;
     return state;

@@ -23,7 +23,6 @@ window.dashCollect = window.dashCollect || (function (environment) {
       }
       deferred.resolve(ste);
       if (that.contains(['resolve','error'], ste.type)) {
-        console.log('collect finished',collections[ ste.context.collector ].length);
         delete collections[ ste.context.collector ];
       }
     });
