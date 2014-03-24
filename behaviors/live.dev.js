@@ -10,7 +10,7 @@ window.dashLive = window.dashLive || (function (environment) {
               return;
             }
             console.log('CALL LIVING', ste);
-            defd.resolve(st2);
+            defd.resolve(ste);
           };
         fn.ready = false;
         return fn;
