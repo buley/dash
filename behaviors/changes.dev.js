@@ -153,7 +153,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
               };
               previous = changeMap[ctx.database].stores[ctx.store].entries[key].data;
               current = ctx.entry;
-              that.each(changeMap[ctx.database].stores[ctx.store].entries[key].callbacks), function(callback) {
+              that.each(changeMap[ctx.database].stores[ctx.store].entries[key].callbacks, function(callback) {
                 if (!that.contains(listeners, callback)) {
                   listeners.push(callback);
                 }
