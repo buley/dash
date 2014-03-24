@@ -2,7 +2,7 @@ window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var change = function(ctx) {
         return function() {
-          console.log('CALL LIVING', ctx.key);
+          //console.log('CALL LIVING', ctx.key);
         }
       }
   return [ function (state) {
@@ -13,6 +13,7 @@ window.dashLive = window.dashLive || (function (environment) {
         deferred = this.deferred(),
         that = this,
         changes;
+    console.log("SHOULD BE ONCE");
     state.promise = deferred.promise;
     changes = change(this.clone(state.context), deferred);
     if (this.isArray(state.context.changes)) {
