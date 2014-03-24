@@ -22,7 +22,6 @@ window.dashLive = window.dashLive || (function (environment) {
         deferred = this.deferred(),
         that = this,
         changes;
-    state.promise = deferred.promise;
     state.context.changed = that.random();
     changes = change(this.clone(state), deferred);
     if (this.isArray(state.context.changes)) {
@@ -31,7 +30,6 @@ window.dashLive = window.dashLive || (function (environment) {
       state.context.changes = [changes];
     }
     changeMap[ state.context.changed ] = false;
-
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.changed)) {
