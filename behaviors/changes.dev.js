@@ -93,7 +93,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
         callbacks: [],
       };
       if (that.contains(['remove.database', 'add.index', 'add.store'], type)) {
-        listeners.push.apply(listeners, changeMap[ctx.database].callbacks);
+        that.each(changeMap[ctx.database].callbacks, function(callback) {
+          if (!that.contains(listeners, callback)) {
+            listeners.push(callback);
+          }
+        });
         previous = changeMap[ctx.database].data;
         current = ctx.db;
       }
@@ -103,7 +107,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
           indexes: {}
         };
         if (that.contains(['remove.database', 'remove.store', 'clear.store', 'add.index'], type)) {
-          listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].callbacks);
+          that.each(changeMap[ctx.database].stores[ctx.store].callbacks, function(callback) {
+            if (!that.contains(listeners, callback)) {
+              listeners.push(callback);
+            }
+          });
           previous = changeMap[ctx.database].stores[ctx.store].data;
           current = ctx.objectstore;
         }
@@ -113,7 +121,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
             entries: {}
           };
           if (that.contains(['remove.index', 'remove.store', 'remove.database', 'clear.store'], type)) {
-            listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks);
+            that.each(changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks, function(callback) {
+              if (!that.contains(listeners, callback)) {
+                listeners.push(callback);
+              }
+            });
             previous = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data;
             current = ctx.idx;
           }
@@ -124,7 +136,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
               };
               previous = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].data;
               current = ctx.entry;
-              listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks);
+              that.each(changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks, function(callback) {
+                if (!that.contains(listeners, callback)) {
+                  listeners.push(callback);
+                }
+              });
             }
           }
         }
@@ -137,7 +153,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
               };
               previous = changeMap[ctx.database].stores[ctx.store].entries[key].data;
               current = ctx.entry;
-              listeners.push.apply(listeners, changeMap[ctx.database].stores[ctx.store].entries[key].callbacks);
+              that.each(changeMap[ctx.database].stores[ctx.store].entries[key].callbacks), function(callback) {
+                if (!that.contains(listeners, callback)) {
+                  listeners.push(callback);
+                }
+              });
             }
         }        
       }
