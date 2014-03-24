@@ -4,7 +4,7 @@ window.dashLive = window.dashLive || (function (environment) {
       change = function(ste, defd) {
         var ctx = ste.context,
           fn = function(st2) {
-            if (false === changeMap[ ctx.changed ]) {
+            if (!changeMap[ ctx.changed ]) {
               return;
             }
             console.log('CALL LIVING', st2, ctx.key);
