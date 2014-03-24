@@ -18,7 +18,6 @@ window.dashLive = window.dashLive || (function (environment) {
         deferred = this.deferred(),
         that = this,
         changes;
-    console.log("SHOULD BE ONCE");
     state.promise = deferred.promise;
     changes = change(this.clone(state.context), deferred);
     if (this.isArray(state.context.changes)) {
@@ -27,6 +26,7 @@ window.dashLive = window.dashLive || (function (environment) {
       state.context.changes = [ changes ];
     }
     promise(function() {
+      console.log("SHOULD BE ONCE");
       changes.ready = true;
       deferred.resolve(state);
     }, function() {
