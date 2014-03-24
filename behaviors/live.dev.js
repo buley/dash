@@ -7,7 +7,7 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
-            console.log('CALL LIVING', changeMap[ ctx.changed ]);
+            console.log('CALL LIVING', ste);
             defd.resolve(ste);
           };
         fn.ready = false;
