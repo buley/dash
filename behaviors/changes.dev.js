@@ -222,7 +222,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       return state;
     }    
     that = this;
-    var id = this.random();
+    var id = ste.context.changed || this.random();
     callbackMap[ id ] = state.context.changes;
     state.context.changed = id;
     return state;
@@ -234,9 +234,6 @@ window.dashChanges = window.dashChanges || (function (environment) {
       var id = ste.context.changed,
           changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
           isChanger = that.exists(id);
-      if (that.isEmpty(changeset)) {
-        changeset = [ null ];
-      } 
       that.each(changeset, function(callback) {
         ste.context.changes = callback; 
         ste.context.changed = ste.context.changed || id;
