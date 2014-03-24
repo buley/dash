@@ -230,18 +230,6 @@ window.dashStats = window.dashStats || (function (environment) {
     allStats = {
       total: model()
     },
-    randomId = function() {
-      var random = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-        count = 16,
-        x = 0,
-        xlength = 0,
-        strlen = random.length,
-        str = [];
-      for (x = 0; x < count; x += 1) {
-        str.push(random[Math.floor(Math.random() * 100) % strlen]);
-      }
-      return str.join('');
-    },
       average = function (stack) {
         var x = 0,
           xlen = stack.length,
@@ -565,7 +553,7 @@ window.dashStats = window.dashStats || (function (environment) {
         }
       };
     if (!theirs.exists(state.context.statistics)) {
-      var id = randomId();
+      var id = that.random();
       allStats[id] = model();
       state.context.statistics = {
         total: allStats['total'],

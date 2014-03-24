@@ -7,6 +7,7 @@ dashApp.config(['$routeProvider',
     dash.add.behavior(dashStats);
     dash.add.behavior(dashMatch);
     dash.add.behavior(dashChanges);
+    dash.add.behavior(dashCollect);
 
     $routeProvider
       .when('/about', {
@@ -1696,6 +1697,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   stats: true,
                   progress: true,
                   forecast: false,
+                  collect: true,
                   index: 'season',
                   index_key_path: 'sy',
                   index_key: new Date('1/1/' + args.range).getTime(),
@@ -1713,6 +1715,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   if (true === scope.visuals) {
                     system.add(context.entry);
                   }
+                  console.log("COLLECTION",context.collection);
                   statsUpdate(context.statistics);
                   //system.cameraMod( 'z', -2, 50000, 10 );
                   //system.cameraMod( 'z', 1, 10000, 0 );

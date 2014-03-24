@@ -181,29 +181,17 @@ window.dashChanges = window.dashChanges || (function (environment) {
       that.each(listeners, function(id, i) {
         if ( false === that.apply(callbackMap[id], [ args ]) ) {
           delete listeners[i];
-          delete callbackMap[id]];
+          delete callbackMap[id];
         }
       });
       return ctx;
-    },
-    randomId = function() {
-      var random = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-        count = 16,
-        x = 0,
-        xlength = 0,
-        strlen = random.length,
-        str = [];
-      for (x = 0; x < count; x += 1) {
-        str.push(random[Math.floor(Math.random() * 100) % strlen]);
-      }
-      return str.join('');
     };
   return [ function(state) {
     if(!this.isFunction(state.context.changes)) {
       return state;
     }    
     that = this;
-    var id = randomId();
+    var id = this.random();
     callbackMap[ id ] = state.context.changes;
     state.context.changes = id;
     return state;

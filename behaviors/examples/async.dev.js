@@ -6,9 +6,9 @@ window.dashAsync = window.dashAsync || (function (environment) {
     }
     var promise = state.promise,
         deferred = this.deferred();
-    promise(function(context) {
+    promise(function(ste) {
       setTimeout( function() {
-        deferred.resolve(context);
+        deferred.resolve(ste);
       }, 3000 );
     });
     state.promise = deferred.promise;
