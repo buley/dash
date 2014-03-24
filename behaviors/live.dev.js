@@ -9,8 +9,8 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
-            console.log('CALL LIVING', ste);
-            defd.resolve(ste);
+            changeMap[ ctx.changed ].resolve(ste);
+            changeMap[ ctx.changed ].notify(ste);
           };
         fn.ready = false;
         return fn;
@@ -32,22 +32,26 @@ window.dashLive = window.dashLive || (function (environment) {
       state.context.changes = [changes];
     }
     changeMap[ state.context.changed ] = false;
+
+    return state;
+  }, function (state) {
+    if(this.isEmpty(state.context.changed)) {
+      return state;
+    }
+    var promise = state.promise,
+        deferred = this.deferred();
+    state.promise = deferred.promise;
+    state.context.changed = that.random();
+    if (this.contains(['resolve', 'error'], state.type)) {
+      changeMap[ state.context.changed ] = deferred;
+    }
     promise(function() {
-      changes.ready = true;
       deferred.resolve(state);
     }, function() {
       deferred.error(state);
     }, function() {
       deferred.notify(state);
     });
-    return state;
-  }, function (state) {
-    if(this.isEmpty(state.context.changed)) {
-      return state;
-    }
-    if (this.contains(['resolve', 'error'], state.type)) {
-      changeMap[ state.context.changed ] = this.clone(state);
-    }
     return state;
   } ];
 }(self));
