@@ -5,7 +5,7 @@ window.dashLive = window.dashLive || (function (environment) {
       change = function(ste) {
         var ctx = ste.context,
           fn = function(st2) {
-            if (that.isEmpty(!changeMap[ ctx.changed ]) {
+            if (that.isEmpty(!changeMap[ ctx.changed ])) {
               return;
             }
             st2.method = ste.method;
