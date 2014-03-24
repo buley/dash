@@ -1715,7 +1715,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   if (true === scope.visuals) {
                     system.add(context.entry);
                   }
-                  console.log("COLLECTION",context.collection);
+                  console.log("COLLECTION",context.collection.length);
                   statsUpdate(context.statistics);
                   //system.cameraMod( 'z', -2, 50000, 10 );
                   //system.cameraMod( 'z', 1, 10000, 0 );

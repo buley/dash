@@ -19,10 +19,13 @@ window.dashCollect = window.dashCollect || (function (environment) {
     promise(function(ste) {
       if (that.exists(ste.context.entry)) { 
         collections[ ste.context.collector ].push(ste.context.entry);
-        ste.context.collection = collections[ ste.context.collector ];
-        console.log('collect state',ste.context.collection.length);
+        ste.context.collection = that.clone(collections[ ste.context.collector ]);
       }
       deferred.resolve(ste);
+      if (that.contains(['resolve','error'], ste.type)) {
+        console.log('collect finished',ste.context.collection.length);
+        delete collections[ ste.context.collector ];
+      }
     });
     state.promise = deferred.promise;
     return state;
