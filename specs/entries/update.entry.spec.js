@@ -1,11 +1,11 @@
 
 (function(){
 	'use strict';
-	describe("put.entry", function() {
+	describe("update.entry", function() {
 		it( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
-				db_name = 'entry-put-test-' + start_time,
-				store_name = 'entry-put-test-store-' + start_time,
+				db_name = 'entry-update-test-' + start_time,
+				store_name = 'entry-update-test-store-' + start_time,
 				key_path = 'entry' + start_time,
 				test_data = { version: 1 },
 				isFinished = false,
@@ -17,7 +17,7 @@
 				notify = false,
 				ctx,
 				key;
-			test_data[key_path] = 'entry-put-1-' + start_time;
+			test_data[key_path] = 'entry-update-1-' + start_time;
              dash.add.entry({
                 database: db_name,
                 store: store_name,
@@ -28,8 +28,8 @@
                 key = context.key;
                 delete context.key;
                 context.data = { version: 2 };
-                context.data[key_path] = 'entry-put-1-' + start_time;
-                dash.put.entry(context)
+                context.data[key_path] = 'entry-update-1-' + start_time;
+                dash.update.entry(context)
                 (function(context) {
                     dash.get.entry(context)
                     (function(context) {
@@ -46,9 +46,9 @@
                 error = true;
             });
 
-			waitsFor(dashIsFinished, 'the put.entry operation to finish', 10000);
+			waitsFor(dashIsFinished, 'the update.entry operation to finish', 10000);
 			runs(function() {
-				describe('put.entry should finish cleanly', function() {
+				describe('update.entry should finish cleanly', function() {
 
 					beforeEach(function() {
 						this.context = ctx;
@@ -62,31 +62,31 @@
 						this.data = test_data;
 					});
 					
-					it("put.entry should be a success", function() {
+					it("update.entry should be a success", function() {
 						expect(this.notify).toBe(false);
 						expect(this.error).toBe(false);
 						expect(this.context.error).toBeUndefined();
 						expect(this.success).toBe(true);
 					});
 
-					it("put.entry should have the correct parent/child relationships", function() {
+					it("update.entry should have the correct parent/child relationships", function() {
 						expect(-1 !== this.context.db.objectStoreNames.indexOf(this.context.store)).toBe(true);
 					});
 
-					it("put.entry references should be the db, store and index we asked for", function(){
+					it("update.entry references should be the db, store and index we asked for", function(){
 						expect(this.context.db.name).toBe(this.dbname);
 						expect(this.context.objectstore.name).toBe(this.storename);
 					});
 
-					it("put.entry should have updated the entry by key", function(){
+					it("update.entry should have updated the entry by key", function(){
 						expect(this.context.entry.version).toBe(2);
 					});
 					
-					it("put.entry should return the key", function(){
+					it("update.entry should return the key", function(){
 						expect(this.context.key).toBe(this.key);
 					});
 
-					it("put.entry should clean up after itself", function() {
+					it("update.entry should clean up after itself", function() {
 						dash.remove.database(this.context);
 					});
 
