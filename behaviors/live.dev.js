@@ -26,24 +26,5 @@ window.dashLive = window.dashLive || (function (environment) {
        deferred.resolve(state);
     });
     return state;
-  }, function (state) {
-    if(this.isnt(state.context.live, true)) {
-      return state;
-    }
-    var promise = state.promise,
-        deferred = this.deferred(),
-        that = this;
-    promise(function(ste) {
-      if (that.exists(ste.context.entry)) { 
-        liveions[ ste.context.living ].push(ste.context.entry);
-        ste.context.liveion = that.clone(liveions[ ste.context.living ]);
-      }
-      deferred.resolve(ste);
-      if (that.contains(['resolve','error'], ste.type)) {
-        delete liveMap[ ste.context.live ];
-      }
-    });
-    state.promise = deferred.promise;
-    return state;
   } ];
 }(self));
