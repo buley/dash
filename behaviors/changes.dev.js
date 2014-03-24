@@ -118,7 +118,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
             current = ctx.idx;
           }
           if (that.exists(ctx.key) && that.isnt(ctx.primary_key, ctx.key)) {
-            if (that.contains(['get.entries', 'remove.store', 'clear.store', 'remove.database', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
+            if (that.contains(['get.entries', 'get.entry', 'remove.store', 'clear.store', 'remove.database', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
               changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] || {
                 callbacks: []
               };
@@ -129,7 +129,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           }
         }
         if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
-            if (that.contains(['get.entries', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry', 'remove.database', 'remove.store', 'clear.store'], type)) {
+            if (that.contains(['get.entries', 'get.entry', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry', 'remove.database', 'remove.store', 'clear.store'], type)) {
               key = ctx.primary_key || ctx.key;
               changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
               changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
