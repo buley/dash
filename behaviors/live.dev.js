@@ -1,13 +1,15 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var changeMap = {},
-      change = function(ctx, defd) {
-        var fn = function() {
+      change = function(ste,defd) {
+
+        var ctx = ste.context,
+          fn = function() {
           if (true !== changeMap[ ctx.changed ]) {
             return;
           }
           console.log('CALL LIVING', ctx.key);
-          defd.notify(state);
+          defd.notify(ste);
         };
         fn.ready = false;
         return fn;
@@ -22,7 +24,7 @@ window.dashLive = window.dashLive || (function (environment) {
         changes;
     state.promise = deferred.promise;
     state.context.changed = that.random();
-    changes = change(this.clone(state.context), deferred);
+    changes = change(this.clone(state), deferred);
     if (this.isArray(state.context.changes)) {
       state.context.changes.push(changes);
     } else {
