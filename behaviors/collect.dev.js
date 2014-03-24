@@ -17,14 +17,12 @@ window.dashCollect = window.dashCollect || (function (environment) {
         deferred = this.deferred(),
         that = this;
     promise(function(ste) {
-      setTimeout( function() {
-        if (that.exists(ste.context.entry)) { 
-          collections[ ste.context.collector ].push(ste.context.entry);
-          ste.context.collection = collections[ ste.context.collector ];
-          console.log('collect state',ste.context.collection.length);
-        }
-        deferred.resolve(ste);
-      }, 3000 );
+      if (that.exists(ste.context.entry)) { 
+        collections[ ste.context.collector ].push(ste.context.entry);
+        ste.context.collection = collections[ ste.context.collector ];
+        console.log('collect state',ste.context.collection.length);
+      }
+      deferred.resolve(ste);
     });
     state.promise = deferred.promise;
     return state;

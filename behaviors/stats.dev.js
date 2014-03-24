@@ -553,7 +553,7 @@ window.dashStats = window.dashStats || (function (environment) {
         }
       };
     if (!theirs.exists(state.context.statistics)) {
-      var id = that.random();
+      var id = theirs.random();
       allStats[id] = model();
       state.context.statistics = {
         total: allStats['total'],
