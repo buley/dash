@@ -41,7 +41,9 @@ window.dashLive = window.dashLive || (function (environment) {
     if(this.isEmpty(state.context.changed)) {
       return state;
     }
-    changeMap[ state.context.changed ] = true;
+    if (that.contains(['resolve', 'error'], state.type)) {
+      changeMap[ state.context.changed ] = true;
+    }
     return state;
   } ];
 }(self));
