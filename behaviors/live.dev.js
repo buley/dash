@@ -1,16 +1,15 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var changeMap = {},
-      change = function(ste,defd) {
-
+      change = function(ste, defd) {
         var ctx = ste.context,
-          fn = function() {
-          if (true !== changeMap[ ctx.changed ]) {
-            return;
-          }
-          console.log('CALL LIVING', ctx.key);
-          defd.notify(ste);
-        };
+          fn = function(st2) {
+            if (false === changeMap[ ctx.changed ]) {
+              return;
+            }
+            console.log('CALL LIVING', st2, ctx.key);
+            defd.notify(ste);
+          };
         fn.ready = false;
         return fn;
       }
@@ -30,7 +29,7 @@ window.dashLive = window.dashLive || (function (environment) {
     } else {
       state.context.changes = [changes];
     }
-    changeMap[ state.context.changed ] = state.context.changes;
+    changeMap[ state.context.changed ] = false;
     promise(function() {
       changes.ready = true;
       deferred.resolve(state);
@@ -45,7 +44,7 @@ window.dashLive = window.dashLive || (function (environment) {
       return state;
     }
     if (this.contains(['resolve', 'error'], state.type)) {
-      changeMap[ state.context.changed ] = true;
+      changeMap[ state.context.changed ] = state;
     }
     return state;
   } ];
