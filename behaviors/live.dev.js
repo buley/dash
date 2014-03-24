@@ -1,12 +1,13 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var changeMap = {},
-      change = function(ctx) {
+      change = function(ctx, defd) {
         var fn = function() {
           if (true !== changeMap[ ctx.changed ]) {
             return;
           }
           console.log('CALL LIVING', ctx.key);
+          defd.notify(state);
         };
         fn.ready = false;
         return fn;
