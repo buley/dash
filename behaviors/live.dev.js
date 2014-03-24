@@ -1,22 +1,19 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
-  var that,
-      changeMap = {},
+  var changeMap = {},
       change = function(ste) {
         var ctx = ste.context,
           fn = function(st2) {
-            if (that.isEmpty(!changeMap[ ctx.changed ])) {
+            if (!changeMap[ ctx.changed ]) {
               return;
             }
             st2.method = ste.method;
-            that.apply(changeMap[ ctx.changed ][st2.type], [st2], that);
-            return false;
+            changeMap[ ctx.changed ][st2.type].apply(that, [st2]);
           };
         fn.ready = false;
         return fn;
       }
   return [ function (state) {
-    that = this;
     if(this.isnt(state.context.live, true)) {
       return state;
     }
