@@ -19,7 +19,7 @@ window.dashLive = window.dashLive || (function (environment) {
       return state;
     }
     var changes;
-    state.context.changed = that.random();
+    state.context.changed = this.random();
     changes = change(this.clone(state), deferred);
     if (this.isArray(state.context.changes)) {
       state.context.changes.push(changes);
