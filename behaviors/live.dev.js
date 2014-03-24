@@ -2,13 +2,16 @@ window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var changeMap = {},
       change = function(ste, defd) {
+        console.log('yeah?',ste.on_success);
+        var their_on_success = ste.context.on_success;
         var ctx = ste.context,
           fn = function(st2) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
             console.log('CALL LIVING', ste);
-            defd.resolve(changeMap[ ctx.changed ]);
+            their_on_success();
+            defd.resolve(ste);
           };
         fn.ready = false;
         return fn;
