@@ -233,7 +233,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     promise(function(ste) {
       var id = ste.context.changed,
           changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
-          isChanger = that.exists(state.context.changes);
+          isChanger = that.exists(id);
       if (that.isEmpty(changeset)) {
         changeset = [ null ];
       } 
