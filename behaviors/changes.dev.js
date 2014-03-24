@@ -224,30 +224,29 @@ window.dashChanges = window.dashChanges || (function (environment) {
     that = this;
     var id = this.random();
     callbackMap[ id ] = state.context.changes;
-    state.context.changes = id;
+    state.context.changed = id;
     return state;
   }, function (state) {
     that = this;
     var promise = state.promise,
         deferred = this.deferred();
     promise(function(ste) {
-      var id = ste.context.changes,
+      var id = ste.context.changed,
           changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
           isChanger = that.exists(state.context.changes);
       if (that.isEmpty(changeset)) {
+        changeset = [ null ];
+      } 
+      that.each(changeset, function(callback) {
+        ste.context.changes = callback; 
+        ste.context.changed = ste.context.changed || id;
+        notify(state.context, state.method, state.type);
+        if (isChanger) {
+          register(ste.method, ste.context);
+          unregister(ste.method, ste.context);            
+        }
         deferred.resolve(ste);
-      } else {
-        that.each(changeset, function(callback) {
-          ste.context.changes = callback; 
-          ste.context.changed = ste.context.changed || id;
-          notify(state.context, state.method, state.type);
-          if (isChanger) {
-            register(ste.method, ste.context);
-            unregister(ste.method, ste.context);            
-          }
-          deferred.resolve(ste);
-        });
-      }
+      });
     });
     state.promise = deferred.promise;
     return state;
