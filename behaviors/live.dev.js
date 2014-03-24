@@ -1,7 +1,6 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
-  var that,
-      changeMap = {},
+  var changeMap = {},
       change = function(ste) {
         var ctx = ste.context,
           fn = function(st2) {
@@ -9,8 +8,8 @@ window.dashLive = window.dashLive || (function (environment) {
               return;
             }
             st2.method = ste.method;
-            ste.type = 'notify';
-            changeMap[ ctx.changed ][st2.type].apply(that, [st2]);
+            st2.type = 'resolve';
+            changeMap[ ctx.changed ].resolve(st2);
           };
         fn.ready = false;
         return fn;
@@ -20,7 +19,6 @@ window.dashLive = window.dashLive || (function (environment) {
       return state;
     }
     var changes;
-    that = this;
     state.context.changed = this.random();
     changes = change(this.clone(state));
     if (this.isArray(state.context.changes)) {
