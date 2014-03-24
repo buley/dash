@@ -183,14 +183,14 @@ window.dashChanges = window.dashChanges || (function (environment) {
         var listens = listeners[i];
         if(that.isArray(listens)) {
           that.each(listens, function(listen, z) {
-            if ( false === that.apply(listen, [ args ]) ) {
+            if ( false === that.apply(callbackMap[id][z], [ args ]) ) {
               delete listeners[i][z];
               delete callbackMap[id][z];
             }
           });
         } else {
           if ( false === that.apply(callbackMap[id], [ args ]) ) {
-            delete listens;
+            delete listeners[i];
             delete callbackMap[id];
           }
         }
