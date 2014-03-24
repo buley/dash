@@ -183,7 +183,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
         var listens = callbackMap[id];
         if(that.isArray(listens)) {
           that.each(listens, function(listen, z) {
-            if ( false === that.apply(callbackMap[id][z], [ args ]) ) {
+            if ( false === that.apply(listen, [ args ]) ) {
               delete listeners[i][z];
               delete callbackMap[id][z];
             }
@@ -212,7 +212,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
         deferred = this.deferred();
     promise(function(ste) {
       var id = ste.context.changes,
-          changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ];
+          changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
+          isChanger = that.exists(state.context.changes);
       if (that.isEmpty(changeset)) {
         deferred.resolve(ste);
       } else {
@@ -220,7 +221,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           ste.context.changes = callback; 
           ste.context.changed = ste.context.changed || id;
           notify(state.context, state.method, state.type);
-          if (that.exists(state.context.changes)) {
+          if (isChanger) {
             register(ste.method, ste.context);
             unregister(ste.method, ste.context);            
           }
