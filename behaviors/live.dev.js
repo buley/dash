@@ -46,7 +46,7 @@ window.dashLive = window.dashLive || (function (environment) {
       return state;
     }
     if (this.contains(['resolve', 'error'], state.type)) {
-      changeMap[ state.context.changed ] = state;
+      changeMap[ state.context.changed ] = this.clone(state);
     }
     return state;
   } ];
