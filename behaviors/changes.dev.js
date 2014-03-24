@@ -199,6 +199,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
   }, function (state) {
     that = this;
     if(!this.exists(state.context.changes)) {
+      console.log('no changes');
       return notify(state.context, state.method, state.type);
     }
     var promise = state.promise,
