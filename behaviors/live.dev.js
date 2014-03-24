@@ -10,7 +10,7 @@ window.dashLive = window.dashLive || (function (environment) {
             }
             st2.method = ste.method;
             st2.type = 'notify';
-            changeMap[ ctx.changed ][st2.type].apply(that, [st2]);
+            changeMap[ ctx.changed ][st2.type](st2);
           };
         fn.ready = false;
         return fn;
