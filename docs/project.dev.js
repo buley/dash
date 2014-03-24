@@ -1709,11 +1709,12 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   start_promise = new Date().getTime();
                 //dash_promise.then( function(context) {
                 dash_promise(function (context) {
-                  statsUpdate(context.statistics);
+                  console.log('promiss success');
+                 statsUpdate(context.statistics);
                 }, function (context) {
                   console.log('dash promise rejected', context);
                 }, function (context) {
-                  console.log('added',context.primary_key, context.key);
+                  console.log('promiss notified',context.primary_key, context.key);
                   if (true === scope.visuals) {
                     system.add(context.entry);
                   }
