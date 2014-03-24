@@ -7,9 +7,7 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
-            console.log('yeah?');
-            changeMap[ ctx.changed ].resolve(ste);
-            changeMap[ ctx.changed ].notify(ste);
+            changeMap[ ctx.changed ].notify(st2);
           };
         fn.ready = false;
         return fn;
@@ -39,7 +37,6 @@ window.dashLive = window.dashLive || (function (environment) {
       changeMap[ state.context.changed ] = deferred;
     }
     promise(function() {
-      console.log('ya');
       deferred.resolve(state);
     }, function() {
       deferred.error(state);
