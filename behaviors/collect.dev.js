@@ -22,9 +22,8 @@ window.dashCollect = window.dashCollect || (function (environment) {
         ste.context.collection = that.clone(collections[ ste.context.collector ]);
       }
       deferred.resolve(ste);
-      console.log('FINISHED',ste.type, ste.method);
       if (that.contains(['resolve','error'], ste.type)) {
-        console.log('collect finished',ste.context.collection.length);
+        console.log('collect finished',collections[ ste.context.collector ].length);
         delete collections[ ste.context.collector ];
       }
     });
