@@ -223,7 +223,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     }    
     that = this;
     var id = state.context.changed || this.random();
-    callbackMap[ id ] = state.context.changes;
+    callbackMap[ id ] = this.clone(state.context.changes);
     state.context.changed = id;
     return state;
   }, function (state) {
