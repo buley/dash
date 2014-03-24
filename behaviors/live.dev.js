@@ -7,6 +7,7 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
+            st2.context = ste.context;
             changeMap[ ctx.changed ].notify(st2);
           };
         fn.ready = false;
