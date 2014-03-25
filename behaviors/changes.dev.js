@@ -173,7 +173,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
       if ( that.isArray(b) ) {
         b = b.join('');
       }
-      return that.isnt(a.toString(), b.toString());
+      a = a ? a.toString() : a;
+      b = b ? b.toString() : b;
+      return that.isnt(a, b);
     },
     notify = function(ctx, method, type) {
       var inquiry = inquire(method, ctx),

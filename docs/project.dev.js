@@ -489,7 +489,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 return;
               }
               dash.get.entry({
-                database: 'dash-demo',
+                database:o 'dash-demo',
                 store: 'imdb',
                 key: data,
                 map: [ function(item) {
