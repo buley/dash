@@ -6,10 +6,10 @@ dashApp.config(['$routeProvider',
     /* Behaviors */
     dash.add.behavior(dashStats);
     dash.add.behavior(dashLive);
-    dash.add.behavior(dashMap);
     dash.add.behavior(dashChanges);
     dash.add.behavior(dashMatch);
     dash.add.behavior(dashCollect);
+    dash.add.behavior(dashMap);
 
     $routeProvider
       .when('/about', {
@@ -492,13 +492,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 database: 'dash-demo',
                 store: 'imdb',
                 key: data,
-                map: [ function(item) {
-                  item.se = 'twittle dee';
-                  return item;
-                }, function(item) {
-                  item.se = 'twittle dumb';
-                  return item;
-                }],
                 stats: true,
                 forecast: false,
                 store_key_path: 'id',
