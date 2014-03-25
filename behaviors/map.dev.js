@@ -37,10 +37,8 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	});
 	    	state.context.promise = promise;
 	    }
-	    console.log('map?',state.context.mapd);
 	    delete mapMap[ state.context.mapd ];
 	    delete state.context.mapd;
-	    mapMap[ state.context.mapd ].resolve(state);
     }
     return state;
   } ];
