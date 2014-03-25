@@ -21,7 +21,7 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	promises = [],
 	    	that = this;
 	    this.each(mapMap[ state.context.mapd ], function(fn) {
-	    	result = that.apply(fn, [ state.context ]);
+	    	result = that.apply(fn, [ state.context.entry ]);
 		   	if (that.isFunction(result)) {
 		   		promises.push(result);
 		   	} else {
@@ -29,7 +29,6 @@ window.dashMap = window.dashMap || (function (environment) {
 		   	}
 	    });
 	    if (this.isEmpty(promises)) {
-	    	console.log('no promises',promises);
 	    	state.context.entry = this.is(results.length, 1) ? results[0] : results;
 	    } else {
 	    	this.each(promises, function(pro) {
