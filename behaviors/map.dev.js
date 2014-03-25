@@ -33,7 +33,9 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	state.context.entry = this.is(results.length, 1) ? results[0] : results;
 	    } else {
 	    	this.each(promises, function(pro) {
-	    		promise = pro;
+	    		promise = pro(function() {
+	    			deferred.resolve(ctx);
+	    		});
 	    	});
 	    	state.context.promise = promise;
 	    }
