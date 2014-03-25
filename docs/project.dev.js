@@ -492,10 +492,13 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 database: 'dash-demo',
                 store: 'imdb',
                 key: data,
-                map: function(item) {
+                map: [ function(item) {
                   console.log("YEAH?",item);
                   return item;
-                },
+                }, function(item) {
+                  console.log("its that easy?",item);
+                  return item;
+                }],
                 stats: true,
                 forecast: false,
                 store_key_path: 'id',
