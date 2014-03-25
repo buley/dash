@@ -30,7 +30,7 @@ window.dashMap = window.dashMap || (function (environment) {
 		   	}
 	    });
 	    if (this.isEmpty(promises)) {
-	    	state.context.entry = is(results.length, 1) ? results[0] : results;
+	    	state.context.entry = this.is(results.length, 1) ? results[0] : results;
 	    } else {
 	    	this.each(promises, function(pro) {
 	    		promise = promise(pro);
