@@ -10,7 +10,6 @@ window.dashMap = window.dashMap || (function (environment) {
     delete state.context.map;
     return state;
   }, function (state) {
-  	console.log("STATE",state.context.mapd);
     if(this.isEmpty(state.context.mapd)) {
       return state;
     }
@@ -41,6 +40,7 @@ window.dashMap = window.dashMap || (function (environment) {
 	    }
 	    delete mapMap[ state.context.mapd ];
 	    delete state.context.mapd;
+	    console.log('donezo');
     }
     return state;
   } ];
