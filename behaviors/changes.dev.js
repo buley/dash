@@ -27,7 +27,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       }      
     },
     register = function(type, ctx) {
-      var obj = ctx.changed;
+      var obj = ctx.changeid;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
         callbacks: [],
@@ -85,7 +85,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       var listeners = [],
           previous = null,
           current = null,
-          obj = ctx.changed,
+          obj = ctx.changeid,
           key;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
@@ -266,21 +266,21 @@ window.dashChanges = window.dashChanges || (function (environment) {
       return state;
     }    
     that = this;
-    var id = state.context.changed || this.random();
+    var id = state.context.changeid || this.random();
     callbackMap[ id ] = this.clone(state.context.changes);
-    state.context.changed = id;
+    state.context.changeid = id;
     return state;
   }, function (state) {
     that = this;
     var promise = state.promise,
         deferred = this.deferred();
     promise(function(ste) {
-      var id = ste.context.changed,
+      var id = ste.context.changeid,
           changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
           isChanger = that.exists(id);
       that.each(changeset, function(callback) {
         ste.context.changes = callback; 
-        ste.context.changed = ste.context.changed || id;
+        ste.context.changeid = ste.context.changeid || id;
         notify(state.context, state.method, state.type);
         if (isChanger) {
           register(ste.method, ste.context);
