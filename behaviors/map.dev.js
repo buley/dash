@@ -2,7 +2,7 @@ window.dashMap = window.dashMap || (function (environment) {
   "use strict";
   var mapMap = {}; //heh
   return [ function (state) {
-    if(this.isnt(state.context.map, true)) {
+    if(this.isEmpty(state.context.map)) {
       return state;
     }
     var maps;
