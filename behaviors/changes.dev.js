@@ -173,9 +173,6 @@ window.dashChanges = window.dashChanges || (function (environment) {
         previous = inquiry.previous || {},
         difference = function(one, two, shallow) {
           var diff = {};
-          if (that.isArray(one) || that.isArray(two)) {
-            diff[ key ] = [];
-          }
           if (that.isObject(one)) {
             that.iterate(one, function(key, val) {
               if (that.isnt(JSON.stringify(val), JSON.stringify(previous[key]))) {
@@ -189,6 +186,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           } else if (that.isArray(one)) {
             if (that.isArray(two)) { 
               that.each(one, function(val, i) {
+                diff[ i ] = diff[ i ] || [];
                 if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
                   diff[ key ] = difference(val, two[i], shallow);
                 } else {
@@ -210,6 +208,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           } else if (that.isArray(two)) {
             if (that.isArray(two)) { 
               that.each(two, function(val, i) {
+                diff[ i ] = diff[ i ] || [];
                 if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
                   diff[ key ] = difference(one[i], val, shallow);
                 } else {
