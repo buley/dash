@@ -187,7 +187,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
           if (that.isObject(one)) {
             that.iterate(one, function(key, val) {
               if (notSame(val, previous[key])) {
-                if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
+                if ( that.isEmpty(val), that.isEmpty(previous[key])) {
+                  diff[ key ] = [val, two[key]];
+                } else if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
                   diff[ key ] = difference(val, two[key], shallow);
                 } else {
                   diff[ key ] = [val, two[key]];
@@ -198,7 +200,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
             if (that.isArray(two)) { 
               that.each(one, function(val, i) {
                 diff[ i ] = diff[ i ] || [];
-                if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
+                if ( that.isEmpty(val) || that.isEmpty(two[i])) {
+                  diff[ key ] = [val, two[i]];
+                } if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
                   diff[i] = difference(val, two[i], shallow);
                 } else {
                   diff[i] = [one[i], val];
@@ -208,8 +212,10 @@ window.dashChanges = window.dashChanges || (function (environment) {
           }
           if (that.isObject(two)) {
             that.iterate(two, function(key, val) {
-              if (notSame(val, current[key]) && that.isEmpty(diff[ key ])) {
-                if ( that.isnt(shallow, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
+              if (notSame(val, one[key]) && that.isEmpty(one[ key ])) {
+                if ( that.isEmpty(val) || that.isEmpty(two[key])) {
+                  diff[ key ] = [val, two[key]];
+                } if ( that.isnt(shallow, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
                   diff[ key ] = difference(one[key], val, shallow);
                 } else {
                   diff[ key ] = [one[key], val];
@@ -220,7 +226,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
             if (that.isArray(two)) { 
               that.each(two, function(val, i) {
                 diff[ i ] = diff[ i ] || [];
-                if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
+                if ( that.isEmpty(val) || that.isEmpty(two[i])) {
+                  diff[ i ] = [val, two[i]];
+                } if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
                   diff[ i ] = difference(one[i], val, shallow);
                 } else {
                   diff[ i ] = [one[i], val];
