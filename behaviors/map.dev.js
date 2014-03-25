@@ -33,7 +33,7 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	state.context.entry = this.is(results.length, 1) ? results[0] : results;
 	    } else {
 	    	this.each(promises, function(pro) {
-	    		promise = promise(pro);
+	    		promise = pro;
 	    	});
 	    	state.context.promise = promise;
 	    }
