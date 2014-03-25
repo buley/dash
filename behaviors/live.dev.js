@@ -8,6 +8,7 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
+            st2.type = 'notify';
             changeMap[ ctx.changed ].resolve(st2);
           };
         fn.ready = false;
