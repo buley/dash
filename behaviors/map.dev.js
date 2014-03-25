@@ -28,19 +28,9 @@ window.dashMap = window.dashMap || (function (environment) {
     if(this.isEmpty(state.context.mapd)) {
       return state;
     }
-    var promise = state.promise,
-        deferred = this.deferred();
-    state.promise = deferred.promise;
-    if (this.contains(['resolve', 'error'], state.type)) {
-      mapMap[ state.context.mapd ] = deferred;
+    if (this.exists(state.context.entry)) {
+      state.context.entry = that.apply(map, [state.context.entry], this );
     }
-    promise(function(ste) {
-      deferred.resolve(ste);
-    }, function(ste) {
-      deferred.error(ste);
-    }, function(ste) {
-      deferred.notify(ste);
-    });
     return state;
   } ];
 }(self));
