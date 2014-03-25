@@ -19,10 +19,11 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	result,
 	    	promise = state.promise,
 	    	results = [],
-	    	promises = [];
+	    	promises = [],
+	    	that = this;
 	    this.each(mapMap[ state.context.mapd ], function(fn) {
-	    	result = this.apply(fn, [ state.context ]);
-		   	if (this.isFunction(result)) {
+	    	result = that.apply(fn, [ state.context ]);
+		   	if (that.isFunction(result)) {
 		   		promises.push(result);
 		   	} else {
 		   		results.push(result);
