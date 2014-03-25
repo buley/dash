@@ -10,7 +10,7 @@ window.dashMap = window.dashMap || (function (environment) {
     delete state.context.map;
     return state;
   }, function (state) {
-    if(this.isEmpty(state.context.mapd)) {
+    if(true || this.isEmpty(state.context.mapd)) {
       return state;
     }
     if (this.exists(state.context.entry)) {
