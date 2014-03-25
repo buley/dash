@@ -9,9 +9,6 @@ window.dashLive = window.dashLive || (function (environment) {
               return;
             }
             st2.type = 'notify';
-            delete st2.context.data;
-            delete st2.context.changes;
-            delete st2.context.changed;
             changeMap[ ctx.changed ].resolve(st2);
           };
         fn.ready = false;
