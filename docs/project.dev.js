@@ -493,10 +493,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 store: 'imdb',
                 key: data,
                 map: [ function(item) {
-                  console.log("YEAH?",item);
+                  item.se = 'twittle dee';
                   return item;
                 }, function(item) {
-                  console.log("its that easy?",item);
+                  item.se = 'twittle dumb';
                   return item;
                 }],
                 stats: true,
