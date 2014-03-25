@@ -29,7 +29,7 @@ window.dashMap = window.dashMap || (function (environment) {
 		   	}
 	    });
 	    if (this.isEmpty(promises)) {
-	    	state.context.entry = this.is(results.length, 1) ? results[0] : results;
+	    	state.context.mapped = this.is(results.length, 1) ? results[0] : results;
 	    } else {
 	    	this.each(promises, function(pro) {
 	    		promise = pro(function(result) {
