@@ -15,13 +15,13 @@ window.dashMap = window.dashMap || (function (environment) {
     }
     if (this.exists(state.context.entry)) {
 	    var deferred = this.deferred(),
-	    	result,
+	    	result = state.context.entry,
 	    	promise = state.promise,
 	    	results = [],
 	    	promises = [],
 	    	that = this;
 	    this.each(mapMap[ state.context.mapd ], function(fn) {
-	    	result = that.apply(fn, [ state.context.entry ]);
+	    	result = that.apply(fn, [ result ]);
 		   	if (that.isFunction(result)) {
 		   		promises.push(result);
 		   	} else {
@@ -32,14 +32,15 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	state.context.mapped = this.is(results.length, 1) ? results[0] : results;
 	    } else {
 	    	this.each(promises, function(pro) {
-	    		promise = pro(function(result) {
+	    		promise(function(result) {
 	    			results.push(results);
 	    		});
+	    		promise = pro;
 	    	});
 	    	state.context.promise = promise(function(ctx) {
 	    		ctx.mapped = that.is(results.length, 1) ? results[0] : results;
 	    		deferred.resolve(ctx);
-	    	})
+	    	});
 	    }
 	    delete mapMap[ state.context.mapd ];
 	    delete state.context.mapd;
