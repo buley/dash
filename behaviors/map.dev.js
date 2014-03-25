@@ -38,7 +38,7 @@ return fn;
 	    if (that.is(promises.length, 0)) {
 	    	state.context.entry = is(results.length, 1) ? results[0] : results;
 	    } else {
-	    	that.each(promises, function(pro)) {
+	    	that.each(promises, function(pro) {
 	    		promise = promise(pro);
 	    	}
 	    	state.context.promise = promise;
