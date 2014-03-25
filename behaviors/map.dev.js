@@ -15,7 +15,7 @@ return fn;
     that = this;
     state.context.mapd = this.random();
     mapMap[ state.context.mapd ] = this.isArray(state.context.map) ? state.context.map : [state.context.map];
-    delete state.context.mapd;
+    delete state.context.map;
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.mapd)) {
