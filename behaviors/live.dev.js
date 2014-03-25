@@ -1,15 +1,15 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var that,
-      changeMap = {},
-      change = function(ste) {
+      liveMap = {},
+      live = function(ste) {
         var ctx = ste.context,
           fn = function(st2) {
-            if (!changeMap[ ctx.changed ]) {
+            if (!liveMap[ ctx.liveid ]) {
               return;
             }
             st2.type = 'notify';
-            changeMap[ ctx.changed ].resolve(st2);
+            liveMap[ ctx.liveid ].resolve(st2);
           };
         fn.ready = false;
         return fn;
@@ -18,26 +18,26 @@ window.dashLive = window.dashLive || (function (environment) {
     if(this.isnt(state.context.live, true)) {
       return state;
     }
-    var changes;
+    var lives;
     that = this;
-    state.context.changed = this.random();
-    changes = change(this.clone(state));
-    if (this.isArray(state.context.changes)) {
-      state.context.changes.push(changes);
+    state.context.liveid = this.random();
+    lives = live(this.clone(state));
+    if (this.isArray(state.context.lives)) {
+      state.context.lives.push(lives);
     } else {
-      state.context.changes = [changes];
+      state.context.lives = [lives];
     }
-    changeMap[ state.context.changed ] = false;
+    liveMap[ state.context.liveid ] = false;
     return state;
   }, function (state) {
-    if(this.isEmpty(state.context.changed)) {
+    if(this.isEmpty(state.context.liveid)) {
       return state;
     }
     var promise = state.promise,
         deferred = this.deferred();
     state.promise = deferred.promise;
     if (this.contains(['resolve', 'error'], state.type)) {
-      changeMap[ state.context.changed ] = deferred;
+      liveMap[ state.context.liveid ] = deferred;
     }
     promise(function(ste) {
       deferred.resolve(ste);
