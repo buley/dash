@@ -22,14 +22,28 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	that = this;
 	    this.each(mapMap[ state.context.mapd ], function(fn) {
 	    	result = that.apply(fn, [ state.context ]);
-	    	console.log('esult',result);
 		   	if (that.isFunction(result)) {
 		   		promises.push(result);
 		   	} else {
 		   		results.push(result);
 		   	}
 	    });
-
+	    if (this.isEmpty(promises)) {
+	    	console.log('no promises',promises);
+	    	state.context.entry = this.is(results.length, 1) ? results[0] : results;
+	    } else {
+	    	this.each(promises, function(pro) {
+	    		promise = pro(function(result) {
+	    			results.push(results);
+	    		});
+	    	});
+	    	state.context.promise = promise(function(ctx) {
+	    		ctx.entry = that.is(results.length, 1) ? results[0] : results;
+	    		deferred.resolve(ctx);
+	    	})
+	    }
+	    delete mapMap[ state.context.mapd ];
+	    delete state.context.mapd;
     }
     return state;
   } ];
