@@ -166,6 +166,15 @@ window.dashChanges = window.dashChanges || (function (environment) {
         previous: previous
       };
     },
+    notSame = function(a, b) {
+      if ( that.isArray(a) ) {
+        a = a.join('');
+      }
+      if ( that.isArray(b) ) {
+        b = b.join('');
+      }
+      return that.isnt(a.toString(), b.toString());
+    },
     notify = function(ctx, method, type) {
       var inquiry = inquire(method, ctx),
         listeners = inquiry.listeners || [],
@@ -175,7 +184,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           var diff = {};
           if (that.isObject(one)) {
             that.iterate(one, function(key, val) {
-              if (that.isnt(JSON.stringify(val), JSON.stringify(previous[key]))) {
+              if (notSame(val, previous[key])) {
                 if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
                   diff[ key ] = difference(val, two[key], shallow);
                 } else {
@@ -197,7 +206,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           }
           if (that.isObject(two)) {
             that.iterate(two, function(key, val) {
-              if (that.isnt(JSON.stringify(val), JSON.stringify(current[key])) && that.isEmpty(diff[ key ])) {
+              if (notSame(val, current[key]) && that.isEmpty(diff[ key ])) {
                 if ( that.isnt(shallow, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
                   diff[ key ] = difference(one[key], val, shallow);
                 } else {
