@@ -494,7 +494,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 map: function(item) {
                   console.log("YEAH?",item);
                   return item;
-                }
+                },
                 stats: true,
                 forecast: false,
                 store_key_path: 'id',
