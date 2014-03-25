@@ -173,24 +173,51 @@ window.dashChanges = window.dashChanges || (function (environment) {
         previous = inquiry.previous || {},
         difference = function(one, two, shallow) {
           var diff = {};
-          that.iterate(one, function(key, val) {
-            if (that.isnt(JSON.stringify(val), JSON.stringify(previous[key]))) {
-              if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
-                diff[ key ] = difference(val, two[key], shallow);
-              } else {
-                diff[ key ] = [val, two[key]];
+          if (that.isArray(one) || that.isArray(two)) {
+            diff[ key ] = [];
+          }
+          if (that.isObject(one)) {
+            that.iterate(one, function(key, val) {
+              if (that.isnt(JSON.stringify(val), JSON.stringify(previous[key]))) {
+                if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
+                  diff[ key ] = difference(val, two[key], shallow);
+                } else {
+                  diff[ key ] = [val, two[key]];
+                }
               }
-            }
-          });
-          that.iterate(two, function(key, val) {
-            if (that.isnt(JSON.stringify(val), JSON.stringify(current[key])) && that.isEmpty(diff[ key ])) {
-              if ( that.isnt(shallow, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
-                diff[ key ] = difference(one[key], val, shallow);
-              } else {
-                diff[ key ] = [one[key], val];
+            });
+          } else if (that.isArray(one)) {
+            if (that.isArray(two)) { 
+              that.each(one, function(val, i) {
+                if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
+                  diff[ key ] = difference(val, two[i], shallow);
+                } else {
+                  diff[ key ] = [one[key], val];
+                }
+              });
+            }     
+          }
+          if (that.isObject(two)) {
+            that.iterate(two, function(key, val) {
+              if (that.isnt(JSON.stringify(val), JSON.stringify(current[key])) && that.isEmpty(diff[ key ])) {
+                if ( that.isnt(shallow, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
+                  diff[ key ] = difference(one[key], val, shallow);
+                } else {
+                  diff[ key ] = [one[key], val];
+                }
               }
-            }
-          });
+            });
+          } else if (that.isArray(two)) {
+            if (that.isArray(two)) { 
+              that.each(two, function(val, i) {
+                if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
+                  diff[ key ] = difference(one[i], val, shallow);
+                } else {
+                  diff[ key ] = [one[i], val];
+                }
+              });
+            }     
+          }
           return diff;
         },
         diff = (that.is(ctx.diff, true)) ? difference(current, previous, ctx.shallow ? true : false) : null,
