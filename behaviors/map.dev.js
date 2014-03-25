@@ -22,6 +22,7 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	that = this;
 	    this.each(mapMap[ state.context.mapd ], function(fn) {
 	    	result = that.apply(fn, [ state.context ]);
+	    	console.log('esult',result);
 		   	if (that.isFunction(result)) {
 		   		promises.push(result);
 		   	} else {
