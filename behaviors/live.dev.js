@@ -13,7 +13,7 @@ window.dashLive = window.dashLive || (function (environment) {
           };
         fn.ready = false;
         return fn;
-      }
+      };
   return [ function (state) {
     if(this.isnt(state.context.live, true)) {
       return state;
