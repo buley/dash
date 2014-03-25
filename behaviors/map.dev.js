@@ -38,7 +38,7 @@ window.dashMap = window.dashMap || (function (environment) {
 	    		});
 	    	});
 	    	state.context.promise = promise(function(ctx) {
-	    		ctx.entry = that.is(results.length, 1) ? results[0] : results;
+	    		ctx.mapped = that.is(results.length, 1) ? results[0] : results;
 	    		deferred.resolve(ctx);
 	    	})
 	    }
