@@ -188,9 +188,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
               that.each(one, function(val, i) {
                 diff[ i ] = diff[ i ] || [];
                 if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
-                  diff[ key ] = difference(val, two[i], shallow);
+                  diff[i] = difference(val, two[i], shallow);
                 } else {
-                  diff[ key ] = [one[key], val];
+                  diff[i] = [one[i], val];
                 }
               });
             }     
@@ -210,9 +210,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
               that.each(two, function(val, i) {
                 diff[ i ] = diff[ i ] || [];
                 if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
-                  diff[ key ] = difference(one[i], val, shallow);
+                  diff[ i ] = difference(one[i], val, shallow);
                 } else {
-                  diff[ key ] = [one[i], val];
+                  diff[ i ] = [one[i], val];
                 }
               });
             }     
