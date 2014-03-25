@@ -1,8 +1,8 @@
 {
   "name": "dash",
-  "version": "0.0.1",
+  "version": "0.0.24",
   "description": "A promising IndexedDB wrapper, since 2011.",
-  "main": "lib/dash.dev.js",
+  "main": "dist/dash.js",
   "scripts": {
     "test": "grunt dev"
   },
@@ -12,20 +12,23 @@
   },
   "keywords": [],
   "author": "Taylor Buley <taylor.buley@gmail.com>",
-  "dependencies": {
-    "coveralls": "~2.8.0",
-    "karma-jasmine": "~0.1.5"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "karma": "~0.10.9",
-    "karma-jasmine": "~0.1.5",
-    "grunt-karma": "~0.6.2",
-    "karma-firefox-launcher": "~0.1.3",
-    "karma-chrome-launcher": "~0.1.2",
-    "grunt-karma-coveralls": "~2.3.0",
-    "karma-coverage": "~0.1.5",
-    "coveralls": "https://registry.npmjs.org/coveralls/-/coveralls-2.8.0.tgz"
+    "coveralls": "*",
+    "grunt": "*",
+    "grunt-karma": "*",
+    "grunt-karma-coveralls": "*",
+    "jasmine-core": "~2.2.0",
+    "karma": "*",
+    "karma-chrome-launcher": "*",
+    "karma-coverage": "*",
+    "karma-firefox-launcher": "*",
+    "karma-ie-launcher": "^0.1.5",
+    "karma-jasmine": "~0.2.0",
+    "karma-opera-launcher": "^0.1.0",
+    "karma-safari-launcher": "^0.1.1",
+    "karma-sauce-launcher": "^0.2.10",
+    "sauce-connect-launcher": "^0.10.1"
   },
   "peerDependencies": {},
   "license": "MIT",

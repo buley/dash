@@ -9,8 +9,14 @@ module.exports = function (grunt) {
     } else {
         plugins.push('karma-chrome-launcher');
         plugins.push('karma-firefox-launcher');
+        plugins.push('karma-safari-launcher');
+        plugins.push('karma-ie-launcher');
+        plugins.push('karma-opera-launcher');
+        plugins.push('karma-sauce-launcher');
         browsers.push('Chrome');
         browsers.push('Firefox');
+        browsers.push('Safari');
+        browsers.push('Opera');
     }
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -25,7 +31,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.js',
+                        'dist/dash.min.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -37,7 +43,7 @@ module.exports = function (grunt) {
                 coverageReporter: {
                     type: "lcov",
                     dir: "coverage/"
-                },
+                }
             },
             dev: {
                 singleRun: true,
@@ -46,14 +52,14 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.dev.js',
+                        'dist/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
                 },
                 reporters: ['dots', 'coverage'],
                 preprocessors: {
-                    "lib/*.dev.js": "coverage"
+                    "lib/*js": "coverage"
                 },
                 coverageReporter: {
                     type: "lcov",
@@ -67,7 +73,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.dev.js',
+                        'dist/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -81,18 +87,60 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.dev.js',
+                        'dist/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
                 },
                 reporters: ['dots']
             },
+            safari: {
+                singleRun: false,
+                autoWatch: true,
+                browsers: ['Safari'],
+                plugins: plugins,
+                options: {
+                    files: [
+                        'dist/dash.js',
+                        'specs/*.js',
+                        'specs/*/*.js'
+                    ]
+                },
+                reporters: ['dots']
+            },
+            opera: {
+                singleRun: false,
+                autoWatch: true,
+                browsers: ['Opera'],
+                plugins: plugins,
+                options: {
+                    files: [
+                        'dist/dash.js',
+                        'specs/*.js',
+                        'specs/*/*.js'
+                    ]
+                },
+                reporters: ['dots']
+            },
+            ie: {
+                singleRun: false,
+                autoWatch: true,
+                browsers: ['IE'],
+                plugins: plugins,
+                options: {
+                    files: [
+                        'dist/dash.js',
+                        'specs/*.js',
+                        'specs/*/*.js'
+                    ]
+                },
+                reporters: ['dots']
+            }
         },
         coveralls: {
             options: {
                 debug: true,
-                coverage_dir: 'coverage/Firefox*'
+                coverageDir: 'coverage/Firefox*'
             }
         }
     });
@@ -103,5 +151,8 @@ module.exports = function (grunt) {
     grunt.registerTask('dev', ['karma:dev']);
     grunt.registerTask('firefox', ['karma:firefox']);
     grunt.registerTask('chrome', ['karma:chrome']);
+    grunt.registerTask('safari', ['karma:safari']);
+    grunt.registerTask('opera', ['karma:opera']);
+    grunt.registerTask('ie', ['karma:ie']);
     grunt.registerTask('default', ['dev', 'coveralls']);
 };

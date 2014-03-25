@@ -1,107 +1,59 @@
-self.dashRest = self.dashRest || (function (environment) {
+var dashFirebase = (function (environment) {
   "use strict";
   var that,
-  	rest = {},
-	ajax = function( context ) {	
-	  var request_type = context.method,
-	    url = context.url,
-	    input = context.data,
-	    params = context.params,
-	    callback = context.callback,
-	  	fallbacks = ['MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'],
-	    request,
-	    serialize = function (data) {
-	      var queryString = '',
-	      	attr;
-	      if ('string' !== typeof data) {
-	        for (attr in data) {
-	          if (data.hasOwnProperty(attr)) {
-	            queryString += "&" + encodeURIComponent(attr) + '=' + encodeURIComponent(data[attr]);
-	          }
-	        }
-	        queryString = queryString.replace(/^&/, '');
-	      } else {
-	        queryString = data;
-	      }
-	      return queryString;
-	    },
-	    qs = serialize(params),
-	    formencoded = serialize(input),
-	    i = 0,
-	    error = null;
-	  if (environment.XMLHttpRequest) {
-	    request = new XMLHttpRequest();
-	  } else {
-	    for (i = 0; i < fallbacks.length; i++) {
-	      try {2
-	        request = new ActiveXObject(fallbacks[i]);
-	        break;
-	      } catch (e) {}
-	    }
-	  }
-	  request.addEventListener('readystatechange', function (e) {
-	  	if ('function' === typeof callback && 4 === request.readyState && null !== request.status.toString().match(/^2/)) {
-	  		var json;
-	  		try {
-	      		json = JSON.parse(request.responseText);
-	  		} catch(e) {
-	  			//not json (or bad json)
-	  		}
-	  		error = null;
-		    callback(json || request.responseText, error, e, request);
-	  	} else if ('function' === typeof callback && 4 === request.readyState && null !== request.status.toString().match(/^[34]/)) {
-	  		var json;
-	  		//TODO: Handle this
-	  		try {
-	      		json = JSON.parse(request.responseText);
-	  		} catch(e) {
-	  			//not json (or bad json)
-	  		}
-	  		error = request.status.toString();
-		    callback(json || request.responseText, error, e, request);
-	  	}
-	  }, true);
-
-	  if (request_type.toUpperCase() === 'GET') {
-	    request.open(request_type, url + (qs ? '?' + qs : ''), true);
-	    request.send();
-	  } else {
-	    request.open(request_type, url + (qs ? '?' + qs : ''), true);
-	    if (false === context.json) {
-		    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		    request.send(formencoded);
-	    } else {
-		    request.setRequestHeader('Content-Type', 'application/javascript');
-	    	request.send(JSON.stringify(input));
-	    }
-	  }
-
+	child = function( context ) {	
+		var deferred = that.deferred();
+		context.method = 'child';
+		return deferred.promise;
 	},
-	get = function( context ) {	
-		context.method = 'GET';
-		ajax(context);
+	set = function( context ) {	
+		var deferred = that.deferred(),
+			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
+		context.method = 'set';
+		ref.set( context.entry, function(err) {
+			if(that.err, null) {
+				deferred.resolve(context.entry);
+			} else {
+				deferred.reject(err);
+			}
+		} );
+		return deferred.promise;
 	},
-	post = function( context ) {	
-		context.method = 'POST';
-		ajax(context);
-	},
-	put = function( context ) {	
-		context.method = 'PUT';
-		ajax(context);
+	update = function( context ) {	
+		var deferred = that.deferred(),
+			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
+		context.method = 'update';
+		ref.update(context.entry, function() {
+			if(that.err, null) {
+				deferred.resolve(context.entry);
+			} else {
+				deferred.reject(err);
+			}
+		});
+		return deferred.promise;
 	},
 	remove = function( context ) {	
-		context.method = 'DELETE';
-		ajax(context);
+		var deferred = that.deferred(),
+			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
+		context.method = 'remove';
+		ref.remove(function() {
+			if(that.err, null) {
+				deferred.resolve(context.entry);
+			} else {
+				deferred.reject(err);
+			}
+		});
+		return deferred.promise;
 	},
 	whichMethod = function(signature) {
 		if ( that.contains( [ 'get.entry', 'get.entries', 'get.index', 'get.database', 'get.store' ], signature)) {
-			return 'GET';
+			return 'child';
 		} else if ( that.contains([ 'remove.entry', 'remove.entries', 'remove.index', 'remove.database', 'remove.store' ], signature)) {
-			return 'DELETE';
+			return 'remove';
 		} else if ( that.contains([ 'add.entry' ], signature)) {
-			return 'POST';
+			return 'set';
 		} else if ( that.contains([ 'update.entry', 'update.entries' ], signature)) {
-			return 'PUT';
+			return 'update';
 		} else {
 			return null;
 		}
@@ -110,8 +62,9 @@ self.dashRest = self.dashRest || (function (environment) {
     libraryScript = scripts[scripts.length - 1] || null,
     libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
 	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
-	worker,
+	worker = !!workerEnvironment && !!libraryPath && null !== libraryPath.match(/firebase/) ? new Worker(libraryPath) : null,
 	workQueue = {},
+	firebases = {},
     workRegister = function (worker, message, context, success, error, notify) {
       var id = that.random(),
         callback = function (e) {
@@ -191,15 +144,15 @@ self.dashRest = self.dashRest || (function (environment) {
       workRegister(worker, message, context, function (data) {
       	var add_ctx = that.clone(context);
       	add_ctx.data = data.context.entry;
-      	add_ctx.resting = true;
+      	add_ctx.firebaseing = true;
       	that.api.add.entry(add_ctx)(function(added_ctx) {
-      		delete added_ctx.resting;
+      		delete added_ctx.firebaseing;
 	        defd.resolve(getData(added_ctx));
       	}, function(added_ctx) {
-      		delete added_ctx.resting;
+      		delete added_ctx.firebaseing;
 	        defd.reject(getData(added_ctx));
       	}, function(added_ctx) {
-      		delete added_ctx.resting;
+      		delete added_ctx.firebaseing;
 	        defd.notify(getData(added_ctx));
       	})
       }, function (data) {
@@ -211,6 +164,8 @@ self.dashRest = self.dashRest || (function (environment) {
     };
 
   if (true === workerEnvironment) {
+  	importScripts('https://cdn.firebase.com/js/client/1.0.6/firebase.js');
+  	console.log('firebase',Firebase);
     environment.addEventListener('message', function (e) {
       var input = e.data,
         method = input.method,
@@ -236,15 +191,18 @@ self.dashRest = self.dashRest || (function (environment) {
 			    end(input);
 	      	}
       	};
-      if (method === 'GET' || method === 'PUT' || method === 'POST' || method === 'DELETE') {
+  	  if ( 'undefined' === typeof firebases[input.context.firebase] ) {
+  		firebases[input.context.firebase] =  new Firebase([context.firebase, context.database, context.store ].join('/'));
+  	  }
+      if (method === 'set' || method === 'update' || method === 'remove') {
       	context.callback = callback(method);
-        if ( method === 'GET' ) {
-        	get(context);
-        } else if ( method === 'POST' ) {
-        	post(context);
-        } else if ( method === 'PUT' ) {
-        	put(context);
-        } else if ( method === 'DELETE' ) {
+        if ( method === 'set' ) {
+        	set(context);
+        } else if ( method === 'child' ) {
+        	child(context);
+        } else if ( method === 'update' ) {
+        	update(context);
+        } else if ( method === 'remove' ) {
         	remove(context);
         }
       } else {
@@ -257,15 +215,13 @@ self.dashRest = self.dashRest || (function (environment) {
       }
     }, false);
   } else {
-	return function(libraryPath) {
-	  worker = !!libraryPath ? new Worker(libraryPath) : null
 	  return [ function (state) {
 	  	that = this;
-	    if(this.isnt(state.context.rest, true) || this.exists(state.context.resting)) {
+	    if(this.isnt(state.context.firebase, true) || this.exists(state.context.firebaseing)) {
 	      return state;
 	    }
-	    state.context.restid = this.random();
-	    rest[ state.context.restid ] = {
+	    state.context.firebaseid = this.random();
+	    firebase[ state.context.firebaseid ] = {
 	    	url: state.context.url,
 	    	params: state.context.params ? state.context.params : null
 	    }
@@ -273,7 +229,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    delete state.context.params;
 	    return state;
 	  }, function (state) {
-	    if(this.isnt(state.context.rest, true) || this.exists(state.context.resting)) {
+	    if(this.isnt(state.context.firebase, true) || this.exists(state.context.firebaseing)) {
 	      return state;
 	    }
 	    var promise = state.promise,
@@ -286,11 +242,11 @@ self.dashRest = self.dashRest || (function (environment) {
 			      update = true;
 			    } 
 	    	} else {
-	    		if ((this.is('error', state.type) || (this.isEmpty(state.context.entry) && this.contains(['get.entry', 'get.entries'], state.method))) && (this.is(state.context.rest, true) || this.is(state.context.fallback, true))) {
+	    		if ((this.is('error', state.type) || (this.isEmpty(state.context.entry) && this.contains(['get.entry', 'get.entries'], state.method))) && (this.is(state.context.firebase, true) || this.is(state.context.fallback, true))) {
 			      update = true;
 				}
 	    	}
-  		    args = rest[ state.context.restid ];
+  		    args = firebase[ state.context.firebaseid ];
 	    	if (update) {
     		  state.promise = outward.promise;
     		  state.context.url = args.url;0
@@ -303,26 +259,14 @@ self.dashRest = self.dashRest || (function (environment) {
     		  state.context.params = args.params;
 	          inward = workDispatch( whichMethod(state.method), state.context);
 		  	  inward(function(ctx2){
-    		    ctx2.url = args.url;
-    		    ctx2.params = args.params;
     		    state.context = ctx2;
     		    state.type = 'resolve';
-			    delete rest[ ctx2.restid ];
-      			delete ctx2.restid;
 			    outward.resolve(state.context);
 		  	  }, function(ctx2) {
-    		    ctx2.url = args.url;
-    		    ctx2.params = args.params;
-			    delete rest[ ctx2.restid ];
-      			delete ctx2.restid;
     		    state.context = ctx2;
     		    state.type = 'error';
   			    outward.reject(state.context);
 		  	  }, function(ctx2) {
-    		    ctx2.url = args.url;
-    		    ctx2.params = args.params;
-			    delete rest[ ctx2.restid ];
-      			delete ctx2.restid;
     		    state.type = 'notify';
     		    state.context = ctx2;
 			    outward.notify(state.context);
@@ -330,11 +274,10 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	} else {
 		      state.context.url = args.url;
 		      state.context.params = args.params;
-		      delete rest[ state.context.restid ];
-		      delete state.context.restid;
+		      delete firebase[ state.context.firebaseid ];
+		      delete state.context.firebaseid;
 	    	}
 	    return state;
 	  } ];
-		};
 	}
 }(self));

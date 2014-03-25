@@ -1,52 +1,67 @@
-window.dashLive = window.dashLive || (function (environment) {
+var dashLive = (function (environment) {
   "use strict";
   var that,
-      changeMap = {},
-      change = function(ste) {
+      liveMap = {},
+      live = function(ste) {
         var ctx = ste.context,
-          fn = function(st2) {
-            if (!changeMap[ ctx.changed ]) {
-              return;
+          fn = function(live_ctx) {
+            if (!liveMap[ ste.context.liveid ]) {
+              return live_ctx;
             }
-            st2.type = 'notify';
-            delete st2.context.data;
-            changeMap[ ctx.changed ].resolve(st2);
+            var ditto = that.clone(ste);
+            ditto.type = that.contains(['get.entries', 'update.entries', 'remove.entries'], ditto.method) ? 'notify' : 'resolve';
+            ditto.context = live_ctx.context;
+            ditto.context.zombie = 'braaains';
+            liveMap[ ste.context.liveid ][ditto.type](ditto);
           };
         fn.ready = false;
         return fn;
       };
   return [ function (state) {
+    that = this;
     if(this.isnt(state.context.live, true)) {
       return state;
     }
-    var changes;
-    that = this;
-    state.context.changed = this.random();
-    changes = change(this.clone(state));
+    state.context.liveid = this.random();
+    var lives = live(this.clone(state));
+    liveMap[ state.context.liveid ] = lives;
     if (this.isArray(state.context.changes)) {
-      state.context.changes.push(changes);
+      state.context.changes.push(lives);
+    } else if (this.isFunction(state.context.changes)) {
+      state.context.changes = [state.context.changes, lives];
     } else {
-      state.context.changes = [changes];
+      state.context.changes = [lives];
     }
-    changeMap[ state.context.changed ] = false;
     return state;
   }, function (state) {
-    if(this.isEmpty(state.context.changed)) {
+    that = this;
+    if(this.isEmpty(state.context.liveid)) {
       return state;
     }
     var promise = state.promise,
-        deferred = this.deferred();
-    state.promise = deferred.promise;
+        deferred = this.deferred(),
+        removeChanges = function(ste) {
+          if(that.isArray(ste.context.changes)) {
+            that.each(ste.context.changes, function(el, i) {
+              if (that.is(ste, liveMap[ ste.context.liveid ])) {
+                delete ste.context.changes[ i ];
+              }
+            });
+          }
+          delete ste.context.liveid;
+          return ste;
+        };
     if (this.contains(['resolve', 'error'], state.type)) {
-      changeMap[ state.context.changed ] = deferred;
+      liveMap[ state.context.liveid ] = deferred;
     }
-    promise(function(ste) {
-      deferred.resolve(ste);
-    }, function(ste) {
-      deferred.error(ste);
-    }, function(ste) {
-      deferred.notify(ste);
+    state.promise = deferred.promise;
+    promise(function(ctx) {
+      deferred.resolve(removeChanges(ctx));
+    }, function(ctx) {
+      deferred.error(removeChanges(ctx));
+    }, function(ctx) {
+      deferred.notify(removeChanges(ctx));
     });
-    return state;
+    return removeChanges(state);
   } ];
 }(self));

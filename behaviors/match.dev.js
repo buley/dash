@@ -1,4 +1,4 @@
-window.dashMatch = window.dashMatch || (function (environment) {
+var dashMatch = (function (environment) {
   "use strict";
   return [ null, function (state) {
     if(this.isEmpty(state.context.match)) {
@@ -14,12 +14,12 @@ window.dashMatch = window.dashMatch || (function (environment) {
 			}
 			if (that.isObject(expr)) {
 				that.iterate(expr, function(key, value) {
-					expr[key] = maybeReduce(value);
+					expr[key] = maybeReduce(value, context);
 				});
 			}
 			return expr;
 		}
-		return maybeReduce(expression);	
+		return maybeReduce(expression, context);	
 	},
 	match = function(expr, data) {
 		var matches = true;
@@ -55,9 +55,9 @@ window.dashMatch = window.dashMatch || (function (environment) {
 	reduced = reduce(st.context.match, st.context);
 	if ( 'notify' === st.type && !match(reduced, st.context.entry) ) {
 		st.type = null;
-        	deferred.reject(st);
+        deferred.reject(st);
 	} else {
-        	deferred.resolve(st);
+        deferred.resolve(st);
 	}
     });
     state.promise = deferred.promise;

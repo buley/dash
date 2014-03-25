@@ -1,8 +1,22 @@
-window.dashChanges = window.dashChanges || (function (environment) {
+var dashChanges = (function (environment) {
   "use strict";
   var callbackMap = {},
     changeMap = {},
     that,
+    update = function(type, ctx) {
+      if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
+        if (that.contains(['update.entries', 'update.entry'], type)) {
+          var key = ctx.primary_key || ctx.key;
+          changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
+          changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
+            callbacks: []
+          };
+          if (that.exists(ctx.entry)) {
+            changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
+          }
+        }
+      }    
+    },
     unregister = function(type, ctx) {
       if (that.contains(['remove.database'], type)) {
         delete changeMap[ctx.database];
@@ -21,16 +35,18 @@ window.dashChanges = window.dashChanges || (function (environment) {
         } else if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
             if (that.contains(['remove.entries', 'remove.entry', 'clear.store'], type)) {
               var key = ctx.primary_key || ctx.key;
-              delete changeMap[ctx.database].stores[ctx.store].entries[key];
+              if (that.exists(changeMap[ctx.database])) {
+                delete changeMap[ctx.database].stores[ctx.store].entries[key];
+              }
             }
         }        
       }      
     },
     register = function(type, ctx) {
-      var obj = ctx.changed;
+      var obj = ctx.changeid;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
-        callbacks: [],
+        callbacks: []
       };
       if (that.contains(['get.databases','get.database'], type)) {
         changeMap[ctx.database].callbacks.push(obj);
@@ -52,44 +68,50 @@ window.dashChanges = window.dashChanges || (function (environment) {
             if (that.exists(ctx.idx)) {
               changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data = ctx.idx;
             }
-            changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks.push(obj);
+            if (!that.contains(changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks, obj)) {
+              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks.push(obj);
+            }
           }
           if (that.exists(ctx.key) && that.isnt(ctx.primary_key, ctx.key)) {
-            if (that.contains(['get.entry','get.entries', 'update.entry', 'remove.entry', 'update.entries', 'remove.entries'], type)) {
+            if (that.is(ctx.live, true) || that.contains(['get.entry','get.entries', 'update.entry', 'remove.entry', 'update.entries'], type)) {
               changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] || {
                 callbacks: []
               };
               if (that.exists(ctx.entry)) {
                 changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].data = ctx.entry;
               }
-              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks.push(obj);
+              if (!that.contains(changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks, obj)) {
+                changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks.push(obj);
+              }
             }
           }
         }
         if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
-            if (that.contains(['get.entry','get.entries', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
-              var key = ctx.primary_key || ctx.key;
-              changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
-              changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
-                callbacks: []
-              };
-              if (that.exists(ctx.entry)) {
-                changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
-              }
+          if (that.is(ctx.live, true) || that.contains(['get.entry','get.entries', 'update.entries', 'update.entry'], type)) {
+            var key = ctx.primary_key || ctx.key;
+            changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
+            changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
+              callbacks: []
+            };
+            if (that.exists(ctx.entry)) {
+              changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
+            }
+            if (!that.contains(changeMap[ctx.database].stores[ctx.store].entries[key].callbacks, obj)) {
               changeMap[ctx.database].stores[ctx.store].entries[key].callbacks.push(obj);
             }
-        }        
+          }
+        }
       }
     },
     inquire = function(type, ctx) {
       var listeners = [],
           previous = null,
           current = null,
-          obj = ctx.changed,
+          obj = ctx.changeid,
           key;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
-        callbacks: [],
+        callbacks: []
       };
       if (that.contains(['remove.database', 'add.index', 'add.store'], type)) {
         that.each(changeMap[ctx.database].callbacks, function(callback) {
@@ -129,7 +151,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
             current = ctx.idx;
           }
           if (that.exists(ctx.key) && that.isnt(ctx.primary_key, ctx.key)) {
-            if (that.contains(['get.entries', 'get.entry', 'remove.store', 'clear.store', 'remove.database', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
+            if (that.is(ctx.live, true) || that.contains(['get.entries', 'get.entry', 'remove.store', 'clear.store', 'remove.database', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
               changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] || {
                 callbacks: []
               };
@@ -144,7 +166,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           }
         }
         if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
-            if (that.contains(['get.entries', 'get.entry', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry', 'remove.database', 'remove.store', 'clear.store'], type)) {
+            if (that.contains(['update.entries', 'update.entry', 'remove.entries', 'remove.entry', 'remove.database', 'remove.store', 'clear.store'], type)) {
               key = ctx.primary_key || ctx.key;
               changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
               changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
@@ -166,6 +188,17 @@ window.dashChanges = window.dashChanges || (function (environment) {
         previous: previous
       };
     },
+    notSame = function(a, b) {
+      if ( that.isArray(a) ) {
+        a = a.join('');
+      }
+      if ( that.isArray(b) ) {
+        b = b.join('');
+      }
+      a = a ? a.toString() : a;
+      b = b ? b.toString() : b;
+      return that.isnt(a, b);
+    },
     notify = function(ctx, method, type) {
       var inquiry = inquire(method, ctx),
         listeners = inquiry.listeners || [],
@@ -173,78 +206,132 @@ window.dashChanges = window.dashChanges || (function (environment) {
         previous = inquiry.previous || {},
         difference = function(one, two, shallow) {
           var diff = {};
-          that.iterate(one, function(key, val) {
-            if (that.isnt(JSON.stringify(val), JSON.stringify(previous[key]))) {
-              if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
-                diff[ key ] = difference(val, two[key], shallow);
-              } else {
-                diff[ key ] = [val, two[key]];
+          one = one || {};
+          two = two || {};
+          if (that.isObject(one)) {
+            that.iterate(one, function(key, val) {
+              if (notSame(val, two[key])) {
+                if ( that.isEmpty(val) || that.isEmpty(one[key])) {
+                  diff[ key ] = [val, one[key]];
+                } else if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
+                  diff[ key ] = difference(val, two[key], shallow);
+                } else {
+                  diff[ key ] = [val, two[key]];
+                }
               }
-            }
-          });
-          that.iterate(two, function(key, val) {
-            if (that.isnt(JSON.stringify(val), JSON.stringify(current[key])) && that.isEmpty(diff[ key ])) {
-              if ( that.isnt(shallow, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
-                diff[ key ] = difference(one[key], val, shallow);
-              } else {
-                diff[ key ] = [one[key], val];
+            });
+          } else if (that.isArray(one)) {
+            if (that.isArray(two)) { 
+              that.each(one, function(val, i) {
+                diff[ i ] = diff[ i ] || [];
+                if ( that.isEmpty(val) || that.isEmpty(two[i])) {
+                  diff[ key ] = [val, two[i]];
+                } if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
+                  diff[i] = difference(val, two[i], shallow);
+                } else {
+                  diff[i] = [one[i], val];
+                }
+              });
+            }     
+          }
+          if (that.isObject(two)) {
+            that.iterate(two, function(key, val) {
+              if (notSame(val, one[key]) && that.isEmpty(one[ key ])) {
+                if ( that.isEmpty(val) || that.isEmpty(two[key])) {
+                  diff[ key ] = [val, two[key]];
+                } if ( that.isnt(shallow, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
+                  diff[ key ] = difference(one[key], val, shallow);
+                } else {
+                  diff[ key ] = [one[key], val];
+                }
               }
-            }
-          });
+            });
+          } else if (that.isArray(two)) {
+            if (that.isArray(two)) { 
+              that.each(two, function(val, i) {
+                diff[ i ] = diff[ i ] || [];
+                if ( that.isEmpty(val) || that.isEmpty(one[i])) {
+                  diff[ i ] = [val, one[i]];
+                } if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
+                  diff[ i ] = difference(one[i], val, shallow);
+                } else {
+                  diff[ i ] = [one[i], val];
+                }
+              });
+            }     
+          }
           return diff;
         },
         diff = (that.is(ctx.diff, true)) ? difference(current, previous, ctx.shallow ? true : false) : null,
         args = { context: ctx, method: method, type: type, current: current, previous: previous };
-      if (that.exists(diff)) {
-        args.difference = diff;
+      if(that.is(ctx.diff, true)) {
+        args.difference = that.isEmpty(diff) ? null : diff;
       }
-      that.each(listeners, function(id, i) {
-        var listens = callbackMap[id];
-        if(that.isArray(listens)) {
-          that.each(listens, function(listen, z) {
-            if ( false === that.apply(listen, [ args ]) ) {
-              delete listeners[i][z];
-              delete callbackMap[id][z];
+      if (that.isnt(ctx.diff, true) || that.isnt(args.difference, null)) {
+        that.each(listeners, function(id, i) {
+          var listens = callbackMap[id];
+          if(that.isArray(listens)) {
+            that.each(listens, function(listen, z) {
+              if ( false === that.apply(listen, [ args ]) ) {
+                delete listeners[i][z];
+                delete callbackMap[id][z];
+              }
+            });
+          } else {
+            if ( false === that.apply(callbackMap[id], [ args ]) ) {
+              delete listeners[i];
+              delete callbackMap[id];
             }
-          });
-        } else {
-          if ( false === that.apply(callbackMap[id], [ args ]) ) {
-            delete listeners[i];
-            delete callbackMap[id];
           }
-        }
-      });
+        });
+      }
       return ctx;
     };
   return [ function(state) {
+    that = this;
+    var id = this.random();
+    state.context.changeid = id;
     if(!this.isFunction(state.context.changes) && !this.isArray(state.context.changes)) {
       return state;
-    }    
-    that = this;
-    var id = state.context.changed || this.random();
+    } 
     callbackMap[ id ] = this.clone(state.context.changes);
-    state.context.changed = id;
     return state;
   }, function (state) {
+    if (this.exists(state.context.zombie)) {
+      return state;
+    }
     that = this;
     var promise = state.promise,
-        deferred = this.deferred();
+        outward = this.deferred(),
+        doTick = function(ste) {
+          if (!ste || !!ste.context.changing) {
+            return ste;
+          }
+          ste.context.changing = true;
+          notify(ste.context, ste.method, ste.type);
+          unregister(ste.method, ste.context);
+          if (!!state.context.changes) {
+            register(ste.method, ste.context);
+          }
+          if(that.is('resolve', 'notify', ste.type)) {
+            update(ste.method, ste.context);
+          }
+          if(that.is('resolve', ste.type)) {
+            if ( !that.isEmpty(callbackMap[ ste.context.changeid ]) ) {
+              ste.context.changes = callbackMap[ ste.context.changeid ];
+            }
+            delete ste.context.changeid;
+          }
+          return ste;
+        };
     promise(function(ste) {
-      var id = ste.context.changed,
-          changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
-          isChanger = that.exists(id);
-      that.each(changeset, function(callback) {
-        ste.context.changes = callback; 
-        ste.context.changed = ste.context.changed || id;
-        notify(state.context, state.method, state.type);
-        if (isChanger) {
-          register(ste.method, ste.context);
-          unregister(ste.method, ste.context);            
-        }
-        deferred.resolve(ste);
-      });
+      outward.resolve(doTick(ste));
+    }, function(ste) {
+      outward.reject(ste);
+    }, function(ste) {
+      outward.notify(doTick(ste));
     });
-    state.promise = deferred.promise;
+    state.promise = outward.promise;
     return state;
   } ];
 }(self));

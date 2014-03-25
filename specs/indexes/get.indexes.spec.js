@@ -12,53 +12,44 @@
 			notify = false,
 			ctx;
 
-		it( 'should get all indexes', function() {
-            dash.get.indexes({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
-            (function(context){
-                ctx = context;
-                success = true;
-                isFinished = true;
-            }, function(context) {
-                ctx = context;
-                error = true;
-                isFinished = true;
-            }, function(context) {
-                notify = true;
-            });
+		beforeEach(function(done) {
+			dash.get.indexes({ database: db_name, store: store_name, index: index_name, index_key_path: key_path})
+			            (function(context){
+			                ctx = context;
+			                success = true;
+			                done();
+			            }, function(context) {
+			                ctx = context;
+			                error = true;
+			                done();
+			            }, function(context) {
+			                notify = true;
+			            });
+		});
 
+		describe( 'should get all indexes', function() {
 
-			waitsFor(function() { 
-				return isFinished;
-			}, 'the get.indexes operation to finish', 10000);
+			beforeEach(function(done) {
+				this.context = ctx;
+				this.success = success;
+				this.error = error;
+				this.notify = notify;
+				done();
+			});
 
-			runs(function() {
-				describe('get.indexes should finish successfully', function() {
-					beforeEach(function() {
-						this.context = ctx;
-						this.success = success;
-						this.error = error;
-						this.notify = notify;
-					});
-					it("get.indexes should be a finish cleanly", function() {
-						expect(this.success).toBe(true);
-						expect(this.error).toBe(false);
-						expect(this.notify).toBe(false);
-					});
-					it("get.indexes return an array with the right contents", function() {
-						expect(this.context.indexes instanceof Array).toBe(true);
-						expect(this.context.indexes.length).toBe(1);
-                                                var found = false, x = 0, xlen = this.context.indexes.length;
-                                                for ( x = 0; x < xlen; x += 1 ) {
-                                                        if ( this.context.index === this.context.indexes[x] ) {
-                                                                found = true;
-                                                        }
-                                                }
-                                                expect(found).toBe(true);
-					});
-					it("get.indexes should clean up after itself", function() {
-						dash.remove.database(this.context);
-					});
-				});
+			it("get.indexes should be a finish cleanly", function() {
+				expect(this.success).toBe(true);
+				expect(this.error).toBe(false);
+				expect(this.notify).toBe(false);
+				expect(this.context.indexes instanceof Array).toBe(true);
+				expect(this.context.indexes.length).toBe(1);
+                var found = false, x = 0, xlen = this.context.indexes.length;
+                for ( x = 0; x < xlen; x += 1 ) {
+                        if ( this.context.index === this.context.indexes[x] ) {
+                                found = true;
+                        }
+                }
+                expect(found).toBe(true);
 			});
 		});
 	});
