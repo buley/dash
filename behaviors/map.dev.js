@@ -40,7 +40,7 @@ return fn;
 	    } else {
 	    	that.each(promises, function(pro) {
 	    		promise = promise(pro);
-	    	}
+	    	});
 	    	state.context.promise = promise;
 	    }
 	    console.log('map?',state.context.mapd);
