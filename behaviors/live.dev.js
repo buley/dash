@@ -8,9 +8,7 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!changeMap[ ctx.changed ]) {
               return;
             }
-            st2.method = ste.method;
-            st2.type = 'resolve';
-            changeMap[ ctx.changed ][st2.type](st2);
+            changeMap[ ctx.changed ].resolve(st2);
           };
         fn.ready = false;
         return fn;
