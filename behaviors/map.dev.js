@@ -5,8 +5,6 @@ window.dashMap = window.dashMap || (function (environment) {
     if(this.isEmpty(state.context.map)) {
       return state;
     }
-    var maps;
-    this = this;
     state.context.mapd = this.random();
     mapMap[ state.context.mapd ] = this.isArray(state.context.map) ? state.context.map : [state.context.map];
     delete state.context.map;
