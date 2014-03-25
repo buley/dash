@@ -492,6 +492,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 database: 'dash-demo',
                 store: 'imdb',
                 key: data,
+                map: function(item) {
+                  item.se = item.id;
+                  return item;
+                },
                 stats: true,
                 forecast: false,
                 store_key_path: 'id',
