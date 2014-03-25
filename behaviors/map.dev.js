@@ -14,7 +14,7 @@ return fn;
     var maps;
     that = this;
     state.context.mapd = this.random();
-    mapMap[ state.context.mapd ] = state.context.map;
+    mapMap[ state.context.mapd ] = this.isArray(state.context.map) ? state.context.map : [state.context.map];
     delete state.context.mapd;
     return state;
   }, function (state) {
@@ -23,22 +23,30 @@ return fn;
     }
     if (this.exists(state.context.entry)) {
 	    var deferred = this.deferred(),
-	    	result = that.apply(mapMap[ st2.context.mapd ], [ st2.context ]),
-	    	promise = state.promise;
-	   	if (this.isFunction(result)) {
-	   		state.promise = result;
-	   		promise(function(ste2) {
-	      		deferred.resolve(ste2);
-	   		});
-	   	} else {
-	   		state.context.entry = result;
-	   	}
-	    console.log('map?',st2.context.mapd);
-	    delete st2.context.mapd;
-	    mapMap[ st2.context.mapd ].resolve(st2);
-	        
-
-      state.context.entry = that.apply(map, [state.context.entry], this );
+	    	result,
+	    	promise = state.promise,
+	    	results = [],
+	    	promises = [];
+	    this.each(mapMap[ state.context.mapd ], function(fn) {
+	    	result = that.apply(fn, [ state.context ]);
+		   	if (this.isFunction(result)) {
+		   		promises.push(result);
+		   	} else {
+		   		results.push(result);
+		   	}
+	    });
+	    if (that.is(promises.length, 0)) {
+	    	state.context.entry = is(results.length, 1) ? results[0] : results;
+	    } else {
+	    	that.each(promises, function(pro)) {
+	    		promise = promise(pro);
+	    	}
+	    	state.context.promise = promise;
+	    }
+	    console.log('map?',state.context.mapd);
+	    delete mapMap[ state.context.mapd ];
+	    delete state.context.mapd;
+	    mapMap[ state.context.mapd ].resolve(state);
     }
     return state;
   } ];
