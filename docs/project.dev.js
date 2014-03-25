@@ -511,6 +511,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 if (context.statistics) {
                   statsObj = context.statistics;
                 }
+                console.log("MAPPED",context.mapped);
                 dashAppSplashBroadcast.current(context.entry);
                 if (pid) {
                   clearTimeout(pid);
