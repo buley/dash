@@ -12,6 +12,7 @@ window.dashMap = window.dashMap || (function (environment) {
     delete state.context.map;
     return state;
   }, function (state) {
+  	console.log("STATE",state.context.mapd);
     if(this.isEmpty(state.context.mapd)) {
       return state;
     }
