@@ -8,7 +8,7 @@ return fn;
       };
   return [ function (state) {
   	that = this;
-    if(this.isnt(state.context.live, true)) {
+    if(this.isnt(state.context.map, true)) {
       return state;
     }
     var maps;
