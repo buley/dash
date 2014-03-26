@@ -493,7 +493,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 store: 'imdb',
                 key: data,
                 map: function(item) {
-                  item.se = item.id;
+                  item.se = item.se ? item.se + ' (' + item.id + ')' : item.id
                   return item;
                 },
                 stats: true,
