@@ -1,8 +1,6 @@
 var dashApp = angular.module('dashApp', ['ngRoute']);
-
 dashApp.config(['$routeProvider',
   function ($routeProvider) {
-
     /* Behaviors */
     dash.add.behavior(dashStats);
     dash.add.behavior(dashLive);
@@ -10,6 +8,7 @@ dashApp.config(['$routeProvider',
     dash.add.behavior(dashMatch);
     dash.add.behavior(dashCollect);
     dash.add.behavior(dashMap);
+    dash.add.behavior(dashMapReduce);
 
     $routeProvider
       .when('/about', {
@@ -44,7 +43,6 @@ dashApp.config(['$routeProvider',
       redirectTo: '/docs'
     });
 }]);
-
 dashApp.controller('dashAppController', ['$location', '$scope',
   function ($location, $scope) {
     $scope.isSplash = function () {
@@ -57,11 +55,9 @@ dashApp.controller('dashAppController', ['$location', '$scope',
       return '/about' === $location.path();
     };
 }]);
-
 dashApp.controller('dashAppAboutController', [
 
   function () {}]);
-
 dashApp.controller('dashAppDocsController', ['$scope', '$http', '$templateCache', '$routeParams',
   function ($scope, $http, $templateCache, $routeParams) {
     $scope.parentSelected = function (parent) {
@@ -114,8 +110,6 @@ dashApp.controller('dashAppDocsController', ['$scope', '$http', '$templateCache'
       regx = new RegExp('^' + others);
       return match || (null !== current.match(regx)) ? true : false;
     };
-
-
     $scope.documents = [
       {
         path: 'overview',
@@ -149,7 +143,7 @@ dashApp.controller('dashAppDocsController', ['$scope', '$http', '$templateCache'
                 'demos': [{
                   'title': 'Opening A Database Example: Simple Case',
                   'id': 'dashdb/ZCngL'
-                            }]
+                 }]
                         },
               {
                 'path': 'database/closing',
@@ -403,9 +397,7 @@ dashApp.controller('dashAppDocsController', ['$scope', '$http', '$templateCache'
       }
     };
     _.map($scope.documents, process);
-
 }]);
-
 dashApp.controller('dashAppDocsContentController', ['$routeParams', '$scope',
   function ($routeParams, $scope) {
     $scope.pathLevel = function (obj) {
@@ -414,12 +406,8 @@ dashApp.controller('dashAppDocsContentController', ['$routeParams', '$scope',
         default && '' === current) || obj.path === current;
     };
 }]);
-
 dashApp.controller('dashAppDocsSidebarController', ['$routeParams', '$scope',
-  function ($routeParams, $scope) {
-
-}]);
-
+  function ($routeParams, $scope) {}]);
 dashApp.controller('dashAppDocsDemosController', ['$scope', '$sce',
   function ($scope, $sce) {
     $scope.demos = function () {
@@ -434,8 +422,6 @@ dashApp.controller('dashAppDocsDemosController', ['$scope', '$sce',
       return $sce.trustAsResourceUrl('http://jsfiddle.net/' + demo.id + '/embedded');
     };
 }]);
-
-
 dashApp.directive('dashSplash', ['dashAppSplashBroadcast', 'dashWorkerService',
   function (dashAppSplashBroadcast, dashWorkerService) {
     return {
@@ -446,7 +432,6 @@ dashApp.directive('dashSplash', ['dashAppSplashBroadcast', 'dashWorkerService',
       }
     };
 }]);
-
 dashApp.factory('dashAppSplashBroadcast', function () {
   queue = [];
   return {
@@ -465,13 +450,10 @@ dashApp.factory('dashAppSplashBroadcast', function () {
     }
   };
 });
-
 dashApp.controller('dashAppSplashController', ['$scope', '$http',
   function ($scope, $http) {
     //does nothing
 }]);
-
-
 dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplashBroadcast', 'dashWorkerService',
   function ($q, $http, $timeout, dashAppSplashBroadcast, dashWorkerService) {
     return {
@@ -492,7 +474,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 database: 'dash-demo',
                 store: 'imdb',
                 key: data,
-                map: function(item) {
+                map: function (item) {
                   item.se = item.se ? item.se + ' (' + item.id + ')' : item.id
                   return item;
                 },
@@ -500,15 +482,15 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 forecast: false,
                 store_key_path: 'id',
                 diff: true,
-                changes: function(state) {
-                  console.log('CHANGED',state);
+                changes: function (state) {
+                  console.log('CHANGED', state);
                 }
               })
               (function (context) {
                 if (context.statistics) {
                   statsObj = context.statistics;
                 }
-                console.log("MAPPED",context.mapped);
+                console.log("MAPPED", context.mapped);
                 dashAppSplashBroadcast.current(context.entry);
                 if (pid) {
                   clearTimeout(pid);
@@ -534,9 +516,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
               });
             }),
             layout = system.layout;
-
           element[0].appendChild(el);
-
           scope.data = {
             se: '',
             ep: ''
@@ -568,7 +548,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 limit = 10000;
               } else if ('thousand' === field && limit > 1000) {
                 limit = 1000;
-
               }
               return limit.toString() + ' entries';
             }
@@ -1210,65 +1189,62 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
           if (dirty) {
             localStorage.setItem('dash-demo-progress', JSON.stringify(scope.progress));
           }
-
           scope.sorts = [{
             name: 'from',
             display: 'from',
             selected: 'from' === scope.sort ? 'selected' : '',
             enabled: true
-  }, {
+          }, {
             name: 'since',
             display: 'since',
             selected: 'since' === scope.sort ? 'selected' : '',
             enabled: true
-  }];
+          }];
           scope.fields = [{
             name: 'everything',
             display: 'all entries',
             selected: 'everything' === scope.field ? 'selected' : '',
             enabled: true
-  }, {
+          }, {
             name: 'hundredthousand',
             display: '100k entries',
             selected: 'hundredthousand' === scope.field ? 'selected' : '',
             enabled: true
-  }, {
+          }, {
             name: 'tenthousand',
             display: '10k entries',
             selected: 'tenthousand' === scope.field ? 'selected' : '',
             enabled: true
-  }, {
+          }, {
             name: 'thousand',
             display: '1k entries',
             selected: (null === scope.field || 'thousand' === scope.field) ? 'selected' : '',
             enabled: true
-  }];
+          }];
           scope.verbs = [{
             name: 'download',
             display: 'download',
             selected: 'download' === scope.verb ? 'selected' : '',
             enabled: true
-  }, {
+          }, {
             name: 'explore',
             display: 'explore',
             selected: 'explore' === scope.verb ? 'selected' : '',
             enabled: true
-  }, {
+          }, {
             name: 'search',
             display: 'search',
             selected: 'search' === scope.verb ? 'selected' : '',
             enabled: true
-  }, {
+          }, {
             name: 'remove',
             display: 'remove',
             selected: 'remove' === scope.verb ? 'selected' : '',
             enabled: true
-  }];
-
+          }];
           scope.numFields = function () {
             return hasDownloaded(scope.range) ? 3 : 1;
           };
-
           scope.numEntries = function () {
             return totalDownloaded(scope.downloaded, scope.range, scope.sort);
           };
@@ -1342,16 +1318,12 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
             }
             console.log('range changed', newer, older);
           });
-
           scope.$watch('verb', function (newer, older) {
             console.log('verb changed', newer, older);
           });
-
           scope.$watch('field', function (newer, older) {
             console.log('field changed', newer, older);
           });
-
-
           scope.$watch('sort', function (newer, older) {
             console.log('sort changed', newer, older);
           });
@@ -1360,7 +1332,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
           }, function () {
             system.controls(true);
           });
-
           scope.verb = 'explore';
           scope.go = function () {
             console.log('GO', scope.field, scope.range, scope.query, scope.sort, scope.verb);
@@ -1432,7 +1403,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 //system.cameraMod( 'z', 2, 50000, 10 );
                 //system.cameraMod( 'z', 1, 10000, 0 );
               });
-
             } else {
               var ctx = {
                 database: 'dash-demo',
@@ -1455,7 +1425,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 //dash_promise = dashWorkerService.get.entries(ctx),
                 dash_promise = dash.get.entries(ctx),
                 start_promise = new Date().getTime();
-
               //dash_promise.then( function(context) {
               dash_promise(function (context) {
                 console.log('searched all', context.amount);
@@ -1470,15 +1439,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 if (true === scope.visuals) {
                   system.add(context);
                 }
-
                 statsUpdate(context.statistics);
                 //system.cameraMod( 'z', 2, 50000, 10 );
                 //system.cameraMod( 'z', 1, 10000, 0 );
               });
-
-
             }
-
           };
           var last_time = new Date().getTime(),
             first_time = null,
@@ -1551,9 +1516,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 if (!queuedSave) {
                   queuedSave = setTimeout(function () {
                     localStorage.setItem('dash-demo-downloaded', JSON.stringify(scope.downloaded));
-
                     localStorage.setItem('dash-demo-progress', JSON.stringify(scope.progress));
-
                     localStorage.setItem('dash-demo-progress', JSON.stringify(scope.progress));
                   }, 1000);
                 }
@@ -1604,7 +1567,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                             index: 'season',
                             index_key_path: 'sy',
                             auto_increment: true,
-                            map: function(item) {
+                            map: function (item) {
                               console.log('item?', item);
                               return item;
                             },
@@ -1699,7 +1662,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 if (true === args.skip) {
                   return;
                 }
-
                 var ctx = {
                   database: 'dash-demo',
                   store: 'imdb',
@@ -1720,7 +1682,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 //dash_promise.then( function(context) {
                 dash_promise(function (context) {
                   console.log('promiss success');
-                 statsUpdate(context.statistics);
+                  statsUpdate(context.statistics);
                 }, function (context) {
                   console.log('dash promise rejected', context);
                 }, function (context) {
@@ -1731,7 +1693,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   //system.cameraMod( 'z', -2, 50000, 10 );
                   //system.cameraMod( 'z', 1, 10000, 0 );
                 });
-
               }, null, function (args) {
                 //console.log('notify',args);
               });
@@ -1745,10 +1706,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
       }
     };
 }]);
-
-
-
-
 dashApp.directive('markdown', function () {
   var converter = new Showdown.converter();
   return {
@@ -1770,7 +1727,6 @@ dashApp.directive('markdown', function () {
     }
   };
 });
-
 dashApp.factory('dashWorkerService', ['$q',
   function ($q) {
     var worker = new Worker('/lib/dash.dev.js'),
