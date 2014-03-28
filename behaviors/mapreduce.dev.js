@@ -38,7 +38,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    } else {
 	    	this.each(promises, function(pro) {
 	    		promise(function(result) {
-	    			results.push(result);it
+	    			results.push(result);
 	    		});
 	    		promise = pro;
 	    	});
@@ -51,7 +51,26 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 					   	mapReduceMap[ state.context.mapReduceId ].intermediate = result;
 				   	}
 			    });
+			    if (this.isEmpty(promises)) {
+			    	state.context.mapped = this.is(results.length, 1) ? results[0] : results;
+			    } else {
+			    	this.each(promises, function(pro) {
+			    		promise(function(result) {
+			    			results.push(result);
+			    		});
+			    		promise = pro;
+			    	});
+			    	state.context.promise = promise(function(ctx2) {
+			    		ctx2.mapped = that.is(results.length, 1) ? results[0] : results;
+			    		deferred.resolve(ctx2);
+			    	}, function(ctx2) {
+				        deferred.reject(ctx2);
+				    }, function(ctx2) {
+				        deferred.notify(ctx2);
+				    });
+			    }
 	    		state.context = ctx;
+	    		state.promise = promise;
 	    		delete state.context.mapReduce;
 	    		deferred.resolve(ctx);
 	    	});
