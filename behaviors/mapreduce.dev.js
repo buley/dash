@@ -49,17 +49,15 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 				   		promises.push(result);
 				   	} else {
 					   	state.context.mapReduce.intermediate = result;
-				   		finalized = result;
 				   	}
 			    });
-	    		ctx.reduced = finalized;
 	    		state.context = ctx;
 	    		delete state.context.mapReduce;
 	    		deferred.resolve(ctx);
 	    	});
 	    }
 	} else if ( this.is(state.type, 'resolve')) {
-		console.log("RESOLVED",state);
+		console.log("RESOLVED",mapReduceMap[ state.context.mapReduceId ]);
 	}
     delete mapReduceMap[ state.context.mapReduce ];
     delete state.context.mapReduceId;
