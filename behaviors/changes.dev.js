@@ -299,6 +299,10 @@ window.dashChanges = window.dashChanges || (function (environment) {
         }
         deferred.resolve(ste);
       });
+    }, function(ste) {
+        deferred.reject(ste);
+    }, function(ste) {
+        deferred.notify(ste);
     });
     state.promise = deferred.promise;
     return state;

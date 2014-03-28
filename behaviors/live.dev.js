@@ -40,12 +40,12 @@ window.dashLive = window.dashLive || (function (environment) {
       liveMap[ state.context.liveid ] = deferred;
     }
     delete state.context.liveid;
-    promise(function(ste) {
-      deferred.resolve(ste);
-    }, function(ste) {
-      deferred.error(ste);
-    }, function(ste) {
-      deferred.notify(ste);
+    promise(function(ctx) {
+      deferred.resolve(ctx);
+    }, function(ctx) {
+      deferred.error(ctx);
+    }, function(ctx) {
+      deferred.notify(ctx);
     });
     return state;
   } ];

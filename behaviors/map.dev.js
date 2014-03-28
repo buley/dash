@@ -40,7 +40,11 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	state.context.promise = promise(function(ctx) {
 	    		ctx.mapped = that.is(results.length, 1) ? results[0] : results;
 	    		deferred.resolve(ctx);
-	    	});
+	    	}, function(ctx) {
+		        deferred.reject(ctx);
+		    }, function(ctx) {
+		        deferred.notify(ctx);
+		    });
 	    }
 	    delete mapMap[ state.context.mapid ];
 	    delete state.context.mapid;

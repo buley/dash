@@ -25,6 +25,10 @@ window.dashCollect = window.dashCollect || (function (environment) {
       if (that.contains(['resolve','error'], ste.type)) {
         delete collections[ ste.context.collector ];
       }
+    }, function(ctx) {
+        deferred.reject(ctx);
+    }, function(ctx) {
+        deferred.notify(ctx);
     });
     state.promise = deferred.promise;
     return state;
