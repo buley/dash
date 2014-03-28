@@ -39,7 +39,11 @@ window.dashPatch = window.dashPatch || (function (environment) {
 	    	state.context.promise = promise(function(ctx) {
 	    		state.context = that.is(results.length, 1) ? results[0] : results;
 	    		deferred.resolve(state);
-	    	})
+	    	}, function(ctx) {
+		        deferred.reject(ctx);
+		    }, function(ctx) {
+		        deferred.notify(ctx);
+		    })
 	    }
 	    delete patchMap[ state.context.patchid ];
 	    delete state.context.patchid;
