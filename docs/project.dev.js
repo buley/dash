@@ -1690,7 +1690,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   start_promise = new Date().getTime();
                 //dash_promise.then( function(context) {
                 dash_promise(function (context) {
-                  console.log('promiss success');
+                  console.log('promiss success',context);
                   statsUpdate(context.statistics);
                 }, function (context) {
                   console.log('dash promise rejected', context);
