@@ -467,7 +467,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
         return function link(scope, element, attrs) {
           var statsObj = {},
             changer = function (state) {
-                  console.log('CHANGED', state);
+                  console.log('CHANGER', state);
             },
             system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function (data) {
               if (!data) {
