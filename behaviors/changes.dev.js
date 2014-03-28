@@ -286,6 +286,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           register(ste.method, ste.context);
           unregister(ste.method, ste.context);            
         }
+        delete ste.context.changeid;
         deferred.resolve(ste);
       });
     });
