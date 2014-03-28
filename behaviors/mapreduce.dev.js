@@ -34,6 +34,14 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 		   		maps.push(result);
 		   	}
 	    });
+	    this.each(mapReduceMap[ state.context.mapReduceId ].reducers function(reducer) {
+	    	result = that.apply(reducer, [ mapReduceMap[ state.context.mapReduceId ].intermediate, result ]);
+		   	if (that.isFunction(result)) {
+		   		promises.push(result);
+		   	} else {
+		   		mapReduceMap[ state.context.mapReduceId ] = result;
+		   	}
+	    });
 	    if (this.isEmpty(promises)) {
 	    	state.context.mapped = maps;
 	    } else {
@@ -44,37 +52,9 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    		promise = pro;
 	    	});
 	    	state.context.promise = promise(function(ctx) {
-			    this.each(mapReduceMap[ state.context.mapReduceId ].reducers, function(reducer) {
-			    	result = that.apply(reducer, [ mapReduceMap[ state.context.mapReduceId ].intermediate || null, result ]);
-				   	if (that.isFunction(result)) {
-				   		promises.push(result);
-				   	} else {
-					   	mapReduceMap[ state.context.mapReduceId ].intermediate = result;
-				   	}
-			    });
-			    if (this.isEmpty(promises)) {
-			    	state.context.reduced = mapReduceMap[ state.context.mapReduceId ].intermediate;
-			    } else {
-			    	this.each(promises, function(pro) {
-			    		promise(function(result) {
-			    			results.push(result);
-			    		});
-			    		promise = pro;
-			    	});
-			    	state.context.promise = promise(function(ctx2) {
-			    		ctx2.reduced = mapReduceMap[ state.context.mapReduceId ].intermediate;
-			    		delete mapReduceMap[ state.context.mapReduceId ];
-			    		deferred.resolve(ctx2);
-			    	}, function(ctx2) {
-				        deferred.reject(ctx2);
-				    }, function(ctx2) {
-				        deferred.notify(ctx2);
-				    });
-			    }
 	    		state.context = ctx;
-				delete mapReduceMap[ state.context.mapReduceId ];
 				delete state.context.mapReduceId;
-	    		deferred.resolve(ctx);
+	    		deferred.resolve(state);
 	    	});
 	    }
 	} else if ( this.is(state.type, 'resolve')) {
