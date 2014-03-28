@@ -1567,9 +1567,19 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                             index: 'season',
                             index_key_path: 'sy',
                             auto_increment: true,
-                            map: function (item) {
-                              console.log('item?', item);
+                            map: function (current) {
+                              console.log('map', current);
+                              return { 
+                                count: 1
+                              };
                               return item;
+                            },
+                            reduce: function (intermediate, current) {
+                              console.log('item?', current);
+                              if (isNaN(intermediate)) {
+                                intermediate = 0;
+                              }
+                              return intermediate += current.total;
                             },
                             store_key_path: null,
                             data: next,

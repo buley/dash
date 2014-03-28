@@ -2,15 +2,15 @@ window.dashMap = window.dashMap || (function (environment) {
   "use strict";
   var mapMap = {}; //heh
   return [ function (state) {
-    if(this.isEmpty(state.context.map)) {
+    if(this.isEmpty(state.context.map) || !this.isEmpty(state.context.reduce)) {
       return state;
     }
-    state.context.mapd = this.random();
-    mapMap[ state.context.mapd ] = this.isArray(state.context.map) ? state.context.map : [state.context.map];
+    state.context.mapid = this.random();
+    mapMap[ state.context.mapid ] = this.isArray(state.context.map) ? state.context.map : [state.context.map];
     delete state.context.map;
     return state;
   }, function (state) {
-    if(this.isEmpty(state.context.mapd)) {
+    if(this.isEmpty(state.context.mapid) || !this.isEmpty(state.context.reduce)) {
       return state;
     }
     if (this.exists(state.context.entry)) {
@@ -20,7 +20,7 @@ window.dashMap = window.dashMap || (function (environment) {
 	    	results = [],
 	    	promises = [],
 	    	that = this;
-	    this.each(mapMap[ state.context.mapd ], function(fn) {
+	    this.each(mapMap[ state.context.mapid ], function(fn) {
 	    	result = that.apply(fn, [ result ]);
 		   	if (that.isFunction(result)) {
 		   		promises.push(result);
@@ -33,7 +33,7 @@ window.dashMap = window.dashMap || (function (environment) {
 	    } else {
 	    	this.each(promises, function(pro) {
 	    		promise(function(result) {
-	    			results.push(results);
+	    			results.push(result);
 	    		});
 	    		promise = pro;
 	    	});
@@ -42,8 +42,8 @@ window.dashMap = window.dashMap || (function (environment) {
 	    		deferred.resolve(ctx);
 	    	});
 	    }
-	    delete mapMap[ state.context.mapd ];
-	    delete state.context.mapd;
+	    delete mapMap[ state.context.mapid ];
+	    delete state.context.mapid;
     }
     return state;
   } ];
