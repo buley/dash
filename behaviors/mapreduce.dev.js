@@ -58,9 +58,9 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    	});
 	    }
 	} else if ( this.is(state.type, 'resolve')) {
-		console.log("RESOLVED",mapReduceMap[ state.context.mapReduceId ].intermediate);
+		state.context.reduced = mapReduceMap[ state.context.mapReduceId ].intermediate;
 	}
-    delete mapReduceMap[ state.context.mapReduce ];
+    delete mapReduceMap[ state.context.mapReduceId ];
     delete state.context.mapReduceId;
     return state;
   } ];
