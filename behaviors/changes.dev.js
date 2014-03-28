@@ -233,7 +233,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
                 } else {
                   diff[ i ] = [one[i], val];
                 }
-              });t.
+              });
             }     
           }
           return diff;
