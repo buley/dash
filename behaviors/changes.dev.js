@@ -273,7 +273,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
   }, function (state) {
     that = this;
     var promise = state.promise,
-        deferred = this.deferred();
+        deferred = this.deferred(),
+        hasChanges = !!state.context.changes;
     promise(function(ste) {
       var id = ste.context.changeid,
           changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
@@ -287,6 +288,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
           unregister(ste.method, ste.context);            
         }
         delete ste.context.changeid;
+        if (!hasChanges) {
+          delete ste.context.changes;
+        }
         deferred.resolve(ste);
       });
     });
