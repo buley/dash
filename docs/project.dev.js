@@ -1679,11 +1679,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   progress: true,
                   forecast: false,
                   map: function (current) {
-                    return current.se ? current.se.split(/\s/) : []
+                    return (current && current.se) ? current.se.split(/\s/) : []
                   },
                   reduce: function (intermediate, current) {
                     intermediate = intermediate || [];
-                    return intermediate.push.apply(intermediate, current);
+                    return intermediate.push.apply(intermediate, [current]);
                   },                  
                   live: true,
                   index: 'season',
