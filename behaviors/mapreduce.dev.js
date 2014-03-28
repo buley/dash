@@ -14,7 +14,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
     delete state.context.mapReduce;
     return state;
   }, function (state) {
-    if(this.isEmpty(state.context.map) || this.isEmpty(state.context.reduce)) {
+    if(this.isEmpty(state.context.mapReduceId)) {
       return state;
     }
     if (this.exists(state.context.entry)) {
