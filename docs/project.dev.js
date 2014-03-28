@@ -1682,7 +1682,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                     return (current && current.se) ? current.se.split(/\s/) : []
                   },
                   reduce: function (intermediate, current) {
-                    intermediate = intermediate || [];
+                    if (!intermediate) {
+                      intermediate = [];
+                    }
                     return intermediate.push.apply(intermediate, current);
                   },                  
                   live: true,
