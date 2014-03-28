@@ -1411,6 +1411,20 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 store_key_path: 'id',
                 index: 'season',
                 stats: true,
+                map: function (current) {
+                  console.log('map', current);
+                  return { 
+                    count: 1
+                  };
+                  return item;
+                },
+                reduce: function (intermediate, current) {
+                  console.log('item?', current);
+                  if (isNaN(intermediate)) {
+                    intermediate = 0;
+                  }
+                  return intermediate += current.total;
+                },
                 progress: true,
                 index_key_path: 'sy',
                 limit: limit,
@@ -1567,20 +1581,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                             index: 'season',
                             index_key_path: 'sy',
                             auto_increment: true,
-                            map: function (current) {
-                              console.log('map', current);
-                              return { 
-                                count: 1
-                              };
-                              return item;
-                            },
-                            reduce: function (intermediate, current) {
-                              console.log('item?', current);
-                              if (isNaN(intermediate)) {
-                                intermediate = 0;
-                              }
-                              return intermediate += current.total;
-                            },
                             store_key_path: null,
                             data: next,
                             stats: true,
