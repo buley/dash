@@ -1412,14 +1412,12 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 index: 'season',
                 stats: true,
                 map: function (current) {
-                  console.log('map', current);
                   return { 
                     count: 1
                   };
                   return item;
                 },
                 reduce: function (intermediate, current) {
-                  console.log('item?', current);
                   if (isNaN(intermediate)) {
                     intermediate = 0;
                   }
@@ -1681,14 +1679,12 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   progress: true,
                   forecast: false,
                   map: function (current) {
-                    console.log('map', current);
                     return { 
                       count: 1
                     };
                     return item;
                   },
                   reduce: function (intermediate, current) {
-                    console.log('item?', current);
                     if (isNaN(intermediate)) {
                       intermediate = 0;
                     }

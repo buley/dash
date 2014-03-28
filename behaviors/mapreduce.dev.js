@@ -25,7 +25,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    	finalized,
 	    	promises = [],
 	    	that = this;
-	    console.log('mapreduce',state);
+	    console.log(state.type);
     	if (this.is(state.type, 'notify') && this.exists(state.context.entry)) {
 		    this.each(mapReduceMap[ state.context.mapReduceId ].mappers, function(mapper) {
 		    	result = that.apply(mapper, [ result ]);
@@ -65,7 +65,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 		}
 	    delete mapReduceMap[ state.context.mapReduce ];
 	    delete state.context.mapReduce;
-   }
+   	}
     return state;
   } ];
 }(self));
