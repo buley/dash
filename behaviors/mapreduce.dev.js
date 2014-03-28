@@ -5,9 +5,9 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
     if(this.isEmpty(state.context.map) || this.isEmpty(state.context.reduce)) {
       return state;
     }
-    state.context.mapReduce = state.context.mapReducer || {};
+    state.context.mapReducer = state.context.mapReducer || {};
     state.context.mapReduceId = this.random();
-    state.context.mapReduce.intermediate = state.context.mapReducer.intermediate || {};
+    state.context.mapReducer.intermediate = state.context.mapReducer.intermediate || {};
     mapReduceMap[ state.context.mapReduceId ].mappers = this.isArray(state.context.mapReduce.map) ? state.context.mapReduce.map : [state.context.mapReduce.map];
     mapReduceMap[ state.context.mapReduceId ].reducers = this.isArray(state.context.mapReduce.reduce) ? state.context.mapReduce.reduce : [state.context.mapReduce.reduce];
     delete state.context.mapReduce;
@@ -39,7 +39,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 		    } else {
 		    	this.each(promises, function(pro) {
 		    		promise(function(result) {
-		    			results.push(result);
+		    			results.push(result);it
 		    		});
 		    		promise = pro;
 		    	});
