@@ -44,11 +44,11 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    	});
 	    	state.context.promise = promise(function(ctx) {
 			    this.each(mapReduceMap[ state.context.mapReduceId ].reducers, function(reducer) {
-			    	result = that.apply(reducer, [ state.context.mapReduce.intermediate || null, result ]);
+			    	result = that.apply(reducer, [ mapReduceMap[ state.context.mapReduceId ].intermediate || null, result ]);
 				   	if (that.isFunction(result)) {
 				   		promises.push(result);
 				   	} else {
-					   	state.context.mapReduce.intermediate = result;
+					   	mapReduceMap[ state.context.mapReduceId ].intermediate = result;
 				   	}
 			    });
 	    		state.context = ctx;
