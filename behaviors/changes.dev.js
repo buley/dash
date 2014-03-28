@@ -64,7 +64,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
               if (that.exists(ctx.entry)) {
                 changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].data = ctx.entry;
               }
-              if (!that.contains(changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks, obj))
+              if (!that.contains(changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks, obj)) {
                 changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks.push(obj);
               }
             }
@@ -84,7 +84,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
               changeMap[ctx.database].stores[ctx.store].entries[key].callbacks.push(obj);
             }
           }
-        }
+        }        
       }
     },
     inquire = function(type, ctx) {
