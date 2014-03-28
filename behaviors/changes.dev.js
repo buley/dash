@@ -233,7 +233,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
                 } else {
                   diff[ i ] = [one[i], val];
                 }
-              });
+              });t.
             }     
           }
           return diff;
@@ -241,22 +241,24 @@ window.dashChanges = window.dashChanges || (function (environment) {
         diff = (that.is(ctx.diff, true)) ? difference(current, previous, ctx.shallow ? true : false) : null,
         args = { context: ctx, method: method, type: type, current: current, previous: previous };
       args.difference = that.isEmpty(diff) ? null : diff;
-      that.each(listeners, function(id, i) {
-        var listens = callbackMap[id];
-        if(that.isArray(listens)) {
-          that.each(listens, function(listen, z) {
-            if ( false === that.apply(listen, [ args ]) ) {
-              delete listeners[i][z];
-              delete callbackMap[id][z];
+      if (that.isnt(args.difference, null)) {
+        that.each(listeners, function(id, i) {
+          var listens = callbackMap[id];
+          if(that.isArray(listens)) {
+            that.each(listens, function(listen, z) {
+              if ( false === that.apply(listen, [ args ]) ) {
+                delete listeners[i][z];
+                delete callbackMap[id][z];
+              }
+            });
+          } else {
+            if ( false === that.apply(callbackMap[id], [ args ]) ) {
+              delete listeners[i];
+              delete callbackMap[id];
             }
-          });
-        } else {
-          if ( false === that.apply(callbackMap[id], [ args ]) ) {
-            delete listeners[i];
-            delete callbackMap[id];
           }
-        }
-      });
+        });
+      }
       return ctx;
     };
   return [ function(state) {
