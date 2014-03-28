@@ -24,6 +24,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    	finalized,
 	    	promises = [],
 	    	that = this;
+	    console.log('mapreduce',state.type);
     	if (this.is(state.type, 'notify') && this.exists(state.context.entry)) {
 		    this.each(mapReduceMap[ state.context.mapReducer.id ].mappers, function(pair) {
 		    	result = that.apply(pair[0], [ result ]);
