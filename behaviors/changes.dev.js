@@ -84,7 +84,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
               changeMap[ctx.database].stores[ctx.store].entries[key].callbacks.push(obj);
             }
           }
-        }        
+        }
       }
     },
     inquire = function(type, ctx) {
