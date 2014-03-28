@@ -1685,7 +1685,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                     if (!intermediate) {
                       intermediate = [];
                     }
-                    return intermediate.push.apply(intermediate, current);
+                    intermediate.push.apply(intermediate, current);
+                    return intermediate;
                   },                  
                   live: true,
                   index: 'season',
