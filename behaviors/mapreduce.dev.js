@@ -7,7 +7,8 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
     }
     state.context.mapReduce = state.context.mapReduce || {};
     state.context.mapReduceId = this.random();
-    state.context.mapReduce.intermediate = state.context.mapReduce.intermediate || {};
+    mapReduceMap[ state.context.mapReduceId ] = mapReduceMap[ state.context.mapReduceId ] || {};
+    mapReduceMap[ state.context.mapReduceId ].intermediate = mapReduceMap[ state.context.mapReduceId ].intermediate || {};
     mapReduceMap[ state.context.mapReduceId ].mappers = this.isArray(state.context.map) ? state.context.map : [state.context.map];
     mapReduceMap[ state.context.mapReduceId ].reducers = this.isArray(state.context.reduce) ? state.context.reduce : [state.context.reduce];
     delete state.context.mapReduce;
