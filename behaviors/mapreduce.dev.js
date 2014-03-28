@@ -21,6 +21,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
     	result = state.context.entry,
     	promise = state.promise,
     	results = [],
+    	maps = [],
     	finalized,
     	promises = [],
     	that = this;
@@ -30,11 +31,11 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 		   	if (that.isFunction(result)) {
 		   		promises.push(result);
 		   	} else {
-		   		results.push(result);
+		   		maps.push(result);
 		   	}
 	    });
 	    if (this.isEmpty(promises)) {
-	    	state.context.reduced = this.is(results.length, 1) ? results[0] : results;
+	    	state.context.mapped = maps;
 	    } else {
 	    	this.each(promises, function(pro) {
 	    		promise(function(result) {
