@@ -5,9 +5,9 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
     if(this.isEmpty(state.context.map) || this.isEmpty(state.context.reduce)) {
       return state;
     }
-    state.context.mapReducer = state.context.mapReducer || {};
+    state.context.mapReduce = state.context.mapReduce || {};
     state.context.mapReduceId = this.random();
-    state.context.mapReducer.intermediate = state.context.mapReducer.intermediate || {};
+    state.context.mapReduce.intermediate = state.context.mapReduce.intermediate || {};
     mapReduceMap[ state.context.mapReduceId ].mappers = this.isArray(state.context.mapReduce.map) ? state.context.mapReduce.map : [state.context.mapReduce.map];
     mapReduceMap[ state.context.mapReduceId ].reducers = this.isArray(state.context.mapReduce.reduce) ? state.context.mapReduce.reduce : [state.context.mapReduce.reduce];
     delete state.context.mapReduce;
@@ -45,25 +45,25 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 		    	});
 		    	state.context.promise = promise(function(ctx) {
 				    this.each(mapReduceMap[ state.context.mapReduceId ].reducers, function(reducer) {
-				    	result = that.apply(reducer, [ state.context.mapReducer.intermediate || null, result ]);
+				    	result = that.apply(reducer, [ state.context.mapReduce.intermediate || null, result ]);
 					   	if (that.isFunction(result)) {
 					   		promises.push(result);
 					   	} else {
-						   	state.context.mapReducer.intermediate = result;
+						   	state.context.mapReduce.intermediate = result;
 					   		finalized = result;
 					   	}
 				    });
 		    		ctx.reduced = finalized;
 		    		state.context = ctx;
-		    		delete state.context.mapReducer;
+		    		delete state.context.mapReduce;
 		    		deferred.resolve(ctx);
 		    	});
 		    }
 		} else if ( this.is(state.type, 'resolve')) {
 			console.log("RESOLVED");
 		}
-	    delete mapReduceMap[ state.context.mapReducer ];
-	    delete state.context.mapReducer;
+	    delete mapReduceMap[ state.context.mapReduce ];
+	    delete state.context.mapReduce;
    }
     return state;
   } ];
