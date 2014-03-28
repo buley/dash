@@ -6,10 +6,10 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
       return state;
     }
     state.context.mapReduce = state.context.mapReducer || {};
-    state.context.mapReduce.id = this.random();
+    state.context.mapReduceId = this.random();
     state.context.mapReduce.intermediate = state.context.mapReducer.intermediate || {};
-    mapReduceMap[ state.context.mapReducer.id ].mappers = this.isArray(state.context.mapReduce.map) ? state.context.mapReduce.map : [state.context.mapReduce.map];
-    mapReduceMap[ state.context.mapReducer.id ].reducers = this.isArray(state.context.mapReduce.reduce) ? state.context.mapReduce.reduce : [state.context.mapReduce.reduce];
+    mapReduceMap[ state.context.mapReduceId ].mappers = this.isArray(state.context.mapReduce.map) ? state.context.mapReduce.map : [state.context.mapReduce.map];
+    mapReduceMap[ state.context.mapReduceId ].reducers = this.isArray(state.context.mapReduce.reduce) ? state.context.mapReduce.reduce : [state.context.mapReduce.reduce];
     delete state.context.mapReduce;
     return state;
   }, function (state) {
@@ -26,8 +26,8 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    	that = this;
 	    console.log('mapreduce',state);
     	if (this.is(state.type, 'notify') && this.exists(state.context.entry)) {
-		    this.each(mapReduceMap[ state.context.mapReducer.id ].mappers, function(pair) {
-		    	result = that.apply(pair[0], [ result ]);
+		    this.each(mapReduceMap[ state.context.mapReduceId ].mappers, function(mapper) {
+		    	result = that.apply(mapper, [ result ]);
 			   	if (that.isFunction(result)) {
 			   		promises.push(result);
 			   	} else {
@@ -44,7 +44,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 		    		promise = pro;
 		    	});
 		    	state.context.promise = promise(function(ctx) {
-				    this.each(mapReduceMap[ state.context.mapReducer.id ].reducers, function(reducer) {
+				    this.each(mapReduceMap[ state.context.mapReduceId ].reducers, function(reducer) {
 				    	result = that.apply(reducer, [ state.context.mapReducer.intermediate || null, result ]);
 					   	if (that.isFunction(result)) {
 					   		promises.push(result);
