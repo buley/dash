@@ -1683,7 +1683,11 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   },
                   reduce: function (intermediate, current) {
                     if (!intermediate) {
-                      intermediate = [];
+                      intermediate = {};
+                    }
+                    for( var x = 0; x < current.length; x += 1) {
+                      intermediate[ current[x] ] = intermediate[ current[x ] ] || {};
+                      intermediate[ current[x] ] += 1;
                     }
                     intermediate.push.apply(intermediate, current);
                     return intermediate;
