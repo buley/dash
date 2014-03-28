@@ -5,7 +5,6 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
     if(this.isEmpty(state.context.map) || this.isEmpty(state.context.reduce)) {
       return state;
     }
-    state.context.mapReduce = state.context.mapReduce || {};
     state.context.mapReduceId = this.random();
     mapReduceMap[ state.context.mapReduceId ] = mapReduceMap[ state.context.mapReduceId ] || {};
     mapReduceMap[ state.context.mapReduceId ].intermediate = mapReduceMap[ state.context.mapReduceId ].intermediate || {};
@@ -53,6 +52,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    	});
 	    	state.context.promise = promise(function(ctx) {
 	    		state.context = ctx;
+			    delete mapReduceMap[ state.context.mapReduceId ];
 				delete state.context.mapReduceId;
 	    		deferred.resolve(state);
 	    	});
@@ -60,8 +60,6 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	} else if ( this.is(state.type, 'resolve')) {
 		state.context.reduced = mapReduceMap[ state.context.mapReduceId ].intermediate;
 	}
-    delete mapReduceMap[ state.context.mapReduceId ];
-    delete state.context.mapReduceId;
     return state;
   } ];
 }(self));
