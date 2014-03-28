@@ -52,7 +52,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 				   	}
 			    });
 			    if (this.isEmpty(promises)) {
-			    	state.context.mapped = this.is(results.length, 1) ? results[0] : results;
+			    	state.context.reduced = mapReduceMap[ state.context.mapReduceId ].intermediate;
 			    } else {
 			    	this.each(promises, function(pro) {
 			    		promise(function(result) {
@@ -61,7 +61,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 			    		promise = pro;
 			    	});
 			    	state.context.promise = promise(function(ctx2) {
-			    		ctx2.mapped = that.is(results.length, 1) ? results[0] : results;
+			    		state.reduced = mapReduceMap[ state.context.mapReduceId ].intermediate;
 			    		deferred.resolve(ctx2);
 			    	}, function(ctx2) {
 				        deferred.reject(ctx2);
