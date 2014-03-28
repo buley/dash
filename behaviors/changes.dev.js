@@ -52,7 +52,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
             if (that.exists(ctx.idx)) {
               changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].data = ctx.idx;
             }
-            changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks.push(obj);
+            if (!that.contains(changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks, obj)) {
+              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].callbacks.push(obj);
+            }
           }
           if (that.exists(ctx.key) && that.isnt(ctx.primary_key, ctx.key)) {
             if (that.contains(['get.entry','get.entries', 'update.entry', 'remove.entry', 'update.entries', 'remove.entries'], type)) {
@@ -62,23 +64,27 @@ window.dashChanges = window.dashChanges || (function (environment) {
               if (that.exists(ctx.entry)) {
                 changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].data = ctx.entry;
               }
-              changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks.push(obj);
+              if (!that.contains(changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks, obj))
+                changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ].callbacks.push(obj);
+              }
             }
           }
         }
         if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
-            if (that.contains(['get.entry','get.entries', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
-              var key = ctx.primary_key || ctx.key;
-              changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
-              changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
-                callbacks: []
-              };
-              if (that.exists(ctx.entry)) {
-                changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
-              }
+          if (that.contains(['get.entry','get.entries', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
+            var key = ctx.primary_key || ctx.key;
+            changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
+            changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
+              callbacks: []
+            };
+            if (that.exists(ctx.entry)) {
+              changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
+            }
+            if (!that.contains(changeMap[ctx.database].stores[ctx.store].entries[key].callbacks, obj)) {
               changeMap[ctx.database].stores[ctx.store].entries[key].callbacks.push(obj);
             }
-        }        
+          }
+        }
       }
     },
     inquire = function(type, ctx) {
