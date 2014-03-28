@@ -73,6 +73,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    		state.context = ctx;
 	    		state.promise = promise;
 				delete mapReduceMap[ state.context.mapReduceId ];
+				delete state.context.mapReduceId;
 	    		deferred.resolve(ctx);
 	    	});
 	    }
