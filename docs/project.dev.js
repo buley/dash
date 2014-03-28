@@ -1686,7 +1686,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                       intermediate = {};
                     }
                     for( var x = 0; x < current.length; x += 1) {
-                      intermediate[ current[x] ] = intermediate[ current[x ] ] || {};
+                      intermediate[ current[x] ] = intermediate[ current[x] ] || 0;
                       intermediate[ current[x] ] += 1;
                     }
                     return intermediate;
