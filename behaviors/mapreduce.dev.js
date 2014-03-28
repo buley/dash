@@ -39,7 +39,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 		   	if (that.isFunction(result)) {
 		   		promises.push(result);
 		   	} else {
-		   		mapReduceMap[ state.context.mapReduceId ] = result;
+		   		mapReduceMap[ state.context.mapReduceId ].intermediate = result;
 		   	}
 	    });
 	    if (this.isEmpty(promises)) {
@@ -58,7 +58,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 	    	});
 	    }
 	} else if ( this.is(state.type, 'resolve')) {
-		console.log("RESOLVED",mapReduceMap[ state.context.mapReduceId ]);
+		console.log("RESOLVED",mapReduceMap[ state.context.mapReduceId ].intermediate);
 	}
     delete mapReduceMap[ state.context.mapReduce ];
     delete state.context.mapReduceId;
