@@ -34,7 +34,7 @@ window.dashMapReduce = window.dashMapReduce || (function (environment) {
 		   		maps.push(result);
 		   	}
 	    });
-	    this.each(mapReduceMap[ state.context.mapReduceId ].reducers function(reducer) {
+	    this.each(mapReduceMap[ state.context.mapReduceId ].reducers, function(reducer) {
 	    	result = that.apply(reducer, [ mapReduceMap[ state.context.mapReduceId ].intermediate, result ]);
 		   	if (that.isFunction(result)) {
 		   		promises.push(result);
