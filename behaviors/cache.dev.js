@@ -533,7 +533,16 @@ window.dashCache = window.dashCache || (function (environment) {
 		return self;
 
 	})(),
-	buildKey = function(key_ctx) {
+	buildKey = function(key_ctx, type) {
+		console.log('key',key_ctx);
+		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key ].reduce(function(acc, curr){
+			console.log('xxx', acc);
+			acc = acc || [];
+			if(!!current)) {
+				acc.push(current);
+			}
+			return acc;
+		}).join('.');
 		console.log('key',key_ctx);
 		return 'test';
 	};
@@ -541,14 +550,14 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    console.log("CREAM get",state.context.key, buildKey(ste));
+    console.log("CREAM get",state.context.key, buildKey(ste.context, ste.type));
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
     if (that.contains(['resolve','error'], ste.type)) {
-      console.log("CREAM set",state.context.entry, buildKey(ste));
+      console.log("CREAM set",state.context.entry, buildKey(ste.context, ste.type));
       delete collections[ ste.context.collector ];
     }
     return state;
