@@ -116,19 +116,23 @@ window.dashCache = window.dashCache || (function (environment) {
     	response;
     console.log('checking',state.method);
     if (this.contains(['get.entry'], state.method)) {
-      	response = cache[buildKey(state.context)];
 	    console.log("CREAM get", buildKey(state.context), response);
     	console.log('response!',response);
-    	state.context.cached = !!response ? response : null;
     	if (!!response) {
 	    	state.type = 'resolve';
     		console.log("ALL GOOD",response);
 	    	inward(function(ctx) {
+		      response = get( {key: buildKey(ctx.context) });
+		      ctx.context = response;
+	     	  ctx.context.cached = !!response ? response : null;
 		      outward.resolve(response);
 		    }, function(ctx) {
 		      outward.error(ctx);
 		    }, function(ctx) {
-		      outward.notify(response);
+		      response = get( {key: buildKey(ctx.context) });
+		      ctx.context = response;
+	     	  ctx.context.cached = !!response ? response : null;
+		      outward.notify(ctx);
 		    });    		
 	    	state.promise = outward.promise;
     	}
