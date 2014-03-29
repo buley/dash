@@ -268,7 +268,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
       return ctx;
     };
   return [ function(state) {
+    console.log('run?');
     if(!this.isFunction(state.context.changes) && !this.isArray(state.context.changes)) {
+      console.log('no!');
       return state;
     }    
     that = this;
