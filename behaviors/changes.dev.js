@@ -292,7 +292,6 @@ window.dashChanges = window.dashChanges || (function (environment) {
         delete state.context.changeid;
         changeset = [];
       }
-      console.log('bogus why?',id, changeset);
       that.each(changeset, function(callback) {
         ste.context.changes = callback; 
         notify(state.context, state.method, state.type);
@@ -303,8 +302,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
         if(that.is('resolve', state.type)) {
           delete ste.context.changeid;
         }
-        deferred.resolve(ste);
       });
+      deferred.resolve(ste);
     }, function(ste) {
         deferred.reject(ste);
     }, function(ste) {
