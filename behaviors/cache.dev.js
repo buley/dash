@@ -583,7 +583,7 @@ window.dashCache = window.dashCache || (function (environment) {
       if ( this.isEmpty(state.context.purge) ) {
       	cream['delete']( { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300 } );
       } else {
-      	cream.set( { key: buildKey(state.context, state.type), value: state.context, ttl: state.context.expires || 300000 } );
+      	cream.set( { key: buildKey(state.context, state.type), value: state.context.entry, ttl: state.context.expires || 300000 } );
   	  }
       console.log("CREAM set", buildKey(state.context));
     }
