@@ -111,7 +111,6 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    console.log('ohwhats?');
     var promise = state.promise,
     	outward = this.deferred(),
     	response;
@@ -122,6 +121,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	    	state = response;
 	    	state.promise = promise;
 	    	state.context.cached = true;
+	    	state.type = 'resolve';
 	    }
 	    console.log("CREAM get", buildKey(state.context), state);
 		/*promise(function(ctx) {
