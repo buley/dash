@@ -580,8 +580,8 @@ window.dashCache = window.dashCache || (function (environment) {
       return state;
     }
     if (this.contains(['resolve','error'], state.type)) {
-      cream.set( { key: buildKey(state.context, state.type), value: state.context.entry, ttl: state.context.expires || 300 } );
-      console.log("CREAM set", state, buildKey(state.context, state.type));
+      cream.set( { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300 } );
+      console.log("CREAM set", state, buildKey(state.context));
     }
     return state;
   } ];
