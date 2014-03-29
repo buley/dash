@@ -117,14 +117,10 @@ window.dashCache = window.dashCache || (function (environment) {
     console.log('checking',state.method);
     if (this.contains(['get.entry'], state.method)) {
 	    response = get( {key: buildKey(state.context) });
-	    state.promise - outward.promise;
 	    console.log("CREAM get", buildKey(state.context), response);
 	    if (!this.isEmpty(response)) {
 	    	state = response;
 	    	state.context.cached = true;
-			setTimeout(function(){
-				outward.resolve(state);
-			}, 20)
 	    }
 		state.method = null;
 		/*
