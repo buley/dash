@@ -123,7 +123,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	    	setTimeout(function(){
 		    	outward.resolve(state);
 	    	}, 1000);
-	    	state.promise = outward;
+	    	state.promise = outward.promise;
 	    	state.type = 'cached';
 	    	state.method = null;
 	    }
