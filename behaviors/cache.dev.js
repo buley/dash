@@ -1,4 +1,4 @@
-window.dashMap = window.dashMap || (function (environment) {
+window.dashCache = window.dashCache || (function (environment) {
   "use strict";
 	/* embedded CREAM github.com/buley/CREAM */
 	var CREAM = ( function () {
