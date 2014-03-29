@@ -23,7 +23,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
-		return cache[ key ].data;
+		return cache[ key ] ? cache[ key ].data || null;
 	},
 	zap = function( request ) {
 		var key = request.key || ''
