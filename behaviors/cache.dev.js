@@ -553,11 +553,25 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
+    var inward = state.promise,
+    	outward = this.deferred();
     var response;
     if (this.contains(['get.entry'], state.method)) {
       	response = cream.get( { key: buildKey(state.context, state.type) } );
-    	console.log("CREAM get",response);
     	state.context.cached = !!response ? response : null;
+    	state.promise = outward.promise;
+    	state.type = 'resolve';
+    	if (!!response) {
+    		console.log("ALL GOOD",response);
+	    	inward(function(ctx) {
+		      outward.resolve(ctx);
+		    }, function(ctx) {
+		      outward.error(ctx);
+		    }, function(ctx) {
+		      outward.notify(ctx);
+		    });    		
+    	}
+
     }
     return state;
   }, function (state) {
