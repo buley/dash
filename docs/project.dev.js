@@ -1700,7 +1700,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                     ctx.context.limit = 1337;
                     return ctx;
                   }, function(ctx) {
-                    ctx.context.entry.foo = 'bar';
+                    if (ctx.context.entry) {
+                      ctx.context.entry.foo = 'bar';
+                    }
                     return ctx;
                   }],
                   live: true,
