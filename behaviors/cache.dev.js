@@ -558,7 +558,6 @@ window.dashCache = window.dashCache || (function (environment) {
     if (this.contains(['get.entry'], state.method)) {
       	response = cream.get( { key: buildKey(state.context, state.type) } );
     	state.context.cached = !!response ? response : null;
-    	state.promise = outward.promise;
     	console.log('response',response);
     	if (!!response) {
 	    	state.type = 'resolve';
@@ -570,6 +569,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		    }, function(ctx) {
 		      outward.notify(ctx);
 		    });    		
+	    	state.promise = outward.promise;
     	}
 
     }
