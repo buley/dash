@@ -1,5 +1,6 @@
 window.dashPatch = window.dashPatch || (function (environment) {
   "use strict";
+  //TODO: Support array of sequential patches
   var patchMap = {}; 
   return [ function (state) {
     if(this.isEmpty(state.context.patch)) {
@@ -36,6 +37,8 @@ window.dashPatch = window.dashPatch || (function (environment) {
       return state;
     }
     if (!patchMap[ state.context.patchid ].after) {
+    	delete state.context.patchid;
+    	delete patchMap[ state.context.patchid ];
     	return state;
     }
     var outside = this.deferred(),
@@ -52,6 +55,8 @@ window.dashPatch = window.dashPatch || (function (environment) {
     } else {
 		state.context.promise = outside.promise;
 		result(function(ctx2) {
+		  delete patchMap[ ctx2.context.patchid ];
+		  delete ctx2.context.patchid;
 		  outside.resolve(ctx2);
 		}, function(ctx2) {
 	      outside.reject(ctx2);

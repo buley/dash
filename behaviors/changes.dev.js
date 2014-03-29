@@ -293,9 +293,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
           register(ste.method, ste.context);
           unregister(ste.method, ste.context);            
         }
-        delete ste.context.changeid;
-        if (!hasChanges) {
-          delete ste.context.changes;
+        if(that.is('resolve', state.type)) {
+          delete ste.context.changeid;
+          if (!hasChanges) {
+            delete ste.context.changes;
+          }
         }
         deferred.resolve(ste);
       });
