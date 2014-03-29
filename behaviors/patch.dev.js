@@ -12,7 +12,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
     	promises = [],
     	that = this;
     state.context.patchid = this.random();
-	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [state.context.patch, state.context.patch];
+	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [ this.clone(state.context.patch), this.clone(state.context.patch)];
     console.log(state.context,'setting', state.context.patchid, patchMap[ state.context.patchid ]);
     state.promise = outside.promise;
     result = this.apply(patchMap[ state.context.patchid ][0], [ state ]);
