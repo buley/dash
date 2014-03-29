@@ -272,7 +272,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       return state;
     }    
     that = this;
-    var id = state.context.changeid || this.random();
+    var id = this.random();
     callbackMap[ id ] = this.clone(state.context.changes);
     state.context.changeid = id;
     return state;
@@ -291,7 +291,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
         notify(state.context, state.method, state.type);
         if (isChanger) {
           register(ste.method, ste.context);
-          unregister(ste.method, ste.context);            
+          unregister(ste.method, ste.context);            r
         }
         if(that.is('resolve', state.type)) {
           delete ste.context.changeid;
