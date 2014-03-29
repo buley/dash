@@ -119,7 +119,9 @@ window.dashCache = window.dashCache || (function (environment) {
 	    if (!this.isEmpty(response)) {
 	    	state = response;
 	    	state.context.cached = true;
-	    	outward.resolve(state);
+	    	setTimeout(function(){
+		    	outward.resolve(state);
+	    	}, 1000);
 	    	state.promise = outward;
 	    }
 	    state.type = null;
