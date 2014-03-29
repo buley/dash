@@ -464,7 +464,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			   , stale = isStale( data );
 		
 			if( true === stale ) {
-				self.prototype.['delete']( { 'key': key } );
+				self.prototype['delete']( { 'key': key } );
 			}
 
 			return prepResults( data );
