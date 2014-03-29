@@ -290,7 +290,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           isChanger = that.exists(id);
       if (!that.isEmpty(callbackMap[ id ])) {
         delete state.context.changeid;
-        changeset = [];
+        changeset = [ null ];
       }
       that.each(changeset, function(callback) {
         ste.context.changes = callback; 
