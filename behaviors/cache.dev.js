@@ -124,8 +124,6 @@ window.dashCache = window.dashCache || (function (environment) {
 		    	outward.resolve(state);
 	    	}, 1000);
 	    	state.promise = outward.promise;
-	    	state.type = 'cached';
-	    	state.method = null;
 	    }
 	    console.log("CREAM get", buildKey(state.context), state);
 		/*promise(function(ctx) {
