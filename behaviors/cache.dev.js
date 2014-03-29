@@ -436,7 +436,8 @@ window.dashCache = window.dashCache || (function (environment) {
 		var prepResults = function( incoming, stale_ok ) {
 			
 			var result = {}
-			  , stale_ok = ( 'undefined' !== stale_ok && null !== stale_ok ) ? stale_ok : false;
+			  , stale_ok = ( 'undefined' !== stale_ok && null !== stale_ok ) ? stale_ok : false
+			  , attr;
 
 			if( false === hasAttributes( incoming ) ) {
 				return incoming;
