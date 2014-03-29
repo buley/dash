@@ -549,8 +549,9 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    if (this.contains(['get.entry'], state.metho)) {
+    if (this.contains(['get.entry'], state.method)) {
     	console.log("CREAM get",state.context.key, buildKey(state.context, state.type));
+    	state.context.cached = null;
     }
     return state;
   }, function (state) {
@@ -559,6 +560,7 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     if (this.contains(['resolve','error'], state.type)) {
       console.log("CREAM set",state.context.entry, buildKey(state.context, state.type));
+      state.context.cached = true;
     }
     return state;
   } ];
