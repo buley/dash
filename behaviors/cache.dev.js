@@ -116,9 +116,8 @@ window.dashCache = window.dashCache || (function (environment) {
     	response;
     console.log('checking',state.method);
     if (this.contains(['get.entry'], state.method)) {
-	    console.log("CREAM get", buildKey(state.context), response);
 	    response = get( {key: buildKey(state.context) });
-    	console.log('response!',response);
+	    console.log("CREAM get", buildKey(state.context), response);
 	    if (!this.isEmpty(response)) {
 	    	state = response;
 	    	state.context.cached = true;
