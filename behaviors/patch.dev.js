@@ -45,7 +45,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
     	promises = [],
     	that = this;
     state.promise = inside;
-    result = this.apply(patchMap[ state.context.patchid ][1], [ state ]);
+    result = this.apply(patchMap[ state.context.patchid ].after, [ state ]);
     if (this.is(result.promise, state.promise)) {
     	result.promise = promise;
     	state = result;
