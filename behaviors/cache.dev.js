@@ -539,7 +539,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			console.log('xxx', acc);
 			acc = acc || [];
 			if(!!current) {
-				acc.push(current);
+				acc = [ acc, current ].join('.');
 			}
 			return acc;
 		}).join('.');
