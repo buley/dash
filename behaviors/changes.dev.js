@@ -247,7 +247,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
         diff = (that.is(ctx.diff, true)) ? difference(current, previous, ctx.shallow ? true : false) : null,
         args = { context: ctx, method: method, type: type, current: current, previous: previous };
       args.difference = that.isEmpty(diff) ? null : diff;
-      if (that.isnt(args.difference, null) || that.isnt(ctx.diff, true)) {
+      if (that.isnt(ctx.diff, true) || that.isnt(args.difference, null)) {
         that.each(listeners, function(id, i) {
           var listens = callbackMap[id];
           if(that.isArray(listens)) {
