@@ -12,7 +12,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
     	that = this;
     state.context.patchid = this.random();
 	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [state.context.patch, state.context.patch];
-    result = this.apply(patchMap[ state.context.patchid ][0], [ result ]);
+    result = this.apply(patchMap[ state.context.patchid ][0], [ state ]);
     if (!this.isFunction(result)) {
     	state = result;
     } else {
