@@ -124,11 +124,11 @@ window.dashCache = window.dashCache || (function (environment) {
 	    	state.type = 'resolve';
     		console.log("ALL GOOD",response);
 	    	inward(function(ctx) {
-		      outward.resolve(ctx);
+		      outward.resolve(response);
 		    }, function(ctx) {
 		      outward.error(ctx);
 		    }, function(ctx) {
-		      outward.notify(ctx);
+		      outward.notify(response);
 		    });    		
 	    	state.promise = outward.promise;
     	}
