@@ -535,7 +535,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	})(),
 	buildKey = function(key_ctx, type) {
 		console.log('key',key_ctx);
-		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key ].reduce(function(acc, curr){
+		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key ].reduce(function(acc, current){
 			console.log('xxx', acc);
 			acc = acc || [];
 			if(!!current) {
