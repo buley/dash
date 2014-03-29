@@ -29,7 +29,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		}
 		console.log('keys to get',keys);
 	},
-	delete = function( request ) {
+	zap = function( request ) {
 		var key = request.key || ''
 		  , temp
 		  , keys = key.split('.');
@@ -143,9 +143,9 @@ window.dashCache = window.dashCache || (function (environment) {
     var args =  { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300000 } ;
     if (this.contains(['resolve','error'], state.type)) {
       if ( this.isEmpty(state.context.purge) ) {
-      	cream['delete'](args);
+      	zap(args);
       } else {
-      	cream.set(args);
+      	set(args);
   	  }
       console.log("CREAM set", buildKey(state.context), args);
     }
