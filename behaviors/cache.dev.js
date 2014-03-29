@@ -534,7 +534,7 @@ window.dashCache = window.dashCache || (function (environment) {
 
 	})(),
 	buildKey = function(key_ctx, type) {
-		console.log('key',key_ctx);
+		console.log('key_ctx',key_ctx);
 		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key ].reduce(function(acc, current){
 			console.log('xxx', acc);
 			acc = acc || [];
@@ -543,8 +543,8 @@ window.dashCache = window.dashCache || (function (environment) {
 			}
 			return acc;
 		});
-		console.log('key',key_ctx);
-		return 'test';
+		console.log('key',key);
+		return key;
 	};
   return [ function (state) {
     if(this.isEmpty(state.context.cache)) {
