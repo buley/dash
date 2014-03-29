@@ -537,7 +537,7 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    console.log("CREAM get",state.context.data);
+    console.log("CREAM get",state.context.key);
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.cache)) {
