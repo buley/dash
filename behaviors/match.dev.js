@@ -14,12 +14,12 @@ window.dashMatch = window.dashMatch || (function (environment) {
 			}
 			if (that.isObject(expr)) {
 				that.iterate(expr, function(key, value) {
-					expr[key] = maybeReduce(value);
+					expr[key] = maybeReduce(value, context);
 				});
 			}
 			return expr;
 		}
-		return maybeReduce(expression);	
+		return maybeReduce(expression, context);	
 	},
 	match = function(expr, data) {
 		var matches = true;

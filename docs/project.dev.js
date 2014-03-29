@@ -1705,6 +1705,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                     }
                     return ctx;
                   }],
+                  shorthand: {
+                    'se': 'season',
+                    'ep': 'episode'
+                  },
                   live: true,
                   index: 'season',
                   index_key_path: 'sy',
