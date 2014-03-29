@@ -24,7 +24,8 @@ window.dashPatch = window.dashPatch || (function (environment) {
 	        deferred.reject(ctx);
 	    }, function(ctx) {
 	        deferred.notify(ctx);
-	    })
+	    });
+	}
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.patchid)) {
