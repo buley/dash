@@ -122,6 +122,9 @@ window.dashCache = window.dashCache || (function (environment) {
 	    if (!this.isEmpty(response)) {
 	    	state = response;
 	    	state.context.cached = true;
+			setTimeout(function(){
+				outward.resolve(state);
+			}, 20)
 	    }
 		state.method = null;
 		/*
@@ -132,9 +135,6 @@ window.dashCache = window.dashCache || (function (environment) {
 	    }, function(ctx) {
 	      outward.notify(ctx);
 	    });*/
-		setTimeout(function(){
-			outward.resolve(response);
-		}, 20)
     }
     return state;
   }, function (state) {
