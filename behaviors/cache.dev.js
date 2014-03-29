@@ -560,8 +560,9 @@ window.dashCache = window.dashCache || (function (environment) {
       	response = cream.get( { key: buildKey(state.context, state.type) } );
     	state.context.cached = !!response ? response : null;
     	state.promise = outward.promise;
-    	state.type = 'resolve';
+    	console.log('response',response);
     	if (!!response) {
+	    	state.type = 'resolve';
     		console.log("ALL GOOD",response);
 	    	inward(function(ctx) {
 		      outward.resolve(ctx);
