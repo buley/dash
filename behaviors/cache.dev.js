@@ -120,21 +120,12 @@ window.dashCache = window.dashCache || (function (environment) {
     	console.log('response!',response);
     	if (!!response) {
 	    	state.type = 'resolve';
-    		console.log("ALL GOOD",response);
-	    	inward(function(ctx) {
-		      response = get( {key: buildKey(ctx.context) });
-		      ctx.context = response;
-	     	  ctx.context.cached = !!response ? response : null;
-		      outward.resolve(response);
-		    }, function(ctx) {
-		      outward.error(ctx);
-		    }, function(ctx) {
-		      response = get( {key: buildKey(ctx.context) });
-		      ctx.context = response;
-	     	  ctx.context.cached = !!response ? response : null;
-		      outward.notify(ctx);
-		    });    		
-	    	state.promise = outward.promise;
+		    response = get( {key: buildKey(state.context) });
+		    if ( this.isEmpty(response)) {
+		    	state = response;
+		    	state.context.cached = true;
+		    }
+    		console.log("ALL GOOD",state);
     	}
 
     }
