@@ -17,16 +17,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
     	state.context.promise = promise;
     	state = result;
     } else {
-		state.context.promise(function(ctx) {
-			state.context.promise = promise;
-    		deferred.resolve(ctx);
-    	}, function(ctx) {
-			state.context.promise = promise;
-	        deferred.reject(ctx);
-	    }, function(ctx) {
-			state.context.promise = promise;
-	        deferred.notify(ctx);
-	    });
+		
 	}
     return state;
   }, function (state) {
