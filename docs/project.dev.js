@@ -1730,7 +1730,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   if (true === scope.visuals) {
                     system.add(context.entry);
                   }
-                  statsUpdate(context.statistics);
+                  _.throttle(function() {
+                    statsUpdate(context.statistics);
+                  }, 100);
                   //system.cameraMod( 'z', -2, 50000, 10 );
                   //system.cameraMod( 'z', 1, 10000, 0 );
                 });
