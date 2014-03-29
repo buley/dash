@@ -555,7 +555,7 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    if (that.contains(['resolve','error'], state.type)) {
+    if (this.contains(['resolve','error'], state.type)) {
       console.log("CREAM set",state.context.entry, buildKey(state.context, state.type));
       delete collections[ state.context.collector ];
     }
