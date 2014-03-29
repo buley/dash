@@ -113,7 +113,16 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     var promise = state.promise,
     	outward = this.deferred(),
-    	response;
+    	response,
+    	callbacks = {
+	        on_success: state.context.on_success,
+	        on_error: state.context.on_error,
+	        on_abort: state.context.on_abort,
+	        on_complete: state.context.on_complete,
+	        on_upgrade_needed: state.context.on_upgrade_needed,
+	        on_blocked: state.context.on_blocked,
+	        on_close: state.context.on_close
+	      }
     if (this.contains(['get.entry'], state.method)) {
     	console.log('was',state);
 	    response = get( {key: buildKey(state.context) });
@@ -123,7 +132,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	    	state.context.cached = true;
 	    	state.type = 'resolve';
 	    }
-	    console.log("CREAM get", buildKey(state.context), state);
+	    console.log("CREAM get", callbacks, buildKey(state.context), state);
 
     }
     return state;
