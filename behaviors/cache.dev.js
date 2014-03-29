@@ -119,12 +119,11 @@ window.dashCache = window.dashCache || (function (environment) {
 	    if (!this.isEmpty(response)) {
 	    	state = response;
 	    	state.context.cached = true;
-	    	state.promise = promise;
+	    	outward.resolve(state);
+	    	state.promise = outward;
 	    }
-		state.method = null;
 	    console.log("CREAM get", buildKey(state.context), response);
-		/*
-		promise(function(ctx) {
+		/*promise(function(ctx) {
 	      outward.resolve(ctx);
 	    }, function(ctx) {
 	      outward.error(ctx);
