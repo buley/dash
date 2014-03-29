@@ -542,7 +542,7 @@ window.dashCache = window.dashCache || (function (environment) {
 				acc = [ acc, current ].join('.');
 			}
 			return acc;
-		}).join('.');
+		});
 		console.log('key',key_ctx);
 		return 'test';
 	};
