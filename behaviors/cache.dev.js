@@ -14,7 +14,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		}
 		cached[ key ] = {
 			data: value,
-			expire: timestamp + ttl;
+			expire: timestamp + ttl
 		};
 		return cached[ key ];
 	},
