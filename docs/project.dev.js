@@ -2,7 +2,6 @@ var dashApp = angular.module('dashApp', ['ngRoute']);
 dashApp.config(['$routeProvider',
   function ($routeProvider) {
     /* Behaviors */
-    dash.add.behavior(dashCache);
     dash.add.behavior(dashStats);
     dash.add.behavior(dashLive);
     dash.add.behavior(dashChanges);
@@ -12,6 +11,7 @@ dashApp.config(['$routeProvider',
     dash.add.behavior(dashMapReduce);
     dash.add.behavior(dashPatch);
     dash.add.behavior(dashShorthand);
+    dash.add.behavior(dashCache);
 
     $routeProvider
       .when('/about', {
