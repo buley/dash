@@ -124,13 +124,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	    	state.type = 'resolve';
 	    }
 	    console.log("CREAM get", buildKey(state.context), state);
-		/*promise(function(ctx) {
-	      outward.resolve(ctx);
-	    }, function(ctx) {
-	      outward.error(ctx);
-	    }, function(ctx) {
-	      outward.notify(ctx);
-	    });*/
+
     }
     return state;
   }, function (state) {
