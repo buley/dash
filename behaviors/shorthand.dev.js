@@ -11,7 +11,7 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
 					delete expr[key];
 					key = map[key];
 				}
-				expr[key] = maybeReduce(map, value, context, reverse);
+				expr[key] = reduce(map, value, context, reverse);
 			});
 		}
 		return expr;
