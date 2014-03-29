@@ -135,7 +135,6 @@ window.dashCache = window.dashCache || (function (environment) {
 							temp = res;
 						}
 					}
-					key = keys.join( '.' );
 				}
 				item = temp[ user_data_prefix + key ];
 				if( 'undefined' !== typeof item ) {
