@@ -14,21 +14,17 @@ window.dashPatch = window.dashPatch || (function (environment) {
 	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [state.context.patch, state.context.patch];
     result = this.apply(patchMap[ state.context.patchid ][0], [ state ]);
     if (!this.isFunction(result)) {
-    	
     	state = result;
-    	console.log('patched');
+    	console.log('patched', result);
     } else {
-		state.context.promise = result(function(result) {
-			results.push(results);
-		});
-    	state.context.promise = promise(function(ctx) {
+    	console.log('chaining patch', result);
+		state.context.promise = result(function(ctx) {
     		deferred.resolve(ctx);
     	}, function(ctx) {
 	        deferred.reject(ctx);
 	    }, function(ctx) {
 	        deferred.notify(ctx);
 	    })
-    }
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.patchid)) {
