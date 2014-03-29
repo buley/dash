@@ -8,12 +8,10 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
 			}
 			if (that.isObject(expr)) {
 				that.iterate(expr, function(key, value) {
-					if (that.contains(map, key)) {
-						expr[value] = maybeReduce(map, value, context, reverse);
-						console.log("REMAP",key, value, map);
+					if (!that.isEmpty(map[key])) {
+						expr[key] = maybeReduce(map, map[key], context, reverse);
 					} else {
-						console.log('leave it',key, value, map);
-						expr[key] = value;//maybeReduce(map, value, context, reverse);
+						expr[key] = maybeReduce(map, value, context, reverse);
 					}
 				});
 			}
