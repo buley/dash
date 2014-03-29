@@ -283,7 +283,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
         hasChanges = !!state.context.changes;
     promise(function(ste) {
       notify(state.context, state.method, state.type);
-      register(ste.method, ste.context);
+      if (hasChanges) {
+        register(ste.method, ste.context);
+      }
       unregister(ste.method, ste.context);
       if(that.is('resolve', state.type)) {
         delete ste.context.changeid;
