@@ -551,7 +551,7 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     var response;
     if (this.contains(['get.entry'], state.method)) {
-      	response = CREAM.get( { key: buildKey(state.context, state.type), value: state.context.entry, ttl: state.context.expires || 300 } );
+      	response = CREAM.get( { key: buildKey(state.context, state.type) } );
     	console.log("CREAM get",response,state.context.key, buildKey(state.context, state.type));
     	state.context.cached = null;
     }
