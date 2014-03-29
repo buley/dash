@@ -1,23 +1,31 @@
 window.dashShorthand = window.dashShorthand || (function (environment) {
   "use strict";
   var that,
-  	 reduce = function(xmap, expression, xcontext, xreverse) {
-		var maybeReduce = function(map, expr, context, reverse) {
-			if (that.isFunction(expr)) {
-				expr = that.apply(expr, [context], that);
-			}
-			if (that.isObject(expr)) {
-				that.iterate(expr, function(key, value) {
-					if (!that.isEmpty(map[key])) {
-						delete expr[key];
-						key = map[key];
-					}
-					expr[key] = maybeReduce(map, value, context, reverse);
-				});
-			}
-			return expr;
+  	 reduce = function(map, expr, context, reverse) {
+		if (that.isFunction(expr)) {
+			expr = that.apply(expr, [context], that);
 		}
-		return maybeReduce(xmap, expression, xcontext, xreverse);	
+		if (that.isObject(expr)) {
+			that.iterate(expr, function(key, value) {
+				if (!that.isEmpty(map[key])) {
+					delete expr[key];
+					key = map[key];
+				}
+				expr[key] = maybeReduce(map, value, context, reverse);
+			});
+		}
+		return expr;
+	}, reverse = function(expr) {
+		if (that.isObject(expr)) {
+			that.iterate(expr, function(key, value) {
+				if (that.isObject(value)) {
+					expr[key] = reverse(value);
+				} else {
+					expr[value] = key;
+				}
+			});
+		}
+		return expr;
 	};
   return [ function (state) {
   	that = this;
@@ -30,7 +38,7 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
     	if (!!shorthand.after || !!shorthand.before) {
     		shorthand = shorthand.before;
     	}
-    	state.context.data = reduce(state.context.shorthand, data, state.context, false);
+    	state.context.data = reduce(reverse(shorthand), data, state.context, false);
     }
     return state;
   }, function (state) {
@@ -43,7 +51,7 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
     	if (!!shorthand.after || !!shorthand.before) {
     		shorthand = shorthand.after;
     	}
-    	state.context.entry = reduce(shorthand, data, state.context, true);
+    	state.context.entry = reduce(shorthand, data, state.context);
     }
     return state;
   } ];
