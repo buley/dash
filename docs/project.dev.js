@@ -1678,7 +1678,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   stats: true,
                   progress: true,
                   forecast: false,
-                  map: function (current) {
+                  /*map: function (current) {
                     return (current && current.se) ? current.se.split(/\s/) : []
                   },
                   reduce: function (intermediate, current) {
@@ -1690,7 +1690,14 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                       intermediate[ current[x] ] += 1;
                     }
                     return intermediate;
-                  },                  
+                  },*/
+                  patch: [ function(ctx) {
+                    console.log('before',ctx);
+                    return ctx;
+                  }, function(ctx) {
+                    console.log('after',ctx);
+                    return ctx;
+                  }],
                   live: true,
                   index: 'season',
                   index_key_path: 'sy',
