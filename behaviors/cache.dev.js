@@ -8,34 +8,31 @@ window.dashCache = window.dashCache || (function (environment) {
 		    , value = request.value || null
 		    , ttl = request.ttl || null //in seconds
 		    , current_date = new Date()
-		    , timestamp = ( current_date.getTime() + ( ttl * 1000 ) )
-		    , obj = {}
-		    , attr
-		    , new_obj = {}
-		    , keys;
+		    , timestamp = ( current_date.getTime() + ( ttl * 1000 ) );
+		if( 'undefined' === typeof key || null === key ) {
+			return;
+		}
 		cached[ key ] = {
 			data: value,
 			expire: timestamp + ttl;
 		};
+		return cached[ key ];
 	},
 	get = function( request ) {
-		var key = request.key || ''
-		  , result
-		  , temp
-		  , temp_key
-		  , item
-		  , keys = key.split('.')
-		  , res = {};
+		var key = request.key || '';
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
-		console.log('keys to get',keys);
+		return cached[ key ];
 	},
 	zap = function( request ) {
 		var key = request.key || ''
 		  , temp
 		  , keys = key.split('.');
-		console.log('keys to delete',keys);
+		if( 'undefined' === typeof key || null === key ) {
+			return;
+		}
+		delete cached[ key ];
 	},
 	setExpires = function( request ) {
 		var key = request.key || null
