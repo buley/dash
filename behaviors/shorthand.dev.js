@@ -10,8 +10,9 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
 				that.iterate(expr, function(key, value) {
 					if (that.contains(key)) {
 						expr[value] = maybeReduce(map, value, context, reverse);
-						console.log("REMAP",key, value);
+						console.log("REMAP",key, value, map);
 					} else {
+						console.log('leave it',key, value, map);
 						expr[key] = maybeReduce(map, value, context, reverse);
 					}
 				});
