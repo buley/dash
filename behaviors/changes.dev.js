@@ -280,24 +280,26 @@ window.dashChanges = window.dashChanges || (function (environment) {
     that = this;
     var promise = state.promise,
         outward = this.deferred(),
-        hasChanges = !!state.context.changes;
+        doTick = function(ste) {
+          notify(ste.context, ste.method, ste.type);
+          if (!!state.context.changes) {
+            register(ste.method, ste.context);
+          }
+          unregister(ste.method, ste.context);
+          if(that.is('resolve', ste.type)) {
+            if ( !that.isEmpty(callbackMap[ ste.context.changeid ]) ) {
+              ste.context.changes = callbackMap[ ste.context.changeid ];
+            }
+            delete ste.context.changeid;
+          }
+          return ste;
+        };
     promise(function(ste) {
-      notify(state.context, state.method, state.type);
-      if (hasChanges) {
-        register(ste.method, ste.context);
-      }
-      unregister(ste.method, ste.context);
-      if(that.is('resolve', state.type)) {
-        delete ste.context.changeid;
-        if ( !that.isEmpty(callbackMap[ state.context.id ]) ) {
-          ste.context.changes = callbackMap[ state.context.id ];
-        }
-      }
-      outward.resolve(ste);
+      outward.resolve(doTick(ste));
     }, function(ste) {
       outward.reject(ste);
     }, function(ste) {
-      outward.notify(ste);
+      outward.notify(doTick(ste));
     });
     state.promise = outward.promise;
     return state;
