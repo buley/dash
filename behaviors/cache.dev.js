@@ -129,6 +129,9 @@ window.dashCache = window.dashCache || (function (environment) {
 	    if (!this.isEmpty(response)) {
 	    	state = response;
 	    	state.promise = promise;
+	    	this.iterate(callbacks, function(key, val) {
+	    		state[key] = val;
+	    	});
 	    	state.context.cached = true;
 	    	state.type = 'resolve';
 	    }
