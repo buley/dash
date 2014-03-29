@@ -559,7 +559,6 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     if (this.contains(['resolve','error'], state.type)) {
       console.log("CREAM set",state.context.entry, buildKey(state.context, state.type));
-      delete collections[ state.context.collector ];
     }
     return state;
   } ];
