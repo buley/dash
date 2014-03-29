@@ -32,24 +32,25 @@ window.dashPatch = window.dashPatch || (function (environment) {
     if(this.isEmpty(state.context.patchid)) {
       return state;
     }
-    var deferred = this.deferred(),
+    var outside = this.deferred(),
+	    inside = this.deferred(),
     	result,
     	promise = state.promise,
     	promises = [],
     	that = this;
-    state.promise = deferred.promise;
+    state.promise = inside;
     result = this.apply(patchMap[ state.context.patchid ][1], [ state ]);
     if (this.is(result.promise, state.promise)) {
     	result.promise = promise;
     	state = result;
     } else {
-		state.context.promise = deferred.promise;
-		result(function(ctx) {
-		  deferred.resolve(ctx);
-		}, function(ctx) {
-	      deferred.reject(ctx);
-	    }, function(ctx) {
-	      deferred.notify(ctx);
+		state.context.promise = outside.promise;
+		result(function(ctx2) {
+		  outside.resolve(ctx2);
+		}, function(ctx2) {
+	      outside.reject(ctx2);
+	    }, function(ctx2) {
+	      outside.notify(ctx2);
 	    });
 	}
     return state;

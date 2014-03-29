@@ -1700,7 +1700,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                     ctx.context.limit = 1337;
                     return ctx;
                   }, function(ctx) {
-                    console.log('after');
+                    console.log('after',ctx);
                     return ctx;
                   }],
                   live: true,
