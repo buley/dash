@@ -293,11 +293,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
           ste.context.changes = callbackMap[ state.context.id ];
         }
       }
-      deferred.resolve(ste);
+      outward.resolve(ste);
     }, function(ste) {
-        deferred.reject(ste);
+      outward.reject(ste);
     }, function(ste) {
-        deferred.notify(ste);
+      outward.notify(ste);
     });
     state.promise = outward.promise;
     return state;
