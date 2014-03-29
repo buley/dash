@@ -115,25 +115,24 @@ window.dashCache = window.dashCache || (function (environment) {
     	outward = this.deferred(),
     	response;
     if (this.contains(['get.entry'], state.method)) {
+    	console.log('was',state);
 	    response = get( {key: buildKey(state.context) });
+	    if (!this.isEmpty(response)) {
+	    	state = response;
+	    	state.context.cached = true;
+	    	setTimeout(function(){
+		    	outward.resolve(state);
+	    	}, 1000);
+	    	state.promise = outward;
+	    }
 	    console.log("CREAM get", buildKey(state.context), state);
-		promise(function(ctx) {
-		    if (!this.isEmpty(response)) {
-		    	state = response;
-		    	state.context.cached = true;
-		    	state.promise = outward;
-		    }
+		/*promise(function(ctx) {
 	      outward.resolve(ctx);
 	    }, function(ctx) {
 	      outward.error(ctx);
 	    }, function(ctx) {
-	    	if (!this.isEmpty(response)) {
-		    	ctx = response;
-		    	ctx.context.cached = true;
-		    	ctx.promise = outward;
-		    }
 	      outward.notify(ctx);
-	    });
+	    });*/
     }
     return state;
   }, function (state) {
