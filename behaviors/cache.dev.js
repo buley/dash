@@ -532,18 +532,25 @@ window.dashCache = window.dashCache || (function (environment) {
 		
 		return self;
 
-	})();
+	})(),
+	buildKey = function(key_ctx) {
+		console.log('key',key_ctx);
+		return 'test';
+	};
   return [ function (state) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    console.log("CREAM get",state.context.key);
+    console.log("CREAM get",state.context.key, buildKey(ste));
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    console.log("CREAM set",state.context.entry);
+    if (that.contains(['resolve','error'], ste.type)) {
+      console.log("CREAM set",state.context.entry, buildKey(ste));
+      delete collections[ ste.context.collector ];
+    }
     return state;
   } ];
 }(self));
