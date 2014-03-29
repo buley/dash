@@ -12,7 +12,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
     	that = this;
     state.context.patchid = this.random();
 	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [state.context.patch, state.context.patch];
-    result = this.apply(state.context.patch, [ result ]);
+    result = this.apply(patchMap[ state.context.patchid ][0], [ result ]);
     if (!this.isFunction(result)) {
     	state = result;
     } else {
@@ -32,6 +32,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
     if(this.isEmpty(state.context.patchid)) {
       return state;
     }
+    /*
     if (this.exists(state.context.entry)) {
 	    var deferred = this.deferred(),
 	    	result = state.context,
@@ -66,7 +67,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
 	    }
 	    delete patchMap[ state.context.patchid ];
 	    delete state.context.patchid;
-    }
+    }*/
     return state;
   } ];
 }(self));
