@@ -2,8 +2,8 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
   "use strict";
   var that,
   	 reduce = function(map, expression, xcontext, xreverse) {
-		var maybeReduce = function(expr) {
-			if (that.isFunction(expr, expression, context, reverse)) {
+		var maybeReduce = function(expr, expression, context, reverse) {
+			if (that.isFunction(expr)) {
 				expr = that.apply(expr, [context], that);
 			}
 			if (that.isObject(expr)) {
