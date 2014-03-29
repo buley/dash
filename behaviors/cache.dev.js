@@ -17,7 +17,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			cache = {};
 		}
 
-		var debug = false;
+		var debug = true;
 
 		var self = function( cache ) {
 			if( cache ) {
@@ -549,8 +549,10 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
+    var response;
     if (this.contains(['get.entry'], state.method)) {
-    	console.log("CREAM get",state.context.key, buildKey(state.context, state.type));
+      	response = CREAM.get( { key: buildKey(state.context, state.type), value: state.context.entry, ttl: state.context.expires || 300 } );
+    	console.log("CREAM get",response,state.context.key, buildKey(state.context, state.type));
     	state.context.cached = null;
     }
     return state;
@@ -559,8 +561,8 @@ window.dashCache = window.dashCache || (function (environment) {
       return state;
     }
     if (this.contains(['resolve','error'], state.type)) {
+      CREAM.set( { key: buildKey(state.context, state.type), value: state.context.entry, ttl: state.context.expires || 300 } );
       console.log("CREAM set",state.context.entry, buildKey(state.context, state.type));
-      state.context.cached = true;
     }
     return state;
   } ];
