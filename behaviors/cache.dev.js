@@ -111,19 +111,30 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    var inward = state.promise,
+    var promise = state.promise,
     	outward = this.deferred(),
     	response;
     console.log('checking',state.method);
     if (this.contains(['get.entry'], state.method)) {
 	    response = get( {key: buildKey(state.context) });
+	    state.promise - outward.promise;
 	    console.log("CREAM get", buildKey(state.context), response);
 	    if (!this.isEmpty(response)) {
 	    	state = response;
 	    	state.context.cached = true;
 	    }
-		console.log("ALL GOOD",state);
-
+		state.method = null;
+		/*
+		promise(function(ctx) {
+	      outward.resolve(ctx);
+	    }, function(ctx) {
+	      outward.error(ctx);
+	    }, function(ctx) {
+	      outward.notify(ctx);
+	    });*/
+		setTimeout(function(){
+			outward.resolve(response);
+		}, 20)
     }
     return state;
   }, function (state) {
