@@ -533,6 +533,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		return self;
 
 	})(),
+	cream = new CREAM(),
 	buildKey = function(key_ctx, type) {
 		console.log('key_ctx',key_ctx);
 		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key ].reduce(function(acc, current){
@@ -551,7 +552,7 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     var response;
     if (this.contains(['get.entry'], state.method)) {
-      	response = CREAM.get( { key: buildKey(state.context, state.type) } );
+      	response = cream.get( { key: buildKey(state.context, state.type) } );
     	console.log("CREAM get",response,state.context.key, buildKey(state.context, state.type));
     	state.context.cached = null;
     }
@@ -561,7 +562,7 @@ window.dashCache = window.dashCache || (function (environment) {
       return state;
     }
     if (this.contains(['resolve','error'], state.type)) {
-      CREAM.set( { key: buildKey(state.context, state.type), value: state.context.entry, ttl: state.context.expires || 300 } );
+      cream.set( { key: buildKey(state.context, state.type), value: state.context.entry, ttl: state.context.expires || 300 } );
       console.log("CREAM set",state.context.entry, buildKey(state.context, state.type));
     }
     return state;
