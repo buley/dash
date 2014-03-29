@@ -505,7 +505,31 @@ window.dashCache = window.dashCache || (function (environment) {
 			}
 			return obj3;
 		}
-
+	
+		var roughObjectSize = function() {
+		    var objectList = [],
+		    	stack = [ object ], 
+		    	bytes = 0,
+		    	i;
+		    	vlaue;
+		    while ( stack.length ) {
+		        value = stack.pop();
+		        if ( typeof value === 'boolean' ) {
+		            bytes += 4;
+		        } else if ( typeof value === 'string' ) {
+		            bytes += value.length * 2;
+		        } else if ( typeof value === 'number' ) {
+		            bytes += 8;
+		        } else if ( typeof value === 'object' && objectList.indexOf( value ) === -1 ) {
+		            objectList.push( value );
+		            for( i in value ) {
+		                stack.push( value[ i ] );
+		            }
+		        }
+		    }
+		    return bytes;
+		};
+		
 		return self;
 
 	})();
@@ -513,11 +537,13 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
+    console.log("CREAM get",state.context.data);
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
+    console.log("CREAM set",state.context.entry);
     return state;
   } ];
 }(self));
