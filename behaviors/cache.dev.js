@@ -16,14 +16,14 @@ window.dashCache = window.dashCache || (function (environment) {
 			data: value,
 			expire: timestamp + ttl
 		};
-		return cache[ key ];
+		return cache[ key ].data;
 	},
 	get = function( request ) {
 		var key = request.key || '';
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
-		return cache[ key ];
+		return cache[ key ].data;
 	},
 	zap = function( request ) {
 		var key = request.key || ''
