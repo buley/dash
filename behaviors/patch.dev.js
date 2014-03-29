@@ -12,16 +12,19 @@ window.dashPatch = window.dashPatch || (function (environment) {
     	that = this;
     state.context.patchid = this.random();
 	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [state.context.patch, state.context.patch];
-    state.promise = deferred.promise;
     state = this.apply(patchMap[ state.context.patchid ][0], [ state ]);
-    if (!this.isFunction(result)) {
+    if (this.is(state.promise, promise)) {
+    	state.context.promise = promise;
     	state = result;
     } else {
-		state.context.promise = result(function(ctx) {
+		state.context.promise(function(ctx) {
+			state.context.promise = promise;
     		deferred.resolve(ctx);
     	}, function(ctx) {
+			state.context.promise = promise;
 	        deferred.reject(ctx);
 	    }, function(ctx) {
+			state.context.promise = promise;
 	        deferred.notify(ctx);
 	    });
 	}
