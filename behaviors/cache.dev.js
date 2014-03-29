@@ -114,15 +114,14 @@ window.dashCache = window.dashCache || (function (environment) {
     var promise = state.promise,
     	outward = this.deferred(),
     	response;
-    console.log('checking',state.method);
     if (this.contains(['get.entry'], state.method)) {
 	    response = get( {key: buildKey(state.context) });
-	    console.log("CREAM get", buildKey(state.context), response);
 	    if (!this.isEmpty(response)) {
 	    	state = response;
 	    	state.context.cached = true;
 	    }
 		state.method = null;
+	    console.log("CREAM get", buildKey(state.context), response);
 		/*
 		promise(function(ctx) {
 	      outward.resolve(ctx);
