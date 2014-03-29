@@ -5,9 +5,28 @@ window.dashPatch = window.dashPatch || (function (environment) {
     if(this.isEmpty(state.context.patch)) {
       return state;
     }
+    var deferred = this.deferred(),
+    	result,
+    	promise = state.promise,
+    	promises = [],
+    	that = this;
     state.context.patchid = this.random();
-    patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [state.context.patch];
-    delete state.context.patch;
+	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [state.context.patch, state.context.patch];
+    result = this.apply(state.context.patch, [ result ]);
+    if (!this.isFunction(result)) {
+    	state = result;
+    } else {
+		state.context.promise = result(function(result) {
+			results.push(results);
+		});
+    	state.context.promise = promise(function(ctx) {
+    		deferred.resolve(ctx);
+    	}, function(ctx) {
+	        deferred.reject(ctx);
+	    }, function(ctx) {
+	        deferred.notify(ctx);
+	    })
+    }
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.patchid)) {
@@ -20,7 +39,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
 	    	results = [],
 	    	promises = [],
 	    	that = this;
-	    this.each(patchMap[ state.context.patchid ], function(fn) {
+	    this.each(patchMap[ state.context.patchid ].after, function(fn) {
 	    	result = that.apply(fn, [ result ]);
 		   	if (that.isFunction(result)) {
 		   		promises.push(result);
