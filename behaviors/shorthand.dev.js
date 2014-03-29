@@ -24,8 +24,12 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
     if(this.isEmpty(state.context.shorthand)) {
       return state;
     }
-    var data = state.context.data;
+    var data = state.context.data,
+    	shorthand = state.context.shorthand;
     if (!this.isEmpty(data)) {
+    	if (!!shorthand.after || !!shorthand.before) {
+    		shorthand = shorthand.before;
+    	}
     	state.context.data = reduce(state.context.shorthand, data, state.context, false);
     }
     return state;
@@ -33,9 +37,13 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
     if(this.isEmpty(state.context.shorthand)) {
       return state;
     }
-    var data = state.context.entry;
+    var data = state.context.entry,
+    	shorthand = state.context.shorthand;
     if (!this.isEmpty(data)) {
-    	state.context.entry = reduce(state.context.shorthand, data, state.context, true);
+    	if (!!shorthand.after || !!shorthand.before) {
+    		shorthand = shorthand.after;
+    	}
+    	state.context.entry = reduce(shorthand, data, state.context, true);
     }
     return state;
   } ];
