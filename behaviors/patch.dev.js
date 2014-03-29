@@ -12,10 +12,9 @@ window.dashPatch = window.dashPatch || (function (environment) {
     	promises = [],
     	that = this;
     state.context.patchid = this.random();
-	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [ this.clone(state.context.patch), this.clone(state.context.patch)];
-    console.log(state.context,'setting', state.context.patchid, patchMap[ state.context.patchid ]);
+	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? { before: state.context.patch[0], after: state.context.patch[1] } : { before: state.context.patch, after: state.context.patch };
     state.promise = outside.promise;
-    result = this.apply(patchMap[ state.context.patchid ][0], [ state ]);
+    result = this.apply(patchMap[ state.context.patchid ].before, [ state ]);
     if (this.is(result.promise, state.promise)) {
     	result.promise = promise;
     	state = result;
@@ -36,8 +35,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
     if(this.isEmpty(state.context.patchid)) {
       return state;
     }
-    if (!patchMap[ state.context.patchid ][1]) {
-    	console.log('wtf: ' + state.context.patchid,patchMap[ state.context.patchid ]);
+    if (!patchMap[ state.context.patchid ].after) {
     	return state;
     }
     var outside = this.deferred(),
