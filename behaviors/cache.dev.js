@@ -19,13 +19,13 @@ window.dashCache = window.dashCache || (function (environment) {
 
 		var debug = true;
 
-		var self = function( cache ) {
+		var api = function( cache ) {
 			if( cache ) {
 				this.cache = preheatCache( cache );
 			}
 		}
 		
-		self.prototype.set = function( request ) {	
+		api.prototype.set = function( request ) {	
 
 			//Prefix to help prevent namespace collisions
 			var key = request.key || null
@@ -41,7 +41,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			    , new_value = {};
 
 			if( !!debug ) {
-				console.log('self.prototype.set key',key,'value',value);
+				console.log('api.prototype.set key',key,'value',value);
 			}
 
 			if( 'function' === typeof value ) {
@@ -103,7 +103,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			return this;
 		};
 
-		self.prototype.get = function( request ) {
+		api.prototype.get = function( request ) {
 
 			var key = request.key || null
 			  , result
@@ -118,7 +118,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			}
 
 			if( !!debug ) {
-				console.log('self.prototype.get key', key ); 
+				console.log('api.prototype.get key', key ); 
 			}
 
 			if( -1 !== key.indexOf( '.' ) ) {
@@ -150,7 +150,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			return filterOutput( key, result );
 		};
 
-		self.prototype.delete = function( request ) {
+		api.prototype.delete = function( request ) {
 
 			var key = request.key || null
 			  , temp
@@ -185,57 +185,57 @@ window.dashCache = window.dashCache || (function (environment) {
 
 		};
 
-		self.prototype.pop = function( request ) {
+		api.prototype.pop = function( request ) {
 
 			request.value = function( previous ) {
 				return updateAndReturn( request.key, previous.pop() );
 			};
 
-			self.prototype.update( request );
+			api.prototype.update( request );
 
 			return this;
 
 		};
 
-		self.prototype.head = function( request ) {
+		api.prototype.head = function( request ) {
 
 			request.value = function( previous ) {
 				return updateAndReturn( request.key, previous.shift() );
 			};
 
-			self.prototype.update( request );
+			api.prototype.update( request );
 
 			return this;
 
 		};
 
 
-		self.prototype.slice = function( request ) {
+		api.prototype.slice = function( request ) {
 
 			request.value = function( previous ) {
 				return updateAndReturn( request.key, previous.slice( request.begin, request.end ) );
 			};
 
-			self.prototype.update( request );
+			api.prototype.update( request );
 
 			return this;
 		};
 
 		// key, property
-		self.prototype.remove = function( request ) {
+		api.prototype.remove = function( request ) {
 
 			request.value = function( previous ) {
 				delete previous[ request.property ] 
 				return updateAndReturn( request.key, previous );
 			};
 
-			return self.prototype.update( request );
+			return api.prototype.update( request );
 			
 			return this;
 
 		};
 
-		self.prototype.prepend = function( request ) {
+		api.prototype.prepend = function( request ) {
 
 			request.value = function( previous ) {
 				var value = request.value;
@@ -247,13 +247,13 @@ window.dashCache = window.dashCache || (function (environment) {
 				return updateAndReturn( request.key, previous );
 			};
 
-			self.prototype.update( request );
+			api.prototype.update( request );
 
 			return this;
 
 		};
 
-		self.prototype.append = function( request ) {
+		api.prototype.append = function( request ) {
 
 			request.value = function( previous ) {
 				var value = request.value;
@@ -266,38 +266,38 @@ window.dashCache = window.dashCache || (function (environment) {
 				return updateAndReturn( request.key, previous );
 			};
 
-			self.prototype.update( request );
+			api.prototype.update( request );
 
 			return this;
 
 		};
 
-		self.prototype.increment = function( request ) {
+		api.prototype.increment = function( request ) {
 
 			request.value = function( previous ) {
 				previous += request.value;
 				return updateAndReturn( request.key, previous );
 			};
 
-			self.prototype.update( request );
+			api.prototype.update( request );
 
 			return this;
 
 		};
 
-		self.prototype.update = function( request ) {
+		api.prototype.update = function( request ) {
 
 			var key = request.key || null
 			  , value = request.value || null;
 
-			var previous = self.prototype.get( key );
+			var previous = api.prototype.get( key );
 
 			if( 'function' === typeof value ) {
 				value = value( previous );
 			}
 
 			cache[ key ] = {
-				'timestamp': self.prototype.getExpires( { 'key': key } )
+				'timestamp': api.prototype.getExpires( { 'key': key } )
 				, 'data': value
 			};
 
@@ -305,7 +305,7 @@ window.dashCache = window.dashCache || (function (environment) {
 
 		};
 
-		self.prototype.setExpires = function( request ) {
+		api.prototype.setExpires = function( request ) {
 
 			var key = request.key || null
 			    , timestamp = request.timestamp || 0;
@@ -318,7 +318,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		};
 
 
-		self.prototype.getExpires = function( request ) {
+		api.prototype.getExpires = function( request ) {
 
 			var key = request.key || null
 			    , result = cache[ key ];
@@ -329,38 +329,38 @@ window.dashCache = window.dashCache || (function (environment) {
 		
 		};
 
-		self.prototype.extendTTL = function( request ) {
+		api.prototype.extendTTL = function( request ) {
 
 			var key = request.key || null
-			    , current = self.prototype.getExpires( { 'key': key } )
+			    , current = api.prototype.getExpires( { 'key': key } )
 			    , timestamp = ( current + request.value );
 
-			self.prototype.setExpires( { 'key': key, 'timestamp': timestamp } );
+			api.prototype.setExpires( { 'key': key, 'timestamp': timestamp } );
 
 			return this;			    
 
 		};
 
-		self.prototype.shortenTTL = function( request ) {
+		api.prototype.shortenTTL = function( request ) {
 
 			var key = request.key || null
-			    , current = self.prototype.getExpires( { 'key': key } )
+			    , current = api.prototype.getExpires( { 'key': key } )
 			    , timestamp = currrent + request.value;
 			
-			self.prototype.setExpires( { 'key': key, 'timestamp': timestamp } );
+			api.prototype.setExpires( { 'key': key, 'timestamp': timestamp } );
 
 			return this;
 
 		};
 
-		self.prototype.increment = function( request ) {
+		api.prototype.increment = function( request ) {
 
 			request.value = function( previous ) {
 				previous += request.value;
 				return updateAndReturn( request.key, previous );
 			};
 
-			self.prototype.update( request );
+			api.prototype.update( request );
 
 			return this;
 
@@ -418,7 +418,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			  , value = request.value || null
 			  , timestamp = getExpires( { 'key': key } );
 
-			self.prototype.update( { 'key': key, 'value': value, 'timestamp': timestamp } );
+			api.prototype.update( { 'key': key, 'value': value, 'timestamp': timestamp } );
 			
 			return value;
 		};
@@ -464,7 +464,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			   , stale = isStale( data );
 		
 			if( true === stale ) {
-				self.prototype['delete']( { 'key': key } );
+				api.prototype['delete']( { 'key': key } );
 			}
 
 			return prepResults( data );
@@ -533,7 +533,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		    return bytes;
 		};
 		
-		return self;
+		return api;
 
 	})(),
 	cream = new CREAM(),
@@ -587,4 +587,4 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     return state;
   } ];
-}(self));
+}(api));
