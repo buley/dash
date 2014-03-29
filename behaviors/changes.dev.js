@@ -270,19 +270,16 @@ window.dashChanges = window.dashChanges || (function (environment) {
   return [ function(state) {
     that = this;
     var id = this.random();
-    console.log('run?', id);   
     state.context.changeid = id;
     if(!this.isFunction(state.context.changes) && !this.isArray(state.context.changes)) {
-      console.log('no!');
       return state;
     } 
     callbackMap[ id ] = this.clone(state.context.changes);
-    console.log('set here',id);
     return state;
   }, function (state) {
     that = this;
     var promise = state.promise,
-        deferred = this.deferred(),
+        outward = this.deferred(),
         hasChanges = !!state.context.changes;
     promise(function(ste) {
       var id = ste.context.changeid,
@@ -295,7 +292,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       that.each(changeset, function(callback) {
         ste.context.changes = callback; 
         notify(state.context, state.method, state.type);
-        if (isChanger) {
+        if (!that.isEmpty(callback) && isChanger) {
           register(ste.method, ste.context);
           unregister(ste.method, ste.context);
         }
@@ -309,7 +306,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     }, function(ste) {
         deferred.notify(ste);
     });
-    state.promise = deferred.promise;
+    state.promise = outward.promise;
     return state;
   } ];
 }(self));
