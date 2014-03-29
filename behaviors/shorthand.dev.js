@@ -1,14 +1,14 @@
 window.dashShorthand = window.dashShorthand || (function (environment) {
   "use strict";
   var that,
-  	 reduce = function(map, expression, context, reverse) {
+  	 reduce = function(map, expression, xcontext, xreverse) {
 		var maybeReduce = function(expr) {
-			if (that.isFunction(expr)) {
+			if (that.isFunction(expr, expression, context, reverse)) {
 				expr = that.apply(expr, [context], that);
 			}
 			if (that.isObject(expr)) {
 				that.iterate(expr, function(key, value) {
-					if (that.contains(key)) {
+					if (that.contains(map, key)) {
 						expr[value] = maybeReduce(map, value, context, reverse);
 						console.log("REMAP",key, value, map);
 					} else {
@@ -19,7 +19,7 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
 			}
 			return expr;
 		}
-		return maybeReduce(map, expression, context, reverse);	
+		return maybeReduce(map, expression, xcontext, xreverse);	
 	};
   return [ function (state) {
   	that = this;
