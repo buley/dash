@@ -308,7 +308,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
             }
             delete ste.context.changeid;
           }
-          update(ste.method, ste.context);
+          if(that.is('resolve', 'notify', ste.type)) {
+            update(ste.method, ste.context);
+          }
           return ste;
         };
     promise(function(ste) {
