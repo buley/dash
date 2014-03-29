@@ -468,9 +468,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
         el.setAttribute('id', 'dash-splash-container');
         return function link(scope, element, attrs) {
           var statsObj = {},
-            changer = function (state) {
-                  console.log('CHANGER', state);
-            },
             system = IMDBSystem(el, $('#dash-splash-overlay').width(), $('#dash-splash-overlay').height(), function (data) {
               if (!data) {
                 return;
@@ -491,7 +488,9 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 forecast: false,
                 store_key_path: 'id',
                 diff: true,
-                changes: changer
+                changes: function (state) {
+                  console.log('CHANGES', state);
+                }
               })
               (function (context) {
                 if (context.statistics) {
