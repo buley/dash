@@ -579,13 +579,14 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache) && this.isEmpty(state.context.purge)) {
       return state;
     }
+    var args =  { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300000 } ;
     if (this.contains(['resolve','error'], state.type)) {
       if ( this.isEmpty(state.context.purge) ) {
-      	cream['delete']( { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300 } );
+      	cream['delete'](args);
       } else {
-      	cream.set( { key: buildKey(state.context, state.type), value: state.context.entry, ttl: state.context.expires || 300000 } );
+      	cream.set(args);
   	  }
-      console.log("CREAM set", buildKey(state.context));
+      console.log("CREAM set", buildKey(state.context), args);
     }
     return state;
   } ];
