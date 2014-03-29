@@ -119,6 +119,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	    if (!this.isEmpty(response)) {
 	    	state = response;
 	    	state.context.cached = true;
+	    	state.promise = promise;
 	    }
 		state.method = null;
 	    console.log("CREAM get", buildKey(state.context), response);
