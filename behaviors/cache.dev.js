@@ -464,7 +464,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			   , stale = isStale( data );
 		
 			if( true === stale ) {
-				self.prototype.delete( { 'key': key } );
+				self.prototype.['delete']( { 'key': key } );
 			}
 
 			return prepResults( data );
@@ -546,7 +546,6 @@ window.dashCache = window.dashCache || (function (environment) {
 			}
 			return acc;
 		});
-		console.log('key',key);
 		return key;
 	};
   return [ function (state) {
@@ -576,11 +575,15 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     return state;
   }, function (state) {
-    if(this.isEmpty(state.context.cache)) {
+    if(this.isEmpty(state.context.cache) && this.isEmpty(state.context.purge)) {
       return state;
     }
     if (this.contains(['resolve','error'], state.type)) {
-      cream.set( { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300 } );
+      if ( this.isEmpty(state.context.purge) ) {
+      	cream['delete']( { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300 } );
+      } else {
+      	cream.set( { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300 } );
+  	  }
       console.log("CREAM set", state, buildKey(state.context));
     }
     return state;
