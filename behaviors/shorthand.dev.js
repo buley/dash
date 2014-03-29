@@ -9,10 +9,9 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
 			if (that.isObject(expr)) {
 				that.iterate(expr, function(key, value) {
 					if (!that.isEmpty(map[key])) {
-						expr[key] = map[key];// maybeReduce(map, map[key], context, reverse);
-					} else {
-						expr[key] = map[key]; //maybeReduce(map, value, context, reverse);
+						map[key] = value;
 					}
+					expr[key] = maybeReduce(map, value, context, reverse);
 				});
 			}
 			return expr;
