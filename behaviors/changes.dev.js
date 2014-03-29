@@ -268,15 +268,15 @@ window.dashChanges = window.dashChanges || (function (environment) {
       return ctx;
     };
   return [ function(state) {
-    console.log('run?');
+    that = this;
+    var id = this.random();
+    console.log('run?', id);   
+    state.context.changeid = id;
     if(!this.isFunction(state.context.changes) && !this.isArray(state.context.changes)) {
       console.log('no!');
       return state;
-    }    
-    that = this;
-    var id = this.random();
+    } 
     callbackMap[ id ] = this.clone(state.context.changes);
-    state.context.changeid = id;
     console.log('set here',id);
     return state;
   }, function (state) {
