@@ -36,6 +36,7 @@ window.dashCache = window.dashCache || (function (environment) {
 			    , obj = {}
 			    , precount = 0
 			    , attr
+			    , keys
 			    , new_value = {};
 
 			if( !!debug ) {
