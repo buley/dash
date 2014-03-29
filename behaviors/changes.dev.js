@@ -295,9 +295,6 @@ window.dashChanges = window.dashChanges || (function (environment) {
         }
         if(that.is('resolve', state.type)) {
           delete ste.context.changeid;
-          if (!hasChanges) {
-            delete ste.context.changes;
-          }
         }
         deferred.resolve(ste);
       });
