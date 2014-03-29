@@ -12,18 +12,18 @@ window.dashCache = window.dashCache || (function (environment) {
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
-		cached[ key ] = {
+		cache[ key ] = {
 			data: value,
 			expire: timestamp + ttl
 		};
-		return cached[ key ];
+		return cache[ key ];
 	},
 	get = function( request ) {
 		var key = request.key || '';
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
-		return cached[ key ];
+		return cache[ key ];
 	},
 	zap = function( request ) {
 		var key = request.key || ''
@@ -32,7 +32,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
-		delete cached[ key ];
+		delete cache[ key ];
 	},
 	setExpires = function( request ) {
 		var key = request.key || null
