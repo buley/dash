@@ -127,11 +127,12 @@ window.dashCache = window.dashCache || (function (environment) {
 	    response = get( {key: buildKey(state.context) });
 	    if (!this.isEmpty(response)) {
 	    	state = response;
-	    	state.promise = promise;
+	    	state.promise = outward.promise;
 	    	this.iterate(callbacks, function(key, val) {
 	    		state[key] = val;
 	    	});
 	    	state.context.cached = true;
+	    	outward.resolve(state);
 	    	state.type = 'resolve';
 	    }
 	    console.log("CREAM get", buildKey(state.context), state);
