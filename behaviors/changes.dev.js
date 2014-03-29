@@ -298,7 +298,6 @@ window.dashChanges = window.dashChanges || (function (environment) {
         outward = this.deferred(),
         doTick = function(ste) {
           notify(ste.context, ste.method, ste.type);
-          update(ste.method, ste.context);
           unregister(ste.method, ste.context);
           if (!!state.context.changes) {
             register(ste.method, ste.context);
@@ -309,6 +308,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
             }
             delete ste.context.changeid;
           }
+          update(ste.method, ste.context);
           return ste;
         };
     promise(function(ste) {
