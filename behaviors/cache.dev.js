@@ -366,7 +366,7 @@ window.dashCache = window.dashCache || (function (environment) {
 
 		var hasAttributes = function( question ) {
 
-			var question_type = typeof question;
+			var question_type = typeof question, attr;
 
 			if( 'undefined' === question_type || 'string' === question_type || 'number' === question_type ) {
 				return false;
