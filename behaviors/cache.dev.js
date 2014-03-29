@@ -550,15 +550,15 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    console.log("CREAM get",state.context.key, buildKey(ste.context, ste.type));
+    console.log("CREAM get",state.context.key, buildKey(state.context, state.type));
     return state;
   }, function (state) {
     if(this.isEmpty(state.context.cache)) {
       return state;
     }
-    if (that.contains(['resolve','error'], ste.type)) {
-      console.log("CREAM set",state.context.entry, buildKey(ste.context, ste.type));
-      delete collections[ ste.context.collector ];
+    if (that.contains(['resolve','error'], state.type)) {
+      console.log("CREAM set",state.context.entry, buildKey(state.context, state.type));
+      delete collections[ state.context.collector ];
     }
     return state;
   } ];
