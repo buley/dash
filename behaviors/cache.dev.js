@@ -581,7 +581,7 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     if (this.contains(['resolve','error'], state.type)) {
       cream.set( { key: buildKey(state.context, state.type), value: state.context.entry, ttl: state.context.expires || 300 } );
-      console.log("CREAM set",state.context.entry, buildKey(state.context, state.type));
+      console.log("CREAM set", state, buildKey(state.context, state.type));
     }
     return state;
   } ];
