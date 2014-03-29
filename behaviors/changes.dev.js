@@ -283,10 +283,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
         hasChanges = !!state.context.changes;
     promise(function(ste) {
       notify(state.context, state.method, state.type);
-      if (isChanger) {
-        register(ste.method, ste.context);
-        unregister(ste.method, ste.context);
-      }
+      register(ste.method, ste.context);
+      unregister(ste.method, ste.context);
       if(that.is('resolve', state.type)) {
         delete ste.context.changeid;
         if ( !that.isEmpty(callbackMap[ state.context.id ]) ) {
