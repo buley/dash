@@ -1,23 +1,23 @@
 window.dashShorthand = window.dashShorthand || (function (environment) {
   "use strict";
   var that,
-  	 reduce = function(map, expression, xcontext, xreverse) {
-		var maybeReduce = function(expr, expression, context, reverse) {
+  	 reduce = function(xmap, expression, xcontext, xreverse) {
+		var maybeReduce = function(map, expr, context, reverse) {
 			if (that.isFunction(expr)) {
 				expr = that.apply(expr, [context], that);
 			}
 			if (that.isObject(expr)) {
 				that.iterate(expr, function(key, value) {
 					if (!that.isEmpty(map[key])) {
-						expr[key] = maybeReduce(map, map[key], context, reverse);
+						expr[key] = map[key];// maybeReduce(map, map[key], context, reverse);
 					} else {
-						expr[key] = maybeReduce(map, value, context, reverse);
+						expr[key] = map[key]; //maybeReduce(map, value, context, reverse);
 					}
 				});
 			}
 			return expr;
 		}
-		return maybeReduce(map, expression, xcontext, xreverse);	
+		return maybeReduce(xmap, expression, xcontext, xreverse);	
 	};
   return [ function (state) {
   	that = this;
