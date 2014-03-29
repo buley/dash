@@ -36,7 +36,7 @@ window.dashPatch = window.dashPatch || (function (environment) {
       return state;
     }
     if (!patchMap[ state.context.patchid ][1]) {
-    	console.log('wtf',patchMap[ state.context.patchid ]);
+    	console.log('wtf: ' + state.context.patchid,patchMap[ state.context.patchid ]);
     	return state;
     }
     var outside = this.deferred(),
