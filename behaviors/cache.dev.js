@@ -123,8 +123,8 @@ window.dashCache = window.dashCache || (function (environment) {
 
 			if( -1 !== key.indexOf( '.' ) ) {
 				temp = cache;
-				while( key && -1 !== key.indexOf( '.' ) ) {
-					keys = key.split( '.' );
+				keys = key.split( '.' );
+				while( keys.length > 0 ) {
 					key = keys.shift();
 					temp_key = temp[ user_data_prefix + key ];
 					if( 'undefined' !== typeof temp && 'undefined' !== typeof temp_key ) {	
