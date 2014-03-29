@@ -42,6 +42,7 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
     }
     return state;
   }, function (state) {
+    that = this;
     if(this.isEmpty(state.context.shorthand)) {
       return state;
     }

@@ -15,11 +15,11 @@ window.dashLive = window.dashLive || (function (environment) {
         return fn;
       };
   return [ function (state) {
+    that = this;
     if(this.isnt(state.context.live, true)) {
       return state;
     }
     var lives;
-    that = this;
     state.context.liveid = this.random();
     lives = live(this.clone(state));
     if (this.isArray(state.context.lives)) {
@@ -30,6 +30,7 @@ window.dashLive = window.dashLive || (function (environment) {
     liveMap[ state.context.liveid ] = false;
     return state;
   }, function (state) {
+    that = this;
     if(this.isEmpty(state.context.liveid)) {
       return state;
     }
