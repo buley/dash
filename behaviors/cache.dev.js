@@ -554,7 +554,7 @@ window.dashCache = window.dashCache || (function (environment) {
     var inward = state.promise,
     	outward = this.deferred(),
     	response;
-    cosole.log('checking',state.method);
+    console.log('checking',state.method);
     if (this.contains(['get.entry'], state.method)) {
       	response = cream.get( { key: buildKey(state.context, state.type) } );
 	    console.log("CREAM get", buildKey(state.context), response);
