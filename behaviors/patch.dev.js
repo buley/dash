@@ -32,6 +32,10 @@ window.dashPatch = window.dashPatch || (function (environment) {
     if(this.isEmpty(state.context.patchid)) {
       return state;
     }
+    if (!patchMap[ state.context.patchid ][1]) {
+    	console.log('wtf',state);
+    	return state;
+    }
     var outside = this.deferred(),
 	    inside = this.deferred(),
     	result,
