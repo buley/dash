@@ -302,14 +302,14 @@ window.dashChanges = window.dashChanges || (function (environment) {
           if (!!state.context.changes) {
             register(ste.method, ste.context);
           }
+          if(that.is('resolve', 'notify', ste.type)) {
+            update(ste.method, ste.context);
+          }
           if(that.is('resolve', ste.type)) {
             if ( !that.isEmpty(callbackMap[ ste.context.changeid ]) ) {
               ste.context.changes = callbackMap[ ste.context.changeid ];
             }
             delete ste.context.changeid;
-          }
-          if(that.is('resolve', 'notify', ste.type)) {
-            update(ste.method, ste.context);
           }
           return ste;
         };
