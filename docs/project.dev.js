@@ -484,6 +484,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   item.se = item.se ? item.se + ' (' + item.id + ')' : item.id
                   return item;
                 },
+                cache: true,
                 stats: true,
                 forecast: false,
                 store_key_path: 'id',
@@ -496,6 +497,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 if (context.statistics) {
                   statsObj = context.statistics;
                 }
+                console.log('cached?',context.cached);
                 dashAppSplashBroadcast.current(context.entry);
                 if (pid) {
                   clearTimeout(pid);
