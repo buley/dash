@@ -13,7 +13,7 @@ window.dashShorthand = window.dashShorthand || (function (environment) {
 						console.log("REMAP",key, value, map);
 					} else {
 						console.log('leave it',key, value, map);
-						expr[key] = maybeReduce(map, value, context, reverse);
+						expr[key] = value;//maybeReduce(map, value, context, reverse);
 					}
 				});
 			}
