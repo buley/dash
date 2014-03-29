@@ -477,6 +477,10 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 database: 'dash-demo',
                 store: 'imdb',
                 key: data,
+                patch:function(ctx) {
+                  console.log('both',ctx);
+                  return ctx;
+                },
                 map: function (item) {
                   item.se = item.se ? item.se + ' (' + item.id + ')' : item.id
                   return item;
