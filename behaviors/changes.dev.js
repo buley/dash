@@ -275,6 +275,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     var id = this.random();
     callbackMap[ id ] = this.clone(state.context.changes);
     state.context.changeid = id;
+    console.log('set here',id);
     return state;
   }, function (state) {
     that = this;
@@ -285,9 +286,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
       var id = ste.context.changeid,
           changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
           isChanger = that.exists(id);
+      console.log('bogus why?',id);
       that.each(changeset, function(callback) {
         ste.context.changes = callback; 
-        ste.context.changeid = ste.context.changeid || id;
         notify(state.context, state.method, state.type);
         if (isChanger) {
           register(ste.method, ste.context);
