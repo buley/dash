@@ -557,6 +557,7 @@ window.dashCache = window.dashCache || (function (environment) {
     cosole.log('checking',state.method);
     if (this.contains(['get.entry'], state.method)) {
       	response = cream.get( { key: buildKey(state.context, state.type) } );
+	    console.log("CREAM get", buildKey(state.context), response);
     	console.log('response!',response);
     	state.context.cached = !!response ? response : null;
     	if (!!response) {
@@ -584,7 +585,7 @@ window.dashCache = window.dashCache || (function (environment) {
       } else {
       	cream.set( { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300 } );
   	  }
-      console.log("CREAM set", state, buildKey(state.context));
+      console.log("CREAM set", buildKey(state.context));
     }
     return state;
   } ];
