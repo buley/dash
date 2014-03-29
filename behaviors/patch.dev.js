@@ -14,7 +14,9 @@ window.dashPatch = window.dashPatch || (function (environment) {
 	patchMap[ state.context.patchid ] = this.isArray(state.context.patch) ? state.context.patch : [state.context.patch, state.context.patch];
     result = this.apply(patchMap[ state.context.patchid ][0], [ state ]);
     if (!this.isFunction(result)) {
+    	
     	state = result;
+    	console.log('patched');
     } else {
 		state.context.promise = result(function(result) {
 			results.push(results);
