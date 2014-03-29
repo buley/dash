@@ -1,4 +1,4 @@
-# dash [![Build Status](https://travis-ci.org/editor/dash.png?branch=master)](https://travis-ci.org/editor/dash) [![Coverage Status](https://coveralls.io/repos/editor/dash/badge.png)](https://coveralls.io/r/editor/dash)
+# dash [![Build Status](https://travis-ci.org/buley/dash.png?branch=master)](https://travis-ci.org/editor/dash) [![Coverage Status](https://coveralls.io/repos/buley/dash/badge.png)](https://coveralls.io/r/editor/dash)
 
 A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
