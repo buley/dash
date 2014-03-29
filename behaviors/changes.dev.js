@@ -282,24 +282,17 @@ window.dashChanges = window.dashChanges || (function (environment) {
         outward = this.deferred(),
         hasChanges = !!state.context.changes;
     promise(function(ste) {
-      var id = ste.context.changeid,
-          changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
-          isChanger = that.exists(id);
-      if (!that.isEmpty(callbackMap[ id ])) {
-        delete state.context.changeid;
-        changeset = [ null ];
+      notify(state.context, state.method, state.type);
+      if (!that.isEmpty(callback) && isChanger) {
+        register(ste.method, ste.context);
+        unregister(ste.method, ste.context);
       }
-      that.each(changeset, function(callback) {
-        ste.context.changes = callback; 
-        notify(state.context, state.method, state.type);
-        if (!that.isEmpty(callback) && isChanger) {
-          register(ste.method, ste.context);
-          unregister(ste.method, ste.context);
+      if(that.is('resolve', state.type)) {
+        delete ste.context.changeid;
+        if ( !that.isEmpty(callbackMap[ state.context.id ]) ) {
+          ste.context.changes = callbackMap[ state.context.id ];
         }
-        if(that.is('resolve', state.type)) {
-          delete ste.context.changeid;
-        }
-      });
+      }
       deferred.resolve(ste);
     }, function(ste) {
         deferred.reject(ste);
