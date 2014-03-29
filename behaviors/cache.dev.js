@@ -538,7 +538,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key ].reduce(function(acc, curr){
 			console.log('xxx', acc);
 			acc = acc || [];
-			if(!!current)) {
+			if(!!current) {
 				acc.push(current);
 			}
 			return acc;
