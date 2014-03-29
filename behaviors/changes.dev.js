@@ -297,12 +297,12 @@ window.dashChanges = window.dashChanges || (function (environment) {
     var promise = state.promise,
         outward = this.deferred(),
         doTick = function(ste) {
+          update(ste.method, ste.context);
           notify(ste.context, ste.method, ste.type);
           if (!!state.context.changes) {
             register(ste.method, ste.context);
           }
           unregister(ste.method, ste.context);
-          update(ste.method, ste.context);
           if(that.is('resolve', ste.type)) {
             if ( !that.isEmpty(callbackMap[ ste.context.changeid ]) ) {
               ste.context.changes = callbackMap[ ste.context.changeid ];
