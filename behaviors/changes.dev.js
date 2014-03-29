@@ -3,6 +3,20 @@ window.dashChanges = window.dashChanges || (function (environment) {
   var callbackMap = {},
     changeMap = {},
     that,
+    update = function(type, ctx) {
+      if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
+        if (that.contains(['update.entries', 'update.entry'], type)) {
+          var key = ctx.primary_key || ctx.key;
+          changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
+          changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
+            callbacks: []
+          };
+          if (that.exists(ctx.entry)) {
+            changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
+          }
+        }
+      }    
+    },
     unregister = function(type, ctx) {
       if (that.contains(['remove.database'], type)) {
         delete changeMap[ctx.database];
@@ -288,6 +302,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
             register(ste.method, ste.context);
           }
           unregister(ste.method, ste.context);
+          update(ste.method, ste.context);
           if(that.is('resolve', ste.type)) {
             if ( !that.isEmpty(callbackMap[ ste.context.changeid ]) ) {
               ste.context.changes = callbackMap[ ste.context.changeid ];
