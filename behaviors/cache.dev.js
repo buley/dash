@@ -10,11 +10,13 @@ window.dashCache = window.dashCache || (function (environment) {
 		    , current_date = new Date()
 		    , timestamp = ( current_date.getTime() + ( ttl * 1000 ) )
 		    , obj = {}
-		    , precount = 0
 		    , attr
 		    , new_obj = {}
-		    , keys
-		    , new_value = {};
+		    , keys;
+		cached[ key ] = {
+			data: value,
+			expire: timestamp + ttl;
+		};
 	},
 	get = function( request ) {
 		var key = request.key || ''
