@@ -288,7 +288,11 @@ window.dashChanges = window.dashChanges || (function (environment) {
       var id = ste.context.changeid,
           changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
           isChanger = that.exists(id);
-      console.log('bogus why?',id);
+      if (!that.isEmpty(callbackMap[ id ])) {
+        delete state.context.changeid;
+        changeset = [];
+      }
+      console.log('bogus why?',id, changeset);
       that.each(changeset, function(callback) {
         ste.context.changes = callback; 
         notify(state.context, state.method, state.type);
