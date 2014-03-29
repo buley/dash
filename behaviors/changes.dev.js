@@ -291,7 +291,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
         notify(state.context, state.method, state.type);
         if (isChanger) {
           register(ste.method, ste.context);
-          unregister(ste.method, ste.context);            r
+          unregister(ste.method, ste.context);
         }
         if(that.is('resolve', state.type)) {
           delete ste.context.changeid;
