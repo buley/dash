@@ -587,4 +587,4 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     return state;
   } ];
-}(api));
+}(self));
