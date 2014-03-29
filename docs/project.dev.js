@@ -9,6 +9,7 @@ dashApp.config(['$routeProvider',
     dash.add.behavior(dashCollect);
     dash.add.behavior(dashMap);
     dash.add.behavior(dashMapReduce);
+    dash.add.behavior(dashPatch);
 
     $routeProvider
       .when('/about', {
@@ -477,7 +478,7 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 database: 'dash-demo',
                 store: 'imdb',
                 key: data,
-                patch:function(ctx) {
+                patch: function(ctx) {
                   console.log('both',ctx);
                   return ctx;
                 },
