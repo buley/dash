@@ -10,6 +10,7 @@ dashApp.config(['$routeProvider',
     dash.add.behavior(dashMap);
     dash.add.behavior(dashMapReduce);
     dash.add.behavior(dashPatch);
+    dash.add.behavior(dashShorthand);
 
     $routeProvider
       .when('/about', {
