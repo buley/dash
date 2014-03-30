@@ -238,6 +238,7 @@ self.dashRest = self.dashRest || (function (environment) {
 				}
 	    	}
 	    	if (update) {
+	    		console.log('doing rest',state.method,state.type);
     		  state.promise = outward.promise;
     		  args = rest[ state.context.restid ];
 	    	  args.data = state.context.entry ? state.context.entry : null
