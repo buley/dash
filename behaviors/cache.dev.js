@@ -281,6 +281,9 @@ self.dashCache = self.dashCache || (function (environment) {
 	  	  inward(function(ctx2){
 		      outward.resolve(ctx2);
 	  	  });
+	  	  setTimeout(function(){
+	  	  	outward.resolve(ctx2);
+	  	  })
 		}
 	    return state;
 	  } ];
