@@ -134,6 +134,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	    	state.context.cached = true;
 	    	if(!this.isEmpty(state.context.statistics)) {
 	    		delete state.context.statistics.id;
+	    		delete state.context.statistics.request;
 	    	}
 	    	outward.resolve(state);
 	    	state.type = 'resolve';
