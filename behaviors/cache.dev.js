@@ -168,7 +168,7 @@ self.dashCache = self.dashCache || (function (environment) {
         	}, reduce = function(input) {
         		var attrs = {},
         			attr;
-        		for ( attr of input ) {
+        		for ( attr in input ) {
         			if ( true === input.hasOwnProperty(attr) ) {
         				if ( isReducible(input[ attr ] ) ) {
 	        				attrs[ attr ] = reduce(input[ attr ]);
@@ -178,6 +178,7 @@ self.dashCache = self.dashCache || (function (environment) {
         				}
         			}
         		}
+        		return attrs;
         	};
         	return reduce(obj);
         },
