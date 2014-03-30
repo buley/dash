@@ -132,6 +132,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	    		state.context[key] = val;
 	    	});
 	    	state.context.cached = true;
+	    	state.context.statistics = null;
 	    	outward.resolve(state);
 	    	state.type = 'resolve';
 	    }
