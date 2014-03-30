@@ -33,11 +33,14 @@ self.dashCache = self.dashCache || (function (environment) {
 	zap = function( request ) {
 		var key = request.key || ''
 		  , temp
-		  , keys = key.split('.');
+		  , keys = key.split('.')
+		  , result;
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
+		result = cache[ key ];
 		delete cache[ key ];
+		return result;
 	},
 	setExpires = function( request ) {
 		var key = request.key || null
@@ -287,7 +290,6 @@ self.dashCache = self.dashCache || (function (environment) {
 	      if ( !this.isEmpty(state.context.purge) ) {
 		    inward = workDispatch('zap', args );
 	      } else {
-	      	console.log('dispatching set',args);
 		    inward = workDispatch('set', args );
 	  	  }
 	  	  inward(function(ctx2){
