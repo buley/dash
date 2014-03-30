@@ -125,7 +125,7 @@ self.dashCache = self.dashCache || (function (environment) {
             queued = workQueue[data.uid];
           if (undefined !== queued) {
             switch (e.data.type) {
-            case 'success':
+            case 'resolve':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
               that.apply(success, [data.context]);
