@@ -113,6 +113,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		});
 		return key;
 	},
+	scripts = ( !! environment.document) ? environment.document.getElementsByTagName("script") : [],
     libraryScript = scripts[scripts.length - 1] || null,
     libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
 	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
