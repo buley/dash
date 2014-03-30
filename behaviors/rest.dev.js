@@ -229,7 +229,6 @@ self.dashRest = self.dashRest || (function (environment) {
 	      		input.context.entry = data;
 	      		delete input.context.callback;
 	      		if (true === error) {
-		      		console.log("ERROR",input.context);
 	      			input.type = 'error';
 	      		}
 			    end(input);
@@ -300,6 +299,10 @@ self.dashRest = self.dashRest || (function (environment) {
     		    state.params = args.params;
     		    console.log('inward',state);
 			    outward.resolve(state);
+		  	  }, function(ctx2) {
+			    outward.reject(state);
+		  	  }, function(ctx2) {
+			    outward.notify(state);
 		  	  });
 	    	}
 	    return state;
