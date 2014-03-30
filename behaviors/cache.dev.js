@@ -231,7 +231,8 @@ window.dashCache = window.dashCache || (function (environment) {
 	      return state;
 	    }
 	    var promise = state.promise,
-	    	outward = this.deferred()
+	    	outward = this.deferred(),
+	    	inward,
 	    	response,
 	    	callbacks = {
 		        on_success: state.context.on_success,
@@ -243,7 +244,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		        on_close: state.context.on_close
 		      }
 	    if (this.contains(['get.entry'], state.method)) {
-		    response = get( {key: buildKey(state.context) });
+		    inward = workDispatch( {method: 'get', key: buildKey(state.context) });
 		    if (!this.isEmpty(response)) {
 		    	state = response;
 		    	state.promise = outward.promise;
@@ -251,7 +252,10 @@ window.dashCache = window.dashCache || (function (environment) {
 		    		state.context[key] = val;
 		    	});
 		    	state.context.cached = true;
-		    	outward.resolve(state);
+		    	inward(function(ste) {
+		    		console.log('dispach relayed');
+			    	outward.resolve(ste);
+		    	});
 		    	state.type = 'resolve';
 		    }
 	    }
