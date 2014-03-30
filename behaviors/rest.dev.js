@@ -259,13 +259,13 @@ self.dashRest = self.dashRest || (function (environment) {
 				}
 	    	}
 	    	if (update) {
-	    	  console.log('promising',outward.promise);
     		  state.promise = outward.promise;
     		  args = rest[ state.context.restid ];
 	    	  args.data = state.context.entry ? state.context.entry : null;
 	    	  args.params = state.context.params ? state.context.params : null;
 	          inward = workDispatch( whichMethod(state.method), args);
 		  	  inward(function(ctx2){
+		  	  	console.log('inward finished',ctx2);
 			    outward.resolve(ctx2);
 		  	  });
 	    	}
