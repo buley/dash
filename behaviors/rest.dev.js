@@ -8,7 +8,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    input = request.data,
 	    callback = request.callback,
 	  	fallbacks = ['MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'],
-	    xhr,
+	    request,
 	    serialize = function (data) {
 	      var queryString = '';
 	      if ('string' !== typeof data) {
@@ -25,25 +25,29 @@ self.dashRest = self.dashRest || (function (environment) {
 	    qs = serialize(input),
 	    i = 0;
 	  if (environment.XMLHttpRequest) {
-	    xhr = new XMLHttpRequest();
+	    request = new XMLHttpRequest();
 	  } else {
 	    for (i = 0; i < fallbacks.length; i++) {
 	      try {
-	        xhr = new ActiveXObject(fallbacks[i]);
+	        request = new ActiveXObject(fallbacks[i]);
 	        break;
 	      } catch (e) {}
 	    }
 	  }
-	  xhr.addEventListener('readystatechange', function () {
-	    callback(xhr);
+	  request.addEventListener('readystatechange', function (e) {
+	    callback(request, e);
 	  }, true);
 	  if (request_type.toUpperCase() === 'GET') {
-	    xhr.open(request_type, url + '?' + qs, true);
-	    xhr.send();
+	    request.open(request_type, url + '?' + qs, true);
+	    request.send();
 	  } else if (request_type.toUpperCase() === 'POST') {
-	    xhr.open(request_type, url, true);
-	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	    xhr.send(qs);
+	    request.open(request_type, url, true);
+	    if (that.is(request.json, false)) {
+		    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		    request.send(qs);
+	    } else {
+		    request.setRequestHeader('Content-Type', 'application/javascript');
+	    }
 	  }
 	},
 	get = function( context ) {	
