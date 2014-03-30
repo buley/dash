@@ -132,8 +132,8 @@ window.dashCache = window.dashCache || (function (environment) {
 	    		state.context[key] = val;
 	    	});
 	    	state.context.cached = true;
-	    	if(this.exists(state.context.statistics)) {
-	    		state.context.statistics.id = null;
+	    	if(!this.isEmpty(state.context.statistics)) {
+	    		delete state.context.statistics.id;
 	    	}
 	    	outward.resolve(state);
 	    	state.type = 'resolve';
