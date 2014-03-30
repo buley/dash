@@ -120,7 +120,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	worker,
 	workQueue = {},
     workRegister = function (worker, message, context, success, error, notify) {
-      var id = randomId(),
+      var id = that.random(),
         callback = function (e) {
           var data = e.data,
             queued = workQueue[data.uid];
