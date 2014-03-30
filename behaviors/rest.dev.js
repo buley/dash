@@ -268,7 +268,7 @@ self.dashRest = self.dashRest || (function (environment) {
 		  	  	console.log('inward finished',ctx2);
 		  	  	state.entry = ctx2 || {};
 		  	  	state.type = 'resolve';
-			    outward.resolve(ctx2);
+			    outward.resolve(state);
 		  	  });
 	    	}
 	    return state;
