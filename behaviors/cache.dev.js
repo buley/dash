@@ -125,7 +125,7 @@ self.dashCache = self.dashCache || (function (environment) {
             queued = workQueue[data.uid];
           if (undefined !== queued) {
             switch (e.data.type) {
-            case 'resolve':
+            case 'success':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
               that.apply(success, [data.context]);
@@ -135,7 +135,7 @@ self.dashCache = self.dashCache || (function (environment) {
               worker.removeEventListener('message', callback);
               that.apply(error, [data.context]);
               break;
-            case 'notify':
+            case 'abort':
               that.apply(notify, [data.context]);
               break;
             default:
@@ -210,7 +210,7 @@ self.dashCache = self.dashCache || (function (environment) {
         expires = input.expires,
         end = function (ctx) {
           input.context = ctx;
-          input.type = 'resolve';
+          input.type = 'success';
           environment.postMessage(input);
         };
       if (method === 'get' || method === 'set' || method === 'delete') {
