@@ -272,8 +272,8 @@ self.dashCache = self.dashCache || (function (environment) {
 	    	args;
 	    if (this.contains(['resolve','error'], state.type)) {
 	    	state.promise = outward.promise;
-	   	  args = { key: buildKey(ctz.context, state.type), value: ctz, ttl: ctz.context.expires || 3000 } ;
-	      if ( !this.isEmpty(ctz.context.purge) ) {
+	   	  args = { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 3000 } ;
+	      if ( !this.isEmpty(state.context.purge) ) {
 		    inward = workDispatch('zap', args );
 	      } else {
 		    inward = workDispatch('set', args );
