@@ -300,7 +300,7 @@ self.dashRest = self.dashRest || (function (environment) {
     		    console.log('inward',state);
 			    outward.resolve(state);
 		  	  }, function(ctx2) {
-			    outward.reject(state);
+			    outward.resolve(state);
 		  	  }, function(ctx2) {
 			    outward.notify(state);
 		  	  });
