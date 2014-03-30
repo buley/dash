@@ -132,7 +132,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	    		state.context[key] = val;
 	    	});
 	    	state.context.cached = true;
-	    	outward.resolve(state.context);
+	    	outward.resolve(state);
 	    	state.type = 'resolve';
 	    }
 	    console.log("CREAM get", buildKey(state.context), state);
