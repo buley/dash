@@ -283,7 +283,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	  	  });
 	  	  setTimeout(function(){
 	  	  	outward.resolve(ctx2);
-	  	  }. 5000)
+	  	  }, 5000);
 		}
 	    return state;
 	  } ];
