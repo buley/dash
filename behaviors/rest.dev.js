@@ -208,7 +208,7 @@ self.dashRest = self.dashRest || (function (environment) {
         end = function (ctx) {
           input.context = ctx;
           input.type = 'success';
-          environment.postMessage(input);
+          environment.postMessage(ctx);
         }, 
         callback = function(sig) {
 	      	return function(data) {
