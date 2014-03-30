@@ -168,7 +168,7 @@ self.dashCache = self.dashCache || (function (environment) {
         				if ( isReducible(input[ attr ] ) ) {
 	        				attrs[ attr ] = reduce(input[ attr ]);
         				} else {
-        					console.log('leaf',input[attr]);
+        					console.log('leaf ' + input[attr]);
 	        				attrs[ attr ] = input[ attr ];
         				}
         			}
