@@ -2,12 +2,12 @@ self.dashRest = self.dashRest || (function (environment) {
   "use strict";
   var that,
   	rest = {},
-	ajax = function( request ) {	
-	  var request_type = request.method,
-	    url = request.url,
-	    input = request.data,
-	    params = request.params,
-	    callback = request.callback,
+	ajax = function( context ) {	
+	  var request_type = context.method,
+	    url = context.url,
+	    input = context.data,
+	    params = context.params,
+	    callback = context.callback,
 	  	fallbacks = ['MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'],
 	    request,
 	    serialize = function (data) {
@@ -65,7 +65,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    request.send();
 	  } else {
 	    request.open(request_type, url + '?' + qs, true);
-	    if (that.is(request.json, false)) {
+	    if (false === context.json)) {
 		    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		    request.send(formencoded);
 	    } else {
