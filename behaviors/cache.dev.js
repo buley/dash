@@ -174,7 +174,6 @@ self.dashCache = self.dashCache || (function (environment) {
         		for ( attr in input ) {
         			if ( true === input.hasOwnProperty(attr) ) {
         				if ( !!input[ attr ] && !!input[ attr ].expire && ( input[ attr ].expire < new Date().getTime() ) ) {
-        					console.log("EXPIRED",new Date().getTime() - input[ attr ].expire);
         				} else if ( isReducible(input[ attr ] ) ) {
 	        				attrs[ attr ] = reduce(input[ attr ]);
         				} else {
