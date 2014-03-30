@@ -117,7 +117,7 @@ self.dashCache = self.dashCache || (function (environment) {
     libraryScript = scripts[scripts.length - 1] || null,
     libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
 	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
-	worker,
+	worker = workerEnvironment ? null : new Worker(libraryPath),
 	workQueue = {},
     workRegister = function (worker, message, context, success, error, notify) {
       var id = that.random(),
@@ -225,7 +225,6 @@ self.dashCache = self.dashCache || (function (environment) {
       }
     }, false);
   } else {
-  	  worker =  new Worker(libraryPath);
 	  return [ function (state) {
 	  	that = this;
 	    if(this.isEmpty(state.context.cache)) {
