@@ -65,7 +65,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    request.send();
 	  } else {
 	    request.open(request_type, url + '?' + qs, true);
-	    if (false === context.json)) {
+	    if (false === context.json) {
 		    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		    request.send(formencoded);
 	    } else {
