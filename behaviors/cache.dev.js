@@ -255,10 +255,11 @@ self.dashCache = self.dashCache || (function (environment) {
 		    inward = workDispatch('get', { key: buildKey(state.context) } );
 	    	state.context.cached = true;
 	    	inward(function(response) {
-	    		console.log('dispach relayed');
 	    		if(that.isEmpty(response)) {
+		    		console.log('dispach relayed, no cache');
 	    			state.context.cached = false;
 	    		} else {
+	    			console.log('dispach relayed a cached object');
 		    		state = response;
 			    	state.promise = outward.promise;
 			    	this.iterate(callbacks, function(key, val) {
