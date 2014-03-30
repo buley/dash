@@ -173,10 +173,12 @@ self.dashCache = self.dashCache || (function (environment) {
         			attr;
         		for ( attr in input ) {
         			if ( true === input.hasOwnProperty(attr) ) {
-        				if ( isReducible(input[ attr ] ) ) {
+        				if ( !!input[ attr ].expire && input[ attr ].expire > new Date().getTime() ) {
+        					console.log("EXPIRED");
+        					delete input[ attr ];
+        				} else if ( isReducible(input[ attr ] ) ) {
 	        				attrs[ attr ] = reduce(input[ attr ]);
         				} else {
-        					console.log('leaf ' + input[attr]);
 	        				attrs[ attr ] = input[ attr ];
         				}
         			}
