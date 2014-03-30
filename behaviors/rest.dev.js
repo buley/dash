@@ -136,7 +136,6 @@ self.dashRest = self.dashRest || (function (environment) {
         notify: notify
       };
       worker.addEventListener('message', callback);
-
       worker.postMessage({
         method: message,
         context: clean(context),
@@ -214,7 +213,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	    }
 	    state.context.restid = this.random();
 	    rest[ state.context.restid ] = {
-	    	url: state.context.url
+	    	url: state.context.url,
+	    	data: state.context.entry ?  state.context.entry : null
 	    }
 	    delete state.context.url;
 	    return state;
@@ -225,8 +225,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    var promise = state.promise,
 	    	outward = this.deferred(),
 	    	inward,
-	    	update = false,
-	    	args;
+	    	update = false;
 	    	if (this.contains(['add.entry', 'update.entry', 'update.entries', 'remove.entry', 'remove.entries'], state.method)) {
 			    if (this.contains(['notify', 'success'], state.type)) {
 			      update = true;
@@ -238,8 +237,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	}
 	    	if (update) {
     		  state.promise = outward.promise;
-		   	  args = { key: buildUri(state.context, state.type) } ;
-	          inward = workDispatch( whichMethod(state.method), args );
+	          inward = workDispatch( whichMethod(state.method), rest[ state.context.restid ] );
 		  	  inward(function(ctx2){
 			    outward.resolve(ctx2);
 		  	  });
