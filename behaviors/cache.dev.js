@@ -272,17 +272,15 @@ self.dashCache = self.dashCache || (function (environment) {
 	    	args;
 	    if (this.contains(['resolve','error'], state.type)) {
 	    	state.promise = outward.promise;
-		    promise(function(ctz) {
-		   	  args = { key: buildKey(ctz.context, state.type), value: ctz, ttl: ctz.context.expires || 3000 } ;
-		      if ( !this.isEmpty(ctz.context.purge) ) {
-			    inward = workDispatch('zap', args );
-		      } else {
-			    inward = workDispatch('set', args );
-		  	  }
-		  	  inward(function(ctx2){
-			      outward.resolve(ctx2);
-		  	  });
-		    });
+	   	  args = { key: buildKey(ctz.context, state.type), value: ctz, ttl: ctz.context.expires || 3000 } ;
+	      if ( !this.isEmpty(ctz.context.purge) ) {
+		    inward = workDispatch('zap', args );
+	      } else {
+		    inward = workDispatch('set', args );
+	  	  }
+	  	  inward(function(ctx2){
+		      outward.resolve(ctx2);
+	  	  });
 		}
 	    return state;
 	  } ];
