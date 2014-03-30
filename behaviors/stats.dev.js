@@ -552,7 +552,7 @@ window.dashStats = window.dashStats || (function (environment) {
           allStats[state.context.statistics.id].display.speed_average.total += ' ms/entry';
         }
       };
-    if (!theirs.exists(state.context.statistics) || !theirs.exists(state.context.statistics.id)) {
+    if (!theirs.exists(state.context.statistics)) {
       var id = theirs.random();
       allStats[id] = model();
       state.context.statistics = {
@@ -573,6 +573,7 @@ window.dashStats = window.dashStats || (function (environment) {
           var processTotal = function (total) {
             if (!verb || !noun) {
               state.promise = promise;
+              deferred.resolve(state.context);
               return;
             }
             if (theirs.exists(state.context.limit) && state.context.limit < total) {
@@ -613,10 +614,8 @@ window.dashStats = window.dashStats || (function (environment) {
               store_key_path: context.store_key_path,
             })(function (context) {
               state.context.total = context.total;
-              delete allStats[state.context.statistics.id];
               processTotal(context.total);
             }, function (context) {
-              delete allStats[state.context.statistics.id];
               deferred.error(state.context);
             }, function (context) {
               deferred.notify(state.context);
@@ -644,7 +643,6 @@ window.dashStats = window.dashStats || (function (environment) {
         if ( !! verb && !! noun) {
           calculate(verb, noun);
         }
-        delete allStats[state.context.statistics.id];
       }
     } else {
       if ( !! allStats[state.context.statistics.id].type) {
