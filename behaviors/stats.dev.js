@@ -552,7 +552,7 @@ window.dashStats = window.dashStats || (function (environment) {
           allStats[state.context.statistics.id].display.speed_average.total += ' ms/entry';
         }
       };
-    if (!theirs.exists(state.context.statistics)) {
+    if (!theirs.exists(state.context.statistics) || !theirs.exists(state.context.statistics.id)) {
       var id = theirs.random();
       allStats[id] = model();
       state.context.statistics = {
