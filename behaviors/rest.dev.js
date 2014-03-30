@@ -24,7 +24,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    },
 	    qs = serialize(input),
 	    i = 0;
-	  if (window.XMLHttpRequest) {
+	  if (environment.XMLHttpRequest) {
 	    xhr = new XMLHttpRequest();
 	  } else {
 	    for (i = 0; i < fallbacks.length; i++) {
