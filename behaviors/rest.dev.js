@@ -275,10 +275,11 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	if (update) {
     		  state.promise = outward.promise;
     		  args = rest[ state.context.restid ];
-	    	  args.data = state.context.entry ? state.context.entry : null;
+    		  state.context.url = args.url;
+    		  state.context.params = args.params;
 	          inward = workDispatch( whichMethod(state.method), args);
 		  	  inward(function(ctx2){
-		  	  	state.data = ctx2.entry;
+		  	  	console.log("INWARD RESOLVE",ctx2);
 		  	  	state.type = 'resolve';
     		    state.url = args.url;
     		    state.params = args.params;
