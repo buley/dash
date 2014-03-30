@@ -213,9 +213,9 @@ self.dashCache = self.dashCache || (function (environment) {
           input.context = ctx;
           environment.postMessage(input);
         };
-      console.log('workermsg',input);
       if (that.is(method, 'get') || that.is(method, 'set') || that.is(method, 'delete')) {
         console.log("CACHE OPERATION");
+        end({foo: 'bar'});
       } else {
         input.type = 'error';
         end({
