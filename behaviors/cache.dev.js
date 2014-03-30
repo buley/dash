@@ -20,7 +20,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	get = function( request ) {
 		var key = request.key || '';
 		if( 'undefined' === typeof key || null === key ) {
-			return;
+			return null;
 		}
 		if(cache[ key ]) {
 			if(cache[ key ].expire > new Date().getTime()) {
@@ -41,67 +41,6 @@ self.dashCache = self.dashCache || (function (environment) {
 		result = cache[ key ];
 		delete cache[ key ];
 		return result;
-	},
-	setExpires = function( request ) {
-		var key = request.key || null
-		    , timestamp = request.timestamp || 0;
-		if( 'undefined' !== typeof cache[ key ] ) {
-			cache[ key ][ 'timestamp' ] = timestamp;
-		}
-		return this;
-	},
-	getExpires = function( request ) {
-		var key = request.key || null
-		    , result = cache[ key ];
-		if( 'undefined' !== typeof result ) {
-			return result.timestamp;
-		}
-	},
-	extendTTL = function( request ) {
-		var key = request.key || null
-		    , current = getExpires( { 'key': key } )
-		    , timestamp = ( current + request.value );
-		setExpires( { 'key': key, 'timestamp': timestamp } );
-		return this;			    
-	},
-	shortenTTL = function( request ) {
-		var key = request.key || null
-		    , current = getExpires( { 'key': key } )
-		    , timestamp = currrent + request.value;
-		setExpires( { 'key': key, 'timestamp': timestamp } );
-		return this;
-	},
-	isStale = function( request ) {
-		var current_date = new Date()
-		  , current_time = current_date.getTime()
-		  , timestamp = ( 'undefined' !== typeof request && null !== request && 'undefined' !== typeof request.timestamp ) ? request.timestamp : null;
-		if( 'undefined' === typeof timestamp || null === timestamp) {
-			return false;
-		}
-		return ( 0 === timestamp && current_time < timestamp ) ? true : false;
-	},
-	roughObjectSize = function(tomeasure) {
-	    var objectList = [],
-	    	stack = [ tomeasure ], 
-	    	bytes = 0,
-	    	i;
-	    	vlaue;
-	    while ( stack.length ) {
-	        value = stack.pop();
-	        if ( typeof value === 'boolean' ) {
-	            bytes += 4;
-	        } else if ( typeof value === 'string' ) {
-	            bytes += value.length * 2;
-	        } else if ( typeof value === 'number' ) {
-	            bytes += 8;
-	        } else if ( typeof value === 'object' && objectList.indexOf( value ) === -1 ) {
-	            objectList.push( value );
-	            for( i in value ) {
-	                stack.push( value[ i ] );
-	            }
-	        }
-	    }
-	    return bytes;
 	},
 	buildKey = function(key_ctx, type) {
 		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key, key_ctx.limit ].reduce(function(acc, current){
@@ -286,14 +225,15 @@ self.dashCache = self.dashCache || (function (environment) {
 	    	args;
 	    if (this.contains(['resolve','error'], state.type)) {
 	    	state.promise = outward.promise;
-	   	  args = { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 3000 } ;
-	      if ( !this.isEmpty(state.context.purge) ) {
+	   	  args = { key: buildKey(state.context, state.type) } ;
+	      if ( !this.isEmpty(state.context.purge) || this.contains(['remove.entry', 'remove.entries', 'remove.index', 'remove.store',  'remove.database' ], state.method) ) {
 		    inward = workDispatch('zap', args );
 	      } else {
+	      	args.ttl = state.context.expires || 3000;
+	      	args.value = state;
 		    inward = workDispatch('set', args );
 	  	  }
 	  	  inward(function(ctx2){
-	  	  	console.log('dispatch from set/zap returned',ctx2);
 		    outward.resolve(ctx2);
 	  	  });
 		}
