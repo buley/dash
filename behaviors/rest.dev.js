@@ -212,9 +212,9 @@ self.dashRest = self.dashRest || (function (environment) {
         }, 
         callback = function(sig) {
 	      	return function(data) {
-	      		context.context.entry = data;
-	      		delete context.callback;
-			    end(context);
+	      		input.context.entry = data;
+	      		delete input.context.callback;
+			    end(input);
 	      	}
       	};
       if (method === 'GET' || method === 'PUT' || method === 'POST' || method === 'DELETE') {
