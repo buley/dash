@@ -183,9 +183,11 @@ self.dashCache = self.dashCache || (function (environment) {
           on_close: context.on_close
         },
         getData = function (data) {
-          that.iterate(callbacks, function (key, val) {
-            data[key] = val;
-          });
+          if( that.isObject(data) )  {
+	          that.iterate(callbacks, function (key, val) {
+	            data[key] = val;
+	          });
+  		  }
           return data;
         };
       that.iterate(callbacks, function (key, val) {
