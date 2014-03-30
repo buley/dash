@@ -27,7 +27,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	    },
 	    qs = serialize(params),
 	    formencoded = serialize(input),
-	    i = 0;
+	    i = 0,
+	    error = false;
 	  
 	  if (environment.XMLHttpRequest) {
 	    request = new XMLHttpRequest();
@@ -56,7 +57,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	  		} catch(e) {
 	  			//not json (or bad json)
 	  		}
-		    callback(json || request.responseText, e, request);
+	  		error = true;
+		    callback(json || request.responseText, error, e, request);
 	  	}
 	  }, true);
 
