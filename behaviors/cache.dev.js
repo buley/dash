@@ -185,6 +185,7 @@ self.dashCache = self.dashCache || (function (environment) {
         		return attrs
         	};
         	return reduce(obj);
+        	-
         },
         end = function (ctx) {
           input.context = ctx;

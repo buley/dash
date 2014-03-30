@@ -23,6 +23,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	      } else {
 	        queryString = data;
 	      }
+	      return queryString;
 	    },
 	    qs = serialize(params),
 	    formencoded = serialize(input),
