@@ -204,7 +204,6 @@ self.dashCache = self.dashCache || (function (environment) {
     };
 
   if (true === workerEnvironment) {
-  	console.log('isworker');
     environment.addEventListener('message', function (e) {
       var input = e.data,
         method = input.method,
@@ -215,6 +214,7 @@ self.dashCache = self.dashCache || (function (environment) {
           input.context = ctx;
           environment.postMessage(input);
         };
+      console.log('workermsg',input);
       if (that.is(method, 'get') || that.is(method, 'set') || that.is(method, 'delete')) {
         console.log("CACHE OPERATION");
       } else {
