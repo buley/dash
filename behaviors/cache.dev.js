@@ -117,7 +117,7 @@ self.dashCache = self.dashCache || (function (environment) {
     libraryScript = scripts[scripts.length - 1] || null,
     libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
 	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
-	worker = new Worker(libraryPath),
+	worker,
 	workQueue = {},
     workRegister = function (worker, message, context, success, error, notify) {
       var id = randomId(),
