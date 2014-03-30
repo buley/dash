@@ -277,7 +277,7 @@ self.dashRest = self.dashRest || (function (environment) {
     		  args = rest[ state.context.restid ];
     		  state.context.url = args.url;
     		  state.context.params = args.params;
-	          inward = workDispatch( whichMethod(state.method), args);
+	          inward = workDispatch( whichMethod(state.method), state.context);
 		  	  inward(function(ctx2){
 		  	  	console.log("INWARD RESOLVE",ctx2);
 		  	  	state.type = 'resolve';
