@@ -257,7 +257,7 @@ self.dashCache = self.dashCache || (function (environment) {
 		    		console.log('dispach relayed, no cache');
 	    			state.context.cached = false;
 	    		} else {
-	    			console.log('dispach relayed a cached object',response.context.entry);
+	    			console.log('dispach relayed a cachesd object',response.context.entry);
 		    		state = response;
 			    	state.promise = outward.promise;
 			    	state.context.cached = true;
