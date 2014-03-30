@@ -58,7 +58,7 @@ self.dashRest = self.dashRest || (function (environment) {
 		context.method = 'PUT';
 		request(context);
 	},
-	delete = function( context ) {	
+	remove = function( context ) {	
 		context.method = 'DELETE';
 		request(context);
 	},
@@ -188,13 +188,15 @@ self.dashRest = self.dashRest || (function (environment) {
           input.type = 'success';
           environment.postMessage(input);
         };
-      if (method === 'get' || method === 'set' || method === 'delete') {
-        if ( method === 'get' ) {
+      if (method === 'GET' || method === 'PUT' || method === 'POST' || method === 'DELETE') {
+        if ( method === 'GET' ) {
         	end(get(context));
-        } else if ( method === 'set' ) {
-        	end(set(context));
-        } else if ( method === 'delete' ) {
-        	end(zap(context));
+        } else if ( method === 'POST' ) {
+        	end(post(context));
+        } else if ( method === 'PUT' ) {
+        	end(put(context));
+        } else if ( method === 'DELETE' ) {
+        	end(remove(context));
         }
       } else {
         input.type = 'error';
