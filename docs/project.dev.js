@@ -497,7 +497,6 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 if (context.statistics) {
                   statsObj = context.statistics;
                 }
-                console.log('cached?',context.cached);
                 dashAppSplashBroadcast.current(context.entry);
                 if (pid) {
                   clearTimeout(pid);
