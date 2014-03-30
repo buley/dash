@@ -23,7 +23,13 @@ window.dashCache = window.dashCache || (function (environment) {
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
-		return cache[ key ] ? cache[ key ].data : null;
+		if(cache[ key ]) {
+			if(cache[ key ].expire > new Date().getTime()) {
+				return cache[ key ].data;
+			}
+			delete cache[key];
+		}
+		return null;
 	},
 	zap = function( request ) {
 		var key = request.key || ''
@@ -135,8 +141,6 @@ window.dashCache = window.dashCache || (function (environment) {
 	    	outward.resolve(state);
 	    	state.type = 'resolve';
 	    }
-	    console.log("CREAM get", buildKey(state.context), state);
-
     }
     return state;
   }, function (state) {
@@ -150,7 +154,6 @@ window.dashCache = window.dashCache || (function (environment) {
       } else {
       	set(args);
   	  }
-      console.log("CREAM set", buildKey(state.context), args);
     }
     return state;
   } ];
