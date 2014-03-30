@@ -155,7 +155,7 @@ self.dashCache = self.dashCache || (function (environment) {
         key = input.key,
         context = input.context,
         expires = input.expires,
-        prune = function() {
+        prune = function(obj) {
         	var isReducible = function(input) {
         		var attrs = 0;
         		for ( attr in input ) {
@@ -177,6 +177,7 @@ self.dashCache = self.dashCache || (function (environment) {
         			}
         		}
         	};
+        	return reduce(obj);
         },
         end = function (ctx) {
           input.context = ctx;
