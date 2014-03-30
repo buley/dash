@@ -233,7 +233,7 @@ self.dashRest = self.dashRest || (function (environment) {
 			      update = true;
 			    } 
 	    	} else {
-	    		if (this.is('error', state.type) && (this.is(state.context.rest, true) || this.is(state.context.fallback, true))) {
+	    		if ((this.is('error', state.type) || (this.isEmpty(state.context.entry) && this.contains(['get.entry', 'get.entries'], state.method))) && (this.is(state.context.rest, true) || this.is(state.context.fallback, true))) {
 			      update = true;
 				}
 	    	}
