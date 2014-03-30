@@ -272,7 +272,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	    }
 	    return state;
 	  }, function (state) {
-	    if(!this.is(state.context.cached, true) || (this.isEmpty(state.context.cache) && this.isEmpty(state.context.purge))) {
+	    if(this.is(state.context.cached, false)) {
 	      return state;
 	    }
 	    var promise = state.promise,
