@@ -129,15 +129,15 @@ self.dashCache = self.dashCache || (function (environment) {
             case 'success':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
-              that.safeApply(success, [data.context]);
+              that.apply(success, [data.context]);
               break;
             case 'error':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
-              that.safeApply(error, [data.context]);
+              that.apply(error, [data.context]);
               break;
             case 'notify':
-              that.safeApply(notify, [data.context]);
+              that.apply(notify, [data.context]);
               break;
             default:
               break;
@@ -148,11 +148,11 @@ self.dashCache = self.dashCache || (function (environment) {
           if (that.isFunction(obj)) { 
             return undefined;
           } else if (that.isObject(obj)) {
-            that.safeIterate(obj, function(key, val) {
+            that.iterate(obj, function(key, val) {
               obj[ key ] = clean(val);
             });
           } else if (that.isArray(obj)) {
-            that.safeEach(obj, function(v, i) {
+            that.each(obj, function(v, i) {
               obj[i] = clean(v);
             });
           }
@@ -185,12 +185,12 @@ self.dashCache = self.dashCache || (function (environment) {
         },
         worker,
         getData = function (data) {
-          that.safeIterate(callbacks, function (key, val) {
+          that.iterate(callbacks, function (key, val) {
             data[key] = val;
           });
           return data;
         };
-      that.safeIterate(callbacks, function (key, val) {
+      that.iterate(callbacks, function (key, val) {
         delete context[key];
       });
       workRegister(worker, message, context, function (data) {
