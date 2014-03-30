@@ -173,7 +173,7 @@ window.dashCache = window.dashCache || (function (environment) {
       return id;
     },
     workDispatch = function (message, context) {
-      var defd = deferred(),
+      var defd = that.deferred(),
         callbacks = {
           on_success: context.on_success,
           on_error: context.on_error,
