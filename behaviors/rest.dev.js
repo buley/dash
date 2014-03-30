@@ -56,7 +56,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	  		} catch(e) {
 	  			//not json (or bad json)
 	  		}
-	  		error = false;
+	  		error = true;
 		    callback(json || request.responseText, error, e, request);
 	  	}
 	  }, true);
