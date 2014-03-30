@@ -92,13 +92,13 @@ self.dashRest = self.dashRest || (function (environment) {
 		ajax(context);
 	},
 	whichMethod = function(signature) {
-		if ( that.contains[ 'get.entry', 'get.entries', 'get.index', 'get.database', 'get.store' ], signature) {
+		if ( that.contains( [ 'get.entry', 'get.entries', 'get.index', 'get.database', 'get.store' ], signature)) {
 			return 'GET';
-		} else if ( that.contains[ 'remove.entry', 'remove.entries', 'remove.index', 'remove.database', 'remove.store' ], signature) {
+		} else if ( that.contains([ 'remove.entry', 'remove.entries', 'remove.index', 'remove.database', 'remove.store' ], signature)) {
 			return 'DELETE';
-		} else if ( that.contains[ 'add.entry' ], signature) {
+		} else if ( that.contains([ 'add.entry' ], signature)) {
 			return 'POST';
-		} else if ( that.contains[ 'update.entry', 'update.entries' ], signature) {
+		} else if ( that.contains([ 'update.entry', 'update.entries' ], signature)) {
 			return 'PUT';
 		} else {
 			return null;
