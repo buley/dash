@@ -214,8 +214,13 @@ self.dashCache = self.dashCache || (function (environment) {
           environment.postMessage(input);
         };
       if (that.is(method, 'get') || that.is(method, 'set') || that.is(method, 'delete')) {
-        console.log("CACHE OPERATION");
-        end({foo: 'bar'});
+        if ( that.is(method, 'get') ) {
+        	end(get(input));
+        } else if ( that.is(method, 'set') ) {
+        	end(set(input));
+        } else if ( that.is(method, 'delete') ) {
+        	end(delete(input));
+        }
       } else {
         input.type = 'error';
         end({
