@@ -145,7 +145,7 @@ window.dashCache = window.dashCache || (function (environment) {
     }
     return state;
   }, function (state) {
-    if(this.isEmpty(state.context.cache) && this.isEmpty(state.context.purge)) {
+    if(!this.is(state.context.cached, true) || (this.isEmpty(state.context.cache) && this.isEmpty(state.context.purge))) {
       return state;
     }
     var args =  { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 3000 } ;
