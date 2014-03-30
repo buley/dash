@@ -33,7 +33,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    request = new XMLHttpRequest();
 	  } else {
 	    for (i = 0; i < fallbacks.length; i++) {
-	      try {
+	      try {2
 	        request = new ActiveXObject(fallbacks[i]);
 	        break;
 	      } catch (e) {}
@@ -41,6 +41,14 @@ self.dashRest = self.dashRest || (function (environment) {
 	  }
 	  request.addEventListener('readystatechange', function (e) {
 	  	if ('function' === typeof callback && 4 === request.readyState && null !== request.status.toString().match(/^2/)) {
+	  		var json;
+	  		try {
+	      		json = JSON.parse(request.responseText);
+	  		} catch(e) {
+	  			//not json (or bad json)
+	  		}
+		    callback(json || request.responseText, e, request);
+	  	} else if ('function' === typeof callback && 4 === request.readyState && null !== request.status.toString().match(/^[34]/)) {
 	  		var json;
 	  		try {
 	      		json = JSON.parse(request.responseText);
