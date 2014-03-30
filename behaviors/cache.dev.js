@@ -248,19 +248,17 @@ self.dashCache = self.dashCache || (function (environment) {
 		      }
 	    if (this.contains(['get.entry'], state.method)) {
 		    inward = workDispatch('get', { key: buildKey(state.context) } );
-		    if (!this.isEmpty(response)) {
-		    	state = response;
+	    	state.context.cached = true;
+	    	inward(function(response) {
+	    		console.log('dispach relayed');
+	    		state = response;
 		    	state.promise = outward.promise;
 		    	this.iterate(callbacks, function(key, val) {
 		    		state.context[key] = val;
 		    	});
-		    	state.context.cached = true;
-		    	inward(function(ste) {
-		    		console.log('dispach relayed');
-			    	outward.resolve(ste);
-		    	});
-		    	state.type = 'resolve';
-		    }
+		    	outward.resolve(state);
+	    	});
+	    	state.type = 'resolve';
 	    }
 	    return state;
 	  }, function (state) {
