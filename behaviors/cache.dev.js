@@ -157,7 +157,8 @@ self.dashCache = self.dashCache || (function (environment) {
         expires = input.expires,
         prune = function(obj) {
         	var isReducible = function(input) {
-        		var attrs = 0;
+        		var attrs = 0,
+        			attr;
         		for ( attr in input ) {
         			if ( input.hasOwnProperty(attr) ) {
         				attrs += 1;
