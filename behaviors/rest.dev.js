@@ -219,13 +219,13 @@ self.dashRest = self.dashRest || (function (environment) {
       if (method === 'GET' || method === 'PUT' || method === 'POST' || method === 'DELETE') {
       	context.callback = callback(method);
         if ( method === 'GET' ) {
-        	end(get(context));
+        	get(context);
         } else if ( method === 'POST' ) {
-        	end(post(context));
+        	post(context);
         } else if ( method === 'PUT' ) {
-        	end(put(context));
+        	put(context);
         } else if ( method === 'DELETE' ) {
-        	end(remove(context));
+        	remove(context);
         }
       } else {
         input.type = 'error';
