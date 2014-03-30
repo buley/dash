@@ -262,7 +262,9 @@ self.dashCache = self.dashCache || (function (environment) {
 			    	state.promise = outward.promise;
 			    	state.context.cached = true;
 			    	that.iterate(callbacks, function(key, val) {
-			    		state.context[key] = val;
+			    		if (!that.isEmpty(val)) {
+				    		state.context[key] = val;
+			    		}
 			    	});
 			    	state.type = 'resolve';
 			    	outward.resolve(state);
