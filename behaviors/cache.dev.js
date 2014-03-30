@@ -213,7 +213,7 @@ self.dashCache = self.dashCache || (function (environment) {
           input.context = ctx;
           environment.postMessage(input);
         };
-      if (method === 'get' || method === 'set' || method === 'delete')) {
+      if (method === 'get' || method === 'set' || method === 'delete') {
         if ( method === 'get' ) {
         	end(get(input));
         } else if ( method === 'set' ) {
