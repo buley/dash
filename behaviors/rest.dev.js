@@ -29,7 +29,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    formencoded = serialize(input),
 	    i = 0,
 	    error = false;
-	  
+	  ct
 	  if (environment.XMLHttpRequest) {
 	    request = new XMLHttpRequest();
 	  } else {
@@ -222,7 +222,7 @@ self.dashRest = self.dashRest || (function (environment) {
         params = context.params,
         expires = input.expires,
         end = function (ctx) {
-          ctx.type = 'success';
+          ctx.type = ctx.type || 'success';
           environment.postMessage(ctx);
         }, 
         callback = function(sig) {
