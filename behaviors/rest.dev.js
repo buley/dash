@@ -213,7 +213,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	      	return function(data) {
 	      		input.context.entry = data;
 	      		delete input.context.callback;
-	      		console.log("ENC",input);
+	      		console.log("ENC",data);
 			    end(input);
 	      	}
       	};
