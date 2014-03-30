@@ -267,14 +267,24 @@ self.dashCache = self.dashCache || (function (environment) {
 	    if(!this.is(state.context.cached, true) || (this.isEmpty(state.context.cache) && this.isEmpty(state.context.purge))) {
 	      return state;
 	    }
-	    var args =  { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 3000 } ;
+	    var promise = state.promise,
+	    	outward = this.deferred(),
+	    	inward,
+	    	response,
+	    	args;
 	    if (this.contains(['resolve','error'], state.type)) {
-	      if ( !this.isEmpty(state.context.purge) ) {
-	      	zap(args);
-	      } else {
-	      	set(args);
-	  	  }
-	    }
+	    	state.promise = outward.promise;
+		    inward = workDispatch('set', { key: buildKey(state.context) } );
+		    inward(function(ctz) {
+		   	  args =  { key: buildKey(ctz.context, state.type), value: ctz, ttl: ctz.context.expires || 3000 } ;
+		      if ( !this.isEmpty(ctz.context.purge) ) {
+		      	zap(args);
+		      } else {
+		      	set(args);
+		  	  }
+		      outward.resolve(ctz);
+		    });
+		}
 	    return state;
 	  } ];
 	}
