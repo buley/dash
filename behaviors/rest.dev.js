@@ -11,7 +11,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	  	fallbacks = ['MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'],
 	    request,
 	    serialize = function (data) {
-	      var queryString = '';
+	      var queryString = '',
+	      	attr;
 	      if ('string' !== typeof data) {
 	        for (attr in data) {
 	          if (data.hasOwnProperty(attr)) {
