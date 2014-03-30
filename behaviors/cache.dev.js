@@ -24,7 +24,6 @@ self.dashCache = self.dashCache || (function (environment) {
 			return;
 		}
 		if(cache[ key ]) {
-			console.log(cache[ key ].expire,'?');
 			if(cache[ key ].expire > new Date().getTime()) {
 				return cache[ key ].data;
 			}
