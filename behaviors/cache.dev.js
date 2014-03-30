@@ -253,12 +253,12 @@ self.dashCache = self.dashCache || (function (environment) {
 		      }
 	    if (this.contains(['get.entry'], state.method)) {
 		    inward = workDispatch('get', { key: buildKey(state.context) } );
-	    	state.context.cached = true;
 	    	inward(function(response) {
 	    		if(that.isEmpty(response)) {
 		    		console.log('dispach relayed, no cache');
 	    			state.context.cached = false;
 	    		} else {
+			    	state.context.cached = true;
 	    			console.log('dispach relayed a cached object',response.context.entry);
 		    		state = response;
 			    	state.promise = outward.promise;
@@ -286,10 +286,12 @@ self.dashCache = self.dashCache || (function (environment) {
 	      if ( !this.isEmpty(state.context.purge) ) {
 		    inward = workDispatch('zap', args );
 	      } else {
+	      	console.log('dispatching set',args);
 		    inward = workDispatch('set', args );
 	  	  }
 	  	  inward(function(ctx2){
-		      outward.resolve(ctx2);
+	  	  	console.log('dispatch returned',args);
+		    outward.resolve(ctx2);
 	  	  });
 		}
 	    return state;
