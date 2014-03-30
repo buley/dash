@@ -219,7 +219,7 @@ self.dashCache = self.dashCache || (function (environment) {
         } else if ( that.is(method, 'set') ) {
         	end(set(input));
         } else if ( that.is(method, 'delete') ) {
-        	end(delete(input));
+        	end(zap(input));
         }
       } else {
         input.type = 'error';
