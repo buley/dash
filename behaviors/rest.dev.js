@@ -213,7 +213,7 @@ self.dashRest = self.dashRest || (function (environment) {
         }, 
         callback = function(sig) {
 	      	return function(data) {
-			    end({context: data});
+			    end(data);
 	      	}
       	};
       if (method === 'GET' || method === 'PUT' || method === 'POST' || method === 'DELETE') {
@@ -248,6 +248,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	params: state.context.params ? state.context.params : null
 	    }
 	    delete state.context.url;
+	    delete state.context.params;
 	    return state;
 	  }, function (state) {
 	    if(this.is(state.context.restd, true) || this.is(state.context.rest, false)) {
@@ -276,6 +277,8 @@ self.dashRest = self.dashRest || (function (environment) {
 		  	  	console.log('inward finished',ctx2);
 		  	  	state.entry = ctx2 || { foo: 'ajax foo'};
 		  	  	state.type = 'resolve';
+    		    state.url = args.url;
+    		    state.params = args.params;
 			    outward.resolve(state);
 		  	  });
 	    	}
