@@ -573,7 +573,6 @@ window.dashStats = window.dashStats || (function (environment) {
           var processTotal = function (total) {
             if (!verb || !noun) {
               state.promise = promise;
-              delete allStats[state.context.statistics.id];
               return;
             }
             if (theirs.exists(state.context.limit) && state.context.limit < total) {
@@ -645,6 +644,7 @@ window.dashStats = window.dashStats || (function (environment) {
         if ( !! verb && !! noun) {
           calculate(verb, noun);
         }
+        delete allStats[state.context.statistics.id];
       }
     } else {
       if ( !! allStats[state.context.statistics.id].type) {
