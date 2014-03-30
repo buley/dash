@@ -112,50 +112,77 @@ window.dashCache = window.dashCache || (function (environment) {
 			return acc;
 		});
 		return key;
-	};
-  return [ function (state) {
-  	that = this;
-    if(this.isEmpty(state.context.cache)) {
-      return state;
-    }
-    var promise = state.promise,
-    	outward = this.deferred(),
-    	response,
-    	callbacks = {
-	        on_success: state.context.on_success,
-	        on_error: state.context.on_error,
-	        on_abort: state.context.on_abort,
-	        on_complete: state.context.on_complete,
-	        on_upgrade_needed: state.context.on_upgrade_needed,
-	        on_blocked: state.context.on_blocked,
-	        on_close: state.context.on_close
-	      }
-    if (this.contains(['get.entry'], state.method)) {
-	    response = get( {key: buildKey(state.context) });
-	    if (!this.isEmpty(response)) {
-	    	state = response;
-	    	state.promise = outward.promise;
-	    	this.iterate(callbacks, function(key, val) {
-	    		state.context[key] = val;
-	    	});
-	    	state.context.cached = true;
-	    	outward.resolve(state);
-	    	state.type = 'resolve';
-	    }
-    }
-    return state;
-  }, function (state) {
-    if(!this.is(state.context.cached, true) || (this.isEmpty(state.context.cache) && this.isEmpty(state.context.purge))) {
-      return state;
-    }
-    var args =  { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 3000 } ;
-    if (this.contains(['resolve','error'], state.type)) {
-      if ( !this.isEmpty(state.context.purge) ) {
-      	zap(args);
+	},
+    libraryScript = scripts[scripts.length - 1] || null,
+    libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
+	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
+
+  if (true === workerEnvironment) {
+    environment.addEventListener('message', function (e) {
+      var input = e.data,
+        method = input.method,
+        value = input.value,
+        key = input.key,
+        expires = input.expires,
+        end = function (ctx) {
+          input.context = ctx;
+          environment.postMessage(input);
+        };
+      if (that.is(method, 'get') || that.is(method, 'set') || that.is(method, 'delete')) {
+        console.log("CACHE OPERATION");
       } else {
-      	set(args);
-  	  }
-    }
-    return state;
-  } ];
+        input.type = 'error';
+        end({
+          error: 'No such method'
+        });
+      }
+    }, false);
+  } else {
+
+	  return [ function (state) {
+	  	that = this;
+	    if(this.isEmpty(state.context.cache)) {
+	      return state;
+	    }
+	    var promise = state.promise,
+	    	outward = this.deferred(),
+	    	response,
+	    	callbacks = {
+		        on_success: state.context.on_success,
+		        on_error: state.context.on_error,
+		        on_abort: state.context.on_abort,
+		        on_complete: state.context.on_complete,
+		        on_upgrade_needed: state.context.on_upgrade_needed,
+		        on_blocked: state.context.on_blocked,
+		        on_close: state.context.on_close
+		      }
+	    if (this.contains(['get.entry'], state.method)) {
+		    response = get( {key: buildKey(state.context) });
+		    if (!this.isEmpty(response)) {
+		    	state = response;
+		    	state.promise = outward.promise;
+		    	this.iterate(callbacks, function(key, val) {
+		    		state.context[key] = val;
+		    	});
+		    	state.context.cached = true;
+		    	outward.resolve(state);
+		    	state.type = 'resolve';
+		    }
+	    }
+	    return state;
+	  }, function (state) {
+	    if(!this.is(state.context.cached, true) || (this.isEmpty(state.context.cache) && this.isEmpty(state.context.purge))) {
+	      return state;
+	    }
+	    var args =  { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 3000 } ;
+	    if (this.contains(['resolve','error'], state.type)) {
+	      if ( !this.isEmpty(state.context.purge) ) {
+	      	zap(args);
+	      } else {
+	      	set(args);
+	  	  }
+	    }
+	    return state;
+	  } ];
+	}
 }(self));
