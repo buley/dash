@@ -183,7 +183,7 @@ self.dashCache = self.dashCache || (function (environment) {
           on_blocked: context.on_blocked,
           on_close: context.on_close
         },
-        worker = new Worker(libraryPath),
+        worker,
         getData = function (data) {
           safeIterate(callbacks, function (key, val) {
             data[key] = val;
@@ -225,6 +225,7 @@ self.dashCache = self.dashCache || (function (environment) {
       }
     }, false);
   } else {
+  	  worker =  new Worker(libraryPath);
 	  return [ function (state) {
 	  	that = this;
 	    if(this.isEmpty(state.context.cache)) {
