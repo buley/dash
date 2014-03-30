@@ -132,6 +132,7 @@ window.dashCache = window.dashCache || (function (environment) {
 	    		state.context[key] = val;
 	    	});
 	    	state.context.cached = true;
+	    	state.context.statistics.total.started = new Date().getTime();
 	    	outward.resolve(state);
 	    	state.type = 'resolve';
 	    }
