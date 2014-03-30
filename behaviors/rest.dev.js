@@ -50,6 +50,7 @@ self.dashRest = self.dashRest || (function (environment) {
 		    callback(json || request.responseText, e, request);
 	  	} else if ('function' === typeof callback && 4 === request.readyState && null !== request.status.toString().match(/^[34]/)) {
 	  		var json;
+	  		//TODO: Handle this
 	  		try {
 	      		json = JSON.parse(request.responseText);
 	  		} catch(e) {
