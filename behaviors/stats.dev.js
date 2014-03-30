@@ -573,7 +573,7 @@ window.dashStats = window.dashStats || (function (environment) {
           var processTotal = function (total) {
             if (!verb || !noun) {
               state.promise = promise;
-              deferred.resolve(state.context);
+              delete allStats[state.context.statistics.id];
               return;
             }
             if (theirs.exists(state.context.limit) && state.context.limit < total) {
