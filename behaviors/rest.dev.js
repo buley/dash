@@ -198,6 +198,7 @@ self.dashRest = self.dashRest || (function (environment) {
         value = input.value,
         key = input.key,
         context = input.context,
+        params = context.params,
         expires = input.expires,
         end = function (ctx) {
           input.context = ctx;
@@ -206,11 +207,11 @@ self.dashRest = self.dashRest || (function (environment) {
         }, 
         callback = function(sig) {
 	      	return function(data) {
-	      		console.log('sig',sig,'d',data);
 			    end({
 		          type: 'success',
 		          context: data,
-		          method: method
+		          method: method,
+		          params: params,
 		        });
 	      	}
       	};
