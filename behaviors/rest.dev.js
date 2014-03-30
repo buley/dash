@@ -243,7 +243,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	    }
 	    state.context.restid = this.random();
 	    rest[ state.context.restid ] = {
-	    	url: state.context.url
+	    	url: state.context.url,
+	    	params: state.context.params ? state.context.params : null
 	    }
 	    delete state.context.url;
 	    return state;
@@ -269,12 +270,11 @@ self.dashRest = self.dashRest || (function (environment) {
     		  state.promise = outward.promise;
     		  args = rest[ state.context.restid ];
 	    	  args.data = state.context.entry ? state.context.entry : null;
-	    	  args.params = state.context.params ? state.context.params : null;
 	          inward = workDispatch( whichMethod(state.method), args);
 		  	  inward(function(ctx2){
 		  	  	state.entry = ctx2 || { foo: 'ajax foo'};
 		  	  	state.type = 'resolve';
-		  	  	console.log('inward finished',state);
+		  	  	console.log('inward finished',ctx2);
 			    outward.resolve(state);
 		  	  });
 	    	}
