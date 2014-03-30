@@ -210,6 +210,7 @@ self.dashCache = self.dashCache || (function (environment) {
         expires = input.expires,
         end = function (ctx) {
           input.context = ctx;
+          input.type = 'resolve';
           environment.postMessage(input);
         };
       if (method === 'get' || method === 'set' || method === 'delete') {
