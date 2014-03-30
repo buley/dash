@@ -213,7 +213,7 @@ self.dashRest = self.dashRest || (function (environment) {
         }, 
         callback = function(sig) {
 	      	return function(data) {
-			    end(data);
+			    end({context: data});
 	      	}
       	};
       if (method === 'GET' || method === 'PUT' || method === 'POST' || method === 'DELETE') {
