@@ -224,10 +224,13 @@ self.dashRest = self.dashRest || (function (environment) {
           environment.postMessage(ctx);
         }, 
         callback = function(sig) {
-	      	return function(data) {
+	      	return function(data, error) {
 	      		input.context.entry = data;
 	      		delete input.context.callback;
-	      		console.log("ENC",input.context);
+	      		if (true === error) {
+		      		console.log("ERROR",input.context);
+	      			input.type = 'error';
+	      		}
 			    end(input);
 	      	}
       	};
