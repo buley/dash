@@ -3,7 +3,6 @@ self.dashCache = self.dashCache || (function (environment) {
   var that,
   	cache = {},
 	set = function( request ) {	
-		//Prefix to help prevent namespace collisions
 		var key = request.key || null
 		    , value = request.value || null
 		    , ttl = request.ttl || null //in seconds
@@ -59,7 +58,6 @@ self.dashCache = self.dashCache || (function (environment) {
 		var key = request.key || null
 		    , current = getExpires( { 'key': key } )
 		    , timestamp = ( current + request.value );
-
 		setExpires( { 'key': key, 'timestamp': timestamp } );
 		return this;			    
 	},
@@ -211,7 +209,7 @@ self.dashCache = self.dashCache || (function (environment) {
         key = input.key,
         expires = input.expires,
         end = function (ctx) {
-          input.context = ctx;
+          input.result = ctx;
           input.type = 'success';
           environment.postMessage(input);
         };
