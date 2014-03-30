@@ -41,7 +41,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	  }
 	  request.addEventListener('readystatechange', function (e) {
 	  	if ('function' === typeof callback && 4 === request.readyState && null !== request.status.toString().match(/^2/)) {
-		    callback(request, e);
+	      	var json = JSON.parse(request.responseText);
+		    callback(json || request.response, e);
 	  	}
 	  }, true);
 
