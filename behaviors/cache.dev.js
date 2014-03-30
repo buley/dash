@@ -147,7 +147,7 @@ window.dashCache = window.dashCache || (function (environment) {
     if(this.isEmpty(state.context.cache) && this.isEmpty(state.context.purge)) {
       return state;
     }
-    var args =  { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 300000 } ;
+    var args =  { key: buildKey(state.context, state.type), value: state, ttl: state.context.expires || 3000 } ;
     if (this.contains(['resolve','error'], state.type)) {
       if ( !this.isEmpty(state.context.purge) ) {
       	zap(args);
