@@ -297,6 +297,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
     var promise = state.promise,
         outward = this.deferred(),
         doTick = function(ste) {
+          if (!ste) {
+            return ste;
+          }
           unregister(ste.method, ste.context);
           if (!!state.context.changes) {
             register(ste.method, ste.context);
