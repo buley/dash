@@ -210,7 +210,7 @@ self.dashCache = self.dashCache || (function (environment) {
         context = input.context,
         expires = input.expires,
         end = function (ctx) {
-          input.result = ctx;
+          input.context = ctx;
           input.type = 'success';
           environment.postMessage(input);
         };
