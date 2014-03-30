@@ -244,7 +244,7 @@ window.dashCache = window.dashCache || (function (environment) {
 		        on_close: state.context.on_close
 		      }
 	    if (this.contains(['get.entry'], state.method)) {
-		    inward = workDispatch( {method: 'get', key: buildKey(state.context) });
+		    inward = workDispatch('get', { key: buildKey(state.context) } );
 		    if (!this.isEmpty(response)) {
 		    	state = response;
 		    	state.promise = outward.promise;
