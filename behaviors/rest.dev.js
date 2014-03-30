@@ -213,8 +213,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    }
 	    state.context.restid = this.random();
 	    rest[ state.context.restid ] = {
-	    	url: state.context.url,
-	    	data: state.context.entry ?  state.context.entry : null
+	    	url: state.context.url
 	    }
 	    delete state.context.url;
 	    return state;
@@ -225,7 +224,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	    var promise = state.promise,
 	    	outward = this.deferred(),
 	    	inward,
-	    	update = false;
+	    	update = false,
+	    	args;
 	    	if (this.contains(['add.entry', 'update.entry', 'update.entries', 'remove.entry', 'remove.entries'], state.method)) {
 			    if (this.contains(['notify', 'success'], state.type)) {
 			      update = true;
@@ -237,7 +237,9 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	}
 	    	if (update) {
     		  state.promise = outward.promise;
-	          inward = workDispatch( whichMethod(state.method), rest[ state.context.restid ] );
+    		  args = rest[ state.context.restid ];
+	    	  args.data = state.context.entry ? state.context.entry : null
+	          inward = workDispatch( whichMethod(state.method), args);
 		  	  inward(function(ctx2){
 			    outward.resolve(ctx2);
 		  	  });
