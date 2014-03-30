@@ -256,7 +256,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	    	state.context.cached = true;
 	    	inward(function(response) {
 	    		console.log('dispach relayed');
-	    		if(isEmpty(response)) {
+	    		if(that.isEmpty(response)) {
 	    			state.context.cached = false;
 	    		} else {
 		    		state = response;
@@ -264,10 +264,10 @@ self.dashCache = self.dashCache || (function (environment) {
 			    	this.iterate(callbacks, function(key, val) {
 			    		state.context[key] = val;
 			    	});
+			    	state.type = 'resolve';
+			    	outward.resolve(state);
 	    		}
-		    	outward.resolve(state);
 	    	});
-	    	state.type = 'resolve';
 	    }
 	    return state;
 	  }, function (state) {
