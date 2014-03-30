@@ -212,7 +212,7 @@ self.dashRest = self.dashRest || (function (environment) {
         }, 
         callback = function(sig) {
 	      	return function(data) {
-	      		context.entry = data;
+	      		context.context.entry = data;
 	      		delete context.callback;
 			    end(context);
 	      	}
