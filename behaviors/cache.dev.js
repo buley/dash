@@ -18,12 +18,15 @@ self.dashCache = self.dashCache || (function (environment) {
 		return cache[ key ].data;
 	},
 	get = function( request ) {
-		var key = request.key || '';
+		var key = request.key || '',
+			current = new Date().getTime();
 		if( 'undefined' === typeof key || null === key ) {
 			return null;
 		}
 		if(cache[ key ]) {
-			if(cache[ key ].expire > new Date().getTime()) {
+			if(cache[ key ].expire > current) {
+				cache[ key ].data = cache[ key ].data || {};
+				cache[ key ].data.ttl = cache[ key ].expire - current;
 				return cache[ key ].data;
 			} else {
 				console.log("EXPIRED ago", new Date().getTime() - cache[ key ].expire )
