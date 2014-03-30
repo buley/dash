@@ -40,7 +40,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    }
 	  }
 	  request.addEventListener('readystatechange', function (e) {
-	  	if ('function' === typeof callback) {
+	  	if ('function' === typeof callback && 4 === request.readyState && null !== request.status.match(/^2/)) {
 		    callback(request, e);
 	  	}
 	  }, true);
