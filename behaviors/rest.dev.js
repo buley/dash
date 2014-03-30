@@ -23,7 +23,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	      }
 	    },
 	    qs = serialize(input),
-	    i =
+	    i = 0;
 	  if (window.XMLHttpRequest) {
 	    xhr = new XMLHttpRequest();
 	  } else {
