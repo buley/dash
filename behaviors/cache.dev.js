@@ -225,7 +225,7 @@ self.dashCache = self.dashCache || (function (environment) {
         input.type = 'error';
         end({
           type: 'abort',
-          context: input
+          context: input,
           error: 'No such method'
         });
       }
