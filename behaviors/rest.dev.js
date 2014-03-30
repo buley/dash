@@ -47,6 +47,7 @@ self.dashRest = self.dashRest || (function (environment) {
 		    request.send(qs);
 	    } else {
 		    request.setRequestHeader('Content-Type', 'application/javascript');
+	    	request.send(JSON.stringify(input));
 	    }
 	  }
 	},
