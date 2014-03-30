@@ -5,15 +5,15 @@ self.dashCache = self.dashCache || (function (environment) {
 	set = function( request ) {	
 		var key = request.key || null
 		    , value = request.value || null
-		    , ttl = request.ttl || null //in seconds
+		    , expires = request.expires || 3000 //in millisecons
 		    , current_date = new Date()
-		    , timestamp = ( current_date.getTime() + ( ttl * 1000 ) );
+		    , timestamp = ( current_date.getTime() + expires );
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
 		cache[ key ] = {
 			data: value,
-			expire: timestamp + ttl
+			expire: timestamp
 		};
 		return cache[ key ].data;
 	},
@@ -25,6 +25,8 @@ self.dashCache = self.dashCache || (function (environment) {
 		if(cache[ key ]) {
 			if(cache[ key ].expire > new Date().getTime()) {
 				return cache[ key ].data;
+			} else {
+				console.log("EXPIRED ago", new Date().getTime() - cache[ key ].expire )
 			}
 			delete cache[key];
 		}
@@ -196,10 +198,8 @@ self.dashCache = self.dashCache || (function (environment) {
 		    inward = workDispatch('get', { key: buildKey(state.context) } );
 	    	inward(function(response) {
 	    		if(that.isEmpty(response)) {
-		    		console.log('dispach relayed, no cache');
 	    			state.context.cached = false;
 	    		} else {
-	    			console.log('dispach relayed a cachesd object',response.context.entry);
 		    		state = response;
 			    	state.promise = outward.promise;
 			    	state.context.cached = true;
@@ -229,7 +229,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	      if ( !this.isEmpty(state.context.purge) || this.contains(['remove.entry', 'remove.entries', 'remove.index', 'remove.store',  'remove.database' ], state.method) ) {
 		    inward = workDispatch('zap', args );
 	      } else {
-	      	args.ttl = state.context.expires || 3000;
+	      	args.expires = state.context.expires || 3000;
 	      	args.value = state;
 		    inward = workDispatch('set', args );
 	  	  }
