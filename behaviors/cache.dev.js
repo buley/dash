@@ -11,6 +11,7 @@ self.dashCache = self.dashCache || (function (environment) {
 		if( 'undefined' === typeof key || null === key ) {
 			return;
 		}
+		cache = cache || {};
 		cache[ key ] = {
 			data: value,
 			expire: timestamp
@@ -18,6 +19,7 @@ self.dashCache = self.dashCache || (function (environment) {
 		return cache[ key ].data;
 	},
 	get = function( request ) {
+		cache = cache || {};
 		var key = request.key || '';
 		if( 'undefined' === typeof key || null === key ) {
 			return null;
@@ -32,6 +34,7 @@ self.dashCache = self.dashCache || (function (environment) {
 		return null;
 	},
 	zap = function( request ) {
+		cache = cache || {};
 		var key = request.key || ''
 		  , temp
 		  , keys = key.split('.')
