@@ -39,7 +39,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    }
 	  }
 	  request.addEventListener('readystatechange', function (e) {
-	    callback(request, e);
+	    that.apply(callback, [request, e], that);
 	  }, true);
 
 	  if (request_type.toUpperCase() === 'GET') {
