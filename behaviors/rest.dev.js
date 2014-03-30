@@ -29,7 +29,6 @@ self.dashRest = self.dashRest || (function (environment) {
 	    formencoded = serialize(input),
 	    i = 0,
 	    error = false;
-	  ct
 	  if (environment.XMLHttpRequest) {
 	    request = new XMLHttpRequest();
 	  } else {
