@@ -190,7 +190,9 @@ self.dashRest = self.dashRest || (function (environment) {
         getData = function (data) {
           if( that.isObject(data) )  {
 	          that.iterate(callbacks, function (key, val) {
-	            data[key] = val;
+	          	if(!!val) {
+		            data[key] = val;
+	          	}
 	          });
   		  }
           return data;
