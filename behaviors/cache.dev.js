@@ -261,7 +261,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	    			console.log('dispach relayed a cached object',response.context.entry);
 		    		state = response;
 			    	state.promise = outward.promise;
-			    	this.iterate(callbacks, function(key, val) {
+			    	that.iterate(callbacks, function(key, val) {
 			    		state.context[key] = val;
 			    	});
 			    	state.type = 'resolve';
