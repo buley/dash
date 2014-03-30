@@ -261,7 +261,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	    if (this.contains(['resolve','error'], state.type)) {
 	    	state.promise = outward.promise;
 	   	  args = { key: buildKey(state.context, state.type) } ;
-	      if ( !this.isEmpty(state.context.purge) || this.contains(['remove.entry', 'remove.entries', 'remove.index', 'remove.store',  'remove.database' ], state.method) ) {
+	      if ( !this.isEmpty(state.context.purge) || this.contains(['remove.entry', 'remove.entries', 'remove.index', 'remove.store', 'remove.database' ], state.method) ) {
 		    inward = workDispatch('zap', args );
 	      } else {
 	      	args.expires = state.context.expires || 3000;
