@@ -41,7 +41,6 @@ self.dashRest = self.dashRest || (function (environment) {
 	  }
 	  request.addEventListener('readystatechange', function (e) {
 	  	if ('function' === typeof callback && 4 === request.readyState && null !== request.status.toString().match(/^2/)) {
-	  		console.log("AJAX", request.responseText);
 	  		var json;
 	  		try {
 	      		json = JSON.parse(request.responseText);
@@ -213,7 +212,8 @@ self.dashRest = self.dashRest || (function (environment) {
         }, 
         callback = function(sig) {
 	      	return function(data) {
-			    end(data);
+	      		context.entry = context;
+			    end(context);
 	      	}
       	};
       if (method === 'GET' || method === 'PUT' || method === 'POST' || method === 'DELETE') {
