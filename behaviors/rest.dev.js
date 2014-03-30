@@ -275,7 +275,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	update = false,
 	    	args;
 	    	if (this.contains(['add.entry', 'update.entry', 'update.entries', 'remove.entry', 'remove.entries'], state.method)) {
-			    if (this.contains(['notify', 'success'], state.type)) {
+			    if (this.contains(['notify', 'resolve'], state.type)) {
 			      update = true;
 			    } 
 	    	} else {
