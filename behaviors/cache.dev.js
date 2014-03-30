@@ -129,15 +129,15 @@ self.dashCache = self.dashCache || (function (environment) {
             case 'success':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
-              safeApply(success, [data.context]);
+              that.safeApply(success, [data.context]);
               break;
             case 'error':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
-              safeApply(error, [data.context]);
+              that.safeApply(error, [data.context]);
               break;
             case 'notify':
-              safeApply(notify, [data.context]);
+              that.safeApply(notify, [data.context]);
               break;
             default:
               break;
@@ -145,14 +145,14 @@ self.dashCache = self.dashCache || (function (environment) {
           }
         },
         clean = function(obj) {
-          if (isFunction(obj)) { 
+          if (that.isFunction(obj)) { 
             return undefined;
-          } else if (isObject(obj)) {
-            safeIterate(obj, function(key, val) {
+          } else if (that.isObject(obj)) {
+            that.safeIterate(obj, function(key, val) {
               obj[ key ] = clean(val);
             });
-          } else if (isArray(obj)) {
-            safeEach(obj, function(v, i) {
+          } else if (that.isArray(obj)) {
+            that.safeEach(obj, function(v, i) {
               obj[i] = clean(v);
             });
           }
@@ -185,12 +185,12 @@ self.dashCache = self.dashCache || (function (environment) {
         },
         worker,
         getData = function (data) {
-          safeIterate(callbacks, function (key, val) {
+          that.safeIterate(callbacks, function (key, val) {
             data[key] = val;
           });
           return data;
         };
-      safeIterate(callbacks, function (key, val) {
+      that.safeIterate(callbacks, function (key, val) {
         delete context[key];
       });
       workRegister(worker, message, context, function (data) {
