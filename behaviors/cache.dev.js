@@ -183,7 +183,6 @@ self.dashCache = self.dashCache || (function (environment) {
           on_blocked: context.on_blocked,
           on_close: context.on_close
         },
-        worker,
         getData = function (data) {
           that.iterate(callbacks, function (key, val) {
             data[key] = val;
