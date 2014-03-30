@@ -116,8 +116,94 @@ window.dashCache = window.dashCache || (function (environment) {
     libraryScript = scripts[scripts.length - 1] || null,
     libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
 	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
+	worker = new Worker(libraryPath),
+	workQueue = {},
+    workRegister = function (worker, message, context, success, error, notify) {
+      var id = randomId(),
+        callback = function (e) {
+          var data = e.data,
+            queued = workQueue[data.uid];
+          if (undefined !== queued) {
+            switch (e.data.type) {
+            case 'success':
+              delete workQueue[data.uid];
+              worker.removeEventListener('message', callback);
+              safeApply(success, [data.context]);
+              break;
+            case 'error':
+              delete workQueue[data.uid];
+              worker.removeEventListener('message', callback);
+              safeApply(error, [data.context]);
+              break;
+            case 'notify':
+              safeApply(notify, [data.context]);
+              break;
+            default:
+              break;
+            }
+          }
+        },
+        clean = function(obj) {
+          if (isFunction(obj)) { 
+            return undefined;
+          } else if (isObject(obj)) {
+            safeIterate(obj, function(key, val) {
+              obj[ key ] = clean(val);
+            });
+          } else if (isArray(obj)) {
+            safeEach(obj, function(v, i) {
+              obj[i] = clean(v);
+            });
+          }
+          return obj;          
+        };
+      workQueue[id] = {
+        success: success,
+        error: error,
+        notify: notify
+      };
+      worker.addEventListener('message', callback);
+
+      worker.postMessage({
+        method: message,
+        context: clean(context),
+        uid: id
+      });
+      return id;
+    },
+    workDispatch = function (message, context) {
+      var defd = deferred(),
+        callbacks = {
+          on_success: context.on_success,
+          on_error: context.on_error,
+          on_abort: context.on_abort,
+          on_complete: context.on_complete,
+          on_upgrade_needed: context.on_upgrade_needed,
+          on_blocked: context.on_blocked,
+          on_close: context.on_close
+        },
+        worker = new Worker(libraryPath),
+        getData = function (data) {
+          safeIterate(callbacks, function (key, val) {
+            data[key] = val;
+          });
+          return data;
+        };
+      safeIterate(callbacks, function (key, val) {
+        delete context[key];
+      });
+      workRegister(worker, message, context, function (data) {
+        defd.resolve(getData(data));
+      }, function (data) {
+        defd.reject(getData(data));
+      }, function (data) {
+        defd.notify(getData(data));
+      });
+      return defd.promise;
+    };
 
   if (true === workerEnvironment) {
+  	console.log('isworker');
     environment.addEventListener('message', function (e) {
       var input = e.data,
         method = input.method,
@@ -138,14 +224,13 @@ window.dashCache = window.dashCache || (function (environment) {
       }
     }, false);
   } else {
-
 	  return [ function (state) {
 	  	that = this;
 	    if(this.isEmpty(state.context.cache)) {
 	      return state;
 	    }
 	    var promise = state.promise,
-	    	outward = this.deferred(),
+	    	outward = this.deferred()
 	    	response,
 	    	callbacks = {
 		        on_success: state.context.on_success,
