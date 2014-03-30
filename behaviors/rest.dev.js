@@ -2,10 +2,11 @@ self.dashRest = self.dashRest || (function (environment) {
   "use strict";
   var that,
   	rest = {},
-	request = function( request ) {	
+	ajax = function( request ) {	
 	  var request_type = request.method,
 	    url = request.url,
 	    input = request.data,
+	    params = request.params,
 	    callback = request.callback,
 	  	fallbacks = ['MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'],
 	    request,
@@ -22,8 +23,10 @@ self.dashRest = self.dashRest || (function (environment) {
 	        queryString = data;
 	      }
 	    },
-	    qs = serialize(input),
+	    qs = serialize(params),
+	    formencoded = serialize(input),
 	    i = 0;
+	  
 	  if (environment.XMLHttpRequest) {
 	    request = new XMLHttpRequest();
 	  } else {
@@ -37,35 +40,37 @@ self.dashRest = self.dashRest || (function (environment) {
 	  request.addEventListener('readystatechange', function (e) {
 	    callback(request, e);
 	  }, true);
+
 	  if (request_type.toUpperCase() === 'GET') {
 	    request.open(request_type, url + '?' + qs, true);
 	    request.send();
 	  } else if (request_type.toUpperCase() === 'POST') {
-	    request.open(request_type, url, true);
+	    request.open(request_type, url + '?' + qs, true);
 	    if (that.is(request.json, false)) {
 		    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		    request.send(qs);
+		    request.send(formencoded);
 	    } else {
 		    request.setRequestHeader('Content-Type', 'application/javascript');
 	    	request.send(JSON.stringify(input));
 	    }
 	  }
+
 	},
 	get = function( context ) {	
 		context.method = 'GET';
-		request(context);
+		ajax(context);
 	},
 	post = function( context ) {	
 		context.method = 'POST';
-		request(context);
+		ajax(context);
 	},
 	put = function( context ) {	
 		context.method = 'PUT';
-		request(context);
+		ajax(context);
 	},
 	remove = function( context ) {	
 		context.method = 'DELETE';
-		request(context);
+		ajax(context);
 	},
 	whichMethod = function(signature) {
 		if ( that.contains[ 'get.entry', 'get.entries', 'get.index', 'get.database', 'get.store' ], signature) {
@@ -246,7 +251,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	    		console.log('doing rest',state.method,state.type);
     		  state.promise = outward.promise;
     		  args = rest[ state.context.restid ];
-	    	  args.data = state.context.entry ? state.context.entry : null
+	    	  args.data = state.context.entry ? state.context.entry : null;
+	    	  args.params = state.context.params ? state.context.params : null;
 	          inward = workDispatch( whichMethod(state.method), args);
 		  	  inward(function(ctx2){
 			    outward.resolve(ctx2);
