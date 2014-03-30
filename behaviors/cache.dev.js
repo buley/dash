@@ -159,7 +159,7 @@ self.dashCache = self.dashCache || (function (environment) {
         	var isReducible = function(input) {
         		var attrs = 0,
         			attr;
-        		if ( 'string' === typeof input || number === typeof input || 'function' === typeof input.slice ) {
+        		if ( 'string' === typeof input || 'number' === typeof input || 'function' === typeof input.slice ) {
         			return false;
         		}
         		for ( attr in input ) {
