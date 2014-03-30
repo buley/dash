@@ -26,8 +26,6 @@ self.dashCache = self.dashCache || (function (environment) {
 			if(cache[ key ].expire > new Date().getTime()) {
 				cache[ key ].data = cache[ key ].data || {};
 				return cache[ key ].data;
-			} else {
-				console.log("EXPIRED ago", new Date().getTime() - cache[ key ].expire )
 			}
 			delete cache[key];
 		}
@@ -154,10 +152,35 @@ self.dashCache = self.dashCache || (function (environment) {
         key = input.key,
         context = input.context,
         expires = input.expires,
+        prune = function() {
+        	var isReducible = function(input) {
+        		var attrs = 0;
+        		for ( attr in input ) {
+        			if ( input.hasOwnProperty(attr) ) {
+        				attrs += 1;
+        			}
+        		}
+        		return !!attrs;
+        	}, reduce = function(input) {
+        		var attrs = {};
+        		for ( attr in input ) {
+        			if ( input.hasOwnProperty(attr) ) {
+        				if ( isReducible(input[ attr ] ) ) {
+	        				attrs[ attr ] = reduce(input[ attr ]);
+        				} else {
+	        				attrs[ attr ] = input[ attr ];
+        				}
+        			}
+        		}
+        	};
+        },
         end = function (ctx) {
           input.context = ctx;
           input.type = 'success';
           environment.postMessage(input);
+          setTimeout(function() {
+          	cache = prune(cache);
+          });
         };
       if (method === 'get' || method === 'set' || method === 'delete') {
         if ( method === 'get' ) {
