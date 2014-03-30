@@ -220,6 +220,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	    }
 	    return state;
 	  }, function (state) {
+	  	that = this;
 	    if(this.is(state.context.cached, true) || this.is(state.context.cache, false)) {
 	      return state;
 	    }
