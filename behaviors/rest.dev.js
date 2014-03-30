@@ -121,12 +121,12 @@ self.dashRest = self.dashRest || (function (environment) {
             case 'success':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
-              that.apply(success, [data]);
+              that.apply(success, [data.context]);
               break;
             case 'error':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
-              that.apply(error, [data]);
+              that.apply(error, [data.context]);
               break;
             case 'abort':
               that.apply(
