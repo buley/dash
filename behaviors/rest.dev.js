@@ -206,14 +206,14 @@ self.dashRest = self.dashRest || (function (environment) {
         params = context.params,
         expires = input.expires,
         end = function (ctx) {
-          input.context = ctx;
-          input.type = 'success';
+          ctx.type = 'success';
           environment.postMessage(ctx);
         }, 
         callback = function(sig) {
 	      	return function(data) {
 	      		input.context.entry = data;
 	      		delete input.context.callback;
+	      		console.log("ENC",input);
 			    end(input);
 	      	}
       	};
