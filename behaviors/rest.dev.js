@@ -39,7 +39,9 @@ self.dashRest = self.dashRest || (function (environment) {
 	    }
 	  }
 	  request.addEventListener('readystatechange', function (e) {
-	    that.apply(callback, [request, e], that);
+	  	if ('function' === typeof callback) {
+		    callback(request, e);
+	  	}
 	  }, true);
 
 	  if (request_type.toUpperCase() === 'GET') {
