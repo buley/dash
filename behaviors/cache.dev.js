@@ -256,11 +256,15 @@ self.dashCache = self.dashCache || (function (environment) {
 	    	state.context.cached = true;
 	    	inward(function(response) {
 	    		console.log('dispach relayed');
-	    		state = response;
-		    	state.promise = outward.promise;
-		    	this.iterate(callbacks, function(key, val) {
-		    		state.context[key] = val;
-		    	});
+	    		if(isEmpty(response)) {
+	    			state.context.cached = false;
+	    		} else {
+		    		state = response;
+			    	state.promise = outward.promise;
+			    	this.iterate(callbacks, function(key, val) {
+			    		state.context[key] = val;
+			    	});
+	    		}
 		    	outward.resolve(state);
 	    	});
 	    	state.type = 'resolve';
