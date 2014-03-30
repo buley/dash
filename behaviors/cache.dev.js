@@ -290,7 +290,7 @@ self.dashCache = self.dashCache || (function (environment) {
 		    inward = workDispatch('set', args );
 	  	  }
 	  	  inward(function(ctx2){
-	  	  	console.log('dispatch returned',args);
+	  	  	console.log('dispatch returned',ctx2);
 		    outward.resolve(ctx2);
 	  	  });
 		}
