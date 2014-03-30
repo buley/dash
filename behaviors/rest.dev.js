@@ -275,10 +275,11 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	  args.data = state.context.entry ? state.context.entry : null;
 	          inward = workDispatch( whichMethod(state.method), args);
 		  	  inward(function(ctx2){
-		  	  	state.entry = ctx2;
+		  	  	state.data = ctx2;
 		  	  	state.type = 'resolve';
     		    state.url = args.url;
     		    state.params = args.params;
+    		    console.log('inward',state);
 			    outward.resolve(state);
 		  	  });
 	    	}
