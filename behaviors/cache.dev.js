@@ -255,7 +255,6 @@ self.dashCache = self.dashCache || (function (environment) {
 		    		console.log('dispach relayed');
 			    	outward.resolve(ste);
 		    	});
-    	    	outward.resolve(ste);
 		    	state.type = 'resolve';
 		    }
 	    }
