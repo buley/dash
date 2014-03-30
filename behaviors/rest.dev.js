@@ -265,9 +265,9 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	  args.params = state.context.params ? state.context.params : null;
 	          inward = workDispatch( whichMethod(state.method), args);
 		  	  inward(function(ctx2){
-		  	  	console.log('inward finished',ctx2);
 		  	  	state.entry = ctx2 || { foo: 'ajax foo'};
 		  	  	state.type = 'resolve';
+		  	  	console.log('inward finished',state);
 			    outward.resolve(state);
 		  	  });
 	    	}
