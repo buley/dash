@@ -1,4 +1,4 @@
-window.dashCache = window.dashCache || (function (environment) {
+window.dashCache = self.dashCache || (function (environment) {
   "use strict";
   var that,
   	cache = {},
