@@ -26,7 +26,7 @@ self.dashCache = self.dashCache || (function (environment) {
 		if(cache[ key ]) {
 			if(cache[ key ].expire > current) {
 				cache[ key ].data = cache[ key ].data || {};
-				if (!that.isEmpty(cache[ key ].data) && !that.isEmpty(cache[ key ].data.context)) {
+				if (!!cache[ key ].data) && !!cache[ key ].data.context) {
 					cache[ key ].data.context.ttl = cache[ key ].expire - current;
 				}
 				return cache[ key ].data;
@@ -220,7 +220,6 @@ self.dashCache = self.dashCache || (function (environment) {
 	    }
 	    return state;
 	  }, function (state) {
-	  	that = this;
 	    if(this.is(state.context.cached, true) || this.is(state.context.cache, false)) {
 	      return state;
 	    }
