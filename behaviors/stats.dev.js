@@ -614,8 +614,10 @@ window.dashStats = window.dashStats || (function (environment) {
               store_key_path: context.store_key_path,
             })(function (context) {
               state.context.total = context.total;
+              delete allStats[state.context.statistics.id];
               processTotal(context.total);
             }, function (context) {
+              delete allStats[state.context.statistics.id];
               deferred.error(state.context);
             }, function (context) {
               deferred.notify(state.context);
