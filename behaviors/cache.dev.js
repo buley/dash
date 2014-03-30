@@ -207,6 +207,7 @@ self.dashCache = self.dashCache || (function (environment) {
         method = input.method,
         value = input.value,
         key = input.key,
+        context = input.context,
         expires = input.expires,
         end = function (ctx) {
           input.result = ctx;
@@ -215,11 +216,11 @@ self.dashCache = self.dashCache || (function (environment) {
         };
       if (method === 'get' || method === 'set' || method === 'delete') {
         if ( method === 'get' ) {
-        	end(get(input));
+        	end(get(context));
         } else if ( method === 'set' ) {
-        	end(set(input));
+        	end(set(context));
         } else if ( method === 'delete' ) {
-        	end(zap(input));
+        	end(zap(context));
         }
       } else {
         input.type = 'error';
