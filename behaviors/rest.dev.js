@@ -298,8 +298,14 @@ self.dashRest = self.dashRest || (function (environment) {
     		    state.params = args.params;
 			    outward.resolve(state);
 		  	  }, function(ctx2) {
-			    outward.resolve(state);
+		  	  	state.type = 'reject';
+    		    state.url = args.url;
+    		    state.params = args.params;
+			    outward.reject(state);
 		  	  }, function(ctx2) {
+		  	  	state.type = 'notify';
+    		    state.url = args.url;
+    		    state.params = args.params;
 			    outward.notify(state);
 		  	  });
 	    	}
