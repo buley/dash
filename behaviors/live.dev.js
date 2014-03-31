@@ -5,13 +5,13 @@ window.dashLive = window.dashLive || (function (environment) {
       live = function(ste) {
         var ctx = ste.context,
           fn = function(live_ctx) {
-            if (!liveMap[ live_ctx.context.liveid ] ||( !!live_ctx.context && !!live_ctx.context.relived)) {
+            if (!liveMap[ ste.context.liveid ] ||( !!live_ctx.context && !!live_ctx.context.relived)) {
               delete live_ctx.context.relived;
               return live_ctx;
             }
             st2.type = 'notify';
             st2.context.relived = true;
-            liveMap[ live_ctx.context.liveid ].resolve(live_ctx);
+            liveMap[ ste.context.liveid ].resolve(live_ctx);
           };
         fn.ready = false;
         return fn;
