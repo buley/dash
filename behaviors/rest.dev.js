@@ -198,8 +198,10 @@ self.dashRest = self.dashRest || (function (environment) {
       that.iterate(callbacks, function (key, val) {
         delete context[key];
       });
-      workRegister(worker, message, context, function (add_ctx) {
-      	console.log('REST resolved, store?',data.context.entry, typeof that.api.add.entry);
+      workRegister(worker, message, context, function (data) {
+      	console.log('REST resolved, store?',data.entry, typeof that.api.add.entry);
+      	var add_ctx = that.clone(context);
+      	add_ctx.data = data.context.entry;
       	that.api.add.entry(add_ctx)(function(added_ctx) {
 	        defd.resolve(getData(added_ctx));
       	}, function(added_ctx) {
