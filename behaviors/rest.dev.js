@@ -239,7 +239,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	      		delete input.context.callback;
 	      		if (!!error) {
 	      			input.context.error = error;
-	      			input.context.body = data;
+	      			input.context.message = data;
 	      			input.type = 'error';
 	      		} else {
 	      			input.context.entry = data;
