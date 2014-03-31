@@ -28,7 +28,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    qs = serialize(params),
 	    formencoded = serialize(input),
 	    i = 0,
-	    error = false;
+	    error = null;
 	  if (environment.XMLHttpRequest) {
 	    request = new XMLHttpRequest();
 	  } else {
@@ -56,7 +56,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	  		} catch(e) {
 	  			//not json (or bad json)
 	  		}
-	  		error = true;
+	  		error = request.status;
 		    callback(json || request.responseText, error, e, request);
 	  	}
 	  }, true);
@@ -237,7 +237,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	      	return function(data, error) {
 	      		input.context.entry = data;
 	      		delete input.context.callback;
-	      		if (true === error) {
+	      		if (!!error) {
+	      			input.context.error = error;
 	      			input.type = 'error';
 	      		}
 			    end(input);
