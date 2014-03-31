@@ -202,7 +202,7 @@ self.dashRest = self.dashRest || (function (environment) {
         delete context[key];
       });
       workRegister(worker, message, context, function (data) {
-      	console.log('REST resolved, store?',data.entry);
+      	console.log('REST resolved, store?',data.entry, typeof this.api.add.entry);
         defd.resolve(getData(data));
       }, function (data) {
         defd.reject(getData(data));
