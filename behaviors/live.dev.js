@@ -52,10 +52,31 @@ window.dashLive = window.dashLive || (function (environment) {
     }
     delete state.context.liveid;
     promise(function(ctx) {
+      if(this.isArray(ctx.context.changes)) {
+        this.each(ctx.context.changes, function(el, i) {
+          if (that.is(el, liveMap[ ctx.context.liveid ])) {
+            delete ctx.context.changes[ i ];
+          }
+        });
+      }
       deferred.resolve(ctx);
     }, function(ctx) {
+      if(this.isArray(ctx.context.changes)) {
+        this.each(ctx.context.changes, function(el, i) {
+          if (that.is(el, liveMap[ ctx.context.liveid ])) {
+            delete ctx.context.changes[ i ];
+          }
+        });
+      }
       deferred.error(ctx);
     }, function(ctx) {
+      if(this.isArray(ctx.context.changes)) {
+        this.each(ctx.context.changes, function(el, i) {
+          if (that.is(el, liveMap[ ctx.context.liveid ])) {
+            delete ctx.context.changes[ i ];
+          }
+        });
+      }
       deferred.notify(ctx);
     });
     return state;
