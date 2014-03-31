@@ -323,7 +323,7 @@ self.dashRest = self.dashRest || (function (environment) {
     		    state.context = ctx2;
     		    state.type = 'error';
       			delete ctx2.restid;
-  			    outward.reject(state);
+  			    outward.reject(state.context);
 		  	  }, function(ctx2) {
     		    ctx2.context.url = args.url;
     		    ctx2.params = args.params;
