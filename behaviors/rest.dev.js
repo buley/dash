@@ -206,9 +206,11 @@ self.dashRest = self.dashRest || (function (environment) {
       	var add_ctx = that.clone(context);
       	add_ctx.data = data.entry;
       	that.api.add.entry(add_ctx)(function(added_ctx) {
-	        defd.resolve(getData(data));
-      	}, function() {
-	        defd.resolve(getData(data));
+	        defd.resolve(getData(added_ctx));
+      	}, function(added_ctx) {
+	        defd.reject(getData(added_ctx));
+      	}, function(added_ctx) {
+	        defd.notify(getData(added_ctx));
       	})
       }, function (data) {
         defd.reject(getData(data));
