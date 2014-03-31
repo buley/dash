@@ -320,18 +320,21 @@ self.dashRest = self.dashRest || (function (environment) {
 		  	  }, function(ctx2) {
     		    ctx2.url = args.url;
     		    ctx2.params = args.params;
+      			delete ctx2.restid;
     		    state.context = ctx2;
     		    state.type = 'error';
-      			delete ctx2.restid;
   			    outward.reject(state.context);
 		  	  }, function(ctx2) {
-    		    ctx2.context.url = args.url;
+    		    ctx2.url = args.url;
     		    ctx2.params = args.params;
       			delete ctx2.restid;
     		    state.type = 'notify';
     		    state.context = ctx2;
 			    outward.notify(state.context);
 		  	  });
+	    	} else {
+		      state.context.url = args.url;
+		      state.context.params = args.params;
 	    	}
 	    return state;
 	  } ];
