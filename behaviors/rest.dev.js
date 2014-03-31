@@ -257,7 +257,7 @@ self.dashRest = self.dashRest || (function (environment) {
   } else {
 	  return [ function (state) {
 	  	that = this;
-	    if(this.isnt(state.context.rest, true)) {
+	    if(this.isnt(state.context.rest, true) || this.exists(state.context.resting)) {
 	      return state;
 	    }
 	    state.context.restid = this.random();
@@ -269,7 +269,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	    delete state.context.params;
 	    return state;
 	  }, function (state) {
-	    if(this.isnt(state.context.rest, true)) {
+	    if(this.isnt(state.context.rest, true) || this.exists(state.context.resting)) {
 	      return state;
 	    }
 	    var promise = state.promise,
