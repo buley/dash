@@ -8,9 +8,9 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!liveMap[ ste.context.liveid ] ||( !!live_ctx.context && !!live_ctx.context.relived)) {
               return live_ctx;
             }
-            live_ctx.type = 'notify';
-            live_ctx.context.relived = true;
-            liveMap[ ste.context.liveid ].resolve(live_ctx);
+            ste.type = 'notify';
+            ste.context.relived = true;
+            liveMap[ ste.context.liveid ].resolve(ste);
           };
         fn.ready = false;
         return fn;
