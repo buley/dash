@@ -1,16 +1,15 @@
 window.dashLive = window.dashLive || (function (environment) {
   "use strict";
   var that,
-      liveMap = {},
       live = function(ste) {
         var ctx = ste.context,
           fn = function(st2) {
-            console.log('live one');
-            if (!liveMap[ ctx.liveid ] ||( !!st2.context && !!st2.context.living)) {
-              return;
+            if (( !!st2.context && !!st2.context.reliving)) {
+              delete st2.context.reliving;
+              return st2;
             }
             st2.type = 'notify';
-            st2.context.living = true;
+            st2.context.reliving = true;
             liveMap[ ctx.liveid ].resolve(st2);
           };
         fn.ready = false;
