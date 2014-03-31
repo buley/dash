@@ -9,8 +9,8 @@ window.dashLive = window.dashLive || (function (environment) {
               delete live_ctx.context.relived;
               return live_ctx;
             }
-            st2.type = 'notify';
-            st2.context.relived = true;
+            live_ctx.type = 'notify';
+            live_ctx.context.relived = true;
             liveMap[ ste.context.liveid ].resolve(live_ctx);
           };
         fn.ready = false;
