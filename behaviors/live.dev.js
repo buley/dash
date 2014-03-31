@@ -42,7 +42,7 @@ window.dashLive = window.dashLive || (function (environment) {
     state.promise = deferred.promise;
     if(this.isArray(state.context.changes)) {
       this.each(state.context.changes, function(el, i) {
-        if (this.is(el, liveMap[ state.context.liveid ])) {
+        if (that.is(el, liveMap[ state.context.liveid ])) {
           delete state.context.changes[ i ];
         }
       });
