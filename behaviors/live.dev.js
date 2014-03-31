@@ -10,7 +10,7 @@ window.dashLive = window.dashLive || (function (environment) {
             }
             ste.type = 'notify';
             ste.context.relived = true;
-            liveMap[ ste.context.liveid ].resolve(ctx);
+            liveMap[ ste.context.liveid ].resolve(ste);
           };
         fn.ready = false;
         return fn;
