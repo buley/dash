@@ -48,7 +48,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	  			//not json (or bad json)
 	  		}
 	  		error = null;
-		    callback(json || request.responseText, e, request);
+		    callback(json || request.responseText, error, e, request);
 	  	} else if ('function' === typeof callback && 4 === request.readyState && null !== request.status.toString().match(/^[34]/)) {
 	  		var json;
 	  		//TODO: Handle this
