@@ -204,10 +204,13 @@ self.dashRest = self.dashRest || (function (environment) {
       	add_ctx.data = data.context.entry;
       	add_ctx.resting = true;
       	that.api.add.entry(add_ctx)(function(added_ctx) {
+      		delete added_ctx.resting;
 	        defd.resolve(getData(added_ctx));
       	}, function(added_ctx) {
+      		delete added_ctx.resting;
 	        defd.reject(getData(added_ctx));
       	}, function(added_ctx) {
+      		delete added_ctx.resting;
 	        defd.notify(getData(added_ctx));
       	})
       }, function (data) {
