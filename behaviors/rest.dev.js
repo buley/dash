@@ -302,10 +302,10 @@ self.dashRest = self.dashRest || (function (environment) {
     		  args = rest[ state.context.restid ];
     		  state.context.url = args.url;0
     		  if (that.isFunction(state.context.url)) {
-    		  	state.context.url = that.apply(state.context.url, [state]);
+    		  	state.context.url = that.apply(state.context.url, [that.clone(state)]);
     		  }
     		  if (that.isFunction(state.context.params)) {
-    		  	state.context.params = that.apply(state.context.params, [state]);
+    		  	state.context.params = that.apply(state.context.params, [that.clone(state)]);
     		  }
     		  state.context.params = args.params;
 	          inward = workDispatch( whichMethod(state.method), state.context);
