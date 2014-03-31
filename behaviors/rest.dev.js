@@ -202,8 +202,13 @@ self.dashRest = self.dashRest || (function (environment) {
         delete context[key];
       });
       workRegister(worker, message, context, function (data) {
-      	console.log('REST resolved, store?',data.entry, typeof this.api.add.entry);
-        defd.resolve(getData(data));
+      	console.log('REST resolved, store?',data.entry, typeof that.api.add.entry);
+      	var add_ctx = that.clone(context);
+      	add_ctx.data = data.entry;
+      	that.api.add.entry(add_ctx)(function(added_ctx) {
+	      	console.log('REST resolved, stored',added_ctx);
+	        defd.resolve(getData(data));
+      	})
       }, function (data) {
         defd.reject(getData(data));
       }, function (data) {
