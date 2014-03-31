@@ -3,6 +3,7 @@ dashApp.config(['$routeProvider',
   function ($routeProvider) {
     /* Behaviors */
     dash.add.behavior(dashStats);
+    dash.add.behavior(dashCache);
     dash.add.behavior(dashLive);
     dash.add.behavior(dashChanges);
     dash.add.behavior(dashMatch);
@@ -11,6 +12,7 @@ dashApp.config(['$routeProvider',
     dash.add.behavior(dashMapReduce);
     dash.add.behavior(dashPatch);
     dash.add.behavior(dashShorthand);
+    dash.add.behavior(dashRest);
 
     $routeProvider
       .when('/about', {
@@ -476,14 +478,14 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 database: 'dash-demo',
                 store: 'imdb',
                 key: data,
-                patch: function(ctx) {
-                  console.log('both',ctx);
-                  return ctx;
+                patch: function(state) {
+                  return state;
                 },
                 map: function (item) {
                   item.se = item.se ? item.se + ' (' + item.id + ')' : item.id
                   return item;
                 },
+                cache: true,
                 stats: true,
                 forecast: false,
                 store_key_path: 'id',
@@ -1725,11 +1727,12 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                 }, function (context) {
                   console.log('dash promise rejected', context);
                 }, function (context) {
-                  console.log('not',context);
                   if (true === scope.visuals) {
                     system.add(context.entry);
                   }
-                  statsUpdate(context.statistics);
+                  _.throttle(function() {
+                    statsUpdate(context.statistics);
+                  }, 100);
                   //system.cameraMod( 'z', -2, 50000, 10 );
                   //system.cameraMod( 'z', 1, 10000, 0 );
                 });

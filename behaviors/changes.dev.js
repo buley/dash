@@ -3,6 +3,20 @@ window.dashChanges = window.dashChanges || (function (environment) {
   var callbackMap = {},
     changeMap = {},
     that,
+    update = function(type, ctx) {
+      if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
+        if (that.contains(['update.entries', 'update.entry'], type)) {
+          var key = ctx.primary_key || ctx.key;
+          changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
+          changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
+            callbacks: []
+          };
+          if (that.exists(ctx.entry)) {
+            changeMap[ctx.database].stores[ctx.store].entries[key].data = ctx.entry;
+          }
+        }
+      }    
+    },
     unregister = function(type, ctx) {
       if (that.contains(['remove.database'], type)) {
         delete changeMap[ctx.database];
@@ -21,7 +35,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
         } else if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
             if (that.contains(['remove.entries', 'remove.entry', 'clear.store'], type)) {
               var key = ctx.primary_key || ctx.key;
-              delete changeMap[ctx.database].stores[ctx.store].entries[key];
+              if (that.exists(changeMap[ctx.database])) {
+                delete changeMap[ctx.database].stores[ctx.store].entries[key];
+              }
             }
         }        
       }      
@@ -246,8 +262,10 @@ window.dashChanges = window.dashChanges || (function (environment) {
         },
         diff = (that.is(ctx.diff, true)) ? difference(current, previous, ctx.shallow ? true : false) : null,
         args = { context: ctx, method: method, type: type, current: current, previous: previous };
-      args.difference = that.isEmpty(diff) ? null : diff;
-      if (that.isnt(args.difference, null)) {
+      if(that.is(ctx.diff, true)) {
+        args.difference = that.isEmpty(diff) ? null : diff;
+      }
+      if (that.isnt(ctx.diff, true) || that.isnt(args.difference, null)) {
         that.each(listeners, function(id, i) {
           var listens = callbackMap[id];
           if(that.isArray(listens)) {
@@ -268,43 +286,46 @@ window.dashChanges = window.dashChanges || (function (environment) {
       return ctx;
     };
   return [ function(state) {
+    that = this;
+    var id = this.random();
+    state.context.changeid = id;
     if(!this.isFunction(state.context.changes) && !this.isArray(state.context.changes)) {
       return state;
-    }    
-    that = this;
-    var id = state.context.changeid || this.random();
+    } 
     callbackMap[ id ] = this.clone(state.context.changes);
-    state.context.changeid = id;
     return state;
   }, function (state) {
     that = this;
     var promise = state.promise,
-        deferred = this.deferred(),
-        hasChanges = !!state.context.changes;
+        outward = this.deferred(),
+        doTick = function(ste) {
+          if (!ste) {
+            return ste;
+          }
+          unregister(ste.method, ste.context);
+          if (!!state.context.changes) {
+            register(ste.method, ste.context);
+          }
+          if(that.is('resolve', 'notify', ste.type)) {
+            update(ste.method, ste.context);
+          }
+          notify(ste.context, ste.method, ste.type);
+          if(that.is('resolve', ste.type)) {
+            if ( !that.isEmpty(callbackMap[ ste.context.changeid ]) ) {
+              ste.context.changes = callbackMap[ ste.context.changeid ];
+            }
+            delete ste.context.changeid;
+          }
+          return ste;
+        };
     promise(function(ste) {
-      var id = ste.context.changeid,
-          changeset = that.isArray(callbackMap[ id ]) ? callbackMap[ id ] : [ callbackMap[ id ] ],
-          isChanger = that.exists(id);
-      that.each(changeset, function(callback) {
-        ste.context.changes = callback; 
-        ste.context.changeid = ste.context.changeid || id;
-        notify(state.context, state.method, state.type);
-        if (isChanger) {
-          register(ste.method, ste.context);
-          unregister(ste.method, ste.context);            
-        }
-        delete ste.context.changeid;
-        if (!hasChanges) {
-          delete ste.context.changes;
-        }
-        deferred.resolve(ste);
-      });
+      outward.resolve(doTick(ste));
     }, function(ste) {
-        deferred.reject(ste);
+      outward.reject(ste);
     }, function(ste) {
-        deferred.notify(ste);
+      outward.notify(doTick(ste));
     });
-    state.promise = deferred.promise;
+    state.promise = outward.promise;
     return state;
   } ];
 }(self));
