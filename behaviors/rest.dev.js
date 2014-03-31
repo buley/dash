@@ -63,10 +63,10 @@ self.dashRest = self.dashRest || (function (environment) {
 	  }, true);
 
 	  if (request_type.toUpperCase() === 'GET') {
-	    request.open(request_type, url + '?' + qs, true);
+	    request.open(request_type, url + (qs ? '?' + qs : ''), true);
 	    request.send();
 	  } else {
-	    request.open(request_type, url + '?' + qs, true);
+	    request.open(request_type, url + (qs ? '?' + qs : ''), true);
 	    if (false === context.json) {
 		    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		    request.send(formencoded);
