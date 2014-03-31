@@ -298,9 +298,9 @@ self.dashRest = self.dashRest || (function (environment) {
 			      update = true;
 				}
 	    	}
+  		    args = rest[ state.context.restid ];
 	    	if (update) {
     		  state.promise = outward.promise;
-    		  args = rest[ state.context.restid ];
     		  state.context.url = args.url;0
     		  if (that.isFunction(state.context.url)) {
     		  	state.context.url = that.apply(state.context.url, [that.clone(state)]);
