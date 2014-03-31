@@ -199,7 +199,6 @@ self.dashRest = self.dashRest || (function (environment) {
         delete context[key];
       });
       workRegister(worker, message, context, function (data) {
-      	console.log('REST resolved, store?',data.context.entry, typeof that.api.add.entry);
       	var add_ctx = that.clone(context);
       	add_ctx.data = data.context.entry;
       	add_ctx.resting = true;
