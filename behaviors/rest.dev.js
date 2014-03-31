@@ -257,7 +257,7 @@ self.dashRest = self.dashRest || (function (environment) {
   } else {
 	  return [ function (state) {
 	  	that = this;
-	    if(this.isEmpty(state.context.rest) || this.isnt(state.context.rest, false)) {
+	    if(this.isnt(state.context.rest, true)) {
 	      return state;
 	    }
 	    state.context.restid = this.random();
