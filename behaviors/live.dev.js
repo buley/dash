@@ -52,8 +52,8 @@ window.dashLive = window.dashLive || (function (environment) {
     }
     delete state.context.liveid;
     promise(function(ctx) {
-      if(this.isArray(ctx.context.changes)) {
-        this.each(ctx.context.changes, function(el, i) {
+      if(that.isArray(ctx.context.changes)) {
+        that.each(ctx.context.changes, function(el, i) {
           if (that.is(el, liveMap[ ctx.context.liveid ])) {
             delete ctx.context.changes[ i ];
           }
@@ -61,8 +61,8 @@ window.dashLive = window.dashLive || (function (environment) {
       }
       deferred.resolve(ctx);
     }, function(ctx) {
-      if(this.isArray(ctx.context.changes)) {
-        this.each(ctx.context.changes, function(el, i) {
+      if(that.isArray(ctx.context.changes)) {
+        that.each(ctx.context.changes, function(el, i) {
           if (that.is(el, liveMap[ ctx.context.liveid ])) {
             delete ctx.context.changes[ i ];
           }
@@ -70,8 +70,8 @@ window.dashLive = window.dashLive || (function (environment) {
       }
       deferred.error(ctx);
     }, function(ctx) {
-      if(this.isArray(ctx.context.changes)) {
-        this.each(ctx.context.changes, function(el, i) {
+      if(that.isArray(ctx.context.changes)) {
+        that.each(ctx.context.changes, function(el, i) {
           if (that.is(el, liveMap[ ctx.context.liveid ])) {
             delete ctx.context.changes[ i ];
           }
