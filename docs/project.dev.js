@@ -4,7 +4,6 @@ dashApp.config(['$routeProvider',
     /* Behaviors */
     dash.add.behavior(dashStats);
     dash.add.behavior(dashCache);
-    dash.add.behavior(dashRest);
     dash.add.behavior(dashLive);
     dash.add.behavior(dashChanges);
     dash.add.behavior(dashMatch);
@@ -13,6 +12,7 @@ dashApp.config(['$routeProvider',
     dash.add.behavior(dashMapReduce);
     dash.add.behavior(dashPatch);
     dash.add.behavior(dashShorthand);
+    dash.add.behavior(dashRest);
 
     $routeProvider
       .when('/about', {
