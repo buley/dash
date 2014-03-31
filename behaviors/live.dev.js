@@ -6,7 +6,6 @@ window.dashLive = window.dashLive || (function (environment) {
         var ctx = ste.context,
           fn = function(live_ctx) {
             if (!liveMap[ ste.context.liveid ] ||( !!live_ctx.context && !!live_ctx.context.relived)) {
-              delete live_ctx.context.relived;
               return live_ctx;
             }
             live_ctx.type = 'notify';
