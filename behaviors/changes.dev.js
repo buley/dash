@@ -35,7 +35,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
         } else if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
             if (that.contains(['remove.entries', 'remove.entry', 'clear.store'], type)) {
               var key = ctx.primary_key || ctx.key;
-              delete changeMap[ctx.database].stores[ctx.store].entries[key];
+              if (that.exists(changeMap[ctx.database])) {
+                delete changeMap[ctx.database].stores[ctx.store].entries[key];
+              }
             }
         }        
       }      
