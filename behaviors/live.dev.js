@@ -20,7 +20,7 @@ window.dashLive = window.dashLive || (function (environment) {
     if(this.isnt(state.context.live, true)) {
       return state;
     }
-    var livss;
+    var lives;
     state.context.liveid = this.random();
     lives = live(this.clone(state));
     if (this.isArray(state.context.changes)) {
