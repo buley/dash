@@ -236,11 +236,13 @@ self.dashRest = self.dashRest || (function (environment) {
         }, 
         callback = function(sig) {
 	      	return function(data, error) {
-	      		input.context.entry = data;
 	      		delete input.context.callback;
 	      		if (!!error) {
 	      			input.context.error = error;
+	      			input.context.message = data;
 	      			input.type = 'error';
+	      		} else {
+	      			input.context.entry = data;
 	      		}
 			    end(input);
 	      	}
