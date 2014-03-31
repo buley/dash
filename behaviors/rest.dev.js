@@ -210,7 +210,7 @@ self.dashRest = self.dashRest || (function (environment) {
 	        defd.notify(getData(added_ctx));
       	})
       }, function (data) {
-        defd.reject(getData(data));
+        defd.reject();
       }, function (data) {
         defd.notify(getData(data));
       });
