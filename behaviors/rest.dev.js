@@ -315,11 +315,13 @@ self.dashRest = self.dashRest || (function (environment) {
     		    ctx2.params = args.params;
     		    state.context = ctx2;
     		    state.type = 'resolve';
+			    delete rest[ ctx2.restid ];
       			delete ctx2.restid;
 			    outward.resolve(state.context);
 		  	  }, function(ctx2) {
     		    ctx2.url = args.url;
     		    ctx2.params = args.params;
+			    delete rest[ ctx2.restid ];
       			delete ctx2.restid;
     		    state.context = ctx2;
     		    state.type = 'error';
@@ -327,6 +329,7 @@ self.dashRest = self.dashRest || (function (environment) {
 		  	  }, function(ctx2) {
     		    ctx2.url = args.url;
     		    ctx2.params = args.params;
+			    delete rest[ ctx2.restid ];
       			delete ctx2.restid;
     		    state.type = 'notify';
     		    state.context = ctx2;
@@ -335,6 +338,8 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	} else {
 		      state.context.url = args.url;
 		      state.context.params = args.params;
+		      delete rest[ state.context.restid ];
+		      delete state.context.restid;
 	    	}
 	    return state;
 	  } ];
