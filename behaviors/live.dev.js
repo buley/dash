@@ -19,15 +19,14 @@ window.dashLive = window.dashLive || (function (environment) {
     if(this.isnt(state.context.live, true)) {
       return state;
     }
-    var lives;
+    var livss;
     state.context.liveid = this.random();
     lives = live(this.clone(state));
-    if (this.isArray(state.context.lives)) {
-      state.context.lives.push(lives);
+    if (this.isArray(state.context.changes)) {
+      state.context.changes.push(lives);
     } else {
-      state.context.lives = [lives];
+      state.context.changes = [lives];
     }
-    liveMap[ state.context.liveid ] = false;
     return state;
   }, function (state) {
     that = this;
