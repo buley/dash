@@ -316,7 +316,7 @@ self.dashRest = self.dashRest || (function (environment) {
     		    state.context = ctx2;
     		    state.type = 'resolve';
       			delete ctx2.restid;
-			    outward.resolve(state);
+			    outward.resolve(state.context);
 		  	  }, function(ctx2) {
     		    ctx2.url = args.url;
     		    ctx2.params = args.params;
@@ -330,7 +330,7 @@ self.dashRest = self.dashRest || (function (environment) {
       			delete ctx2.restid;
     		    state.type = 'notify';
     		    state.context = ctx2;
-			    outward.notify(state);
+			    outward.notify(state.context);
 		  	  });
 	    	}
 	    return state;
