@@ -4,14 +4,14 @@ window.dashLive = window.dashLive || (function (environment) {
       liveMap = {},
       live = function(ste) {
         var ctx = ste.context,
-          fn = function(st2) {
-            if (!liveMap[ st2.liveid ] ||( !!st2.context && !!st2.context.relived)) {
-              delete st2.context.relived;
-              return st2;
+          fn = function(live_ctx) {
+            if (!liveMap[ live_ctx.context.liveid ] ||( !!live_ctx.context && !!live_ctx.context.relived)) {
+              delete live_ctx.context.relived;
+              return live_ctx;
             }
             st2.type = 'notify';
             st2.context.relived = true;
-            liveMap[ ctx.liveid ].resolve(st2);
+            liveMap[ live_ctx.context.liveid ].resolve(live_ctx);
           };
         fn.ready = false;
         return fn;
