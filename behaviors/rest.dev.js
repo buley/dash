@@ -299,20 +299,17 @@ self.dashRest = self.dashRest || (function (environment) {
     		  state.context.params = args.params;
 	          inward = workDispatch( whichMethod(state.method), state.context);
 		  	  inward(function(ctx2){
-		  	  	state.type = 'resolve';
-    		    state.url = args.url;
-    		    state.params = args.params;
+    		    ctx2.context.url = args.url;
+    		    ctx2.context.params = args.params;
 			    outward.resolve(state);
 		  	  }, function(ctx2) {
-		  	  	state.type = 'reject';
-    		    state.url = args.url;
-    		    state.params = args.params;
-			    outward.reject(state);
+    		    ctx2.context.url = args.url;
+    		    ctx2.context.params = args.params;
+  			    outward.reject(state);
 		  	  }, function(ctx2) {
-		  	  	state.type = 'notify';
-    		    state.url = args.url;
-    		    state.params = args.params;
-			    outward.notify(state);
+    		    ctx2.context.url = args.url;
+    		    ctx2.context.params = args.params;
+			    outward.notify(ctx2);
 		  	  });
 	    	}
 	    return state;
