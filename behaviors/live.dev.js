@@ -6,10 +6,11 @@ window.dashLive = window.dashLive || (function (environment) {
         var ctx = ste.context,
           fn = function(st2) {
             console.log('live one');
-            if (!liveMap[ ctx.liveid ]) {
+            if (!liveMap[ ctx.liveid ] ||( !!st2.context && !!st2.context.living)) {
               return;
             }
             st2.type = 'notify';
+            st2.context.living = true;
             liveMap[ ctx.liveid ].resolve(st2);
           };
         fn.ready = false;
