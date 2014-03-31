@@ -5,6 +5,7 @@ window.dashLive = window.dashLive || (function (environment) {
       live = function(ste) {
         var ctx = ste.context,
           fn = function(st2) {
+            console.log('live one');
             if (!liveMap[ ctx.liveid ]) {
               return;
             }
