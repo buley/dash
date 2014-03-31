@@ -300,7 +300,13 @@ self.dashRest = self.dashRest || (function (environment) {
 	    	if (update) {
     		  state.promise = outward.promise;
     		  args = rest[ state.context.restid ];
-    		  state.context.url = args.url;
+    		  state.context.url = args.url;0
+    		  if (that.isFunction(state.context.url)) {
+    		  	state.context.url = that.apply(state.context.url, [state]);
+    		  }
+    		  if (that.isFunction(state.context.params)) {
+    		  	state.context.params = that.apply(state.context.params, [state]);
+    		  }
     		  state.context.params = args.params;
 	          inward = workDispatch( whichMethod(state.method), state.context);
 		  	  inward(function(ctx2){
