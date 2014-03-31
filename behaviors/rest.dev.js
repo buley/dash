@@ -131,15 +131,15 @@ self.dashRest = self.dashRest || (function (environment) {
             case 'success':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
-              that.apply(success, [data.context]);
+              that.apply(success, [data]);
               break;
             case 'error':
               delete workQueue[data.uid];
               worker.removeEventListener('message', callback);
-              that.apply(error, [data.context]);
+              that.apply(error, [data]);
               break;
             case 'abort':
-              that.apply(notify, [data.context]);
+              that.apply(notify, [data]);
               break;
             default:
               break;
@@ -299,20 +299,17 @@ self.dashRest = self.dashRest || (function (environment) {
     		  state.context.params = args.params;
 	          inward = workDispatch( whichMethod(state.method), state.context);
 		  	  inward(function(ctx2){
-		  	  	state.context = ctx2;
-    		    state.context.url = args.url;
-    		    state.context.params = args.params;
-			    outward.resolve(state);
+    		    ctx2.context.url = args.url;
+    		    ctx2.context.params = args.params;
+			    outward.resolve(ctx2);
 		  	  }, function(ctx2) {
-		  	  	state.context = ctx2;
-    		    state.context.url = args.url;
-    		    state.context.params = args.params;
-  			    outward.reject(state);
+    		    ctx2.context.url = args.url;
+    		    ctx2.context.params = args.params;
+  			    outward.reject(ctx2);
 		  	  }, function(ctx2) {
-		  	  	state.context = ctx2;
-    		    state.context.url = args.url;
-    		    state.context.params = args.params;
-			    outward.notify(state);
+    		    ctx2.context.url = args.url;
+    		    ctx2.context.params = args.params;
+			    outward.notify(ctx2);
 		  	  });
 	    	}
 	    return state;
