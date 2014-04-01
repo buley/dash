@@ -12,7 +12,7 @@ window.dashLive = window.dashLive || (function (environment) {
             ditto.type = that.contains(['get.entries', 'update.entries', 'remove.entries'], ditto.method) ? 'notify' : 'resolve';
             ditto.context = live_ctx.context;
             ditto.context.zombie = 'braaains';
-            liveMap[ ste.context.liveid ].resolve(ditto);
+            liveMap[ ste.context.liveid ][ditto.type](ditto);
           };
         fn.ready = false;
         return fn;
