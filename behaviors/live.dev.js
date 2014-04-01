@@ -39,47 +39,29 @@ window.dashLive = window.dashLive || (function (environment) {
       return state;
     }
     var promise = state.promise,
-        deferred = this.deferred();
+        deferred = this.deferred(),
+        removeChanges = function(ste) {
+          if(this.isArray(ste.context.changes)) {
+            this.each(ste.context.changes, function(el, i) {
+              if (that.is(ste, liveMap[ ste.context.liveid ])) {
+                delete ste.context.changes[ i ];
+              }
+            });
+          }
+          delete ste.context.liveid;
+          return ste;
+        };
     state.promise = deferred.promise;
-    if(this.isArray(state.context.changes)) {
-      this.each(state.context.changes, function(el, i) {
-        if (that.is(el, liveMap[ state.context.liveid ])) {
-          delete state.context.changes[ i ];
-        }
-      });
-    }
     if (this.contains(['resolve', 'error'], state.type)) {
       liveMap[ state.context.liveid ] = deferred;
     }
-    delete state.context.liveid;
     promise(function(ctx) {
-      if(that.isArray(ctx.context.changes)) {
-        that.each(ctx.context.changes, function(el, i) {
-          if (that.is(el, liveMap[ ctx.context.liveid ])) {
-            delete ctx.context.changes[ i ];
-          }
-        });
-      }
-      deferred.resolve(ctx);
+      deferred.resolve(removeChanges(ctx));
     }, function(ctx) {
-      if(that.isArray(ctx.context.changes)) {
-        that.each(ctx.context.changes, function(el, i) {
-          if (that.is(el, liveMap[ ctx.context.liveid ])) {
-            delete ctx.context.changes[ i ];
-          }
-        });
-      }
-      deferred.error(ctx);
+      deferred.error(removeChanges(ctx));
     }, function(ctx) {
-      if(that.isArray(ctx.context.changes)) {
-        that.each(ctx.context.changes, function(el, i) {
-          if (that.is(el, liveMap[ ctx.context.liveid ])) {
-            delete ctx.context.changes[ i ];
-          }
-        });
-      }
-      deferred.notify(ctx);
+      deferred.notify(removeChanges(ctx));
     });
-    return state;
+    return removeChanges(state);
   } ];
 }(self));
