@@ -14,7 +14,6 @@ window.dashLive = window.dashLive || (function (environment) {
             ste.context = live_ctx.context;
             ste.context.zombie = 'braaains';
             liveMap[ ste.context.liveid ].resolve(that.clone(ste));
-            delete ste.context.zombie;
           };
         fn.ready = false;
         return fn;
