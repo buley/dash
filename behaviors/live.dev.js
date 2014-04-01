@@ -23,12 +23,13 @@ window.dashLive = window.dashLive || (function (environment) {
     if(this.isnt(state.context.live, true)) {
       return state;
     }
-    var lives;
     state.context.liveid = this.random();
-    lives = live(this.clone(state));
+    var lives = live(this.clone(state));
     liveMap[ state.context.liveid ] = lives;
     if (this.isArray(state.context.changes)) {
       state.context.changes.push(lives);
+    } else if (this.isFunction(state.context.changes)) {
+      state.context.changes = [state.context.changes, lives];
     } else {
       state.context.changes = [lives];
     }
