@@ -166,7 +166,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           }
         }
         if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
-            if (that.is(ctx.live, true) || that.contains(['update.entries', 'update.entry', 'remove.entries', 'remove.entry', 'remove.database', 'remove.store', 'clear.store'], type)) {
+            if (that.contains(['update.entries', 'update.entry', 'remove.entries', 'remove.entry', 'remove.database', 'remove.store', 'clear.store'], type)) {
               key = ctx.primary_key || ctx.key;
               changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
               changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
