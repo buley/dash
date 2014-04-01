@@ -3,17 +3,47 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
   var that,
 	child = function( context ) {	
 		context.method = 'child';
+		var deferred = that.deferred();
+		return deferred.promise;
 	},
 	set = function( context ) {	
 		context.method = 'set';
-		var ref = firebase[ context.firebase ].child([context.database, context.store, context.primary_key ].join('/'));
-		ref.set( context.entry );
+		var deferred = that.deferred(),
+			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
+		ref.set( context.entry, function(err))) {
+			if(that.err, null) {
+				deferred.resolve(context.entry);
+			} else {
+				deferred.reject(err);
+			}
+		} );
+		return deferred.promise;
 	},
 	update = function( context ) {	
 		context.method = 'update';
+		var deferred = that.deferred(),
+			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
+		ref.update(context.entry, function() {
+			if(that.err, null) {
+				deferred.resolve(context.entry);
+			} else {
+				deferred.reject(err);
+			}
+		});
+		return deferred.promise;
 	},
 	remove = function( context ) {	
 		context.method = 'remove';
+		var deferred = that.deferred(),
+			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
+		ref.remove(function() {
+			if(that.err, null) {
+				deferred.resolve(context.entry);
+			} else {
+				deferred.reject(err);
+			}
+		});
+		return deferred.promise;
 	},
 	whichMethod = function(signature) {
 		if ( that.contains( [ 'get.entry', 'get.entries', 'get.index', 'get.database', 'get.store' ], signature)) {
@@ -162,7 +192,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 	      	}
       	};
   	  if ( 'undefined' === typeof firebases[input.context.firebase] ) {
-  		firebases[input.context.firebase] =  new Firebase(input.context.firebase),
+  		firebases[input.context.firebase] =  new Firebase([context.firebase, context.database, context.store ].join('/')),
   	  }
       if (method === 'set' || method === 'update' || method === 'remove') {
       	context.callback = callback(method);
