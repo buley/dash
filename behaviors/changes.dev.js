@@ -302,9 +302,10 @@ window.dashChanges = window.dashChanges || (function (environment) {
     var promise = state.promise,
         outward = this.deferred(),
         doTick = function(ste) {
-          if (!ste || !!ste.context.zombie) {
+          if (!ste || !!ste.context.changing) {
             return ste;
           }
+          ste.context.changing = true;
           unregister(ste.method, ste.context);
           if (!!state.context.changes) {
             register(ste.method, ste.context);
