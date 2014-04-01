@@ -13,7 +13,8 @@ window.dashLive = window.dashLive || (function (environment) {
             live_ctx.context.liveid = ste.context.liveid;
             ste.context = live_ctx.context;
             ste.context.zombie = true;
-            liveMap[ ste.context.liveid ].resolve(ste);
+            liveMap[ ste.context.liveid ].resolve(that.clone(ste));
+            delete ste.context.zombie;
           };
         fn.ready = false;
         return fn;
