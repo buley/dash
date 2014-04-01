@@ -11,10 +11,9 @@ window.dashLive = window.dashLive || (function (environment) {
             var ditto = that.clone(ste);
             ditto.type = 'notify';
             ditto.method = live_ctx.method;
-            ditto.context.liveid = ste.context.liveid;
             ditto.context = live_ctx.context;
             ditto.context.zombie = 'braaains';
-            liveMap[ ditto.context.liveid ].resolve(ditto);
+            liveMap[ ste.context.liveid ].resolve(ditto);
           };
         fn.ready = false;
         return fn;
