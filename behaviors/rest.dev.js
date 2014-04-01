@@ -106,16 +106,6 @@ self.dashRest = self.dashRest || (function (environment) {
 			return null;
 		}
 	},
-	buildUri = function(key_ctx, type) {
-		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key, key_ctx.limit ].reduce(function(acc, current){
-			acc = acc || [];
-			if(!!current) {
-				acc = [ acc, current ].join('.');
-			}
-			return acc;
-		});
-		return key;
-	},
 	scripts = ( !! environment.document) ? environment.document.getElementsByTagName("script") : [],
     libraryScript = scripts[scripts.length - 1] || null,
     libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
