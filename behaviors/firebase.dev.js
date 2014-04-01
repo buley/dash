@@ -235,7 +235,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
     		  if (that.isFunction(state.context.url)) {
     		  	state.context.url = that.apply(state.context.url, [that.clone(state)]);
     		  }
-    	re	  if (that.isFunction(state.context.params)) {
+    		  if (that.isFunction(state.context.params)) {
     		  	state.context.params = that.apply(state.context.params, [that.clone(state)]);
     		  }
     		  state.context.params = args.params;
