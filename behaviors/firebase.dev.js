@@ -1,48 +1,32 @@
 self.dashFirebase = self.dashFirebase || (function (environment) {
   "use strict";
   var that,
-  	firebase = {},
-	request = function( context ) {	
-	  console.log("REQUEST", context);
+	child = function( context ) {	
+		context.method = 'child';
 	},
-	get = function( context ) {	
-		context.method = 'GET';
-		request(context);
+	set = function( context ) {	
+		context.method = 'set';
+		var ref = firebase[ context.firebase ].child([context.database, context.store, context.primary_key ].join('/')]);
+		ref.set( context.entry );
 	},
-	post = function( context ) {	
-		context.method = 'POST';
-		request(context);
-	},
-	put = function( context ) {	
-		context.method = 'PUT';
-		request(context);
+	update = function( context ) {	
+		context.method = 'update';
 	},
 	remove = function( context ) {	
-		context.method = 'DELETE';
-		request(context);
+		context.method = 'remove';
 	},
 	whichMethod = function(signature) {
 		if ( that.contains( [ 'get.entry', 'get.entries', 'get.index', 'get.database', 'get.store' ], signature)) {
-			return 'GET';
+			return 'child';
 		} else if ( that.contains([ 'remove.entry', 'remove.entries', 'remove.index', 'remove.database', 'remove.store' ], signature)) {
-			return 'DELETE';
+			return 'remove';
 		} else if ( that.contains([ 'add.entry' ], signature)) {
-			return 'POST';
+			return 'set';
 		} else if ( that.contains([ 'update.entry', 'update.entries' ], signature)) {
-			return 'PUT';
+			return 'update';
 		} else {
 			return null;
 		}
-	},
-	buildUri = function(key_ctx, type) {
-		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key, key_ctx.limit ].reduce(function(acc, current){
-			acc = acc || [];
-			if(!!current) {
-				acc = [ acc, current ].join('.');
-			}
-			return acc;
-		});
-		return key;
 	},
 	scripts = ( !! environment.document) ? environment.document.getElementsByTagName("script") : [],
     libraryScript = scripts[scripts.length - 1] || null,
@@ -50,6 +34,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
 	worker = workerEnvironment ? null : new Worker(libraryPath),
 	workQueue = {},
+	firebases = {},
     workRegister = function (worker, message, context, success, error, notify) {
       var id = that.random(),
         callback = function (e) {
@@ -176,15 +161,18 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 			    end(input);
 	      	}
       	};
-      if (method === 'GET' || method === 'PUT' || method === 'POST' || method === 'DELETE') {
+  	  if ( 'undefined' === typeof firebases[input.context.firebase] ) {
+  		firebases[input.context.firebase] =  new Firebase(input.context.firebase),
+  	  }
+      if (method === 'set' || method === 'update' || method === 'remove') {
       	context.callback = callback(method);
-        if ( method === 'GET' ) {
-        	get(context);
-        } else if ( method === 'POST' ) {
-        	post(context);
-        } else if ( method === 'PUT' ) {
-        	put(context);
-        } else if ( method === 'DELETE' ) {
+        if ( method === 'set' ) {
+        	set(context);
+        } else if ( method === 'child' ) {
+        	child(context);
+        } else if ( method === 'update' ) {
+        	update(context);
+        } else if ( method === 'remove' ) {
         	remove(context);
         }
       } else {
@@ -241,26 +229,14 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
     		  state.context.params = args.params;
 	          inward = workDispatch( whichMethod(state.method), state.context);
 		  	  inward(function(ctx2){
-    		    ctx2.url = args.url;
-    		    ctx2.params = args.params;
     		    state.context = ctx2;
     		    state.type = 'resolve';
-			    delete firebase[ ctx2.firebaseid ];
-      			delete ctx2.firebaseid;
 			    outward.resolve(state.context);
 		  	  }, function(ctx2) {
-    		    ctx2.url = args.url;
-    		    ctx2.params = args.params;
-			    delete firebase[ ctx2.firebaseid ];
-      			delete ctx2.firebaseid;
     		    state.context = ctx2;
     		    state.type = 'error';
   			    outward.reject(state.context);
 		  	  }, function(ctx2) {
-    		    ctx2.url = args.url;
-    		    ctx2.params = args.params;
-			    delete firebase[ ctx2.firebaseid ];
-      			delete ctx2.firebaseid;
     		    state.type = 'notify';
     		    state.context = ctx2;
 			    outward.notify(state.context);
