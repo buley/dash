@@ -307,13 +307,13 @@ window.dashChanges = window.dashChanges || (function (environment) {
           }
           ste.context.changing = true;
           unregister(ste.method, ste.context);
+          notify(ste.context, ste.method, ste.type);
           if (!!state.context.changes) {
             register(ste.method, ste.context);
           }
           if(that.is('resolve', 'notify', ste.type)) {
             update(ste.method, ste.context);
           }
-          notify(ste.context, ste.method, ste.type);
           if(that.is('resolve', ste.type)) {
             if ( !that.isEmpty(callbackMap[ ste.context.changeid ]) ) {
               ste.context.changes = callbackMap[ ste.context.changeid ];
