@@ -309,7 +309,9 @@ window.dashChanges = window.dashChanges || (function (environment) {
           if(that.is('resolve', 'notify', ste.type)) {
             update(ste.method, ste.context);
           }
-          notify(ste.context, ste.method, ste.type);
+          if(!that.exists(ste.context.zombie)) {
+            notify(ste.context, ste.method, ste.type);
+          }
           if(that.is('resolve', ste.type)) {
             if ( !that.isEmpty(callbackMap[ ste.context.changeid ]) ) {
               ste.context.changes = callbackMap[ ste.context.changeid ];
