@@ -73,7 +73,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
             }
           }
           if (that.exists(ctx.key) && that.isnt(ctx.primary_key, ctx.key)) {
-            if (that.contains(['get.entry','get.entries', 'update.entry', 'remove.entry', 'update.entries', 'remove.entries'], type)) {
+            if (that.contains(['get.entry','get.entries', 'update.entry', 'remove.entry', 'update.entries'], type)) {
               changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] = changeMap[ctx.database].stores[ctx.store].indexes[ctx.index].entries[ ctx.key ] || {
                 callbacks: []
               };
@@ -87,7 +87,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           }
         }
         if (that.exists(ctx.primary_key) || that.exists(ctx.key)) {
-          if (that.contains(['get.entry','get.entries', 'update.entries', 'update.entry', 'remove.entries', 'remove.entry'], type)) {
+          if (that.contains(['get.entry','get.entries', 'update.entries', 'update.entry'], type)) {
             var key = ctx.primary_key || ctx.key;
             changeMap[ctx.database].stores[ctx.store].entries = changeMap[ctx.database].stores[ctx.store].entries || {};
             changeMap[ctx.database].stores[ctx.store].entries[key] = changeMap[ctx.database].stores[ctx.store].entries[key] || {
@@ -306,8 +306,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
             return ste;
           }
           ste.context.changing = true;
-          unregister(ste.method, ste.context);
           notify(ste.context, ste.method, ste.type);
+          unregister(ste.method, ste.context);
           if (!!state.context.changes) {
             register(ste.method, ste.context);
           }
