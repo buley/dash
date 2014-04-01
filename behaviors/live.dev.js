@@ -5,7 +5,7 @@ window.dashLive = window.dashLive || (function (environment) {
       live = function(ste) {
         var ctx = ste.context,
           fn = function(live_ctx) {
-            if (!liveMap[ ste.context.liveid ] ||( !!live_ctx.context && !!live_ctx.context.zombie)) {
+            if (!liveMap[ ste.context.liveid ]) {
               return live_ctx;
             }
             var ditto = that.clone(ste);
