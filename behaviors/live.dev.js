@@ -55,7 +55,7 @@ window.dashLive = window.dashLive || (function (environment) {
     if (this.contains(['resolve', 'error'], state.type)) {
       liveMap[ state.context.liveid ] = deferred;
     }
-    state.promise = dseferred.promise;
+    state.promise = deferred.promise;
     promise(function(ctx) {
       deferred.resolve(removeChanges(ctx));
     }, function(ctx) {
