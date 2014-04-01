@@ -12,7 +12,7 @@ window.dashLive = window.dashLive || (function (environment) {
             ste.method = live_ctx.method;
             live_ctx.context.liveid = ste.context.liveid;
             ste.context = live_ctx.context;
-            ste.context.relived = true;
+            ste.context.zombie = true;
             liveMap[ ste.context.liveid ].resolve(ste);
           };
         fn.ready = false;
