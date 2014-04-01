@@ -8,12 +8,13 @@ window.dashLive = window.dashLive || (function (environment) {
             if (!liveMap[ ste.context.liveid ] ||( !!live_ctx.context && !!live_ctx.context.zombie)) {
               return live_ctx;
             }
-            ste.type = 'notify';
-            ste.method = live_ctx.method;
-            live_ctx.context.liveid = ste.context.liveid;
-            ste.context = live_ctx.context;
-            ste.context.zombie = 'braaains';
-            liveMap[ ste.context.liveid ].resolve(that.clone(ste));
+            var ditto = that.clone(ste);
+            ditto.type = 'notify';
+            ditto.method = live_ctx.method;
+            ditto.context.liveid = ste.context.liveid;
+            ditto.context = live_ctx.context;
+            ditto.context.zombie = 'braaains';
+            liveMap[ ditto.context.liveid ].resolve(ditto);
           };
         fn.ready = false;
         return fn;
