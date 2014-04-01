@@ -42,7 +42,7 @@ window.dashLive = window.dashLive || (function (environment) {
         deferred = this.deferred(),
         removeChanges = function(ste) {
           if(that.isArray(ste.context.changes)) {
-            this.each(ste.context.changes, function(el, i) {
+            that.each(ste.context.changes, function(el, i) {
               if (that.is(ste, liveMap[ ste.context.liveid ])) {
                 delete ste.context.changes[ i ];
               }
