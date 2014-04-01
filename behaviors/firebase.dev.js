@@ -2,14 +2,14 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
   "use strict";
   var that,
 	child = function( context ) {	
-		context.method = 'child';
 		var deferred = that.deferred();
+		context.method = 'child';
 		return deferred.promise;
 	},
 	set = function( context ) {	
-		context.method = 'set';
 		var deferred = that.deferred(),
 			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
+		context.method = 'set';
 		ref.set( context.entry, function(err))) {
 			if(that.err, null) {
 				deferred.resolve(context.entry);
@@ -20,9 +20,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 		return deferred.promise;
 	},
 	update = function( context ) {	
-		context.method = 'update';
 		var deferred = that.deferred(),
 			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
+		context.method = 'update';
 		ref.update(context.entry, function() {
 			if(that.err, null) {
 				deferred.resolve(context.entry);
@@ -33,9 +33,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 		return deferred.promise;
 	},
 	remove = function( context ) {	
-		context.method = 'remove';
 		var deferred = that.deferred(),
 			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
+		context.method = 'remove';
 		ref.remove(function() {
 			if(that.err, null) {
 				deferred.resolve(context.entry);
