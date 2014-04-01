@@ -41,7 +41,7 @@ window.dashLive = window.dashLive || (function (environment) {
     var promise = state.promise,
         deferred = this.deferred(),
         removeChanges = function(ste) {
-          if(this.isArray(ste.context.changes)) {
+          if(that.isArray(ste.context.changes)) {
             this.each(ste.context.changes, function(el, i) {
               if (that.is(ste, liveMap[ ste.context.liveid ])) {
                 delete ste.context.changes[ i ];
