@@ -295,7 +295,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
     callbackMap[ id ] = this.clone(state.context.changes);
     return state;
   }, function (state) {
-    if (this.exists(that.exists(ste.context.zombie)) {
+    if (this.exists(state.context.zombie)) {
       return state;
     }
     that = this;
