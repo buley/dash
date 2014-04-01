@@ -5,7 +5,7 @@ window.dashLive = window.dashLive || (function (environment) {
       live = function(ste) {
         var ctx = ste.context,
           fn = function(live_ctx) {
-            if (!liveMap[ ste.context.liveid ] ||( !!live_ctx.context && !!live_ctx.context.relived)) {
+            if (!liveMap[ ste.context.liveid ] ||( !!live_ctx.context && !!live_ctx.context.zombie)) {
               return live_ctx;
             }
             ste.type = 'notify';
@@ -13,7 +13,7 @@ window.dashLive = window.dashLive || (function (environment) {
             live_ctx.context.liveid = ste.context.liveid;
             ste.context = live_ctx.context;
             ste.context.zombie = true;
-            liveMap[ ste.context.liveid ].resolve(ste);
+            liveMap[ ste.context.liveid ].resolve(that.clone(ste));
             delete ste.context.zombie;
           };
         fn.ready = false;
