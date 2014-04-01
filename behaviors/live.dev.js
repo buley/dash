@@ -9,6 +9,8 @@ window.dashLive = window.dashLive || (function (environment) {
               return live_ctx;
             }
             var ditto = that.clone(ste);
+            ditto.type = 'resolve';
+            ditto.method = live_ctx.method;
             ditto.context = live_ctx.context;
             ditto.context.zombie = 'braaains';
             liveMap[ ste.context.liveid ].resolve(ditto);
