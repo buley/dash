@@ -6,7 +6,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 	},
 	set = function( context ) {	
 		context.method = 'set';
-		var ref = firebase[ context.firebase ].child([context.database, context.store, context.primary_key ].join('/')]);
+		var ref = firebase[ context.firebase ].child([context.database, context.store, context.primary_key ].join('/'));
 		ref.set( context.entry );
 	},
 	update = function( context ) {	
