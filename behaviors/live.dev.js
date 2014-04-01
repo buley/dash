@@ -40,6 +40,7 @@ window.dashLive = window.dashLive || (function (environment) {
       return state;
     }
     var promise = state.promise,
+        deferred = this.deferred(),
         removeChanges = function(ste) {
           if(that.isArray(ste.context.changes)) {
             that.each(ste.context.changes, function(el, i) {
@@ -52,16 +53,16 @@ window.dashLive = window.dashLive || (function (environment) {
           return ste;
         };
     if (this.contains(['resolve', 'error'], state.type)) {
-      liveMap[ state.context.liveid ] = this.deferred();
+      liveMap[ state.context.liveid ] = deferred;
     }
-    state.promise(function(ctx) {
+    state.promise = dseferred.promise;
+    promise(function(ctx) {
       deferred.resolve(removeChanges(ctx));
     }, function(ctx) {
       deferred.error(removeChanges(ctx));
     }, function(ctx) {
       deferred.notify(removeChanges(ctx));
     });
-    state.promise = liveMap[ state.context.liveid ].promise;
     return removeChanges(state);
   } ];
 }(self));
