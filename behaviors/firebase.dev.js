@@ -30,7 +30,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           'promise': function (on_success, on_error, on_notify) {
             var defd = deferred();
             children.push(deferred);
-            if (complete === true) {
+            if (complete === true ) {
               safeApply(wasSuccess ? on_success : on_error, completed);
             }
             safeEach([
