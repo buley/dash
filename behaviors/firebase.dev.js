@@ -78,46 +78,46 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         child = function (context) {
           var deferred = deferred();
           context.method = 'child';
-          return deferred.promise;
+          return defd.promise;
         },
         set = function (context) {
-          var deferred = deferred(),
+          var defd = deferred(),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(context.primary_key);
           context.method = 'set';
           ref.set(context.entry, function (err) {
             if (that.err, null) {
-              deferred.resolve(context.entry);
+              defd.resolve(context.entry);
             } else {
-              deferred.reject(err);
+              defd.reject(err);
             }
           });
-          return deferred.promise;
+          return defd.promise;
         },
         update = function (context) {
-          var deferred = deferred(),
+          var defd = deferred(),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(context.primary_key);
           context.method = 'update';
           ref.update(context.entry, function () {
             if (that.err, null) {
-              deferred.resolve(context.entry);
+              defd.resolve(context.entry);
             } else {
-              deferred.reject(err);
+              defd.reject(err);
             }
           });
-          return deferred.promise;
+          return defd.promise;
         },
         remove = function (context) {
-          var deferred = deferred(),
+          var defd = deferred(),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(context.primary_key);
           context.method = 'remove';
           ref.remove(function () {
             if (that.err, null) {
-              deferred.resolve(context.entry);
+              defd.resolve(context.entry);
             } else {
-              deferred.reject(err);
+              defd.reject(err);
             }
           });
-          return deferred.promise;
+          return defd.promise;
         },
         whichMethod = function (signature) {
           if (that.contains(['get.entry', 'get.entries', 'get.index', 'get.database', 'get.store'], signature)) {
