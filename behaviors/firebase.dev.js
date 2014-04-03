@@ -86,7 +86,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
           context.method = 'set';
           ref.set(context.entry, function (err) {
-            if (that.err, null) {
+            if (!err) {
               defd.resolve(context.entry);
             } else {
               defd.reject(err);
@@ -99,8 +99,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             key = context.entry ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
           context.method = 'update';
-          ref.update(context.entry, function () {
-            if (that.err, null) {
+          ref.update(context.entry, function (err) {
+            if (!err) {
               defd.resolve(context.entry);
             } else {
               defd.reject(err);
@@ -113,8 +113,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             key = context.entry ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
           context.method = 'remove';
-          ref.remove(function () {
-            if (that.err, null) {
+          ref.remove(function (err) {
+            if (!err) {
               defd.resolve(context.entry);
             } else {
               defd.reject(err);
