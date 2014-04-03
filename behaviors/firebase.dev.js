@@ -26,56 +26,57 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           }, isFunction = function (mixed_var) {
             return "function" === typeof mixed_var;
           };
-        return {
-          'promise': function (on_success, on_error, on_notify) {
-            var defd = deferred();
-            children.push(deferred);
-            if (true === complete) {
-              safeApply(wasSuccess ? on_success : on_error, completed);
-            }
-            safeEach([
-                    [successes, on_success],
-                    [errors, on_error],
-                    [notifies, on_notify]
-                ], function (pair) {
-              var fn = pair[1];
-              if (isFunction(fn)) {
-                pair[0].push(fn);
+          return {
+            'promise': function (on_success, on_error, on_notify) {
+              var defd = deferred();
+              children.push(deferred);
+              if (true === complete) {
+                safeApply(wasSuccess ? on_success : on_error, completed);
               }
-            });
-            return defd.promise;
-          },
-          'resolve': function () {
-            var args = arguments;
-            wasSuccess = true;
-            complete = true;
-            completed = args;
-            safeEach(successes, function (on_success) {
-              safeApply(on_success, args);
-            });
-            safeEach(children, function (child) {
-              safeApply(child.resolve, args);
-            });
-          },
-          'notify': function () {
-            var args = arguments;
-            safeEach(notifies, function (on_notify) {
-              safeApply(on_notify, args);
-            });
-            safeEach(children, function (child) {
-              safeApply(child.notify, args);
-            });
-          },
-          'reject': function () {
-            var args = arguments;
-            wasSuccess = false;
-            complete = true;
-            completed = args;
-            safeEach(errors, function (on_error) {
-              safeApply(on_error, args);
-            });
-          }
-        },
+              safeEach([
+                      [successes, on_success],
+                      [errors, on_error],
+                      [notifies, on_notify]
+                  ], function (pair) {
+                var fn = pair[1];
+                if (isFunction(fn)) {
+                  pair[0].push(fn);
+                }
+              });
+              return defd.promise;
+            },
+            'resolve': function () {
+              var args = arguments;
+              wasSuccess = true;
+              complete = true;
+              completed = args;
+              safeEach(successes, function (on_success) {
+                safeApply(on_success, args);
+              });
+              safeEach(children, function (child) {
+                safeApply(child.resolve, args);
+              });
+            },
+            'notify': function () {
+              var args = arguments;
+              safeEach(notifies, function (on_notify) {
+                safeApply(on_notify, args);
+              });
+              safeEach(children, function (child) {
+                safeApply(child.notify, args);
+              });
+            },
+            'reject': function () {
+              var args = arguments;
+              wasSuccess = false;
+              complete = true;
+              completed = args;
+              safeEach(errors, function (on_error) {
+                safeApply(on_error, args);
+              });
+            }
+          };
+        }
         child = function (context) {
           var deferred = that.deferred();
           context.method = 'child';
