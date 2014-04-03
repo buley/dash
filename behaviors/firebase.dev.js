@@ -229,7 +229,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 	    delete state.context.params;
 	    return state;
 	  }, function (state) {
-	    if(this.isnt(state.context.firebase, true) || this.exists(state.context.firebaseing)) {
+      if(this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing)) {
 	      return state;
 	    }
 	    var promise = state.promise,
