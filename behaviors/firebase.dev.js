@@ -33,11 +33,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               if (true === complete) {
                 safeApply(wasSuccess ? on_success : on_error, completed);
               }
-              safeEach([
-                      [successes, on_success],
+              safeEach([ [successes, on_success],
                       [errors, on_error],
-                      [notifies, on_notify]
-                  ], function (pair) {
+                      [notifies, on_notify] ], function (pair) {
                 var fn = pair[1];
                 if (isFunction(fn)) {
                   pair[0].push(fn);
