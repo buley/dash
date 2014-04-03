@@ -76,12 +76,12 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           };
         },
         child = function (context) {
-          var deferred = that.deferred();
+          var deferred = deferred();
           context.method = 'child';
           return deferred.promise;
         },
         set = function (context) {
-          var deferred = that.deferred(),
+          var deferred = deferred(),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(context.primary_key);
           context.method = 'set';
           ref.set(context.entry, function (err) {
@@ -94,7 +94,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           return deferred.promise;
         },
         update = function (context) {
-          var deferred = that.deferred(),
+          var deferred = deferred(),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(context.primary_key);
           context.method = 'update';
           ref.update(context.entry, function () {
@@ -107,7 +107,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           return deferred.promise;
         },
         remove = function (context) {
-          var deferred = that.deferred(),
+          var deferred = deferred(),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(context.primary_key);
           context.method = 'remove';
           ref.remove(function () {
@@ -192,7 +192,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           return id;
         },
         workDispatch = function (message, context) {
-          var defd = that.deferred(),
+          var defd = deferred(),
             callbacks = {
               on_success: context.on_success,
               on_error: context.on_error,
