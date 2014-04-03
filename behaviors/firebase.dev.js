@@ -138,7 +138,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
         worker = workerEnvironment ? null : new Worker(libraryPath),
         workQueue = {},
-        firebases = {},
+        firebase = {},
         workRegister = function (worker, message, context, success, error, notify) {
           var id = that.random(),
             callback = function (e) {
@@ -264,8 +264,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   end(input);
                 }
               };
-            if ('undefined' === typeof firebases[input.context.firebase]) {
-              firebases[input.context.firebase] = new Firebase([context.firebase, context.database, context.store].join('/'));
+            if ('undefined' === typeof firebase[input.context.firebase]) {
+              firebase[input.context.firebase] = new Firebase([context.firebase, context.database, context.store].join('/'));
             }
             if ('set' === method || 'update' === method || 'remove' === method || 'child' === method) {
               context.callback = callback(method);
