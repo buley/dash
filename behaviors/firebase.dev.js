@@ -74,7 +74,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               });
             }
           };
-        }
+        },
         child = function (context) {
           var deferred = that.deferred();
           context.method = 'child';
