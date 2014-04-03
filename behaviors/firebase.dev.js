@@ -225,31 +225,32 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         inward,
         update = false,
         args;
-      if (this.contains(['add.entry', 'update.entry', 'update.entries', 'remove.entry', 'remove.entries'], state.method)) {
-        if (this.contains(['notify', 'resolve'], state.type)) {
-          update = true;
+        if (this.contains(['add.entry', 'update.entry', 'update.entries', 'remove.entry', 'remove.entries'], state.method)) {
+          if (this.contains(['notify', 'resolve'], state.type)) {
+            update = true;
+          }
+        } else {
+          if ((this.is('error', state.type) || (this.isEmpty(state.context.entry) && this.contains(['get.entry', 'get.entries'], state.method))) && (this.is(state.context.firebase, true) || this.is(state.context.fallback, true))) {
+            update = true;
+          }
         }
-      } else {
-        if ((this.is('error', state.type) || (this.isEmpty(state.context.entry) && this.contains(['get.entry', 'get.entries'], state.method))) && (this.is(state.context.firebase, true) || this.is(state.context.fallback, true))) {
-          update = true;
+        if (update) {
+          state.promise = outward.promise;
+          inward = workDispatch(whichMethod(state.method), state.context);
+          inward(function (ctx2) {
+            state.context = ctx2;
+            state.type = 'resolve';
+            outward.resolve(state.context);
+          }, function (ctx2) {
+            state.context = ctx2;
+            state.type = 'error';
+            outward.reject(state.context);
+          }, function (ctx2) {
+            state.type = 'notify';
+            state.context = ctx2;
+            outward.notify(state.context);
+          });
         }
-      }
-      if (update) {
-        state.promise = outward.promise;
-        inward = workDispatch(whichMethod(state.method), state.context);
-        inward(function (ctx2) {
-          state.context = ctx2;
-          state.type = 'resolve';
-          outward.resolve(state.context);
-        }, function (ctx2) {
-          state.context = ctx2;
-          state.type = 'error';
-          outward.reject(state.context);
-        }, function (ctx2) {
-          state.type = 'notify';
-          state.context = ctx2;
-          outward.notify(state.context);
-        });
       }
       return state;
     }, function (state) {
