@@ -241,7 +241,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         };
         if (true === workerEnvironment) {
           importScripts('https://cdn.firebase.com/js/client/1.0.6/firebase.js');
-          console.log('firebase', Firebase);
           environment.addEventListener('message', function (e) {
             var input = e.data,
               method = input.method,
@@ -254,11 +253,25 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 ctx.type = ctx.type || 'success';
                 environment.postMessage(ctx);
               },
+              callback = function (sig) {
+                return function (data, error) {
+                  delete input.context.callback;
+                  if ( !! error) {
+                    input.context.error = error;
+                    input.context.message = data;
+                    input.type = 'error';
+                  } else {
+                    input.context.entry = data;
+                  }
+                  end(input);
+                }
+              },
               promise;
             if ('undefined' === typeof firebase[ [ context.firebase, context.database, context.store].join('/') ] ) {
               firebase[[context.firebase, context.database, context.store].join('/')] = new Firebase([context.firebase, context.database, context.store].join('/'));
             }
             if ('set' === method || 'update' === method || 'remove' === method || 'child' === method) {
+              context.callback = callback(method);
               if (method === 'set') {
                 promise = set(context);
               } else if (method === 'child') {
@@ -268,17 +281,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               } else if (method === 'remove') {
                 promise = remove(context);
               }
-              promise(function (data, error) {
-                delete input.context.callback;
-                if (!!error) {
-                  input.context.error = error;
-                  input.context.message = data;
-                  input.type = 'error';
-                } else {
-                  input.context.entry = data;
-                }
-                end(input);
-              })
+              promise((function(ctx) {
+                ctx.callback();
+              }(context)));
             } else {
               input.type = 'error';
               end({
