@@ -1,7 +1,7 @@
 self.dashFirebase = self.dashFirebase || (function (environment) {
     "use strict";
     var that,
-      deferred = function () {
+      deferred = function deferred() {
         var complete = false,
           wasSuccess = null,
           completed = [],
