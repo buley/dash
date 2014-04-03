@@ -254,33 +254,31 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 ctx.type = ctx.type || 'success';
                 environment.postMessage(ctx);
               },
-              callback = function (sig) {
-                return function (data, error) {
-                  delete input.context.callback;
-                  if ( !! error) {
-                    input.context.error = error;
-                    input.context.message = data;
-                    input.type = 'error';
-                  } else {
-                    input.context.entry = data;
-                  }
-                  end(input);
-                }
-              };
+              promise;
             if ('undefined' === typeof firebase[ [ context.firebase, context.database, context.store].join('/') ] ) {
               firebase[[context.firebase, context.database, context.store].join('/')] = new Firebase([context.firebase, context.database, context.store].join('/'));
             }
             if ('set' === method || 'update' === method || 'remove' === method || 'child' === method) {
-              context.callback = callback(method);
               if (method === 'set') {
-                set(context);
+                promise = set(context);
               } else if (method === 'child') {
-                child(context);
+                promise = child(context);
               } else if (method === 'update') {
-                update(context);
+                promise = update(context);
               } else if (method === 'remove') {
-                remove(context);
+                promise = remove(context);
               }
+              promise(function (data, error) {
+                delete input.context.callback;
+                if (!!error) {
+                  input.context.error = error;
+                  input.context.message = data;
+                  input.type = 'error';
+                } else {
+                  input.context.entry = data;
+                }
+                end(input);
+              })
             } else {
               input.type = 'error';
               end({
