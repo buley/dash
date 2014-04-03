@@ -217,7 +217,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
   } else {
 	  return [ function (state) {
 	  	that = this;
-	    if(this.isnt(state.context.firebase, true) || this.exists(state.context.firebaseing)) {
+	    if(this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing)) {
 	      return state;
 	    }
 	    state.context.firebaseid = this.random();
