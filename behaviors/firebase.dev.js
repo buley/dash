@@ -10,7 +10,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 		var deferred = that.deferred(),
 			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
 		context.method = 'set';
-		ref.set( context.entry, function(err) {
+		ref.set( context.entry, function(err)it {
 			if(that.err, null) {
 				deferred.resolve(context.entry);
 			} else {
@@ -192,9 +192,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 	      	}
       	};
   	  if ( 'undefined' === typeof firebases[input.context.firebase] ) {
-  		firebases[input.context.firebase] =  new Firebase([context.firebase, context.database, context.store ].join('/')),
+  		  firebases[input.context.firebase] =  new Firebase([context.firebase, context.database, context.store ].join('/'));
   	  }
-      if (method === 'set' || method === 'update' || method === 'remove') {
+      if (that.contains[ 'set', 'update', 'remove', 'child',  ], method) {
       	context.callback = callback(method);
         if ( method === 'set' ) {
         	set(context);
