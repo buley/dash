@@ -264,7 +264,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   end(input);
                 }
               };
-            if ('undefined' === typeof firebase[context.firebase, context.database, context.store].join('/')]) {
+            if ('undefined' === typeof firebase[ [ context.firebase, context.database, context.store].join('/') ] ) {
               firebase[context.firebase, context.database, context.store].join('/')] = new Firebase([context.firebase, context.database, context.store].join('/'));
             }
             if ('set' === method || 'update' === method || 'remove' === method || 'child' === method) {
