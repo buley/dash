@@ -10,7 +10,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 		var deferred = that.deferred(),
 			ref = firebase[ [context.firebase, context.database, context.store ].join('/') ].child(context.primary_key);
 		context.method = 'set';
-		ref.set( context.entry, function(err))) {
+		ref.set( context.entry, function(err) {
 			if(that.err, null) {
 				deferred.resolve(context.entry);
 			} else {
