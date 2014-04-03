@@ -293,7 +293,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         } else {
           return [function (state) {
             that = this;
-            if (this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing)) {
+            if (this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing) || this.is(state.context.sync, false)) {
               return state;
             }
             if (this.is(state.context.sync, true)) {
@@ -331,7 +331,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             }
             return state;
           }, function (state) {
-            if (this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing)) {
+            if (this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing) || this.is(state.context.sync, false)) {
               return state;
             }
             var promise = state.promise,
