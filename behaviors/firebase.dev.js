@@ -193,7 +193,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
       if ('undefined' === typeof firebases[input.context.firebase]) {
         firebases[input.context.firebase] = new Firebase([context.firebase, context.database, context.store].join('/'));
       }
-      if (that.contains(['set', 'update', 'remove', 'child'], method)) {
+      if ('set' === method || 'update' === method || 'remove' === method || 'child' === method) {
         context.callback = callback(method);
         if (method === 'set') {
           set(context);
