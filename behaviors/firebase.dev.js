@@ -246,22 +246,13 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 			      update = true;
 				}
 	    	}
-  		    args = firebase[ state.context.firebaseid ];
 	    	if (update) {
     		  state.promise = outward.promise;
-    		  state.context.url = args.url;0
-    		  if (that.isFunction(state.context.url)) {
-    		  	state.context.url = that.apply(state.context.url, [that.clone(state)]);
-    		  }
-    		  if (that.isFunction(state.context.params)) {
-    		  	state.context.params = that.apply(state.context.params, [that.clone(state)]);
-    		  }
-    		  state.context.params = args.params;
-	          inward = workDispatch( whichMethod(state.method), state.context);
+	        inward = workDispatch( whichMethod(state.method), state.context);
 		  	  inward(function(ctx2){
     		    state.context = ctx2;
     		    state.type = 'resolve';
-			    outward.resolve(state.context);
+			     outward.resolve(state.context);
 		  	  }, function(ctx2) {
     		    state.context = ctx2;
     		    state.type = 'error';
@@ -269,13 +260,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 		  	  }, function(ctx2) {
     		    state.type = 'notify';
     		    state.context = ctx2;
-			    outward.notify(state.context);
+			       outward.notify(state.context);
 		  	  });
-	    	} else {
-		      state.context.url = args.url;
-		      state.context.params = args.params;
-		      delete firebase[ state.context.firebaseid ];
-		      delete state.context.firebaseid;
 	    	}
 	    return state;
 	  } ];
