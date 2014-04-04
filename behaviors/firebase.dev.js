@@ -142,7 +142,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         worker = workerEnvironment ? null : new Worker(libraryPath),
         workQueue = {},
         firebase = {},
-        workRegister = function (worker, message, context, success, error, notify, signature) {
+        workRegister = function (worker, message, context, success, error, notify, signature, type) {
           var id = that.random(),
             callback = function (e) {
               var data = e.data,
@@ -151,19 +151,23 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               if (undefined !== queued) {
                 switch (e.data.type) {
                 case 'success':
+                  data.type = type;
                   delete workQueue[data.uid];
                   worker.removeEventListener('message', callback);
                   that.apply(success, [data]);
                   break;
                 case 'error':
+                  data.type = type;
                   delete workQueue[data.uid];
                   worker.removeEventListener('message', callback);
                   that.apply(error, [data]);
                   break;
                 case 'abort':
+                  data.type = type;
                   that.apply(notify, [data]);
                   break;
                 default:
+                  data.type = type;
                   break;
                 }
               }
@@ -195,7 +199,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           });
           return id;
         },
-        workDispatch = function (message, context, signature) {
+        workDispatch = function (message, context, signature. type) {
           var defd = deferred(),
             callbacks = {
               on_success: context.on_success,
@@ -225,7 +229,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             defd.reject(getData(data));
           }, function (data) {
             defd.notify(getData(data));
-          }, signature);
+          }, signature, type);
           return defd.promise;
         };
         if (true === workerEnvironment) {
@@ -292,7 +296,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               }
               if (update) {
                 state.promise = outward.promise;
-                inward = workDispatch(whichMethod(state.method), state.context, state.method);
+                inward = workDispatch(whichMethod(state.method), state.context, state.method, state.type);
                 inward(function (ctx2) {
                   state.context = ctx2;
                   state.type = 'resolve';
@@ -329,7 +333,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             }
             if (update) {
               state.promise = outward.promise;
-              inward = workDispatch(whichMethod(state.method), state.context, state.method);
+              inward = workDispatch(whichMethod(state.method), state.context, state.method, state.type);
               inward(function (ctx2) {
                 state.context = ctx2;
                 state.type = 'resolve';
