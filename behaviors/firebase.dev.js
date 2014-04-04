@@ -255,15 +255,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               },
               callback = function (sig) {
                 return function (data, error) {
-                  delete input.context.callback;
-                  if ( !! error) {
-                    input.context.error = error;
-                    input.context.message = data;
-                    input.type = 'error';
-                  } else {
-                    input.context.entry = data;
-                  }
-                  end(input);
+                  
                 }
               },
               promise;
@@ -281,9 +273,10 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               } else if (method === 'remove') {
                 promise = remove(context);
               }
-              promise((function(ctx) {
-                ctx.callback();
-              }(context)));
+              promise(function(ctx) {
+                input.context = ctx;
+                end(input);
+              });
             } else {
               input.type = 'error';
               end({
