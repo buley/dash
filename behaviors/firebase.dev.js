@@ -142,11 +142,12 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         worker = workerEnvironment ? null : new Worker(libraryPath),
         workQueue = {},
         firebase = {},
-        workRegister = function (worker, message, context, success, error, notify) {
+        workRegister = function (worker, message, context, success, error, notify, signature) {
           var id = that.random(),
             callback = function (e) {
               var data = e.data,
                 queued = workQueue[data.uid];
+              data.method = signature;
               if (undefined !== queued) {
                 switch (e.data.type) {
                 case 'success':
@@ -194,7 +195,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           });
           return id;
         },
-        workDispatch = function (message, context) {
+        workDispatch = function (message, context, signature) {
           var defd = deferred(),
             callbacks = {
               on_success: context.on_success,
@@ -220,7 +221,11 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           });
           workRegister(worker, message, context, function (data) {
             defd.resolve(getData(data));
-          });
+          }, function (data) {
+            defd.reject(getData(data));
+          }, function (data) {
+            defd.notify(getData(data));
+          }, signature);
           return defd.promise;
         };
         if (true === workerEnvironment) {
@@ -287,7 +292,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               }
               if (update) {
                 state.promise = outward.promise;
-                inward = workDispatch(whichMethod(state.method), state.context);
+                inward = workDispatch(whichMethod(state.method), state.context, state.method);
                 inward(function (ctx2) {
                   state.context = ctx2;
                   state.type = 'resolve';
@@ -324,7 +329,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             }
             if (update) {
               state.promise = outward.promise;
-              inward = workDispatch(whichMethod(state.method), state.context);
+              inward = workDispatch(whichMethod(state.method), state.context, state.method);
               inward(function (ctx2) {
                 state.context = ctx2;
                 state.type = 'resolve';
