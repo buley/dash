@@ -251,8 +251,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               } else if (method === 'remove') {
                 promise = remove(context);
               }
-              promise(function(ctx) {
-                input.context = ctx;
+              promise(function(entry) {
+                input.context.entry = entry;
                 end(input);
               });
             } else {
