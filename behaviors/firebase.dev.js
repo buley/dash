@@ -85,9 +85,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             key = context.entry ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
           context.method = 'set';
-          ref.set(context.entry, function (err) {
+          ref.set(context.data, function (err) {
             if (!err) {
-              defd.resolve(context.entry);
+              defd.resolve(context.data);
             } else {
               defd.reject(err);
             }
