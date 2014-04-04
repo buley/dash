@@ -219,23 +219,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             delete context[key];
           });
           workRegister(worker, message, context, function (data) {
-            var add_ctx = that.clone(context);
-            add_ctx.data = data.context.entry;
-            add_ctx.firebaseing = true;
-            that.api.add.entry(add_ctx)(function (added_ctx) {
-              delete added_ctx.firebaseing;
-              defd.resolve(getData(added_ctx));
-            }, function (added_ctx) {
-              delete added_ctx.firebaseing;
-              defd.reject(getData(added_ctx));
-            }, function (added_ctx) {
-              delete added_ctx.firebaseing;
-              defd.notify(getData(added_ctx));
-            })
-          }, function (data) {
-            defd.reject(getData(data));
-          }, function (data) {
-            defd.notify(getData(data));
+            defd.resolve(getData(data));
           });
           return defd.promise;
         };
@@ -252,11 +236,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               end = function (ctx) {
                 ctx.type = ctx.type || 'success';
                 environment.postMessage(ctx);
-              },
-              callback = function (sig) {
-                return function (data, error) {
-                  
-                }
               },
               promise;
             if ('undefined' === typeof firebase[ [ context.firebase, context.database, context.store].join('/') ] ) {
