@@ -199,7 +199,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           });
           return id;
         },
-        workDispatch = function (message, context, signature. type) {
+        workDispatch = function (message, context, signature, type) {
           var defd = deferred(),
             callbacks = {
               on_success: context.on_success,
