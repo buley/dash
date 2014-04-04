@@ -110,7 +110,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         },
         remove = function (context) {
           var defd = deferred(),
-            key = context.entry ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
+            key = context.entry && !!context.entry[context.objectstore.keyPath] ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
           context.method = 'remove';
           ref.remove(function (err) {
