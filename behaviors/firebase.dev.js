@@ -82,7 +82,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         },
         set = function (context) {
           var defd = deferred(),
-            key = context.entry ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
+            key = context.entry && !!context.entry[context.objectstore.keyPath] ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
           context.method = 'set';
           ref.set(context.data, function (err) {
@@ -96,7 +96,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         },
         update = function (context) {
           var defd = deferred(),
-            key = context.entry ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
+            key = context.entry && !!context.entry[context.objectstore.keyPath] ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
           context.method = 'update';
           ref.update(context.entry, function (err) {
