@@ -421,6 +421,13 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         dirty_remote = true;
                       }
                       console.log('dirty', remote_diff, dirty_remote, local_diff,dirty_local);
+                      if (dirty_local) {
+                        //TODO: Save changes locally
+                        state.context.entry = local;
+                      }
+                      if (dirty_remote) {
+                        //TODO: Save Firebase
+                      }
                     }
                   }
                 }
