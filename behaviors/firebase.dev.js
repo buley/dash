@@ -360,7 +360,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               outward = this.deferred(),
               inward,
               update = false,
-              args;
+              args, 
+              diff;
             if (this.contains(['add.entry', 'update.entry', 'update.entries', 'remove.entry', 'remove.entries'], state.method)) {
               if (this.contains(['notify', 'resolve'], state.type)) {
                 update = true;
@@ -377,8 +378,12 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               inward(function (ctx2) {
                 state.context = ctx2;
                 state.type = 'resolve';
-                console.log('ctx2',ctx2)
-                console.log('merge conflict?',ctx2.context.entry, ctx2.context.remote, difference(ctx2.context.entry, ctx2.context.remote,true));
+                if (this.contains(['get.entry'], state.method)) {
+                  diff = difference(ctx2.context.entry, ctx2.context.remote,true);
+                  if (!isEmpty(diff)) {
+                    console.log('merge conflict',diff);
+                  }
+                }
                 outward.resolve(state.context);
               }, function (ctx2) {
                 state.context = ctx2;
