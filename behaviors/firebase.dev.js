@@ -405,14 +405,14 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           });
                         }
                       } else {
-                        if (that.is(ctx.context.ours, true)) {
+                        if (that.is(ctx2.context.ours, true)) {
                           remote = that.clone(local);
                         } else {
                           local = that.clone(remote);
                         }
                       }
-                      local_diff = difference(local, ctx2.context.entry);
-                      remote_diff = difference(local, ctx2.context.entry);
+                      local_diff = difference(local, state.context.entry);
+                      remote_diff = difference(local, state.context.entry);
                       state.context.merged = diff;
                       if (!that.isEmpty(local_diff)) {
                         dirty_local = true;
