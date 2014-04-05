@@ -327,7 +327,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 promise = remove(context);
               }
               promise(function(entry) {
-                input.context.entry = entry;
+                input.context.firebased = entry;
                 end(input);
               });
             } else {
