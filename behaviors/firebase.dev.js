@@ -295,6 +295,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               }
             }
             if (update) {
+              that = this;
               state.promise = outward.promise;
               inward = workDispatch(whichMethod(state.method), state.context, state.method, state.type);
               inward(function (ctx2) {
