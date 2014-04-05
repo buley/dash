@@ -208,7 +208,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           var diff = {};
           if (that.isObject(one)) {
             that.iterate(one, function(key, val) {
-              if (notSame(val, previous[key])) {
+              if (notSame(val, two[key])) {
                 if ( that.isEmpty(val) || that.isEmpty(one[key])) {
                   diff[ key ] = [val, one[key]];
                 } else if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
