@@ -423,6 +423,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     }
                   }
                 }
+
                 console.log('dirty', remote_diff, dirty_remote, local_diff,dirty_local);
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
                   var deff = deferred(),
@@ -454,8 +455,12 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   },function(ctx2) {
                     outward.notify(ctx2);
                   });
+                  ctx2.context.remote = remote;
+                  ctx2.context.local = local;
                   deff.resolve(state);
                 } else {
+                  ctx2.context.remote = remote;
+                  ctx2.context.local = local;
                   outward.resolve(state.context);
                 }
               }, function (ctx2) {
