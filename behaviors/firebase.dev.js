@@ -339,6 +339,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               }
               promise(function(entry) {
                 input.context.remote = entry;
+                input.context.local = input.context.entry;
                 end(input);
               });
             } else {
@@ -455,12 +456,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   },function(ctx2) {
                     outward.notify(ctx2);
                   });
-                  ctx2.context.remote = remote;
-                  ctx2.context.local = local;
                   deff.resolve(state);
                 } else {
-                  ctx2.context.remote = remote;
-                  ctx2.context.local = local;
                   outward.resolve(state.context);
                 }
               }, function (ctx2) {
