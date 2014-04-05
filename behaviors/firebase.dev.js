@@ -339,7 +339,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               }
               promise(function(entry) {
                 input.context.remote = entry;
-                input.context.local = input.context.entry;
+                input.context.local = that.clone(input.context.entry);
                 end(input);
               });
             } else {
