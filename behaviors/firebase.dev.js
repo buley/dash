@@ -75,6 +75,62 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             }
           };
         },
+        difference = function(one, two, shallow) {
+          var diff = {};
+          if (that.isObject(one)) {
+            that.iterate(one, function(key, val) {
+              if (notSame(val, previous[key])) {
+                if ( that.isEmpty(val) || that.isEmpty(one[key])) {
+                  diff[ key ] = [val, one[key]];
+                } else if ( that.isnt(shallow, true) && ( ( that.exists(two[key]) && that.isObject(two[key]) ) || that.isObject(val))) {
+                  diff[ key ] = difference(val, two[key], shallow);
+                } else {
+                  diff[ key ] = [val, two[key]];
+                }
+              }
+            });
+          } else if (that.isArray(one)) {
+            if (that.isArray(two)) { 
+              that.each(one, function(val, i) {
+                diff[ i ] = diff[ i ] || [];
+                if ( that.isEmpty(val) || that.isEmpty(two[i])) {
+                  diff[ key ] = [val, two[i]];
+                } if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
+                  diff[i] = difference(val, two[i], shallow);
+                } else {
+                  diff[i] = [one[i], val];
+                }
+              });
+            }     
+          }
+          if (that.isObject(two)) {
+            that.iterate(two, function(key, val) {
+              if (notSame(val, one[key]) && that.isEmpty(one[ key ])) {
+                if ( that.isEmpty(val) || that.isEmpty(two[key])) {
+                  diff[ key ] = [val, two[key]];
+                } if ( that.isnt(shallow, true) && (that.exists(one[key]) && that.isObject(one[key]) ) || that.isObject(val) ) {
+                  diff[ key ] = difference(one[key], val, shallow);
+                } else {
+                  diff[ key ] = [one[key], val];
+                }
+              }
+            });
+          } else if (that.isArray(two)) {
+            if (that.isArray(two)) { 
+              that.each(two, function(val, i) {
+                diff[ i ] = diff[ i ] || [];
+                if ( that.isEmpty(val) || that.isEmpty(one[i])) {
+                  diff[ i ] = [val, one[i]];
+                } if ( that.isnt(shallow, true) && (that.exists(one[i]) && that.isObject(one[i]) ) || that.isObject(val) ) {
+                  diff[ i ] = difference(one[i], val, shallow);
+                } else {
+                  diff[ i ] = [one[i], val];
+                }
+              });
+            }     
+          }
+          return diff;
+        },
         child = function (context) {
           var defd = deferred(),
             key = context.entry && !!context.entry[context.objectstore.keyPath] ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
@@ -82,14 +138,12 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           context.method = 'child';
           ref.on('value', function (snapshot) {
             var value = snapshot.val();
-            console.log('value',value);
             if (!!value) {
               defd.resolve(value);
             } else {
               defd.reject(value);
             }
           });
-          console.log('getting',context.key,ref);
           return defd.promise;
         },
         set = function (context) {
@@ -312,6 +366,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               inward(function (ctx2) {
                 state.context = ctx2;
                 state.type = 'resolve';
+                console.log('merge conflict?',state);
                 outward.resolve(state.context);
               }, function (ctx2) {
                 state.context = ctx2;
