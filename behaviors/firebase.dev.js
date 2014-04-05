@@ -76,8 +76,10 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           };
         },
         child = function (context) {
-          var defd = deferred();
-          console.log('getting',context);
+          var defd = deferred(),
+            key = context.entry && !!context.entry[context.objectstore.keyPath] ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
+            ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
+          console.log('getting',context.key,ref);
           context.method = 'child';
           return defd.promise;
         },
