@@ -366,7 +366,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               inward(function (ctx2) {
                 state.context = ctx2;
                 state.type = 'resolve';
-                console.log('merge conflict?',state.context.entry, state.context.remote, difference(state.context.entry, state.context.remote,true));
+                console.log('ctx2',ctx2)
+                console.log('merge conflict?',ctx2.context.entry, ctx2.context.remote, difference(ctx2.context.entry, ctx2.context.remote,true));
                 outward.resolve(state.context);
               }, function (ctx2) {
                 state.context = ctx2;
