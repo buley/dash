@@ -276,7 +276,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           }, false);
         } else {
           return [null, function (state) {
-            if (this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing) || ( this.is(state.context.sync, false) || this.isEmpty(state.context.sync))  {
+            if (this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing) || ( this.is(state.context.sync, false) || this.isnt(state.context.sync, true))  {
               return state;
             }
             var promise = state.promise,
