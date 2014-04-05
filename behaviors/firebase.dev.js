@@ -411,8 +411,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           local = that.clone(remote);
                         }
                       }
-                      local_diff = difference(local, state.context.entry);
-                      remote_diff = difference(remote, state.context.remote);
+                      local_diff = difference(local, ctx2.context.entry);
+                      remote_diff = difference(remote, ctx2.context.remote);
                       state.context.merged = diff;
                       if (!that.isEmpty(local_diff)) {
                         dirty_local = true;
@@ -420,7 +420,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       if (!that.isEmpty(remote_diff)) {
                         dirty_remote = true;
                       }
-                      console.log('dirty', dirty_remote, dirty_local);
+                      console.log('dirty', remote_diff, dirty_remote, local_diff,dirty_local);
                     }
                   }
                 }
