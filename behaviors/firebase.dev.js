@@ -384,7 +384,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               state.promise = outward.promise;
               inward = workDispatch(whichMethod(state.method), state.context, state.method, state.type);
               inward(function (ctx2) {
-                state.context = ctx2;
+                state.context = ctx2.context;
                 state.type = 'resolve';
                 if (that.contains(['get.entry'], state.method)) {
                   diff = difference(ctx2.context.entry, ctx2.context.remote, true);
