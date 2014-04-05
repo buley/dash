@@ -276,6 +276,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           }, false);
         } else {
           return [null, function (state) {
+            that = this;
             if (this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing) || (this.is(state.context.sync, false) || this.isnt(state.context.sync, true)))  {
               return state;
             }
@@ -295,7 +296,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               }
             }
             if (update) {
-              that = this;
               state.promise = outward.promise;
               inward = workDispatch(whichMethod(state.method), state.context, state.method, state.type);
               inward(function (ctx2) {
