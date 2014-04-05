@@ -81,6 +81,14 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
           console.log('getting',context.key,ref);
           context.method = 'child';
+          ref.on('value', function (snapshot) {
+            var value = snapshot.val();
+            if (!!value) {
+              defd.resolve(value);
+            } else {
+              defd.reject(value);
+            }
+          });
           return defd.promise;
         },
         set = function (context) {
