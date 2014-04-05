@@ -2,7 +2,7 @@ var dashApp = angular.module('dashApp', ['ngRoute']);
 dashApp.config(['$routeProvider',
   function ($routeProvider) {
     /* Behaviors */
-    //dash.add.behavior(dashStats);
+    dash.add.behavior(dashStats);
     //dash.add.behavior(dashFirebase);
     //dash.add.behavior(dashCache);
     //dash.add.behavior(dashLive);
