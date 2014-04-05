@@ -437,6 +437,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       var extra = that.clone(ctx2.context),
                           update_pro;
                       extra.data = that.clone(local);
+                      console.log('extra',extra);
                       update_pro = that.api.update.entry(extra);
                       update_pro(function(ctx3) {
                         console.log('ctx3',ctx3);
