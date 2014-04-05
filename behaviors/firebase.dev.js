@@ -361,7 +361,15 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               inward,
               update = false,
               args, 
-              diff;
+              diff,
+              finalized = {},
+              remote = {},
+              local = {},
+              local_diff,
+              remote_diff,
+              dirty_remote = false,
+              dirty_local = false,
+              copy;
             if (this.contains(['add.entry', 'update.entry', 'update.entries', 'remove.entry', 'remove.entries'], state.method)) {
               if (this.contains(['notify', 'resolve'], state.type)) {
                 update = true;
@@ -379,25 +387,42 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 state.context = ctx2;
                 state.type = 'resolve';
                 if (that.contains(['get.entry'], state.method)) {
-                  diff = difference(ctx2.context.entry, ctx2.context.remote,true);
+                  diff = difference(ctx2.context.entry, ctx2.context.remote, true);
                   if (!that.isEmpty(diff)) {
-                    state.context.conflict = diff;
-                    console.log('merge conflict',state.context.conflict);
-                    if (that.is(ctx.context.safe, true)) {
-                    } else if (that.is(ctx.context.merge, true)) {
-                      if (that.is(ctx.context.ours, true)) {
-                        console.log('merge ours into theirs');
-                      } else {
-                        console.log('merge theirs into ours');
-                      }
+                    if (that.is(ctx.context.cautious, true)) {
+                      state.context.conflict = diff;
                     } else {
-                      if (that.is(ctx.context.ours, true)) {
-                        console.log('force ours');
+                      if (that.is(ctx.context.merge, true)) {
+                        local = that.clone(ctx2.context.entry);
+                        remote = that.clone(ctx.context.remote);
+                        if (that.is(ctx.context.ours, true)) {
+                          that.safeIterate(local, fnction(key, val) {
+                            remote[key] = val;
+                          });
+                        } else {
+                          that.safeIterate(remote, fnction(key, val) {
+                            local[key] = val;
+                          });
+                        }
                       } else {
-                        console.log('force theirs');
+                        if (that.is(ctx.context.ours, true)) {
+                          remote = that.clone(local);
+                        } else {
+                          local = that.clone(remote);
+                        }
                       }
-                    }
+                      local_diff = difference(local, ctx2.context.entry);
+                      remote_diff = difference(local, ctx2.context.entry);
+                      state.context.merged = diff;
+                      if (!that.isEmpty(local_diff)) {
+                        dirty_local = true;
+                      }
+                      if (!that.isEmpty(remote_diff)) {
+                        dirty_remote = true;
+                      }
+                      console.log('dirty', dirty_remote, dirty_local);
 
+                    }
                   }
                 }
                 outward.resolve(state.context);
