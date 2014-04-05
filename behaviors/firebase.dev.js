@@ -75,6 +75,17 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             }
           };
         },
+        notSame = function(a, b) {
+          if ( that.isArray(a) ) {
+            a = a.join('');
+          }
+          if ( that.isArray(b) ) {
+            b = b.join('');
+          }
+          a = a ? a.toString() : a;
+          b = b ? b.toString() : b;
+          return that.isnt(a, b);
+        },
         difference = function(one, two, shallow) {
           var diff = {};
           if (that.isObject(one)) {
