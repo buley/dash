@@ -442,7 +442,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   },function(ctx2) {
                     deff.notify(ctx2);
                   });
-                  state.promise = deff.promise;
+                  //state.promise = deff.promise;
                 } else {
                   outward.resolve(state.context);
                 }
