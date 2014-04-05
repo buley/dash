@@ -420,18 +420,32 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       if (!that.isEmpty(remote_diff)) {
                         dirty_remote = true;
                       }
-                      console.log('dirty', remote_diff, dirty_remote, local_diff,dirty_local);
-                      if (dirty_local) {
-                        //TODO: Save changes locally
-                        state.context.entry = local;
-                      }
-                      if (dirty_remote) {
-                        //TODO: Save Firebase
-                      }
                     }
                   }
                 }
-                outward.resolve(state.context);
+                console.log('dirty', remote_diff, dirty_remote, local_diff,dirty_local);
+                if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
+                  if (dirty_local) {
+                    //TODO: Save changes locally
+                    state.context.entry = local;
+                  }
+                  if (dirty_remote) {
+                    //TODO: Save Firebase
+                  } 
+                  var deff = deferred(),
+                    prev = state.promise;
+                  prev(function(ctx2) {
+                    console.log('dirty promise');
+                    deff.resolve(ctx2);
+                  },function(ctx2) {
+                    deff.reject(ctx2);
+                  },function(ctx2) {
+                    deff.notify(ctx2);
+                  });
+                  state.promise = deff.promise;
+                } else {
+                  outward.resolve(state.context);
+                }
               }, function (ctx2) {
                 state.context = ctx2;
                 state.type = 'error';
