@@ -487,6 +487,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                   return item;
                 },
                 cache: true,
+                sync: true,
+                firebase: 'http://sizzling-fire-6181.firebaseio.com',
                 stats: true,
                 forecast: false,
                 store_key_path: 'id',
