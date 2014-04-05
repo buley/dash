@@ -380,7 +380,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 state.type = 'resolve';
                 if (that.contains(['get.entry'], state.method)) {
                   diff = difference(ctx2.context.entry, ctx2.context.remote,true);
-                  if (!isEmpty(diff)) {
+                  if (!that.isEmpty(diff)) {
                     console.log('merge conflict',diff);
                   }
                 }
