@@ -421,7 +421,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         dirty_remote = true;
                       }
                       console.log('dirty', dirty_remote, dirty_local);
-
                     }
                   }
                 }
