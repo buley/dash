@@ -434,9 +434,14 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         localpro = pro;
                     pro = localdef.promise;
                     localpro(function(ctx2) {
-                      console.log('that',ctx2);
-                      that.api.update.entry()
-                      localdef.resolve(ctx2);
+                      var extra = that.clone(ctx2.context),
+                          update_pro;
+                      extra.data = that.clone(local);
+                      update_pro = that.api.update.entry(extra);
+                      update_pro(function(ctx3) {
+                        console.log('ctx3',ctx3);
+                        localdef.resolve(ctx3);
+                      });
                     });
                   }
                   if (dirty_remote) {
