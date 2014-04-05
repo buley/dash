@@ -434,7 +434,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         localpro = pro;
                     pro = localdef.promise;
                     localpro(function(ctx2) {
-                      console.log('that',that.api);
+                      console.log('that',ctx2);
+                      that.api.update.entry()
                       localdef.resolve(ctx2);
                     });
                   }
