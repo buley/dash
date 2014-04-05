@@ -431,6 +431,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   if (dirty_local) {
                     //TODO: Save changes locally
                     state.context.entry = local;
+                    setTimeout(function() {
+                      deff.resolve(state);
+                    }, 3000);
                   }
                   if (dirty_remote) {
                     //TODO: Save Firebase
