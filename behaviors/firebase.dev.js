@@ -429,25 +429,30 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     prev = state.promise,
                     pro = deff.promise;
                   if (dirty_local) {
-                    //TODO: Save changes locally
                     state.context.entry = local;
                     var localdef = deferred(),
                         localpro = pro;
                     pro = localdef.promise;
                     localpro(function(ctx2) {
                       localdef.resolve(ctx2);
-                    }, 3000);
+                    });
                   }
                   if (dirty_remote) {
-                    //TODO: Save Firebase
+                    state.context.entry = local;
+                    var remotedef = deferred(),
+                        remotepro = pro;
+                    pro = localdef.promise;
+                    remotepro(function(ctx2) {
+                      remotedef.resolve(ctx2);
+                    });
                   } 
                   pro(function(ctx2) {
                     console.log('dirty promise');
-                    outward.resolve(ctx2.context);
+                    outward.resolve(ctx2);
                   },function(ctx2) {
-                    outward.reject(ctx2.context);
+                    outward.reject(ctx2);
                   },function(ctx2) {
-                    outward.notify(ctx2.context);
+                    outward.notify(ctx2);
                   });
                   deff.resolve(state);
                 } else {
