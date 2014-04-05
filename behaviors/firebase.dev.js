@@ -425,7 +425,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   }
                 }
 
-                console.log('dirty', remote_diff, dirty_remote, local_diff,dirty_local);
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
                   var deff = deferred(),
                     prev = state.promise,
@@ -436,6 +435,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         localpro = pro;
                     pro = localdef.promise;
                     localpro(function(ctx2) {
+                      console.log('that.api',that.api.update.entry);
                       localdef.resolve(ctx2);
                     });
                   }
@@ -449,7 +449,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     });
                   } 
                   pro(function(ctx2) {
-                    console.log('dirty promise');
                     outward.resolve(ctx2);
                   },function(ctx2) {
                     outward.reject(ctx2);
