@@ -431,8 +431,11 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   if (dirty_local) {
                     //TODO: Save changes locally
                     state.context.entry = local;
-                    setTimeout(function() {
-                      deff.resolve(state);
+                    var localdef = deferred(),
+                        localpro = pro;
+                    pro = localdef.promise;
+                    localpro(function(ctx2) {
+                      localdef.resolve(ctx2);
                     }, 3000);
                   }
                   if (dirty_remote) {
@@ -446,6 +449,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   },function(ctx2) {
                     outward.notify(ctx2.context);
                   });
+                  deff.resolve(state);
                 } else {
                   outward.resolve(state.context);
                 }
