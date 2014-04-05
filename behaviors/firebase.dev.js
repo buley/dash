@@ -377,7 +377,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               }
             } else {
               if ((this.is('error', state.type) || (!this.isEmpty(state.context.entry) && this.contains(['get.entry', 'get.entries'], state.method))) && (this.is(state.context.firebase, true) || this.is(state.context.sync, true))) {
-                console.log('sync?', state.context.sync);
                 update = true;
               }
             }
@@ -435,6 +434,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         localpro = pro;
                     pro = localdef.promise;
                     localpro(function(ctx2) {
+                      console.log('that',that.api);
                       localdef.resolve(ctx2);
                     });
                   }
