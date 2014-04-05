@@ -395,7 +395,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       if (that.is(ctx2.context.merge, true)) {
                         local = that.clone(ctx2.context.entry);
                         remote = that.clone(ctx2.context.remote);
-                        if (that.is(ctx.context.ours, true)) {
+                        if (that.is(ctx2.context.ours, true)) {
                           that.safeIterate(local, function(key, val) {
                             remote[key] = that.clone(val);
                           });
