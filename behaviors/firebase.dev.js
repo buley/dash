@@ -79,16 +79,17 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           var defd = deferred(),
             key = context.entry && !!context.entry[context.objectstore.keyPath] ? context.entry[context.objectstore.keyPath] : ( context.primary_key || context.key ),
             ref = firebase[[context.firebase, context.database, context.store].join('/')].child(key);
-          console.log('getting',context.key,ref);
           context.method = 'child';
           ref.on('value', function (snapshot) {
             var value = snapshot.val();
+            console.log('value',value);
             if (!!value) {
               defd.resolve(value);
             } else {
               defd.reject(value);
             }
           });
+          console.log('getting',context.key,ref);
           return defd.promise;
         },
         set = function (context) {
