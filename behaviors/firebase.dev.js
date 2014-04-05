@@ -289,7 +289,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 update = true;
               }
             } else {
-              if ((this.is('error', state.type) || (this.isEmpty(state.context.entry) && this.contains(['get.entry', 'get.entries'], state.method))) && (this.is(state.context.firebase, true) || this.is(state.context.sync, true))) {
+              if ((this.is('error', state.type) || (!this.isEmpty(state.context.entry) && this.contains(['get.entry', 'get.entries'], state.method))) && (this.is(state.context.firebase, true) || this.is(state.context.sync, true))) {
                 console.log('sync?', state.context.sync);
                 update = true;
               }
