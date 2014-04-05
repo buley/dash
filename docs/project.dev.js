@@ -1588,6 +1588,8 @@ dashApp.directive('dashSplashOverlay', ['$q', '$http', '$timeout', 'dashAppSplas
                             store: 'imdb',
                             index: 'season',
                             index_key_path: 'sy',
+                            sync: true,
+                            firebase: 'http://sizzling-fire-6181.firebaseio.com',
                             auto_increment: true,
                             store_key_path: null,
                             data: next,
