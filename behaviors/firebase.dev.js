@@ -400,7 +400,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                             remote[key] = val;
                           });
                         } else {
-                          that.safeIterate(remote, fnction(key, val) {
+                          that.safeIterate(remote, function(key, val) {
                             local[key] = val;
                           });
                         }
