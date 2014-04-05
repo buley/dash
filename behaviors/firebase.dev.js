@@ -425,6 +425,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 }
                 console.log('dirty', remote_diff, dirty_remote, local_diff,dirty_local);
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
+                  var deff = deferred(),
+                    prev = state.promise,
+                    pro = deff.promise;
                   if (dirty_local) {
                     //TODO: Save changes locally
                     state.context.entry = local;
@@ -432,17 +435,14 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   if (dirty_remote) {
                     //TODO: Save Firebase
                   } 
-                  var deff = deferred(),
-                    prev = state.promise;
-                  prev(function(ctx2) {
+                  pro(function(ctx2) {
                     console.log('dirty promise');
-                    deff.resolve(ctx2);
+                    outward.resolve(ctx2.context);
                   },function(ctx2) {
-                    deff.reject(ctx2);
+                    outward.reject(ctx2.context);
                   },function(ctx2) {
-                    deff.notify(ctx2);
+                    outward.notify(ctx2.context);
                   });
-                  //state.promise = deff.promise;
                 } else {
                   outward.resolve(state.context);
                 }
