@@ -381,7 +381,23 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 if (that.contains(['get.entry'], state.method)) {
                   diff = difference(ctx2.context.entry, ctx2.context.remote,true);
                   if (!that.isEmpty(diff)) {
-                    console.log('merge conflict',diff);
+                    state.context.conflict = diff;
+                    console.log('merge conflict',state.context.conflict);
+                    if (that.is(ctx.context.safe, true)) {
+                    } else if (that.is(ctx.context.merge, true)) {
+                      if (that.is(ctx.context.ours, true)) {
+                        console.log('merge ours into theirs');
+                      } else {
+                        console.log('merge theirs into ours');
+                      }
+                    } else {
+                      if (that.is(ctx.context.ours, true)) {
+                        console.log('force ours');
+                      } else {
+                        console.log('force theirs');
+                      }
+                    }
+
                   }
                 }
                 outward.resolve(state.context);
