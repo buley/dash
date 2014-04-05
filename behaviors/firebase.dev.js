@@ -77,6 +77,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         },
         child = function (context) {
           var deferred = deferred();
+          console.log('getting',context);
           context.method = 'child';
           return defd.promise;
         },
