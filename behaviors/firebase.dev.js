@@ -447,7 +447,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         //
                         return ctx3;
                       });
-                    } else if (that.isnt(state.context.remote, null) && that.ismt(state.context.firerecursive, true)) {
+                    } else if (that.isnt(state.context.remote, null) && that.isnt(state.context.firerecursive, true)) {
                       var extra = that.clone(state.context),
                           update_pro,
                           remotedef = deferred();
