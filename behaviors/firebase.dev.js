@@ -432,12 +432,12 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     }
                   }
                 } else if (that.contains(['add.entry'], state.method)) {
-                    console.log("statestate",state);
+                  diff = difference(ctx2.context.entry, ctx2.context.remote || {}, true);
                   delete state.context.firerebasing;
+                  console.log("ADD DIFF?",diff);
                   var addpro = workDispatch('update', state.context, ctx2.method, state.type);
                   addpro(function(ctx3) {
                     console.log("CTX3",ctx3);
-                    diff = difference(ctx2.context.entry, ctx2.context.remote, true);
                     if (!that.isEmpty(diff)) {
                       console.log("ADDING MERGE CONF",diff);
                     }
