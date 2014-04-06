@@ -461,7 +461,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           update_pro;
                       extra.entry = that.clone(remote);
                       extra.firerebasing = true;
-                      update_pro = workDispatch(whichMethod(ctx2.method), extra, 'update', ctx2.type);
+                      update_pro = workDispatch('update', extra, ctx2.method, ctx2.type);
                       update_pro(function(ctx3) {
                         console.log('firebase updated',ctx3);
                         remotedef.resolve(ctx3);
