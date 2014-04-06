@@ -452,7 +452,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     });
                   }
                   if (dirty_remote) {
-                    state.context.entry = local;
+                    state.context.remote = remote;
                     var remotedef = deferred(),
                         remotepro = pro;
                     pro = localdef.promise;
