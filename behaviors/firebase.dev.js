@@ -425,7 +425,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       }
                     }
                   }
-                } else if (that.contains(['add.entry'], ctx2.method)) {
+                } else if (that.contains(['add.entry'], state.method)) {
                     console.log("ctxctx2",ctx2);
                   var addpro = workDispatch('update', state.context, ctx2.method, state.type);
                   addpro(function(ctx3) {
