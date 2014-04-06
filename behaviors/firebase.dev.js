@@ -205,7 +205,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           } else if (that.contains(['remove.entry', 'remove.entries', 'remove.index', 'remove.database', 'remove.store'], signature)) {
             return 'remove';
           } else if (that.contains(['add.entry'], signature)) {
-            return 'set';
+            return 'child';
           } else if (that.contains(['update.entry', 'update.entries'], signature)) {
             return 'update';
           } else {
@@ -426,7 +426,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     }
                   }
                 } else if (that.contains(['add.entry'], ctx2.method)) {
-                  var addpro = workDispatch('child', state.context, ctx2.method, state.type);
+                    console.log("ctxctx2",ctx2);
+                  var addpro = workDispatch('update', state.context, ctx2.method, state.type);
                   addpro(function(ctx3) {
                     console.log("CTX3",ctx3);
                     diff = difference(ctx2.context.entry, ctx2.context.remote, true);
