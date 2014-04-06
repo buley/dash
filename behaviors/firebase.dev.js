@@ -425,7 +425,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       }
                     }
                   }
-                } else if (that.contains(['add.entry'], state.method)) {
+                } else if (that.contains(['add.entry'], ctx2.method)) {
                   diff = difference(ctx2.context.entry, ctx2.context.remote, true);
                   if (!that.isEmpty(diff)) {
                     console.log("ADDING MERGE CONF",diff);
