@@ -463,7 +463,20 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           delete ctx3.firerebasing;
                           var addpro = that.api.add.entry(ctx3);
                           addpro(function(ctx4) {
-                            remotedef.resolve(ctx4);
+                            //console.log('was added now alert firebase');
+                            var addpro = workDispatch('set', ctx4, state.method, state.type);
+                            addpro(function(ctx3) {
+                              console.log("added to firebase",ctx3);
+                              remotedef.resolve(ctx4);
+                              return ctx3;
+                            }, function(ctx3) {
+                              //
+                              return ctx3;
+                            }, function(ctx3) {
+                              //
+                              return ctx3;
+                            });
+
                           }, function(ctx4) {
                             remotedef.reject(ctx4);
                           }, function(ctx4) {
