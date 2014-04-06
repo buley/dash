@@ -508,10 +508,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         if(that.is(extra.objectstore.autoIncrement, true)) {
                           delete extra.key;
                         }
-                        delete extra.entry;
                         update_pro = that.api.update.entry(extra);
                         update_pro(function(ctx3) {
-                          delete ctx3.entry;
+                          var orig_entry = ctx3.entry;
                           if(that.is(ctx3.objectstore.autoIncrement, true)) {
                             ctx3.data = state.context.local;
                             if (that.isnt(state.context.cautious, true)) {
