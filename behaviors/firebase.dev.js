@@ -387,7 +387,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               }
             }
             if (update) {
-              state.promise = outward.promise;
+              promise = outward.promise;
               inward = workDispatch(whichMethod(state.method), state.context, state.method, state.type);
               inward(function (ctx2) {
                 state.context = ctx2.context;
@@ -475,15 +475,16 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         });
                       });
                     } 
-                    pro(function(ctx2) {
+
+                    promise(function(ste) {
+                      deff.resolve(ste);
+                    });
+                    promise = pro(function(ctx2) {
                       outward.resolve(ctx2);
                     },function(ctx2) {
                       outward.reject(ctx2);
                     },function(ctx2) {
                       outward.notify(ctx2);
-                    });
-                    promise = promise(function(ste) {
-                      deff.resolve(ste);
                     });
                   } else {
                     promise = promise(function(ste) {
