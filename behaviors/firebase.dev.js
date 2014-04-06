@@ -496,16 +496,17 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   if(!that.isEmpty(diff)) {
                     if (that.is(state.context.ours, true) || that.is(state.context.remote, null)) {
                       state.context.entry = local;
-                      var remotedef = deferred(),
-                          addpro = workDispatch('update', state.context, ctx2.method, state.type);
-                      addpro(function(ctx3) {
-                        remotedef.resolve(ctx3);
-                      }, function(ctx3) {
-                        remotedef.reject(ctx3);
-                      }, function(ctx3) {
-                        remotedef.notify(ctx3);
-                      });
-                      state.promise = remotedef.promise;
+                      var remotedef = deferred();
+                      promise(function(ste) {
+                        workDispatch('update', ste.context, ste.method, ste.type)(function(ctx3) {
+                          remotedef.resolve(ctx3);
+                        }, function(ctx3) {
+                          remotedef.reject(ctx3);
+                        }, function(ctx3) {
+                          remotedef.notify(ctx3);
+                        });
+                      })
+                      promise = remotedef.promise;
                     } else {
                       var extra = that.clone(state.context),
                           update_pro,
@@ -540,11 +541,11 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       promise(function(ste) {
                         that.api.update.entry(ste);
                       })
-                      state.promise = remotedef.promise;
+                      promise = remotedef.promise;
                     }
                   }
                 }
-
+                state.promise = promise;
               }, function (ctx2) {
                 state.context = ctx2.context;
                 state.type = 'error';
