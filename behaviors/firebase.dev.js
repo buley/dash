@@ -494,9 +494,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 } else if (that.contains(['add.entry'], state.method)) {
                   delete state.context.firerebasing;
                   if(!that.isEmpty(diff)) {
+                    var remotedef = deferred();
                     if (that.is(state.context.ours, true) || that.is(state.context.remote, null)) {
                       state.context.entry = local;
-                      var remotedef = deferred();
                       promise(function(ste) {
                         workDispatch('update', ste.context, ste.method, ste.type)(function(ctx3) {
                           remotedef.resolve(ctx3);
@@ -508,7 +508,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       })
                       promise = remotedef.promise;
                     } else {
-                      var remotedef = deferred();
+                      state.context.entry = remote;
                       promise(function(ste) {
                         var extra = that.clone(ste.context),
                             update_pro;
@@ -540,9 +540,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           remotedef.notify(ctx3);
                         });
                       });
+                      promise = remotedef.promise;
                     }
                   }
-                  promise = remotedef.promise;
                 }
                 state.promise = promise;
               }, function (ctx2) {
