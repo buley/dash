@@ -463,6 +463,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           ctx3.data = state.context.local;
                           console.log('adding old,local',state.context.local);
                           delete ctx3.data[ ctx3.objectstore.keyPath ];
+                          delete ctx3.firerebasing;
                           var addpro = that.api.add.entry(ctx3);
                           addpro(function(ctx4) {
                             console.log('added old,local',ctx4);
