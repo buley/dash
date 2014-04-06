@@ -338,14 +338,15 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 promise = remove(context);
               }
               promise(function(entry) {
+                input.type = 'success';
                 input.context.remote = entry;
                 input.context.local = input.context.entry;
                 end(input);
               }, function(ctx3) {
-                input.type = 'reject';
+                input.type = 'error';
                 end(input);
               }, function(ctx3) {
-                input.type = 'notify';
+                input.type = 'abort';
                 end(input);
               });
             } else {
