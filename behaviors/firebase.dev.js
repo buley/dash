@@ -450,7 +450,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     } else if (that.isnt(state.context.remote,null)) {
                       console.log("UPDATE LOCAL WITH REMOTE, ADD IT AGAIN", state.context.remote, state.context.local);
                       var extra = that.clone(state.context),
-                          update_pro;
+                          update_pro,
+                          remotedef = deferred();
                       extra.firerebasing = true;
                       extra.data = extra.remote;
                       delete extra.key;
@@ -465,6 +466,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         remotedef.notify(ctx3);
                       });
                       that.api.update.entry(extra);
+                      state.promise = remotedef.promise;
                     }
                   }
                 }
