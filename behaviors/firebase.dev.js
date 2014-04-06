@@ -501,7 +501,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     } else {
                       state.context.entry = state.context.remote;
                       state.context.data = state.context.remote;
-                      if (that.is(state.context.fastforward, true)) {
+                      if (!that.is(state.context.fastforward, false)) {
                         var extra = that.clone(state.context),
                             update_pro;
                         extra.firerebasing = true;
