@@ -382,7 +382,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             }
             if (update) {
               state.promise = outward.promise;
-
               inward = workDispatch(whichMethod(state.method), state.context, state.method, state.type);
               inward(function (ctx2) {
                 state.context = ctx2.context;
@@ -397,6 +396,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       ctx2.context.remote = that.clone(ctx2.context.remote);
                       local = that.clone(ctx2.context.entry);
                       remote = that.clone(ctx2.context.remote);
+
                       if (that.is(ctx2.context.merge, true)) {
                         if (that.is(ctx2.context.ours, true)) {
                           that.iterate(local, function(key, val) {
@@ -425,7 +425,13 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       }
                     }
                   }
+                } else if (that.contains(['add.entry'], state.method)) {
+                  diff = difference(ctx2.context.entry, ctx2.context.remote, true);
+                  if (!that.isEmpty(diff)) {
+                    console.log("ADDING MERGE CONF",diff);
+                  }
                 }
+
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
                   var deff = deferred(),
                     prev = state.promise,
