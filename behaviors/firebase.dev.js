@@ -435,19 +435,18 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   diff = difference(ctx2.context.entry, ctx2.context.remote || {}, true);
                   delete state.context.firerebasing;
                   if(!that.isEmpty(diff)) {
-                    if (that.is(state.context.ours, true)) {
-                      var addpro = workDispatch('update', state.context, ctx2.method, state.type);
+                    if (that.is(state.context.ours, true) || that.is(state.context.remote, null)) {
+                      var remotedef = deferred(),
+                          addpro = workDispatch('update', state.context, ctx2.method, state.type);
                       addpro(function(ctx3) {
-                        console.log("added to firebase",ctx3);
-                        return ctx3;
-                      }, function(ctx3) {
-                        //
-                        return ctx3;
-                      }, function(ctx3) {
-                        //
-                        return ctx3;
+                        remotedef.resolve(ctx4);
+                      }, function(ctx4) {
+                        remotedef.reject(ctx4);
+                      }, function(ctx4) {
+                        remotedef.notify(ctx4);
                       });
-                    } else if (that.isnt(state.context.remote, null) && that.isnt(state.context.firerecursive, true)) {
+                      state.promise = remotedef.promise;
+                    } else {
                       var extra = that.clone(state.context),
                           update_pro,
                           remotedef = deferred();
@@ -463,20 +462,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           delete ctx3.firerebasing;
                           var addpro = that.api.add.entry(ctx3);
                           addpro(function(ctx4) {
-                            console.log('was added locally now alert firebase', ctx4);
-                            var addpro = workDispatch('set', ctx4, state.method, state.type);
-                            addpro(function(ctx3) {
-                              console.log("added to firebase",ctx3);
-                              remotedef.resolve(ctx4);
-                              return ctx3;
-                            }, function(ctx3) {
-                              //
-                              return ctx3;
-                            }, function(ctx3) {
-                              //
-                              return ctx3;
-                            });
-
+                            remotedef.resolve(ctx4);
                           }, function(ctx4) {
                             remotedef.reject(ctx4);
                           }, function(ctx4) {
