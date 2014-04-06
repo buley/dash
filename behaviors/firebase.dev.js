@@ -448,7 +448,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         return ctx3;
                       });
                     } else if (that.isnt(state.context.remote,null)) {
-                      console.log("UPDATE LOCAL WITH REMOTE, ADD IT AGAIN");
+                      console.log("UPDATE LOCAL WITH REMOTE, ADD IT AGAIN", state.context.remote, state.context.local);
                     }
                   }
                 }
