@@ -460,7 +460,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       var extra = that.clone(ctx2.context),
                           update_pro;
                       extra.entry = that.clone(local);
-                      delete extra.key;
                       extra.firerebasing = true;
                       update_pro = workDispatch(whichMethod(ctx2.method), extra, 'update', ctx2.type);
                       update_pro(function(ctx3) {
