@@ -460,6 +460,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         if(that.is(ctx3.objectstore.autoIncrement, true)) {
                           ctx3.data = state.context.remote;
                           delete ctx3.data[ ctx3.objectstore.keyPath ];
+                          delete ctx3.firerebasing;
                           var addpro = that.api.add.entry(ctx3);
                           addpro(function(ctx4) {
                             console.log('was added locally now alert firebase', ctx4);
