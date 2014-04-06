@@ -426,10 +426,15 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     }
                   }
                 } else if (that.contains(['add.entry'], ctx2.method)) {
-                  diff = difference(ctx2.context.entry, ctx2.context.remote, true);
-                  if (!that.isEmpty(diff)) {
-                    console.log("ADDING MERGE CONF",diff);
-                  }
+                  var addpro = workDispatch('get', state.context, ctx2.method, state.type);
+                  addpro(function(ctx3) {
+                    console.log("CTX3",ctx3);
+                    diff = difference(ctx2.context.entry, ctx2.context.remote, true);
+                    if (!that.isEmpty(diff)) {
+                      console.log("ADDING MERGE CONF",diff);
+                    }
+                    return ctx3;
+                  })
                 }
 
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
