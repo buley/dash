@@ -502,13 +502,13 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   outward.resolve(state);
                 }
               }, function (ctx2) {
-                state.context = ctx2;
+                state.context = ctx2.context;
                 state.type = 'error';
-                outward.reject(state.context);
+                outward.reject(state);
               }, function (ctx2) {
                 state.type = 'notify';
-                state.context = ctx2;
-                outward.notify(state.context);
+                state.context = ctx2.context;
+                outward.notify(state);
               });
             }
             return state;
