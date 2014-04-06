@@ -470,7 +470,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   });
                   deff.resolve(state);
                 } else {
-                  outward.resolve(state.context);
+                  outward.resolve(state);
                 }
               }, function (ctx2) {
                 state.context = ctx2;
