@@ -455,10 +455,13 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       extra.firerebasing = true;
                       extra.data = extra.remote;
                       delete extra.key;
-                      console.log('XXX',extra);
                       update_pro = that.api.update.entry(extra);
                       update_pro(function(ctx3) {
-                        console.log('firebase updated',ctx3);
+                        console.log('local updated, adding original again',ctx3.entry);
+                        delete ctx3.entry;
+                        ctx3.data = state.context.local;
+                        console.log('adding old,local',state.context.local);
+                        var addpro = that.api.add.entry(ctx3);
                         remotedef.resolve(ctx3);
                       }, function(ctx3) {
                         remotedef.reject(ctx3);
