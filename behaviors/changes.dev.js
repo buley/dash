@@ -206,6 +206,8 @@ window.dashChanges = window.dashChanges || (function (environment) {
         previous = inquiry.previous || {},
         difference = function(one, two, shallow) {
           var diff = {};
+          one = one || {};
+          two = two || {};
           if (that.isObject(one)) {
             that.iterate(one, function(key, val) {
               if (notSame(val, two[key])) {

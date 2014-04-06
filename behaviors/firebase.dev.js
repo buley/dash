@@ -88,6 +88,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         },
         difference = function(one, two, shallow) {
           var diff = {};
+          one = one || {};
+          two = two || {};
           if (that.isObject(one)) {
             that.iterate(one, function(key, val) {
               if (notSame(val, two[key])) {
