@@ -462,7 +462,16 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         ctx3.data = state.context.local;
                         console.log('adding old,local',state.context.local);
                         var addpro = that.api.add.entry(ctx3);
-                        remotedef.resolve(ctx3);
+                        addpro(function(ctx4) {
+                          console.log('added old,local',ctx4);
+                          remotedef.resolve(ctx3);
+                        }, function(ctx3) {
+                          remotedef.reject(ctx3);
+                        }, function(ctx3) {
+                          remotedef.notify(ctx3);
+                        });
+
+
                       }, function(ctx3) {
                         remotedef.reject(ctx3);
                       }, function(ctx3) {
