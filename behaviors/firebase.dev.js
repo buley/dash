@@ -360,7 +360,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         } else {
           return [null, function (state) {
             that = this;
-            if (this.isEmpty(state.context.firebase) || this.is(state.context.firerebasing, true) || this.exists(state.context.firebaseing) || (this.is(state.context.sync, false) || this.isnt(state.context.sync, true)))  {
+            if (this.isEmpty(state.context.firebase) || ( this.is(state.context.firerebasing, true) && this.isEmpty(state.context.firerecursive) ) || this.exists(state.context.firebaseing) || (this.is(state.context.sync, false) || this.isnt(state.context.sync, true)))  {
               return state;
             }
             var promise = state.promise,
@@ -460,10 +460,11 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         if(that.is(ctx3.objectstore.autoIncrement, true)) {
                           ctx3.data = state.context.local;
                           delete ctx3.data[ ctx3.objectstore.keyPath ];
-                          delete ctx3.firerebasing;
+                          ctx3.firerecursive = true;
                           var addpro = that.api.add.entry(ctx3);
                           addpro(function(ctx4) {
                             console.log('was added locally now alert firebase', ctx4);
+                            delete ctx4.firerecursive;
                             var addpro = workDispatch('set', ctx4, state.method, state.type);
                             addpro(function(ctx3) {
                               console.log("added to firebase",ctx3);
