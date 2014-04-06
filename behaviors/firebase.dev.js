@@ -439,11 +439,11 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       var remotedef = deferred(),
                           addpro = workDispatch('update', state.context, ctx2.method, state.type);
                       addpro(function(ctx3) {
-                        remotedef.resolve(ctx4);
-                      }, function(ctx4) {
-                        remotedef.reject(ctx4);
-                      }, function(ctx4) {
-                        remotedef.notify(ctx4);
+                        remotedef.resolve(ctx3);
+                      }, function(ctx3) {
+                        remotedef.reject(ctx3);
+                      }, function(ctx3) {
+                        remotedef.notify(ctx3);
                       });
                       state.promise = remotedef.promise;
                     } else {
