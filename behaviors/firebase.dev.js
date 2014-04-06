@@ -446,7 +446,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         extra.data = that.clone(local);
                         delete extra.key;
                         extra.firerebasing = true;
-                        if (is(extra.everything, true)) {
+                        if (is(extra.fastforward, true)) {
                           update_pro = that.api.update.entry(extra);
                           update_pro(function(ctx3) {
                             localdef.resolve(ctx3);
