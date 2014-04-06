@@ -459,23 +459,24 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       update_pro(function(ctx3) {
                         console.log('local updated, adding original again',ctx3.entry);
                         delete ctx3.entry;
-                        ctx3.data = state.context.local;
-                        console.log('adding old,local',state.context.local);
                         if(that.is(ctx3.objectstore.autoIncrement, true)) {
+                          ctx3.data = state.context.local;
+                          console.log('adding old,local',state.context.local);
                           delete ctx3.data[ ctx3.objectstore.keyPath ];
+                          var addpro = that.api.add.entry(ctx3);
+                          addpro(function(ctx4) {
+                            console.log('added old,local',ctx4);
+                            remotedef.resolve(ctx4);
+                          }, function(ctx4) {
+                            console.log('error with old,local',ctx4);
+                            remotedef.reject(ctx4);
+                          }, function(ctx4) {
+                            remotedef.notify(ctx4);
+                          });
+                        } else {
+                          ctx3.context.error = { message: 'conflicting primary key for remote entry' };
+                          remotedef.reject(ctx3);
                         }
-                        var addpro = that.api.add.entry(ctx3);
-                        addpro(function(ctx4) {
-                          console.log('added old,local',ctx4);
-                          remotedef.resolve(ctx4);
-                        }, function(ctx4) {
-                          console.log('error with old,local',ctx4);
-                          remotedef.reject(ctx4);
-                        }, function(ctx4) {
-                          remotedef.notify(ctx4);
-                        });
-
-
                       }, function(ctx3) {
                         remotedef.reject(ctx3);
                       }, function(ctx3) {
