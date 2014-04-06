@@ -459,7 +459,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     remotepro(function(ctx2) {
                       var extra = that.clone(ctx2.context),
                           update_pro;
-                      extra.data = that.clone(local);
+                      extra.entry = that.clone(local);
                       delete extra.key;
                       extra.firerebasing = true;
                       update_pro = workDispatch(whichMethod(ctx2.method), extra, 'update', ctx2.type);
