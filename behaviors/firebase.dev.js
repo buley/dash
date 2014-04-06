@@ -514,10 +514,10 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           delete ctx3.entry;
                           if(that.is(ctx3.objectstore.autoIncrement, true)) {
                             ctx3.data = state.context.local;
-                            delete ctx3.entry;
-                            delete ctx3.data[ ctx3.objectstore.keyPath ];
-                            delete ctx3.firerebasing;
-                            if (that.is(state.context.fastforward, true)) {
+                            if (that.isnt(state.context.cautious, true)) {
+                              delete ctx3.entry;
+                              delete ctx3.data[ ctx3.objectstore.keyPath ];
+                              delete ctx3.firerebasing;
                               that.api.add.entry(ctx3)(function(ctx4) {
                                 state.context = ctx4;
                                 outward.resolve(state);
