@@ -463,7 +463,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       extra.firerebasing = true;
                       update_pro = workDispatch(whichMethod(ctx2.method), extra, 'update', ctx2.type);
                       update_pro(function(ctx3) {
-                        console.log('firebase updated');
+                        console.log('firebase updated',ctx3);
                         remotedef.resolve(ctx3);
                       }, function(ctx3) {
                         remotedef.reject(ctx3);
