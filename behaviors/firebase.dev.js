@@ -437,12 +437,17 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       var extra = that.clone(ctx2.context),
                           update_pro;
                       extra.data = that.clone(local);
-                      console.log('extra',extra);
                       delete extra.key;
                       update_pro = that.api.update.entry(extra);
                       update_pro(function(ctx3) {
                         console.log('ctx3',ctx3);
                         localdef.resolve(ctx3);
+                      }, function(ctx3) {
+                        console.log('ctx3 error',ctx3);
+                        localdef.reject(ctx3);
+                      }, function(ctx3) {
+                        console.log('ctx3 notify',ctx3);
+                        localdef.notify(ctx3);
                       });
                     });
                   }
