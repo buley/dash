@@ -448,7 +448,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         return ctx3;
                       });
                     } else if (that.isnt(state.context.remote,null)) {
-                      console.log("UPDATE LOCAL WITH REMOTE, ADD IT AGAIN", state.context.remote, state.context.local);
                       var extra = that.clone(state.context),
                           update_pro,
                           remotedef = deferred();
@@ -457,19 +456,15 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       delete extra.key;
                       update_pro = that.api.update.entry(extra);
                       update_pro(function(ctx3) {
-                        console.log('local updated, adding original again',ctx3.entry);
                         delete ctx3.entry;
                         if(that.is(ctx3.objectstore.autoIncrement, true)) {
                           ctx3.data = state.context.local;
-                          console.log('adding old,local',state.context.local);
                           delete ctx3.data[ ctx3.objectstore.keyPath ];
                           delete ctx3.firerebasing;
                           var addpro = that.api.add.entry(ctx3);
                           addpro(function(ctx4) {
-                            console.log('added old,local',ctx4);
                             remotedef.resolve(ctx4);
                           }, function(ctx4) {
-                            console.log('error with old,local',ctx4);
                             remotedef.reject(ctx4);
                           }, function(ctx4) {
                             remotedef.notify(ctx4);
