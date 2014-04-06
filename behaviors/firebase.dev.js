@@ -475,78 +475,65 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         });
                       });
                     } 
-
-                    promise(function(ste) {
-                      deff.resolve(ste);
-                    });
-                    promise = pro(function(ctx2) {
+                    pro(function(ctx2) {
                       outward.resolve(ctx2);
                     },function(ctx2) {
                       outward.reject(ctx2);
                     },function(ctx2) {
                       outward.notify(ctx2);
                     });
+                    deff.resolve(state);
                   } else {
-                    promise = promise(function(ste) {
-                      outward.resolve(ste);
-                    });
+                    outward.resolve(state);
                   }
-                  state.promise = promise;
                 } else if (that.contains(['add.entry'], state.method)) {
                   delete state.context.firerebasing;
                   if(!that.isEmpty(diff)) {
-                    var remotedef = deferred();
                     if (that.is(state.context.ours, true) || that.is(state.context.remote, null)) {
                       state.context.entry = local;
-                      promise(function(ste) {
-                        workDispatch('update', ste.context, ste.method, ste.type)(function(ctx3) {
-                          remotedef.resolve(ctx3);
-                        }, function(ctx3) {
-                          remotedef.reject(ctx3);
-                        }, function(ctx3) {
-                          remotedef.notify(ctx3);
-                        });
-                      })
-                      promise = remotedef.promise;
-                    } else {
-                      state.context.entry = remote;
-                      state.context.data = remote;
-                      promise(function(ste) {
-                        var extra = that.clone(ste.context),
-                            update_pro;
-                        extra.firerebasing = true;
-                        extra.data = remote;
-                        if(that.is(extra.objectstore.autoIncrement, true)) {
-                          delete extra.key;
-                        }
-                        delete extra.entry;
-                        update_pro = that.api.update.entry(extra);
-                        update_pro(function(ctx3) {
-                          delete ctx3.entry;
-                          if(that.is(ctx3.objectstore.autoIncrement, true)) {
-                            ctx3.data = local;
-                            delete ctx3.entry;
-                            delete ctx3.data[ ctx3.objectstore.keyPath ];
-                            delete ctx3.firerebasing;
-                            var addpro = that.api.add.entry(ctx3);
-                            addpro(function(ctx4) {
-                              remotedef.resolve(ctx4);
-                            }, function(ctx4) {
-                              remotedef.reject(ctx4);
-                            }, function(ctx4) {
-                              remotedef.notify(ctx4);
-                            });
-                          } else {
-                            ctx3.context.error = { message: 'conflicting primary key for remote entry' };
-                            remotedef.reject(ctx3);
-                          }
-                        }, function(ctx3) {
-                          remotedef.reject(ctx3);
-                        }, function(ctx3) {
-                          remotedef.notify(ctx3);
-                        });
+                      workDispatch('update', state.context, state.method, state.type)(function(ctx3) {
+                        outward.resolve(ctx3);
+                      }, function(ctx3) {
+                        outward.reject(ctx3);
+                      }, function(ctx3) {
+                        outward.notify(ctx3);
                       });
-                      promise = remotedef.promise;
+                    } else {
+                    state.context.entry = remote;
+                    state.context.data = remote;
+                      var extra = that.clone(ste.context),
+                          update_pro;
+                      extra.firerebasing = true;
+                      extra.data = remote;
+                      if(that.is(extra.objectstore.autoIncrement, true)) {
+                        delete extra.key;
+                      }
+                      delete extra.entry;
+                      update_pro = that.api.update.entry(extra);
+                      update_pro(function(ctx3) {
+                        delete ctx3.entry;
+                        if(that.is(ctx3.objectstore.autoIncrement, true)) {
+                          ctx3.data = local;
+                          delete ctx3.entry;
+                          delete ctx3.data[ ctx3.objectstore.keyPath ];
+                          delete ctx3.firerebasing;
+                          var addpro = that.api.add.entry(ctx3);
+                          addpro(function(ctx4) {
+                            outward.resolve(ctx4);
+                          }, function(ctx4) {
+                            outward.reject(ctx4);
+                          }, function(ctx4) {
+                            outward.notify(ctx4);
+                          });
+                        } else {
+                          ctx3.context.error = { message: 'conflicting primary key for remote entry' };
+                          outward.reject(ctx3);
+                        }
+                      }, function(ctx3) {
+                        outward.reject(ctx3);
+                      }, function(ctx3) {
+                        outward.notify(ctx3);
+                      });
                     }
                   }
                 }
