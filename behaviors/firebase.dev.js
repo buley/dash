@@ -509,17 +509,22 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       promise = remotedef.promise;
                     } else {
                       state.context.entry = remote;
+                      state.context.data = remote;
                       promise(function(ste) {
                         var extra = that.clone(ste.context),
                             update_pro;
                         extra.firerebasing = true;
                         extra.data = remote;
-                        delete extra.key;
+                        if(that.is(ctx3.objectstore.autoIncrement, true)) {
+                          delete extra.key;
+                        }
+                        delete extra.entry;
                         update_pro = that.api.update.entry(extra);
                         update_pro(function(ctx3) {
                           delete ctx3.entry;
                           if(that.is(ctx3.objectstore.autoIncrement, true)) {
-                            ctx3.data = state.context.local;
+                            ctx3.data = local;
+                            delete ctx3.entry;
                             delete ctx3.data[ ctx3.objectstore.keyPath ];
                             delete ctx3.firerebasing;
                             var addpro = that.api.add.entry(ctx3);
