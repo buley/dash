@@ -458,7 +458,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       update_pro(function(ctx3) {
                         delete ctx3.entry;
                         if(that.is(ctx3.objectstore.autoIncrement, true)) {
-                          ctx3.data = state.context.local;
+                          ctx3.data = state.context.remote;
                           delete ctx3.data[ ctx3.objectstore.keyPath ];
                           ctx3.firerecursive = true;
                           var addpro = that.api.add.entry(ctx3);
