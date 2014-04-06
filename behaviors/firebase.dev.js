@@ -434,21 +434,23 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 } else if (that.contains(['add.entry'], state.method)) {
                   diff = difference(ctx2.context.entry, ctx2.context.remote || {}, true);
                   delete state.context.firerebasing;
-                  console.log("ADD DIFF?",diff);
-                  var addpro = workDispatch('update', state.context, ctx2.method, state.type);
-                  addpro(function(ctx3) {
-                    console.log("CTX3",ctx3);
-                    if (!that.isEmpty(diff)) {
-                      console.log("ADDING MERGE CONF",diff);
+                  if(!that.isEmpty(diff)) {
+                    if (that.is(state.context.ours, true)) {
+                      var addpro = workDispatch('update', state.context, ctx2.method, state.type);
+                      addpro(function(ctx3) {
+                        console.log("added to firebase",ctx3);
+                        return ctx3;
+                      }, function(ctx3) {
+                        //
+                        return ctx3;
+                      }, function(ctx3) {
+                        //
+                        return ctx3;
+                      });
+                    } else {
+                      console.log("UPDATE LOCAL WITH REMOTE, ADD IT AGAIN");
                     }
-                    return ctx3;
-                  }, function(ctx3) {
-                    //
-                    return ctx3;
-                  }, function(ctx3) {
-                    //
-                    return ctx3;
-                  });
+                  }
                 }
 
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
