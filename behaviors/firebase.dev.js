@@ -149,11 +149,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
           context.method = 'child';
           ref.on('value', function (snapshot) {
             var value = snapshot.val();
-            if (!!value) {
-              defd.resolve(value);
-            } else {
-              defd.reject(value);
-            }
+            defd.resolve(value);
           });
           return defd.promise;
         },
