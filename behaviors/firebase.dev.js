@@ -392,8 +392,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               inward(function (ctx2) {
                 state.context = ctx2.context;
                 state.type = 'resolve';
+                diff = difference(ctx2.context.entry, ctx2.context.remote || {}, true);
                 if (that.contains(['get.entry'], state.method)) {
-                  diff = difference(ctx2.context.entry, ctx2.context.remote, true);
                   if (!that.isEmpty(diff)) {
                     if (that.is(ctx2.context.cautious, true)) {
                       state.context.conflict = diff;
@@ -431,11 +431,71 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       }
                     }
                   }
+
+                  if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
+                    var deff = deferred(),
+                      pro = deff.promise;
+                    if (dirty_local) {
+                      state.context.entry = local;
+                      var localdef = deferred(),
+                          localpro = pro;
+                      pro = localdef.promise;
+                      localpro(function(ctx2) {
+                        var extra = that.clone(ctx2.context),
+                            update_pro;
+                        extra.data = that.clone(local);
+                        delete extra.key;
+                        extra.firerebasing = true;
+                        update_pro = that.api.update.entry(extra);
+                        update_pro(function(ctx3) {
+                          localdef.resolve(ctx3);
+                        }, function(ctx3) {
+                          localdef.reject(ctx3);
+                        }, function(ctx3) {
+                          localdef.notify(ctx3);
+                        });
+                      });
+                    }
+                    if (dirty_remote) {
+                      state.context.remote = remote;
+                      var remotedef = deferred(),
+                          remotepro = pro;
+                      pro = remotedef.promise;
+                      remotepro(function(ctx2) {
+                        var extra = that.clone(ctx2.context),
+                            update_pro;
+                        extra.firerebasing = true;
+                        update_pro = workDispatch('update', extra, ctx2.method, ctx2.type);
+                        update_pro(function(ctx3) {
+                          remotedef.resolve(ctx3);
+                        }, function(ctx3) {
+                          remotedef.reject(ctx3);
+                        }, function(ctx3) {
+                          remotedef.notify(ctx3);
+                        });
+                      });
+                    } 
+                    pro(function(ctx2) {
+                      outward.resolve(ctx2);
+                    },function(ctx2) {
+                      outward.reject(ctx2);
+                    },function(ctx2) {
+                      outward.notify(ctx2);
+                    });
+                    promise = promise(function(ste) {
+                      deff.resolve(ste);
+                    });
+                  } else {
+                    promise = promise(function(ste) {
+                      outward.resolve(ste);
+                    });
+                  }
+                  state.promise = promise;
                 } else if (that.contains(['add.entry'], state.method)) {
-                  diff = difference(ctx2.context.entry, ctx2.context.remote || {}, true);
                   delete state.context.firerebasing;
                   if(!that.isEmpty(diff)) {
                     if (that.is(state.context.ours, true) || that.is(state.context.remote, null)) {
+                      state.context.entry = local;
                       var remotedef = deferred(),
                           addpro = workDispatch('update', state.context, ctx2.method, state.type);
                       addpro(function(ctx3) {
@@ -451,7 +511,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           update_pro,
                           remotedef = deferred();
                       extra.firerebasing = true;
-                      extra.data = extra.remote;
+                      extra.data = remote;
                       delete extra.key;
                       update_pro = that.api.update.entry(extra);
                       update_pro(function(ctx3) {
@@ -477,68 +537,14 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       }, function(ctx3) {
                         remotedef.notify(ctx3);
                       });
-                      that.api.update.entry(extra);
+                      promise(function(ste) {
+                        that.api.update.entry(ste);
+                      })
                       state.promise = remotedef.promise;
                     }
                   }
                 }
 
-                if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
-                  var deff = deferred(),
-                    prev = state.promise,
-                    pro = deff.promise;
-                  if (dirty_local) {
-                    state.context.entry = local;
-                    var localdef = deferred(),
-                        localpro = pro;
-                    pro = localdef.promise;
-                    localpro(function(ctx2) {
-                      var extra = that.clone(ctx2.context),
-                          update_pro;
-                      extra.data = that.clone(local);
-                      delete extra.key;
-                      extra.firerebasing = true;
-                      update_pro = that.api.update.entry(extra);
-                      update_pro(function(ctx3) {
-                        localdef.resolve(ctx3);
-                      }, function(ctx3) {
-                        localdef.reject(ctx3);
-                      }, function(ctx3) {
-                        localdef.notify(ctx3);
-                      });
-                    });
-                  }
-                  if (dirty_remote) {
-                    state.context.remote = remote;
-                    var remotedef = deferred(),
-                        remotepro = pro;
-                    pro = remotedef.promise;
-                    remotepro(function(ctx2) {
-                      var extra = that.clone(ctx2.context),
-                          update_pro;
-                      extra.firerebasing = true;
-                      update_pro = workDispatch('update', extra, ctx2.method, ctx2.type);
-                      update_pro(function(ctx3) {
-                        console.log('firebase updated',ctx3);
-                        remotedef.resolve(ctx3);
-                      }, function(ctx3) {
-                        remotedef.reject(ctx3);
-                      }, function(ctx3) {
-                        remotedef.notify(ctx3);
-                      });
-                    });
-                  } 
-                  pro(function(ctx2) {
-                    outward.resolve(ctx2);
-                  },function(ctx2) {
-                    outward.reject(ctx2);
-                  },function(ctx2) {
-                    outward.notify(ctx2);
-                  });
-                  deff.resolve(state);
-                } else {
-                  outward.resolve(state);
-                }
               }, function (ctx2) {
                 state.context = ctx2.context;
                 state.type = 'error';
