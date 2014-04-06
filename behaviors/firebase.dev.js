@@ -342,7 +342,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 input.context.remote = entry;
                 input.context.local = input.context.entry;
                 end(input);
-              }, function(ctx3) {
+              }, function(entry) {
                 input.type = 'error';
                 input.context.remote = entry;
                 input.context.local = input.context.entry;
