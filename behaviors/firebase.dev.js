@@ -515,7 +515,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                             update_pro;
                         extra.firerebasing = true;
                         extra.data = remote;
-                        if(that.is(ctx3.objectstore.autoIncrement, true)) {
+                        if(that.is(extra.objectstore.autoIncrement, true)) {
                           delete extra.key;
                         }
                         delete extra.entry;
