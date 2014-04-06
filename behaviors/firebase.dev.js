@@ -540,9 +540,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           remotedef.notify(ctx3);
                         });
                       });
-                      promise = remotedef.promise;
                     }
                   }
+                  promise = remotedef.promise;
                 }
                 state.promise = promise;
               }, function (ctx2) {
