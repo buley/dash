@@ -340,13 +340,11 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               input.context.local = input.context.entry;
               promise(function(entry) {
                 input.type = 'success';
-                input.context.entry = entry;
                 input.context.remote = entry;
                 end(input);
               }, function(entry) {
                 input.type = 'error';
                 input.context.remote = entry;
-                input.context.entry = entry;
                 end(input);
               }, function(ctx3) {
                 input.type = 'abort';
