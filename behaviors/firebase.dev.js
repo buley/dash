@@ -456,7 +456,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                             localdef.notify(ctx3);
                           });
                         } else {
-                          localdef.resolve(ctx3);
+                          localdef.resolve(ctx2);
                         }
                       }, function(ctx3) {
                         localdef.reject(ctx3);
