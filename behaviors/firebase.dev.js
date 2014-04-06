@@ -446,22 +446,14 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         extra.data = that.clone(local);
                         delete extra.key;
                         extra.firerebasing = true;
-                        if (is(extra.fastforward, true)) {
-                          update_pro = that.api.update.entry(extra);
-                          update_pro(function(ctx3) {
-                            localdef.resolve(ctx3);
-                          }, function(ctx3) {
-                            localdef.reject(ctx3);
-                          }, function(ctx3) {
-                            localdef.notify(ctx3);
-                          });
-                        } else {
-                          localdef.resolve(ctx2);
-                        }
-                      }, function(ctx3) {
-                        localdef.reject(ctx3);
-                      }, function(ctx3) {
-                        localdef.notify(ctx3);
+                        update_pro = that.api.update.entry(extra);
+                        update_pro(function(ctx3) {
+                          localdef.resolve(ctx3);
+                        }, function(ctx3) {
+                          localdef.reject(ctx3);
+                        }, function(ctx3) {
+                          localdef.notify(ctx3);
+                        });
                       });
                     }
                     if (dirty_remote) {
@@ -509,40 +501,44 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     } else {
                       state.context.entry = state.context.remote;
                       state.context.data = state.context.remote;
-                      var extra = that.clone(state.context),
-                          update_pro;
-                      extra.firerebasing = true;
-                      if(that.is(extra.objectstore.autoIncrement, true)) {
-                        delete extra.key;
-                      }
-                      delete extra.entry;
-                      update_pro = that.api.update.entry(extra);
-                      update_pro(function(ctx3) {
-                        delete ctx3.entry;
-                        if(that.is(ctx3.objectstore.autoIncrement, true)) {
-                          ctx3.data = state.context.local;
-                          delete ctx3.entry;
-                          delete ctx3.data[ ctx3.objectstore.keyPath ];
-                          delete ctx3.firerebasing;
-                          that.api.add.entry(ctx3)(function(ctx4) {
-                            state.context = ctx4;
-                            outward.resolve(state);
-                          }, function(ctx4) {
-                            state.context = ctx4;
-                            outward.reject(state);
-                          }, function(ctx4) {
-                            state.context = ctx4;
-                            outward.notify(state);
-                          });
-                        } else {
-                          ctx3.context.error = { message: 'Conflicting primary key for remote entry.', name: 'DashRemoteKeyConflict'};
-                          outward.reject(ctx3);
+                      if (is(extra.fastforward, true)) {
+                        var extra = that.clone(state.context),
+                            update_pro;
+                        extra.firerebasing = true;
+                        if(that.is(extra.objectstore.autoIncrement, true)) {
+                          delete extra.key;
                         }
-                      }, function(ctx3) {
-                        outward.reject(ctx3);
-                      }, function(ctx3) {
-                        outward.notify(ctx3);
-                      });
+                        delete extra.entry;
+                        update_pro = that.api.update.entry(extra);
+                        update_pro(function(ctx3) {
+                          delete ctx3.entry;
+                          if(that.is(ctx3.objectstore.autoIncrement, true)) {
+                            ctx3.data = state.context.local;
+                            delete ctx3.entry;
+                            delete ctx3.data[ ctx3.objectstore.keyPath ];
+                            delete ctx3.firerebasing;
+                            that.api.add.entry(ctx3)(function(ctx4) {
+                              state.context = ctx4;
+                              outward.resolve(state);
+                            }, function(ctx4) {
+                              state.context = ctx4;
+                              outward.reject(state);
+                            }, function(ctx4) {
+                              state.context = ctx4;
+                              outward.notify(state);
+                            });
+                          } else {
+                            ctx3.context.error = { message: 'Conflicting primary key for remote entry.', name: 'DashRemoteKeyConflict'};
+                            outward.reject(ctx3);
+                          }
+                        }, function(ctx3) {
+                          outward.reject(ctx3);
+                        }, function(ctx3) {
+                          outward.notify(ctx3);
+                        });
+                      } else {
+                        outward.resolve(state);
+                      }
                     }
                   } else {
                     outward.resolve(state);
