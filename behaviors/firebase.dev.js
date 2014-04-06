@@ -382,6 +382,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
             }
             if (update) {
               state.promise = outward.promise;
+
               inward = workDispatch(whichMethod(state.method), state.context, state.method, state.type);
               inward(function (ctx2) {
                 state.context = ctx2.context;
@@ -392,6 +393,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     if (that.is(ctx2.context.cautious, true)) {
                       state.context.conflict = diff;
                     } else {
+                      ctx2.context.entry = that.clone(ctx2.context.entry);
+                      ctx2.context.remote = that.clone(ctx2.context.remote);
                       local = that.clone(ctx2.context.entry);
                       remote = that.clone(ctx2.context.remote);
                       if (that.is(ctx2.context.merge, true)) {
@@ -438,16 +441,12 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           update_pro;
                       extra.data = that.clone(local);
                       delete extra.key;
-                      console.log('updating', extra);
                       update_pro = that.api.update.entry(extra);
                       update_pro(function(ctx3) {
-                        console.log('ctx3',ctx3);
                         localdef.resolve(ctx3);
                       }, function(ctx3) {
-                        console.log('ctx3 error',ctx3);
                         localdef.reject(ctx3);
                       }, function(ctx3) {
-                        console.log('ctx3 notify',ctx3);
                         localdef.notify(ctx3);
                       });
                     });
