@@ -517,16 +517,21 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                             delete ctx3.entry;
                             delete ctx3.data[ ctx3.objectstore.keyPath ];
                             delete ctx3.firerebasing;
-                            that.api.add.entry(ctx3)(function(ctx4) {
-                              state.context = ctx4;
+                            if (that.is(state.context.fastforward, true)) {
+                              that.api.add.entry(ctx3)(function(ctx4) {
+                                state.context = ctx4;
+                                outward.resolve(state);
+                              }, function(ctx4) {
+                                state.context = ctx4;
+                                outward.reject(state);
+                              }, function(ctx4) {
+                                state.context = ctx4;
+                                outward.notify(state);
+                              });
+                            } else  {
+                              state.context = ctx3;
                               outward.resolve(state);
-                            }, function(ctx4) {
-                              state.context = ctx4;
-                              outward.reject(state);
-                            }, function(ctx4) {
-                              state.context = ctx4;
-                              outward.notify(state);
-                            });
+                            }
                           } else {
                             ctx3.context.error = { message: 'Conflicting primary key for remote entry.', name: 'DashRemoteKeyConflict'};
                             outward.reject(ctx3);
