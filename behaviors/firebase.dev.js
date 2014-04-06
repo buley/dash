@@ -387,7 +387,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
               }
             }
             if (update) {
-              promise = outward.promise;
+              state.promise = outward.promise;
               inward = workDispatch(whichMethod(state.method), state.context, state.method, state.type);
               inward(function (ctx2) {
                 state.context = ctx2.context;
@@ -518,7 +518,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           delete ctx3.firerebasing;
                           var addpro = that.api.add.entry(ctx3);
                           addpro(function(ctx4) {
-                            outward.resolve(ctx4);
+                            //outward.resolve(ctx4);
                           }, function(ctx4) {
                             outward.reject(ctx4);
                           }, function(ctx4) {
@@ -534,9 +534,10 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         outward.notify(ctx3);
                       });
                     }
+                  } else {
+                    outward.resolve(state);
                   }
                 }
-                state.promise = promise;
               }, function (ctx2) {
                 state.context = ctx2.context;
                 state.type = 'error';
