@@ -452,6 +452,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                       var extra = that.clone(state.context),
                           update_pro;
                       extra.firerebasing = true;
+                      extra.data = extra.remote;
                       delete extra.key;
                       console.log('XXX',extra);
                       update_pro = that.api.update.entry(extra);
