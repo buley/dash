@@ -490,7 +490,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   delete state.context.firerebasing;
                   if(!that.isEmpty(diff)) {
                     if (that.is(state.context.ours, true) || that.is(state.context.remote, null)) {
-                      state.context.entry = local;
+                      state.context.entry = state.context.local;
                       workDispatch('update', state.context, state.method, state.type)(function(ctx3) {
                         outward.resolve(ctx3);
                       }, function(ctx3) {
@@ -499,8 +499,8 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         outward.notify(ctx3);
                       });
                     } else {
-                    state.context.entry = remote;
-                    state.context.data = remote;
+                    state.context.entry = state.context.remote;
+                    state.context.data = state.context.remote;
                       var extra = that.clone(ste.context),
                           update_pro;
                       extra.firerebasing = true;
