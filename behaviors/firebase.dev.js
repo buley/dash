@@ -426,7 +426,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     }
                   }
                 }
-
+                console.log('FIRE?', state.context.firecleanup);
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
                   var deff = deferred(),
                     prev = state.promise,
@@ -441,6 +441,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           update_pro;
                       extra.data = that.clone(local);
                       delete extra.key;
+                      extra.firecleanup = true;
                       update_pro = that.api.update.entry(extra);
                       update_pro(function(ctx3) {
                         localdef.resolve(ctx3);
