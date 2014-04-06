@@ -354,7 +354,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
         } else {
           return [null, function (state) {
             that = this;
-            if (this.isEmpty(state.context.firebase) || this.exists(state.context.firebaseing) || (this.is(state.context.sync, false) || this.isnt(state.context.sync, true)))  {
+            if (this.isEmpty(state.context.firebase) || this.is(state.context.firerebasing, true) || this.exists(state.context.firebaseing) || (this.is(state.context.sync, false) || this.isnt(state.context.sync, true)))  {
               return state;
             }
             var promise = state.promise,
@@ -426,7 +426,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     }
                   }
                 }
-                console.log('FIRE?', state.context.firecleanup);
+                console.log('FIRE?', state.context.firerebasing);
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
                   var deff = deferred(),
                     prev = state.promise,
@@ -441,7 +441,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           update_pro;
                       extra.data = that.clone(local);
                       delete extra.key;
-                      extra.firecleanup = true;
+                      extra.firerebasing = true;
                       update_pro = that.api.update.entry(extra);
                       update_pro(function(ctx3) {
                         localdef.resolve(ctx3);
