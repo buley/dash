@@ -440,7 +440,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   }, function(ctx3) {
                     //
                     return ctx3;
-                  }))
+                  });
                 }
 
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
