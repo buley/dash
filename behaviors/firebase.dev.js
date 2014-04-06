@@ -516,8 +516,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                           delete ctx3.entry;
                           delete ctx3.data[ ctx3.objectstore.keyPath ];
                           delete ctx3.firerebasing;
-                          var addpro = that.api.add.entry(ctx3);
-                          addpro(function(ctx4) {
+                          that.api.add.entry(ctx3)(function(ctx4) {
                             outward.resolve(ctx4);
                           }, function(ctx4) {
                             outward.reject(ctx4);
