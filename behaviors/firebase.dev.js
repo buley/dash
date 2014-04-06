@@ -461,6 +461,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         delete ctx3.entry;
                         ctx3.data = state.context.local;
                         console.log('adding old,local',state.context.local);
+                        if(that.is(ctx3.objectstore.autoIncrement, true)) {
+                          delete ctx3.data[ ctx3.objectstore.keyPath ];
+                        }
                         var addpro = that.api.add.entry(ctx3);
                         addpro(function(ctx4) {
                           console.log('added old,local',ctx4);
