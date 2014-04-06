@@ -446,14 +446,22 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         extra.data = that.clone(local);
                         delete extra.key;
                         extra.firerebasing = true;
-                        update_pro = that.api.update.entry(extra);
-                        update_pro(function(ctx3) {
+                        if (is(extra.sync, true)) {
+                          update_pro = that.api.update.entry(extra);
+                          update_pro(function(ctx3) {
+                            localdef.resolve(ctx3);
+                          }, function(ctx3) {
+                            localdef.reject(ctx3);
+                          }, function(ctx3) {
+                            localdef.notify(ctx3);
+                          });
+                        } else {
                           localdef.resolve(ctx3);
-                        }, function(ctx3) {
-                          localdef.reject(ctx3);
-                        }, function(ctx3) {
-                          localdef.notify(ctx3);
-                        });
+                        }
+                      }, function(ctx3) {
+                        localdef.reject(ctx3);
+                      }, function(ctx3) {
+                        localdef.notify(ctx3);
                       });
                     }
                     if (dirty_remote) {
@@ -527,7 +535,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                             outward.notify(state);
                           });
                         } else {
-                          ctx3.context.error = { message: 'conflicting primary key for remote entry' };
+                          ctx3.context.error = { message: 'Conflicting primary key for remote entry.', name: 'DashRemoteKeyConflict'};
                           outward.reject(ctx3);
                         }
                       }, function(ctx3) {
