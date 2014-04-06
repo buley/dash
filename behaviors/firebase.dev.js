@@ -341,6 +341,12 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                 input.context.remote = entry;
                 input.context.local = input.context.entry;
                 end(input);
+              }, function(ctx3) {
+                input.type = 'reject';
+                end(input);
+              }, function(ctx3) {
+                input.type = 'notify';
+                end(input);
               });
             } else {
               input.type = 'error';
