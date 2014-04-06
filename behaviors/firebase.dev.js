@@ -499,12 +499,11 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         outward.notify(ctx3);
                       });
                     } else {
-                    state.context.entry = state.context.remote;
-                    state.context.data = state.context.remote;
+                      state.context.entry = state.context.remote;
+                      state.context.data = state.context.remote;
                       var extra = that.clone(state.context),
                           update_pro;
                       extra.firerebasing = true;
-                      extra.data = remote;
                       if(that.is(extra.objectstore.autoIncrement, true)) {
                         delete extra.key;
                       }
