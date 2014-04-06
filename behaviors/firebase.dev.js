@@ -427,6 +427,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                   }
                 } else if (that.contains(['add.entry'], state.method)) {
                     console.log("statestate",state);
+                  delete state.context.firerebasing;
                   var addpro = workDispatch('update', state.context, ctx2.method, state.type);
                   addpro(function(ctx3) {
                     console.log("CTX3",ctx3);
