@@ -426,7 +426,6 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     }
                   }
                 }
-                console.log('FIRE?', state.context.firerebasing);
                 if (that.is(dirty_local,true)||that.is(dirty_remote,true)) {
                   var deff = deferred(),
                     prev = state.promise,
@@ -456,9 +455,22 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                     state.context.remote = remote;
                     var remotedef = deferred(),
                         remotepro = pro;
-                    pro = localdef.promise;
+                    pro = remotedef.promise;
                     remotepro(function(ctx2) {
-                      remotedef.resolve(ctx2);
+                      var extra = that.clone(ctx2.context),
+                          update_pro;
+                      extra.data = that.clone(local);
+                      delete extra.key;
+                      extra.firerebasing = true;
+                      update_pro = workDispatch(whichMethod(ctx2.method), extra, 'update', ctx2.type);
+                      update_pro(function(ctx3) {
+                        console.log('firebase updated');
+                        remotedef.resolve(ctx3);
+                      }, function(ctx3) {
+                        remotedef.reject(ctx3);
+                      }, function(ctx3) {
+                        remotedef.notify(ctx3);
+                      });
                     });
                   } 
                   pro(function(ctx2) {
