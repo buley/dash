@@ -460,11 +460,9 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
                         if(that.is(ctx3.objectstore.autoIncrement, true)) {
                           ctx3.data = state.context.remote;
                           delete ctx3.data[ ctx3.objectstore.keyPath ];
-                          ctx3.firerecursive = true;
                           var addpro = that.api.add.entry(ctx3);
                           addpro(function(ctx4) {
                             console.log('was added locally now alert firebase', ctx4);
-                            delete ctx4.firerecursive;
                             var addpro = workDispatch('set', ctx4, state.method, state.type);
                             addpro(function(ctx3) {
                               console.log("added to firebase",ctx3);
