@@ -15,4 +15,4 @@ script:
   - grunt
 
 addons:
-  firefox: "26.0"
+  firefox: "30.0"
