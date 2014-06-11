@@ -26,13 +26,21 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 	    });
 	  });
 
-### Development Features
+### Developer Features
 
 * Free (MIT Licensed)
 * [Task-based](http://gruntjs.com/) Development Workflow
 * [Automated](https://github.com/karma-runner/karma) [Jasmine](http://pivotal.github.io/jasmine/) [Testing](https://github.com/karma-runner/karma-jasmine) 
 * [Coverage](https://github.com/gotwarlost/istanbul) [Testing](https://github.com/karma-runner/karma-coverage)
 * Continuous [Integration](http://travis-ci.org/buley/dash) and [Coverage](https://github.com/cainus/node-coveralls) Reporting
+
+
+#### To Test
+
+    npm install
+    grunt
+
+Building requires `grunt-cli`
 
 #### Documention
 
