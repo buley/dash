@@ -106,13 +106,16 @@ self.dashCache = self.dashCache || (function (environment) {
         error: error,
         notify: notify
       };
-      worker.addEventListener('message', callback);
-
-      worker.postMessage({
-        method: message,
-        context: clean(context),
-        uid: id
-      });
+      if ( !!worker ) {
+          worker.addEventListener('message', callback);
+          worker.postMessage({
+            method: message,
+            context: clean(context),
+            uid: id
+          });
+      } else {
+        throw new Error('non-Worker interface not yet implemented');
+      }
       return id;
     },
     workDispatch = function (message, context) {
