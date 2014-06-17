@@ -62,7 +62,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
     libraryScript = scripts[scripts.length - 1] || null,
     libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
 	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
-	worker = workerEnvironment ? null : new Worker(libraryPath),
+	worker = !!workerEnvironment && !!libraryPath && null !== libraryPath.match(/firebase/) ? new Worker(libraryPath) : null,
 	workQueue = {},
 	firebases = {},
     workRegister = function (worker, message, context, success, error, notify) {

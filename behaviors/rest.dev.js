@@ -110,7 +110,7 @@ self.dashRest = self.dashRest || (function (environment) {
     libraryScript = scripts[scripts.length - 1] || null,
     libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
 	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
-	worker = workerEnvironment ? null : new Worker(libraryPath),
+	worker = !!workerEnvironment && !!libraryPath && null !== libraryPath.match(/rest/) ? new Worker(libraryPath) : null,
 	workQueue = {},
     workRegister = function (worker, message, context, success, error, notify) {
       var id = that.random(),
