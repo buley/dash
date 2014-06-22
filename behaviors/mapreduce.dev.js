@@ -1,4 +1,4 @@
-window.dashMapReduce = window.dashMapReduce || (function (environment) {
+dashMapReduce = dashMapReduce || (function (environment) {
   "use strict";
   var mapReduceMap = {};
   return [ function (state) {

@@ -1,4 +1,4 @@
-window.dashMatch = window.dashMatch || (function (environment) {
+dashMatch = dashMatch || (function (environment) {
   "use strict";
   return [ null, function (state) {
     if(this.isEmpty(state.context.match)) {

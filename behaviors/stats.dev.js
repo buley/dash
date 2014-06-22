@@ -1,4 +1,4 @@
-window.dashStats = window.dashStats || (function (environment) {
+dashStats = dashStats || (function (environment) {
   "use strict";
   var model = function () {
     return {

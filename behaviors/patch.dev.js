@@ -1,4 +1,4 @@
-window.dashPatch = window.dashPatch || (function (environment) {
+dashPatch = dashPatch || (function (environment) {
   "use strict";
   //TODO: Support array of sequential patches
   var patchMap = {}; 

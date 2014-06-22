@@ -1,4 +1,4 @@
-window.dashMap = window.dashMap || (function (environment) {
+dashMap = dashMap || (function (environment) {
   "use strict";
   var mapMap = {}; //heh
   return [ function (state) {
