@@ -1,4 +1,4 @@
-dashCollect = dashCollect || (function (environment) {
+self.dashCollect = self.dashCollect || (function (environment) {
   "use strict";
   var collections = {};
   return [ function (state) {

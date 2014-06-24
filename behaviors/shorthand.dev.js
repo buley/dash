@@ -1,4 +1,4 @@
-dashShorthand = dashShorthand || (function (environment) {
+self.dashShorthand = self.dashShorthand || (function (environment) {
   "use strict";
   var that,
   	 reduce = function(map, expr, context, reverse) {

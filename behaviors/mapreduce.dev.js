@@ -1,4 +1,4 @@
-dashMapReduce = dashMapReduce || (function (environment) {
+self.dashMapReduce = self.dashMapReduce || (function (environment) {
   "use strict";
   var mapReduceMap = {};
   return [ function (state) {
@@ -60,6 +60,9 @@ dashMapReduce = dashMapReduce || (function (environment) {
 	} else if ( this.is(state.type, 'resolve')) {
 		state.context.reduced = mapReduceMap[ state.context.mapReduceId ].intermediate;
 	}
+    if ( state.context.mapReduceId ) {
+        delete state.context.mapReduceId;
+    }
     return state;
   } ];
 }(self));

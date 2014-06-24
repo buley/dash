@@ -1,4 +1,4 @@
-dashLive = dashLive || (function (environment) {
+self.dashLive = self.dashLive || (function (environment) {
   "use strict";
   var that,
       liveMap = {},
