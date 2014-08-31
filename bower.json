@@ -26,7 +26,7 @@
     "docs/demo/data",
     "index.html",
     "CNAME",
-    '.idea',
+    ".idea",
     "**/.*",
     "node_modules",
     "bower_components",
