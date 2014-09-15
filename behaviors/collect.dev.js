@@ -25,14 +25,15 @@ self.dashCollect = self.dashCollect || (function(environment) {
           collections[ste.context.collector].push(ctx.context.error);
           deferred.reject(ctx);
         }
-      } else if ("resolve" === ste.type){
+      } else if ("resolve" === ste.type) {
         if (that.exists(ste.context.collector)) {
           ste.context.collection = that.clone(collections[ste.context.collector]);
         }
         delete ste.context.collector;
         deferred.resolve(ste);
         delete collections[ste.context.collector];
-      });
+      }
+    });
     state.promise = deferred.promise;
     return state;
   }];
