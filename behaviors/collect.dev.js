@@ -21,13 +21,18 @@ self.dashCollect = self.dashCollect || (function (environment) {
         collections[ ste.context.collector ].push(ste.context.entry);
         ste.context.collection = that.clone(collections[ ste.context.collector ]);
       }
+	  delete ste.collector;
       deferred.resolve(ste);
-      if (that.contains(['resolve','error'], ste.type)) {
-        delete collections[ ste.context.collector ];
-      }
     }, function(ctx) {
-        deferred.reject(ctx);
+	  delete ctx.collector;
+      deferred.reject(ctx);
+      delete collections[ ctx.context.collector ];
     }, function(ctx) {
+		if (that.exists(ste.context.entry)) { 
+		  collections[ ste.context.collector ].push(ste.context.entry);
+		  ste.context.collection = that.clone(collections[ ste.context.collector ]);
+		}
+		dwelete ctx.collector;
         deferred.notify(ctx);
     });
     state.promise = deferred.promise;
