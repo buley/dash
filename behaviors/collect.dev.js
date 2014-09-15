@@ -29,9 +29,8 @@ self.dashCollect = self.dashCollect || (function(environment) {
     }, function(ctx) {
       if (that.exists(ste.context.entry)) {
         collections[ste.context.collector].push(ste.context.entry);
-        ste.context.collection = that.clone(collections[ste.context.collector]);
       }
-      delete ctx.collector;
+      delete ctx.context.collector;
       deferred.notify(ctx);
     });
     state.promise = deferred.promise;
