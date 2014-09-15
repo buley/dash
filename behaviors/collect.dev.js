@@ -17,21 +17,22 @@ self.dashCollect = self.dashCollect || (function(environment) {
       deferred = this.deferred(),
       that = this;
     promise(function(ste) {
-      if (that.exists(ste.context.collector)) {
-        ste.context.collection = that.clone(collections[ste.context.collector]);
-      }
-      delete ste.context.collector;
-      deferred.resolve(ste);
-    }, function(ctx) {
-      delete ctx.collector;
-      deferred.reject(ctx);
-      delete collections[ctx.context.collector];
-    }, function(ctx) {
-      if (that.exists(ctx.context.entry)) {
-        collections[ctx.context.collector].push(ctx.context.entry);
-      }
-      deferred.notify(ctx);
-    });
+      if (that.contains(['notify', 'error'], ste.type)) {
+        if (that.exists(ste.context.entry)) {
+          collections[ste.context.collector].push(ctx.context.entry);
+          deferred.notify(ste);
+        } else if (that.exists(ste.context.error)) {
+          collections[ste.context.collector].push(ctx.context.error);
+          deferred.reject(ctx);
+        }
+      } else if ("resolve" === ste.type){
+        if (that.exists(ste.context.collector)) {
+          ste.context.collection = that.clone(collections[ste.context.collector]);
+        }
+        delete ste.context.collector;
+        deferred.resolve(ste);
+        delete collections[ste.context.collector];
+      });
     state.promise = deferred.promise;
     return state;
   }];
