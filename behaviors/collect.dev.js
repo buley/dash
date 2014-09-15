@@ -19,11 +19,11 @@ self.dashCollect = self.dashCollect || (function(environment) {
     promise(function(ste) {
       if (that.contains(['notify', 'error'], ste.type)) {
         if (that.exists(ste.context.entry)) {
-          collections[ste.context.collector].push(ctx.context.entry);
+          collections[ste.context.collector].push(ste.context.entry);
           deferred.notify(ste);
         } else if (that.exists(ste.context.error)) {
-          collections[ste.context.collector].push(ctx.context.error);
-          deferred.reject(ctx);
+          collections[ste.context.collector].push(ste.context.error);
+          deferred.reject(ste);
         }
       } else if ("resolve" === ste.type) {
         if (that.exists(ste.context.collector)) {
