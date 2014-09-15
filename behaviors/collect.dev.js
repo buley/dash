@@ -27,8 +27,8 @@ self.dashCollect = self.dashCollect || (function(environment) {
       deferred.reject(ctx);
       delete collections[ctx.context.collector];
     }, function(ctx) {
-      if (that.exists(ste.context.entry)) {
-        collections[ste.context.collector].push(ste.context.entry);
+      if (that.exists(ctx.context.entry)) {
+        collections[ctx.context.collector].push(ctx.context.entry);
       }
       deferred.notify(ctx);
     });
