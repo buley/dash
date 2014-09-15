@@ -20,7 +20,7 @@ self.dashCollect = self.dashCollect || (function(environment) {
       if (that.exists(ste.context.collector)) {
         ste.context.collection = that.clone(collections[ste.context.collector]);
       }
-      delete ste.collector;
+      delete ste.context.collector;
       deferred.resolve(ste);
     }, function(ctx) {
       delete ctx.collector;
