@@ -30,7 +30,6 @@ self.dashCollect = self.dashCollect || (function(environment) {
       if (that.exists(ste.context.entry)) {
         collections[ste.context.collector].push(ste.context.entry);
       }
-      delete ctx.context.collector;
       deferred.notify(ctx);
     });
     state.promise = deferred.promise;
