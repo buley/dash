@@ -32,7 +32,7 @@ self.dashCollect = self.dashCollect || (function (environment) {
 		  collections[ ste.context.collector ].push(ste.context.entry);
 		  ste.context.collection = that.clone(collections[ ste.context.collector ]);
 		}
-		dwelete ctx.collector;
+		delete ctx.collector;
         deferred.notify(ctx);
     });
     state.promise = deferred.promise;
