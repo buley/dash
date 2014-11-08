@@ -46,7 +46,7 @@ self.dashChanges = self.dashChanges || (function (environment) {
       var obj = ctx.changeid;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
-        callbacks: [],
+        callbacks: []
       };
       if (that.contains(['get.databases','get.database'], type)) {
         changeMap[ctx.database].callbacks.push(obj);
@@ -111,7 +111,7 @@ self.dashChanges = self.dashChanges || (function (environment) {
           key;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
-        callbacks: [],
+        callbacks: []
       };
       if (that.contains(['remove.database', 'add.index', 'add.store'], type)) {
         that.each(changeMap[ctx.database].callbacks, function(callback) {
