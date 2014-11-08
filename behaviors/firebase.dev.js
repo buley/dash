@@ -192,7 +192,7 @@ self.dashFirebase = self.dashFirebase || (function (environment) {
 	      	}
       	};
   	  if ( 'undefined' === typeof firebases[input.context.firebase] ) {
-  		firebases[input.context.firebase] =  new Firebase([context.firebase, context.database, context.store ].join('/')),
+  		firebases[input.context.firebase] =  new Firebase([context.firebase, context.database, context.store ].join('/'));
   	  }
       if (method === 'set' || method === 'update' || method === 'remove') {
       	context.callback = callback(method);
