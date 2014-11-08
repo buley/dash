@@ -611,7 +611,7 @@ self.dashStats = self.dashStats || (function (environment) {
               index_key_path: context.index_key_path,
               limit: context.limit,
               store: context.store,
-              store_key_path: context.store_key_path,
+              store_key_path: context.store_key_path
             })(function (context) {
               state.context.total = context.total;
               processTotal(context.total);
