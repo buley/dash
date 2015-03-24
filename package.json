@@ -15,7 +15,7 @@
   "dependencies": {},
   "devDependencies": {
     "grunt": "*",
-    "phantomjs": ">=1.9.7-8"
+    "phantomjs": ">=1.9.7-8",
     "karma": "*",
     "karma-jasmine": "*",
     "grunt-karma": "*",
