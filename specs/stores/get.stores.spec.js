@@ -15,19 +15,17 @@
                     ctx = context;
                     success = true;
                     isFinished = true;
+                    done();
                 }, function(context) {
                     ctx = context;
                     error = true;
                     isFinished = true;
+                    done();
                 }, function(context) {
                     notify = true;
                 });
 
-			waitsFor(function() { 
-				return isFinished;
-			}, 'the get.stores operation to finish', 10000);
-
-			runs(function() {
+			it('the get.stores operation to finish', function() {
 				describe('get.stores should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;

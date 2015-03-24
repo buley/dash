@@ -37,21 +37,23 @@
                 (function(context) {
                     success = true;
                     isFinished = true;
+                    done();
                     ctx = context;
                 }, function(context) {
                     ctx = context;
                     error = true;
                     isFinished = true;
+                    done();
                 }, function(context) {
                     notify = true;
                 });
             }, function(context) {
                 error = true;
                 isFinished = true;
+                done();
             });
 
-            waitsFor(dashIsFinished, 'the get.entries operation to finish', 3000);
-            runs(function() {
+            it('the get.entries operation to finish', function() {
                 describe('get.entries should finish cleanly', function() {
 
                     beforeEach(function() {
@@ -92,7 +94,7 @@
                     });
 
                     //TODO: Test collect behavior
-		    /*
+		            /*
                     it("get.entries should return entries", function(){
                         expect(undefined !== this.context.entries).toBe(true);
                         expect(null !== this.context.entries).toBe(true);

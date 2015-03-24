@@ -9,7 +9,7 @@
 				dashDbIsClosed = function() {
 					return isClosed;
 				};
-			runs(function(){
+			it(function(){
 				describe( 'new database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
@@ -70,7 +70,7 @@
 
 			/* Test for opening an existing database: should handle
 			 * in the same way, execept with upgrade flags as false */
-			runs(function(){
+			it('should open an existing database', function(){
 				describe( 'existing database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
@@ -85,10 +85,12 @@
 								ctx = context;
 								isFinished = true;
 								success = true;
+								done();
 							}, function(context) {
 								ctx = context;
 								error = true;
 								isFinished = true;
+								done();
 							}, function(context) {
 								notify = true;
 							});
@@ -122,7 +124,7 @@
 
 			/* Test for opening an existing database: should handle
 			 * in the same way, execept with upgrade flags as false */
-			runs(function(){
+			it('should handle an existing database with upgrades', function(){
 				describe( 'existing database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
@@ -137,16 +139,17 @@
 						dash.get.database({ database: db_name, version: random_version })(function(context) {
 								ctx = context;
 								isFinished = true;
+								done();
 								success = true;
 							}, function(context) {
 								ctx = context;
 								error = true;
 								isFinished = true;
+								done();
 							}, function(context) {
 								notify = true;
 							});
-						waitsFor(dashIsFinished, 'the get.database operation to finish', 10000);
-						runs(function() {
+						if( 'the get.database operation to finish', function() {
 							describe('teritary should finish cleanly', function() {
 								beforeEach(function() {
 									this.context = ctx;

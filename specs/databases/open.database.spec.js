@@ -9,7 +9,7 @@
 				dashDbIsClosed = function() {
 					return isClosed;
 				};
-			runs(function(){
+			it('should be ok with new databases', function(){
 				describe( 'new database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
@@ -25,15 +25,16 @@
 								ctx = context;
 								isFinished = true;
 								success = true;
+								done();
 							}, function(context) {
 								ctx = context;
 								error = true;
 								isFinished = true;
+								done();
 							}, function(context) {
 								notify = true;
 							});
-						waitsFor(dashIsFinished, 'the get.database operation to finish', 10000);
-						runs(function() {
+						it('the get.database operation to finish', function() {
 							describe('the get.database operation should finish cleanly', function() {
 								beforeEach(function() {
 									this.context = ctx;
@@ -71,7 +72,7 @@
 
 			/* Test for opening an existing database: should handle
 			 * in the same way, execept with upgrade flags as false */
-			runs(function(){
+			it('should handle existing databases with upgrade flags', function(){
 				describe( 'existing database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
@@ -86,15 +87,16 @@
 								ctx = context;
 								isFinished = true;
 								success = true;
+								done();
 							}, function(context) {
 								ctx = context;
 								error = true;
 								isFinished = true;
+								done();
 							}, function(context) {
 								notify = true;
 							});
-						waitsFor(dashIsFinished, 'the get.database operation to finish', 10000);
-						runs(function() {
+						it('waits for the get.database operation to finish', function() {
 							describe('secondary should finish cleanly', function() {
 								beforeEach(function() {
 									this.context = ctx;
@@ -123,7 +125,7 @@
 
 			/* Test for opening an existing database: should handle
 			 * in the same way, execept with upgrade flags as false */
-			runs(function(){
+			it('should be OK to handle existing databases with version ugprades', function(){
 				describe( 'existing database example', function(){
 					var isFinished = false,
 						dashIsFinished = function() { 
@@ -146,8 +148,7 @@
 							}, function(context) {
 								notify = true;
 							});
-						waitsFor(dashIsFinished, 'the get.database operation to finish', 10000);
-						runs(function() {
+						it('the get.database operation to finish',function() {
 							describe('secondary should finish cleanly', function() {
 								beforeEach(function() {
 									this.context = ctx;
@@ -157,11 +158,10 @@
 									this.version = random_version;
 								});
 
-								//not available on Travis-ci.org Firefox builds?
-								/*it('version should be the provided version', function() {
+								it('version should be the provided version', function() {
 									expect(this.context.new_version).toBe(this.version);
 									expect(this.context.old_version).toBe(1);
-								});*/
+								});
 
 								it("get.database secondary test should clenup after itself", function(){
 									dash.remove.database(this.context);

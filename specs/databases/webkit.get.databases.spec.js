@@ -17,16 +17,17 @@
 				(function(context) {
 					ctx = context;
 					isFinished = true;
+					done();
 					success = true;
 				}, function(context) {
 					ctx = context;
 					error = true;
 					isFinished = true;
+					done();
 				}, function(context) {
 					notify = true;
 				});
-			waitsFor(dashIsFinished, 'the get.databases operation to finish', 10000);
-			runs(function() {
+			it('the get.databases operation to finish', function() {
 				describe('get.databases should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;
@@ -59,9 +60,7 @@
 							expect(this.context.databases).toBeUndefined();
 						}
 					});
-					
 				});
-
 			});
 		});
 	});

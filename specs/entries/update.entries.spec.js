@@ -41,11 +41,13 @@
                 (function (context) {
                   success = true;
                   isFinished = true;
+                  done();
                   ctx = context;
                 }, function (context) {
                   ctx = context;
                   error = true;
                   isFinished = true;
+                  done();
                 }, function (context) {
                   notify = true;
                 });
@@ -53,13 +55,13 @@
                 ctx = context;
                 error = true;
                 isFinished = true;
+                done();
               }, function (context) {
                 notify = true;
               });
             });
 
-            waitsFor(dashIsFinished, 'the update.entries operation to finish', 10000);
-            runs(function () {
+            it('the update.entries operation to finish', function () {
                 describe('update.entries should finish cleanly', function () {
 
                     beforeEach(function () {

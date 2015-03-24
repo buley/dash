@@ -19,16 +19,17 @@
 					success = true;
 					isFinished = true;
 					ctx = context;
+					done();
 				}, function(context) {
 					ctx = context;
 					error = true;
 					isFinished = true;
+					done();
 				}, function(context) {
 					notify = true;
 				});
 
-			waitsFor(dashIsFinished, 'the clear.store operation to finish', 10000);
-			runs(function() {
+			it('the clear.store operation to finish', function() {
 				describe('clear.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;

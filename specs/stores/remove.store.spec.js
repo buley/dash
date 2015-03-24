@@ -29,10 +29,12 @@
                     finalcount = context.db.objectStoreNames.length;
                     success = true;
                     isFinished = true;
+                    done();
                 }, function(context) {
                     ctx = context;
                     error = true;
                     isFinished = true;
+	                done();
                 }, function(context) {
                     notify = true;
                 });
@@ -40,13 +42,13 @@
                 ctx = context;
                 error = true;
                 isFinished = true;
+                done();
             }, function(context) {
                 notify = true;
 		    });
 
 
-			waitsFor(dashIsFinished, 'the remove.store operation to finish', 20000);
-			runs(function() {
+			it('the remove.store operation to finish', function() {
 				describe('remove.store should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;

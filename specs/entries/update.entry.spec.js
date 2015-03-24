@@ -36,18 +36,20 @@
                         ctx = context;
                         isFinished = true;
                         success = true;
+                        done();
                     });
                 }, function(context) {
                     isFinished = true;
                     error = true;
+                    done();
                 });
             }, function(context) {
                 isFinished = true;
                 error = true;
+                done();
             });
 
-			waitsFor(dashIsFinished, 'the update.entry operation to finish', 10000);
-			runs(function() {
+			it('the update.entry operation to finish', function() {
 				describe('update.entry should finish cleanly', function() {
 
 					beforeEach(function() {

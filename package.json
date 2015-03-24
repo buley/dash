@@ -13,19 +13,19 @@
   "keywords": [],
   "author": "Taylor Buley <taylor.buley@gmail.com>",
   "dependencies": {
-    "coveralls": "~2.8.0",
-    "karma-jasmine": "~0.1.5"
+    "coveralls": "*",
+    "karma-jasmine": "*"
   },
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "karma": "~0.10.9",
-    "karma-jasmine": "~0.1.5",
-    "grunt-karma": "~0.6.2",
-    "karma-firefox-launcher": "~0.1.3",
-    "karma-chrome-launcher": "~0.1.2",
-    "grunt-karma-coveralls": "~2.3.0",
-    "karma-coverage": "~0.2.4",
-    "coveralls": "https://registry.npmjs.org/coveralls/-/coveralls-2.8.0.tgz"
+    "grunt": "*",
+    "karma": "*",
+    "karma-jasmine": "*",
+    "grunt-karma": "*",
+    "karma-firefox-launcher": "*",
+    "karma-chrome-launcher": "*",
+    "grunt-karma-coveralls": "*",
+    "karma-coverage": "*",
+    "coveralls": "*"
   },
   "peerDependencies": {},
   "license": "MIT",

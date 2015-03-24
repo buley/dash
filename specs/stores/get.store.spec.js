@@ -21,16 +21,17 @@
                 ctx = context;
                 success = true;
                 isFinished = true;
+                done();
             }, function(context) {
                 ctx = context;
                 error = true;
                 isFinished = true;
+                done();
             }, function(context) {
                 notify = true;
             });
 
-			waitsFor(dashIsFinished, 'the get.store operation to finish', 10000);
-			runs(function() {
+			it('the get.store operation to finish', function() {
 				describe('get.store should finish cleanly', function() {
 
 					beforeEach(function() {

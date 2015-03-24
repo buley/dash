@@ -32,17 +32,18 @@
           success = true;
           isFinished = true;
           ctx = context;
+          done();
         }, function(context) {
           ctx = context;
           error = true;
           isFinished = true;
+          done();
         }, function(context) {
           notify = true;
         });
       });
 
-      waitsFor(dashIsFinished, 'the get.entry operation to finish', 10000);
-      runs(function() {
+      it('the get.entry operation to finish', function() {
         describe('get.entry should finish cleanly', function() {
 
           beforeEach(function() {

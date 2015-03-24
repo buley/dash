@@ -41,22 +41,24 @@
           (function(context) {
             success = true;
             isFinished = true;
+            done();
             ctx = context;
           }, function(context) {
             error = true;
             isFinished = true;
+            done();
           });
         }, function(context) {
           ctx = context;
           error = true;
           isFinished = true;
+          done();
         }, function(context) {
           notify = true;
         });
       });
 
-      waitsFor(dashIsFinished, 'the remove.entries operation to finish', 30000);
-      runs(function() {
+      it('the remove.entries operation to finish', function() {
         describe('remove.entries should finish cleanly', function() {
 
           beforeEach(function() {

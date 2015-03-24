@@ -16,16 +16,17 @@
 			(function(context) {
 				ctx = context;
 				isFinished = true;
+				done();
 				success = true;
 			}, function(context) {
 				ctx = context;
 				error = true;
 				isFinished = true;
+				done();
 			}, function(context) {
 				notify = true;
 			});
-			waitsFor(dashIsFinished, 'the close.database operation to finish', 10000);
-			runs(function() {
+			it('the close.database operation to finish', function() {
 				describe('database.close should finish cleanly', function() {
 					beforeEach(function() {
 						this.context = ctx;

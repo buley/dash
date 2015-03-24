@@ -20,16 +20,17 @@
                 success = true;
                 isFinished = true;
                 ctx = context;
+                done();
             }, function(context) {
                 ctx = context;
                 error = true;
                 isFinished = true;
+                done();
             }, function(context) {
                 notify = true;
             });
 
-			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
-			runs(function() {
+			it('the add.index operation to finish', function() {
 				describe('add.index should finish cleanly', function() {
 
 					beforeEach(function() {
@@ -104,17 +105,18 @@
 				(function(context) {
 					success = true;
 					isFinished = true;
+					done();
 					ctx = context;
 				}, function(context) {
 					ctx = context;
 					error = true;
 					isFinished = true;
+					done();
 				}, function(context) {
 					notify = true;
 				});
 
-			waitsFor(dashIsFinished, 'the add.index operation to finish', 10000);
-			runs(function() {
+			it('the add.index operation to finish', function() {
 				describe('add.index should finish cleanly', function() {
 
 					beforeEach(function() {
