@@ -14,7 +14,8 @@
   "author": "Taylor Buley <taylor.buley@gmail.com>",
   "dependencies": {
     "coveralls": "*",
-    "karma-jasmine": "*"
+    "karma-jasmine": "*",
+    "phantomjs": ">=1.9.7-8"
   },
   "devDependencies": {
     "grunt": "*",
