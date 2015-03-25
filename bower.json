@@ -5,7 +5,7 @@
   ],
   "homepage": "http://dashdb.com",
   "description": "A cookie-sized JavaSript library offering a promise-based wrapper for the IndexedDB (IDB) HTML5 database API.",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "keywords": [
     "indexeddb",
     "databases",
