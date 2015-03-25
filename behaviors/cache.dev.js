@@ -1,6 +1,6 @@
 self.dashCache = self.dashCache || (function (environment) {
   "use strict";
-  var that,
+  var that = this,
   	cache = {},
 	set = function( request ) {	
 		var key = request.key || null
@@ -119,10 +119,6 @@ self.dashCache = self.dashCache || (function (environment) {
       return id;
     },
     workDispatch = function (message, context) {
-      if (!that) {
-        console.log("dash.js - Denying cache behavior",message,context);
-        return;
-      }
       var defd = that.deferred(),
         callbacks = {
           on_success: context.on_success,
