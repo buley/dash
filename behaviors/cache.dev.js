@@ -56,7 +56,64 @@ self.dashCache = self.dashCache || (function(environment) {
                 return acc;
             });
             return key;
-        };
+        },
+        workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
+        worker,
+        workQueue = {},
+        workRegister = function(worker, message, context, success, error, notify) {
+            var id = that.random(),
+                callback = function(e) {
+                    var data = e.data,
+                        queued = workQueue[data.uid];
+                    if (undefined !== queued) {
+                        switch (e.data.type) {
+                            case 'success':
+                                delete workQueue[data.uid];
+                                worker.removeEventListener('message', callback);
+                                that.apply(success, [data.context]);
+                                break;
+                            case 'error':
+                                delete workQueue[data.uid];
+                                worker.removeEventListener('message', callback);
+                                that.apply(error, [data.context]);
+                                break;
+                            case 'abort':
+                                that.apply(notify, [data.context]);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                },
+                clean = function(obj) {
+                    if (that.isFunction(obj)) {
+                        return undefined;
+                    } else if (that.isObject(obj)) {
+                        that.iterate(obj, function(key, val) {
+                            obj[key] = clean(val);
+                        });
+                    } else if (that.isArray(obj)) {
+                        that.each(obj, function(v, i) {
+                            obj[i] = clean(v);
+                        });
+                    }
+                    return obj;
+                };
+            workQueue[id] = {
+                success: success,
+                error: error,
+                notify: notify
+            };
+            if (!!worker) {
+                worker.addEventListener('message', callback);
+                worker.postMessage({
+                    method: message,
+                    context: clean(context),
+                    uid: id
+                });
+            } else {
+                throw new Error('non-Worker interface not yet implemented');
+            }
             return id;
         },
         workDispatch = function(message, context) {
@@ -158,66 +215,7 @@ self.dashCache = self.dashCache || (function(environment) {
         }, false);
     } else {
         return function(libraryPath) {
-          var scripts = (!!environment.document) ? environment.document.getElementsByTagName("script") : [],
-            libraryScript = scripts[scripts.length - 1] || null,
-            workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
             worker = !!workerEnvironment && !!libraryPath && null !== libraryPath.match(/cache/) ? new Worker(libraryPath) : null,
-            workQueue = {},
-            workRegister = function(worker, message, context, success, error, notify) {
-              var id = that.random(),
-                callback = function(e) {
-                    var data = e.data,
-                        queued = workQueue[data.uid];
-                    if (undefined !== queued) {
-                        switch (e.data.type) {
-                            case 'success':
-                                delete workQueue[data.uid];
-                                worker.removeEventListener('message', callback);
-                                that.apply(success, [data.context]);
-                                break;
-                            case 'error':
-                                delete workQueue[data.uid];
-                                worker.removeEventListener('message', callback);
-                                that.apply(error, [data.context]);
-                                break;
-                            case 'abort':
-                                that.apply(notify, [data.context]);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                },
-                clean = function(obj) {
-                    if (that.isFunction(obj)) {
-                        return undefined;
-                    } else if (that.isObject(obj)) {
-                        that.iterate(obj, function(key, val) {
-                            obj[key] = clean(val);
-                        });
-                    } else if (that.isArray(obj)) {
-                        that.each(obj, function(v, i) {
-                            obj[i] = clean(v);
-                        });
-                    }
-                    return obj;
-                };
-            workQueue[id] = {
-                success: success,
-                error: error,
-                notify: notify
-            };
-            if (!!worker) {
-                worker.addEventListener('message', callback);
-                worker.postMessage({
-                    method: message,
-                    context: clean(context),
-                    uid: id
-                });
-            } else {
-                throw new Error('non-Worker interface not yet implemented');
-            }
-
             return [function(state) {
                 that = this;
                 if (this.isEmpty(state.context.cache)) {
