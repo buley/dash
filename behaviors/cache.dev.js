@@ -1,6 +1,6 @@
 self.dashCache = self.dashCache || (function (environment) {
   "use strict";
-  var that = this,
+  var that,
   	cache = {},
 	set = function( request ) {	
 		var key = request.key || null
@@ -254,6 +254,7 @@ self.dashCache = self.dashCache || (function (environment) {
 	    }
 	    return state;
 	  }, function (state) {
+            that = this;
 	    if(this.is(state.context.cached, true) || this.is(state.context.cache, false)) {
 	      return state;
 	    }
