@@ -215,7 +215,7 @@ self.dashCache = self.dashCache || (function(environment) {
         }, false);
     } else {
         return function(libraryPath) {
-            worker = !!workerEnvironment && !!libraryPath ? new Worker(libraryPath) : null;
+            worker = !!libraryPath ? new Worker(libraryPath) : null;
             return [function(state) {
                 that = this;
                 if (this.isEmpty(state.context.cache)) {
