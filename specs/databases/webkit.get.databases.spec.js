@@ -41,16 +41,12 @@
 						expect(this.error).toBe(true);
 						expect(this.notify).toBe(false);
 					}
-				});
-				it("should return a Array when available", function() {
 					if (this.available) {
 						expect(this.context.databases).not.toBeUndefined();
 						expect(this.context.databases instanceof Array || null === this.context.databases).toBe(true);
 					} else {
 						expect(this.context.databases).toBeUndefined();
 					}
-				});
-				it("should be an error when unavailable", function() {
 					if (!this.available) {
 						expect(this.success).toBe(false);
 						expect(this.error).toBe(true);

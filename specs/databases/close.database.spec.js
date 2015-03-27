@@ -23,28 +23,22 @@
 				});
 			});
 			describe('the close.database operation to finish', function() {
-				describe('database.close should finish cleanly', function() {
-					beforeEach(function(done) {
-						this.context = ctx;
-						this.success = success;
-						this.error = error;
-						this.notify = notify;
-						this.dbname = db_name;
-						done();
-					});
-					it("should be a success", function() {
-						expect(this.notify).toBe(false);
-						expect(this.error).toBe(false);
-						expect(this.context.error).toBeUndefined();
-						expect(this.success).toBe(true);
-					});
-					it("should have the correct references", function() {
-						expect(this.context.db).not.toBeFalsy();
-						expect(this.context.db instanceof IDBDatabase).toBe(false);
-					});
-					it( "database.close should clenup after itself", function(){
-						dash.remove.database(this.context);
-					});
+				beforeEach(function(done) {
+					this.context = ctx;
+					this.success = success;
+					this.error = error;
+					this.notify = notify;
+					this.dbname = db_name;
+					done();
+				});
+				it("should be a success", function() {
+					expect(this.notify).toBe(false);
+					expect(this.error).toBe(false);
+					expect(this.context.error).toBeUndefined();
+					expect(this.success).toBe(true);
+					expect(this.context.db).not.toBeFalsy();
+					expect(this.context.db instanceof IDBDatabase).toBe(false);
+					dash.remove.database(this.context);
 				});
 			});
 		});

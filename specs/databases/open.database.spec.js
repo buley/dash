@@ -4,7 +4,7 @@
 		db_name = 'database-open-test-' + start_time,
 		store_name = 'database-open-test-' + start_time;
 	
-	describe("get.database", function() {
+	fdescribe("get.database", function() {
 
 		describe( 'should open a new database when none exists', function() {
 			var error = false,
@@ -27,26 +27,22 @@
 					});
 			});
 
-			describe('the get.database operation to finish', function() {
-				describe('the get.database operation should finish cleanly', function() {
-					beforeEach(function(done) {
-						this.context = ctx;
-						this.success = success;
-						this.error = error;
-						this.notify = notify;
-						this.dbname = db_name;
-						done();
-					});
-					it("the get.database operation should be a success", function() {
-						expect(this.notify).toBe(false);
-						expect(this.error).toBe(false);
-						expect(this.context.error).toBeUndefined();
-						expect(this.success).toBe(true);
-					});
-					it('the get.database operation should have the correct attributes', function() {
-						expect(this.dbname).toBe(this.context.database);
-						expect(this.context.db.name).toBe(this.context.database);
-					});
+			describe('the get.database operation should finish cleanly', function() {
+				beforeEach(function(done) {
+					this.context = ctx;
+					this.success = success;
+					this.error = error;
+					this.notify = notify;
+					this.dbname = db_name;
+					done();
+				});
+				it("the get.database operation should be a success", function() {
+					expect(this.notify).toBe(false);
+					expect(this.error).toBe(false);
+					expect(this.context.error).toBeUndefined();
+					expect(this.success).toBe(true);
+					expect(this.dbname).toBe(this.context.database);
+					expect(this.context.db.name).toBe(this.context.database);
 				});
 			});
 		});
@@ -72,14 +68,14 @@
 				});
 			});
 			describe('secondary should finish cleanly', function() {
-				beforeEach(function() {
+				beforeEach(function(done) {
 					this.context = ctx;
 					this.success = success;
 					this.error = error;
 					this.notify = notify;
 					this.dbname = db_name;
+					done();
 				});
-
 				it("should not have errored", function(){
 					expect(this.success).toBe(true);
 					expect(this.error).toBe(false);
@@ -110,21 +106,17 @@
 					});
 			});
 			describe('secondary should finish cleanly', function() {
-				beforeEach(function() {
+				beforeEach(function(done) {
 					this.context = ctx;
 					this.success = success;
 					this.error = error;
 					this.notify = notify;
 					this.version = random_version;
+					done();
 				});
-
 				it('version should be the provided version', function() {
 					expect(this.context.new_version).toBe(this.version);
 					expect(this.context.old_version).toBe(1);
-				});
-
-				it("get.database secondary test should clenup after itself", function(){
-					dash.remove.database(this.context);
 				});
 			});
 		});
