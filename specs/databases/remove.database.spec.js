@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	describe("remove.database", function() {
+	fdescribe("remove.database", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'db-remove-test-' + start_time,
 			error = false,

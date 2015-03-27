@@ -6,7 +6,7 @@
 			db_name = 'database-get-test-' + start_time,
 			store_name = 'database-get-test-' + start_time;
 		
-		fdescribe( 'should open a new database when none exists', function() {
+		describe( 'should open a new database when none exists', function() {
 			var error = false,
 				success = false,
 				notify = false,
@@ -46,7 +46,7 @@
 
 		/* Test for opening an existing database: should handle
 		 * in the same way, execept with upgrade flags as false */
-		xdescribe( 'should handle existing databases', function() {
+		describe( 'should handle existing databases', function() {
 			var error = false,
 				success = false,
 				notify = false,
@@ -84,7 +84,7 @@
 
 		/* Test for opening an existing database: should handle
 		 * in the same way, execept with upgrade flags as false */
-		fdescribe( 'should open an existing database when one exists', function() {
+		describe( 'should open an existing database when one exists', function() {
 			var error = false,
 				success = false,
 				notify = false,

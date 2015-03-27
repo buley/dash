@@ -2,7 +2,7 @@
 (function(){
 	'use strict';
 
-	describe("add.entry", function() {
+	fdescribe("add.entry", function() {
 
 		var start_time = new Date().getTime(),
 			db_name = 'entry-add-test-' + start_time,
