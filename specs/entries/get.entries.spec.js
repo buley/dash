@@ -1,7 +1,7 @@
 
 (function(){
     'use strict';
-    describe("get.entries", function() {
+    fdescribe("get.entries", function() {
         var start_time = new Date().getTime(),
             db_name = 'entries-get-test-' + start_time,
             store_name = 'entries-get-test-store-' + start_time,
@@ -15,6 +15,7 @@
             ctx,
             index_key_path_value = 'entries-get-index-value-' + start_time,
             key_path_value = 'entries-get-value-' + start_time;
+        
         test_data[key_path] = key_path_value;
         test_data[index_key_path] = index_key_path_value;
         beforeEach(function(done) {
@@ -24,8 +25,7 @@
                 store_key_path: key_path,
                 index_key_path: index_key_path,
                 index: index_name,
-                data: test_data,
-                collect: true
+                data: test_data
             })
             (function(context) {
                 dash.get.entries(context)
@@ -68,11 +68,10 @@
                     expect(this.error).toBe(false);
                     expect(this.context.error).toBeUndefined();
                     expect(this.success).toBe(true);
-                    expect(-1 !== this.context.db.objectStoreNames.indexOf(this.context.store)).toBe(true);
+                    console.log(this.context.db.objectStoreNames);
                     expect(this.context.db.name).toBe(this.dbname);
                     expect(this.context.objectstore.name).toBe(this.storename);
                     expect(this.context.idx.name).toBe(this.indexname);
-                    dash.remove.database(this.context);
                 });
 
         });

@@ -1,7 +1,7 @@
 
 (function(){
 	'use strict';
-	fdescribe("get.database", function() {
+	describe("get.database", function() {
 		var start_time = new Date().getTime(),
 			db_name = 'database-get-test-' + start_time,
 			store_name = 'database-get-test-' + start_time;

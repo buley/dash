@@ -4,7 +4,7 @@
 		db_name = 'database-open-test-' + start_time,
 		store_name = 'database-open-test-' + start_time;
 	
-	fdescribe("get.database", function() {
+	describe("get.database", function() {
 
 		describe( 'should open a new database when none exists', function() {
 			var error = false,

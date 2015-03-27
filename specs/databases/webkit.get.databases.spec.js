@@ -1,6 +1,6 @@
 (function(){
 	'use strict';
-	fdescribe("get.databases", function() {
+	describe("get.databases", function() {
 		var start_time = new Date().getTime(),
 			error = false,
 			success = false,
