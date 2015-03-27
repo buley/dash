@@ -9,8 +9,10 @@ module.exports = function (grunt) {
     } else {
         plugins.push('karma-chrome-launcher');
         plugins.push('karma-firefox-launcher');
+        plugins.push('karma-safari-launcher');
         browsers.push('Chrome');
         browsers.push('Firefox');
+        browsers.push('Safari');
     }
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -88,6 +90,20 @@ module.exports = function (grunt) {
                 },
                 reporters: ['dots']
             },
+            safari: {
+                singleRun: false,
+                autoWatch: true,
+                browsers: ['Safari'],
+                plugins: plugins,
+                options: {
+                    files: [
+                        'lib/dash.js',
+                        'specs/*.js',
+                        'specs/*/*.js'
+                    ]
+                },
+                reporters: ['dots']
+            }
         },
         coveralls: {
             options: {
@@ -103,5 +119,6 @@ module.exports = function (grunt) {
     grunt.registerTask('dev', ['karma:dev']);
     grunt.registerTask('firefox', ['karma:firefox']);
     grunt.registerTask('chrome', ['karma:chrome']);
+    grunt.registerTask('safari', ['karma:safari']);
     grunt.registerTask('default', ['dev', 'coveralls']);
 };

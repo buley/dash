@@ -1,7 +1,7 @@
 
 (function(){
     'use strict';
-    fdescribe("get.entries", function() {
+    describe("get.entries", function() {
         var start_time = new Date().getTime(),
             db_name = 'entries-get-test-' + start_time,
             store_name = 'entries-get-test-store-' + start_time,
@@ -68,7 +68,7 @@
                     expect(this.error).toBe(false);
                     expect(this.context.error).toBeUndefined();
                     expect(this.success).toBe(true);
-                    console.log(this.context.db.objectStoreNames);
+                    expect(-1 !== this.context.db.objectStoreNames.indexOf(this.context.store)).toBe(true);
                     expect(this.context.db.name).toBe(this.dbname);
                     expect(this.context.objectstore.name).toBe(this.storename);
                     expect(this.context.idx.name).toBe(this.indexname);

@@ -23,7 +23,8 @@
     "karma-chrome-launcher": "*",
     "karma-coverage": "*",
     "karma-firefox-launcher": "*",
-    "karma-jasmine": "~0.2.0"
+    "karma-jasmine": "~0.2.0",
+    "karma-safari-launcher": "^0.1.1"
   },
   "peerDependencies": {},
   "license": "MIT",
