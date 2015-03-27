@@ -1,17 +1,14 @@
 
 (function(){
 	'use strict';
-	describe("add.entry", function() {
-		it( 'should open a database, add a store and an index to it with default parameters', function() {
+	fdescribe("add.entry", function() {
+		describe( 'should open a database, add a store and an index to it with default parameters', function() {
 			var start_time = new Date().getTime(),
 				db_name = 'entry-add-test-' + start_time,
 				store_name = 'entry-add-test-store-' + start_time,
 				key_path = 'entry' + start_time,
 				add_response = {},
 				test_data = { test: 'entry-add' },
-				dashIsFinished = function() { 
-					return isFinished;
-				},
 				error = false,
 				success = false,
 				notify = false,
@@ -22,31 +19,32 @@
 				notifies = 0,
 				ctx;	
 			test_data[key_path] = 'entry-add-value-' + start_time;
-            dash.add.entry({
-                database: db_name,
-                store: store_name,
-                store_key_path: key_path,
-                data: test_data
-            })
-            (function(context) {
-                ctx = context;
-                successes += 1;
-                isFinished = true;
-                done();
-                add_response = context;
-                entry_key = context.key;
-                success = true;
-            }, function(context) {
-                ctx = context;
-               	errors += 1;
-                isFinished = false;
-                error = true;
-            }, function(context) {
-            	notify = true;
-            	notifies += 1;
-            });
+			beforeEach(function(done) {
+	            dash.add.entry({
+	                database: db_name,
+	                store: store_name,
+	                store_key_path: key_path,
+	                data: test_data
+	            })
+	            (function(context) {
+	                ctx = context;
+	                successes += 1;
+	                add_response = context;
+	                entry_key = context.key;
+	                success = true;
+	                done();
+	            }, function(context) {
+	                ctx = context;
+	               	errors += 1;
+	                error = true;
+	            }, function(context) {
+	            	notify = true;
+	            	notifies += 1;
+	            });
+			});
+
 			describe('add.entry should complete', function() {
-				beforeEach(function() {
+				beforeEach(function(done) {
 					this.context = add_response;
 					this.success = success;
 					this.error = error;
@@ -59,6 +57,7 @@
 					this.successes = successes;
 					this.errors = errors;
 					this.notifies = notifies;
+					done();
 				});
 				
 				it("add.entry should be a success", function() {

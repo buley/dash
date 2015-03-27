@@ -25,7 +25,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.js',
+                        'lib/dash.min.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -46,14 +46,14 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.dev.js',
+                        'lib/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
                 },
                 reporters: ['dots', 'coverage'],
                 preprocessors: {
-                    "lib/*.dev.js": "coverage"
+                    "lib/*js": "coverage"
                 },
                 coverageReporter: {
                     type: "lcov",
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.dev.js',
+                        'lib/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -81,7 +81,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.dev.js',
+                        'lib/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]

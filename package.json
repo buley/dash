@@ -14,15 +14,16 @@
   "author": "Taylor Buley <taylor.buley@gmail.com>",
   "dependencies": {},
   "devDependencies": {
+    "coveralls": "*",
     "grunt": "*",
-    "karma": "*",
-    "karma-jasmine": "*",
     "grunt-karma": "*",
-    "karma-firefox-launcher": "*",
-    "karma-chrome-launcher": "*",
     "grunt-karma-coveralls": "*",
+    "jasmine-core": "~2.2.0",
+    "karma": "*",
+    "karma-chrome-launcher": "*",
     "karma-coverage": "*",
-    "coveralls": "*"
+    "karma-firefox-launcher": "*",
+    "karma-jasmine": "~0.2.0"
   },
   "peerDependencies": {},
   "license": "MIT",
