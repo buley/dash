@@ -10,9 +10,15 @@ module.exports = function (grunt) {
         plugins.push('karma-chrome-launcher');
         plugins.push('karma-firefox-launcher');
         plugins.push('karma-safari-launcher');
+        plugins.push('karma-ie-launcher');
+        plugins.push('karma-opera-launcher');
+        plugins.push('karma-sauce-launcher');
         browsers.push('Chrome');
         browsers.push('Firefox');
         browsers.push('Safari');
+        browsers.push('Opera');
+        browsers.push('sl_ie_11');
+        browsers.push('sl_ios_safari');
     }
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -103,6 +109,79 @@ module.exports = function (grunt) {
                     ]
                 },
                 reporters: ['dots']
+            },
+            opera: {
+                singleRun: false,
+                autoWatch: true,
+                browsers: ['Opera'],
+                plugins: plugins,
+                options: {
+                    files: [
+                        'lib/dash.js',
+                        'specs/*.js',
+                        'specs/*/*.js'
+                    ]
+                },
+                reporters: ['dots']
+            },
+            ie: {
+                singleRun: false,
+                autoWatch: true,
+                browsers: ['IE'],
+                plugins: plugins,
+                options: {
+                    files: [
+                        'lib/dash.js',
+                        'specs/*.js',
+                        'specs/*/*.js'
+                    ]
+                },
+                reporters: ['dots']
+            },
+            sauce: {
+                singleRun: false,
+                autoWatch: true,
+                browsers: ['sl_ie_11', 'sl_ios_safari'],
+                captureTimeout: 300000,
+                plugins: plugins,
+                options: {
+                    files: [
+                        'lib/dash.js',
+                        'specs/*.js',
+                        'specs/*/*.js'
+                    ]
+                },
+                reporters: ['dots', 'saucelabs']
+            },
+            sl_ios_safari: {
+                singleRun: false,
+                autoWatch: true,
+                captureTimeout: 300000,
+                browsers: ['sl_ios_safari'],
+                plugins: plugins,
+                options: {
+                    files: [
+                        'lib/dash.js',
+                        'specs/*.js',
+                        'specs/*/*.js'
+                    ]
+                },
+                reporters: ['dots', 'saucelabs']
+            },
+            sl_ie_11: {
+                singleRun: false,
+                autoWatch: true,
+                browsers: ['sl_ie_11'],
+                captureTimeout: 300000,
+                plugins: plugins,
+                options: {
+                    files: [
+                        'lib/dash.js',
+                        'specs/*.js',
+                        'specs/*/*.js'
+                    ]
+                },
+                reporters: ['dots', 'saucelabs']
             }
         },
         coveralls: {
@@ -120,5 +199,8 @@ module.exports = function (grunt) {
     grunt.registerTask('firefox', ['karma:firefox']);
     grunt.registerTask('chrome', ['karma:chrome']);
     grunt.registerTask('safari', ['karma:safari']);
+    grunt.registerTask('opera', ['karma:opera']);
+    grunt.registerTask('ie', ['karma:ie']);
+    grunt.registerTask('sauce', ['karma:sl_ios_safari', 'karma:sl_ie_11']);
     grunt.registerTask('default', ['dev', 'coveralls']);
 };
