@@ -45,7 +45,7 @@ module.exports = function (grunt) {
                 coverageReporter: {
                     type: "lcov",
                     dir: "coverage/"
-                },
+                }
             },
             dev: {
                 singleRun: true,
