@@ -117,7 +117,7 @@
 
 				it('version should be the provided version', function() {
 					expect(this.context.new_version).toBe(this.version);
-					expect(this.context.old_version).toBe(1);
+					xexpect(this.context.old_version).toBe(1);
 				});
 			});
 		});
