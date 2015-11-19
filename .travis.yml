@@ -15,4 +15,4 @@ script:
   - grunt
 
 addons:
-  firefox: "31.0esr"
+  firefox: "39.0"
