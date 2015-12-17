@@ -1,4 +1,4 @@
-# dash [![Build Status](https://travis-ci.org/buley/dash.png?branch=master)](https://travis-ci.org/buley/dash.svg) [![Coverage Status](https://coveralls.io/repos/buley/dash/badge.png?branch=master)](https://coveralls.io/r/buley/dash?branch=master)
+# dash [![Build Status](https://travis-ci.org/buley/dash.png?branch=master)](https://travis-ci.org/buley/dash.svg) [![Coverage Status](https://coveralls.io/repos/buley/dash/badge.png?branch=master)](https://coveralls.io/r/buley/dash?branch=master) [![Docs Status](http://inch-ci.org/github/buley/dash.svg?branch=master)]
 
 A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
