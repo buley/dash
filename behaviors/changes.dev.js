@@ -1,4 +1,4 @@
-self.dashChanges = self.dashChanges || (function (environment) {
+var dashChanges = (function (environment) {
   "use strict";
   var callbackMap = {},
     changeMap = {},

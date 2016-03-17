@@ -1,4 +1,4 @@
-self.dashCache = self.dashCache || (function (environment) {
+var dashCache = (function (environment) {
   "use strict";
   var that,
     cache = {},

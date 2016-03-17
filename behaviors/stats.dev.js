@@ -1,4 +1,4 @@
-self.dashStats = self.dashStats || (function (environment) {
+var dashStats = (function (environment) {
   "use strict";
   var model = function () {
     return {

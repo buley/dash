@@ -1,4 +1,4 @@
-self.dashMatch = self.dashMatch || (function (environment) {
+var dashMatch = (function (environment) {
   "use strict";
   return [ null, function (state) {
     if(this.isEmpty(state.context.match)) {

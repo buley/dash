@@ -1,4 +1,4 @@
-self.dashMapReduce = self.dashMapReduce || (function (environment) {
+var dashMapReduce = (function (environment) {
   "use strict";
   var mapReduceMap = {};
   return [ function (state) {

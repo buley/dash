@@ -1,4 +1,4 @@
-self.dashMap = self.dashMap || (function (environment) {
+var dashMap = (function (environment) {
   "use strict";
   var mapMap = {}; //heh
   return [ function (state) {

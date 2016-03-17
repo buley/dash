@@ -1,4 +1,4 @@
-self.dashPatch = self.dashPatch || (function (environment) {
+var dashPatch = (function (environment) {
   "use strict";
   //TODO: Support array of sequential patches
   var patchMap = {}; 

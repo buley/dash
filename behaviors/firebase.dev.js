@@ -1,4 +1,4 @@
-self.dashFirebase = self.dashFirebase || (function (environment) {
+var dashFirebase = (function (environment) {
   "use strict";
   var that,
 	child = function( context ) {	
