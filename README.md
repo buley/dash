@@ -1,4 +1,4 @@
-# dash [![Build Status](https://travis-ci.org/buley/dash.png?branch=master)](https://travis-ci.org/buley/dash.svg) [![Coverage Status](https://coveralls.io/repos/buley/dash/badge.png?branch=master)](https://coveralls.io/r/buley/dash?branch=master) [![Docs Status](http://inch-ci.org/github/buley/dash.svg?branch=master)]
+# dash [![Build Status](https://travis-ci.org/buley/dash.png?branch=master)](https://travis-ci.org/buley/dash.svg) [![Coverage Status](https://coveralls.io/repos/buley/dash/badge.png?branch=master)](https://coveralls.io/r/buley/dash?branch=master)
 
 A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
@@ -42,15 +42,3 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
     grunt
 
 Building requires `grunt-cli`
-
-#### Documention
-
-[http://dashdb.com/#/docs](http://dashdb.com/#/docs)
-
-#### Demos
-
-[http://dashdb.com/#/demos](http://dashdb.com/#/demos)
-
-#### License
-
-[http://dashdb.com/#/about](http://dashdb.com/#/about)

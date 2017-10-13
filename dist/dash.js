@@ -1112,6 +1112,7 @@ var dash = (function (environment) {
                 }
                 return context;
             };
+        console.log("opening", open_ctx, database);
         open_ctx.request = isNumber(open_ctx.version) ? db.open(open_ctx.database, open_ctx.version) : db.open(open_ctx.database);
         open_ctx.request.addEventListener('upgradeneeded', function (event) {
             was_upgrade = true;
