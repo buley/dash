@@ -1772,7 +1772,7 @@ dashApp.directive('markdown', function () {
 });
 dashApp.factory('dashWorkerService', ['$q',
   function ($q) {
-    var worker = new Worker('/lib/dash.dev.js'),
+    var worker = new Worker('/dist/dash.js'),
       queue = {},
       methods = [
        'add.entry',

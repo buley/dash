@@ -11,7 +11,7 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
 #### Installation Options
 
-* Download [dash.js](https://raw.github.com/buley/dash/master/lib/dash.js)
+* Download [dash.js](https://raw.github.com/buley/dash/master/dist/dash.js)
 * Install via [bower](https://github.com/bower/bower): `bower install dash`
 
 #### Up And Running

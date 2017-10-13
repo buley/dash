@@ -17,8 +17,6 @@ module.exports = function (grunt) {
         browsers.push('Firefox');
         browsers.push('Safari');
         browsers.push('Opera');
-        browsers.push('sl_ie_11');
-        browsers.push('sl_ios_safari');
     }
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -33,7 +31,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.min.js',
+                        'dist/dash.min.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -54,7 +52,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.js',
+                        'dist/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -75,7 +73,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.js',
+                        'dist/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -89,7 +87,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.js',
+                        'dist/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -103,7 +101,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.js',
+                        'dist/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -117,7 +115,7 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.js',
+                        'dist/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
@@ -131,57 +129,12 @@ module.exports = function (grunt) {
                 plugins: plugins,
                 options: {
                     files: [
-                        'lib/dash.js',
+                        'dist/dash.js',
                         'specs/*.js',
                         'specs/*/*.js'
                     ]
                 },
                 reporters: ['dots']
-            },
-            sauce: {
-                singleRun: false,
-                autoWatch: true,
-                browsers: ['sl_ie_11', 'sl_ios_safari'],
-                captureTimeout: 300000,
-                plugins: plugins,
-                options: {
-                    files: [
-                        'lib/dash.js',
-                        'specs/*.js',
-                        'specs/*/*.js'
-                    ]
-                },
-                reporters: ['dots', 'saucelabs']
-            },
-            sl_ios_safari: {
-                singleRun: false,
-                autoWatch: true,
-                captureTimeout: 300000,
-                browsers: ['sl_ios_safari'],
-                plugins: plugins,
-                options: {
-                    files: [
-                        'lib/dash.js',
-                        'specs/*.js',
-                        'specs/*/*.js'
-                    ]
-                },
-                reporters: ['dots', 'saucelabs']
-            },
-            sl_ie_11: {
-                singleRun: false,
-                autoWatch: true,
-                browsers: ['sl_ie_11'],
-                captureTimeout: 300000,
-                plugins: plugins,
-                options: {
-                    files: [
-                        'lib/dash.js',
-                        'specs/*.js',
-                        'specs/*/*.js'
-                    ]
-                },
-                reporters: ['dots', 'saucelabs']
             }
         },
         coveralls: {
@@ -201,6 +154,5 @@ module.exports = function (grunt) {
     grunt.registerTask('safari', ['karma:safari']);
     grunt.registerTask('opera', ['karma:opera']);
     grunt.registerTask('ie', ['karma:ie']);
-    grunt.registerTask('sauce', ['karma:sl_ios_safari', 'karma:sl_ie_11']);
     grunt.registerTask('default', ['dev', 'coveralls']);
 };

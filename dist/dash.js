@@ -1,8 +1,5 @@
-/* Documentation -> http://dashdb.com
- * Repo -> http://github.com/editor/dash
- * License -> MIT
- * Author -> Taylor Buley (@taylorbuley)
- * Copyright -> (c) 2011-2015 Buley LLC
+/* License -> MIT
+ * Copyright -> (c) 2011-2015 Taylor Buley (@taylorbuley)
  */
 var dash = (function (environment) {
 
@@ -24,11 +21,11 @@ var dash = (function (environment) {
         db = environment.indexedDB || indexedDB,
         kr = environment.IDBKeyRange || IDBKeyRange,
         sl = environment.DOMStringList || (self ? Array : DOMStringList),
-        workerEnvironment = (null !== environment.constructor.toString().match(/WorkerGlobalScope/) ) ? true : false,
+        workerEnvironment = (null !== environment.constructor.toString().match(/WorkerGlobalScope/) ),
         webkitEnvironment = !!db.webkitGetDatabaseNames,
-        workerPresent = ( !!self.Worker && ( null !== libraryPath && !!libraryPath.match(/dash/) ) ) ? true : false,
-    /* This method copies an object by value (deeply) */
-    //warning: recursive
+        workerPresent = ( !!self.Worker && ( null !== libraryPath && !!libraryPath.match(/dash/) ) ),
+        /* This method copies an object by value (deeply) */
+        //warning: recursive
         clone = function (obj) {
             var clo = {},
                 key;
@@ -65,7 +62,7 @@ var dash = (function (environment) {
             });
             return clo;
         },
-    /* This method checks whether a variable has a value */
+        /* This method checks whether a variable has a value */
         isEmpty = function (mixed_var) {
             if (isObject(mixed_var)) {
                 var count = 0;
@@ -76,10 +73,10 @@ var dash = (function (environment) {
                     return true;
                 }
             }
-            return (isnt(mixed_var, undefined) && isnt(mixed_var, null) && isnt(mixed_var, "") && (!isArray(mixed_var) || mixed_var.length > 0)) ? false : true;
+            return (!(isnt(mixed_var, undefined) && isnt(mixed_var, null) && isnt(mixed_var, "") && (!isArray(mixed_var) || mixed_var.length > 0)));
         },
-    /* This method maybe applys a `fn` */
-    //warning: recursive
+        /* This method maybe applys a `fn` */
+        //warning: recursive
         safeApply = function (fn, args, context, err) {
             if (isFunction(fn)) {
                 return fn.apply(context || {}, args || []);
@@ -88,9 +85,9 @@ var dash = (function (environment) {
                 return safeApply(err, []);
             }
         },
-    /* This method returns the inverse of isEmpty(mixed_var) */
+        /* This method returns the inverse of isEmpty(mixed_var) */
         exists = function (mixed_var) {
-            return (isEmpty(mixed_var)) ? false : true;
+            return (!isEmpty(mixed_var));
         },
         is = function (a, b) {
             return b === a;
@@ -107,7 +104,7 @@ var dash = (function (environment) {
         isnt = function (a, b) {
             return b !== a;
         },
-    //arraylike works (e.g. DOMStringList)
+        //arraylike works (e.g. DOMStringList)
         isArray = function (mixed_var) {
             var result = false;
             if (mixed_var instanceof Array || mixed_var instanceof sl) {
@@ -116,7 +113,7 @@ var dash = (function (environment) {
             return result;
         },
         isBoolean = function (mixed_var) {
-            return (isType("boolean", mixed_var) || is(mixed_var, 'true') || is(mixed_var, 'false')) ? true : false;
+            return !!(isType("boolean", mixed_var) || is(mixed_var, 'true') || is(mixed_var, 'false'));
         },
         isRegEx = function (mixed_var) {
             return isFunction(mixed_var.constructor) && null !== mixed_var.constructor.toString().match(/RegExp/);
@@ -128,7 +125,7 @@ var dash = (function (environment) {
             return isnt(mixed_var, null) && isnt(mixed_var, undefined) && isType("object", mixed_var) && is("[object Object]", mixed_var.toString());
         },
         isNumber = function (mixed_var) {
-            return (isType("number", mixed_var) || is(isNaN(parseInt(mixed_var, 10), false))) ? true : false;
+            return !!(isType("number", mixed_var) || is(isNaN(parseInt(mixed_var, 10), false)));
         },
         isString = function (mixed_var) {
             return isType("string", mixed_var);
@@ -139,8 +136,7 @@ var dash = (function (environment) {
         randomId = function (len, charset) {
             var random = charset || "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
                 count = len || 16,
-                x = 0,
-                xlength = 0,
+                x,
                 strlen = random.length,
                 str = [];
             for (x = 0; x < count; x += 1) {
@@ -148,7 +144,7 @@ var dash = (function (environment) {
             }
             return str.join('');
         },
-    /* This method safely iterates through an array */
+        /* This method safely iterates through an array */
         safeEach = function (items, callback, inc) {
             var x,
                 count = items ? items.length : 0;
@@ -157,7 +153,7 @@ var dash = (function (environment) {
                 safeApply(callback, [items[x], x]);
             }
         },
-    /* This method safely iterates through an object */
+        /* This method safely iterates through an object */
         safeIterate = function (item, callback) {
             var attr;
             for (attr in item) {
@@ -234,7 +230,7 @@ var dash = (function (environment) {
                 }
             };
         },
-    /* This method determines whether a given `haystack` contains a `needle` */
+        /* This method determines whether a given `haystack` contains a `needle` */
         contains = function (haystack, needle, use_key) {
             var result = false;
             if (exists(haystack)) {
@@ -296,7 +292,7 @@ var dash = (function (environment) {
             'unique',
             'version'
         ],
-    //TODO: Why isn't this yet refactored out
+        //TODO: Why isn't this yet refactored out
         detachedAttributes = [
             'auto_increment',
             'database',
@@ -366,21 +362,21 @@ var dash = (function (environment) {
         parseResults = function (results_ctx, methodname) {
             var obj = {},
                 toArray = function (list) {
-                  var copied = [],
-                    x = 0,
-                    xlen;
-                  //special case: DOMStringList
-                  if (!!list[0] && !!list[0].item) {
-                    xlen = list.length;
-                    for (; x < xlen; x += 1) {
-                      copied.push(list.item(x));
+                    var copied = [],
+                        x = 0,
+                        xlen;
+                    //special case: DOMStringList
+                    if (!!list[0] && !!list[0].item) {
+                        xlen = list.length;
+                        for (; x < xlen; x += 1) {
+                            copied.push(list.item(x));
+                        }
+                    } else {
+                        safeEach(list, function (el) {
+                            copied.push(el);
+                        });
                     }
-                  } else {
-                    safeEach(list, function (el) {
-                        copied.push(el);
-                    });
-                  }
-                  return copied;
+                    return copied;
                 };
             safeEach(validAttrs, function (k) {
                 if (exists(results_ctx[k])) {
@@ -449,7 +445,7 @@ var dash = (function (environment) {
                     }
                     complete(cursor_ctx);
                 };
-            if ( !exists( cursor_ctx.direction ) ) {
+            if (!exists(cursor_ctx.direction)) {
                 cursor_ctx.direction = ( exists(cursor_ctx) && is(false, cursor_ctx.duplicates) ) ? 'nextunique' : 'next';
             }
             cursor_ctx.range = cursor_ctx.range || range.get(cursor_ctx);
@@ -565,14 +561,14 @@ var dash = (function (environment) {
                     on_blocked: context.on_blocked,
                     on_close: context.on_close
                 },
-                worker = new Worker(libraryPath),
+                worker = new Worker(libraryPath || ''),
                 getData = function (data) {
                     safeIterate(callbacks, function (key, val) {
                         data[key] = val;
                     });
                     return data;
                 };
-            safeIterate(callbacks, function (key, val) {
+            safeIterate(callbacks, function (key) {
                 delete context[key];
             });
             workRegister(worker, message, context, function (data) {
@@ -654,7 +650,7 @@ var dash = (function (environment) {
                         db_ctx.upgraded = true;
                         db_ctx.version = db_ctx.new_version;
                         db_ctx.on_upgrade_needed = null;
-                        db_ctx.request.transaction.addEventListener('complete', function(e) {
+                        db_ctx.request.transaction.addEventListener('complete', function () {
                             db_ctx.db.close();
                             safeApply(callback, [db_ctx]);
                         });
@@ -679,7 +675,7 @@ var dash = (function (environment) {
                                     keyPath: isString(upg_os_ctx.store_key_path) ? upg_os_ctx.store_key_path : null,
                                     autoIncrement: isBoolean(upg_os_ctx.auto_increment) ? upg_os_ctx.auto_increment : false
                                 });
-                                os_ctx.request.transaction.addEventListener('complete', function(e) {
+                                os_ctx.request.transaction.addEventListener('complete', function (e) {
                                     upg_os_ctx.db.close();
                                     safeApply(callback, [upg_os_ctx]);
                                 });
@@ -713,12 +709,12 @@ var dash = (function (environment) {
                                     'multiEntry': upg_idx_ctx.index_multi_entry || false
                                 });
                                 upg_idx_ctx.on_upgrade_needed = null;
-                                upg_idx_ctx.request.transaction.addEventListener('complete', function(e) {
+                                upg_idx_ctx.request.transaction.addEventListener('complete', function (e) {
                                     upg_idx_ctx.db.close();
                                     safeApply(callback, [upg_idx_ctx]);
                                 });
                             };
-                            idx_ctx.transaction.addEventListener('complete',function() {
+                            idx_ctx.transaction.addEventListener('complete', function () {
                                 database.get(idx_ctx);
                             });
                             idx_ctx.db.close();
@@ -751,15 +747,15 @@ var dash = (function (environment) {
                                 error(err_ctx);
                             };
                             if (exists(cb_ctx.store) && isnt(determined_type, "versionchange")) {
-                              cb_ctx.db = cb_ctx.request.result;
-                              if (is(cb_ctx.transaction, null)) {
-                                cb_ctx.transaction = cb_ctx.db.transaction([cb_ctx.store], determined_type);
-                                cb_ctx.transaction.addEventListener('complete', function (e) {
-                                  cb_ctx.db.close();
-                                });
-                              }
-                              cb_ctx.objectstore = cb_ctx.transaction.objectStore(cb_ctx.store);
-                              safeApply(method, [cb_ctx]);
+                                cb_ctx.db = cb_ctx.request.result;
+                                if (is(cb_ctx.transaction, null)) {
+                                    cb_ctx.transaction = cb_ctx.db.transaction([cb_ctx.store], determined_type);
+                                    cb_ctx.transaction.addEventListener('complete', function (e) {
+                                        cb_ctx.db.close();
+                                    });
+                                }
+                                cb_ctx.objectstore = cb_ctx.transaction.objectStore(cb_ctx.store);
+                                safeApply(method, [cb_ctx]);
                             } else if (exists(cb_ctx.store)) {
                                 if (!contains(['add.store', 'remove.store', 'get.store'], methodname)) {
                                     cb_ctx.objectstore = cb_ctx.transaction.objectStore(cb_ctx.store);
@@ -842,8 +838,7 @@ var dash = (function (environment) {
             apply: safeApply,
             each: safeEach,
             iterate: safeIterate,
-            random: randomId,
-            api: Public
+            random: randomId
         },
         wrapRequest = function (fn, method) {
             return function (context) {
@@ -867,13 +862,13 @@ var dash = (function (environment) {
                     var defd = deferred(),
                         count = 0,
                         complex = contains(['get.entries', 'update.entries', 'remove.entries'], method),
-                    /* This  method enforces promises and defines the behavior
-                     * of how they map to IDB concepts. The shorthand is to save bytes:
-                     * s: success
-                     * e: error
-                     * a: abort
-                     * b: blocked
-                     * */
+                        /* This  method enforces promises and defines the behavior
+                         * of how they map to IDB concepts. The shorthand is to save bytes:
+                         * s: success
+                         * e: error
+                         * a: abort
+                         * b: blocked
+                         * */
                         codeMap = {
                             success: 's',
                             error: 'e',
@@ -940,7 +935,7 @@ var dash = (function (environment) {
                                 });
                                 pro(function (st) {
                                     //TODO: Why is this required?
-                                    if ("abort" == st.type) {
+                                    if ("abort" === st.type) {
                                         st.type = "reject";
                                     }
                                     if (!isEmpty(st.type) && isFunction(defd[st.type])) {
@@ -1044,7 +1039,7 @@ var dash = (function (environment) {
         Public;
 
     /* libraryPath verification */
-    if ( !!libraryPath &&  null === libraryPath.match(/dash/) ) {
+    if (!!libraryPath && null === libraryPath.match(/dash/)) {
         libraryPath = null;
     }
     /*
@@ -1101,9 +1096,7 @@ var dash = (function (environment) {
         var their_upgrade = open_ctx.on_upgrade_needed,
             their_success = open_ctx.on_success,
             their_on_error = open_ctx.on_error,
-            their_on_blocked = open_ctx.on_blocked,
             was_upgrade = false,
-            next_ctx = {},
             decorate = function (event, context) {
                 context.event = event;
                 context.transaction = context.request ? context.request.transaction : event.target.transaction;
@@ -1113,11 +1106,7 @@ var dash = (function (environment) {
                 if (exists(event.newVersion)) {
                     context.new_version = event.newVersion;
                     context.old_version = event.oldVersion;
-                    if (isnt(context.old_version, context.new_version)) {
-                        context.upgrade = true;
-                    } else {
-                        context.upgrade = false;
-                    }
+                    context.upgrade = !!isnt(context.old_version, context.new_version);
                 } else {
                     context.upgrade = false;
                 }
@@ -1136,7 +1125,7 @@ var dash = (function (environment) {
         });
         open_ctx.request.addEventListener('success', function (event) {
             if (was_upgrade) {
-              return;
+                return;
             }
             open_ctx = decorate(event, open_ctx);
             open_ctx.upgrade = false;
@@ -1150,16 +1139,16 @@ var dash = (function (environment) {
             /* do nothing, here for friendly documention of IDB API */
         });
         open_ctx.request.addEventListener('error', function (event) {
-          if (!!event.target && !!event.target.error && "AbortError" !== event.target.error.name) {
-            open_ctx = decorate(event, open_ctx);
-            safeApply(their_on_error, [open_ctx]);
-          }
+            if (!!event.target && !!event.target.error && "AbortError" !== event.target.error.name) {
+                open_ctx = decorate(event, open_ctx);
+                safeApply(their_on_error, [open_ctx]);
+            }
         });
         open_ctx.request.addEventListener('abort', function (event) {
-          if (!!event.target && !!event.target.error && "AbortError" !== event.target.error.name) {
-            open_ctx = decorate(event, open_ctx);
-            safeApply(their_on_error, [open_ctx]);
-          }
+            if (!!event.target && !!event.target.error && "AbortError" !== event.target.error.name) {
+                open_ctx = decorate(event, open_ctx);
+                safeApply(their_on_error, [open_ctx]);
+            }
         });
     };
 
@@ -1167,19 +1156,19 @@ var dash = (function (environment) {
     /* Returns all stores syncronously, or asyncronously through
      * an on_success callback, given a database. */
     databases.get = function (get_ctx) {
-      if (is(webkitEnvironment, false)) {
-          return error(get_ctx);
-      }
-      get_ctx.request = db.webkitGetDatabaseNames();
-      get_ctx.request.addEventListener('error', function (event) {
-        get_ctx.event = event;
-        error(get_ctx);
-      });
-      get_ctx.request.addEventListener('success', function (event) {
-        get_ctx.event = event;
-        get_ctx.databases = event.target.result;
-        success(get_ctx);
-      });
+        if (is(webkitEnvironment, false)) {
+            return error(get_ctx);
+        }
+        get_ctx.request = db.webkitGetDatabaseNames();
+        get_ctx.request.addEventListener('error', function (event) {
+            get_ctx.event = event;
+            error(get_ctx);
+        });
+        get_ctx.request.addEventListener('success', function (event) {
+            get_ctx.event = event;
+            get_ctx.databases = event.target.result;
+            success(get_ctx);
+        });
     };
 
     /*
@@ -1415,7 +1404,6 @@ var dash = (function (environment) {
     };
 
 
-
     /* This method updates rows in a `database` `store` matching the
      * `index` cursor with the given `key_range`
      */
@@ -1463,7 +1451,7 @@ var dash = (function (environment) {
             result = kr.upperBound(right_bound, !right_open);
         } else if (exists(get_ctx.value)) {
             result = kr.only(get_ctx.value);
-        } else if (exists(left_bound)){
+        } else if (exists(left_bound)) {
             result = kr.lowerBound(left_bound);
         } else if (exists(right_bound)) {
             result = kr.upperBound(right_bound);
@@ -1571,9 +1559,12 @@ var dash = (function (environment) {
      * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      *
      */
-
-    if (!!module && !!module.exports) {
-        module.exports = Public;
+    try {
+        if (undefined !== module && !!module.exports) {
+            module.exports = Public;
+        }
+    } catch (e) {
+        /* Not node.js */
     }
     return Public;
 

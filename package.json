@@ -2,7 +2,7 @@
   "name": "dash",
   "version": "0.0.24",
   "description": "A promising IndexedDB wrapper, since 2011.",
-  "main": "lib/dash.dev.js",
+  "main": "dist/dash.js",
   "scripts": {
     "test": "grunt dev"
   },
