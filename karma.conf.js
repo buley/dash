@@ -18,8 +18,7 @@ module.exports = function(config) {
         sauceLabs: {
             testName: 'dash.js'
         },
-        customLaunchers: {
-        },
+        customLaunchers: {},
         captureTimeout: 300000,
         browserDisconnectTimeout: 5000,
         browserDisconnectTolerance: 3,

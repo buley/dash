@@ -7,7 +7,7 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 * Transaction and optionally version-free 
 * Declarative databases, object stores and indexes
 * 5KB gzipped (18KB uncompressed)
-* Tests passing on Chrome 41.0.2272 (Mac OS X 10.10.2), Firefox 35.0.0 (Mac OS X 10.10), Safari 8.0.4 (Mac OS X 10.10.2) and Opera 25.0.1614 (Mac OS X 10.10.2)
+* Tests passing Chrome 61.0.3163
 
 #### Installation Options
 
