@@ -1095,6 +1095,7 @@ var dash = (function (environment) {
     database.get = function (open_ctx, block_ct) {
         var their_upgrade = open_ctx.on_upgrade_needed,
             their_success = open_ctx.on_success,
+            their_on_blocked = open_ctx.on_blocked,
             their_on_error = open_ctx.on_error,
             was_upgrade = false,
             decorate = function (event, context) {
@@ -1112,7 +1113,6 @@ var dash = (function (environment) {
                 }
                 return context;
             };
-        console.log("opening", open_ctx, database);
         open_ctx.request = isNumber(open_ctx.version) ? db.open(open_ctx.database, open_ctx.version) : db.open(open_ctx.database);
         open_ctx.request.addEventListener('upgradeneeded', function (event) {
             was_upgrade = true;
@@ -1137,16 +1137,19 @@ var dash = (function (environment) {
             event.target.result.close();
         });
         open_ctx.request.addEventListener('blocked', function (event) {
-            /* do nothing, here for friendly documention of IDB API */
+            if (!!event.target) {
+                open_ctx = decorate(event, open_ctx);
+                safeApply(their_on_blocked, [open_ctx]);
+            }
         });
         open_ctx.request.addEventListener('error', function (event) {
-            if (!!event.target && !!event.target.error && "AbortError" !== event.target.error.name) {
+            if (!!event.target && (!event.target.error || "AbortError" !== event.target.error.name)) {
                 open_ctx = decorate(event, open_ctx);
                 safeApply(their_on_error, [open_ctx]);
             }
         });
         open_ctx.request.addEventListener('abort', function (event) {
-            if (!!event.target && !!event.target.error && "AbortError" !== event.target.error.name) {
+            if (!!event.target) {
                 open_ctx = decorate(event, open_ctx);
                 safeApply(their_on_error, [open_ctx]);
             }

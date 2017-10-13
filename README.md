@@ -3,7 +3,7 @@
 A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
 #### Key Features
-* Simpified callbacks through promises
+* Simplified callbacks through promises
 * Transaction and optionally version-free 
 * Declarative databases, object stores and indexes
 * 5KB gzipped (18KB uncompressed)
