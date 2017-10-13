@@ -1,4 +1,4 @@
-window.dashShorthand = window.dashShorthand || (function (environment) {
+var dashShorthand = (function (environment) {
   "use strict";
   var that,
   	 reduce = function(map, expr, context, reverse) {

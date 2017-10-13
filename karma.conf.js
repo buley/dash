@@ -5,19 +5,24 @@ module.exports = function(config) {
         files: [
             'specs/*.js',
             'specs/*/*.js',
-            'lib/dash.dev.js'
+            'dist/dash.js'
         ],
         exclude: [],
         reporters: ['progress'],
         port: 1412,
         colors: true,
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_DEBUG,
+        //config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+        logLevel: config.LOG_INFO,
         autoWatch: true,
-        //browsers: ['Chrome', 'Firefox' ],
-        //browsers: ['Chrome'],
-        browsers: ['Firefox'],
-        captureTimeout: 60000,
+        browsers: ['Firefox'], //default TravisCI browser
+        sauceLabs: {
+            testName: 'dash.js'
+        },
+        customLaunchers: {},
+        captureTimeout: 300000,
+        browserDisconnectTimeout: 5000,
+        browserDisconnectTolerance: 3,
+        browserNoActivityTimeout: 20000,
         singleRun: false,
         plugins: []
     });

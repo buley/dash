@@ -1,16 +1,17 @@
-# dash [![Build Status](https://travis-ci.org/buley/dash.png?branch=master)](https://travis-ci.org/buley/dash) [![Coverage Status](https://coveralls.io/repos/buley/dash/badge.png)](https://coveralls.io/r/buley/dash)
+# dash [![Build Status](https://travis-ci.org/buley/dash.png?branch=master)](https://travis-ci.org/buley/dash.svg) [![Coverage Status](https://coveralls.io/repos/buley/dash/badge.png?branch=master)](https://coveralls.io/r/buley/dash?branch=master)
 
 A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 
 #### Key Features
-* Simpified callbacks through promises
+* Simplified callbacks through promises
 * Transaction and optionally version-free 
 * Declarative databases, object stores and indexes
-* 4KB gzipped (15KB uncompressed)
+* 5KB gzipped (18KB uncompressed)
+* Tests passing Chrome 61.0.3163
 
 #### Installation Options
 
-* Download the [lastest build](https://raw.github.com/buley/dash/master/lib/dash.js)
+* Download [dash.js](https://raw.github.com/buley/dash/master/dist/dash.js)
 * Install via [bower](https://github.com/bower/bower): `bower install dash`
 
 #### Up And Running
@@ -26,7 +27,7 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 	    });
 	  });
 
-### Development Features
+### Developer Features
 
 * Free (MIT Licensed)
 * [Task-based](http://gruntjs.com/) Development Workflow
@@ -34,14 +35,10 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 * [Coverage](https://github.com/gotwarlost/istanbul) [Testing](https://github.com/karma-runner/karma-coverage)
 * Continuous [Integration](http://travis-ci.org/buley/dash) and [Coverage](https://github.com/cainus/node-coveralls) Reporting
 
-#### Documention
 
-[http://dashdb.com/#/docs](http://dashdb.com/#/docs)
+#### To Test
 
-#### Demos
+    npm install
+    grunt
 
-[http://dashdb.com/#/demos](http://dashdb.com/#/demos)
-
-#### License
-
-[http://dashdb.com/#/about](http://dashdb.com/#/about)
+Building requires `grunt-cli`

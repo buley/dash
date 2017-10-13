@@ -1,3 +1,4 @@
+.idea
 #vim swap files
 *.swp
 #node/npm

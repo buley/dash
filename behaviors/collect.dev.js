@@ -1,36 +1,40 @@
-window.dashCollect = window.dashCollect || (function (environment) {
+var dashCollect = (function(environment) {
   "use strict";
   var collections = {};
-  return [ function (state) {
-    if(this.isnt(state.context.collect, true)) {
+  return [function(state) {
+    if (this.isnt(state.context.collect, true)) {
       return state;
     }
     state.context.collector = this.random();
-    collections[ state.context.collector ] = [];
-    state.context.collection = collections[ state.context.collector ];
+    collections[state.context.collector] = [];
+    state.context.collection = collections[state.context.collector];
     return state;
-  }, function (state) {
-    if(this.isnt(state.context.collect, true)) {
+  }, function(state) {
+    if (this.isnt(state.context.collect, true)) {
       return state;
     }
     var promise = state.promise,
-        deferred = this.deferred(),
-        that = this;
+      deferred = this.deferred(),
+      that = this;
     promise(function(ste) {
-      if (that.exists(ste.context.entry)) { 
-        collections[ ste.context.collector ].push(ste.context.entry);
-        ste.context.collection = that.clone(collections[ ste.context.collector ]);
+      if (that.contains(['notify', 'error'], ste.type)) {
+        if (that.exists(ste.context.entry)) {
+          collections[ste.context.collector].push(ste.context.entry);
+          deferred.notify(ste);
+        } else if (that.exists(ste.context.error)) {
+          collections[ste.context.collector].push(ste.context.error);
+          deferred.reject(ste);
+        }
+      } else if ("resolve" === ste.type) {
+        if (that.exists(ste.context.collector)) {
+          ste.context.collection = that.clone(collections[ste.context.collector]);
+        }
+        delete ste.context.collector;
+        deferred.resolve(ste);
+        delete collections[ste.context.collector];
       }
-      deferred.resolve(ste);
-      if (that.contains(['resolve','error'], ste.type)) {
-        delete collections[ ste.context.collector ];
-      }
-    }, function(ctx) {
-        deferred.reject(ctx);
-    }, function(ctx) {
-        deferred.notify(ctx);
     });
     state.promise = deferred.promise;
     return state;
-  } ];
+  }];
 }(self));

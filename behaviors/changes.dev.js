@@ -1,4 +1,4 @@
-window.dashChanges = window.dashChanges || (function (environment) {
+var dashChanges = (function (environment) {
   "use strict";
   var callbackMap = {},
     changeMap = {},
@@ -46,7 +46,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
       var obj = ctx.changeid;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
-        callbacks: [],
+        callbacks: []
       };
       if (that.contains(['get.databases','get.database'], type)) {
         changeMap[ctx.database].callbacks.push(obj);
@@ -111,7 +111,7 @@ window.dashChanges = window.dashChanges || (function (environment) {
           key;
       changeMap[ctx.database] = changeMap[ctx.database] || {
         stores: {},
-        callbacks: [],
+        callbacks: []
       };
       if (that.contains(['remove.database', 'add.index', 'add.store'], type)) {
         that.each(changeMap[ctx.database].callbacks, function(callback) {

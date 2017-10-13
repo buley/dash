@@ -1,4 +1,4 @@
-window.dashLive = window.dashLive || (function (environment) {
+var dashLive = (function (environment) {
   "use strict";
   var that,
       liveMap = {},

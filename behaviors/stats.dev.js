@@ -1,4 +1,4 @@
-window.dashStats = window.dashStats || (function (environment) {
+var dashStats = (function (environment) {
   "use strict";
   var model = function () {
     return {
@@ -611,7 +611,7 @@ window.dashStats = window.dashStats || (function (environment) {
               index_key_path: context.index_key_path,
               limit: context.limit,
               store: context.store,
-              store_key_path: context.store_key_path,
+              store_key_path: context.store_key_path
             })(function (context) {
               state.context.total = context.total;
               processTotal(context.total);

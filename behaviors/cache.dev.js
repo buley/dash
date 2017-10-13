@@ -1,67 +1,67 @@
-self.dashCache = self.dashCache || (function (environment) {
+var dashCache = (function (environment) {
   "use strict";
   var that,
-  	cache = {},
-	set = function( request ) {	
-		var key = request.key || null
-		    , value = request.value || null
-		    , expires = request.expires || 3000 //in millisecons
-		    , current_date = new Date()
-		    , timestamp = ( current_date.getTime() + expires );
-		if( 'undefined' === typeof key || null === key ) {
-			return;
-		}
-		cache = cache || {};
-		cache[ key ] = {
-			data: value,
-			expire: timestamp
-		};
-		return cache[ key ].data;
-	},
-	get = function( request ) {
-		cache = cache || {};
-		var key = request.key || '';
-		if( 'undefined' === typeof key || null === key ) {
-			return null;
-		}
-		if(cache[ key ]) {
-			if(cache[ key ].expire > new Date().getTime()) {
-				cache[ key ].data = cache[ key ].data || {};
-				return cache[ key ].data;
-			}
-			delete cache[key];
-		}
-		return null;
-	},
-	zap = function( request ) {
-		cache = cache || {};
-		var key = request.key || ''
-		  , temp
-		  , keys = key.split('.')
-		  , result;
-		if( 'undefined' === typeof key || null === key ) {
-			return;
-		}
-		result = cache[ key ];
-		delete cache[ key ];
-		return result;
-	},
-	buildKey = function(key_ctx, type) {
-		var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key, key_ctx.limit ].reduce(function(acc, current){
-			acc = acc || [];
-			if(!!current) {
-				acc = [ acc, current ].join('.');
-			}
-			return acc;
-		});
-		return key;
-	},
-	scripts = ( !! environment.document) ? environment.document.getElementsByTagName("script") : [],
+    cache = {},
+    set = function( request ) { 
+        var key = request.key || null
+            , value = request.value || null
+            , expires = request.expires || 3000 //in millisecons
+            , current_date = new Date()
+            , timestamp = ( current_date.getTime() + expires );
+        if( 'undefined' === typeof key || null === key ) {
+            return;
+        }
+        cache = cache || {};
+        cache[ key ] = {
+            data: value,
+            expire: timestamp
+        };
+        return cache[ key ].data;
+    },
+    get = function( request ) {
+        cache = cache || {};
+        var key = request.key || '';
+        if( 'undefined' === typeof key || null === key ) {
+            return null;
+        }
+        if(cache[ key ]) {
+            if(cache[ key ].expire > new Date().getTime()) {
+                cache[ key ].data = cache[ key ].data || {};
+                return cache[ key ].data;
+            }
+            delete cache[key];
+        }
+        return null;
+    },
+    zap = function( request ) {
+        cache = cache || {};
+        var key = request.key || ''
+          , temp
+          , keys = key.split('.')
+          , result;
+        if( 'undefined' === typeof key || null === key ) {
+            return;
+        }
+        result = cache[ key ];
+        delete cache[ key ];
+        return result;
+    },
+    buildKey = function(key_ctx, type) {
+        var key = [ key_ctx.database, key_ctx.store, key_ctx.index, key_ctx.key, key_ctx.primary_key, key_ctx.limit ].reduce(function(acc, current){
+            acc = acc || [];
+            if(!!current) {
+                acc = [ acc, current ].join('.');
+            }
+            return acc;
+        });
+        return key;
+    },
+    scripts = ( !! environment.document) ? environment.document.getElementsByTagName("script") : [],
     libraryScript = scripts[scripts.length - 1] || null,
-    libraryPath =( null !== libraryScript && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : null,
-	workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
-	worker = workerEnvironment ? null : new Worker(libraryPath),
-	workQueue = {},
+    libraryPath =( null !== libraryScript && null !== libraryScript.src.match(/cache/) && null === libraryScript.src.match(/chrome-extension/) ) ? libraryScript.src : self.currentScript || null,
+    workerEnvironment = null !== environment.constructor.toString().match(/WorkerGlobalScope/),
+    worker = !!workerEnvironment && !!libraryPath && null !== libraryPath.match(/cache/) && undefined !== Worker ? new Worker(libraryPath) : null,
+    workQueue = {},
     workRegister = function (worker, message, context, success, error, notify) {
       var id = that.random(),
         callback = function (e) {
@@ -106,13 +106,16 @@ self.dashCache = self.dashCache || (function (environment) {
         error: error,
         notify: notify
       };
-      worker.addEventListener('message', callback);
-
-      worker.postMessage({
-        method: message,
-        context: clean(context),
-        uid: id
-      });
+      if ( !!worker ) {
+          worker.addEventListener('message', callback);
+          worker.postMessage({
+            method: message,
+            context: clean(context),
+            uid: id
+          });
+      } else {
+        throw new Error('non-Worker interface not yet implemented');
+      }
       return id;
     },
     workDispatch = function (message, context) {
@@ -128,10 +131,10 @@ self.dashCache = self.dashCache || (function (environment) {
         },
         getData = function (data) {
           if( that.isObject(data) )  {
-	          that.iterate(callbacks, function (key, val) {
-	            data[key] = val;
-	          });
-  		  }
+              that.iterate(callbacks, function (key, val) {
+                data[key] = val;
+              });
+          }
           return data;
         };
       that.iterate(callbacks, function (key, val) {
@@ -156,51 +159,51 @@ self.dashCache = self.dashCache || (function (environment) {
         context = input.context,
         expires = input.expires,
         prune = function(obj) {
-        	var isReducible = function(input) {
-        		var attrs = 0,
-        			attr;
-        		if ( undefined === input || null === input || 'string' === typeof input || 'number' === typeof input || 'function' === typeof input.slice ) {
-        			return false;
-        		}
-        		for ( attr in input ) {
-        			if ( true === input.hasOwnProperty(attr) ) {
-        				attrs += 1;
-        			}
-        		}
-        		return ( attrs >= 1 ) ? true : false;
-        	}, reduce = function(input) {
-        		var attrs = {},
-        			attr;
-        		for ( attr in input ) {
-        			if ( true === input.hasOwnProperty(attr) ) {
-        				if ( !!input[ attr ] && !!input[ attr ].expire && ( input[ attr ].expire < new Date().getTime() ) ) {
-        				  //skip
-        				} else if ( isReducible(input[ attr ] ) ) {
-	        				attrs[ attr ] = reduce(input[ attr ]);
-        				} else {
-	        				attrs[ attr ] = input[ attr ];
-        				}
-        			}
-        		}
-        		return attrs
-        	};
-        	return reduce(obj);
+            var isReducible = function(input) {
+                var attrs = 0,
+                    attr;
+                if ( undefined === input || null === input || 'string' === typeof input || 'number' === typeof input || 'function' === typeof input.slice ) {
+                    return false;
+                }
+                for ( attr in input ) {
+                    if ( true === input.hasOwnProperty(attr) ) {
+                        attrs += 1;
+                    }
+                }
+                return ( attrs >= 1 ) ? true : false;
+            }, reduce = function(input) {
+                var attrs = {},
+                    attr;
+                for ( attr in input ) {
+                    if ( true === input.hasOwnProperty(attr) ) {
+                        if ( !!input[ attr ] && !!input[ attr ].expire && ( input[ attr ].expire < new Date().getTime() ) ) {
+                          //skip
+                        } else if ( isReducible(input[ attr ] ) ) {
+                            attrs[ attr ] = reduce(input[ attr ]);
+                        } else {
+                            attrs[ attr ] = input[ attr ];
+                        }
+                    }
+                }
+                return attrs
+            };
+            return reduce(obj);
         },
         end = function (ctx) {
           input.context = ctx;
           input.type = 'success';
           environment.postMessage(input);
           setTimeout(function() {
-          	cache = prune(cache);
+            cache = prune(cache);
           });
         };
       if (method === 'get' || method === 'set' || method === 'delete') {
         if ( method === 'get' ) {
-        	end(get(context));
+            end(get(context));
         } else if ( method === 'set' ) {
-        	end(set(context));
+            end(set(context));
         } else if ( method === 'delete' ) {
-        	end(zap(context));
+            end(zap(context));
         }
       } else {
         input.type = 'error';
@@ -212,68 +215,68 @@ self.dashCache = self.dashCache || (function (environment) {
       }
     }, false);
   } else {
-	  return [ function (state) {
-	  	that = this;
-	    if(this.isEmpty(state.context.cache)) {
-	      return state;
-	    }
-	    var promise = state.promise,
-	    	outward = this.deferred(),
-	    	inward,
-	    	response,
-	    	callbacks = {
-		        on_success: state.context.on_success,
-		        on_error: state.context.on_error,
-		        on_abort: state.context.on_abort,
-		        on_complete: state.context.on_complete,
-		        on_upgrade_needed: state.context.on_upgrade_needed,
-		        on_blocked: state.context.on_blocked,
-		        on_close: state.context.on_close
-		      }
-	    if (this.contains(['get.entry'], state.method)) {
-		    inward = workDispatch('get', { key: buildKey(state.context) } );
-	    	inward(function(response) {
-	    		if(that.isEmpty(response)) {
-	    			state.context.cached = false;
-	    		} else {
-		    		state = response;
-			    	state.promise = outward.promise;
-			    	state.context.cached = true;
-			    	that.iterate(callbacks, function(key, val) {
-			    		if (!that.isEmpty(val)) {
-				    		state.context[key] = val;
-			    		}
-			    	});
-			    	state.type = 'resolve';
-			    	outward.resolve(state);
-	    		}
-	    	});
-	    }
-	    return state;
-	  }, function (state) {
-	    if(this.is(state.context.cached, true) || this.is(state.context.cache, false)) {
-	      return state;
-	    }
-	    var promise = state.promise,
-	    	outward = this.deferred(),
-	    	inward,
-	    	response,
-	    	args;
-	    if (this.contains(['resolve','error'], state.type)) {
-	    	state.promise = outward.promise;
-	   	  args = { key: buildKey(state.context, state.type) } ;
-	      if ( !this.isEmpty(state.context.purge) || this.contains(['remove.entry', 'remove.entries', 'remove.index', 'remove.store', 'remove.database' ], state.method) ) {
-		    inward = workDispatch('zap', args );
-	      } else {
-	      	args.expires = state.context.expires || 3000;
-	      	args.value = state;
-		    inward = workDispatch('set', args );
-	  	  }
-	  	  inward(function(ctx2){
-		    outward.resolve(ctx2);
-	  	  });
-		}
-	    return state;
-	  } ];
-	}
+      return [ function (state) {
+        that = this;
+        if(this.isEmpty(state.context.cache)) {
+          return state;
+        }
+        var promise = state.promise,
+            outward = this.deferred(),
+            inward,
+            response,
+            callbacks = {
+                on_success: state.context.on_success,
+                on_error: state.context.on_error,
+                on_abort: state.context.on_abort,
+                on_complete: state.context.on_complete,
+                on_upgrade_needed: state.context.on_upgrade_needed,
+                on_blocked: state.context.on_blocked,
+                on_close: state.context.on_close
+              }
+        if (this.contains(['get.entry'], state.method)) {
+            inward = workDispatch('get', { key: buildKey(state.context) } );
+            inward(function(response) {
+                if(that.isEmpty(response)) {
+                    state.context.cached = false;
+                } else {
+                    state = response;
+                    state.promise = outward.promise;
+                    state.context.cached = true;
+                    that.iterate(callbacks, function(key, val) {
+                        if (!that.isEmpty(val)) {
+                            state.context[key] = val;
+                        }
+                    });
+                    state.type = 'resolve';
+                    outward.resolve(state);
+                }
+            });
+        }
+        return state;
+      }, function (state) {
+        if(this.is(state.context.cached, true) || this.is(state.context.cache, false)) {
+          return state;
+        }
+        var promise = state.promise,
+            outward = this.deferred(),
+            inward,
+            response,
+            args;
+        if (this.contains(['resolve','error'], state.type)) {
+            state.promise = outward.promise;
+          args = { key: buildKey(state.context, state.type) } ;
+          if ( !this.isEmpty(state.context.purge) || this.contains(['remove.entry', 'remove.entries', 'remove.index', 'remove.store', 'remove.database' ], state.method) ) {
+            inward = workDispatch('zap', args );
+          } else {
+            args.expires = state.context.expires || 3000;
+            args.value = state;
+            inward = workDispatch('set', args );
+          }
+          inward(function(ctx2){
+            outward.resolve(ctx2);
+          });
+        }
+        return state;
+      } ];
+    }
 }(self));
