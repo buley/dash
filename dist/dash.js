@@ -391,7 +391,7 @@ var dash = (function (environment) {
                             name: results_ctx[k].name,
                             indexNames: toArray(results_ctx[k].indexNames),
                             autoIncrement: results_ctx[k].autoIncrement,
-                            keyPath: results_ctx[k].keyPath
+                            keyPath:  results_ctx[k].keyPath
                         }, 'store', results_ctx);
                     } else if (is(k, 'idx')) {
                         obj[k] = providerCache({
@@ -673,7 +673,7 @@ var dash = (function (environment) {
                                 //This is where the object store is actually created
                                 upg_os_ctx.objectstore = upg_os_ctx.db.createObjectStore(upg_os_ctx.store, {
                                     keyPath: isString(upg_os_ctx.store_key_path) ? upg_os_ctx.store_key_path : null,
-                                    autoIncrement: isBoolean(upg_os_ctx.auto_increment) ? upg_os_ctx.auto_increment : false
+                                    autoIncrement: isString(upg_os_ctx.store_key_path) ? upg_os_ctx.auto_increment : true
                                 });
                                 os_ctx.request.transaction.addEventListener('complete', function (e) {
                                     upg_os_ctx.db.close();
@@ -1089,15 +1089,18 @@ var dash = (function (environment) {
     };
 
     /* This method loads a database given a database name and version.
-     * The database can be retrived on successful callback via the `db`
+     * The database can be retrieved on successful callback via the `db`
      * attribute on the context object */
     // TODO: Localize open_ctx.request and provide any results from within this method
     database.get = function (open_ctx, block_ct) {
-        var their_upgrade = open_ctx.on_upgrade_needed,
+        var that = this,
+            their_upgrade = open_ctx.on_upgrade_needed,
+            their_abort = open_ctx.on_abort,
             their_success = open_ctx.on_success,
             their_on_blocked = open_ctx.on_blocked,
             their_on_error = open_ctx.on_error,
             was_upgrade = false,
+            was_success = false,
             decorate = function (event, context) {
                 context.event = event;
                 context.transaction = context.request ? context.request.transaction : event.target.transaction;
@@ -1122,12 +1125,13 @@ var dash = (function (environment) {
             open_ctx.db = event.target.result;
             open_ctx.on_upgrade_needed = their_upgrade;
             upgrade_needed(open_ctx);
-            event.target.result.close();
         });
         open_ctx.request.addEventListener('success', function (event) {
             if (was_upgrade) {
+                event.target.result.close();
                 return;
             }
+            was_success = true;
             open_ctx = decorate(event, open_ctx);
             open_ctx.upgrade = false;
             open_ctx.opened = true;
@@ -1137,19 +1141,16 @@ var dash = (function (environment) {
             event.target.result.close();
         });
         open_ctx.request.addEventListener('blocked', function (event) {
-            if (!!event.target) {
-                open_ctx = decorate(event, open_ctx);
-                safeApply(their_on_blocked, [open_ctx]);
-            }
+            /* do nothing, here for friendly documention of IDB API */
         });
         open_ctx.request.addEventListener('error', function (event) {
-            if (!!event.target && (!event.target.error || "AbortError" !== event.target.error.name)) {
+            if (!!event.target && !!event.target.error && "AbortError" !== event.target.error.name) {
                 open_ctx = decorate(event, open_ctx);
                 safeApply(their_on_error, [open_ctx]);
             }
         });
         open_ctx.request.addEventListener('abort', function (event) {
-            if (!!event.target) {
+            if (!!event.target && !!event.target.error && "AbortError" !== event.target.error.name) {
                 open_ctx = decorate(event, open_ctx);
                 safeApply(their_on_error, [open_ctx]);
             }

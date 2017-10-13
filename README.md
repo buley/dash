@@ -19,13 +19,15 @@ A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
 	/* There's no setup required to get started using IndexedDB with dash. */
 	/* Just start adding entries and any declared databases, object stores and 
 	 * indexes will be provided */
-	dash.add.object({ database: 'foo', store: 'bar', data: { baz: new Date().getTime() } )
-	  (function(add_context) {
-	    dash.get.object(add_context)
-	    (function(get_context) {
-	      console.log('Data', get_context.entry)
+	dash.add.entry({
+	    database: 'foo',
+	    store: 'bar',
+	    data: { baz: new Date().getTime() }
+	})((add) => {
+	    dash.get.entry(add)((get) => {
+	      console.log('Data', get.entry)
 	    });
-	  });
+	});
 
 ### Developer Features
 

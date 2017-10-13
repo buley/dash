@@ -45,7 +45,7 @@
 					expect(this.context.db.name).toBe(this.dbname);
 					expect(this.context.objectstore.name).toBe(this.storename);
 					expect(this.context.objectstore.keyPath).toBe(null);
-					expect(this.context.objectstore.autoIncrement).toBe(false);
+					expect(this.context.objectstore.autoIncrement).toBe(true);
 				});
 
 			});
