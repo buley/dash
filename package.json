@@ -30,7 +30,8 @@
   "dependencies": {
     "@firebase/database": "^1.0.7",
     "idb": "^8.0.0",
-    "jest-environment-jsdom": "^29.7.0"
+    "jest-environment-jsdom": "^29.7.0",
+    "ts-loader": "^9.5.1"
   },
   "bugs": {
     "url": "https://github.com/buley/dash/issues"
