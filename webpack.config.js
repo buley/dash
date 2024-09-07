@@ -17,6 +17,7 @@ module.exports = {
   output: {
     filename: 'dash.min.js',
     path: path.resolve(__dirname, 'dist'),
+    clean: true,
   },
   devServer: {
     static: path.join(__dirname, "dist"),
