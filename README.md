@@ -24,10 +24,10 @@ Here's a basic example of how to use Dash:
 import dash from 'dash-indexeddb';
 
 // Open a database
-dash.database.open({ database: 'myDB', version: 1 })
+dash.get.database({ database: 'myDB', version: 1 })
   .then(ctx => {
     // Create an object store
-    return dash.stores.add({
+    return dash.add.store({
       ...ctx,
       store: 'myStore',
       store_key_path: 'id',
@@ -36,7 +36,7 @@ dash.database.open({ database: 'myDB', version: 1 })
   })
   .then(ctx => {
     // Add an entry to the store
-    return dash.entry.add({
+    return dash.add.entry({
       ...ctx,
       data: { name: 'John Doe', age: 30 }
     });
