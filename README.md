@@ -1,4 +1,5 @@
 # Dash
+## Version: 0.0.30
 
 Dash is a simple, lightweight wrapper around the IndexedDB API. It provides a promise-based interface for working with IndexedDB, making it easier to perform database operations in web applications.
 
@@ -24,10 +25,10 @@ Here's a basic example of how to use Dash:
 import dash from '@buley/dash';
 
 // Open a database
-dash.database.open({ database: 'myDB', version: 1 })
+dash.get.database({ database: 'myDB', version: 1 })
   .then(ctx => {
     // Create an object store
-    return dash.stores.add({
+    return dash.add.store({
       ...ctx,
       store: 'myStore',
       store_key_path: 'id',
@@ -36,7 +37,7 @@ dash.database.open({ database: 'myDB', version: 1 })
   })
   .then(ctx => {
     // Add an entry to the store
-    return dash.entry.add({
+    return dash.add.entry({
       ...ctx,
       data: { name: 'John Doe', age: 30 }
     });
@@ -51,35 +52,38 @@ dash.database.open({ database: 'myDB', version: 1 })
 
 ## API Reference
 
-Dash provides methods for working with databases, stores, indexes, and entries. Here are some of the key modules:
+Dash provides methods for working with databases, stores, indexes, and entries. The API is structured as `dash.<action>.<target>`. Here are some key operations:
 
-- `dash.database`: Methods for working with databases (open, close, delete)
-- `dash.stores`: Methods for working with object stores (add, remove, get)
-- `dash.indexes`: Methods for working with indexes (add, remove, get)
-- `dash.entry`: Methods for working with individual entries (add, get, put, remove, update, count)
+- Database operations:
+  - `dash.get.database`: Open a database
+  - `dash.remove.database`: Delete a database
+- Store operations:
+  - `dash.add.store`: Create a new object store
+  - `dash.remove.store`: Delete an object store
+  - `dash.get.stores`: Get all object stores
+- Index operations:
+  - `dash.add.index`: Create a new index
+  - `dash.remove.index`: Delete an index
+  - `dash.get.indexes`: Get all indexes for a store
+- Entry operations:
+  - `dash.add.entry`: Add a new entry
+  - `dash.get.entry`: Get an entry
+  - `dash.update.entry`: Update an entry
+  - `dash.remove.entry`: Delete an entry
+  - `dash.count.entries`: Count entries in a store
 
-Each module provides methods that return promises, allowing for easy chaining of operations.
+Each method returns a promise, allowing for easy chaining of operations.
 
 ## Behaviors
 
 Dash supports custom behaviors that can be added to modify or extend its functionality. Behaviors can be used to implement logging, validation, or any custom logic you need.
 
 ```javascript
-dash.behaviors.add((ctx) => {
+dash.add.behavior((ctx) => {
   console.log('Operation:', ctx.type, ctx.method);
   return ctx;
 });
 ```
-
-### Testing
-
-To run unit tests:
-
-```
-npm run test
-```
-
-[![Coverage Status](https://coveralls.io/repos/github/buley/dash/badge.svg?branch=master)](https://coveralls.io/github/buley/dash?branch=master)
 
 ## Contributing
 
@@ -91,8 +95,4 @@ This project is licensed under the MIT License.
 
 ## Author
 
-[Taylor Buley](https://buley.info) (@taylorbuley)
-
----
-
-Version: 0.0.30
+Taylor Buley (@taylorbuley)
