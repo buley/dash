@@ -4,33 +4,29 @@
   "description": "A promising IndexedDB wrapper, since 2011.",
   "main": "dist/dash.js",
   "scripts": {
-    "test": "grunt dev"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/editor/dash.git"
+    "url": "git://github.com/buley/dash.git"
   },
   "keywords": [],
   "author": "Taylor Buley <taylor.buley@gmail.com>",
-  "dependencies": {},
   "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.5.4",
     "coveralls": "*",
-    "grunt": "*",
-    "grunt-karma": "*",
-    "grunt-karma-coveralls": "*",
-    "jasmine-core": "~2.2.0",
-    "karma": "*",
-    "karma-chrome-launcher": "*",
-    "karma-coverage": "*",
-    "karma-firefox-launcher": "*",
-    "karma-ie-launcher": "^0.1.5",
-    "karma-jasmine": "~0.2.0",
-    "karma-opera-launcher": "^0.1.0",
-    "karma-safari-launcher": "^0.1.1",
-    "karma-sauce-launcher": "^0.2.10",
-    "sauce-connect-launcher": "^0.10.1"
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   },
-  "peerDependencies": {},
   "license": "MIT",
-  "contributors": []
+  "contributors": [],
+  "dependencies": {
+    "idb": "^8.0.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
 }
