@@ -139,33 +139,65 @@ describe('indexesMethods', () => {
     });
 
     describe('countEntries', () => {
-        it('should count entries from an index and call on_success with the count', async () => {
-            const mockRequest = {
-                addEventListener: jest.fn((event, callback) => {
-                    if (event === 'success') {
-                        callback();  // Simulate success
-                    }
-                }),
-                result: 10
-            };
-
+        it('should count entries in the object store index and call on_success', async () => {
             const mockObjectStore = {
-                index: jest.fn(() => ({
-                    count: jest.fn(() => mockRequest)
-                }))
+                index: jest.fn().mockReturnValue({
+                    count: jest.fn().mockReturnValue({
+                        addEventListener: (event: string, callback: () => void) => {
+                            if (event === 'success') callback();
+                        },
+                        result: 5
+                    })
+                })
             };
-
+    
             const count_ctx: DashContext = {
                 objectstore: mockObjectStore as unknown as IDBObjectStore,
-                index: 'indexName',
+                index: 'testIndex',
                 on_success: mockSuccessCallback
             };
-
+    
             await indexesMethods.countEntries(count_ctx);
-
-            expect(mockObjectStore.index).toHaveBeenCalledWith('indexName');
+    
+            expect(mockObjectStore.index).toHaveBeenCalledWith('testIndex');
             expect(mockSuccessCallback).toHaveBeenCalledWith(count_ctx);
-            expect(count_ctx.total).toBe(10);
+            expect(count_ctx.total).toBe(5);
         });
+    
+        
+        it('should handle errors and call on_error', async () => {
+            const mockObjectStore = {
+                index: jest.fn().mockReturnValue({
+                    count: jest.fn().mockReturnValue({
+                        addEventListener: (event: string, callback: (event: any) => void) => {
+                            if (event === 'error') {
+                                const mockErrorEvent = { target: { error: new Error('Test Error') } };
+                                callback(mockErrorEvent);
+                            }
+                        }
+                    })
+                })
+            };
+        
+            const count_ctx: DashContext = {
+                objectstore: mockObjectStore as unknown as IDBObjectStore,
+                index: 'testIndex',
+                on_error: mockErrorCallback
+            };
+        
+            try {
+                // Await the function call
+                await indexesMethods.countEntries(count_ctx);
+            } catch (ctx: any) {
+                // Expect the error to be part of the returned context
+                expect(ctx.error).toEqual(new Error('Test Error'));
+        
+                // Ensure the error callback is called with the correct context
+                expect(mockErrorCallback).toHaveBeenCalledWith(count_ctx);
+            }
+        });
+        
+        
     });
+    
 });

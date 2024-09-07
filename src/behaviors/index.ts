@@ -133,4 +133,8 @@ export const behaviorMethods = {
 
 };
 
-export default behaviorMethods;
+export default {
+    ...behaviorMethods,
+    behaviorFilters,
+    behaviorActions
+};
