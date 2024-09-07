@@ -181,68 +181,119 @@ export interface DashProviderCacheObj {
  * @returns {Promise<DashContext>} The promise object.
  * @private
  */
-export function cloneError(err: Error): Error {
-    const clone = new Error(err.message);
-    clone.name = err.name;
-    return clone;
-}
+export const cloneError = (error: Error): Error => {
+    const clonedError = new Error(error.message);
+    
+    // Optionally, clone the stack trace if it's available
+    if (error.stack) {
+        clonedError.stack = error.stack;
+    }
+
+    // Clone custom properties
+    Object.keys(error).forEach((key) => {
+        (clonedError as any)[key] = (error as any)[key];
+    });
+
+    return clonedError;
+};
 
 // Clone function that performs a deep copy of an object, array, or function
-export const clone = (obj: any): any => {
-    if (typeof obj === 'function') {
-        const clo = function (this: any, ...args: any[]) {
-            return obj.apply(this, args);
-        };
-        for (const key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                (clo as { [key: string]: any })[key] = obj[key];
-            }
-        }
-        return clo;
+export const clone = (source: any): any => {
+    if (source === null || typeof source !== 'object') {
+        return source;
     }
-    if (typeof obj === 'number') return parseInt(obj.toString(), 10);
-    if (Array.isArray(obj)) return obj.map(clone);
-    if (typeof obj === 'object' && obj !== null) {
-        const clo: { [key: string]: any } = {};
-        for (const key in obj) {
-            clo[key] = clone(obj[key]);
-        }
-        return clo;
+
+    // Handle arrays
+    if (Array.isArray(source)) {
+        return source.map(item => clone(item));
     }
-    return obj;
+
+    // Handle functions (return the same function reference)
+    if (typeof source === 'function') {
+        return source;
+    }
+
+    // Handle objects
+    const copy: { [key: string]: any } = {};
+    for (const key in source) {
+        if (source.hasOwnProperty(key)) {
+            copy[key] = clone(source[key]);  // Recursively clone properties
+        }
+    }
+    return copy;
 };
 
 // Checks if an item exists in an array or object
-export const contains = (haystack: any, needle: any, use_key?: boolean): boolean => {
-    if (Array.isArray(haystack)) {
-        return haystack.some((value, key) => (use_key ? key === needle : value === needle));
-    } else if (typeof haystack === 'object') {
-        return Object.keys(haystack).some((key) => (use_key ? key === needle : haystack[key] === needle));
+export const contains = (str: string, substr: string): boolean => {
+    if (typeof str !== 'string' || typeof substr !== 'string') {
+        return false; // Ensure both inputs are strings
     }
-    return false;
+
+    // An empty substring should always return true
+    if (substr === '') {
+        return true;
+    }
+
+    return str.includes(substr); // Use built-in includes method for substring checking
 };
 
 // Checks whether a value exists
-export const exists = (mixed_var: any): boolean => !isEmpty(mixed_var);
+export const exists = (value: any): boolean => {
+    return value !== null && value !== undefined;
+};
 
 // Checks if a variable is empty
 export const isEmpty = (mixed_var: any): boolean => {
+    // Handle null and undefined cases
+    if (mixed_var === null || mixed_var === undefined) {
+        return true;
+    }
+
+    // Handle objects (including arrays)
     if (typeof mixed_var === 'object') {
         return Object.keys(mixed_var).length === 0;
     }
-    return !mixed_var;
+
+    // Handle strings (empty string should return true)
+    if (typeof mixed_var === 'string') {
+        return mixed_var.length === 0;
+    }
+
+    // For numbers and booleans, they are considered "not collections" and hence should return true
+    if (typeof mixed_var === 'number' || typeof mixed_var === 'boolean') {
+        return true;
+    }
+
+    return false;
 };
 
-// Utility functions to check the type of variables
-export const is = (type: string, mixed_var: any): boolean => typeof mixed_var === type;
-export const isnt = (type: string, mixed_var: any): boolean => !is(type, mixed_var);
+export const is = (a: any, b: any): boolean => {
+    return Object.is(a, b);
+};
+
+export const isnt = (a: any, b: any): boolean => {
+    return a !== b;
+};
 export const isArray = Array.isArray;
 export const isBoolean = (mixed_var: any): boolean => typeof mixed_var === 'boolean';
 export const isRegEx = (mixed_var: any): boolean => mixed_var instanceof RegExp;
-export const isFunction = (mixed_var: any): boolean => typeof mixed_var === 'function';
-export const isObject = (mixed_var: any): boolean => typeof mixed_var === 'object' && mixed_var !== null && !Array.isArray(mixed_var);
+export const isFunction = (value: any): boolean => {
+    if (typeof value !== 'function') {
+        return false;
+    }
+
+    // Check if it's a class constructor by examining the function's string representation
+    const isClass = /^class\s/.test(Function.prototype.toString.call(value));
+    return !isClass;
+};
+
+export const isObject = (value: any): boolean => {
+    return Object.prototype.toString.call(value) === '[object Object]';
+};
 export const isNumber = (mixed_var: any): boolean => typeof mixed_var === 'number';
-export const isString = (mixed_var: any): boolean => typeof mixed_var === 'string';
+export const isString = (value: any): boolean => {
+    return typeof value === 'string' || value instanceof String;
+};
 
 // Applies a function if it's defined
 export const safeApply = (fn: Function | undefined, args: any[], context?: any, err?: Function): any => {
