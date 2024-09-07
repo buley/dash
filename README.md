@@ -71,6 +71,16 @@ dash.behaviors.add((ctx) => {
 });
 ```
 
+### Testing
+
+To run unit tests:
+
+```
+npm run test
+```
+
+[![Coverage Status](https://coveralls.io/repos/github/buley/dash/badge.svg?branch=master)](https://coveralls.io/github/buley/dash?branch=master)
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
