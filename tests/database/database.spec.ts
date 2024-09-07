@@ -78,7 +78,7 @@ describe('databaseMethods', () => {
             mockRequest.onsuccess({ target: { result: undefined } } as any);
 
             await expect(resultPromise).rejects.toMatchObject({
-                error: { message: 'missing', name: 'DashNoEntry' },
+                error: { message: 'Missing entry', name: 'DashNoEntry' },
             });
         });
     });

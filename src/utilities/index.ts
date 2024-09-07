@@ -18,8 +18,8 @@
  * @property {any} [data] - The data.
  * @property {number} [amount] - The amount.
  * @property {string} [type] - The type.
- * @property {Function} [on_success] - The on_success function.
- * @property {Function} [on_error] - The on_error function.
+ * @property {Function} [onSuccess] - The onSuccess function.
+ * @property {Function} [onError] - The onError function.
  */
 export interface DashContext {
     [key: string]: any;
@@ -36,8 +36,8 @@ export interface DashContext {
     data?: any;
     amount?: number;
     type?: string;
-    on_success?: (ctx: DashContext) => void;
-    on_error?: (ctx: DashContext) => void;
+    onSuccess?: (ctx: DashContext) => void;
+    onError?: (ctx: DashContext) => void;
 }
 
 /**

@@ -14,7 +14,7 @@ describe('storeMethods', () => {
     });
 
     describe('clear', () => {
-        it('should clear the object store and call on_success', async () => {
+        it('should clear the object store and call onSuccess', async () => {
             const mockRequest = {
                 addEventListener: jest.fn((event, callback) => {
                     if (event === 'success') {
@@ -29,7 +29,7 @@ describe('storeMethods', () => {
                 objectstore: {
                     clear: jest.fn(() => mockRequest),
                 } as unknown as IDBObjectStore,
-                on_success: mockSuccessCallback,
+                onSuccess: mockSuccessCallback,
             };
         
             await storeMethods.clear(clear_ctx);
@@ -47,7 +47,7 @@ describe('storeMethods', () => {
                 objectstore: {
                     clear: jest.fn(() => mockRequest),
                 } as unknown as IDBObjectStore,
-                on_error: mockErrorCallback,
+                onError: mockErrorCallback,
             };
 
             return storeMethods.clear(clear_ctx).catch((ctx: DashContext) => {
@@ -59,7 +59,7 @@ describe('storeMethods', () => {
     });
 
     describe('remove', () => {
-        it('should remove an entry from the object store and call on_success', () => {
+        it('should remove an entry from the object store and call onSuccess', () => {
             const mockRequest = { addEventListener: jest.fn((event: string, callback: EventListenerOrEventListenerObject) => {
                 if (event === 'success') (callback as EventListener)(new Event('success'));
             }) };
@@ -69,7 +69,7 @@ describe('storeMethods', () => {
                     delete: jest.fn(() => mockRequest),
                 } as unknown as IDBObjectStore,
                 key: 'testKey',
-                on_success: mockSuccessCallback,
+                onSuccess: mockSuccessCallback,
             };
 
             return storeMethods.remove(remove_ctx).then((ctx: DashContext) => {
@@ -88,7 +88,7 @@ describe('storeMethods', () => {
                     delete: jest.fn(() => mockRequest),
                 } as unknown as IDBObjectStore,
                 key: 'testKey',
-                on_error: mockErrorCallback,
+                onError: mockErrorCallback,
             };
 
             return storeMethods.remove(remove_ctx).catch((ctx: DashContext) => {
@@ -100,7 +100,7 @@ describe('storeMethods', () => {
     });
 
     describe('get', () => {
-        it('should retrieve an entry from the object store and call on_success', () => {
+        it('should retrieve an entry from the object store and call onSuccess', () => {
             const mockRequest = { addEventListener: jest.fn((event: string, callback: EventListenerOrEventListenerObject) => {
                 if (event === 'success') (callback as EventListener)(new Event('success'));
             }), result: 'testEntry' };
@@ -110,7 +110,7 @@ describe('storeMethods', () => {
                     get: jest.fn(() => mockRequest),
                 } as unknown as IDBObjectStore,
                 key: 'testKey',
-                on_success: mockSuccessCallback,
+                onSuccess: mockSuccessCallback,
             };
 
             return storeMethods.get(get_ctx).then((ctx: DashContext) => {
@@ -130,7 +130,7 @@ describe('storeMethods', () => {
                     get: jest.fn(() => mockRequest),
                 } as unknown as IDBObjectStore,
                 key: 'testKey',
-                on_error: mockErrorCallback,
+                onError: mockErrorCallback,
             };
 
             return storeMethods.get(get_ctx).catch((ctx: DashContext) => {
@@ -150,7 +150,7 @@ describe('storeMethods', () => {
                     get: jest.fn(() => mockRequest),
                 } as unknown as IDBObjectStore,
                 key: 'testKey',
-                on_error: mockErrorCallback,
+                onError: mockErrorCallback,
             };
 
             return storeMethods.get(get_ctx).catch((ctx: DashContext) => {

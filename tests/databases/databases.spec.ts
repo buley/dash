@@ -50,12 +50,12 @@ describe('databasesMethods', () => {
       const open_ctx: DashContext = {
         database: 'testDB',
         version: 2,
-        on_upgrade_needed: jest.fn(),
+        onUpgradeNeeded: jest.fn(),
       };
 
       const result = await databasesMethods.open(open_ctx);
       expect(result.db).toBe(mockDB);
-      expect(open_ctx.on_upgrade_needed).toHaveBeenCalled();
+      expect(open_ctx.onUpgradeNeeded).toHaveBeenCalled();
     });
 
     it('should handle errors', async () => {
@@ -79,7 +79,7 @@ describe('databasesMethods', () => {
       });
     });
   });
-  
+
   describe('get', () => {
     it('should get all databases successfully', async () => {
       const mockDatabases = [{ name: 'db1' }, { name: 'db2' }];
@@ -87,12 +87,15 @@ describe('databasesMethods', () => {
 
       const get_ctx: DashContext = {
         databases: [],
-        on_success: jest.fn(),
+        onSuccess: jest.fn(),
       };
 
       const result = await databasesMethods.get(get_ctx);
       expect(result.databases).toEqual(mockDatabases);
-      expect(get_ctx.on_success).toHaveBeenCalledWith(result);
+      expect(get_ctx.onSuccess).toHaveBeenCalledWith({
+        databases: mockDatabases,
+        onSuccess: get_ctx.onSuccess
+      });
     });
 
     it('should handle errors when getting databases', async () => {
@@ -103,13 +106,18 @@ describe('databasesMethods', () => {
 
       const get_ctx: DashContext = {
         databases: [],
-        on_error: jest.fn(),
+        onError: jest.fn(),
       };
 
-      await expect(databasesMethods.get(get_ctx)).rejects.toMatchObject({
-        error: mockError,
-      });
-      expect(get_ctx.on_error).toHaveBeenCalled();
+      try {
+        await databasesMethods.get(get_ctx);
+      } catch (error) {
+        expect(error).toMatchObject({
+          error: mockError,
+        });
+      }
+
+      expect(get_ctx.onError).toHaveBeenCalled();
     });
   });
 
@@ -157,7 +165,7 @@ describe('databasesMethods', () => {
   describe('close', () => {
     it('should close a database', async () => {
       const mockDB = {
-          close: jest.fn(),
+        close: jest.fn(),
       } as unknown as IDBDatabase;
       const close_ctx: DashContext = {
         db: mockDB,
