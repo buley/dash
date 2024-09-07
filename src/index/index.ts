@@ -11,6 +11,7 @@ export const indexMethods = {
      * Get an index.
      * @param get_ctx 
      * @returns Promise<DashContext>
+     * @private
      */
     get: (get_ctx: DashContext) => {
         return new Promise((resolve, reject) => {
@@ -31,6 +32,7 @@ export const indexMethods = {
      * Remove an index.
      * @param remove_ctx 
      * @returns Promise<DashContext>
+     * @private
      */
     remove: (remove_ctx: DashContext) => {
         return new Promise((resolve, reject) => {
@@ -45,6 +47,7 @@ export const indexMethods = {
      * Get indexes.
      * @param ctx 
      * @returns Promise<DashContext>
+     * @private
      */
     getIndexes: (ctx: DashContext) => {
         return new Promise((resolve) => {

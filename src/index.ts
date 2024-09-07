@@ -17,14 +17,19 @@
   License -> MIT (https://opensource.org/licenses/MIT)
 */
 
-import behaviorMethods from './behaviors';
+// Databases
 import databaseMethods from './database';
 import databasesMethods from './databases';
+// Stores
+import storeMethods from './store';
 import storesMethods from './stores';
+// Entries
 import entryMethods from './entry';
+// Indexes
 import indexMethods from './index';
 import indexesMethods from './indexes';
-import storeMethods from './store';
+// Behaviors
+import behaviorMethods from './behaviors';
 
 const dash = ((internal: any) => {
   'use strict';
@@ -73,13 +78,13 @@ const dash = ((internal: any) => {
   'get.databases': databasesMethods.get,
   'get.store': storeMethods.get,
   'get.stores': storesMethods.get,
-  'get.index': indexMethods.get,
+  //'get.index': indexMethods.get,
   'get.indexes': indexesMethods.get,
   'get.entries': entryMethods.get,
   'get.entry': entryMethods.get,
   'remove.database': databaseMethods.remove,
   'remove.entries': entryMethods.remove,
-  'remove.index': indexMethods.remove,
+  //'remove.index': indexMethods.remove,
   'remove.entry': entryMethods.remove,
   'remove.store': storeMethods.remove,
   'update.entries': entryMethods.update,
