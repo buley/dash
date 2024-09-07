@@ -1,6 +1,5 @@
-
 /**
- * Store methods
+ * Store methods for interacting with IndexedDB object stores.
  * @module store
  */
 
@@ -9,94 +8,102 @@ import { cloneError, DashContext, exists } from "../utilities";
 // Store methods
 export const storeMethods = {
     /**
-     * Clear a store.
-     * @param clear_ctx 
-     * @returns Promise<DashContext>
+     * Clears all entries from the object store.
+     * @param {DashContext} clearCtx - The context object containing the object store.
+     * @returns {Promise<DashContext>} A promise that resolves when the store is cleared.
      */
-    clear: (clear_ctx: DashContext): Promise<DashContext> => {
+    clear: (clearCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
-            const request: IDBRequest<any> | undefined = clear_ctx.objectstore?.clear();
+            // Attempt to clear the object store
+            const request: IDBRequest<any> | undefined = clearCtx.objectstore?.clear();
 
+            // Handle success event
             request?.addEventListener('success', () => {
-                if (clear_ctx.on_success) {
-                    clear_ctx.on_success(clear_ctx);  // Call the success callback here
+                if (clearCtx.onSuccess) {
+                    clearCtx.onSuccess(clearCtx); // Call the success callback if provided
                 }
-                resolve(clear_ctx);
+                resolve(clearCtx);
             });
 
+            // Handle error event
             request?.addEventListener('error', (event) => {
-                clear_ctx.error = cloneError((event as any).target.error);
-                if (clear_ctx.on_error) {
-                    clear_ctx.on_error(clear_ctx);  // Call the error callback here
+                clearCtx.error = cloneError((event as any).target.error);
+                if (clearCtx.onError) {
+                    clearCtx.onError(clearCtx); // Call the error callback if provided
                 }
-                reject(clear_ctx);
-            });
-        });
-    },
-    
-    /**
-     * Remove a store entry.
-     * @param remove_ctx 
-     * @returns Promise<DashContext>
-     */
-    remove: (remove_ctx: DashContext): Promise<DashContext> => {
-        return new Promise((resolve, reject) => {
-            const request: IDBRequest<any> | undefined = remove_ctx.objectstore?.delete(remove_ctx.key);
-
-            request?.addEventListener('success', () => {
-                if (remove_ctx.on_success) {
-                    remove_ctx.on_success(remove_ctx);  // Call the success callback here
-                }
-                resolve(remove_ctx);
-            });
-
-            request?.addEventListener('error', (event) => {
-                remove_ctx.error = cloneError((event as any).target.error);
-                if (remove_ctx.on_error) {
-                    remove_ctx.on_error(remove_ctx);  // Call the error callback here
-                }
-                reject(remove_ctx);
+                reject(clearCtx);
             });
         });
     },
 
     /**
-     * Get a store entry.
-     * @param get_ctx 
-     * @returns Promise<DashContext>
+     * Removes an entry from the object store.
+     * @param {DashContext} removeCtx - The context object containing the object store and key to delete.
+     * @returns {Promise<DashContext>} A promise that resolves when the entry is removed.
      */
-    get: (get_ctx: DashContext): Promise<DashContext> => {
+    remove: (removeCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
-            const request: IDBRequest<any> | undefined = exists(get_ctx.index)
-                ? get_ctx.objectstore?.index(get_ctx.index)?.get(get_ctx.key) as IDBRequest<any>
-                : get_ctx.objectstore?.get(get_ctx.key) as IDBRequest<any>;
+            // Attempt to remove the entry by key from the object store
+            const request: IDBRequest<any> | undefined = removeCtx.objectstore?.delete(removeCtx.key);
 
+            // Handle success event
             request?.addEventListener('success', () => {
-                get_ctx.entry = request.result;
-                if (!get_ctx.entry) {
-                    get_ctx.error = { message: 'missing', name: 'DashNoEntry' };
-                    if (get_ctx.on_error) {
-                        get_ctx.on_error(get_ctx);  // Call the error callback here
+                if (removeCtx.onSuccess) {
+                    removeCtx.onSuccess(removeCtx); // Call the success callback if provided
+                }
+                resolve(removeCtx);
+            });
+
+            // Handle error event
+            request?.addEventListener('error', (event) => {
+                removeCtx.error = cloneError((event as any).target.error);
+                if (removeCtx.onError) {
+                    removeCtx.onError(removeCtx); // Call the error callback if provided
+                }
+                reject(removeCtx);
+            });
+        });
+    },
+
+    /**
+     * Retrieves an entry from the object store.
+     * @param {DashContext} getCtx - The context object containing the object store, key, and optionally an index.
+     * @returns {Promise<DashContext>} A promise that resolves with the retrieved entry.
+     */
+    get: (getCtx: DashContext): Promise<DashContext> => {
+        return new Promise((resolve, reject) => {
+            // Determine whether to retrieve the entry from an index or directly from the object store
+            const request: IDBRequest<any> | undefined = exists(getCtx.index)
+                ? getCtx.objectstore?.index(getCtx.index)?.get(getCtx.key) as IDBRequest<any>
+                : getCtx.objectstore?.get(getCtx.key) as IDBRequest<any>;
+
+            // Handle success event
+            request?.addEventListener('success', () => {
+                getCtx.entry = request.result;
+                if (!getCtx.entry) {
+                    getCtx.error = { message: 'missing', name: 'DashNoEntry' };
+                    if (getCtx.onError) {
+                        getCtx.onError(getCtx); // Call the error callback if provided
                     }
-                    reject(get_ctx);
+                    reject(getCtx);
                 } else {
-                    if (get_ctx.on_success) {
-                        get_ctx.on_success(get_ctx);  // Call the success callback here
+                    if (getCtx.onSuccess) {
+                        getCtx.onSuccess(getCtx); // Call the success callback if provided
                     }
-                    resolve(get_ctx);
+                    resolve(getCtx);
                 }
             });
 
+            // Handle error event
             request?.addEventListener('error', (event) => {
-                get_ctx.error = cloneError((event as any).target.error);
-                if (get_ctx.on_error) {
-                    get_ctx.on_error(get_ctx);  // Call the error callback here
+                getCtx.error = cloneError((event as any).target.error);
+                if (getCtx.onError) {
+                    getCtx.onError(getCtx); // Call the error callback if provided
                 }
-                reject(get_ctx);
+                reject(getCtx);
             });
         });
     }
 };
 
-// Export the store methods
 export default storeMethods;

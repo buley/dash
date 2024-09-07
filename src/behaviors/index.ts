@@ -27,33 +27,31 @@ const behaviorContext: DashBehaviorContext = {
     api: {} as any
 };
 
-
 // Methods for managing streams of deferred objects
 export const behaviorMethods = {
     /**
      * Retrieves all behaviors.
-     * @param get_ctx The context object.
+     * @param getCtx The context object.
      * @returns Promise<DashContext>
      */
-    get: function (get_ctx: DashContext): Promise<DashContext> {
+    get: function (getCtx: DashContext): Promise<DashContext> {
         return new Promise((resolve, reject) => {
             try {
-                get_ctx.behaviors = get_ctx.objectstore?.indexNames;
-                safeApply(get_ctx.on_success, [get_ctx]);
-                resolve(get_ctx);
+                getCtx.behaviors = getCtx.objectstore?.indexNames;
+                safeApply(getCtx.onSuccess, [getCtx]);
+                resolve(getCtx);
             } catch (error) {
-                get_ctx.error = cloneError(error as Error);
-                safeApply(get_ctx.on_error, [get_ctx]);
-                reject(get_ctx);
+                getCtx.error = cloneError(error as Error);
+                safeApply(getCtx.onError, [getCtx]);
+                reject(getCtx);
             }
         });
     },
     /**
      * Adds a new behavior.
-     * @param add_ctx The context object.
-     * @returns Promise<DashContext>
+     * @param influence The behavior influence, either a function or an array of functions.
      */
-    add: function (influence: ((ctx: any) => any) | [((ctx: any) => any), ((ctx: any) => any)]) {
+    add: function (influence: ((addCtx: any) => any) | [((addCtx: any) => any), ((addCtx: any) => any)]) {
         if (Array.isArray(influence)) {
             if (typeof influence[0] === 'function') {
                 behaviorFilters.push(influence[0]);
@@ -68,14 +66,16 @@ export const behaviorMethods = {
     },
     /**
      * Removes a behavior.
-     * @param remove_ctx The context object.
+     * @param processCtx The context object.
+     * @param slug The slug identifier.
+     * @param method The method to execute.
      * @returns Promise<DashContext>
      */
-    process: function (ctx: DashContext, slug: string, method: string): Promise<DashContext> {
+    process: function (processCtx: DashContext, slug: string, method: string): Promise<DashContext> {
         return new Promise((resolve, reject) => {
             let count = 0;
             let response: any;
-            let promisesChain = Promise.resolve(ctx); // Initial promise chain starts with the context
+            let promisesChain = Promise.resolve(processCtx); // Initial promise chain starts with the context
 
             // Iterate over the behavior filters and chain them
             safeEach(behaviorFilters, (filter) => {
@@ -97,26 +97,26 @@ export const behaviorMethods = {
     },
     /**
      * Applies user-defined behaviors to a context.
-     * @param ctx The context object.
-     * @param slug The slug.
-     * @param method The method.
-     * @param initialPromise The initial promise.
+     * @param applyCtx The context object.
+     * @param slug The slug identifier.
+     * @param method The method to execute.
+     * @param initialPromise The initial promise to start the chain.
      * @returns Promise<DashContext>
      */
-    applyBehaviors: function (ctx: DashContext, slug: string, method: string, initialPromise: Promise<DashContext>): Promise<DashContext> {
+    applyBehaviors: function (applyCtx: DashContext, slug: string, method: string, initialPromise: Promise<DashContext>): Promise<DashContext> {
         let count = 0;
 
         return new Promise((resolve, reject) => {
-            let promisesChain = initialPromise || Promise.resolve(ctx); // Start the promise chain with the initial promise or the context
+            let promisesChain = initialPromise || Promise.resolve(applyCtx); // Start the promise chain with the initial promise or the context
 
             // Iterate over the behavior actions and chain them using Promises
             safeEach(behaviorActions, (action) => {
                 promisesChain = promisesChain.then((context) => {
                     const response = safeApply(action, [{ type: slug, method, context, priority: ++count }], behaviorContext);
 
-                    ctx = response.context || ctx; // Update the context if it's modified
+                    applyCtx = response.context || applyCtx; // Update the context if it's modified
                     slug = response.type || slug;  // Update the slug if modified
-                    return ctx;
+                    return applyCtx;
                 });
             });
 
@@ -130,7 +130,6 @@ export const behaviorMethods = {
                 });
         });
     }
-
 };
 
 export default {

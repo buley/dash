@@ -1,148 +1,164 @@
-
 /**
- * Indexes methods
+ * Indexes methods for managing and interacting with indexes in an IndexedDB object store.
  * @module indexes
  */
+
 import { cloneError, DashContext, safeApply } from "../utilities";
 
 // Indexes methods
 export const indexesMethods = {
     /**
-     * Get all indexes from a specific object store.
-     * @param get_ctx The context object.
-     * @returns Promise<DashContext>
+     * Retrieves all index names from a specific object store.
+     * @param {DashContext} getCtx - The context object containing the object store.
+     * @returns {Promise<DashContext>} A promise that resolves with the context including the index names.
      */
-    get: function (get_ctx: DashContext): Promise<DashContext> {
+    get: function (getCtx: DashContext): Promise<DashContext> {
         return new Promise((resolve, reject) => {
             try {
-                get_ctx.indexes = get_ctx.objectstore?.indexNames;
-                if (get_ctx.on_success) {
-                    safeApply(get_ctx.on_success, [get_ctx]);
+                // Retrieve the index names from the object store
+                getCtx.indexes = getCtx.objectstore?.indexNames;
+                if (getCtx.onSuccess) {
+                    safeApply(getCtx.onSuccess, [getCtx]);
                 }
-                resolve(get_ctx);
+                resolve(getCtx);
             } catch (error) {
-                get_ctx.error = cloneError(error as Error);
-                if (get_ctx.on_error) {
-                    safeApply(get_ctx.on_error, [get_ctx]);
+                // Handle errors
+                getCtx.error = cloneError(error as Error);
+                if (getCtx.onError) {
+                    safeApply(getCtx.onError, [getCtx]);
                 }
-                reject(get_ctx);
+                reject(getCtx);
             }
         });
     },
 
     /**
-     * Add a new index to an object store.
-     * @param add_ctx The context object.
-     * @returns Promise<DashContext>
+     * Adds a new index to an object store.
+     * @param {DashContext} addCtx - The context object containing the object store, index name, key path, and index options.
+     * @returns {Promise<DashContext>} A promise that resolves with the context once the index is added.
      */
-    add: function (add_ctx: DashContext): Promise<DashContext> {
+    add: function (addCtx: DashContext): Promise<DashContext> {
         return new Promise((resolve, reject) => {
             try {
-                add_ctx.objectstore?.createIndex(add_ctx.index, add_ctx.index_key_path, {
-                    unique: !!add_ctx.index_unique,
-                    multiEntry: !!add_ctx.index_multi_entry
+                // Create a new index in the object store with the provided options
+                addCtx.objectstore?.createIndex(addCtx.index, addCtx.indexKeyPath, {
+                    unique: !!addCtx.indexUnique,
+                    multiEntry: !!addCtx.indexMultiEntry
                 });
-                if (add_ctx.on_success) {
-                    safeApply(add_ctx.on_success, [add_ctx]);
+                if (addCtx.onSuccess) {
+                    safeApply(addCtx.onSuccess, [addCtx]);
                 }
-                resolve(add_ctx);
+                resolve(addCtx);
             } catch (error) {
-                add_ctx.error = cloneError(error as Error);
-                if (add_ctx.on_error) {
-                    safeApply(add_ctx.on_error, [add_ctx]);
+                // Handle errors
+                addCtx.error = cloneError(error as Error);
+                if (addCtx.onError) {
+                    safeApply(addCtx.onError, [addCtx]);
                 }
-                reject(add_ctx);
+                reject(addCtx);
             }
         });
     },
 
     /**
-     * Remove an index from an object store.
-     * @param remove_ctx The context object.
-     * @returns Promise<DashContext>
+     * Removes an index from an object store.
+     * @param {DashContext} removeCtx - The context object containing the object store and index name.
+     * @returns {Promise<DashContext>} A promise that resolves once the index is removed.
      */
-    remove: function (remove_ctx: DashContext): Promise<DashContext> {
+    remove: function (removeCtx: DashContext): Promise<DashContext> {
         return new Promise((resolve, reject) => {
             try {
-                remove_ctx.objectstore?.deleteIndex(remove_ctx.index);
-                if (remove_ctx.on_success) {
-                    safeApply(remove_ctx.on_success, [remove_ctx]);
+                // Remove the index from the object store
+                removeCtx.objectstore?.deleteIndex(removeCtx.index);
+                if (removeCtx.onSuccess) {
+                    safeApply(removeCtx.onSuccess, [removeCtx]);
                 }
-                resolve(remove_ctx);
+                resolve(removeCtx);
             } catch (error) {
-                remove_ctx.error = cloneError(error as Error);
-                if (remove_ctx.on_error) {
-                    safeApply(remove_ctx.on_error, [remove_ctx]);
+                // Handle errors
+                removeCtx.error = cloneError(error as Error);
+                if (removeCtx.onError) {
+                    safeApply(removeCtx.onError, [removeCtx]);
                 }
-                reject(remove_ctx);
+                reject(removeCtx);
             }
         });
     },
+
     /**
- * Get all entries from a specific index.
- * @param get_ctx The context object.
- * @returns Promise<DashContext>
- */
-    getEntries: function (get_ctx: DashContext): Promise<DashContext> {
+     * Retrieves all entries from a specific index in an object store.
+     * @param {DashContext} getCtx - The context object containing the object store and index name.
+     * @returns {Promise<DashContext>} A promise that resolves once all entries are retrieved.
+     */
+    getEntries: function (getCtx: DashContext): Promise<DashContext> {
         return new Promise((resolve, reject) => {
-            const request = get_ctx.objectstore?.index(get_ctx.index)?.openCursor();
+            // Open a cursor to retrieve all entries from the specified index
+            const request = getCtx.objectstore?.index(getCtx.index)?.openCursor();
 
             if (!request) {
-                get_ctx.error = new Error("Failed to open cursor");
-                if (get_ctx.on_error) {
-                    safeApply(get_ctx.on_error, [get_ctx]);
+                getCtx.error = new Error("Failed to open cursor");
+                if (getCtx.onError) {
+                    safeApply(getCtx.onError, [getCtx]);
                 }
-                reject(get_ctx);
+                reject(getCtx);
                 return;
             }
 
+            // Handle the success event of the cursor
             request.onsuccess = function (event) {
                 const cursor = request.result;
                 if (cursor) {
-                    if (get_ctx.on_success) {
-                        safeApply(get_ctx.on_success, [cursor.value]);
+                    // If there are more entries, apply the onSuccess handler and continue
+                    if (getCtx.onSuccess) {
+                        safeApply(getCtx.onSuccess, [cursor.value]);
                     }
                     cursor.continue();
                 } else {
-                    if (get_ctx.on_complete) {
-                        safeApply(get_ctx.on_complete, [get_ctx]);
+                    // Once all entries are retrieved, apply the onComplete handler
+                    if (getCtx.onComplete) {
+                        safeApply(getCtx.onComplete, [getCtx]);
                     }
-                    resolve(get_ctx);
+                    resolve(getCtx);
                 }
             };
 
-            request.onerror = function (event) {
-                get_ctx.error = cloneError(request.error!);
-                if (get_ctx.on_error) {
-                    safeApply(get_ctx.on_error, [get_ctx]);
+            // Handle the error event of the cursor
+            request.onerror = function () {
+                getCtx.error = cloneError(request.error!);
+                if (getCtx.onError) {
+                    safeApply(getCtx.onError, [getCtx]);
                 }
-                reject(get_ctx);
+                reject(getCtx);
             };
         });
     },
+
     /**
      * Counts the number of entries in a specific index.
-     * @param count_ctx The context object.
-     * @returns Promise<DashContext>
+     * @param {DashContext} countCtx - The context object containing the object store and index name.
+     * @returns {Promise<DashContext>} A promise that resolves with the context including the count of entries.
      */
-    countEntries: function (count_ctx: DashContext): Promise<DashContext> {
+    countEntries: function (countCtx: DashContext): Promise<DashContext> {
         return new Promise((resolve, reject) => {
-            const request = count_ctx.objectstore?.index(count_ctx.index)?.count();
+            // Count the number of entries in the specified index
+            const request = countCtx.objectstore?.index(countCtx.index)?.count();
 
+            // Handle the success event for counting entries
             request?.addEventListener('success', function () {
-                count_ctx.total = request.result;
-                if (count_ctx.on_success) {
-                    safeApply(count_ctx.on_success, [count_ctx]);
+                countCtx.total = request.result;
+                if (countCtx.onSuccess) {
+                    safeApply(countCtx.onSuccess, [countCtx]);
                 }
-                resolve(count_ctx);
+                resolve(countCtx);
             });
 
+            // Handle the error event for counting entries
             request?.addEventListener('error', function (event: any) {
-                count_ctx.error = cloneError((event as any).target.error);
-                if (count_ctx.on_error) {
-                    safeApply(count_ctx.on_error, [count_ctx]);
+                countCtx.error = cloneError((event as any).target.error);
+                if (countCtx.onError) {
+                    safeApply(countCtx.onError, [countCtx]);
                 }
-                reject(count_ctx);
+                reject(countCtx);
             });
         });
     }
