@@ -1,13 +1,14 @@
 {
-  "name": "dash",
-  "version": "0.0.24",
+  "name": "@buley/dash",
+  "version": "0.0.30",
   "description": "A promising IndexedDB wrapper, since 2011.",
   "main": "dist/dash.js",
   "scripts": {
     "build": "tsc src/index.ts --outDir ./dist",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "publish": "npm publish --access=public"
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,12 @@
   "dependencies": {
     "idb": "^8.0.0",
     "jest-environment-jsdom": "^29.7.0"
+  },
+  "bugs": {
+    "url": "https://github.com/buley/dash/issues"
+  },
+  "homepage": "https://github.com/buley/dash#readme",
+  "directories": {
+    "test": "tests"
   }
 }
