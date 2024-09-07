@@ -4,6 +4,7 @@
   "description": "A promising IndexedDB wrapper, since 2011.",
   "main": "dist/dash.js",
   "scripts": {
+    "build": "tsc src/index.ts --outDir ./dist",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
