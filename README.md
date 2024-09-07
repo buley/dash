@@ -13,7 +13,7 @@ Dash is a simple, lightweight wrapper around the IndexedDB API. It provides a pr
 ## Installation
 
 ```bash
-npm install dash-indexeddb
+npm install @buley/dash
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ npm install dash-indexeddb
 Here's a basic example of how to use Dash:
 
 ```javascript
-import dash from 'dash-indexeddb';
+import dash from '@buley/dash';
 
 // Open a database
 dash.database.open({ database: 'myDB', version: 1 })

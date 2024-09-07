@@ -1,6 +1,6 @@
 {
-  "name": "dash",
-  "version": "0.0.24",
+  "name": "@buley/dash",
+  "version": "0.0.30",
   "description": "A promising IndexedDB wrapper, since 2011.",
   "main": "dist/dash.js",
   "scripts": {
@@ -29,5 +29,12 @@
   "dependencies": {
     "idb": "^8.0.0",
     "jest-environment-jsdom": "^29.7.0"
+  },
+  "bugs": {
+    "url": "https://github.com/buley/dash/issues"
+  },
+  "homepage": "https://github.com/buley/dash#readme",
+  "directories": {
+    "test": "tests"
   }
 }

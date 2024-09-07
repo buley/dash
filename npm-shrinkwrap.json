@@ -1,12 +1,12 @@
 {
-  "name": "dash",
-  "version": "0.0.24",
+  "name": "@buley/dash-indexeddb",
+  "version": "0.0.30",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "dash",
-      "version": "0.0.24",
+      "name": "@buley/dash-indexeddb",
+      "version": "0.0.30",
       "license": "MIT",
       "dependencies": {
         "idb": "^8.0.0",
