@@ -1,4 +1,3 @@
-
 /**
  * Entry methods
  * @module entry
@@ -9,172 +8,197 @@ import { cloneError, DashContext } from "../utilities";
 // Entry methods
 export const entryMethods = {
     /**
-     * Add an entry.
-     * @param add_ctx 
-     * @returns Promise<DashContext>
+     * Adds a new entry to the object store.
+     * @param {DashContext} addCtx - The context object containing the object store, data, and key.
+     * @returns {Promise<DashContext>} A promise that resolves with the context, including the added entry and key.
      */
-    add: (add_ctx: DashContext) => {
+    add: (addCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
-            const request = add_ctx.objectstore?.add(add_ctx.data, add_ctx.key);
+            // Attempt to add the data to the object store
+            const request = addCtx.objectstore?.add(addCtx.data, addCtx.key);
 
+            // If request is null, reject the promise with an error
             if (!request) {
-                add_ctx.error = { message: "Request object is null", name: "DashRequestError" };
-                return reject(add_ctx);
+                addCtx.error = { message: "Request object is null", name: "DashRequestError" };
+                return reject(addCtx);
             }
 
+            // Handle success event
             request.addEventListener('success', () => {
-                add_ctx.key = request.result;
-                add_ctx.entry = add_ctx.data;
-                resolve(add_ctx);
+                addCtx.key = request.result;
+                addCtx.entry = addCtx.data;
+                resolve(addCtx);
             });
 
+            // Handle error event
             request.addEventListener('error', (event) => {
-                add_ctx.error = cloneError((event as any).target.error);
-                reject(add_ctx);
+                addCtx.error = cloneError((event as any).target.error);
+                reject(addCtx);
             });
         });
     },
 
     /**
-     * Get an entry.
-     * @param get_ctx
-     * @returns Promise<DashContext>
+     * Retrieves an entry from the object store.
+     * @param {DashContext} getCtx - The context object containing the object store, key, and index (optional).
+     * @returns {Promise<DashContext>} A promise that resolves with the context, including the retrieved entry.
      */
-    get: (get_ctx: DashContext) => {
+    get: (getCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
             let request;
 
-            if (get_ctx.index && get_ctx.objectstore && typeof get_ctx.objectstore.index === 'function') {
-                const index = get_ctx.objectstore.index(get_ctx.index);
+            // If an index is provided, use it to retrieve the entry
+            if (getCtx.index && getCtx.objectstore && typeof getCtx.objectstore.index === 'function') {
+                const index = getCtx.objectstore.index(getCtx.index);
                 if (index && typeof index.get === 'function') {
-                    request = index.get(get_ctx.key);
+                    request = index.get(getCtx.key);
                 } else {
-                    get_ctx.error = { message: 'Invalid index or get method', name: 'DashInvalidIndex' };
-                    return reject(get_ctx);
+                    getCtx.error = { message: 'Invalid index or get method', name: 'DashInvalidIndex' };
+                    return reject(getCtx);
                 }
-            } else if (get_ctx.objectstore && typeof get_ctx.objectstore.get === 'function') {
-                request = get_ctx.objectstore.get(get_ctx.key);
+            } else if (getCtx.objectstore && typeof getCtx.objectstore.get === 'function') {
+                // Otherwise, use the object store directly
+                request = getCtx.objectstore.get(getCtx.key);
             } else {
-                get_ctx.error = { message: 'Invalid objectstore or get method', name: 'DashInvalidObjectStore' };
-                return reject(get_ctx);
+                getCtx.error = { message: 'Invalid object store or get method', name: 'DashInvalidObjectStore' };
+                return reject(getCtx);
             }
 
+            // If request is null, reject the promise with an error
             if (!request) {
-                get_ctx.error = { message: "Request object is null", name: "DashRequestError" };
-                return reject(get_ctx);
+                getCtx.error = { message: "Request object is null", name: "DashRequestError" };
+                return reject(getCtx);
             }
 
+            // Handle success event
             request.addEventListener('success', () => {
-                get_ctx.entry = request.result;
-                resolve(get_ctx);
+                getCtx.entry = request.result;
+                resolve(getCtx);
             });
 
+            // Handle error event
             request.addEventListener('error', (event) => {
-                get_ctx.error = cloneError((event as any).target.error);
-                reject(get_ctx);
+                getCtx.error = cloneError((event as any).target.error);
+                reject(getCtx);
             });
         });
     },
 
     /**
-     * Put an entry.
-     * @param put_ctx 
-     * @returns Promise<DashContext>
+     * Updates an entry in the object store.
+     * @param {DashContext} putCtx - The context object containing the object store, data, and key.
+     * @returns {Promise<DashContext>} A promise that resolves with the context, including the updated entry.
      */
-    put: (put_ctx: DashContext) => {
+    put: (putCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
-            const request = put_ctx.objectstore?.put(put_ctx.data, put_ctx.key);
+            // Attempt to update the data in the object store
+            const request = putCtx.objectstore?.put(putCtx.data, putCtx.key);
 
+            // If request is null, reject the promise with an error
             if (!request) {
-                put_ctx.error = { message: "Request object is null", name: "DashRequestError" };
-                return reject(put_ctx);
+                putCtx.error = { message: "Request object is null", name: "DashRequestError" };
+                return reject(putCtx);
             }
 
+            // Handle success event
             request.addEventListener('success', () => {
-                put_ctx.entry = put_ctx.data;
-                resolve(put_ctx);
+                putCtx.entry = putCtx.data;
+                resolve(putCtx);
             });
 
+            // Handle error event
             request.addEventListener('error', (event) => {
-                put_ctx.error = cloneError((event as any).target.error);
-                reject(put_ctx);
+                putCtx.error = cloneError((event as any).target.error);
+                reject(putCtx);
             });
         });
     },
 
     /**
-     * Remove an entry.
-     * @param remove_ctx 
-     * @returns Promise<DashContext>
+     * Removes an entry from the object store.
+     * @param {DashContext} removeCtx - The context object containing the object store and key to delete.
+     * @returns {Promise<DashContext>} A promise that resolves with the context after the entry is deleted.
      */
-    remove: (remove_ctx: DashContext) => {
+    remove: (removeCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
-            const request = remove_ctx.objectstore?.delete(remove_ctx.key);
+            // Attempt to delete the entry from the object store
+            const request = removeCtx.objectstore?.delete(removeCtx.key);
 
+            // If request is null, reject the promise with an error
             if (!request) {
-                remove_ctx.error = { message: "Request object is null", name: "DashRequestError" };
-                return reject(remove_ctx);
+                removeCtx.error = { message: "Request object is null", name: "DashRequestError" };
+                return reject(removeCtx);
             }
 
+            // Handle success event
             request.addEventListener('success', () => {
-                resolve(remove_ctx);
+                resolve(removeCtx);
             });
 
+            // Handle error event
             request.addEventListener('error', (event) => {
-                remove_ctx.error = cloneError((event as any).target.error);
-                reject(remove_ctx);
+                removeCtx.error = cloneError((event as any).target.error);
+                reject(removeCtx);
             });
         });
     },
 
     /**
-     * Update an entry.
-     * @param update_ctx 
-     * @returns Promise<DashContext>
+     * Updates an entry in the object store (alias for put).
+     * @param {DashContext} updateCtx - The context object containing the object store, data, and key.
+     * @returns {Promise<DashContext>} A promise that resolves with the context, including the updated entry.
      */
-    update: (update_ctx: DashContext) => {
+    update: (updateCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
-            const request = update_ctx.objectstore?.put(update_ctx.data, update_ctx.key);
+            // Attempt to update the data in the object store (alias for put)
+            const request = updateCtx.objectstore?.put(updateCtx.data, updateCtx.key);
 
+            // If request is null, reject the promise with an error
             if (!request) {
-                update_ctx.error = { message: "Request object is null", name: "DashRequestError" };
-                return reject(update_ctx);
+                updateCtx.error = { message: "Request object is null", name: "DashRequestError" };
+                return reject(updateCtx);
             }
 
+            // Handle success event
             request.addEventListener('success', () => {
-                update_ctx.entry = update_ctx.data;
-                resolve(update_ctx);
+                updateCtx.entry = updateCtx.data;
+                resolve(updateCtx);
             });
 
+            // Handle error event
             request.addEventListener('error', (event) => {
-                update_ctx.error = cloneError((event as any).target.error);
-                reject(update_ctx);
+                updateCtx.error = cloneError((event as any).target.error);
+                reject(updateCtx);
             });
         });
     },
 
     /**
-     * Count entries.
-     * @param count_ctx 
-     * @returns Promise<DashContext>
+     * Counts the number of entries in the object store.
+     * @param {DashContext} countCtx - The context object containing the object store and range (optional).
+     * @returns {Promise<DashContext>} A promise that resolves with the context, including the count of entries.
      */
-    count: (count_ctx: DashContext) => {
+    count: (countCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
-            const request = count_ctx.objectstore?.count(count_ctx.range);
+            // Attempt to count entries in the object store
+            const request = countCtx.objectstore?.count(countCtx.range);
 
+            // If request is null, reject the promise with an error
             if (!request) {
-                count_ctx.error = { message: "Request object is null", name: "DashRequestError" };
-                return reject(count_ctx);
+                countCtx.error = { message: "Request object is null", name: "DashRequestError" };
+                return reject(countCtx);
             }
 
+            // Handle success event
             request.addEventListener('success', () => {
-                count_ctx.amount = request.result;
-                resolve(count_ctx);
+                countCtx.amount = request.result;
+                resolve(countCtx);
             });
 
+            // Handle error event
             request.addEventListener('error', (event) => {
-                count_ctx.error = cloneError((event as any).target.error);
-                reject(count_ctx);
+                countCtx.error = cloneError((event as any).target.error);
+                reject(countCtx);
             });
         });
     }

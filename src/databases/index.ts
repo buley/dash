@@ -1,5 +1,5 @@
 /**
- * Databases module.
+ * Databases management module.
  * @module databases
  */
 
@@ -8,109 +8,120 @@ import { cloneError, DashContext, safeApply } from "../utilities";
 // Database methods
 export const databasesMethods = {
   /**
-   * Gets all databases.
-   * @param get_ctx The context object.
-   * @returns Promise<DashContext>
+   * Retrieves all databases.
+   * @param {DashContext} getCtx - The context object containing the callback functions.
+   * @returns {Promise<DashContext>} A promise that resolves with the context including the databases list.
    */
-  get: function (get_ctx: DashContext): Promise<DashContext> {
+  get: function (getCtx: DashContext): Promise<DashContext> {
     return new Promise((resolve, reject) => {
       try {
-        get_ctx.databases = indexedDB.databases();
-        safeApply(get_ctx.on_success, [get_ctx]);
-        resolve(get_ctx);
+        // Retrieve the list of databases
+        getCtx.databases = indexedDB.databases();
+        safeApply(getCtx.onSuccess, [getCtx]);
+        resolve(getCtx);
       } catch (error) {
-        // Capture the error in the context object
-        get_ctx.error = error;
-        safeApply(get_ctx.on_error, [get_ctx]);
-        reject(get_ctx);
+        // Capture any errors and reject
+        getCtx.error = error;
+        safeApply(getCtx.onError, [getCtx]);
+        reject(getCtx);
       }
     });
   },
 
   /**
-   * Opens a database.
-   * @param open_ctx The context object.
-   * @returns Promise<DashContext>
+   * Opens a specific database.
+   * @param {DashContext} openCtx - The context object containing the database name and version.
+   * @returns {Promise<DashContext>} A promise that resolves with the opened database in the context.
    */
-  open: function (open_ctx: DashContext): Promise<DashContext> {
+  open: function (openCtx: DashContext): Promise<DashContext> {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open(open_ctx.database, open_ctx.version);
+      // Open the database with the provided name and version
+      const request = indexedDB.open(openCtx.database, openCtx.version);
 
-      // Handle success
+      // Handle successful database open
       request.addEventListener('success', (event) => {
-        open_ctx.db = (event.target as IDBOpenDBRequest).result;
-        resolve(open_ctx);
+        openCtx.db = (event.target as IDBOpenDBRequest).result;
+        resolve(openCtx);
       });
 
-      // Handle upgradeneeded event (used for setting up new object stores or changing version)
+      // Handle the case where the database version changes or the store is created
       request.addEventListener('upgradeneeded', (event) => {
-        open_ctx.db = (event.target as IDBOpenDBRequest).result;
-        if (open_ctx.on_upgrade_needed) {
-          safeApply(open_ctx.on_upgrade_needed, [open_ctx]);
+        openCtx.db = (event.target as IDBOpenDBRequest).result;
+        if (openCtx.onUpgradeNeeded) {
+          safeApply(openCtx.onUpgradeNeeded, [openCtx]);
         }
-        resolve(open_ctx);
+        resolve(openCtx);
       });
 
-      // Handle errors
+      // Handle errors during the opening process
       request.addEventListener('error', (event) => {
-        open_ctx.error = cloneError((event as any).target.error);
-        reject(open_ctx);
+        openCtx.error = cloneError((event as any).target.error);
+        reject(openCtx);
       });
 
-      // Handle blocked (when another connection keeps the database from opening)
+      // Handle blocked event when another connection prevents opening the database
       request.addEventListener('blocked', (event) => {
-        if (open_ctx.on_blocked) {
-          safeApply(open_ctx.on_blocked, [open_ctx]);
+        if (openCtx.onBlocked) {
+          safeApply(openCtx.onBlocked, [openCtx]);
         }
-        reject(open_ctx);
+        reject(openCtx);
       });
     });
   },
+
   /**
-   * Deletes a database.
-   * @param delete_ctx The context object.
-   * @returns Promise<DashContext>
+   * Deletes a database by name.
+   * @param {DashContext} deleteCtx - The context object containing the database name to delete.
+   * @returns {Promise<DashContext>} A promise that resolves once the database is deleted.
    */
-  delete: function (delete_ctx: DashContext): Promise<DashContext> {
+  delete: function (deleteCtx: DashContext): Promise<DashContext> {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.deleteDatabase(delete_ctx.database);
+      // Delete the database
+      const request = indexedDB.deleteDatabase(deleteCtx.database);
 
+      // Handle successful deletion
       request.addEventListener('success', () => {
-        resolve(delete_ctx);
+        resolve(deleteCtx);
       });
 
+      // Handle errors during deletion
       request.addEventListener('error', (event) => {
-        delete_ctx.error = cloneError((event as any).target.error);
-        reject(delete_ctx);
+        deleteCtx.error = cloneError((event as any).target.error);
+        reject(deleteCtx);
       });
 
+      // Handle blocked event if another connection prevents deletion
       request.addEventListener('blocked', (event) => {
-        if (delete_ctx.on_blocked) {
-          safeApply(delete_ctx.on_blocked, [delete_ctx]);
+        if (deleteCtx.onBlocked) {
+          safeApply(deleteCtx.onBlocked, [deleteCtx]);
         }
-        reject(delete_ctx);
+        reject(deleteCtx);
       });
     });
   },
+
   /**
-   * Closes a database.
-   * @param close_ctx The context object.
-   * @returns Promise<DashContext>
+   * Closes an open database.
+   * @param {DashContext} closeCtx - The context object containing the database to close.
+   * @returns {Promise<DashContext>} A promise that resolves once the database is closed.
    */
-  close: function (close_ctx: DashContext): Promise<DashContext> {
+  close: function (closeCtx: DashContext): Promise<DashContext> {
     return new Promise((resolve) => {
-      if (close_ctx.db) {
-        close_ctx.db.close();
+      if (closeCtx.db) {
+        // Close the open database connection
+        closeCtx.db.close();
       }
-      resolve(close_ctx);
+      resolve(closeCtx);
     });
   },
+
   /**
-   * Lists all databases.
-   * @returns Promise<IDBDatabaseInfo[]>
+   * Lists all databases in the current environment.
+   * @returns {Promise<IDBDatabaseInfo[]>} A promise that resolves with an array of database information objects.
    */
   listAll: function (): Promise<IDBDatabaseInfo[]> {
     return new Promise((resolve, reject) => {
+      // Check if the `databases` method is supported in the current browser
       if ('databases' in indexedDB && typeof (indexedDB as any).databases === 'function') {
         (indexedDB as any).databases().then((databases: IDBDatabaseInfo[]) => {
           resolve(databases);

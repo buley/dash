@@ -1,5 +1,5 @@
 /**
- * Index methods
+ * Index methods for interacting with IndexedDB.
  * @module index
  */
 
@@ -8,49 +8,59 @@ import { cloneError, DashContext } from "../utilities";
 // Index methods
 export const indexMethods = {
     /**
-     * Get an index.
-     * @param get_ctx 
-     * @returns Promise<DashContext>
+     * Retrieves an entry from a specific index in the object store.
+     * @param {DashContext} getCtx - The context containing the index and key to retrieve.
+     * @returns {Promise<DashContext>} A promise that resolves with the context including the retrieved entry.
      * @private
      */
-    get: (get_ctx: DashContext) => {
+    get: (getCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
-            const request = get_ctx.idx?.get(get_ctx.key);
+            // Attempt to get the entry from the specified index using the key
+            const request = getCtx.idx?.get(getCtx.key);
 
+            // Handle success event
             request?.addEventListener('success', () => {
-                get_ctx.entry = request.result;
-                resolve(get_ctx);
+                getCtx.entry = request.result;
+                resolve(getCtx);
             });
 
+            // Handle error event
             request?.addEventListener('error', (event) => {
-                get_ctx.error = cloneError((event as any).target.error);
-                reject(get_ctx);
+                getCtx.error = cloneError((event as any).target.error);
+                reject(getCtx);
             });
         });
     },
+
     /**
-     * Remove an index.
-     * @param remove_ctx 
-     * @returns Promise<DashContext>
+     * Removes an index from the object store.
+     * @param {DashContext} removeCtx - The context containing the object store and index key to delete.
+     * @returns {Promise<DashContext>} A promise that resolves once the index is removed.
      * @private
      */
-    remove: (remove_ctx: DashContext) => {
+    remove: (removeCtx: DashContext): Promise<DashContext> => {
         return new Promise((resolve, reject) => {
-            remove_ctx.objectstore?.deleteIndex(remove_ctx.key);
-            // Why don't we have success/error handlers?
-            // Because this method returns void, not a request object.
+            // The deleteIndex method does not return a request object, so no success/error handlers are needed
             // https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/deleteIndex#return_value
-            resolve(remove_ctx);
+            try {
+                removeCtx.objectstore?.deleteIndex(removeCtx.key);
+                resolve(removeCtx);
+            } catch (error) {
+                removeCtx.error = cloneError(error as Error);
+                reject(removeCtx);
+            }
         });
     },
+
     /**
-     * Get indexes.
-     * @param ctx 
-     * @returns Promise<DashContext>
+     * Retrieves all index names from the object store.
+     * @param {DashContext} ctx - The context containing the object store.
+     * @returns {Promise<DashContext>} A promise that resolves with the context including the list of index names.
      * @private
      */
-    getIndexes: (ctx: DashContext) => {
+    getIndexes: (ctx: DashContext): Promise<DashContext> => {
         return new Promise((resolve) => {
+            // Get all index names from the object store and store them in the context
             const indexes = ctx.objectstore?.indexNames;
             ctx.indexes = Array.from(indexes || []);
             resolve(ctx);
