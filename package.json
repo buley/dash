@@ -28,6 +28,7 @@
   "license": "MIT",
   "contributors": [],
   "dependencies": {
+    "@firebase/database": "^1.0.7",
     "idb": "^8.0.0",
     "jest-environment-jsdom": "^29.7.0"
   },
