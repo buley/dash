@@ -35,17 +35,17 @@ describe('behaviorMethods', () => {
                 objectstore: {
                     indexNames: ['behavior1', 'behavior2'],
                 } as unknown as IDBObjectStore,
-                on_success: jest.fn(),
+                onSuccess: jest.fn(),
             };
         
-            // Mock safeApply to call the on_success without using the spread operator
+            // Mock safeApply to call the onSuccess without using the spread operator
             const safeApply = require('./../../src/utilities').safeApply;
             safeApply.mockImplementation((callback: (arg0: any) => any, args: any[]) => callback(args[0]));
         
             const result = await behaviorMethods.get(get_ctx);
         
             expect(get_ctx.behaviors).toEqual(['behavior1', 'behavior2']);
-            expect(get_ctx.on_success).toHaveBeenCalledWith(get_ctx);  // Check if on_success is called correctly
+            expect(get_ctx.onSuccess).toHaveBeenCalledWith(get_ctx);  // Check if onSuccess is called correctly
         });
         
 
@@ -54,21 +54,21 @@ describe('behaviorMethods', () => {
                 objectstore: {
                     indexNames: null,  // Simulate an error
                 } as unknown as IDBObjectStore,
-                on_error: jest.fn(),
+                onError: jest.fn(),
             };
         
             // Mock cloneError to return a proper error object
             const cloneError = require('./../../src/utilities').cloneError;
             cloneError.mockImplementation((error: Error) => ({ message: 'Test Error' }));
         
-            // Mock safeApply to call the on_error callback
+            // Mock safeApply to call the onError callback
             const safeApply = require('./../../src/utilities').safeApply;
             safeApply.mockImplementation((callback: (arg0: any) => any, args: any[]) => callback(args[0]));
         
             await expect(behaviorMethods.get(get_ctx)).rejects.toEqual(get_ctx);
             expect(get_ctx.error).toBeDefined();  // Check if error is set
             expect(get_ctx.error.message).toBe('Test Error');  // Check error message
-            expect(get_ctx.on_error).toHaveBeenCalledWith(get_ctx);  // Ensure on_error is called
+            expect(get_ctx.onError).toHaveBeenCalledWith(get_ctx);  // Ensure onError is called
         });
         
         

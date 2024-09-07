@@ -44,8 +44,8 @@ const mockDb = {
 
 
     describe('get', () => {
-        it('should retrieve object store names and call on_success', () => {
-            const get_ctx: DashContext = { db: mockDb, on_success: mockSuccessCallback };
+        it('should retrieve object store names and call onSuccess', () => {
+            const get_ctx: DashContext = { db: mockDb, onSuccess: mockSuccessCallback };
 
             storesMethods.get(get_ctx);
 
@@ -55,7 +55,7 @@ const mockDb = {
     });
 
     describe('add', () => {
-        it('should add a new object store and call on_success', () => {
+        it('should add a new object store and call onSuccess', () => {
             const mockRequest = {
                 result: {
                     createObjectStore: jest.fn(() => ({
@@ -67,10 +67,10 @@ const mockDb = {
             const add_ctx: DashContext = {
                 request: mockRequest,  // Mock the request object and its result
                 store: 'newStore',
-                store_key_path: 'id',
-                auto_increment: true,
+                storeKeyPath: 'id',
+                autoIncrement: true,
                 indexes: [{ name: 'index1', keyPath: 'key1', unique: true }],
-                on_success: mockSuccessCallback,
+                onSuccess: mockSuccessCallback,
             };
         
             storesMethods.add(add_ctx);
@@ -80,15 +80,15 @@ const mockDb = {
         });
 
         it('should throw an error if database is undefined', () => {
-            const add_ctx: DashContext = { db: undefined, on_error: mockErrorCallback };
+            const add_ctx: DashContext = { db: undefined, onError: mockErrorCallback };
 
             expect(() => storesMethods.add(add_ctx)).toThrow('Database is undefined');
         });
     });
 
     describe('remove', () => {
-        it('should remove an object store and call on_success', () => {
-            const remove_ctx: DashContext = { db: mockDb, store: 'storeToRemove', on_success: mockSuccessCallback };
+        it('should remove an object store and call onSuccess', () => {
+            const remove_ctx: DashContext = { db: mockDb, store: 'storeToRemove', onSuccess: mockSuccessCallback };
 
             storesMethods.remove(remove_ctx);
 
@@ -98,7 +98,7 @@ const mockDb = {
     });
 
     describe('clearAll', () => {
-        it('should clear all object stores and call on_success on transaction complete', () => {
+        it('should clear all object stores and call onSuccess on transaction complete', () => {
             const mockTransaction = {
                 objectStore: jest.fn(() => ({
                     clear: jest.fn(),
@@ -117,7 +117,7 @@ const mockDb = {
                 deleteObjectStore: jest.fn(),
             } as unknown as IDBDatabase;
         
-            const clear_ctx: DashContext = { db: mockDb, on_success: mockSuccessCallback, on_error: mockErrorCallback };
+            const clear_ctx: DashContext = { db: mockDb, onSuccess: mockSuccessCallback, onError: mockErrorCallback };
         
             storesMethods.clearAll(clear_ctx);
         
@@ -125,7 +125,7 @@ const mockDb = {
             expect(mockSuccessCallback).toHaveBeenCalledWith(clear_ctx);  // Success callback should be called
         });
 
-        it('should call on_error when transaction encounters an error', () => {
+        it('should call onError when transaction encounters an error', () => {
             const failingMockDb: unknown = {
                 ...mockDb,
                 transaction: jest.fn(() => ({
@@ -137,7 +137,7 @@ const mockDb = {
                     }),
                 })),
             };
-            const clear_ctx: DashContext = { db: failingMockDb as IDBDatabase, on_success: mockSuccessCallback, on_error: mockErrorCallback };
+            const clear_ctx: DashContext = { db: failingMockDb as IDBDatabase, onSuccess: mockSuccessCallback, onError: mockErrorCallback };
 
             storesMethods.clearAll(clear_ctx);
 

@@ -14,14 +14,14 @@ describe('indexesMethods', () => {
     });
 
     describe('get', () => {
-        it('should retrieve indexes from the object store and call on_success', async () => {
+        it('should retrieve indexes from the object store and call onSuccess', async () => {
             const mockObjectStore = {
                 indexNames: ['index1', 'index2']
             };
 
             const get_ctx: DashContext = {
                 objectstore: mockObjectStore as unknown as IDBObjectStore,
-                on_success: mockSuccessCallback
+                onSuccess: mockSuccessCallback
             };
 
             await indexesMethods.get(get_ctx);
@@ -32,7 +32,7 @@ describe('indexesMethods', () => {
     });
 
     describe('add', () => {
-        it('should add an index to the object store and call on_success', async () => {
+        it('should add an index to the object store and call onSuccess', async () => {
             const mockObjectStore = {
                 createIndex: jest.fn()
             };
@@ -40,9 +40,9 @@ describe('indexesMethods', () => {
             const add_ctx: DashContext = {
                 objectstore: mockObjectStore as unknown as IDBObjectStore,
                 index: 'newIndex',
-                index_key_path: 'keyPath',
-                index_unique: true,
-                on_success: mockSuccessCallback
+                indexKeyPath: 'keyPath',
+                indexUnique: true,
+                onSuccess: mockSuccessCallback
             };
 
             await indexesMethods.add(add_ctx);
@@ -56,7 +56,7 @@ describe('indexesMethods', () => {
     });
 
     describe('remove', () => {
-        it('should remove an index from the object store and call on_success', async () => {
+        it('should remove an index from the object store and call onSuccess', async () => {
             const mockObjectStore = {
                 deleteIndex: jest.fn()
             };
@@ -64,7 +64,7 @@ describe('indexesMethods', () => {
             const remove_ctx: DashContext = {
                 objectstore: mockObjectStore as unknown as IDBObjectStore,
                 index: 'indexToRemove',
-                on_success: mockSuccessCallback
+                onSuccess: mockSuccessCallback
             };
 
             await indexesMethods.remove(remove_ctx);
@@ -75,7 +75,7 @@ describe('indexesMethods', () => {
     });
 
     describe('getEntries', () => {
-        it('should retrieve entries from an index and call on_success for each entry and on_complete at the end', async () => {
+        it('should retrieve entries from an index and call onSuccess for each entry and onComplete at the end', async () => {
             jest.setTimeout(10000);  // Increase timeout to 10 seconds
 
             let callCount = 0;
@@ -116,8 +116,8 @@ describe('indexesMethods', () => {
             const get_ctx: DashContext = {
                 objectstore: mockObjectStore as unknown as IDBObjectStore,
                 index: 'indexName',
-                on_success: mockSuccessCallback,
-                on_complete: mockCompleteCallback,
+                onSuccess: mockSuccessCallback,
+                onComplete: mockCompleteCallback,
             };
         
             const getEntriesPromise = indexesMethods.getEntries(get_ctx);
@@ -139,7 +139,7 @@ describe('indexesMethods', () => {
     });
 
     describe('countEntries', () => {
-        it('should count entries in the object store index and call on_success', async () => {
+        it('should count entries in the object store index and call onSuccess', async () => {
             const mockObjectStore = {
                 index: jest.fn().mockReturnValue({
                     count: jest.fn().mockReturnValue({
@@ -154,7 +154,7 @@ describe('indexesMethods', () => {
             const count_ctx: DashContext = {
                 objectstore: mockObjectStore as unknown as IDBObjectStore,
                 index: 'testIndex',
-                on_success: mockSuccessCallback
+                onSuccess: mockSuccessCallback
             };
     
             await indexesMethods.countEntries(count_ctx);
@@ -165,7 +165,7 @@ describe('indexesMethods', () => {
         });
     
         
-        it('should handle errors and call on_error', async () => {
+        it('should handle errors and call onError', async () => {
             const mockObjectStore = {
                 index: jest.fn().mockReturnValue({
                     count: jest.fn().mockReturnValue({
@@ -182,7 +182,7 @@ describe('indexesMethods', () => {
             const count_ctx: DashContext = {
                 objectstore: mockObjectStore as unknown as IDBObjectStore,
                 index: 'testIndex',
-                on_error: mockErrorCallback
+                onError: mockErrorCallback
             };
         
             try {
