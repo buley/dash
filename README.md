@@ -1,46 +1,88 @@
-# dash [![Build Status](https://travis-ci.org/buley/dash.png?branch=master)](https://travis-ci.org/buley/dash.svg) [![Coverage Status](https://coveralls.io/repos/buley/dash/badge.png?branch=master)](https://coveralls.io/r/buley/dash?branch=master)
+# Dash
 
-A cookie-sized JavaSript library wrapping the IndexedDB "HTML5" database API.
+Dash is a simple, lightweight wrapper around the IndexedDB API. It provides a promise-based interface for working with IndexedDB, making it easier to perform database operations in web applications.
 
-#### Key Features
-* Simplified callbacks through promises
-* Transaction and optionally version-free 
-* Declarative databases, object stores and indexes
-* 5KB gzipped (18KB uncompressed)
-* Tests passing Chrome 61.0.3163
+## Features
 
-#### Installation Options
+- Promise-based API for IndexedDB operations
+- Modular design with separate modules for databases, stores, indexes, and entries
+- Built-in error handling and type safety with TypeScript
+- Support for custom behaviors and extensions
+- Lightweight and easy to integrate into existing projects
 
-* Download [dash.js](https://raw.github.com/buley/dash/master/dist/dash.js)
-* Install via [bower](https://github.com/bower/bower): `bower install dash`
+## Installation
 
-#### Up And Running
+```bash
+npm install dash-indexeddb
+```
 
-	/* There's no setup required to get started using IndexedDB with dash. */
-	/* Just start adding entries and any declared databases, object stores and 
-	 * indexes will be provided */
-	dash.add.entry({
-	    database: 'foo',
-	    store: 'bar',
-	    data: { baz: new Date().getTime() }
-	})((add) => {
-	    dash.get.entry(add)((get) => {
-	      console.log('Data', get.entry)
-	    });
-	});
+## Usage
 
-### Developer Features
+Here's a basic example of how to use Dash:
 
-* Free (MIT Licensed)
-* [Task-based](http://gruntjs.com/) Development Workflow
-* [Automated](https://github.com/karma-runner/karma) [Jasmine](http://pivotal.github.io/jasmine/) [Testing](https://github.com/karma-runner/karma-jasmine) 
-* [Coverage](https://github.com/gotwarlost/istanbul) [Testing](https://github.com/karma-runner/karma-coverage)
-* Continuous [Integration](http://travis-ci.org/buley/dash) and [Coverage](https://github.com/cainus/node-coveralls) Reporting
+```javascript
+import dash from 'dash-indexeddb';
 
+// Open a database
+dash.database.open({ database: 'myDB', version: 1 })
+  .then(ctx => {
+    // Create an object store
+    return dash.stores.add({
+      ...ctx,
+      store: 'myStore',
+      store_key_path: 'id',
+      auto_increment: true
+    });
+  })
+  .then(ctx => {
+    // Add an entry to the store
+    return dash.entry.add({
+      ...ctx,
+      data: { name: 'John Doe', age: 30 }
+    });
+  })
+  .then(ctx => {
+    console.log('Entry added successfully:', ctx.entry);
+  })
+  .catch(error => {
+    console.error('An error occurred:', error);
+  });
+```
 
-#### To Test
+## API Reference
 
-    npm install
-    grunt
+Dash provides methods for working with databases, stores, indexes, and entries. Here are some of the key modules:
 
-Building requires `grunt-cli`
+- `dash.database`: Methods for working with databases (open, close, delete)
+- `dash.stores`: Methods for working with object stores (add, remove, get)
+- `dash.indexes`: Methods for working with indexes (add, remove, get)
+- `dash.entry`: Methods for working with individual entries (add, get, put, remove, update, count)
+
+Each module provides methods that return promises, allowing for easy chaining of operations.
+
+## Behaviors
+
+Dash supports custom behaviors that can be added to modify or extend its functionality. Behaviors can be used to implement logging, validation, or any custom logic you need.
+
+```javascript
+dash.behaviors.add((ctx) => {
+  console.log('Operation:', ctx.type, ctx.method);
+  return ctx;
+});
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Author
+
+[Taylor Buley](https://buley.info) (@taylorbuley)
+
+---
+
+Version: 0.0.30
